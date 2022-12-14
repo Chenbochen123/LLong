@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{115E8CA5-03B8-4CC6-9894-7AB5908A7BDC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Equip.Data</RootNamespace>
+    <AssemblyName>Mesnac.Equip.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\@packages\MyBatis\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\@packages\MyBatis\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.DbAccess">
+      <HintPath>..\..\@packages\Frame\Mesnac.DbAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.Common">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.DataMapper">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Frame\Mesnac.DbAccess\Mesnac.DbAccess.csproj">
+      <Project>{60b919c5-c601-4999-a531-439042d59746}</Project>
+      <Name>Mesnac.DbAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Equip.Entity\Mesnac.Equip.Entity.csproj">
+      <Project>{37595BDF-10FF-40E1-8390-1B09D118B2B7}</Project>
+      <Name>Mesnac.Equip.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implements\CbmBrandService.cs" />
+    <Compile Include="Implements\CbmLoadIndexService.cs" />
+    <Compile Include="Implements\CbmPatternService.cs" />
+    <Compile Include="Implements\CbmPlyratingService.cs" />
+    <Compile Include="Implements\CbmSizeService.cs" />
+    <Compile Include="Implements\CbmSpeedLevelService.cs" />
+    <Compile Include="Implements\CimMouldCardService.cs" />
+    <Compile Include="Implements\CimMouldEquipService.cs" />
+    <Compile Include="Implements\CimMouldInfoService.cs" />
+    <Compile Include="Implements\CimMouldInputService.cs" />
+    <Compile Include="Implements\CimMouldInventoryDetailService.cs" />
+    <Compile Include="Implements\CimMouldInventoryMainService.cs" />
+    <Compile Include="Implements\CimMouldOutputService.cs" />
+    <Compile Include="Implements\CimMouldScanLogService.cs" />
+    <Compile Include="Implements\CimMouldStorageService.cs" />
+    <Compile Include="Implements\MouldErrornumberService.cs" />
+    <Compile Include="Implements\SbeClearmouldService.cs" />
+    <Compile Include="Implements\SbeEquipInspectionPlanService.cs" />
+    <Compile Include="Implements\SbeEquipMoniterService.cs" />
+    <Compile Include="Implements\SbeEquipRepairPlanService.cs" />
+    <Compile Include="Implements\SbeEquipService.cs" />
+    <Compile Include="Implements\SbeEquipStopReasonService.cs" />
+    <Compile Include="Implements\SbeEquipStopTypeService.cs" />
+    <Compile Include="Implements\SbmEquipRepairRecordService.cs" />
+    <Compile Include="Implements\SbmMaterialService.cs" />
+    <Compile Include="Implements\SbmSparePartInStockService.cs" />
+    <Compile Include="Implements\SbmSparePartOutStockService.cs" />
+    <Compile Include="Implements\SbmSparePartStorageService.cs" />
+    <Compile Include="Implements\SebEquipStoreService.cs" />
+    <Compile Include="Implements\SebEquipUnitService.cs" />
+    <Compile Include="Implements\SebStorePlaceService.cs" />
+    <Compile Include="Implements\SebStoreService.cs" />
+    <Compile Include="Implements\SebSubStorePlaceService.cs" />
+    <Compile Include="Implements\SebUnitService.cs" />
+    <Compile Include="Implements\SeeEquipStopRecordService.cs" />
+    <Compile Include="Implements\SesSparepartsMajorTypeService.cs" />
+    <Compile Include="Implements\SesSparepartsMinorTypeService.cs" />
+    <Compile Include="Implements\SesSparepartsService.cs" />
+    <Compile Include="Implements\SesStopFaultService.cs" />
+    <Compile Include="Interface\ICbmBrandService.cs" />
+    <Compile Include="Interface\ICbmLoadIndexService.cs" />
+    <Compile Include="Interface\ICbmPatternService.cs" />
+    <Compile Include="Interface\ICbmPlyratingService.cs" />
+    <Compile Include="Interface\ICbmSizeService.cs" />
+    <Compile Include="Interface\ICbmSpeedLevelService.cs" />
+    <Compile Include="Interface\ICimMouldCardService.cs" />
+    <Compile Include="Interface\ICimMouldEquipService.cs" />
+    <Compile Include="Interface\ICimMouldInfoService.cs" />
+    <Compile Include="Interface\ICimMouldInputService.cs" />
+    <Compile Include="Interface\ICimMouldInventoryDetailService.cs" />
+    <Compile Include="Interface\ICimMouldInventoryMainService.cs" />
+    <Compile Include="Interface\ICimMouldOutputService.cs" />
+    <Compile Include="Interface\ICimMouldScanLogService.cs" />
+    <Compile Include="Interface\ICimMouldStorageService.cs" />
+    <Compile Include="Interface\IMouldErrornumberService.cs" />
+    <Compile Include="Interface\ISbeClearmouldService.cs" />
+    <Compile Include="Interface\ISbeEquipInspectionPlanService.cs" />
+    <Compile Include="Interface\ISbeEquipMoniterService.cs" />
+    <Compile Include="Interface\ISbeEquipRepairPlanService.cs" />
+    <Compile Include="Interface\ISbeEquipService.cs" />
+    <Compile Include="Interface\ISbeEquipStopReasonService.cs" />
+    <Compile Include="Interface\ISbeEquipStopTypeService.cs" />
+    <Compile Include="Interface\ISbmEquipRepairRecordService.cs" />
+    <Compile Include="Interface\ISbmMaterialService.cs" />
+    <Compile Include="Interface\ISbmSparePartInStockService.cs" />
+    <Compile Include="Interface\ISbmSparePartOutStockService.cs" />
+    <Compile Include="Interface\ISbmSparePartStorageService.cs" />
+    <Compile Include="Interface\ISebEquipStoreService.cs" />
+    <Compile Include="Interface\ISebEquipUnitService.cs" />
+    <Compile Include="Interface\ISebStorePlaceService.cs" />
+    <Compile Include="Interface\ISebStoreService.cs" />
+    <Compile Include="Interface\ISebSubStorePlaceService.cs" />
+    <Compile Include="Interface\ISebUnitService.cs" />
+    <Compile Include="Interface\ISeeEquipStopRecordService.cs" />
+    <Compile Include="Interface\ISesSparepartsMajorTypeService.cs" />
+    <Compile Include="Interface\ISesSparepartsMinorTypeService.cs" />
+    <Compile Include="Interface\ISesSparepartsService.cs" />
+    <Compile Include="Interface\ISesStopFaultService.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

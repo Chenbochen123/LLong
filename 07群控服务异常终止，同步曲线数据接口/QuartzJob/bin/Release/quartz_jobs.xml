@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 				version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+
+  <schedule>
+
+    <job>
+      <name>job</name>
+      <group>jobGroup</group>
+      <description>MES-APS施工表数据同步</description>
+      <job-type>QuartzJob.ApsJob, QuartzJob</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+
+        <name>trigger</name>
+
+        <group>tripperGroup</group>
+
+        <job-name>job</job-name>
+
+        <job-group>jobGroup</job-group>
+
+
+        <cron-expression>10 13 14 * * ?</cron-expression>
+        
+        
+        <!--<cron-expression>0 0 0/8 * * ?</cron-expression>
+        --><!--代表每八小时执行一次。
+        前三位代表：秒 分 时。-->
+
+        <!--<cron-expression>10 01 14 * * ?</cron-expression>
+        --><!--"30 10 1 * * ?" 每天1点10分30秒触发任务-->
+
+      </cron>
+    </trigger>
+
+
+
+  </schedule>
+</job-scheduling-data>

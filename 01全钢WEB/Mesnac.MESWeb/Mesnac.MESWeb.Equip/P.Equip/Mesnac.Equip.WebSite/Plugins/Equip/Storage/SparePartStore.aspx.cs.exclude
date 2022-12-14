@@ -1,0 +1,280 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Ext.Net;
+using NBear.Common;
+using Mesnac.Business.Implements;
+using Mesnac.Entity;
+using System.Text.RegularExpressions;
+using Mesnac.Data.Components;
+using System.Data;
+using Mesnac.Business.Interface;
+using Mesnac.Web.UI.Entity;
+
+public partial class Plugins_Equip_Storage_SparePartStore : Mesnac.Web.UI.Page
+{
+    protected IEqmSparePartRepairOutManager outManager = new EqmSparePartRepairOutManager();//业务对象
+    protected IEqmSapSparePartManager inManager = new EqmSapSparePartManager();//业务对象
+    protected IEqmSparePartStoreManager manager = new EqmSparePartStoreManager();//业务对象
+    protected IEqmSparePartManager sparePartManager = new EqmSparePartManager();//业务对象
+    protected IEqmSparePartMainTypeManager majorTypeManager = new EqmSparePartMainTypeManager();//业务对象
+    protected IEqmSparePartDetailTypeManager minorTypeManager = new EqmSparePartDetailTypeManager();//业务对象
+    protected IBasEquipManager equipManager = new BasEquipManager();//业务对象
+    protected IBasUserManager userManager = new BasUserManager();//业务对象
+    protected Ext.Net.MessageBox msg = new Ext.Net.MessageBox();//弹出框
+    private EntityArrayList<EqmSapSparePart> entityList;
+
+
+    #region 权限定义
+    protected __ _ = new __();
+    public class __ : ___  //必须继承___   //Action不能重复，重复会被覆盖
+    {
+        public __()
+        {
+            查询 = new PageAction() { ActionId = 1, ActionName = "btn_search" };
+            导出 = new PageAction() { ActionId = 3, ActionName = "btnExport" };
+            修改 = new PageAction() { ActionId = 4, ActionName = "Edit" };
+            添加 = new PageAction() { ActionId = 7, ActionName = "btn_add" };
+        }
+        public PageAction 查询 { get; private set; } //必须为 public
+        public PageAction 导出 { get; private set; } //必须为 public
+        public PageAction 修改 { get; private set; } //必须为 public
+        public PageAction 添加 { get; private set; } //必须为 public
+    }
+    #endregion
+
+    #region 初始化方法
+    /// <summary>
+    /// 页面初始化方法
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!X.IsAjaxRequest)
+        {
+        }
+    }
+    #endregion
+
+    #region 分页相关方法
+    private PageResult<EqmSparePartStore> GetPageResultData(PageResult<EqmSparePartStore> pageParams)
+    {
+        EqmSparePartStoreManager.QueryParams queryParams = new EqmSparePartStoreManager.QueryParams();
+        queryParams.pageParams = pageParams;
+        queryParams.deleteFlag = hidden_delete_flag.Text;
+        queryParams.sparePartCode = hidden_select_sparepart_code.Text;
+        return manager.GetTablePageDataBySql(queryParams);
+    }
+
+    [DirectMethod]
+    public object GridPanelBindData(string action, Dictionary<string, object> extraParams)
+    {
+        //if (this._.查询.SeqIdx == 0)
+        //{
+        //    return "";
+        //}
+        StoreRequestParameters prms = new StoreRequestParameters(extraParams);
+        PageResult<EqmSparePartStore> pageParams = new PageResult<EqmSparePartStore>();
+        pageParams.PageIndex = prms.Page;
+        pageParams.PageSize = prms.Limit;
+        pageParams.Orderfld = prms.Sort[0].Property + " " + prms.Sort[0].Direction;
+
+        PageResult<EqmSparePartStore> lst = GetPageResultData(pageParams);
+        DataTable data = lst.DataSet.Tables[0];
+
+        int total = lst.RecordCount;
+        return new { data, total };
+    }
+
+    protected void RowSelect(object sender, StoreReadDataEventArgs e)
+    {
+        string spareOrderCode = e.Parameters["SparePartCode"];
+
+        this.storeDetail.DataSource = manager.GetSparePartStoreDetail(spareOrderCode);
+        this.storeDetail.DataBind();
+    }
+    #endregion
+
+    #region 打印
+    /// <summary>
+    /// 打印调用方法
+    /// yuany 2013年3月2日
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnExportSubmit_Click(object sender, EventArgs e)
+    {
+        PageResult<EqmSparePartStore> pageParams = new PageResult<EqmSparePartStore>();
+        pageParams.PageSize = -100;
+        PageResult<EqmSparePartStore> lst = GetPageResultData(pageParams);
+        for (int i = 0; i < lst.DataSet.Tables[0].Columns.Count; i++)
+        {
+            bool isshow = false;
+            DataColumn dc = lst.DataSet.Tables[0].Columns[i];
+            foreach (ColumnBase cb in this.pnlList.ColumnModel.Columns)
+            {
+                if ((cb.DataIndex != null) && (cb.DataIndex.ToUpper() == dc.ColumnName.ToUpper()))
+                {
+                    dc.ColumnName = cb.Text;
+                    isshow = true;
+                    break;
+                }
+            }
+            if (!isshow)
+            {
+                lst.DataSet.Tables[0].Columns.Remove(dc.ColumnName);
+                i--;
+            }
+        }
+        new Mesnac.Util.Excel.ExcelDownload().ExcelFileDown(lst.DataSet, "备件库存信息");
+    }
+    #endregion
+
+    #region 增删改查按钮激发的事件
+    /// <summary>
+    /// 点击添加按钮激发的事件
+    /// yuany   2013年1月22日
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btn_add_Click(object sender, EventArgs e)
+    {
+        add_sparepart_code.Text = "";
+        hidden_sparepart_code.Text = "";
+        add_standards.Text = "";
+        add_current_store_num.Text = "1";
+        add_max_store_num.Text = "100";
+        add_min_store_num.Text = "1";
+        add_pos_storage_place_id.Text = "";
+        add_use_storage_place_id.Text = "";
+        add_remark.Text = "";
+        btnAddSave.Disable(true);
+        this.winAdd.Show();
+    }
+
+
+    /// <summary>
+    /// 点击修改激发的事件
+    /// yuany   2013年1月22日
+    /// </summary>
+    /// <param name="unit_num"></param>
+    [Ext.Net.DirectMethod()]
+    public void commandcolumn_direct_edit(string objID)
+    {
+        EqmSparePartStore store = manager.GetById(Convert.ToInt32(objID));
+        modify_obj_id.Text = store.ObjID.ToString();
+        modify_spare_part_code.Text = sparePartManager.GetListByWhere(EqmSparePart._.SparePartCode == store.SparePartCode)[0].SparePartName;
+        hidden_sparepart_code.Text = store.SparePartCode;
+        modify_major_type.Text = majorTypeManager.GetListByWhere(EqmSparePartMainType._.ObjID == store.MajorType)[0].MainTypeName;
+        modify_minor_type.Text = minorTypeManager.GetListByWhere(EqmSparePartDetailType._.DetailTypeCode == store.MinorType)[0].DetailTypeName;
+        modify_standards.Text = store.Standards;
+        modify_current_store_num.Text = store.CurrentStoreNum.ToString();
+        modify_max_store_num.Text = store.MaxStoreNum.ToString();
+        modify_min_store_num.Text = store.MinStoreNum.ToString();
+        modify_pos_storage_place_id.Text = store.PosStoragePlaceID;
+        modify_use_storage_place_id.Text = store.UseStoragePlaceID;
+        modify_remark.Text = store.Remark;
+        this.winModify.Show();
+    }
+
+
+    /// <summary>
+    /// 点击取消按钮激发的事件
+    /// yuany   2013年1月22日
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public void BtnCancel_Click(object sender, DirectEventArgs e)
+    {
+        this.winAdd.Close();
+        this.winModify.Close();
+    }
+
+    /// <summary>
+    /// 点击添加信息中保存按钮激发的事件
+    /// yuany   2013年1月22日
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public void BtnAddSave_Click(object sender, DirectEventArgs e)
+    {
+        try
+        {
+            EqmSparePartStore store = new EqmSparePartStore();
+            store.SparePartCode = hidden_sparepart_code.Text;
+            EntityArrayList<EqmSparePartStore> list = manager.GetListByWhere(EqmSparePartStore._.SparePartCode == store.SparePartCode);
+            if (list.Count > 0)
+            {
+                msg.Alert("提示", "已存在此备件的库存信息").Show();
+                return;
+            }
+            store.MajorType = store.SparePartCode.Substring(0, 1);
+            store.MinorType = store.SparePartCode.Substring(1, 4);
+            store.Standards = add_standards.Text;
+            store.CurrentStoreNum = Convert.ToDecimal(add_current_store_num.Text == "" ? "0" : add_current_store_num.Text);
+            store.MaxStoreNum = Convert.ToDecimal(add_max_store_num.Text == "" ? "1" : add_max_store_num.Text);
+            store.MinStoreNum = Convert.ToDecimal(add_min_store_num.Text == "" ? "0" : add_min_store_num.Text);
+            store.PosStoragePlaceID = add_pos_storage_place_id.Text;
+            store.UseStoragePlaceID = add_use_storage_place_id.Text;
+            store.Remark = add_remark.Text; ;
+            store.DeleteFlag = "0";
+            if (store.CurrentStoreNum < store.MinStoreNum || store.CurrentStoreNum > store.MaxStoreNum)
+            {
+                msg.Alert("操作", "现有库存值[" + store.CurrentStoreNum + "]溢出库存限制[" + store.MinStoreNum + "－" + store.MaxStoreNum + "]").Show();
+                return;
+            }
+            manager.Insert(store);
+            this.AppendWebLog("备件库存记录增加", "备件编号：" + store.SparePartCode);
+            pageToolBar.DoRefresh();
+            this.winAdd.Close();
+            msg.Notify("操作", "保存成功").Show();
+        }
+        catch (Exception ex)
+        {
+            msg.Alert("操作", "保存失败：" + ex);
+            msg.Show();
+        }
+    }
+
+    /// <summary>
+    /// 点击修改信息中保存按钮激发的事件
+    /// yuany   2013年1月22日
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void BtnModifySave_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            EqmSparePartStore store = manager.GetById(modify_obj_id.Text);
+            store.Attach();
+            store.CurrentStoreNum = Convert.ToDecimal(modify_current_store_num.Text == "" ? "0" : modify_current_store_num.Text);
+            store.MaxStoreNum = Convert.ToDecimal(modify_max_store_num.Text == "" ? "1" : modify_max_store_num.Text);
+            store.MinStoreNum = Convert.ToDecimal(modify_min_store_num.Text == "" ? "0" : modify_min_store_num.Text);
+            store.Standards = modify_standards.Text;
+            store.PosStoragePlaceID = modify_pos_storage_place_id.Text;
+            store.UseStoragePlaceID = modify_use_storage_place_id.Text;
+            store.Remark = modify_remark.Text;
+            if (store.CurrentStoreNum < store.MinStoreNum || store.CurrentStoreNum > store.MaxStoreNum)
+            {
+                msg.Alert("操作", "现有库存值[" + store.CurrentStoreNum + "]溢出库存限制[" + store.MinStoreNum + "－" + store.MaxStoreNum + "]").Show();
+                return;
+            }
+            manager.Update(store);
+            this.AppendWebLog("备件库存记录修改", "备件编号：" + store.SparePartCode);
+            pageToolBar.DoRefresh();
+            this.winModify.Close();
+            msg.Notify("操作", "更新成功").Show();
+        }
+        catch (Exception ex)
+        {
+            msg.Alert("操作", "更新失败：" + ex);
+            msg.Show();
+        }
+    }
+    #endregion
+}

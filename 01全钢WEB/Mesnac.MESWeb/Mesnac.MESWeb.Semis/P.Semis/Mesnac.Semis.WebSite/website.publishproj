@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+***********************************************************************************************
+website.publishproj
+
+警告: 请勿修改此文件，它将用于 Web 发布过程。
+
+版权所有 (C) Microsoft Corporation。保留所有权利。
+
+***********************************************************************************************
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.30319</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4bc645e3-e744-4e82-af3d-2cea135686ab}</ProjectGuid>
+    <SourceWebPhysicalPath>$(MSBuildThisFileDirectory)</SourceWebPhysicalPath>
+    <SourceWebVirtualPath>/Mesnac.Semis.WebSite</SourceWebVirtualPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SourceWebProject>http://localhost:7825</SourceWebProject>
+    <SourceWebMetabasePath>/IISExpress/7.5/LM/W3SVC/55/ROOT</SourceWebMetabasePath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- for VS2010 we need to use 10.5 but for VS2012+ we should use VisualStudioVersion -->
+    <WebPublishTargetsVersion Condition=" '$(WebPublishTargetsVersion)' =='' and '$(VisualStudioVersion)' == 10.0 ">10.5</WebPublishTargetsVersion>
+    <WebPublishTargetsVersion Condition=" '$(WebPublishTargetsVersion)'=='' ">$(VisualStudioVersion)</WebPublishTargetsVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(WebPublishTargetsVersion)</VSToolsPath>
+    <_WebPublishTargetsPath Condition=" '$(_WebPublishTargetsPath)'=='' ">$(VSToolsPath)</_WebPublishTargetsPath>
+    <AssemblyFileVersion Condition="'$(AssemblyFileVersion)' == ''">1.0.0.0</AssemblyFileVersion>
+    <AssemblyVersion Condition="'$(AssemblyVersion)' == ''">1.0.0.0</AssemblyVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AssemblyAttributes Include="AssemblyFileVersion">
+      <Value>$(AssemblyFileVersion)</Value>
+    </AssemblyAttributes>
+    <AssemblyAttributes Include="AssemblyVersion">
+      <Value>$(AssemblyVersion)</Value>
+    </AssemblyAttributes>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mesnac.Semis.Business\Mesnac.Semis.Business.csproj">
+      <Project>{D998BEAA-997A-43A6-9A70-2536B30DE7C4}</Project>
+      <Name>Mesnac.Semis.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Semis.Data\Mesnac.Semis.Data.csproj">
+      <Project>{F6DD545E-3D3E-4301-BA04-3614618AF00D}</Project>
+      <Name>Mesnac.Semis.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Semis.Entity\Mesnac.Semis.Entity.csproj">
+      <Project>{9693EB18-296E-4E4F-B280-A4DF3466C798}</Project>
+      <Name>Mesnac.Semis.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Semis.Mapper\Mesnac.Semis.Mapper.csproj">
+      <Project>{CBC1E504-48AA-4CB7-96D1-59FF0D7FE5CF}</Project>
+      <Name>Mesnac.Semis.Mapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Semis.McUI\Mesnac.Semis.McUI.csproj">
+      <Project>{C8DFFF3B-8E96-49D9-B0C2-831130A6D887}</Project>
+      <Name>Mesnac.Semis.McUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.SemisBG.Business\Mesnac.SemisBG.Business.csproj">
+      <Project>{913F2B77-81A8-44F1-B585-BCF97E7AA26C}</Project>
+      <Name>Mesnac.SemisBG.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.SemisBG.Data\Mesnac.SemisBG.Data.csproj">
+      <Project>{BE235B5E-90A4-4B0A-8E46-85F1D33F893A}</Project>
+      <Name>Mesnac.SemisBG.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.SemisBG.Entity\Mesnac.SemisBG.Entity.csproj">
+      <Project>{3A089696-CFCB-4EB7-BB2B-FE972CC2C274}</Project>
+      <Name>Mesnac.SemisBG.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.SemisBG.Mapper\Mesnac.SemisBG.Mapper.csproj">
+      <Project>{38CA80EF-9DFE-4466-9381-CD6E4DBD514C}</Project>
+      <Name>Mesnac.SemisBG.Mapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.SqlSemis.Mapper\Mesnac.SqlSemis.Mapper.csproj">
+      <Project>{7BA643DC-5C8F-471A-BA07-E9D63A702D14}</Project>
+      <Name>Mesnac.SqlSemis.Mapper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(_WebPublishTargetsPath)\Web\Microsoft.WebSite.Publishing.targets" />
+</Project>

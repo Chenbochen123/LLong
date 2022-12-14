@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CppCuringProductionLog"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CppCuringProductionLog" type="Mesnac.Curing.Entity.BasicEntity.CppCuringProductionLog, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CppCuringProductionLog" class="CppCuringProductionLog">
+    <result property="ObjId" column="OBJID"/>
+    <result property="OldTyreNo" column="OLD_TYRE_NO"/>
+    <result property="OldGreenTyreNo" column="OLD_GREEN_TYRE_NO"/>
+    <result property="OldPlanDate" column="OLD_PLAN_DATE"/>
+    <result property="OldPlanId" column="OLD_PLAN_ID"/>
+    <result property="OldPlanDetailId" column="OLD_PLAN_DETAIL_ID"/>
+    <result property="OldPlanShiftId" column="OLD_PLAN_SHIFT_ID"/>
+    <result property="OldEquipId" column="OLD_EQUIP_ID"/>
+    <result property="OldEquipPosition" column="OLD_EQUIP_POSITION"/>
+    <result property="OldMaterialId" column="OLD_MATERIAL_ID"/>
+    <result property="OldShiftMasterId" column="OLD_SHIFT_MASTER_ID"/>
+    <result property="OldShiftDate" column="OLD_SHIFT_DATE"/>
+    <result property="OldShiftId" column="OLD_SHIFT_ID"/>
+    <result property="OldClassId" column="OLD_CLASS_ID"/>
+    <result property="OldWorkerId" column="OLD_WORKER_ID"/>
+    <result property="LogAction" column="LOG_ACTION"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="ProductionId" column="PRODUCTION_ID"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CppCuringProductionLog" class="CppCuringProductionLog">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="OldTyreNo" column="OldTyreNo"/>
+    <parameter property="OldGreenTyreNo" column="OldGreenTyreNo"/>
+    <parameter property="OldPlanDate" column="OldPlanDate"/>
+    <parameter property="OldPlanId" column="OldPlanId"/>
+    <parameter property="OldPlanDetailId" column="OldPlanDetailId"/>
+    <parameter property="OldPlanShiftId" column="OldPlanShiftId"/>
+    <parameter property="OldEquipId" column="OldEquipId"/>
+    <parameter property="OldEquipPosition" column="OldEquipPosition"/>
+    <parameter property="OldMaterialId" column="OldMaterialId"/>
+    <parameter property="OldShiftMasterId" column="OldShiftMasterId"/>
+    <parameter property="OldShiftDate" column="OldShiftDate"/>
+    <parameter property="OldShiftId" column="OldShiftId"/>
+    <parameter property="OldClassId" column="OldClassId"/>
+    <parameter property="OldWorkerId" column="OldWorkerId"/>
+    <parameter property="LogAction" column="LogAction"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="ProductionId" column="ProductionId"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CPP_CURING_PRODUCTION_LOG ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.OldTyreNo" prepend="AND">
+          <![CDATA[OLD_TYRE_NO = #where.OldTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.OldGreenTyreNo" prepend="AND">
+          <![CDATA[OLD_GREEN_TYRE_NO = #where.OldGreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.OldPlanDate" prepend="AND">
+          <![CDATA[OLD_PLAN_DATE = #where.OldPlanDate#]]>
+        </isNotNull>
+        <isNotNull property="where.OldPlanId" prepend="AND">
+          <![CDATA[OLD_PLAN_ID = #where.OldPlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.OldPlanDetailId" prepend="AND">
+          <![CDATA[OLD_PLAN_DETAIL_ID = #where.OldPlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.OldPlanShiftId" prepend="AND">
+          <![CDATA[OLD_PLAN_SHIFT_ID = #where.OldPlanShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.OldEquipId" prepend="AND">
+          <![CDATA[OLD_EQUIP_ID = #where.OldEquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.OldEquipPosition" prepend="AND">
+          <![CDATA[OLD_EQUIP_POSITION = #where.OldEquipPosition#]]>
+        </isNotNull>
+        <isNotNull property="where.OldMaterialId" prepend="AND">
+          <![CDATA[OLD_MATERIAL_ID = #where.OldMaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.OldShiftMasterId" prepend="AND">
+          <![CDATA[OLD_SHIFT_MASTER_ID = #where.OldShiftMasterId#]]>
+        </isNotNull>
+        <isNotNull property="where.OldShiftDate" prepend="AND">
+          <![CDATA[OLD_SHIFT_DATE = #where.OldShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.OldShiftId" prepend="AND">
+          <![CDATA[OLD_SHIFT_ID = #where.OldShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.OldClassId" prepend="AND">
+          <![CDATA[OLD_CLASS_ID = #where.OldClassId#]]>
+        </isNotNull>
+        <isNotNull property="where.OldWorkerId" prepend="AND">
+          <![CDATA[OLD_WORKER_ID = #where.OldWorkerId#]]>
+        </isNotNull>
+        <isNotNull property="where.LogAction" prepend="AND">
+          <![CDATA[LOG_ACTION = #where.LogAction#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.ProductionId" prepend="AND">
+          <![CDATA[PRODUCTION_ID = #where.ProductionId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CPP_CURING_PRODUCTION_LOG]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="OldTyreNo" prepend=",">OLD_TYRE_NO</isNotNull>
+        <isNotNull property="OldGreenTyreNo" prepend=",">OLD_GREEN_TYRE_NO</isNotNull>
+        <isNotNull property="OldPlanDate" prepend=",">OLD_PLAN_DATE</isNotNull>
+        <isNotNull property="OldPlanId" prepend=",">OLD_PLAN_ID</isNotNull>
+        <isNotNull property="OldPlanDetailId" prepend=",">OLD_PLAN_DETAIL_ID</isNotNull>
+        <isNotNull property="OldPlanShiftId" prepend=",">OLD_PLAN_SHIFT_ID</isNotNull>
+        <isNotNull property="OldEquipId" prepend=",">OLD_EQUIP_ID</isNotNull>
+        <isNotNull property="OldEquipPosition" prepend=",">OLD_EQUIP_POSITION</isNotNull>
+        <isNotNull property="OldMaterialId" prepend=",">OLD_MATERIAL_ID</isNotNull>
+        <isNotNull property="OldShiftMasterId" prepend=",">OLD_SHIFT_MASTER_ID</isNotNull>
+        <isNotNull property="OldShiftDate" prepend=",">OLD_SHIFT_DATE</isNotNull>
+        <isNotNull property="OldShiftId" prepend=",">OLD_SHIFT_ID</isNotNull>
+        <isNotNull property="OldClassId" prepend=",">OLD_CLASS_ID</isNotNull>
+        <isNotNull property="OldWorkerId" prepend=",">OLD_WORKER_ID</isNotNull>
+        <isNotNull property="LogAction" prepend=",">LOG_ACTION</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="ProductionId" prepend=",">PRODUCTION_ID</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_CPP_CURING_PRODUCTION_LOG.NEXTVAL</isNull>
+        <isNotNull property="OldTyreNo" prepend=",">#OldTyreNo#</isNotNull>
+        <isNotNull property="OldGreenTyreNo" prepend=",">#OldGreenTyreNo#</isNotNull>
+        <isNotNull property="OldPlanDate" prepend=",">#OldPlanDate#</isNotNull>
+        <isNotNull property="OldPlanId" prepend=",">#OldPlanId#</isNotNull>
+        <isNotNull property="OldPlanDetailId" prepend=",">#OldPlanDetailId#</isNotNull>
+        <isNotNull property="OldPlanShiftId" prepend=",">#OldPlanShiftId#</isNotNull>
+        <isNotNull property="OldEquipId" prepend=",">#OldEquipId#</isNotNull>
+        <isNotNull property="OldEquipPosition" prepend=",">#OldEquipPosition#</isNotNull>
+        <isNotNull property="OldMaterialId" prepend=",">#OldMaterialId#</isNotNull>
+        <isNotNull property="OldShiftMasterId" prepend=",">#OldShiftMasterId#</isNotNull>
+        <isNotNull property="OldShiftDate" prepend=",">#OldShiftDate#</isNotNull>
+        <isNotNull property="OldShiftId" prepend=",">#OldShiftId#</isNotNull>
+        <isNotNull property="OldClassId" prepend=",">#OldClassId#</isNotNull>
+        <isNotNull property="OldWorkerId" prepend=",">#OldWorkerId#</isNotNull>
+        <isNotNull property="LogAction" prepend=",">#LogAction#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="ProductionId" prepend=",">#ProductionId#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CPP_CURING_PRODUCTION_LOG
+       <dynamic prepend="SET">
+        <isNotNull  property="update.OldTyreNo"  prepend=",">
+          OLD_TYRE_NO = #update.OldTyreNo#
+        </isNotNull>
+        <isNotNull  property="update.OldGreenTyreNo"  prepend=",">
+          OLD_GREEN_TYRE_NO = #update.OldGreenTyreNo#
+        </isNotNull>
+        <isNotNull  property="update.OldPlanDate"  prepend=",">
+          OLD_PLAN_DATE = #update.OldPlanDate#
+        </isNotNull>
+        <isNotNull  property="update.OldPlanId"  prepend=",">
+          OLD_PLAN_ID = #update.OldPlanId#
+        </isNotNull>
+        <isNotNull  property="update.OldPlanDetailId"  prepend=",">
+          OLD_PLAN_DETAIL_ID = #update.OldPlanDetailId#
+        </isNotNull>
+        <isNotNull  property="update.OldPlanShiftId"  prepend=",">
+          OLD_PLAN_SHIFT_ID = #update.OldPlanShiftId#
+        </isNotNull>
+        <isNotNull  property="update.OldEquipId"  prepend=",">
+          OLD_EQUIP_ID = #update.OldEquipId#
+        </isNotNull>
+        <isNotNull  property="update.OldEquipPosition"  prepend=",">
+          OLD_EQUIP_POSITION = #update.OldEquipPosition#
+        </isNotNull>
+        <isNotNull  property="update.OldMaterialId"  prepend=",">
+          OLD_MATERIAL_ID = #update.OldMaterialId#
+        </isNotNull>
+        <isNotNull  property="update.OldShiftMasterId"  prepend=",">
+          OLD_SHIFT_MASTER_ID = #update.OldShiftMasterId#
+        </isNotNull>
+        <isNotNull  property="update.OldShiftDate"  prepend=",">
+          OLD_SHIFT_DATE = #update.OldShiftDate#
+        </isNotNull>
+        <isNotNull  property="update.OldShiftId"  prepend=",">
+          OLD_SHIFT_ID = #update.OldShiftId#
+        </isNotNull>
+        <isNotNull  property="update.OldClassId"  prepend=",">
+          OLD_CLASS_ID = #update.OldClassId#
+        </isNotNull>
+        <isNotNull  property="update.OldWorkerId"  prepend=",">
+          OLD_WORKER_ID = #update.OldWorkerId#
+        </isNotNull>
+        <isNotNull  property="update.LogAction"  prepend=",">
+          LOG_ACTION = #update.LogAction#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.ProductionId"  prepend=",">
+          PRODUCTION_ID = #update.ProductionId#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CPP_CURING_PRODUCTION_LOG
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CppCuringProductionLog">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CppCuringProductionLog">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CPP_CURING_PRODUCTION_LOG
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CPP_CURING_PRODUCTION_LOG
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CppCuringProductionLog" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CPP_CURING_PRODUCTION_LOG
+    </statement>
+  </statements>
+</sqlMap>

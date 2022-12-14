@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudHptSemisTechBjp" parameterClass="map" resultClass="row">
+      <![CDATA[
+        select t2.material_name,t3.equip_name,T4.SHIFT_NAME,t1.* from HPT_SEMIS_TECH_BJP t1 left join sbm_material t2 on t1.material_id=t2.objid
+        left join sbe_equip t3 on t1.equip_id=t3.objid
+        LEFT JOIN ssb_shift T4 ON T1.SHIFT_ID=T4.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME <= #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[t3.EQUIP_NAME like '%' || #EquipName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    
+    <select id="Select@CrudHptSemisTechBjp@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+       select t2.material_name,t3.equip_name,T4.SHIFT_NAME,t1.* from HPT_SEMIS_TECH_BJP t1 left join sbm_material t2 on t1.material_id=t2.objid
+        left join sbe_equip t3 on t1.equip_id=t3.objid
+        LEFT JOIN ssb_shift T4 ON T1.SHIFT_ID=T4.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T1.OBJID = #where.OBJID#)]]>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

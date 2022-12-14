@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudFqgGradeInfo" parameterClass="int" resultClass="row">
+      <![CDATA[
+          select T1.*, T2.PROCEDURE_NAME, T3.FACTORY_NAME, T4.WORKSHOP_NAME, T5.USER_NAME,case t1.GRADENAME when '一级品' then '合格品' when '二级品' then '次品' when '一级品B' then '合格品B' else T1.GRADENAME end GRADENAME1
+          from FQG_GRADE_INFO T1
+               left join SSB_PROCEDURE T2 on T1.WORK_PROCESS_ID = T2.OBJID
+		           left join SSB_FACTORY T3 on T1.FACTORY_ID = T3.OBJID
+		           left join SSB_WORKSHOP T4 on T1.WORKSHOP_ID = T4.OBJID
+		           left join SSB_USER T5 on T1.RECORD_USERID = T5.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.GRADENAME1" prepend="AND">
+          T1.GRADENAME  like '%'||#where.GRADENAME1#||'%'
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+        <isNotNull property="where.WORK_PROCESS_ID" prepend="AND">
+          <![CDATA[T1.WORK_PROCESS_ID = #where.WORK_PROCESS_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.FACTORY_ID" prepend="AND">
+          <![CDATA[T1.FACTORY_ID = #where.FACTORY_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.WORKSHOP_ID" prepend="AND">
+          <![CDATA[T1.WORKSHOP_ID = #where.WORKSHOP_ID#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    <select id="Select+Update@CrudFqgGradeInfo" parameterClass="int" resultClass="row">
+      <![CDATA[SELECT * FROM FQG_GRADE_INFO ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询工序信息-->
+    <select id="GetComboBoxData@Select@CrudFqgGradeInfo@WORK_PROCESS_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey, PROCEDURE_NAME ssValue from SSB_PROCEDURE where DELETE_FLAG = 0 order by OBJID
+     ]]>
+    </select>
+    <!--查询工厂信息-->
+    <select id="GetComboBoxData@Select@CrudFqgGradeInfo@FACTORY_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey, FACTORY_NAME ssValue from SSB_FACTORY where DELETE_FLAG = 0 order by OBJID
+     ]]>
+    </select>
+    <!--查询车间信息-->
+    <select id="GetComboBoxData@Select@CrudFqgGradeInfo@WORKSHOP_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey, WORKSHOP_NAME ssValue from SSB_WORKSHOP where DELETE_FLAG = 0 order by OBJID
+     ]]>
+    </select>
+    <!--查询人员信息-->
+    <select id="GetComboBoxData@Select@CrudFqgGradeInfo@RECORD_USERID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey, USER_NAME ssValue from SSB_USER where DELETE_FLAG = 0 order by OBJID
+     ]]>
+    </select>
+
+  </statements>
+</sqlMap>

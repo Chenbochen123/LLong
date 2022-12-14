@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Equip.Mapper.BusinessMapper.SbeEquipMoniter"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_EQUIP_MONITER ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ShowName" prepend="AND">
+          <![CDATA[SHOW_NAME = #where.ShowName#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipState" prepend="AND">
+          <![CDATA[EQUIP_STATE = #where.EquipState#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+<!--设备大类-->
+     <select id="SelectEquipGroup@EquipMoniter" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT DISTINCT T.MAJOR_TYPE_ID,T2.MAJOR_TYPE_NAME FROM SBE_EQUIP T
+        LEFT JOIN SBE_EQUIP_MAJOR_TYPE T2 ON T.MAJOR_TYPE_ID=T2.OBJID
+        WHERE T.DELETE_FLAG=0
+        ORDER BY T.MAJOR_TYPE_ID
+      ]]>
+     </select>
+
+     <!--所有设备-->
+     <select id="SelectEquip@EquipMoniter" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT case( T2.EQUIP_STATE) when 0 then '计划停机' when 1 then '待料停机' when 2 then '故障停机' when 3 then '维护停机' end EQUIP_STATE ,T2.EQUIP_ID,T.*
+        FROM SBE_EQUIP T
+        LEFT JOIN SBE_EQUIP_MONITER T2 ON T2.EQUIP_ID=T.OBJID and T2.SEQ_INDEX<>0
+        WHERE  T.DELETE_FLAG=0 
+      ]]>
+       <isNotNull property="MAJOR_TYPE_ID" prepend="AND">
+         <![CDATA[T.MAJOR_TYPE_ID = #MAJOR_TYPE_ID#]]>
+       </isNotNull>
+       <isNotNull property="OrderString" prepend="">
+         ORDER BY $OrderString$
+       </isNotNull>
+     </select>
+      
+     <!--设备历史状态-->
+     <select id="SelectEquipHistory@EquipMoniter" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         SELECT case(T.EQUIP_STATE) when 0 then '计划停机' when 1 then '待料停机' when 2 then '故障停机' when 3 then '维护停机' end EQUIP_STATE ,T.RECORD_TIME FROM SBE_EQUIP_MONITER T
+         WHERE  T.SEQ_INDEX=0 AND T.DELETE_FLAG=0 
+      ]]>
+       <isNotNull property="EquipId" prepend="AND">
+         <![CDATA[T.EQUIP_ID = #EquipId#]]>
+       </isNotNull>
+       <isNotNull property="OrderString" prepend="">
+         ORDER BY $OrderString$
+       </isNotNull>
+     </select>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="MOULD_NAME" Value="模具编号"></Caption>
+    <Caption Name="MOULD_BARCODE" Value="模具条码"></Caption>
+    <Caption Name="PLATTERN_ID" Value="主花纹代号"></Caption>
+    <Caption Name="PATTERN_NAME" Value="主花纹代号"></Caption>
+    <Caption Name="SEC_PATTERN" Value="其余花纹代号活块"></Caption>
+    <Caption Name="SEC_BRAND" Value="其余商标活块"></Caption>
+    <Caption Name="BRAND" Value="主商标"></Caption>
+    <Caption Name="BRAND_NAME" Value="主商标"></Caption>
+    <Caption Name="IN_TYPE" Value="入厂类型"></Caption>
+    <Caption Name="IN_DATE" Value="到德州时间"></Caption>
+    <Caption Name="CONTAINER" Value="向心机构"></Caption>
+    <Caption Name="SIZE_ID" Value="规格"></Caption>
+    <Caption Name="SIZE_NAME" Value="规格"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+    <Caption Name="RECORD_USER_ID" Value="记录人"></Caption>
+    <Caption Name="USER_NAME" Value="记录人"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+  </Captions>
+  <WebPage Title="模具信息">
+  </WebPage>
+  <Crud TableName="CIM_MOULD_INFO">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_CIM_MOULD_INFO"></SeqField>
+    </SeqFields>
+    <Uniques>
+      <Unique Fields="MOULD_NAME"></Unique>
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME" >
+    <ParamPanel Height="500">
+      <ParamFields>
+        <ParamField FieldName="MOULD_NAME" ></ParamField>
+        <ParamField FieldName="MOULD_BARCODE" Nullable="true"></ParamField>
+        <ParamField FieldName="PLATES" Nullable="true"></ParamField>
+        <ParamField FieldName="SIZE_ID" Nullable="true"></ParamField>
+        <ParamField FieldName="SEC_PATTERN" Nullable="true"></ParamField>
+        <ParamField FieldName="SEC_BRAND" Nullable="true"></ParamField>
+        <ParamField FieldName="BRAND" Nullable="true"></ParamField>
+        <ParamField FieldName="IN_TYPE" Nullable="true"></ParamField>
+        <ParamField FieldName="IN_DATE" Nullable="true"></ParamField>
+        <ParamField FieldName="CONTAINER" Nullable="true"></ParamField>
+       <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel  Height="500">
+      <ParamFields>
+        <ParamField FieldName="MOULD_NAME" ></ParamField>
+        <ParamField FieldName="MOULD_BARCODE" Nullable="true"></ParamField>
+        <ParamField FieldName="SIZE_ID" Nullable="true"></ParamField>
+        <ParamField FieldName="PLATES" Nullable="true"></ParamField>
+        <ParamField FieldName="SEC_PATTERN" Nullable="true"></ParamField>
+        <ParamField FieldName="SEC_BRAND" Nullable="true"></ParamField>
+        <ParamField FieldName="BRAND" Nullable="true"></ParamField>
+        <ParamField FieldName="IN_TYPE" Nullable="true"></ParamField>
+        <ParamField FieldName="IN_DATE" Nullable="true"></ParamField>
+        <ParamField FieldName="CONTAINER" Nullable="true"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="MOULD_BARCODE"></ParamField>
+        <ParamField FieldName="MOULD_NAME"></ParamField>
+        <ParamField FieldName="SIZE_NAME"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid>
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="MOULD_BARCODE"  Width="100"></GridColumn>
+        <GridColumn ColumnName="MOULD_NAME"  Width="100"></GridColumn>        
+        <GridColumn ColumnName="PATTERN_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="SIZE_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="BRAND_NAME" ></GridColumn>
+        <GridColumn ColumnName="SEC_PATTERN" Width="100"></GridColumn>
+        <GridColumn ColumnName="SEC_BRAND" Width="200"></GridColumn>
+        <GridColumn ColumnName="IN_TYPE"></GridColumn>
+        <GridColumn ColumnName="IN_DATE" Width="150" ColumnType="Date"></GridColumn>
+        <GridColumn ColumnName="CONTAINER" Width="100"></GridColumn>
+       <GridColumn ColumnName="REMARK"  Width="200"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

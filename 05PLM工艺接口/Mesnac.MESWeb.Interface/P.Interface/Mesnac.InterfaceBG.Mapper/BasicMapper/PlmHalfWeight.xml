@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.InterfaceBG.Mapper.BasicMapper.PlmHalfWeight"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="PlmHalfWeight" type="Mesnac.InterfaceBG.Entity.BasicEntity.PlmHalfWeight, Mesnac.InterfaceBG.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_PlmHalfWeight" class="PlmHalfWeight">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Mastersap" column="MASTERSAP"/>
+    <result property="Masterrevision" column="MASTERREVISION"/>
+    <result property="Masterspec" column="MASTERSPEC"/>
+    <result property="Masterdesc" column="MASTERDESC"/>
+    <result property="Subitemsap" column="SUBITEMSAP"/>
+    <result property="Subitemrevision" column="SUBITEMREVISION"/>
+    <result property="Subitemspec" column="SUBITEMSPEC"/>
+    <result property="Subitemdesc" column="SUBITEMDESC"/>
+    <result property="Weight" column="WEIGHT"/>
+    <result property="Unit" column="UNIT"/>
+    <result property="Prophase" column="PROPHASE"/>
+    <result property="Factory" column="FACTORY"/>
+    <result property="Werks" column="WERKS"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="Dummy5" column="DUMMY5"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_PlmHalfWeight" class="PlmHalfWeight">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Mastersap" column="Mastersap"/>
+    <parameter property="Masterrevision" column="Masterrevision"/>
+    <parameter property="Masterspec" column="Masterspec"/>
+    <parameter property="Masterdesc" column="Masterdesc"/>
+    <parameter property="Subitemsap" column="Subitemsap"/>
+    <parameter property="Subitemrevision" column="Subitemrevision"/>
+    <parameter property="Subitemspec" column="Subitemspec"/>
+    <parameter property="Subitemdesc" column="Subitemdesc"/>
+    <parameter property="Weight" column="Weight"/>
+    <parameter property="Unit" column="Unit"/>
+    <parameter property="Prophase" column="Prophase"/>
+    <parameter property="Factory" column="Factory"/>
+    <parameter property="Werks" column="Werks"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="Dummy5" column="Dummy5"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PLM_HALF_WEIGHT ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Mastersap" prepend="AND">
+          <![CDATA[MASTERSAP = #where.Mastersap#]]>
+        </isNotNull>
+        <isNotNull property="where.Masterrevision" prepend="AND">
+          <![CDATA[MASTERREVISION = #where.Masterrevision#]]>
+        </isNotNull>
+        <isNotNull property="where.Masterspec" prepend="AND">
+          <![CDATA[MASTERSPEC = #where.Masterspec#]]>
+        </isNotNull>
+        <isNotNull property="where.Masterdesc" prepend="AND">
+          <![CDATA[MASTERDESC = #where.Masterdesc#]]>
+        </isNotNull>
+        <isNotNull property="where.Subitemsap" prepend="AND">
+          <![CDATA[SUBITEMSAP = #where.Subitemsap#]]>
+        </isNotNull>
+        <isNotNull property="where.Subitemrevision" prepend="AND">
+          <![CDATA[SUBITEMREVISION = #where.Subitemrevision#]]>
+        </isNotNull>
+        <isNotNull property="where.Subitemspec" prepend="AND">
+          <![CDATA[SUBITEMSPEC = #where.Subitemspec#]]>
+        </isNotNull>
+        <isNotNull property="where.Subitemdesc" prepend="AND">
+          <![CDATA[SUBITEMDESC = #where.Subitemdesc#]]>
+        </isNotNull>
+        <isNotNull property="where.Weight" prepend="AND">
+          <![CDATA[WEIGHT = #where.Weight#]]>
+        </isNotNull>
+        <isNotNull property="where.Unit" prepend="AND">
+          <![CDATA[UNIT = #where.Unit#]]>
+        </isNotNull>
+        <isNotNull property="where.Prophase" prepend="AND">
+          <![CDATA[PROPHASE = #where.Prophase#]]>
+        </isNotNull>
+        <isNotNull property="where.Factory" prepend="AND">
+          <![CDATA[FACTORY = #where.Factory#]]>
+        </isNotNull>
+        <isNotNull property="where.Werks" prepend="AND">
+          <![CDATA[WERKS = #where.Werks#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO PLM_HALF_WEIGHT]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="Mastersap" prepend=",">MASTERSAP</isNotNull>
+        <isNotNull property="Masterrevision" prepend=",">MASTERREVISION</isNotNull>
+        <isNotNull property="Masterspec" prepend=",">MASTERSPEC</isNotNull>
+        <isNotNull property="Masterdesc" prepend=",">MASTERDESC</isNotNull>
+        <isNotNull property="Subitemsap" prepend=",">SUBITEMSAP</isNotNull>
+        <isNotNull property="Subitemrevision" prepend=",">SUBITEMREVISION</isNotNull>
+        <isNotNull property="Subitemspec" prepend=",">SUBITEMSPEC</isNotNull>
+        <isNotNull property="Subitemdesc" prepend=",">SUBITEMDESC</isNotNull>
+        <isNotNull property="Weight" prepend=",">WEIGHT</isNotNull>
+        <isNotNull property="Unit" prepend=",">UNIT</isNotNull>
+        <isNotNull property="Prophase" prepend=",">PROPHASE</isNotNull>
+        <isNotNull property="Factory" prepend=",">FACTORY</isNotNull>
+        <isNotNull property="Werks" prepend=",">WERKS</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">DUMMY5</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_PLM_HALF_WEIGHT.NEXTVAL</isNull>
+        <isNotNull property="Mastersap" prepend=",">#Mastersap#</isNotNull>
+        <isNotNull property="Masterrevision" prepend=",">#Masterrevision#</isNotNull>
+        <isNotNull property="Masterspec" prepend=",">#Masterspec#</isNotNull>
+        <isNotNull property="Masterdesc" prepend=",">#Masterdesc#</isNotNull>
+        <isNotNull property="Subitemsap" prepend=",">#Subitemsap#</isNotNull>
+        <isNotNull property="Subitemrevision" prepend=",">#Subitemrevision#</isNotNull>
+        <isNotNull property="Subitemspec" prepend=",">#Subitemspec#</isNotNull>
+        <isNotNull property="Subitemdesc" prepend=",">#Subitemdesc#</isNotNull>
+        <isNotNull property="Weight" prepend=",">#Weight#</isNotNull>
+        <isNotNull property="Unit" prepend=",">#Unit#</isNotNull>
+        <isNotNull property="Prophase" prepend=",">#Prophase#</isNotNull>
+        <isNotNull property="Factory" prepend=",">#Factory#</isNotNull>
+        <isNotNull property="Werks" prepend=",">#Werks#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">#Dummy5#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE PLM_HALF_WEIGHT
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Mastersap"  prepend=",">
+          MASTERSAP = #update.Mastersap#
+        </isNotNull>
+        <isNotNull  property="update.Masterrevision"  prepend=",">
+          MASTERREVISION = #update.Masterrevision#
+        </isNotNull>
+        <isNotNull  property="update.Masterspec"  prepend=",">
+          MASTERSPEC = #update.Masterspec#
+        </isNotNull>
+        <isNotNull  property="update.Masterdesc"  prepend=",">
+          MASTERDESC = #update.Masterdesc#
+        </isNotNull>
+        <isNotNull  property="update.Subitemsap"  prepend=",">
+          SUBITEMSAP = #update.Subitemsap#
+        </isNotNull>
+        <isNotNull  property="update.Subitemrevision"  prepend=",">
+          SUBITEMREVISION = #update.Subitemrevision#
+        </isNotNull>
+        <isNotNull  property="update.Subitemspec"  prepend=",">
+          SUBITEMSPEC = #update.Subitemspec#
+        </isNotNull>
+        <isNotNull  property="update.Subitemdesc"  prepend=",">
+          SUBITEMDESC = #update.Subitemdesc#
+        </isNotNull>
+        <isNotNull  property="update.Weight"  prepend=",">
+          WEIGHT = #update.Weight#
+        </isNotNull>
+        <isNotNull  property="update.Unit"  prepend=",">
+          UNIT = #update.Unit#
+        </isNotNull>
+        <isNotNull  property="update.Prophase"  prepend=",">
+          PROPHASE = #update.Prophase#
+        </isNotNull>
+        <isNotNull  property="update.Factory"  prepend=",">
+          FACTORY = #update.Factory#
+        </isNotNull>
+        <isNotNull  property="update.Werks"  prepend=",">
+          WERKS = #update.Werks#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.Dummy5"  prepend=",">
+          DUMMY5 = #update.Dummy5#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM PLM_HALF_WEIGHT
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_PlmHalfWeight">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_PlmHalfWeight">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM PLM_HALF_WEIGHT
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM PLM_HALF_WEIGHT
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_PlmHalfWeight" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE PLM_HALF_WEIGHT
+    </statement>
+  </statements>
+</sqlMap>

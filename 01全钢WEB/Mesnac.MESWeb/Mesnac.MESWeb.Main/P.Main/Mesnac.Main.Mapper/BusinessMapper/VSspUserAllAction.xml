@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Main.Mapper.BusinessMapper.VSspUserAllAction"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM V_SSP_USER_ALL_ACTION ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.UserId" prepend="AND">
+          <![CDATA[USER_ID = #where.UserId#]]>
+        </isNotNull>
+        <isNotNull property="where.ActionId" prepend="AND">
+          <![CDATA[ACTION_ID = #where.ActionId#]]>
+        </isNotNull>
+        <isNotNull property="where.M" prepend="AND">
+          <![CDATA[M = #where.M#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

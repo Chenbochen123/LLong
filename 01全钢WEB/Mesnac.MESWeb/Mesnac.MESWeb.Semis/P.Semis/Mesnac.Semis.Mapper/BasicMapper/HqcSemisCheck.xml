@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.HqcSemisCheck"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HqcSemisCheck" type="Mesnac.Semis.Entity.BasicEntity.HqcSemisCheck, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HqcSemisCheck" class="HqcSemisCheck">
+    <result property="ObjId" column="OBJID"/>
+    <result property="CardNo" column="CARD_NO"/>
+    <result property="GradeId" column="GRADE_ID"/>
+    <result property="DefectId" column="DEFECT_ID"/>
+    <result property="SuggestionId" column="SUGGESTION_ID"/>
+    <result property="ClassId" column="CLASS_ID"/>
+    <result property="ShiftId" column="SHIFT_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="WorkshopId" column="WORKSHOP_ID"/>
+    <result property="Seqid" column="SEQID"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="Remark" column="REMARK"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HqcSemisCheck" class="HqcSemisCheck">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="CardNo" column="CardNo"/>
+    <parameter property="GradeId" column="GradeId"/>
+    <parameter property="DefectId" column="DefectId"/>
+    <parameter property="SuggestionId" column="SuggestionId"/>
+    <parameter property="ClassId" column="ClassId"/>
+    <parameter property="ShiftId" column="ShiftId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="WorkshopId" column="WorkshopId"/>
+    <parameter property="Seqid" column="Seqid"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="Remark" column="Remark"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HQC_SEMIS_CHECK ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.CardNo" prepend="AND">
+          <![CDATA[CARD_NO = #where.CardNo#]]>
+        </isNotNull>
+        <isNotNull property="where.GradeId" prepend="AND">
+          <![CDATA[GRADE_ID = #where.GradeId#]]>
+        </isNotNull>
+        <isNotNull property="where.DefectId" prepend="AND">
+          <![CDATA[DEFECT_ID = #where.DefectId#]]>
+        </isNotNull>
+        <isNotNull property="where.SuggestionId" prepend="AND">
+          <![CDATA[SUGGESTION_ID = #where.SuggestionId#]]>
+        </isNotNull>
+        <isNotNull property="where.ClassId" prepend="AND">
+          <![CDATA[CLASS_ID = #where.ClassId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.Seqid" prepend="AND">
+          <![CDATA[SEQID = #where.Seqid#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HQC_SEMIS_CHECK]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="CardNo" prepend=",">CARD_NO</isNotNull>
+        <isNotNull property="GradeId" prepend=",">GRADE_ID</isNotNull>
+        <isNotNull property="DefectId" prepend=",">DEFECT_ID</isNotNull>
+        <isNotNull property="SuggestionId" prepend=",">SUGGESTION_ID</isNotNull>
+        <isNotNull property="ClassId" prepend=",">CLASS_ID</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">SHIFT_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">WORKSHOP_ID</isNotNull>
+        <isNotNull property="Seqid" prepend=",">SEQID</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_HQC_SEMIS_CHECK.NEXTVAL</isNull>
+        <isNotNull property="CardNo" prepend=",">#CardNo#</isNotNull>
+        <isNotNull property="GradeId" prepend=",">#GradeId#</isNotNull>
+        <isNotNull property="DefectId" prepend=",">#DefectId#</isNotNull>
+        <isNotNull property="SuggestionId" prepend=",">#SuggestionId#</isNotNull>
+        <isNotNull property="ClassId" prepend=",">#ClassId#</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">#ShiftId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">#WorkshopId#</isNotNull>
+        <isNotNull property="Seqid" prepend=",">#Seqid#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HQC_SEMIS_CHECK
+       <dynamic prepend="SET">
+        <isNotNull  property="update.CardNo"  prepend=",">
+          CARD_NO = #update.CardNo#
+        </isNotNull>
+        <isNotNull  property="update.GradeId"  prepend=",">
+          GRADE_ID = #update.GradeId#
+        </isNotNull>
+        <isNotNull  property="update.DefectId"  prepend=",">
+          DEFECT_ID = #update.DefectId#
+        </isNotNull>
+        <isNotNull  property="update.SuggestionId"  prepend=",">
+          SUGGESTION_ID = #update.SuggestionId#
+        </isNotNull>
+        <isNotNull  property="update.ClassId"  prepend=",">
+          CLASS_ID = #update.ClassId#
+        </isNotNull>
+        <isNotNull  property="update.ShiftId"  prepend=",">
+          SHIFT_ID = #update.ShiftId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.WorkshopId"  prepend=",">
+          WORKSHOP_ID = #update.WorkshopId#
+        </isNotNull>
+        <isNotNull  property="update.Seqid"  prepend=",">
+          SEQID = #update.Seqid#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HQC_SEMIS_CHECK
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HqcSemisCheck">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HqcSemisCheck">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM HQC_SEMIS_CHECK
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HQC_SEMIS_CHECK
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HqcSemisCheck" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HQC_SEMIS_CHECK
+    </statement>
+  </statements>
+</sqlMap>

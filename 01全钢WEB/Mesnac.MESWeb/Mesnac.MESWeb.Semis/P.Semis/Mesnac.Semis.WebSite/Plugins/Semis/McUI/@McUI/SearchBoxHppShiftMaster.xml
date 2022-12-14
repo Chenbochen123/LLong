@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="BEGIN_DATE" Value="开始日期"></Caption>
+    <Caption Name="END_DATE" Value="结束日期"></Caption>
+    <Caption Name="SHIFT_ID" Value="班次"></Caption>
+    <Caption Name="CLASS_ID" Value="班组"></Caption>
+    <Caption Name="WORKER_NAME" Value="接班人"></Caption>
+    <Caption Name="EQUIP_NAME" Value="机台"></Caption>
+    <Caption Name="SHIFT_DATE" Value="接班日期"></Caption>
+    <Caption Name="SHIFT_NAME" Value="班次"></Caption>
+    <Caption Name="CLASS_NAME" Value="班组"></Caption>
+  </Captions>
+  <WebPage Title="接班信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Semis/McUI/@McUI/SearchBoxHppShiftMaster.js" />
+    </JavaScripts>
+  </WebPage>
+  <Select>
+    <ParamPanel ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="BEGIN_DATE" Type="DateBox"></ParamField>
+        <ParamField FieldName="END_DATE" Type="DateBox"></ParamField>
+        <ParamField FieldName="SHIFT_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="CLASS_ID" Type="ComboBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="t1.SHIFT_DATE,t1.SHIFT_ID,t1.CLASS_ID,t4.equip_name">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="SHIFT_MASTER_NAME" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="SHIFT_DATE" ColumnType="Date" ColumnFormt="yyyy-MM-dd"></GridColumn>
+        <GridColumn ColumnName="EQUIP_ID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="EQUIP_NAME"></GridColumn>
+        <GridColumn ColumnName="SHIFT_ID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="SHIFT_NAME"></GridColumn>
+        <GridColumn ColumnName="CLASS_ID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="CLASS_NAME"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

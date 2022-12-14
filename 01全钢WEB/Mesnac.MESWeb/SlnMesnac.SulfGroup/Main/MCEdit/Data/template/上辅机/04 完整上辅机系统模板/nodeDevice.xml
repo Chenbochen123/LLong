@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EquipFactory>
+    <Equip name="FeedingDB" project="上辅机">
+        <Main>
+            <Brand value="ConfigInfo" />
+            <Model value="MSSQL" />
+            <ReadHz value="3000" />
+            <UnitLen value="0" />
+            <Connection mode="Database">
+                <ConnectionString value="Password=yfgh@123;Persist Security Info=True;User ID=sa;Initial Catalog=RJPT;Data Source=172.16.12.213" />
+            </Connection>
+        </Main>
+        <Group>
+            <Group name="JarInfo" block="SELECT (CONVERT(VARCHAR(10),JarSerial)+'@'+CONVERT(VARCHAR(10),JarType)) AS [ssKey],rtrim(MaterialName) AS ssValue  FROM dbo.SytJar" start="0" len="100" access="ReadWrite" remark="料仓信息" isautoread="True">
+                <Data>
+                    <Data name="1@炭黑" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="2@炭黑" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="3@炭黑" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="4@炭黑" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="5@炭黑" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="6@炭黑" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="7@炭黑" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="8@炭黑" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="1@油" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="2@油" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="3@油" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="4@油" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="5@油" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="6@油" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="7@油" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="8@油" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                </Data>
+            </Group>
+            <Group name="SysKeyValue" block="SELECT * FROM dbo.SysKeyValue" start="0" len="10" access="ReadWrite" remark="配置信息" isautoread="True">
+                <Data>
+                    <Data name="RecipeMixing" runname="" start="0" len="1" method="密炼信息(FeedingDB)" max="" issave="True" subtractor="" remark="密炼信息（设备）" />
+                    <Data name="RecipeMixingName" runname="" start="0" len="1" method="" max="" issave="True" subtractor="" remark="密炼名称" />
+                </Data>
+            </Group>
+        </Group>
+    </Equip>
+    <Equip name="FeedingPLC" project="上辅机">
+        <Main>
+            <Brand value="FictitiousPlc" />
+            <Model value="SqlitePlc" />
+            <ReadHz value="1000" />
+            <UnitLen value="8" />
+            <Connection mode="Default" />
+        </Main>
+        <Group>
+            <Group name="N29" block="10" start="0" len="256" access="ReadWrite" remark="终止密炼" isautoread="False">
+                <Data>
+                    <Data name="AbortMixing" runname="AbortMixing" start="22" len="1" method="" max="" issave="False" subtractor="" remark="终止密炼" />
+                    <Data name="AbortWeight" runname="AbortWeight" start="22" len="1" method="" max="" issave="False" subtractor="" remark="终止称量" />
+                </Data>
+            </Group>
+            <Group name="N30" block="30" start="0" len="250" access="ReadWrite" remark="密炼信息" isautoread="False">
+                <Data>
+                    <Data name="Mixing" runname="Mixing" start="0" len="200" method="" max="" issave="False" subtractor="" remark="配方名称" />
+                </Data>
+            </Group>
+            <Group name="N30T200" block="30" start="200" len="56" access="ReadWrite" remark="密炼+配方 信息" isautoread="True">
+                <Data>
+                    <Data name="RecipeName" runname="RecipeName" start="0" len="6" method="配方名称()" max="" issave="True" subtractor="" remark="配方名称" />
+                    <Data name="RecipeSetNumber" runname="RecipeSetNumber" start="11" len="1" method="" max="" issave="True" subtractor="" remark="密炼设定次数" />
+                    <Data name="WeightSetNumber" runname="WeightSetNumber" start="12" len="1" method="" max="" issave="True" subtractor="" remark="称量设定次数" />
+                    <Data name="CarbonRecycleType" runname="CarbonRecycleType" start="13" len="1" method="" max="" issave="True" subtractor="" remark="炭黑是否回收" />
+                    <Data name="CarbonRecycleTime" runname="CarbonRecycleTime" start="14" len="1" method="" max="" issave="True" subtractor="" remark="炭黑回收时间" />
+                    <Data name="OverTempSetTemp" runname="OverTempSetTemp" start="15" len="1" method="" max="" issave="True" subtractor="" remark="超温排胶温度" />
+                    <Data name="OverTimeSetTime" runname="OverTimeSetTime" start="16" len="1" method="" max="" issave="True" subtractor="" remark="超时排胶最短时间" />
+                    <Data name="OverTempMinTime" runname="OverTempMinTime" start="17" len="1" method="" max="" issave="True" subtractor="" remark="超温排胶最短时间" />
+                    <Data name="OverEnergySetEnergy" runname="OverEnergySetEnergy" start="18" len="1" method="" max="" issave="True" subtractor="" remark="超能量排胶能量" />
+                    <Data name="OverEnergySetTime" runname="OverEnergySetTime" start="19" len="1" method="" max="" issave="True" subtractor="" remark="超能量排胶最短时间" />
+                    <Data name="MakeUpTemp" runname="MakeUpTemp" start="20" len="1" method="" max="" issave="True" subtractor="" remark="排胶温度补偿" />
+                    <Data name="SideTemp" runname="SideTemp" start="21" len="1" method="" max="" issave="True" subtractor="" remark="侧壁温度" />
+                    <Data name="RollTemp" runname="RollTemp" start="22" len="1" method="" max="" issave="True" subtractor="" remark="转子温度" />
+                    <Data name="DdoorTemp" runname="DdoorTemp" start="23" len="1" method="" max="" issave="True" subtractor="" remark="卸料门温度" />
+                    <Data name="StartMix" runname="StartMix" start="40" len="1" method="" max="" issave="True" subtractor="" remark="开始密炼" />
+                    <Data name="StopPlan" runname="StopPlan" start="41" len="1" method="" max="" issave="True" subtractor="" remark="终止密炼" />
+                </Data>
+            </Group>
+            <Group name="N31" block="31" start="0" len="256" access="ReadWrite" remark="称量信息" isautoread="False">
+                <Data>
+                    <Data name="RecipCarbon" runname="RecipCarbon" start="0" len="40" method="" max="" issave="False" subtractor="" remark="炭黑称量" />
+                    <Data name="RecipOil" runname="RecipOil" start="40" len="40" method="" max="" issave="False" subtractor="" remark="油称量" />
+                    <Data name="RecipPly" runname="RecipPly" start="80" len="40" method="" max="" issave="False" subtractor="" remark="胶料称量" />
+                    <Data name="SmallRecipPly" runname="SmallRecipPly" start="120" len="40" method="" max="" issave="False" subtractor="" remark="小料称量" />
+                    <Data name="StartWeight" runname="StartWeight" start="240" len="1" method="" max="" issave="False" subtractor="" remark="开始称量" />
+                </Data>
+            </Group>
+            <Group name="N85" block="85" start="0" len="256" access="Write" remark="存盘信息" isautoread="False">
+                <Data>
+                    <Data name="存盘信号写入" runname="SaveDataPerLot" start="0" len="1" method="" max="" issave="False" subtractor="" remark="存盘基本信息" />
+                </Data>
+            </Group>
+            <Group name="N85R" block="85" start="0" len="25" access="ReadWrite" remark="存盘信息" isautoread="False">
+                <Data>
+                    <Data name="密炼开始时间" runname="MixingStartTime" start="15" len="6" method="密炼开始时间()" max="" issave="False" subtractor="" remark="存盘基本信息" />
+                </Data>
+            </Group>
+            <Group name="N23" block="23" start="0" len="100" access="Read" remark="系统状态" isautoread="True">
+                <Data>
+                    <Data name="系统状态_MixerNormal" runname="" start="0" len="1" method="位计算(0)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_MixerAuto" runname="" start="0" len="1" method="位计算(1)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_SystemAuto" runname="" start="0" len="1" method="位计算(2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_CarbonNormal" runname="" start="0" len="1" method="位计算(3)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_CarbonAuto" runname="" start="0" len="1" method="位计算(4)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_OilNormal" runname="" start="0" len="1" method="位计算(5)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_OilAuto" runname="" start="0" len="1" method="位计算(6)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_PloyNormal" runname="" start="0" len="1" method="位计算(7)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_PloyAuto" runname="" start="0" len="1" method="位计算(8)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_HaveRecip" runname="" start="0" len="1" method="位计算(9)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_RubLock" runname="" start="0" len="1" method="位计算(10)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_SetNumber" runname="" start="1" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_CurrentTime" runname="" start="2" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_CurrentTemp" runname="" start="3" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_CurrentEnergy" runname="" start="4" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_CurrentPower" runname="" start="5" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_MixerCurrent" runname="" start="6" len="1" method="除法(10)" max="3276.8" issave="True" subtractor="6553.5" remark="" />
+                    <Data name="系统状态_PressureRam" runname="" start="7" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_SpeedRotor" runname="" start="8" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_FinishedNumber" runname="MixingFinishedCount" start="9" len="1" method="" max="" issave="True" subtractor="" remark="计划完成数量" />
+                    <Data name="系统状态_LengthMixer" runname="" start="10" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_CarbonFinished" runname="CarbonFinishedCount" start="11" len="1" method="" max="" issave="True" subtractor="" remark="炭黑称量完成数量" />
+                    <Data name="系统状态_OilFinished" runname="OilFinishedCount" start="12" len="1" method="" max="" issave="True" subtractor="" remark="油称量完成数量" />
+                    <Data name="系统状态_PloyFinished" runname="PloyFinishedCount" start="13" len="1" method="" max="" issave="True" subtractor="" remark="胶料称量完成数量" />
+                    <Data name="系统状态_PowerOpenDoor" runname="" start="14" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_EnergyOpenDoor" runname="" start="15" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_TempOpenDoor" runname="" start="16" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_TimeOpenDoor" runname="" start="17" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_FlagDpDoorOpen" runname="" start="18" len="1" method="位计算(0)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_FlagFinishedBatch" runname="FinishedBatch" start="18" len="1" method="位计算(1)" max="" issave="True" subtractor="" remark="存盘信号" />
+                    <Data name="系统状态_FlagMixerEnd" runname="" start="18" len="1" method="位计算(2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_FenLiaoNormal" runname="" start="18" len="1" method="位计算(3)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_FenLiaoAuto" runname="" start="18" len="1" method="位计算(4)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_FenLiaoFinished" runname="" start="19" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_GetRubWeight" runname="" start="20" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_ShuSongEquip" runname="" start="21" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_ShusongBin" runname="" start="22" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_HoopPerstion" runname="" start="23" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_Alarm" runname="" start="24" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_炭黑称01_BinNumber" runname="" start="30" len="1" method="" max="" issave="True" subtractor="" remark="罐号" />
+                    <Data name="系统状态_炭黑称01_ActualValue" runname="" start="31" len="1" method="除法(100)" max="500" issave="True" subtractor="" remark="实际值" />
+                    <Data name="系统状态_炭黑称02_BinNumber" runname="" start="32" len="1" method="" max="" issave="True" subtractor="" remark="罐号" />
+                    <Data name="系统状态_炭黑称02_ActualValue" runname="" start="33" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="实际值" />
+                    <Data name="系统状态_炭黑称03_BinNumber" runname="" start="34" len="1" method="" max="" issave="True" subtractor="" remark="罐号" />
+                    <Data name="系统状态_炭黑称03_ActualValue" runname="" start="35" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="实际值" />
+                    <Data name="系统状态_油称01_BinNumber" runname="" start="54" len="1" method="" max="" issave="True" subtractor="" remark="罐号" />
+                    <Data name="系统状态_油称01_ActualValue" runname="" start="55" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="实际值" />
+                    <Data name="系统状态_油称02_BinNumber" runname="" start="56" len="1" method="" max="" issave="True" subtractor="" remark="罐号" />
+                    <Data name="系统状态_油称02_ActualValue" runname="" start="57" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="实际值" />
+                    <Data name="系统状态_油称03_BinNumber" runname="" start="58" len="1" method="" max="" issave="True" subtractor="" remark="罐号" />
+                    <Data name="系统状态_油称03_ActualValue" runname="" start="59" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="实际值" />
+                    <Data name="系统状态_胶称01_ActualValue" runname="" start="70" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶称02_ActualValue" runname="" start="71" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶称03_ActualValue" runname="" start="72" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶料称_EndWeight" runname="" start="76" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶料称_FirstPloy" runname="" start="76" len="1" method="位计算(0)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶料称_SecondPloy" runname="" start="76" len="1" method="位计算(1)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶料称_ThirdPloy" runname="" start="76" len="1" method="位计算(2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶料称_FourthPloy" runname="" start="76" len="1" method="位计算(3)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶料称_FifthPloy" runname="" start="76" len="1" method="位计算(4)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶料称_SixthPloy" runname="" start="76" len="1" method="位计算(5)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶料称_EndAndWaitPloy" runname="" start="76" len="1" method="位计算(6)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶料称_SendingPloy" runname="" start="76" len="1" method="位计算(7)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶料称_SevenPloy" runname="" start="76" len="1" method="位计算(8)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶料称_WeightAuto" runname="" start="76" len="1" method="位计算(15)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶料称_PlyScreenNum" runname="" start="77" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_胶料称_PloyWeight" runname="" start="78" len="1" method="除法(10)" max="100000" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_粉料称量显示_BinNumber" runname="" start="82" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_粉料称量显示_ActualValue" runname="" start="83" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_连续料位01_LianxuValue1" runname="" start="96" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_连续料位02_LianxuValue2" runname="" start="96" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_小料称量显示_EndWeight" runname="" start="97" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_小料称量显示_FirstPloy" runname="" start="97" len="1" method="位计算(0)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_小料称量显示_SecondPloy" runname="" start="97" len="1" method="位计算(1)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_小料称量显示_ThirdPloy" runname="" start="97" len="1" method="位计算(2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_小料称量显示_FourthPloy" runname="" start="97" len="1" method="位计算(3)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_小料称量显示_FifthPloy" runname="" start="97" len="1" method="位计算(4)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_小料称量显示_SixthPloy" runname="" start="97" len="1" method="位计算(5)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_小料称量显示_EndAndWaitPloy" runname="" start="97" len="1" method="位计算(6)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_小料称量显示_SendingPloy" runname="" start="97" len="1" method="位计算(7)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_小料称量显示_WeightAuto" runname="" start="97" len="1" method="位计算(15)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_小料称量显示_PloyWeight" runname="" start="98" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                    <Data name="系统状态_小料称量显示_ActualValue" runname="" start="99" len="1" method="" max="" issave="True" subtractor="" remark="" />
+                </Data>
+            </Group>
+            <Group name="N24" block="24" start="0" len="102" access="Read" remark="设备状态" isautoread="True">
+                <Data>
+                    <Data name="炭黑称_CBWeight" runname="" start="0" len="1" method="除法(100)" max="500" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_JlcWeight" runname="" start="1" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_ValveOut" runname="" start="2" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_ValveAirInjet" runname="" start="2" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_ValveAir" runname="" start="2" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_PreHolderLevel" runname="" start="2" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_ValveMidOut" runname="" start="2" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_ValveMidAirInjet" runname="" start="2" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_ValveMixIn" runname="" start="2" len="1" method="位计算(13,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_ValveMixSide" runname="" start="2" len="1" method="位计算(15,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_ActOut" runname="" start="3" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_ValveOut2" runname="" start="3" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_ValveMidOut2" runname="" start="3" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_Cabin1" runname="" start="3" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_Cabin2" runname="" start="3" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_MidCabin1" runname="" start="3" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="炭黑称_MidCabin2" runname="" start="3" len="1" method="位计算(13,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油称_OilWeight" runname="" start="8" len="1" method="除法(100)" max="200" issave="True" subtractor="" remark="" />
+                    <Data name="油称_ValveOut" runname="" start="9" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油称_PreHolderLevel" runname="" start="9" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油称_ValveHeat" runname="" start="9" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油称_ActOut" runname="" start="9" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油称_ValveSidePipe" runname="" start="9" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="胶称_PlyWeight" runname="" start="12" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="胶称_SensorWeight" runname="" start="13" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="胶称_SensorMidBelt" runname="" start="13" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="胶称_MotorWeight" runname="" start="13" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="胶称_MotorMidBelt" runname="" start="13" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="胶称_MotorSendPloy" runname="" start="13" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压送罐_ValveIn" runname="" start="18" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压送罐_ValveOut" runname="" start="18" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压送罐_ValveTopAir" runname="" start="18" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压送罐_ValveAirInjet" runname="" start="18" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压送罐_ValveConvy" runname="" start="18" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压送罐_ValveMainAir" runname="" start="18" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压送罐_ValveLover" runname="" start="18" len="1" method="位计算(13,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压送罐_SensorPressure1" runname="" start="18" len="1" method="位计算(15,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压送罐_SensorPressure2" runname="" start="19" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="大罐_Cabin" runname="" start="30" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="大罐_SensorPressure" runname="" start="30" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="大罐_ValveOut" runname="" start="30" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="大罐_ValveAirInjet" runname="" start="30" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="大罐_ValveAirFlat" runname="" start="30" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="大罐_CarbonLevel" runname="" start="30" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="中间斗_Cabin" runname="" start="42" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="中间斗_CarbonLevel" runname="" start="42" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="中间斗_SensorPressure" runname="" start="42" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="中间斗_ValveAirBalance" runname="" start="42" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="中间斗_ValveAirInjet" runname="" start="42" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A1_Cabin" runname="" start="50" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A1_CarbonLevel" runname="" start="50" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A1_SensorPressure" runname="" start="50" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A1_ValveAirInjet" runname="" start="50" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A1_MotorFeed" runname="" start="50" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A1_ValveFeed" runname="" start="50" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A2_Cabin" runname="" start="51" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A2_CarbonLevel" runname="" start="51" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A2_SensorPressure" runname="" start="51" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A2_ValveAirInjet" runname="" start="51" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A2_MotorFeed" runname="" start="51" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A2_ValveFeed" runname="" start="51" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A3_Cabin" runname="" start="52" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A3_CarbonLevel" runname="" start="52" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A3_SensorPressure" runname="" start="52" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A3_ValveAirInjet" runname="" start="52" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A3_MotorFeed" runname="" start="52" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A3_ValveFeed" runname="" start="52" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A4_Cabin" runname="" start="53" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A4_CarbonLevel" runname="" start="53" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A4_SensorPressure" runname="" start="53" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A4_ValveAirInjet" runname="" start="53" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A4_MotorFeed" runname="" start="53" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A4_ValveFeed" runname="" start="53" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A5_Cabin" runname="" start="54" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A5_CarbonLevel" runname="" start="54" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A5_SensorPressure" runname="" start="54" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A5_ValveAirInjet" runname="" start="54" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A5_MotorFeed" runname="" start="54" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A5_ValveFeed" runname="" start="54" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A6_Cabin" runname="" start="55" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A6_CarbonLevel" runname="" start="55" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A6_SensorPressure" runname="" start="55" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A6_ValveAirInjet" runname="" start="55" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A6_MotorFeed" runname="" start="55" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A6_ValveFeed" runname="" start="55" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A7_Cabin" runname="" start="56" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A7_CarbonLevel" runname="" start="56" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A7_SensorPressure" runname="" start="56" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A7_ValveAirInjet" runname="" start="56" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A7_MotorFeed" runname="" start="56" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A7_ValveFeed" runname="" start="56" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A8_Cabin" runname="" start="57" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A8_CarbonLevel" runname="" start="57" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A8_SensorPressure" runname="" start="57" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A8_ValveAirInjet" runname="" start="57" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A8_MotorFeed" runname="" start="57" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="日罐A8_ValveFeed" runname="" start="57" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="除尘_Cabin" runname="" start="62" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="除尘_CarbonLevel" runname="" start="62" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="除尘_SensorPressor" runname="" start="62" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="除尘_MotorFeed1" runname="" start="62" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="除尘_MotorFeed2" runname="" start="62" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="除尘_ValveFeed1" runname="" start="62" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="除尘_ValveFeed2" runname="" start="62" len="1" method="位计算(13,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="除尘_ValveClearFeed" runname="" start="62" len="1" method="位计算(15,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="除尘_ValveRecycleFeed" runname="" start="63" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="除尘_RecycleBin" runname="" start="63" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐1_OilLevel" runname="" start="74" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐1_ValveHeat" runname="" start="74" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐1_ValveFastIn" runname="" start="74" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐1_ValveSlowIn" runname="" start="74" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐1_ValvePushWater" runname="" start="74" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐1_ValveWaterLevel" runname="" start="74" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐2_OilLevel" runname="" start="75" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐2_ValveHeat" runname="" start="75" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐2_ValveFastIn" runname="" start="75" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐2_ValveSlowIn" runname="" start="75" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐2_ValvePushWater" runname="" start="75" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐2_ValveWaterLevel" runname="" start="75" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐3_OilLevel" runname="" start="76" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐3_ValveHeat" runname="" start="76" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐3_ValveFastIn" runname="" start="76" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐3_ValveSlowIn" runname="" start="76" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐3_ValvePushWater" runname="" start="76" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐3_ValveWaterLevel" runname="" start="76" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐4_OilLevel" runname="" start="77" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐4_ValveHeat" runname="" start="77" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐4_ValveFastIn" runname="" start="77" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐4_ValveSlowIn" runname="" start="77" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐4_ValvePushWater" runname="" start="77" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="油罐4_ValveWaterLevel" runname="" start="77" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="岔道阀1_ValveForkStraight" runname="" start="84" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="岔道阀1_ValveForkInclined" runname="" start="84" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="岔道阀2_ValveForkStraight" runname="" start="84" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="岔道阀2_ValveForkInclined" runname="" start="84" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="岔道阀3_ValveForkStraight" runname="" start="84" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="岔道阀3_ValveForkInclined" runname="" start="84" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="岔道阀4_ValveForkStraight" runname="" start="84" len="1" method="位计算(13,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="岔道阀4_ValveForkInclined" runname="" start="84" len="1" method="位计算(15,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="岔道阀5_ValveForkStraight" runname="" start="85" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="岔道阀5_ValveForkInclined" runname="" start="85" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="破拱阀1" runname="" start="94" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="破拱阀2" runname="" start="94" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="破拱阀3" runname="" start="94" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="破拱阀4" runname="" start="94" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="破拱阀5" runname="" start="94" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="破拱阀6" runname="" start="94" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="破拱阀7" runname="" start="94" len="1" method="位计算(13,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="破拱阀8" runname="" start="94" len="1" method="位计算(15,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压力开关1" runname="" start="96" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压力开关2" runname="" start="96" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压力开关3" runname="" start="96" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压力开关4" runname="" start="96" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压力开关5" runname="" start="96" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压力开关6" runname="" start="96" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压力开关7" runname="" start="96" len="1" method="位计算(13,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="压力开关8" runname="" start="96" len="1" method="位计算(15,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="风机1" runname="" start="98" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="风机2" runname="" start="98" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="风机3" runname="" start="98" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="风机4" runname="" start="98" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="风机5" runname="" start="98" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="风机6" runname="" start="98" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="风机7" runname="" start="98" len="1" method="位计算(13,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="风机8" runname="" start="98" len="1" method="位计算(15,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="密炼机_MixerRamUp" runname="" start="99" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="密炼机_MixerRamMid" runname="" start="99" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="密炼机_MixerRamDwon" runname="" start="99" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="密炼机_MixerDpDoorOpen" runname="" start="99" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="密炼机_MixerDpDoorClose" runname="" start="99" len="1" method="位计算(9,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="密炼机_MixerInDoorOpen" runname="" start="99" len="1" method="位计算(11,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="密炼机_MixerInDoorClose" runname="" start="99" len="1" method="位计算(13,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="密炼机_MixerMainMotor" runname="" start="99" len="1" method="位计算(15,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="密炼机_MixerOilPump" runname="" start="100" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="密炼机_ValveOilOffBatch" runname="" start="100" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="密炼机_ValveInjetOil" runname="" start="100" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="密炼机_ValveClearPipe" runname="" start="100" len="1" method="位计算(7,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="下辅机_MotorExtral" runname="" start="101" len="1" method="位计算(1,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="下辅机_MotorCool" runname="" start="101" len="1" method="位计算(3,2)" max="" issave="True" subtractor="" remark="" />
+                    <Data name="下辅机_MotorFeed" runname="" start="101" len="1" method="位计算(5,2)" max="" issave="True" subtractor="" remark="" />
+                </Data>
+            </Group>
+        </Group>
+    </Equip>
+</EquipFactory>

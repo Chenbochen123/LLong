@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HptSemisTechNcc"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPT_SEMIS_TECH_NCC ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcj1jttemp" prepend="AND">
+          <![CDATA[JCJ1JTTEMP = #where.Jcj1jttemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcj1sh1temp" prepend="AND">
+          <![CDATA[JCJ1SH1TEMP = #where.Jcj1sh1temp#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcj1sh2temp" prepend="AND">
+          <![CDATA[JCJ1SH2TEMP = #where.Jcj1sh2temp#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcj1jctemp" prepend="AND">
+          <![CDATA[JCJ1JCTEMP = #where.Jcj1jctemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcj1lgtemp" prepend="AND">
+          <![CDATA[JCJ1LGTEMP = #where.Jcj1lgtemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcj2jttemp" prepend="AND">
+          <![CDATA[JCJ2JTTEMP = #where.Jcj2jttemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcj2sh1temp" prepend="AND">
+          <![CDATA[JCJ2SH1TEMP = #where.Jcj2sh1temp#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcj2sh2temp" prepend="AND">
+          <![CDATA[JCJ2SH2TEMP = #where.Jcj2sh2temp#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcj2jctemp" prepend="AND">
+          <![CDATA[JCJ2JCTEMP = #where.Jcj2jctemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcj2lgtemp" prepend="AND">
+          <![CDATA[JCJ2LGTEMP = #where.Jcj2lgtemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj1sztemp" prepend="AND">
+          <![CDATA[YYJ1SZTEMP = #where.Yyj1sztemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj1xztemp" prepend="AND">
+          <![CDATA[YYJ1XZTEMP = #where.Yyj1xztemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj2sztemp" prepend="AND">
+          <![CDATA[YYJ2SZTEMP = #where.Yyj2sztemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj2xztemp" prepend="AND">
+          <![CDATA[YYJ2XZTEMP = #where.Yyj2xztemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj1cjtemp" prepend="AND">
+          <![CDATA[YYJ1CJTEMP = #where.Yyj1cjtemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj2cjtemp" prepend="AND">
+          <![CDATA[YYJ2CJTEMP = #where.Yyj2cjtemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Lqjtemp" prepend="AND">
+          <![CDATA[LQJTEMP = #where.Lqjtemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Jlthickness1" prepend="AND">
+          <![CDATA[JLTHICKNESS1 = #where.Jlthickness1#]]>
+        </isNotNull>
+        <isNotNull property="where.Jlthickness2" prepend="AND">
+          <![CDATA[JLTHICKNESS2 = #where.Jlthickness2#]]>
+        </isNotNull>
+        <isNotNull property="where.Ncctotalthickness" prepend="AND">
+          <![CDATA[NCCTOTALTHICKNESS = #where.Ncctotalthickness#]]>
+        </isNotNull>
+        <isNotNull property="where.Ncctotalthicknesscpk" prepend="AND">
+          <![CDATA[NCCTOTALTHICKNESSCPK = #where.Ncctotalthicknesscpk#]]>
+        </isNotNull>
+        <isNotNull property="where.Jlactualwidth1" prepend="AND">
+          <![CDATA[JLACTUALWIDTH1 = #where.Jlactualwidth1#]]>
+        </isNotNull>
+        <isNotNull property="where.Jlactualwidth2" prepend="AND">
+          <![CDATA[JLACTUALWIDTH2 = #where.Jlactualwidth2#]]>
+        </isNotNull>
+        <isNotNull property="where.Jpwidthcpk" prepend="AND">
+          <![CDATA[JPWIDTHCPK = #where.Jpwidthcpk#]]>
+        </isNotNull>
+        <isNotNull property="where.Ncctotalwidth" prepend="AND">
+          <![CDATA[NCCTOTALWIDTH = #where.Ncctotalwidth#]]>
+        </isNotNull>
+        <isNotNull property="where.Ncctotalwidthcpk" prepend="AND">
+          <![CDATA[NCCTOTALWIDTHCPK = #where.Ncctotalwidthcpk#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj1czcrolldistance" prepend="AND">
+          <![CDATA[YYJ1CZCROLLDISTANCE = #where.Yyj1czcrolldistance#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj1qdcrolldistance" prepend="AND">
+          <![CDATA[YYJ1QDCROLLDISTANCE = #where.Yyj1qdcrolldistance#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj2czcrolldistance" prepend="AND">
+          <![CDATA[YYJ2CZCROLLDISTANCE = #where.Yyj2czcrolldistance#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj2qdcrolldistance" prepend="AND">
+          <![CDATA[YYJ2QDCROLLDISTANCE = #where.Yyj2qdcrolldistance#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj1czcaxiscross" prepend="AND">
+          <![CDATA[YYJ1CZCAXISCROSS = #where.Yyj1czcaxiscross#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj1qdcaxiscross" prepend="AND">
+          <![CDATA[YYJ1QDCAXISCROSS = #where.Yyj1qdcaxiscross#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj2czcaxiscross" prepend="AND">
+          <![CDATA[YYJ2CZCAXISCROSS = #where.Yyj2czcaxiscross#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj2qdcaxiscross" prepend="AND">
+          <![CDATA[YYJ2QDCAXISCROSS = #where.Yyj2qdcaxiscross#]]>
+        </isNotNull>
+        <isNotNull property="where.Wl1speed" prepend="AND">
+          <![CDATA[WL1SPEED = #where.Wl1speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcj1speed" prepend="AND">
+          <![CDATA[JCJ1SPEED = #where.Jcj1speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Fhj1speed" prepend="AND">
+          <![CDATA[FHJ1SPEED = #where.Fhj1speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj1speed" prepend="AND">
+          <![CDATA[YYJ1SPEED = #where.Yyj1speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Lcg1speed" prepend="AND">
+          <![CDATA[LCG1SPEED = #where.Lcg1speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Jq1speed" prepend="AND">
+          <![CDATA[JQ1SPEED = #where.Jq1speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Dzspeed" prepend="AND">
+          <![CDATA[DZSPEED = #where.Dzspeed#]]>
+        </isNotNull>
+        <isNotNull property="where.Thspeed" prepend="AND">
+          <![CDATA[THSPEED = #where.Thspeed#]]>
+        </isNotNull>
+        <isNotNull property="where.Wl2speed" prepend="AND">
+          <![CDATA[WL2SPEED = #where.Wl2speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcj2speed" prepend="AND">
+          <![CDATA[JCJ2SPEED = #where.Jcj2speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Fhj2speed" prepend="AND">
+          <![CDATA[FHJ2SPEED = #where.Fhj2speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Yyj2speed" prepend="AND">
+          <![CDATA[YYJ2SPEED = #where.Yyj2speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Lcg2speed" prepend="AND">
+          <![CDATA[LCG2SPEED = #where.Lcg2speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Jq2speed" prepend="AND">
+          <![CDATA[JQ2SPEED = #where.Jq2speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Lqg1speed" prepend="AND">
+          <![CDATA[LQG1SPEED = #where.Lqg1speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Lqg2speed" prepend="AND">
+          <![CDATA[LQG2SPEED = #where.Lqg2speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Lqg3speed" prepend="AND">
+          <![CDATA[LQG3SPEED = #where.Lqg3speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Lqg4speed" prepend="AND">
+          <![CDATA[LQG4SPEED = #where.Lqg4speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Xpspeed" prepend="AND">
+          <![CDATA[XPSPEED = #where.Xpspeed#]]>
+        </isNotNull>
+        <isNotNull property="where.Mcjqspeed" prepend="AND">
+          <![CDATA[MCJQSPEED = #where.Mcjqspeed#]]>
+        </isNotNull>
+        <isNotNull property="where.Juanq1speed" prepend="AND">
+          <![CDATA[JUANQ1SPEED = #where.Juanq1speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Juanq2speed" prepend="AND">
+          <![CDATA[JUANQ2SPEED = #where.Juanq2speed#]]>
+        </isNotNull>
+        <isNotNull property="where.Lqstemp" prepend="AND">
+          <![CDATA[LQSTEMP = #where.Lqstemp#]]>
+        </isNotNull>
+        <isNotNull property="where.Lqsjspre" prepend="AND">
+          <![CDATA[LQSJSPRE = #where.Lqsjspre#]]>
+        </isNotNull>
+        <isNotNull property="where.Lqscspre" prepend="AND">
+          <![CDATA[LQSCSPRE = #where.Lqscspre#]]>
+        </isNotNull>
+        <isNotNull property="where.Lqspredif" prepend="AND">
+          <![CDATA[LQSPREDIF = #where.Lqspredif#]]>
+        </isNotNull>
+        <isNotNull property="where.Cdspeed" prepend="AND">
+          <![CDATA[CDSPEED = #where.Cdspeed#]]>
+        </isNotNull>
+        <isNotNull property="where.Param62" prepend="AND">
+          <![CDATA[PARAM62 = #where.Param62#]]>
+        </isNotNull>
+        <isNotNull property="where.Param63" prepend="AND">
+          <![CDATA[PARAM63 = #where.Param63#]]>
+        </isNotNull>
+        <isNotNull property="where.Param64" prepend="AND">
+          <![CDATA[PARAM64 = #where.Param64#]]>
+        </isNotNull>
+        <isNotNull property="where.Param65" prepend="AND">
+          <![CDATA[PARAM65 = #where.Param65#]]>
+        </isNotNull>
+        <isNotNull property="where.Param66" prepend="AND">
+          <![CDATA[PARAM66 = #where.Param66#]]>
+        </isNotNull>
+        <isNotNull property="where.Param67" prepend="AND">
+          <![CDATA[PARAM67 = #where.Param67#]]>
+        </isNotNull>
+        <isNotNull property="where.Param68" prepend="AND">
+          <![CDATA[PARAM68 = #where.Param68#]]>
+        </isNotNull>
+        <isNotNull property="where.Param69" prepend="AND">
+          <![CDATA[PARAM69 = #where.Param69#]]>
+        </isNotNull>
+        <isNotNull property="where.Param70" prepend="AND">
+          <![CDATA[PARAM70 = #where.Param70#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

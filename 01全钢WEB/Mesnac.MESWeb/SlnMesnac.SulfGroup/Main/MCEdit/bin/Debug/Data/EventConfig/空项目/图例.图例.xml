@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ActionService>
+  <Design>
+    <Path path="主控界面/生产监控">
+      <Action action="D4A1FDB740E84623BCC09D9761414CEE">
+        <Caption>硫化_图例</Caption>
+        <Remark>图例</Remark>
+      </Action>
+      <Action action="D4A1FDB740E84623BCC09D9761414CDD">
+          <Caption>硫化_测试</Caption>
+          <Remark>测试</Remark>
+      </Action>
+    </Path>
+  </Design>
+
+  <DesignToRuntime>
+    <Design action="D4A1FDB740E84623BCC09D9761414CEE">
+      <Runtime action="B4696FCAC7534569ACFD0FA04F5AF0F8"/>
+    </Design>
+    <Design action="D4A1FDB740E84623BCC09D9761414CDD">
+        <Runtime action="B4696FCAC7534569ACFD0FA04F5AF0DD"/>
+    </Design>
+  </DesignToRuntime>
+
+  <Runtime>
+    <Import assembly = "Data/Action/SulfGroup/Mesnac.Action.SulfGroup.dll">
+      <Action action="B4696FCAC7534569ACFD0FA04F5AF0F8" class="Mesnac.Action.SulfGroup.Main.Mian"/>
+      <Action action="B4696FCAC7534569ACFD0FA04F5AF0DD" class="Mesnac.Action.SulfGroup.OnLood.OnLoop"/>
+    </Import>
+  </Runtime>
+</ActionService>

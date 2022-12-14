@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportPsbMaterialQk" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*
+        FROM PSB_MATERIAL_QK T1
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_CODE_NEW" prepend="AND">
+          <![CDATA[T1.MATERIAL_CODE_NEW = #where.MATERIAL_CODE_NEW#]]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_CODE_OLD" prepend="AND">
+          <![CDATA[T1.MATERIAL_CODE_OLD = #where.MATERIAL_CODE_OLD#]]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_NAME_LONG" prepend="AND">
+          <![CDATA[T1.MATERIAL_NAME_LONG LIKE '%' || #where.MATERIAL_NAME_LONG# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_NAME_SHORT" prepend="AND">
+          <![CDATA[T1.MATERIAL_NAME_SHORT LIKE '%' || #where.MATERIAL_NAME_SHORT# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_CODE_LONG" prepend="AND">
+          <![CDATA[T1.MATERIAL_CODE_LONG LIKE '%' || #where.MATERIAL_CODE_LONG# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.MATERIAL_CODE_NEW
+      </isNull>
+    </select>
+    <select id="Select+Update@ReportPsbMaterialQk" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM PSB_MATERIAL_QK ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <select id="Select@ReportPsbMaterialQk@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*
+        FROM PSB_MATERIAL_QK T1
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T1.OBJID = #where.OBJID#)]]>
+      </dynamic>
+    </select>
+
+  </statements>
+</sqlMap>

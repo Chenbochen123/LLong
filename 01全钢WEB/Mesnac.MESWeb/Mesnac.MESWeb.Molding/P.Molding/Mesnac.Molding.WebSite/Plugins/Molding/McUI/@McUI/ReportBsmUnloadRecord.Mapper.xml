@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportBsmUnloadRecord" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T4.USER_NAME , t0.record_user_id,t0.record_time,t0.tooling_barcode,t0.green_tyre_no,t0.objid
+        FROM BSM_TOOLING_UNLOAD_RECORD T0
+        LEFT JOIN SSB_USER T4 ON T4.OBJID = T0.RECORD_USER_ID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.GREEN_TYRE_NO" prepend="AND">
+          <![CDATA[T0.GREEN_TYRE_NO = #where.GREEN_TYRE_NO#]]>
+        </isNotNull>
+
+        <isNull property="where.GREEN_TYRE_NO">
+          <isNotNull property="where.OBJID" prepend="AND">
+            <![CDATA[T0.OBJID = #where.OBJID#]]>
+          </isNotNull>
+          <isNotNull property="where.BeginTime" prepend="AND">
+            <![CDATA[T0.RECORD_TIME >= #where.BeginTime#]]>
+          </isNotNull>
+          <isNotNull property="where.EndTime" prepend="AND">
+            <![CDATA[T0.RECORD_TIME <= #where.EndTime#]]>
+          </isNotNull>
+          <isNotNull property="where.TOOLING_BARCODE" prepend="AND">
+            <![CDATA[T0.TOOLING_BARCODE = #where.TOOLING_BARCODE#]]>
+          </isNotNull>
+        </isNull>
+          <isNotNull property="where.DELETE_FLAG" prepend="AND">
+            <![CDATA[T0.DELETE_FLAG = #where.DELETE_FLAG#]]>
+          </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    <select id="Select+Update@ReportBsmUnloadRecord" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM BSM_TOOLING_UNLOAD_RECORD ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <select id="Select@ReportBsmUnloadRecord@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T4.USER_NAME , t0.record_user_id,t0.record_time,t0.tooling_barcode,t0.green_tyre_no,t0.objid
+        FROM BSM_TOOLING_UNLOAD_RECORD T0
+        LEFT JOIN SSB_USER T4 ON T4.OBJID = T0.RECORD_USER_ID
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T0.OBJID = #where.OBJID#)]]>
+      </dynamic>
+    </select>
+
+  </statements>
+</sqlMap>

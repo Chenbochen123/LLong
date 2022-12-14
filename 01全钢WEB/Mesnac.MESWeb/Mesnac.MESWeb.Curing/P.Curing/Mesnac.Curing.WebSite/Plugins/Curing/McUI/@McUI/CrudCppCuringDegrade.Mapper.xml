@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudCppCuringDegrade" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*, T2.USER_NAME RECORD_USER_NAME 
+        , T3.EQUIP_NAME,T4.GRADENAME
+        FROM CPP_CURING_DEGRADE T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        LEFT JOIN SBE_EQUIP T3 ON T1.EQUIP_ID = T3.OBJID 
+        LEFT JOIN (SELECT * FROM FQG_GRADE_INFO WHERE WORK_PROCESS_ID=499) T4 ON T1.DEGRADE_ID=T4.GRADE_CODE
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME <= #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EQUIP_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[T1.TYRE_NO LIKE '%' || #where.TyreNo# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.GreenNo" prepend="AND">
+          <![CDATA[T1.GREEN_NO LIKE '%' || #where.GreenNo# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.DEGRADE_ID" prepend="AND">
+          <![CDATA[T1.DEGRADE_ID = #where.DEGRADE_ID#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    <!--查询物料信息，ID值固定为GetComboBoxData@Select@CrudCimMouldChangeinfo@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCppCuringDegrade@DEGRADE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT GRADE_CODE sskey,GRADENAME ssValue FROM FQG_GRADE_INFO WHERE WORK_PROCESS_ID=499 AND DELETE_FLAG = '0' ORDER BY GRADE_CODE
+     ]]>
+    </select>
+    <select id="Select+Update@CrudCppCuringDegrade" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM CPP_CURING_DEGRADE ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+    <select id="Select@CrudCppCuringDegrade@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*, T2.USER_NAME RECORD_USER_NAME 
+        , T3.EQUIP_NAME,T4.GRADENAME
+        FROM CPP_CURING_DEGRADE T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        LEFT JOIN SBE_EQUIP T3 ON T1.EQUIP_ID = T3.OBJID 
+        LEFT JOIN (SELECT * FROM FQG_GRADE_INFO WHERE WORK_PROCESS_ID=499) T4 ON T1.DEGRADE_ID=T4.GRADE_CODE
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T1.OBJID = #where.OBJID#)]]>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

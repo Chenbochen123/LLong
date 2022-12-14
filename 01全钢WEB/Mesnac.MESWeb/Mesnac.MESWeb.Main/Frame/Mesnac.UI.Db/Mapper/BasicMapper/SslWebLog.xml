@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BasicMapper.SslWebLog"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SslWebLog" type="Mesnac.FrameDb.Entity.BasicEntity.SslWebLog, Mesnac.FrameDb.Mapper" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SslWebLog" class="SslWebLog">
+    <result property="ObjId" column="OBJID"/>
+    <result property="UserId" column="USER_ID"/>
+    <result property="PageId" column="PAGE_ID"/>
+    <result property="MethodId" column="METHOD_ID"/>
+    <result property="UserIp" column="USER_IP"/>
+    <result property="ShowName" column="SHOW_NAME"/>
+    <result property="MethodResult" column="METHOD_RESULT"/>
+    <result property="PageRequest" column="PAGE_REQUEST"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BakupFlag" column="BAKUP_FLAG"/>
+    <result property="BakupTime" column="BAKUP_TIME"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SslWebLog" class="SslWebLog">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="UserId" column="UserId"/>
+    <parameter property="PageId" column="PageId"/>
+    <parameter property="MethodId" column="MethodId"/>
+    <parameter property="UserIp" column="UserIp"/>
+    <parameter property="ShowName" column="ShowName"/>
+    <parameter property="MethodResult" column="MethodResult"/>
+    <parameter property="PageRequest" column="PageRequest"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BakupFlag" column="BakupFlag"/>
+    <parameter property="BakupTime" column="BakupTime"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SSL_WEB_LOG ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.UserId" prepend="AND">
+          <![CDATA[USER_ID = #where.UserId#]]>
+        </isNotNull>
+        <isNotNull property="where.PageId" prepend="AND">
+          <![CDATA[PAGE_ID = #where.PageId#]]>
+        </isNotNull>
+        <isNotNull property="where.MethodId" prepend="AND">
+          <![CDATA[METHOD_ID = #where.MethodId#]]>
+        </isNotNull>
+        <isNotNull property="where.UserIp" prepend="AND">
+          <![CDATA[USER_IP = #where.UserIp#]]>
+        </isNotNull>
+        <isNotNull property="where.ShowName" prepend="AND">
+          <![CDATA[SHOW_NAME = #where.ShowName#]]>
+        </isNotNull>
+        <isNotNull property="where.MethodResult" prepend="AND">
+          <![CDATA[METHOD_RESULT = #where.MethodResult#]]>
+        </isNotNull>
+        <isNotNull property="where.PageRequest" prepend="AND">
+          <![CDATA[PAGE_REQUEST = #where.PageRequest#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SSL_WEB_LOG]]>
+       <dynamic prepend="(">
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="UserId" prepend=",">USER_ID</isNotNull>
+        <isNotNull property="PageId" prepend=",">PAGE_ID</isNotNull>
+        <isNotNull property="MethodId" prepend=",">METHOD_ID</isNotNull>
+        <isNotNull property="UserIp" prepend=",">USER_IP</isNotNull>
+        <isNotNull property="ShowName" prepend=",">SHOW_NAME</isNotNull>
+        <isNotNull property="MethodResult" prepend=",">METHOD_RESULT</isNotNull>
+        <isNotNull property="PageRequest" prepend=",">PAGE_REQUEST</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BakupFlag" prepend=",">BAKUP_FLAG</isNotNull>
+        <isNotNull property="BakupTime" prepend=",">BAKUP_TIME</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="UserId" prepend=",">#UserId#</isNotNull>
+        <isNotNull property="PageId" prepend=",">#PageId#</isNotNull>
+        <isNotNull property="MethodId" prepend=",">#MethodId#</isNotNull>
+        <isNotNull property="UserIp" prepend=",">#UserIp#</isNotNull>
+        <isNotNull property="ShowName" prepend=",">#ShowName#</isNotNull>
+        <isNotNull property="MethodResult" prepend=",">#MethodResult#</isNotNull>
+        <isNotNull property="PageRequest" prepend=",">#PageRequest#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BakupFlag" prepend=",">#BakupFlag#</isNotNull>
+        <isNotNull property="BakupTime" prepend=",">#BakupTime#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SSL_WEB_LOG
+       <dynamic prepend="SET">
+        <isNotNull  property="update.UserId"  prepend=",">
+          USER_ID = #update.UserId#
+        </isNotNull>
+        <isNotNull  property="update.PageId"  prepend=",">
+          PAGE_ID = #update.PageId#
+        </isNotNull>
+        <isNotNull  property="update.MethodId"  prepend=",">
+          METHOD_ID = #update.MethodId#
+        </isNotNull>
+        <isNotNull  property="update.UserIp"  prepend=",">
+          USER_IP = #update.UserIp#
+        </isNotNull>
+        <isNotNull  property="update.ShowName"  prepend=",">
+          SHOW_NAME = #update.ShowName#
+        </isNotNull>
+        <isNotNull  property="update.MethodResult"  prepend=",">
+          METHOD_RESULT = #update.MethodResult#
+        </isNotNull>
+        <isNotNull  property="update.PageRequest"  prepend=",">
+          PAGE_REQUEST = #update.PageRequest#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BakupFlag"  prepend=",">
+          BAKUP_FLAG = #update.BakupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BakupTime"  prepend=",">
+          BAKUP_TIME = #update.BakupTime#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SSL_WEB_LOG
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SslWebLog">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SslWebLog">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SSL_WEB_LOG
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SSL_WEB_LOG
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SslWebLog" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SSL_WEB_LOG
+    </statement>
+  </statements>
+</sqlMap>

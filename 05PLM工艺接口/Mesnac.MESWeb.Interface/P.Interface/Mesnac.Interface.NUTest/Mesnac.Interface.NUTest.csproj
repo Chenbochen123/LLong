@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{414D1232-E907-45A3-92C2-49FD4E9036D6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Interface.NUTest</RootNamespace>
+    <AssemblyName>Mesnac.Interface.NUTest</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\@packages\MyBatis\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\@packages\MyBatis\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.DbAccess">
+      <HintPath>..\..\@packages\Frame\Mesnac.DbAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="LogAgent">
+      <HintPath>..\..\@packages\LogAgent\LogAgent.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.FrameDb.Mapper">
+      <HintPath>..\..\@packages\Frame\Mesnac.FrameDb.Mapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.McUI">
+      <HintPath>..\..\@packages\Frame\Mesnac.McUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Utility">
+      <HintPath>..\..\@packages\Frame\Mesnac.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Web.UI">
+      <HintPath>..\..\@packages\Frame\Mesnac.Web.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.Common">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.DataMapper">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\@packages\nunit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_Test.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config\dbVersion.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="config\LogAgent.config" />
+    <None Include="config\providers.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="config\SqlMap.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="log4net\log4net.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Frame\Mesnac.DbAccess\Mesnac.DbAccess.csproj">
+      <Project>{60b919c5-c601-4999-a531-439042d59746}</Project>
+      <Name>Mesnac.DbAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Frame\Mesnac.Utility\Mesnac.Utility.csproj">
+      <Project>{03b7f91d-fc5b-4c3d-a4b5-abf78bb4f884}</Project>
+      <Name>Mesnac.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Interface.Business\Mesnac.Interface.Business.csproj">
+      <Project>{A7140F46-5834-4E2E-85B2-9F2A51C88A03}</Project>
+      <Name>Mesnac.Interface.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Interface.Data\Mesnac.Interface.Data.csproj">
+      <Project>{5CBD2B37-F50A-41AE-95BF-D97E01EEAA35}</Project>
+      <Name>Mesnac.Interface.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Interface.Entity\Mesnac.Interface.Entity.csproj">
+      <Project>{1538D382-E144-4F03-9FA8-AC4BC6C2DA2D}</Project>
+      <Name>Mesnac.Interface.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Interface.Mapper\Mesnac.Interface.Mapper.csproj">
+      <Project>{8D9F386D-DF39-4FCF-8789-98E3A6B9CB71}</Project>
+      <Name>Mesnac.Interface.Mapper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log4net\log4net.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

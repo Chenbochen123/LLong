@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.HptSemisTechDd"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HptSemisTechDd" type="Mesnac.Semis.Entity.BasicEntity.HptSemisTechDd, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HptSemisTechDd" class="HptSemisTechDd">
+    <result property="ObjId" column="OBJID"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="ShiftId" column="SHIFT_ID"/>
+    <result property="MaterialId" column="MATERIAL_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="PlanId" column="PLAN_ID"/>
+    <result property="PlanDetailId" column="PLAN_DETAIL_ID"/>
+    <result property="Param1" column="PARAM1"/>
+    <result property="Param2" column="PARAM2"/>
+    <result property="Param3" column="PARAM3"/>
+    <result property="Param4" column="PARAM4"/>
+    <result property="Param5" column="PARAM5"/>
+    <result property="Param6" column="PARAM6"/>
+    <result property="Param7" column="PARAM7"/>
+    <result property="Param8" column="PARAM8"/>
+    <result property="Param9" column="PARAM9"/>
+    <result property="Param10" column="PARAM10"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HptSemisTechDd" class="HptSemisTechDd">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="ShiftId" column="ShiftId"/>
+    <parameter property="MaterialId" column="MaterialId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="PlanId" column="PlanId"/>
+    <parameter property="PlanDetailId" column="PlanDetailId"/>
+    <parameter property="Param1" column="Param1"/>
+    <parameter property="Param2" column="Param2"/>
+    <parameter property="Param3" column="Param3"/>
+    <parameter property="Param4" column="Param4"/>
+    <parameter property="Param5" column="Param5"/>
+    <parameter property="Param6" column="Param6"/>
+    <parameter property="Param7" column="Param7"/>
+    <parameter property="Param8" column="Param8"/>
+    <parameter property="Param9" column="Param9"/>
+    <parameter property="Param10" column="Param10"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPT_SEMIS_TECH_DD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.Param1" prepend="AND">
+          <![CDATA[PARAM1 = #where.Param1#]]>
+        </isNotNull>
+        <isNotNull property="where.Param2" prepend="AND">
+          <![CDATA[PARAM2 = #where.Param2#]]>
+        </isNotNull>
+        <isNotNull property="where.Param3" prepend="AND">
+          <![CDATA[PARAM3 = #where.Param3#]]>
+        </isNotNull>
+        <isNotNull property="where.Param4" prepend="AND">
+          <![CDATA[PARAM4 = #where.Param4#]]>
+        </isNotNull>
+        <isNotNull property="where.Param5" prepend="AND">
+          <![CDATA[PARAM5 = #where.Param5#]]>
+        </isNotNull>
+        <isNotNull property="where.Param6" prepend="AND">
+          <![CDATA[PARAM6 = #where.Param6#]]>
+        </isNotNull>
+        <isNotNull property="where.Param7" prepend="AND">
+          <![CDATA[PARAM7 = #where.Param7#]]>
+        </isNotNull>
+        <isNotNull property="where.Param8" prepend="AND">
+          <![CDATA[PARAM8 = #where.Param8#]]>
+        </isNotNull>
+        <isNotNull property="where.Param9" prepend="AND">
+          <![CDATA[PARAM9 = #where.Param9#]]>
+        </isNotNull>
+        <isNotNull property="where.Param10" prepend="AND">
+          <![CDATA[PARAM10 = #where.Param10#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HPT_SEMIS_TECH_DD]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">SHIFT_ID</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">MATERIAL_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="PlanId" prepend=",">PLAN_ID</isNotNull>
+        <isNotNull property="PlanDetailId" prepend=",">PLAN_DETAIL_ID</isNotNull>
+        <isNotNull property="Param1" prepend=",">PARAM1</isNotNull>
+        <isNotNull property="Param2" prepend=",">PARAM2</isNotNull>
+        <isNotNull property="Param3" prepend=",">PARAM3</isNotNull>
+        <isNotNull property="Param4" prepend=",">PARAM4</isNotNull>
+        <isNotNull property="Param5" prepend=",">PARAM5</isNotNull>
+        <isNotNull property="Param6" prepend=",">PARAM6</isNotNull>
+        <isNotNull property="Param7" prepend=",">PARAM7</isNotNull>
+        <isNotNull property="Param8" prepend=",">PARAM8</isNotNull>
+        <isNotNull property="Param9" prepend=",">PARAM9</isNotNull>
+        <isNotNull property="Param10" prepend=",">PARAM10</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_HPT_SEMIS_TECH_DD.NEXTVAL</isNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">#ShiftId#</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">#MaterialId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="PlanId" prepend=",">#PlanId#</isNotNull>
+        <isNotNull property="PlanDetailId" prepend=",">#PlanDetailId#</isNotNull>
+        <isNotNull property="Param1" prepend=",">#Param1#</isNotNull>
+        <isNotNull property="Param2" prepend=",">#Param2#</isNotNull>
+        <isNotNull property="Param3" prepend=",">#Param3#</isNotNull>
+        <isNotNull property="Param4" prepend=",">#Param4#</isNotNull>
+        <isNotNull property="Param5" prepend=",">#Param5#</isNotNull>
+        <isNotNull property="Param6" prepend=",">#Param6#</isNotNull>
+        <isNotNull property="Param7" prepend=",">#Param7#</isNotNull>
+        <isNotNull property="Param8" prepend=",">#Param8#</isNotNull>
+        <isNotNull property="Param9" prepend=",">#Param9#</isNotNull>
+        <isNotNull property="Param10" prepend=",">#Param10#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HPT_SEMIS_TECH_DD
+       <dynamic prepend="SET">
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.ShiftId"  prepend=",">
+          SHIFT_ID = #update.ShiftId#
+        </isNotNull>
+        <isNotNull  property="update.MaterialId"  prepend=",">
+          MATERIAL_ID = #update.MaterialId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.PlanId"  prepend=",">
+          PLAN_ID = #update.PlanId#
+        </isNotNull>
+        <isNotNull  property="update.PlanDetailId"  prepend=",">
+          PLAN_DETAIL_ID = #update.PlanDetailId#
+        </isNotNull>
+        <isNotNull  property="update.Param1"  prepend=",">
+          PARAM1 = #update.Param1#
+        </isNotNull>
+        <isNotNull  property="update.Param2"  prepend=",">
+          PARAM2 = #update.Param2#
+        </isNotNull>
+        <isNotNull  property="update.Param3"  prepend=",">
+          PARAM3 = #update.Param3#
+        </isNotNull>
+        <isNotNull  property="update.Param4"  prepend=",">
+          PARAM4 = #update.Param4#
+        </isNotNull>
+        <isNotNull  property="update.Param5"  prepend=",">
+          PARAM5 = #update.Param5#
+        </isNotNull>
+        <isNotNull  property="update.Param6"  prepend=",">
+          PARAM6 = #update.Param6#
+        </isNotNull>
+        <isNotNull  property="update.Param7"  prepend=",">
+          PARAM7 = #update.Param7#
+        </isNotNull>
+        <isNotNull  property="update.Param8"  prepend=",">
+          PARAM8 = #update.Param8#
+        </isNotNull>
+        <isNotNull  property="update.Param9"  prepend=",">
+          PARAM9 = #update.Param9#
+        </isNotNull>
+        <isNotNull  property="update.Param10"  prepend=",">
+          PARAM10 = #update.Param10#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HPT_SEMIS_TECH_DD
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HptSemisTechDd">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HptSemisTechDd">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM HPT_SEMIS_TECH_DD
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HPT_SEMIS_TECH_DD
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HptSemisTechDd" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HPT_SEMIS_TECH_DD
+    </statement>
+  </statements>
+</sqlMap>

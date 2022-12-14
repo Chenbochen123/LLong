@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.HbeEquipControl"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HbeEquipControl" type="Mesnac.Semis.Entity.BasicEntity.HbeEquipControl, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HbeEquipControl" class="HbeEquipControl">
+    <result property="ObjId" column="OBJID"/>
+    <result property="IsControl" column="IS_CONTROL"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BakupFlag" column="BAKUP_FLAG"/>
+    <result property="BakupTime" column="BAKUP_TIME"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="WorkshopId" column="WORKSHOP_ID"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="MaterialId" column="MATERIAL_ID"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="IsControlTime" column="IS_CONTROL_TIME"/>
+    <result property="IsControlDate" column="IS_CONTROL_DATE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HbeEquipControl" class="HbeEquipControl">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="IsControl" column="IsControl"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BakupFlag" column="BakupFlag"/>
+    <parameter property="BakupTime" column="BakupTime"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="WorkshopId" column="WorkshopId"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="MaterialId" column="MaterialId"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="IsControlTime" column="IsControlTime"/>
+    <parameter property="IsControlDate" column="IsControlDate"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HBE_EQUIP_CONTROL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.IsControl" prepend="AND">
+          <![CDATA[IS_CONTROL = #where.IsControl#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.IsControlTime" prepend="AND">
+          <![CDATA[IS_CONTROL_TIME = #where.IsControlTime#]]>
+        </isNotNull>
+        <isNotNull property="where.IsControlDate" prepend="AND">
+          <![CDATA[IS_CONTROL_DATE = #where.IsControlDate#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HBE_EQUIP_CONTROL]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="IsControl" prepend=",">IS_CONTROL</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BakupFlag" prepend=",">BAKUP_FLAG</isNotNull>
+        <isNotNull property="BakupTime" prepend=",">BAKUP_TIME</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">WORKSHOP_ID</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">MATERIAL_ID</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="IsControlTime" prepend=",">IS_CONTROL_TIME</isNotNull>
+        <isNotNull property="IsControlDate" prepend=",">IS_CONTROL_DATE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_HBE_EQUIP_CONTROL.NEXTVAL</isNull>
+        <isNotNull property="IsControl" prepend=",">#IsControl#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BakupFlag" prepend=",">#BakupFlag#</isNotNull>
+        <isNotNull property="BakupTime" prepend=",">#BakupTime#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">#WorkshopId#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">#MaterialId#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="IsControlTime" prepend=",">#IsControlTime#</isNotNull>
+        <isNotNull property="IsControlDate" prepend=",">#IsControlDate#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HBE_EQUIP_CONTROL
+       <dynamic prepend="SET">
+        <isNotNull  property="update.IsControl"  prepend=",">
+          IS_CONTROL = #update.IsControl#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BakupFlag"  prepend=",">
+          BAKUP_FLAG = #update.BakupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BakupTime"  prepend=",">
+          BAKUP_TIME = #update.BakupTime#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.WorkshopId"  prepend=",">
+          WORKSHOP_ID = #update.WorkshopId#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.MaterialId"  prepend=",">
+          MATERIAL_ID = #update.MaterialId#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.IsControlTime"  prepend=",">
+          IS_CONTROL_TIME = #update.IsControlTime#
+        </isNotNull>
+        <isNotNull  property="update.IsControlDate"  prepend=",">
+          IS_CONTROL_DATE = #update.IsControlDate#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HBE_EQUIP_CONTROL
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HbeEquipControl">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HbeEquipControl">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM HBE_EQUIP_CONTROL
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HBE_EQUIP_CONTROL
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HbeEquipControl" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HBE_EQUIP_CONTROL
+    </statement>
+  </statements>
+</sqlMap>

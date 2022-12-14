@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CppCuringEquipCheck"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CPP_CURING_EQUIP_CHECK ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.IsCheckbom" prepend="AND">
+          <![CDATA[IS_CHECKBOM = #where.IsCheckbom#]]>
+        </isNotNull>
+        <isNotNull property="where.IsCheckheat" prepend="AND">
+          <![CDATA[IS_CHECKHEAT = #where.IsCheckheat#]]>
+        </isNotNull>
+        <isNotNull property="where.IsCheckfirst" prepend="AND">
+          <![CDATA[IS_CHECKFIRST = #where.IsCheckfirst#]]>
+        </isNotNull>
+        <isNotNull property="where.IsCheckalarm" prepend="AND">
+          <![CDATA[IS_CHECKALARM = #where.IsCheckalarm#]]>
+        </isNotNull>
+        <isNotNull property="where.IsCheckcontrol" prepend="AND">
+          <![CDATA[IS_CHECKCONTROL = #where.IsCheckcontrol#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetEquipStateCheck" parameterClass="map" resultClass="Row">
+       <![CDATA[ SELECT T2.OBJID,T1.OBJID EQUIP_ID,T1.EQUIP_CODE,T1.EQUIP_NAME,NVL(T2.IS_CHECKBOM,0) IS_CHECKBOM,t2.is_checkbom_time,NVL(T2.IS_CHECKCONTROL,0) IS_CHECKCONTROL,t2.is_checkcontrol_time,
+        NVL(T2.IS_CHECKMATER,0) IS_CHECKMATER,t2.is_checkmater_time,t2.remark,
+        t2.record_time
+        FROM SBE_EQUIP T1 LEFT OUTER JOIN CPP_CURING_EQUIP_CHECK T2 ON T1.OBJID=T2.EQUIP_ID WHERE T1. MINOR_TYPE_ID in ('5101','5102') AND T1.DELETE_FLAG=0
+      ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.EQUIPCODE" prepend="AND">
+           <![CDATA[t1.EQUIP_CODE like '%'||#where.EQUIPCODE#||'%']]>
+         </isNotNull>
+         <isNotNull property="where.ISCHECKBOM" prepend="AND">
+           <![CDATA[NVL(T2.IS_CHECKBOM,0) = #where.ISCHECKBOM#]]>
+         </isNotNull>
+       </dynamic>
+       <isNull property="OrderString" prepend=" ">
+         <![CDATA[
+        order by T1.EQUIP_CODE
+        ]]>
+       </isNull>
+     </select>
+     <update id="UpdateByObjIdB" parameterClass="map">
+       <![CDATA[   
+          UPDATE CPP_CURING_EQUIP_CHECK SET
+           IS_CHECKBOM= #IsCheckbom#,IS_CHECKCONTROL=#IsCheckcontrol#
+           ,IS_CHECKMATER=#IsCheckmater#
+          WHERE (OBJID = #ObjId#) 
+      ]]>
+     </update>
+
+		 <select id="GetDeControlReason" parameterClass="map" resultClass="Row">
+			 <![CDATA[select OBJID,DECONTROL_REASON from SSB_DECONTROL_REASON where DELETE_FLAG='0' ]]>
+		 </select>
+     <select id="GetCuringEquipName" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        SELECT B.EQUIP_NAME,A.* 
+        FROM CPP_CURING_EQUIP_CHECK A
+        LEFT JOIN SBE_EQUIP B ON A.EQUIP_ID = B.OBJID
+        WHERE 1=1
+      ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.OBJID" prepend="AND">
+           <![CDATA[A.OBJID = #where.OBJID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+  </statements>
+</sqlMap>

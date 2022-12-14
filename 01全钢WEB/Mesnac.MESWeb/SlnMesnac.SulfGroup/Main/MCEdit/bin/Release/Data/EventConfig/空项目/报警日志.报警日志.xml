@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ActionService>
+    <Design>
+        <Path path="报警管理/报警日志">
+            <Action action="CF7E2288B697437489AE5DA3CC65B18F">
+                <Caption>报警日志初始化</Caption>
+                <Remark>报警日志初始化</Remark>
+            </Action>
+            <Action action="A91E11EC762B459E92E2BBE5C51B2F58">
+                <Caption>报警日志查询</Caption>
+                <Remark>报警日志查询</Remark>
+            </Action>
+        </Path>
+    </Design>
+
+    <DesignToRuntime>
+        <Design action="CF7E2288B697437489AE5DA3CC65B18F">
+            <Runtime action="4A581FDEEB7346D7ADF12545912BA5B1"/>
+        </Design>
+        <Design action="A91E11EC762B459E92E2BBE5C51B2F58">
+            <Runtime action="9FAFCE45C9C842C989D25FB28775377F"/>
+        </Design>
+    </DesignToRuntime>
+    
+    <Runtime>
+        <Import assembly = "Data/Action/SulfGroup/Mesnac.Action.SulfGroup.dll">
+            <Action action="4A581FDEEB7346D7ADF12545912BA5B1" class="Mesnac.Action.SulfGroup.Alarm.CuringAlarmRecord"/>
+            <Action action="9FAFCE45C9C842C989D25FB28775377F" class="Mesnac.Action.SulfGroup.Alarm.CuringAlarmRecordSelect"/>
+        </Import>
+    </Runtime>
+</ActionService>

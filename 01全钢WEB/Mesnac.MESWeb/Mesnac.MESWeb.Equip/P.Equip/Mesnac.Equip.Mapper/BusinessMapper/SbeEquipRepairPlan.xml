@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Equip.Mapper.BusinessMapper.SbeEquipRepairPlan"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_EQUIP_REPAIR_PLAN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanRepaircontent" prepend="AND">
+          <![CDATA[PLAN_REPAIRCONTENT = #where.PlanRepaircontent#]]>
+        </isNotNull>
+        <isNotNull property="where.RepairDate" prepend="AND">
+          <![CDATA[REPAIR_DATE = #where.RepairDate#]]>
+        </isNotNull>
+        <isNotNull property="where.RepairTime" prepend="AND">
+          <![CDATA[REPAIR_TIME = #where.RepairTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ResponseUser" prepend="AND">
+          <![CDATA[RESPONSE_USER = #where.ResponseUser#]]>
+        </isNotNull>
+        <isNotNull property="where.NeedStoptime" prepend="AND">
+          <![CDATA[NEED_STOPTIME = #where.NeedStoptime#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanStopdate" prepend="AND">
+          <![CDATA[PLAN_STOPDATE = #where.PlanStopdate#]]>
+        </isNotNull>
+        <isNotNull property="where.FinishCondition" prepend="AND">
+          <![CDATA[FINISH_CONDITION = #where.FinishCondition#]]>
+        </isNotNull>
+        <isNotNull property="where.FinishDate" prepend="AND">
+          <![CDATA[FINISH_DATE = #where.FinishDate#]]>
+        </isNotNull>
+        <isNotNull property="where.FinishUser" prepend="AND">
+          <![CDATA[FINISH_USER = #where.FinishUser#]]>
+        </isNotNull>
+        <isNotNull property="where.Verification" prepend="AND">
+          <![CDATA[VERIFICATION = #where.Verification#]]>
+        </isNotNull>
+        <isNotNull property="where.ConfirmUser" prepend="AND">
+          <![CDATA[CONFIRM_USER = #where.ConfirmUser#]]>
+        </isNotNull>
+        <isNotNull property="where.ConfirmDate" prepend="AND">
+          <![CDATA[CONFIRM_DATE = #where.ConfirmDate#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanTypeId" prepend="AND">
+          <![CDATA[PLAN_TYPE_ID = #where.PlanTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanStopTime" prepend="AND">
+          <![CDATA[PLAN_STOPTIME = #where.PlanStopTime#]]>
+        </isNotNull>
+      <isNotNull property="where.ConfirmUser" prepend="AND">
+        <![CDATA[CONFIRM_USER = #where.ConfirmUser#]]>
+      </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+
+     <select id="Select@EquipRepairPlan" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T1.USER_NAME RESPONSE_USER_NAME,T2.USER_NAME FINISH_USER_NAME,T3.USER_NAME CONFIRM_USER_NAME,
+         CASE T.PLAN_STOPTIME WHEN 0 THEN '本月上旬' WHEN 1 THEN '本月中旬' WHEN 2 THEN '本月下旬' WHEN 3 THEN '每月' WHEN 4 THEN '每周'
+        ELSE '123' END PLAN_STOPTIME_TEXT,
+          T4.EQUIP_NAME,
+         T.*, T.ROWID
+          FROM SBE_EQUIP_REPAIR_PLAN T
+        LEFT JOIN SSB_USER T1 ON T.RESPONSE_USER=T1.OBJID
+        LEFT JOIN SSB_USER T2 ON T.FINISH_USER=T2.OBJID
+        LEFT JOIN SSB_USER T3 ON T.CONFIRM_USER=T3.OBJID
+        LEFT JOIN SBE_EQUIP T4 ON T.EQUIP_ID=T4.OBJID
+        WHERE 1=1 AND t.DELETE_FLAG = 0
+       ]]>
+       <dynamic>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[t.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginRepairDate" prepend="AND">
+           <![CDATA[t.REPAIR_DATE >= #where.BeginRepairDate#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginConfirmDate" prepend="AND">
+           <![CDATA[t.CONFIRM_DATE >= #where.BeginConfirmDate#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginFinishDate" prepend="AND">
+           <![CDATA[t.FINISH_DATE >= #where.BeginFinishDate#]]>
+         </isNotNull>
+         <isNotNull property="where.EndRepairDate" prepend="AND">
+           <![CDATA[t.REPAIR_DATE <= #where.EndRepairDate#]]>
+         </isNotNull>
+         <isNotNull property="where.EndConfirmDate" prepend="AND">
+           <![CDATA[t.CONFIRM_DATE <= #where.EndConfirmDate#]]>
+         </isNotNull>
+         <isNotNull property="where.EndFinishDate" prepend="AND">
+           <![CDATA[t.FINISH_DATE <= #where.EndFinishDate#]]>
+         </isNotNull>
+         <isNotNull property="where.ResponseUser" prepend="AND">
+           <![CDATA[t.RESPONSE_USER = #where.ResponseUser#]]>
+         </isNotNull>
+         <isNotNull property="where.FinishUser" prepend="AND">
+           <![CDATA[t.FINISH_USER = #where.FinishUser#]]>
+         </isNotNull>
+         <isNotNull property="where.ConfirmUser" prepend="AND">
+           <![CDATA[t.CONFIRM_USER = #where.ConfirmUser#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.PlanTypeId" prepend="AND">
+           <![CDATA[t.PLAN_TYPE_ID = #where.PlanTypeId#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetNewBillNo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT COUNT(1) ID FROM SBE_EQUIP_REPAIR_PLAN T
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="BillDate" prepend="AND">
+           <![CDATA[T.Bill_Date = #BillDate#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+     <select id="GetEquipWHInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      SELECT T1.USER_NAME RESPONSE_USER_NAME,T2.USER_NAME FINISH_USER_NAME,T3.USER_NAME CONFIRM_USER_NAME,
+         CASE T.PLAN_STOPTIME WHEN 0 THEN '本月上旬' WHEN 1 THEN '本月中旬' WHEN 2 THEN '本月下旬' WHEN 3 THEN '每月' WHEN 4 THEN '每周'
+        ELSE '123' END PLAN_STOPTIME_TEXT,
+          T4.EQUIP_NAME,
+         T.*, T.ROWID
+          FROM SBE_EQUIP_REPAIR_PLAN T
+        LEFT JOIN SSB_USER T1 ON T.RESPONSE_USER=T1.OBJID
+        LEFT JOIN SSB_USER T2 ON T.FINISH_USER=T2.OBJID
+        LEFT JOIN SSB_USER T3 ON T.CONFIRM_USER=T3.OBJID
+        LEFT JOIN SBE_EQUIP T4 ON T.EQUIP_ID=T4.OBJID
+        WHERE 1=1 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="EquipID" prepend="AND">
+           <![CDATA[T.EQUIP_ID = #EquipID#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+       order by t.bill_no 
+      ]]>
+     </select>
+
+     <select id="GetEquipMajorInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select OBJID,MAJOR_TYPE_NAME V from sbe_equip_major_type
+        where objid <> 1 and delete_flag = 0
+        order by objid
+       ]]>
+     </select>
+
+     <select id="GetEquipMinorInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select OBJID,MINOR_TYPE_NAME from sbe_equip_minor_type WHERE DELETE_FLAG=0
+       ]]>
+       <isNotNull property="majorId" prepend="AND">
+         <![CDATA[MAJOR_TYPE_ID=#majorId#]]>
+       </isNotNull>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[objid ]]>
+       </dynamic>
+     </select>
+
+     <select id="Select@XJContentInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT  T1.MAJOR_TYPE_NAME,T2.MINOR_TYPE_NAME,
+                CASE T.INSPECTION_TYPE_ID WHEN 1 THEN '电气点检项目' ELSE '机械点检项目' END INSPECTION_TYPE_NAME,
+                T.SEQ_INDEX,T.INSPECTION_CONTENT,T.INSPECTION_STANDARD,T.INSPECTION_METHOD,
+                T4.USER_NAME,T3.EQUIP_NAME,T.OBJID,T.RECORD_TIME,
+                T.EQUIP_MAJOR_TYPE_ID,T.EQUIP_MINOR_TYPE_ID,T.INSPECTION_TYPE_ID
+        FROM SBE_EQUIP_XJ_BOOK T
+        LEFT JOIN SBE_EQUIP_MAJOR_TYPE T1 ON T.EQUIP_MAJOR_TYPE_ID = T1.OBJID
+        LEFT JOIN SBE_EQUIP_MINOR_TYPE T2 ON T.EQUIP_MINOR_TYPE_ID = T2.OBJID
+        LEFT JOIN SBE_EQUIP T3 ON T.EQUIP_ID = T3.OBJID
+        LEFT JOIN SSB_USER T4 ON T.RECORD_USER_ID = T4.OBJID 
+        WHERE 1=1
+       ]]>
+       <dynamic>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.Content" prepend="AND">
+           <![CDATA[T.INSPECTION_CONTENT LIKE '%' || #where.Content# || '%']]>
+         </isNotNull>
+         <isNotNull property="where.MajorTypeID" prepend="AND">
+           <![CDATA[T.EQUIP_MAJOR_TYPE_ID = #where.MajorTypeID#]]>
+         </isNotNull>
+         <isNotNull property="where.MinorTypeID" prepend="AND">
+           <![CDATA[T.EQUIP_MINOR_TYPE_ID = #where.MinorTypeID#]]>
+         </isNotNull>
+         
+       </dynamic>
+       <![CDATA[
+        ORDER BY T.EQUIP_MAJOR_TYPE_ID,T.EQUIP_MINOR_TYPE_ID,T.INSPECTION_TYPE_ID,T.SEQ_INDEX,T.OBJID
+       ]]>
+     </select>
+
+     <insert id="InsertXJContentInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+       INSERT INTO SBE_EQUIP_XJ_BOOK(OBJID,RECORD_USER_ID,RECORD_TIME,DELETE_FLAG
+       ,EQUIP_MAJOR_TYPE_ID,EQUIP_MINOR_TYPE_ID,INSPECTION_TYPE_ID,INSPECTION_CONTENT
+       ,INSPECTION_STANDARD,INSPECTION_METHOD,SEQ_INDEX) 
+       VALUES(SEQ_SBE_EQUIP_XJ_BOOK.NEXTVAL,#USER#,#TIME#,#DELETE_FLAG#
+       ,#MAJOR_TYPE_ID#,#MINOR_TYPE_ID#,#INSPECTION_TYPE_ID#,#INSPECTION_CONTENT#
+       ,#INSPECTION_STANDARD#,#INSPECTION_METHOD#,#SEQ_INDEX#)
+      ]]>
+     </insert>
+
+     <update id="UpdateXJContentInfo" parameterClass="map" >
+       <![CDATA[
+       UPDATE SBE_EQUIP_XJ_BOOK SET RECORD_USER_ID = #USER#,
+       RECORD_TIME = #TIME#,INSPECTION_CONTENT = #INSPECTION_CONTENT#,
+       INSPECTION_STANDARD = #INSPECTION_STANDARD#,INSPECTION_METHOD = #INSPECTION_METHOD#,
+       SEQ_INDEX = #SEQ_INDEX#,INSPECTION_TYPE_ID = #INSPECTION_TYPE_ID#
+       WHERE OBJID = #OBJID#
+      ]]>
+     </update>
+
+     <delete id="DeleteXJContentInfo" parameterClass="map">
+       <![CDATA[
+       DELETE FROM SBE_EQUIP_XJ_BOOK WHERE OBJID =  #OBJID# 
+       ]]>
+     </delete>
+
+     <insert id="InitEquipXJDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+       insert into SBE_EQUIP_XJ_DETAIL (OBJID,INSPECTION_PLAN_OBJID,XJ_BOOK_OBJID) 
+       select SEQ_SBE_EQUIP_XJ_DETAIL.nextval,A.OBJID,C.OBJID  
+       FROM SBE_EQUIP_INSPECTION_PLAN A
+       INNER JOIN SBE_EQUIP B ON A.EQUIP_ID = B.OBJID
+       INNER JOIN SBE_EQUIP_XJ_BOOK C ON B.MAJOR_TYPE_ID = C.EQUIP_MAJOR_TYPE_ID 
+       AND B.MINOR_TYPE_ID = C.EQUIP_MINOR_TYPE_ID
+       WHERE A.OBJID = #OBJID#
+       and not EXISTS (select 1 from  SBE_EQUIP_XJ_DETAIL t0 where t0.INSPECTION_PLAN_OBJID=A.OBJID
+       and t0.XJ_BOOK_OBJID =C.OBJID)
+      ]]>
+     </insert>
+
+     <select id="Select@XJContentDetailInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT E.MAJOR_TYPE_NAME,F.MINOR_TYPE_NAME,C.EQUIP_NAME,
+               CASE D.INSPECTION_TYPE_ID WHEN 1 THEN '电气点检项目' ELSE '机械点检项目' END INSPECTION_TYPE_NAME,
+               D.SEQ_INDEX,D.INSPECTION_CONTENT,D.INSPECTION_STANDARD,D.INSPECTION_METHOD,
+               A.INSPECTION_RECORD,A.REPAIR_TIME,A.REMARK,G.USER_NAME,A.RECORD_TIME,A.OBJID
+        FROM SBE_EQUIP_XJ_DETAIL A
+        LEFT JOIN SBE_EQUIP_INSPECTION_PLAN B ON A.INSPECTION_PLAN_OBJID = B.OBJID
+        LEFT JOIN SBE_EQUIP C ON B.EQUIP_ID = C.OBJID
+        LEFT JOIN SBE_EQUIP_XJ_BOOK D ON C.MAJOR_TYPE_ID = D.EQUIP_MAJOR_TYPE_ID AND A.XJ_BOOK_OBJID = D.OBJID
+        AND C.MINOR_TYPE_ID = D.EQUIP_MINOR_TYPE_ID
+        LEFT JOIN SBE_EQUIP_MAJOR_TYPE E ON E.OBJID = C.MAJOR_TYPE_ID
+        LEFT JOIN SBE_EQUIP_MINOR_TYPE F ON F.OBJID = C.MINOR_TYPE_ID
+        LEFT JOIN SSB_USER G ON G.OBJID = A.RECORD_USER_ID
+        WHERE 1=1
+       ]]>
+       <dynamic>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[D.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.OBJID" prepend="AND">
+           <![CDATA[B.OBJID = #where.OBJID#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        ORDER BY D.EQUIP_MAJOR_TYPE_ID,D.EQUIP_MINOR_TYPE_ID,D.INSPECTION_TYPE_ID,D.SEQ_INDEX,A.OBJID
+       ]]>
+     </select>
+
+     <update id="UpdateXJContentDetailInfo" parameterClass="map" >
+       <![CDATA[
+       UPDATE SBE_EQUIP_XJ_DETAIL SET RECORD_USER_ID = #USER#,
+       RECORD_TIME = #TIME#,REPAIR_TIME = #REPAIR_TIME#,
+       INSPECTION_RECORD = #INSPECTION_RECORD#,REMARK = #REMARK#
+       WHERE OBJID = #OBJID#
+      ]]>
+     </update>
+     
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

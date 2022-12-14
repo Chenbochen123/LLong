@@ -1,0 +1,462 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Ext.Net;
+using Mesnac.Equip.Business.Implements;
+using Mesnac.Equip.Entity.BasicEntity;
+using System.Text.RegularExpressions;
+using System.Data;
+using Mesnac.Web.UI.Entity;
+using Mesnac.DbAccess;
+using Mesnac.Web.UI;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using Mesnac.Main.Entity.BasicEntity;
+using Mesnac.Main.Business.Implements;
+public partial class Plugins_Equip_Record_RepairRecord : Mesnac.Web.UI.Page
+{
+    protected Mesnac.Equip.Business.Implements.SbmEquipRepairRecordManager equipRepairRecordManager = new Mesnac.Equip.Business.Implements.SbmEquipRepairRecordManager();//业务对象
+    protected Mesnac.Equip.Business.Implements.SbeEquipManager equipManager = new Mesnac.Equip.Business.Implements.SbeEquipManager();
+    protected Mesnac.Equip.Business.Implements.SbeEquipStopReasonManager equipStopReasonManager = new Mesnac.Equip.Business.Implements.SbeEquipStopReasonManager();
+    protected Mesnac.Equip.Business.Implements.SbeEquipStopTypeManager equipStoTypeManager = new Mesnac.Equip.Business.Implements.SbeEquipStopTypeManager();
+    protected Ext.Net.MessageBox msg = new Ext.Net.MessageBox();//弹出框
+    
+
+
+    #region 权限定义
+    protected __ _ = new __();
+    public class __ :___  //必须继承___   //Action不能重复，重复会被覆盖
+    {
+        public __()
+        {
+            查询 = new PageAction() { ActionId = 1, ActionName = "btn_search" };
+            导出 = new PageAction() { ActionId = 3, ActionName = "btnExport" };
+            修改 = new PageAction() { ActionId = 4, ActionName = "Edit" };
+            删除 = new PageAction() { ActionId = 5, ActionName = "Delete" };
+            添加 = new PageAction() { ActionId = 7, ActionName = "btn_add" };
+        }
+        public PageAction 查询 { get; private set; } //必须为 public
+        public PageAction 导出 { get; private set; } //必须为 public
+        public PageAction 修改 { get; private set; } //必须为 public
+        public PageAction 删除 { get; private set; } //必须为 public
+        public PageAction 添加 { get; private set; } //必须为 public
+    }
+    #endregion
+
+    #region 初始化方法
+    /// <summary>
+    /// 页面初始化方法
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void Page_Load(object sender, EventArgs e)
+    
+    {
+        
+    }
+    #endregion
+
+
+    #region 分页相关方法
+    private PageResult GetPageResultData(PageResult pageParams)
+    {
+        Dictionary<string, object> dic = new Dictionary<string, object>();
+        var stopBeginTime = Convert.ToDateTime(txt_begin_stop_date.Text).ToString("yyyy-MM-dd");
+        var stopEndTime = Convert.ToDateTime(txt_end_stop_date.Text).ToString("yyyy-MM-dd");
+        var equipCode = equip_code.Text;
+        var equipId = hidden_select_equip_id.Text;
+        string deleteFlag = hidden_delete_flag.Text;
+        #region 数据验证
+        //如果时间为空则只显示当天
+        try
+        {
+            stopBeginTime = Convert.ToDateTime(txt_begin_stop_date.Value).ToString("yyyy-MM-dd").Equals("0001-01-01") ? "" : txt_begin_stop_date.Value.ToString();
+        }
+        catch
+        {
+        }
+        try
+        {
+            stopEndTime = Convert.ToDateTime(txt_end_stop_date.Value).ToString("yyyy-MM-dd").Equals("0001-01-01") ? "" : txt_end_stop_date.Value.ToString();
+        }
+        catch
+        {
+        }
+        if (string.IsNullOrWhiteSpace(stopBeginTime))
+        {
+            dic.Add("BeginTime", DateTime.Now);
+            txt_begin_stop_date.Text = DateTime.Now.ToString("yyyy-MM-dd");
+        }
+        if (string.IsNullOrWhiteSpace(stopEndTime))
+        {
+            dic.Add("EndTime", DateTime.Now.AddDays(1));
+            txt_end_stop_date.Text = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+        }
+        if (!string.IsNullOrWhiteSpace(stopBeginTime))
+        {
+            dic.Add("BeginTime", Convert.ToDateTime(stopBeginTime));
+        }
+        if (!string.IsNullOrWhiteSpace(stopEndTime))
+        {
+            dic.Add("EndTime", Convert.ToDateTime(stopEndTime));
+        }
+        if (!string.IsNullOrWhiteSpace(equipCode))
+        {
+            dic.Add("EQUIP_CODE", equipCode);
+        }
+        if (!string.IsNullOrWhiteSpace(equipId))
+        {
+            dic.Add("EQUIP_ID", equipId);
+        }
+        if (!string.IsNullOrWhiteSpace(deleteFlag))
+        {
+            dic.Add("DELETE_FLAG",Convert.ToInt32(deleteFlag));
+        }
+       
+        #endregion 数据验证 end 
+        pageParams.ParameterObject = dic;
+        pageParams.StatementId = "Select@SbmEquipRepairRecord";
+        return equipRepairRecordManager.GetPageDataByReader(pageParams);
+    }
+
+    [DirectMethod]
+    public object GridPanelBindData(string action, Dictionary<string, object> extraParams)
+    {
+        StoreRequestParameters prms = new StoreRequestParameters(extraParams);
+        PageResult pageParams = new PageResult();
+        pageParams.PageIndex = prms.Page;
+        pageParams.PageSize = prms.Limit;
+        pageParams = GetPageResultData(pageParams);
+        DataTable data = pageParams.ResultDataSet.Tables[0];
+        
+        int total = pageParams.RecordCount;
+        return new { data, total };
+    }
+    #endregion
+   
+
+    #region 导出
+    public void btnExportSubmit_Click(object sender, EventArgs e)
+    {
+        //PageResult pageResult = new PageResult();
+        //pageResult.StatementId = "SparePart@SbmSparePartInStock";
+        //pageResult.PageSize = 0;
+        //pageResult.PageIndex = 0;
+        //Dictionary<string, object> dic = GetParameterObject();
+        //pageResult.ParameterObject = dic;
+        //pageResult =equipStopManager.GetPageDataByReader(pageResult);
+        //DataTable data = pageResult.ResultDataSet.Tables[0];
+        //DataSet ds = new DataSet();
+        //DataTable dt = new DataTable();
+        //data.TableName = "备品备件入库信息";
+        //ds.Tables.Add(data.Copy());
+        //dt = IniPlanExcelTable(ds);
+        //new Mesnac.Utility.Excel.ExcelDownload().ExcelFileDown(dt, "备品备件入库信息");
+    }
+    private DataTable IniPlanExcelTable(DataSet ds)
+    {
+        var dt=ds.Tables["备品备件入库信息"];
+        #region 数据绑定
+        var result = new DataTable();
+        {
+            DataColumn dc = new DataColumn();
+            dc.DataType = typeof(string);
+            dc.ColumnName = "备件细类名称";
+            result.Columns.Add(dc);
+        }
+        {
+            DataColumn dc = new DataColumn();
+            dc.DataType = typeof(string);
+            dc.ColumnName = "备件细类代号";
+            result.Columns.Add(dc);
+        }
+        {
+            DataColumn dc = new DataColumn();
+            dc.DataType = typeof(string);
+            dc.ColumnName = "SAP单号";
+            result.Columns.Add(dc);
+        }
+        {
+            DataColumn dc = new DataColumn();
+            dc.DataType = typeof(string);
+            dc.ColumnName = "领用单号";
+            result.Columns.Add(dc);
+        }
+        {
+            DataColumn dc = new DataColumn();
+            dc.DataType = typeof(string);
+            dc.ColumnName = "入库日期";
+            result.Columns.Add(dc);
+        }
+        {
+            DataColumn dc = new DataColumn();
+            dc.DataType = typeof(string);
+            dc.ColumnName = "备件名称";
+            result.Columns.Add(dc);
+        }
+        {
+            DataColumn dc = new DataColumn();
+            dc.DataType = typeof(string);
+            dc.ColumnName = "备件代号";
+            result.Columns.Add(dc);
+        }
+        {
+            DataColumn dc = new DataColumn();
+            dc.DataType = typeof(string);
+            dc.ColumnName = "入库数量";
+            result.Columns.Add(dc);
+        }
+        {
+            DataColumn dc = new DataColumn();
+            dc.DataType = typeof(string);
+            dc.ColumnName = "接收人";
+            result.Columns.Add(dc);
+        }
+        {
+            DataColumn dc = new DataColumn();
+            dc.DataType = typeof(string);
+            dc.ColumnName = "备注";
+            result.Columns.Add(dc);
+        }
+        #endregion 数据绑定 end
+        DataRow newdr = null;
+        foreach (DataRow dr in dt.Rows)
+        {
+            if (newdr != null)
+                result.Rows.Add(newdr);
+            newdr=result.NewRow();
+            newdr["备件细类名称"] = dr["MINOR_TYPE_NAME"].ToString();
+            newdr["备件细类代号"] = dr["MINOR_TYPE_CODE"].ToString();
+            newdr["SAP单号"] = dr["SAP_CODE"].ToString();
+            newdr["领用单号"] = dr["LYD_CODE"].ToString();
+            newdr["入库日期"] = dr["IN_DATE"].ToString();
+            newdr["备件名称"] = dr["SPAREPARTS_NAME"].ToString();
+            newdr["备件代号"] = dr["SPAREPARTS_CODE"].ToString();
+            newdr["入库数量"] = dr["IN_AMOUNT"].ToString();
+            newdr["接收人"] = dr["USER_NAME"].ToString();
+            newdr["备注"] = dr["REMARK"].ToString();
+        }
+        if (newdr != null)
+            result.Rows.Add(newdr);
+        return result;
+    }
+    #endregion
+
+    #region 增删改查按钮激发的事件
+    /// <summary>
+    /// 点击添加按钮激发的事件
+    /// dingby   2016年7月25日
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btn_add_Click(object sender, EventArgs e)
+    {
+        //hidden_receive_user.Text = "";
+        //hidden_sparepart_code.Text = "";
+        //add_receive_date.Text = DateTime.Now.ToString();
+        //add_sparepart_code.Text = "";
+        //add_lyd_code.Text = "";
+        //add_sap_code.Text = "";
+        //add_number.Text = "0";
+        //add_receive_user.Text = "";
+        //add_remark.Text = "";
+        btnAddSave.Disable(true);
+        this.winAdd.Show();
+    }
+
+
+    /// <summary>
+    /// 点击修改激发的事件
+    /// dingby   2016年7月25日
+    /// </summary>
+    /// <param name="unit_num"></param>
+    [Ext.Net.DirectMethod()]
+    public void commandcolumn_direct_edit(string ObjID)
+    {
+        modify_obj_id.Value = ObjID;
+        //SeeEquipStopRecord equipStopRecord = new SeeEquipStopRecord();
+        var equipStopRecord=equipRepairRecordManager.GetByObjId(Convert.ToInt32(ObjID));
+        var stopResonId = equipStopRecord.StopReasonId;
+        var equipStopReason = equipStopReasonManager.GetByObjId(Convert.ToInt32(stopResonId));
+        var equipStopTypeId = equipStopRecord.StopTypeId;
+        var equipStopType = equipStoTypeManager.GetByObjId(Convert.ToInt32(equipStopTypeId));
+        var equipId = equipStopRecord.EquipId;
+        var equip = equipManager.GetByObjId(Convert.ToInt32(equipId));
+
+        hidden_modify_equip_id.Value = equipId;
+        modify_equip_name.Text = equip.EquipName;
+
+        hidden_modify_stop_reason.Value = stopResonId;
+        modify_stop_reason.Text = equipStopReason.EquipStopReasonName;
+
+        hidden_modify_stop_type.Value = equipStopTypeId;
+        modify_stop_type.Text = equipStopType.EquipStopTypeName;
+
+        modify_repair_result.Text = equipStopRecord.Remark;
+        this.winModify.Show();
+    }
+
+    /// <summary>
+    /// 点击删除触发的事件
+    /// dingby   2016年7月25日
+    /// </summary>
+    /// <param name="unit_num"></param>
+    /// <returns></returns>
+    [Ext.Net.DirectMethod()]
+    public string commandcolumn_direct_delete(string objID)
+    {
+        try
+        {
+            Mesnac.Equip.Entity.BasicEntity.SeeEquipStopRecord equipStopRecord = new Mesnac.Equip.Entity.BasicEntity.SeeEquipStopRecord();
+            equipStopRecord.DeleteFlag = 1;
+            var objid = Convert.ToInt32(objID);
+            var RecordUserId = Convert.ToInt32(this.Data.User.UserId);
+            var flag = equipRepairRecordManager.UpdateByObjId(equipStopRecord, objid);
+            if (flag == 0)
+            {
+                return flag.ToString();
+            }
+            this.AppendWebLog("设备停机记录删除", "编号：" + equipStopRecord.ObjId);
+            pageToolBar.DoRefresh();
+        }
+        catch (Exception e)
+        {
+            return "删除失败：" + e;
+        }
+        return "删除成功";
+    }
+
+    /// <summary>
+    /// 点击恢复触发的事件
+    /// </summary>
+    /// <param name="objID"></param>
+    /// <returns></returns>
+    [Ext.Net.DirectMethod()]
+    public string commandcolumn_direct_recover(string objID)
+    {
+        //try
+        //{
+        //    SbmSparePartInStock sparePartsIn = new SbmSparePartInStock();
+        //    sparePartsIn.DeleteFlag = 0;
+        //    var objid = Convert.ToInt32(objID);
+        //    var RecordUserId = Convert.ToInt32(this.Data.User.UserId);
+        //    sparePartsIn.Dummy2 = RecordUserId.ToString();
+        //    var flag = inStockManager.UpdateByObjId(sparePartsIn, objid);
+        //    if (flag==0)
+        //    {
+        //        return flag.ToString();
+        //    }
+        //    this.AppendWebLog("备件入库删除记录恢复", "编号：" + sparePartsIn.SparepartsId);
+        //    pageToolBar.DoRefresh();
+        //}
+        //catch (Exception e)
+        //{
+        //    return "恢复失败：" + e;
+        //}
+        return "恢复成功";
+    }
+
+    /// <summary>
+    /// 点击取消按钮激发的事件
+    /// dingby   2016年7月25日
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public void BtnCancel_Click(object sender, DirectEventArgs e)
+    {
+        this.winAdd.Close();
+        this.winModify.Close();
+    }
+
+    /// <summary>
+    /// 点击添加信息中保存按钮激发的事件
+    /// dingby   2016年7月25日
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    public void BtnAddSave_Click(object sender, DirectEventArgs e)
+    {
+        Mesnac.Equip.Entity.BasicEntity.SeeEquipStopRecord equipStopRecord=new Mesnac.Equip.Entity.BasicEntity.SeeEquipStopRecord();
+        try
+        {
+            var  beginDate =Convert.ToDateTime( Convert.ToDateTime(add_begin_date.Text).ToString("yyyy-MM-dd") + " " + add_begin_time.Value);
+            var stopDate =Convert.ToDateTime( Convert.ToDateTime(add_stop_date.Text).ToString("yyyy-MM-dd") + " " + add_stop_time.Value);
+            var a = DateTime.Compare(beginDate, stopDate);
+            if (a >= 0)
+            {
+                msg.Alert("操作", "结束时间不能早于或等于开始时间");
+                msg.Show();
+                return;
+            }
+            //equipStopRecord.ObjId = equipStopManager.GetSeqNextVal("SEQ_SEE_EQUIP_STOP_RECORD");
+            equipStopRecord.StopBeginTime=beginDate;
+            equipStopRecord.StopEndTime=stopDate;
+            equipStopRecord.EquipId=Convert.ToInt32(hidden_add_equip_id.Value);
+            equipStopRecord.StopTypeId=Convert.ToInt32(hidden_add_stop_type.Value);
+            equipStopRecord.StopReasonId=Convert.ToInt32(hidden_add_stop_reason.Value);
+            //记录维修结果
+            equipStopRecord.RecordUserId = Convert.ToInt32(this.Session["UserID"].ToString());
+            equipStopRecord.Remark = add_repair_result.Text;
+            equipRepairRecordManager.Insert(equipStopRecord);
+            this.AppendWebLog("停机记录增加", "编号：" + equipStopRecord.ObjId.ToString());
+            pageToolBar.DoRefresh();
+            this.winAdd.Close();
+            msg.Notify("操作", "保存成功").Show();
+        }
+        catch (Exception exTrans)
+        {
+            msg.Alert("操作", "保存失败：" + exTrans);
+            msg.Show();
+            throw exTrans;
+        }
+    }
+
+    /// <summary>
+    /// 点击修改信息中保存按钮激发的事件
+    /// dingby   2016年7月25日
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void BtnModifySave_Click(object sender, EventArgs e)
+    {
+        var OBJID = Convert.ToInt32(modify_obj_id.Text);
+        Mesnac.Equip.Entity.BasicEntity.SeeEquipStopRecord equipStopRecord = new Mesnac.Equip.Entity.BasicEntity.SeeEquipStopRecord();
+        try
+        {
+            var beginDate = Convert.ToDateTime(Convert.ToDateTime(modify_begin_date.Text).ToString("yyyy-MM-dd") + " " +modify_begin_time.Value);
+            var stopDate = Convert.ToDateTime(Convert.ToDateTime(modify_stop_date.Text).ToString("yyyy-MM-dd") + " " + modify_stop_time.Value);
+            var a = DateTime.Compare(beginDate, stopDate);
+            if (a >= 0)
+            {
+                msg.Alert("操作", "结束时间不能早于或等于开始时间");
+                msg.Show();
+                return;
+            }
+
+
+            equipStopRecord.StopBeginTime = beginDate;
+            equipStopRecord.StopEndTime = stopDate;
+            equipStopRecord.EquipId = Convert.ToInt32(hidden_modify_equip_id.Value);
+            equipStopRecord.StopTypeId = Convert.ToInt32(hidden_modify_stop_type.Value);
+            equipStopRecord.StopReasonId = Convert.ToInt32(hidden_modify_stop_reason.Value);
+            equipStopRecord.RecordUserId = Convert.ToInt32(this.Session["UserID"].ToString());
+            //记录维修结果
+            equipStopRecord.Remark = modify_repair_result.Text;
+            equipRepairRecordManager.UpdateByObjId(equipStopRecord, OBJID);
+            this.AppendWebLog("停机记录更新", "编号：" + equipStopRecord.ObjId.ToString());
+            pageToolBar.DoRefresh();
+            this.winAdd.Close();
+            msg.Notify("操作", "保存成功").Show();
+        }
+        catch (Exception exTrans)
+        {
+            msg.Alert("操作", "保存失败：" + exTrans);
+            msg.Show();
+            throw exTrans;
+        }      
+    }
+    #endregion
+}

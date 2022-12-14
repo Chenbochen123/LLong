@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CrtShapingPress"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_SHAPING_PRESS ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingPressCode" prepend="AND">
+          <![CDATA[SHAPING_PRESS_CODE = #where.ShapingPressCode#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedAmountRange1" prepend="AND">
+          <![CDATA[USED_AMOUNT_RANGE_1 = #where.UsedAmountRange1#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress1" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_1 = #where.FirstShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress1" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_1 = #where.SecondShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.ThirdShapingPress1" prepend="AND">
+          <![CDATA[THIRD_SHAPING_PRESS_1 = #where.ThirdShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedAmountRange2" prepend="AND">
+          <![CDATA[USED_AMOUNT_RANGE_2 = #where.UsedAmountRange2#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress2" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_2 = #where.FirstShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress2" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_2 = #where.SecondShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.ThirdShapingPress2" prepend="AND">
+          <![CDATA[THIRD_SHAPING_PRESS_2 = #where.ThirdShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedAmountRange3" prepend="AND">
+          <![CDATA[USED_AMOUNT_RANGE_3 = #where.UsedAmountRange3#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress3" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_3 = #where.FirstShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress3" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_3 = #where.SecondShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.ThirdShapingPress3" prepend="AND">
+          <![CDATA[THIRD_SHAPING_PRESS_3 = #where.ThirdShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditFlag" prepend="AND">
+          <![CDATA[AUDIT_FLAG = #where.AuditFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ModifyTime" prepend="AND">
+          <![CDATA[MODIFY_TIME = #where.ModifyTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ModifyUserId" prepend="AND">
+          <![CDATA[MODIFY_USER_ID = #where.ModifyUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditTime" prepend="AND">
+          <![CDATA[AUDIT_TIME = #where.AuditTime#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditUserId" prepend="AND">
+          <![CDATA[AUDIT_USER_ID = #where.AuditUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

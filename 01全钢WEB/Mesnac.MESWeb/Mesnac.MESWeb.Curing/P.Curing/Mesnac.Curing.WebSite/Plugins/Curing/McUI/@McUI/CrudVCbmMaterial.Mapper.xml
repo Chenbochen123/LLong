@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudVCbmMaterial" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT T1.*
+      , T2.USER_NAME RECORD_USER_NAME, T3.BRAND_NAME, T4.SIZE_NAME, T5.PLYRATING_NAME, T6.PATTERN_NAME
+      , T7.LOAD_INDEX_NAME, T8.SPEED_LEVEL_NAME, T9.STANDARD_NAME, T10.ATTRIBUTE_NAME 
+      FROM V_CBM_MATERIAL T1 
+      LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+      LEFT JOIN CBM_BRAND T3 ON T1.BRAND_ID = T3.OBJID
+      LEFT JOIN CBM_SIZE T4 ON T1.SIZE_ID = T4.OBJID
+      LEFT JOIN CBM_PLYRATING T5 ON T1.PLYRATING_ID = T5.OBJID
+      LEFT JOIN CBM_PATTERN T6 ON T1.PATTERN_ID = T6.OBJID
+      LEFT JOIN CBM_LOAD_INDEX T7 ON T1.LOAD_INDEX_ID = T7.OBJID
+      LEFT JOIN CBM_SPEED_LEVEL T8 ON T1.SPEED_LEVEL_ID = T8.OBJID
+      LEFT JOIN CBM_STANDARD T9 ON T1.STANDARD_ID = T9.OBJID
+      LEFT JOIN CBM_ATTRIBUTE T10 ON T1.ATTRIBUTE_ID = T10.OBJID
+               ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BRAND_ID" prepend="AND">
+          <![CDATA[T1.BRAND_ID = #where.BRAND_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.SIZE_ID" prepend="AND">
+          <![CDATA[T1.SIZE_ID = #where.SIZE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.PLYRATING_ID" prepend="AND">
+          <![CDATA[T1.PLYRATING_ID = #where.PLYRATING_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.PATTERN_ID" prepend="AND">
+          <![CDATA[T1.PATTERN_ID = #where.PATTERN_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.LOAD_INDEX_ID" prepend="AND">
+          <![CDATA[T1.LOAD_INDEX_ID = #where.LOAD_INDEX_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.SPEED_LEVEL_ID" prepend="AND">
+          <![CDATA[T1.SPEED_LEVEL_ID = #where.SPEED_LEVEL_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.STANDARD_ID" prepend="AND">
+          <![CDATA[T1.STANDARD_ID = #where.STANDARD_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.ATTRIBUTE_ID" prepend="AND">
+          <![CDATA[T1.ATTRIBUTE_ID = #where.ATTRIBUTE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+          <![CDATA[T1.MATERIAL_NAME LIKE '%' || #where.MATERIAL_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_CODE" prepend="AND">
+          <![CDATA[T1.MATERIAL_CODE LIKE '%' || #where.MATERIAL_CODE# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.BRAND_NAME" prepend="AND">
+          <![CDATA[T3.BRAND_NAME LIKE '%' || #where.BRAND_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.SIZE_NAME" prepend="AND">
+          <![CDATA[T4.SIZE_NAME LIKE '%' || #where.SIZE_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.PLYRATING_NAME" prepend="AND">
+          <![CDATA[T5.PLYRATING_NAME LIKE '%' || #where.PLYRATING_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.PATTERN_NAME" prepend="AND">
+          <![CDATA[T6.PATTERN_NAME LIKE '%' || #where.PATTERN_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.LOAD_INDEX_NAME" prepend="AND">
+          <![CDATA[T7.LOAD_INDEX_NAME LIKE '%' || #where.LOAD_INDEX_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.SPEED_LEVEL_NAME" prepend="AND">
+          <![CDATA[T8.SPEED_LEVEL_NAME LIKE '%' || #where.SPEED_LEVEL_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.STANDARD_NAME" prepend="AND">
+          <![CDATA[T9.STANDARD_NAME LIKE '%' || #where.STANDARD_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.ATTRIBUTE_NAME" prepend="AND">
+          <![CDATA[T10.ATTRIBUTE_NAME LIKE '%' || #where.ATTRIBUTE_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    <select id="Select+Update@CrudVCbmMaterial" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM V_CBM_MATERIAL ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询物料类型信息，ID值固定为GetComboBoxData@Select@CrudVCbmMaterial@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudVCbmMaterial@MAJOR_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey,t1.MAJOR_TYPE_NAME ssValue from SBM_MATERIAL_MAJOR_TYPE t1 join CBH_CONFIG_HELPER t2 on t1.OBJID = t2.CONFIG_VALUE and t2.CONFIG_NAME = 'CuringMaterialMajorTypeId' where t1.DELETE_FLAG = '0'
+     ]]>
+    </select>
+
+    <!--查询品牌信息，ID值固定为GetComboBoxData@Select@CrudVCbmMaterial@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudVCbmMaterial@BRAND_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,BRAND_NAME ssValue from CBM_BRAND where DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询规格信息，ID值固定为GetComboBoxData@Select@CrudVCbmMaterial@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudVCbmMaterial@SIZE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,SIZE_NAME ssValue from CBM_SIZE where DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询层级信息，ID值固定为GetComboBoxData@Select@CrudVCbmMaterial@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudVCbmMaterial@PLYRATING_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,PLYRATING_NAME ssValue from CBM_PLYRATING where DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询花纹信息，ID值固定为GetComboBoxData@Select@CrudVCbmMaterial@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudVCbmMaterial@PATTERN_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,PATTERN_NAME ssValue from CBM_PATTERN where DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询负荷指数信息，ID值固定为GetComboBoxData@Select@CrudVCbmMaterial@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudVCbmMaterial@LOAD_INDEX_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,LOAD_INDEX_NAME ssValue from CBM_LOAD_INDEX where DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询速度级别信息，ID值固定为GetComboBoxData@Select@CrudVCbmMaterial@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudVCbmMaterial@SPEED_LEVEL_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,SPEED_LEVEL_NAME ssValue from CBM_SPEED_LEVEL where DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询标准信息，ID值固定为GetComboBoxData@Select@CrudVCbmMaterial@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudVCbmMaterial@STANDARD_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,STANDARD_NAME ssValue from CBM_STANDARD where DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询属性信息，ID值固定为GetComboBoxData@Select@CrudVCbmMaterial@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudVCbmMaterial@ATTRIBUTE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,ATTRIBUTE_NAME ssValue from CBM_ATTRIBUTE where DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+  
+  </statements>
+</sqlMap>

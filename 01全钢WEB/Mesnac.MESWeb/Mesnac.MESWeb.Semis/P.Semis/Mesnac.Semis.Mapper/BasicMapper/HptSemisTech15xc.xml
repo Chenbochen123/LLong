@@ -1,0 +1,659 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.HptSemisTech15xc"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HptSemisTech15xc" type="Mesnac.Semis.Entity.BasicEntity.HptSemisTech15xc, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HptSemisTech15xc" class="HptSemisTech15xc">
+    <result property="ObjId" column="OBJID"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="ShiftId" column="SHIFT_ID"/>
+    <result property="MaterialId" column="MATERIAL_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="PlanId" column="PLAN_ID"/>
+    <result property="PlanDetailId" column="PLAN_DETAIL_ID"/>
+    <result property="Sideawidth" column="SIDEAWIDTH"/>
+    <result property="Sidebwidth" column="SIDEBWIDTH"/>
+    <result property="Sideawidthcpk" column="SIDEAWIDTHCPK"/>
+    <result property="Sidebwidthcpk" column="SIDEBWIDTHCPK"/>
+    <result property="Param5" column="PARAM5"/>
+    <result property="Param6" column="PARAM6"/>
+    <result property="Param7" column="PARAM7"/>
+    <result property="Param8" column="PARAM8"/>
+    <result property="Param9" column="PARAM9"/>
+    <result property="Param10" column="PARAM10"/>
+    <result property="Param11" column="PARAM11"/>
+    <result property="Param12" column="PARAM12"/>
+    <result property="Param13" column="PARAM13"/>
+    <result property="Param14" column="PARAM14"/>
+    <result property="Param15" column="PARAM15"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="Width" column="WIDTH"/>
+    <result property="Sideastandardwidth" column="SIDEASTANDARDWIDTH"/>
+    <result property="Sidebstandardwidth" column="SIDEBSTANDARDWIDTH"/>
+    <result property="Sideearlyalarmtol" column="SIDEEARLYALARMTOL"/>
+    <result property="Sidealarmtol" column="SIDEALARMTOL"/>
+    <result property="Cbearlyalarmtol" column="CBEARLYALARMTOL"/>
+    <result property="Cbalarmtol" column="CBALARMTOL"/>
+    <result property="Gapearlyalarmtol" column="GAPEARLYALARMTOL"/>
+    <result property="Gapalarmtol" column="GAPALARMTOL"/>
+    <result property="Anglestandard" column="ANGLESTANDARD"/>
+    <result property="Angleearlyalarmtol" column="ANGLEEARLYALARMTOL"/>
+    <result property="Anglealarmtol" column="ANGLEALARMTOL"/>
+    <result property="Jointstandard" column="JOINTSTANDARD"/>
+    <result property="Jointearlyalarmtol" column="JOINTEARLYALARMTOL"/>
+    <result property="Jointalarmtol" column="JOINTALARMTOL"/>
+    <result property="Anglereal" column="ANGLEREAL"/>
+    <result property="Toggle" column="TOGGLE"/>
+    <result property="Crodstop" column="CRODSTOP"/>
+    <result property="Cdhkdval" column="CDHKDVAL"/>
+    <result property="Cdjdval" column="CDJDVAL"/>
+    <result property="Jtkd" column="JTKD"/>
+    <result property="Jqzl1" column="JQZL1"/>
+    <result property="Jqzl2" column="JQZL2"/>
+    <result property="Jqzl3" column="JQZL3"/>
+    <result property="Jqzl4" column="JQZL4"/>
+    <result property="Cbkdczc" column="CBKDCZC"/>
+    <result property="Cbkdsbc" column="CBKDSBC"/>
+    <result property="Djkdczc" column="DJKDCZC"/>
+    <result property="Djkdsbc" column="DJKDSBC"/>
+    <result property="Barcode" column="BARCODE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HptSemisTech15xc" class="HptSemisTech15xc">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="ShiftId" column="ShiftId"/>
+    <parameter property="MaterialId" column="MaterialId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="PlanId" column="PlanId"/>
+    <parameter property="PlanDetailId" column="PlanDetailId"/>
+    <parameter property="Sideawidth" column="Sideawidth"/>
+    <parameter property="Sidebwidth" column="Sidebwidth"/>
+    <parameter property="Sideawidthcpk" column="Sideawidthcpk"/>
+    <parameter property="Sidebwidthcpk" column="Sidebwidthcpk"/>
+    <parameter property="Param5" column="Param5"/>
+    <parameter property="Param6" column="Param6"/>
+    <parameter property="Param7" column="Param7"/>
+    <parameter property="Param8" column="Param8"/>
+    <parameter property="Param9" column="Param9"/>
+    <parameter property="Param10" column="Param10"/>
+    <parameter property="Param11" column="Param11"/>
+    <parameter property="Param12" column="Param12"/>
+    <parameter property="Param13" column="Param13"/>
+    <parameter property="Param14" column="Param14"/>
+    <parameter property="Param15" column="Param15"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="Width" column="Width"/>
+    <parameter property="Sideastandardwidth" column="Sideastandardwidth"/>
+    <parameter property="Sidebstandardwidth" column="Sidebstandardwidth"/>
+    <parameter property="Sideearlyalarmtol" column="Sideearlyalarmtol"/>
+    <parameter property="Sidealarmtol" column="Sidealarmtol"/>
+    <parameter property="Cbearlyalarmtol" column="Cbearlyalarmtol"/>
+    <parameter property="Cbalarmtol" column="Cbalarmtol"/>
+    <parameter property="Gapearlyalarmtol" column="Gapearlyalarmtol"/>
+    <parameter property="Gapalarmtol" column="Gapalarmtol"/>
+    <parameter property="Anglestandard" column="Anglestandard"/>
+    <parameter property="Angleearlyalarmtol" column="Angleearlyalarmtol"/>
+    <parameter property="Anglealarmtol" column="Anglealarmtol"/>
+    <parameter property="Jointstandard" column="Jointstandard"/>
+    <parameter property="Jointearlyalarmtol" column="Jointearlyalarmtol"/>
+    <parameter property="Jointalarmtol" column="Jointalarmtol"/>
+    <parameter property="Anglereal" column="Anglereal"/>
+    <parameter property="Toggle" column="Toggle"/>
+    <parameter property="Crodstop" column="Crodstop"/>
+    <parameter property="Cdhkdval" column="Cdhkdval"/>
+    <parameter property="Cdjdval" column="Cdjdval"/>
+    <parameter property="Jtkd" column="Jtkd"/>
+    <parameter property="Jqzl1" column="Jqzl1"/>
+    <parameter property="Jqzl2" column="Jqzl2"/>
+    <parameter property="Jqzl3" column="Jqzl3"/>
+    <parameter property="Jqzl4" column="Jqzl4"/>
+    <parameter property="Cbkdczc" column="Cbkdczc"/>
+    <parameter property="Cbkdsbc" column="Cbkdsbc"/>
+    <parameter property="Djkdczc" column="Djkdczc"/>
+    <parameter property="Djkdsbc" column="Djkdsbc"/>
+    <parameter property="Barcode" column="Barcode"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPT_SEMIS_TECH_15XC ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.Sideawidth" prepend="AND">
+          <![CDATA[SIDEAWIDTH = #where.Sideawidth#]]>
+        </isNotNull>
+        <isNotNull property="where.Sidebwidth" prepend="AND">
+          <![CDATA[SIDEBWIDTH = #where.Sidebwidth#]]>
+        </isNotNull>
+        <isNotNull property="where.Sideawidthcpk" prepend="AND">
+          <![CDATA[SIDEAWIDTHCPK = #where.Sideawidthcpk#]]>
+        </isNotNull>
+        <isNotNull property="where.Sidebwidthcpk" prepend="AND">
+          <![CDATA[SIDEBWIDTHCPK = #where.Sidebwidthcpk#]]>
+        </isNotNull>
+        <isNotNull property="where.Param5" prepend="AND">
+          <![CDATA[PARAM5 = #where.Param5#]]>
+        </isNotNull>
+        <isNotNull property="where.Param6" prepend="AND">
+          <![CDATA[PARAM6 = #where.Param6#]]>
+        </isNotNull>
+        <isNotNull property="where.Param7" prepend="AND">
+          <![CDATA[PARAM7 = #where.Param7#]]>
+        </isNotNull>
+        <isNotNull property="where.Param8" prepend="AND">
+          <![CDATA[PARAM8 = #where.Param8#]]>
+        </isNotNull>
+        <isNotNull property="where.Param9" prepend="AND">
+          <![CDATA[PARAM9 = #where.Param9#]]>
+        </isNotNull>
+        <isNotNull property="where.Param10" prepend="AND">
+          <![CDATA[PARAM10 = #where.Param10#]]>
+        </isNotNull>
+        <isNotNull property="where.Param11" prepend="AND">
+          <![CDATA[PARAM11 = #where.Param11#]]>
+        </isNotNull>
+        <isNotNull property="where.Param12" prepend="AND">
+          <![CDATA[PARAM12 = #where.Param12#]]>
+        </isNotNull>
+        <isNotNull property="where.Param13" prepend="AND">
+          <![CDATA[PARAM13 = #where.Param13#]]>
+        </isNotNull>
+        <isNotNull property="where.Param14" prepend="AND">
+          <![CDATA[PARAM14 = #where.Param14#]]>
+        </isNotNull>
+        <isNotNull property="where.Param15" prepend="AND">
+          <![CDATA[PARAM15 = #where.Param15#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.Width" prepend="AND">
+          <![CDATA[WIDTH = #where.Width#]]>
+        </isNotNull>
+        <isNotNull property="where.Sideastandardwidth" prepend="AND">
+          <![CDATA[SIDEASTANDARDWIDTH = #where.Sideastandardwidth#]]>
+        </isNotNull>
+        <isNotNull property="where.Sidebstandardwidth" prepend="AND">
+          <![CDATA[SIDEBSTANDARDWIDTH = #where.Sidebstandardwidth#]]>
+        </isNotNull>
+        <isNotNull property="where.Sideearlyalarmtol" prepend="AND">
+          <![CDATA[SIDEEARLYALARMTOL = #where.Sideearlyalarmtol#]]>
+        </isNotNull>
+        <isNotNull property="where.Sidealarmtol" prepend="AND">
+          <![CDATA[SIDEALARMTOL = #where.Sidealarmtol#]]>
+        </isNotNull>
+        <isNotNull property="where.Cbearlyalarmtol" prepend="AND">
+          <![CDATA[CBEARLYALARMTOL = #where.Cbearlyalarmtol#]]>
+        </isNotNull>
+        <isNotNull property="where.Cbalarmtol" prepend="AND">
+          <![CDATA[CBALARMTOL = #where.Cbalarmtol#]]>
+        </isNotNull>
+        <isNotNull property="where.Gapearlyalarmtol" prepend="AND">
+          <![CDATA[GAPEARLYALARMTOL = #where.Gapearlyalarmtol#]]>
+        </isNotNull>
+        <isNotNull property="where.Gapalarmtol" prepend="AND">
+          <![CDATA[GAPALARMTOL = #where.Gapalarmtol#]]>
+        </isNotNull>
+        <isNotNull property="where.Anglestandard" prepend="AND">
+          <![CDATA[ANGLESTANDARD = #where.Anglestandard#]]>
+        </isNotNull>
+        <isNotNull property="where.Angleearlyalarmtol" prepend="AND">
+          <![CDATA[ANGLEEARLYALARMTOL = #where.Angleearlyalarmtol#]]>
+        </isNotNull>
+        <isNotNull property="where.Anglealarmtol" prepend="AND">
+          <![CDATA[ANGLEALARMTOL = #where.Anglealarmtol#]]>
+        </isNotNull>
+        <isNotNull property="where.Jointstandard" prepend="AND">
+          <![CDATA[JOINTSTANDARD = #where.Jointstandard#]]>
+        </isNotNull>
+        <isNotNull property="where.Jointearlyalarmtol" prepend="AND">
+          <![CDATA[JOINTEARLYALARMTOL = #where.Jointearlyalarmtol#]]>
+        </isNotNull>
+        <isNotNull property="where.Jointalarmtol" prepend="AND">
+          <![CDATA[JOINTALARMTOL = #where.Jointalarmtol#]]>
+        </isNotNull>
+        <isNotNull property="where.Anglereal" prepend="AND">
+          <![CDATA[ANGLEREAL = #where.Anglereal#]]>
+        </isNotNull>
+        <isNotNull property="where.Toggle" prepend="AND">
+          <![CDATA[TOGGLE = #where.Toggle#]]>
+        </isNotNull>
+        <isNotNull property="where.Crodstop" prepend="AND">
+          <![CDATA[CRODSTOP = #where.Crodstop#]]>
+        </isNotNull>
+        <isNotNull property="where.Cdhkdval" prepend="AND">
+          <![CDATA[CDHKDVAL = #where.Cdhkdval#]]>
+        </isNotNull>
+        <isNotNull property="where.Cdjdval" prepend="AND">
+          <![CDATA[CDJDVAL = #where.Cdjdval#]]>
+        </isNotNull>
+        <isNotNull property="where.Jtkd" prepend="AND">
+          <![CDATA[JTKD = #where.Jtkd#]]>
+        </isNotNull>
+        <isNotNull property="where.Jqzl1" prepend="AND">
+          <![CDATA[JQZL1 = #where.Jqzl1#]]>
+        </isNotNull>
+        <isNotNull property="where.Jqzl2" prepend="AND">
+          <![CDATA[JQZL2 = #where.Jqzl2#]]>
+        </isNotNull>
+        <isNotNull property="where.Jqzl3" prepend="AND">
+          <![CDATA[JQZL3 = #where.Jqzl3#]]>
+        </isNotNull>
+        <isNotNull property="where.Jqzl4" prepend="AND">
+          <![CDATA[JQZL4 = #where.Jqzl4#]]>
+        </isNotNull>
+        <isNotNull property="where.Cbkdczc" prepend="AND">
+          <![CDATA[CBKDCZC = #where.Cbkdczc#]]>
+        </isNotNull>
+        <isNotNull property="where.Cbkdsbc" prepend="AND">
+          <![CDATA[CBKDSBC = #where.Cbkdsbc#]]>
+        </isNotNull>
+        <isNotNull property="where.Djkdczc" prepend="AND">
+          <![CDATA[DJKDCZC = #where.Djkdczc#]]>
+        </isNotNull>
+        <isNotNull property="where.Djkdsbc" prepend="AND">
+          <![CDATA[DJKDSBC = #where.Djkdsbc#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[BARCODE = #where.Barcode#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HPT_SEMIS_TECH_15XC]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">SHIFT_ID</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">MATERIAL_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="PlanId" prepend=",">PLAN_ID</isNotNull>
+        <isNotNull property="PlanDetailId" prepend=",">PLAN_DETAIL_ID</isNotNull>
+        <isNotNull property="Sideawidth" prepend=",">SIDEAWIDTH</isNotNull>
+        <isNotNull property="Sidebwidth" prepend=",">SIDEBWIDTH</isNotNull>
+        <isNotNull property="Sideawidthcpk" prepend=",">SIDEAWIDTHCPK</isNotNull>
+        <isNotNull property="Sidebwidthcpk" prepend=",">SIDEBWIDTHCPK</isNotNull>
+        <isNotNull property="Param5" prepend=",">PARAM5</isNotNull>
+        <isNotNull property="Param6" prepend=",">PARAM6</isNotNull>
+        <isNotNull property="Param7" prepend=",">PARAM7</isNotNull>
+        <isNotNull property="Param8" prepend=",">PARAM8</isNotNull>
+        <isNotNull property="Param9" prepend=",">PARAM9</isNotNull>
+        <isNotNull property="Param10" prepend=",">PARAM10</isNotNull>
+        <isNotNull property="Param11" prepend=",">PARAM11</isNotNull>
+        <isNotNull property="Param12" prepend=",">PARAM12</isNotNull>
+        <isNotNull property="Param13" prepend=",">PARAM13</isNotNull>
+        <isNotNull property="Param14" prepend=",">PARAM14</isNotNull>
+        <isNotNull property="Param15" prepend=",">PARAM15</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="Width" prepend=",">WIDTH</isNotNull>
+        <isNotNull property="Sideastandardwidth" prepend=",">SIDEASTANDARDWIDTH</isNotNull>
+        <isNotNull property="Sidebstandardwidth" prepend=",">SIDEBSTANDARDWIDTH</isNotNull>
+        <isNotNull property="Sideearlyalarmtol" prepend=",">SIDEEARLYALARMTOL</isNotNull>
+        <isNotNull property="Sidealarmtol" prepend=",">SIDEALARMTOL</isNotNull>
+        <isNotNull property="Cbearlyalarmtol" prepend=",">CBEARLYALARMTOL</isNotNull>
+        <isNotNull property="Cbalarmtol" prepend=",">CBALARMTOL</isNotNull>
+        <isNotNull property="Gapearlyalarmtol" prepend=",">GAPEARLYALARMTOL</isNotNull>
+        <isNotNull property="Gapalarmtol" prepend=",">GAPALARMTOL</isNotNull>
+        <isNotNull property="Anglestandard" prepend=",">ANGLESTANDARD</isNotNull>
+        <isNotNull property="Angleearlyalarmtol" prepend=",">ANGLEEARLYALARMTOL</isNotNull>
+        <isNotNull property="Anglealarmtol" prepend=",">ANGLEALARMTOL</isNotNull>
+        <isNotNull property="Jointstandard" prepend=",">JOINTSTANDARD</isNotNull>
+        <isNotNull property="Jointearlyalarmtol" prepend=",">JOINTEARLYALARMTOL</isNotNull>
+        <isNotNull property="Jointalarmtol" prepend=",">JOINTALARMTOL</isNotNull>
+        <isNotNull property="Anglereal" prepend=",">ANGLEREAL</isNotNull>
+        <isNotNull property="Toggle" prepend=",">TOGGLE</isNotNull>
+        <isNotNull property="Crodstop" prepend=",">CRODSTOP</isNotNull>
+        <isNotNull property="Cdhkdval" prepend=",">CDHKDVAL</isNotNull>
+        <isNotNull property="Cdjdval" prepend=",">CDJDVAL</isNotNull>
+        <isNotNull property="Jtkd" prepend=",">JTKD</isNotNull>
+        <isNotNull property="Jqzl1" prepend=",">JQZL1</isNotNull>
+        <isNotNull property="Jqzl2" prepend=",">JQZL2</isNotNull>
+        <isNotNull property="Jqzl3" prepend=",">JQZL3</isNotNull>
+        <isNotNull property="Jqzl4" prepend=",">JQZL4</isNotNull>
+        <isNotNull property="Cbkdczc" prepend=",">CBKDCZC</isNotNull>
+        <isNotNull property="Cbkdsbc" prepend=",">CBKDSBC</isNotNull>
+        <isNotNull property="Djkdczc" prepend=",">DJKDCZC</isNotNull>
+        <isNotNull property="Djkdsbc" prepend=",">DJKDSBC</isNotNull>
+        <isNotNull property="Barcode" prepend=",">BARCODE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_HPT_SEMIS_TECH_15XC.NEXTVAL</isNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">#ShiftId#</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">#MaterialId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="PlanId" prepend=",">#PlanId#</isNotNull>
+        <isNotNull property="PlanDetailId" prepend=",">#PlanDetailId#</isNotNull>
+        <isNotNull property="Sideawidth" prepend=",">#Sideawidth#</isNotNull>
+        <isNotNull property="Sidebwidth" prepend=",">#Sidebwidth#</isNotNull>
+        <isNotNull property="Sideawidthcpk" prepend=",">#Sideawidthcpk#</isNotNull>
+        <isNotNull property="Sidebwidthcpk" prepend=",">#Sidebwidthcpk#</isNotNull>
+        <isNotNull property="Param5" prepend=",">#Param5#</isNotNull>
+        <isNotNull property="Param6" prepend=",">#Param6#</isNotNull>
+        <isNotNull property="Param7" prepend=",">#Param7#</isNotNull>
+        <isNotNull property="Param8" prepend=",">#Param8#</isNotNull>
+        <isNotNull property="Param9" prepend=",">#Param9#</isNotNull>
+        <isNotNull property="Param10" prepend=",">#Param10#</isNotNull>
+        <isNotNull property="Param11" prepend=",">#Param11#</isNotNull>
+        <isNotNull property="Param12" prepend=",">#Param12#</isNotNull>
+        <isNotNull property="Param13" prepend=",">#Param13#</isNotNull>
+        <isNotNull property="Param14" prepend=",">#Param14#</isNotNull>
+        <isNotNull property="Param15" prepend=",">#Param15#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="Width" prepend=",">#Width#</isNotNull>
+        <isNotNull property="Sideastandardwidth" prepend=",">#Sideastandardwidth#</isNotNull>
+        <isNotNull property="Sidebstandardwidth" prepend=",">#Sidebstandardwidth#</isNotNull>
+        <isNotNull property="Sideearlyalarmtol" prepend=",">#Sideearlyalarmtol#</isNotNull>
+        <isNotNull property="Sidealarmtol" prepend=",">#Sidealarmtol#</isNotNull>
+        <isNotNull property="Cbearlyalarmtol" prepend=",">#Cbearlyalarmtol#</isNotNull>
+        <isNotNull property="Cbalarmtol" prepend=",">#Cbalarmtol#</isNotNull>
+        <isNotNull property="Gapearlyalarmtol" prepend=",">#Gapearlyalarmtol#</isNotNull>
+        <isNotNull property="Gapalarmtol" prepend=",">#Gapalarmtol#</isNotNull>
+        <isNotNull property="Anglestandard" prepend=",">#Anglestandard#</isNotNull>
+        <isNotNull property="Angleearlyalarmtol" prepend=",">#Angleearlyalarmtol#</isNotNull>
+        <isNotNull property="Anglealarmtol" prepend=",">#Anglealarmtol#</isNotNull>
+        <isNotNull property="Jointstandard" prepend=",">#Jointstandard#</isNotNull>
+        <isNotNull property="Jointearlyalarmtol" prepend=",">#Jointearlyalarmtol#</isNotNull>
+        <isNotNull property="Jointalarmtol" prepend=",">#Jointalarmtol#</isNotNull>
+        <isNotNull property="Anglereal" prepend=",">#Anglereal#</isNotNull>
+        <isNotNull property="Toggle" prepend=",">#Toggle#</isNotNull>
+        <isNotNull property="Crodstop" prepend=",">#Crodstop#</isNotNull>
+        <isNotNull property="Cdhkdval" prepend=",">#Cdhkdval#</isNotNull>
+        <isNotNull property="Cdjdval" prepend=",">#Cdjdval#</isNotNull>
+        <isNotNull property="Jtkd" prepend=",">#Jtkd#</isNotNull>
+        <isNotNull property="Jqzl1" prepend=",">#Jqzl1#</isNotNull>
+        <isNotNull property="Jqzl2" prepend=",">#Jqzl2#</isNotNull>
+        <isNotNull property="Jqzl3" prepend=",">#Jqzl3#</isNotNull>
+        <isNotNull property="Jqzl4" prepend=",">#Jqzl4#</isNotNull>
+        <isNotNull property="Cbkdczc" prepend=",">#Cbkdczc#</isNotNull>
+        <isNotNull property="Cbkdsbc" prepend=",">#Cbkdsbc#</isNotNull>
+        <isNotNull property="Djkdczc" prepend=",">#Djkdczc#</isNotNull>
+        <isNotNull property="Djkdsbc" prepend=",">#Djkdsbc#</isNotNull>
+        <isNotNull property="Barcode" prepend=",">#Barcode#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HPT_SEMIS_TECH_15XC
+       <dynamic prepend="SET">
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.ShiftId"  prepend=",">
+          SHIFT_ID = #update.ShiftId#
+        </isNotNull>
+        <isNotNull  property="update.MaterialId"  prepend=",">
+          MATERIAL_ID = #update.MaterialId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.PlanId"  prepend=",">
+          PLAN_ID = #update.PlanId#
+        </isNotNull>
+        <isNotNull  property="update.PlanDetailId"  prepend=",">
+          PLAN_DETAIL_ID = #update.PlanDetailId#
+        </isNotNull>
+        <isNotNull  property="update.Sideawidth"  prepend=",">
+          SIDEAWIDTH = #update.Sideawidth#
+        </isNotNull>
+        <isNotNull  property="update.Sidebwidth"  prepend=",">
+          SIDEBWIDTH = #update.Sidebwidth#
+        </isNotNull>
+        <isNotNull  property="update.Sideawidthcpk"  prepend=",">
+          SIDEAWIDTHCPK = #update.Sideawidthcpk#
+        </isNotNull>
+        <isNotNull  property="update.Sidebwidthcpk"  prepend=",">
+          SIDEBWIDTHCPK = #update.Sidebwidthcpk#
+        </isNotNull>
+        <isNotNull  property="update.Param5"  prepend=",">
+          PARAM5 = #update.Param5#
+        </isNotNull>
+        <isNotNull  property="update.Param6"  prepend=",">
+          PARAM6 = #update.Param6#
+        </isNotNull>
+        <isNotNull  property="update.Param7"  prepend=",">
+          PARAM7 = #update.Param7#
+        </isNotNull>
+        <isNotNull  property="update.Param8"  prepend=",">
+          PARAM8 = #update.Param8#
+        </isNotNull>
+        <isNotNull  property="update.Param9"  prepend=",">
+          PARAM9 = #update.Param9#
+        </isNotNull>
+        <isNotNull  property="update.Param10"  prepend=",">
+          PARAM10 = #update.Param10#
+        </isNotNull>
+        <isNotNull  property="update.Param11"  prepend=",">
+          PARAM11 = #update.Param11#
+        </isNotNull>
+        <isNotNull  property="update.Param12"  prepend=",">
+          PARAM12 = #update.Param12#
+        </isNotNull>
+        <isNotNull  property="update.Param13"  prepend=",">
+          PARAM13 = #update.Param13#
+        </isNotNull>
+        <isNotNull  property="update.Param14"  prepend=",">
+          PARAM14 = #update.Param14#
+        </isNotNull>
+        <isNotNull  property="update.Param15"  prepend=",">
+          PARAM15 = #update.Param15#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.Width"  prepend=",">
+          WIDTH = #update.Width#
+        </isNotNull>
+        <isNotNull  property="update.Sideastandardwidth"  prepend=",">
+          SIDEASTANDARDWIDTH = #update.Sideastandardwidth#
+        </isNotNull>
+        <isNotNull  property="update.Sidebstandardwidth"  prepend=",">
+          SIDEBSTANDARDWIDTH = #update.Sidebstandardwidth#
+        </isNotNull>
+        <isNotNull  property="update.Sideearlyalarmtol"  prepend=",">
+          SIDEEARLYALARMTOL = #update.Sideearlyalarmtol#
+        </isNotNull>
+        <isNotNull  property="update.Sidealarmtol"  prepend=",">
+          SIDEALARMTOL = #update.Sidealarmtol#
+        </isNotNull>
+        <isNotNull  property="update.Cbearlyalarmtol"  prepend=",">
+          CBEARLYALARMTOL = #update.Cbearlyalarmtol#
+        </isNotNull>
+        <isNotNull  property="update.Cbalarmtol"  prepend=",">
+          CBALARMTOL = #update.Cbalarmtol#
+        </isNotNull>
+        <isNotNull  property="update.Gapearlyalarmtol"  prepend=",">
+          GAPEARLYALARMTOL = #update.Gapearlyalarmtol#
+        </isNotNull>
+        <isNotNull  property="update.Gapalarmtol"  prepend=",">
+          GAPALARMTOL = #update.Gapalarmtol#
+        </isNotNull>
+        <isNotNull  property="update.Anglestandard"  prepend=",">
+          ANGLESTANDARD = #update.Anglestandard#
+        </isNotNull>
+        <isNotNull  property="update.Angleearlyalarmtol"  prepend=",">
+          ANGLEEARLYALARMTOL = #update.Angleearlyalarmtol#
+        </isNotNull>
+        <isNotNull  property="update.Anglealarmtol"  prepend=",">
+          ANGLEALARMTOL = #update.Anglealarmtol#
+        </isNotNull>
+        <isNotNull  property="update.Jointstandard"  prepend=",">
+          JOINTSTANDARD = #update.Jointstandard#
+        </isNotNull>
+        <isNotNull  property="update.Jointearlyalarmtol"  prepend=",">
+          JOINTEARLYALARMTOL = #update.Jointearlyalarmtol#
+        </isNotNull>
+        <isNotNull  property="update.Jointalarmtol"  prepend=",">
+          JOINTALARMTOL = #update.Jointalarmtol#
+        </isNotNull>
+        <isNotNull  property="update.Anglereal"  prepend=",">
+          ANGLEREAL = #update.Anglereal#
+        </isNotNull>
+        <isNotNull  property="update.Toggle"  prepend=",">
+          TOGGLE = #update.Toggle#
+        </isNotNull>
+        <isNotNull  property="update.Crodstop"  prepend=",">
+          CRODSTOP = #update.Crodstop#
+        </isNotNull>
+        <isNotNull  property="update.Cdhkdval"  prepend=",">
+          CDHKDVAL = #update.Cdhkdval#
+        </isNotNull>
+        <isNotNull  property="update.Cdjdval"  prepend=",">
+          CDJDVAL = #update.Cdjdval#
+        </isNotNull>
+        <isNotNull  property="update.Jtkd"  prepend=",">
+          JTKD = #update.Jtkd#
+        </isNotNull>
+        <isNotNull  property="update.Jqzl1"  prepend=",">
+          JQZL1 = #update.Jqzl1#
+        </isNotNull>
+        <isNotNull  property="update.Jqzl2"  prepend=",">
+          JQZL2 = #update.Jqzl2#
+        </isNotNull>
+        <isNotNull  property="update.Jqzl3"  prepend=",">
+          JQZL3 = #update.Jqzl3#
+        </isNotNull>
+        <isNotNull  property="update.Jqzl4"  prepend=",">
+          JQZL4 = #update.Jqzl4#
+        </isNotNull>
+        <isNotNull  property="update.Cbkdczc"  prepend=",">
+          CBKDCZC = #update.Cbkdczc#
+        </isNotNull>
+        <isNotNull  property="update.Cbkdsbc"  prepend=",">
+          CBKDSBC = #update.Cbkdsbc#
+        </isNotNull>
+        <isNotNull  property="update.Djkdczc"  prepend=",">
+          DJKDCZC = #update.Djkdczc#
+        </isNotNull>
+        <isNotNull  property="update.Djkdsbc"  prepend=",">
+          DJKDSBC = #update.Djkdsbc#
+        </isNotNull>
+        <isNotNull  property="update.Barcode"  prepend=",">
+          BARCODE = #update.Barcode#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HPT_SEMIS_TECH_15XC
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HptSemisTech15xc">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HptSemisTech15xc">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM HPT_SEMIS_TECH_15XC
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HPT_SEMIS_TECH_15XC
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HptSemisTech15xc" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HPT_SEMIS_TECH_15XC
+    </statement>
+  </statements>
+</sqlMap>

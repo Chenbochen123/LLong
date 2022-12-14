@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号" ></Caption>
+    <Caption Name="MES_EQUIPID" Value="MES机台ID" ></Caption>
+    <Caption Name="MES_EQUIPNAME" Value="MES机台名称" ></Caption>
+    <Caption Name="PLM_EQUIPCODE" Value="施工表机台编码" ></Caption>
+    <Caption Name="PLN_EQUIPNAME" Value="施工表机台名称" ></Caption>
+    <Caption Name="REMARK" Value="备注" ></Caption>
+    <Caption Name="RECORD_USER_ID" Value="记录人ID" ></Caption>
+    <Caption Name="RECORD_NAME" Value="记录人" ></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间" ></Caption>
+  </Captions>
+  <WebPage Title="半制品设备与PLM设备关联">
+  </WebPage>
+  <Crud TableName="EQUIP_RELATION">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <!--<Uniques>
+      <Unique Fields="EQUIP_ID"></Unique>
+    </Uniques>-->
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel ColumnCount="2" Width="600">
+      <ParamFields>
+        <ParamField FieldName="MES_EQUIPID"    Type="ComboBox"  Nullable="false"></ParamField>
+        <ParamField FieldName="MES_EQUIPNAME"  Type="ComboBox"  Nullable="false"></ParamField>
+        <ParamField FieldName="PLM_EQUIPCODE"  Type="ComboBox"  Nullable="false"></ParamField>
+        <ParamField FieldName="PLN_EQUIPNAME"  Type="ComboBox"  Nullable="false"></ParamField>
+        <ParamField FieldName="REMARK"                          Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel ColumnCount="2" Width="600">
+      <ParamFields>
+        <ParamField FieldName="MES_EQUIPID"    Type="ComboBox"  Nullable="false"></ParamField>
+        <ParamField FieldName="MES_EQUIPNAME"  Type="ComboBox"  Nullable="false"></ParamField>
+        <ParamField FieldName="PLM_EQUIPCODE"  Type="ComboBox"  Nullable="false"></ParamField>
+        <ParamField FieldName="PLN_EQUIPNAME"  Type="ComboBox"  Nullable="false"></ParamField>
+        <ParamField FieldName="REMARK"                          Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="MES_EQUIPID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="PLM_EQUIPCODE" Type="ComboBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" Width="50"></GridColumn>
+        <GridColumn ColumnName="MES_EQUIPID" Width="120"></GridColumn>
+        <GridColumn ColumnName="MES_EQUIPNAME" Width="120"></GridColumn>
+        <GridColumn ColumnName="PLM_EQUIPCODE" Width="120"></GridColumn>
+        <GridColumn ColumnName="PLN_EQUIPNAME" Width="120"></GridColumn>
+        <GridColumn ColumnName="REMARK" Width="100"></GridColumn>
+        <GridColumn ColumnName="RECORD_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" Width="160" ColumnType="Date" Format="yyyy-MM-dd HH:mm:ss"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

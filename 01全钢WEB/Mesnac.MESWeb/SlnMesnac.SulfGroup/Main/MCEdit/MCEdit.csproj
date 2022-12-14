@@ -1,0 +1,721 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0C653BC3-0016-4CC8-BD75-3F961FED1FBC}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MCEdit</RootNamespace>
+    <AssemblyName>MCEdit</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>images\designer.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Host, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Host.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Core, Version=4.3.0.9338, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Data.Access">
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Data.~\ICSharpCode.Data.Access.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Data.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Data.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Data.MySQL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Data.~\ICSharpCode.Data.MySQL.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Data.Oracle">
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Data.~\ICSharpCode.Data.Oracle.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Data.SQLServer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Data.~\ICSharpCode.Data.SQLServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Loder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Loder.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\Libraries\log4net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Communication, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Mesnac.Communication.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Controls.Base, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Controls\Mesnac.Controls.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\Mesnac.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Equips.Connection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Equips\Mesnac.Equips.Connection.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Gui, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\Mesnac.Gui.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.PlugIn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\Mesnac.PlugIn.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.DataAccess">
+      <HintPath>..\..\Libraries\Oracle\Oracle.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Controls\Mesnac.Controls.Default\Mesnac.Controls.Default.csproj">
+      <Project>{F022C0E6-2819-4FB1-BB86-0F389F061A44}</Project>
+      <Name>Mesnac.Controls.Default</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Controls\Mesnac.Controls.Feeding\Mesnac.Controls.Feeding.csproj">
+      <Project>{D0C0324F-434E-47EB-8F7C-BA6CD7F233B4}</Project>
+      <Name>Mesnac.Controls.Feeding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Controls\Mesnac.Controls.Sulf\Mesnac.Controls.Sulf.csproj">
+      <Project>{A68F1349-57E9-4E5F-8B98-A7ECFC028FB4}</Project>
+      <Name>Mesnac.Controls.Sulf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mesnac.Action.SulfGroup\Mesnac.Action.SulfGroup.csproj">
+      <Project>{243891EC-75BF-43D8-A557-455D6B368ECC}</Project>
+      <Name>Mesnac.Action.SulfGroup</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Gui.Edit.Global\Mesnac.Gui.Edit.Global.csproj">
+      <Project>{E7FE3BD9-0D1D-497B-AA59-CE46159CEFBC}</Project>
+      <Name>Mesnac.Gui.Edit.Global</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Gui.Edit\Mesnac.Gui.Edit.csproj">
+      <Project>{D061040C-E4C0-4B7A-8348-88D4315B4889}</Project>
+      <Name>Mesnac.Gui.Edit</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Chinese_%28Simplified%29.frl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\DeviceConfig\Mesnac.Equips\Mesnac.Equip.ConfigInfo\EquipConfig.MSSQL\上辅机\模版01\Equip.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\DeviceConfig\Mesnac.Equips\Mesnac.Equip.Display\EquipConfig.Text\上辅机\模版01\Equip.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Data\AccessData\2012-08-14.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\DeviceConfig\Mesnac.Equips\Mesnac.Equip.FictitiousPlc\Mesnac.Equip.FictitiousPlc.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\DeviceConfig\Mesnac.Equips\Mesnac.Equip.Mitsubishi\ActMulti.dll" />
+    <Content Include="Data\DeviceConfig\Mesnac.Equips\Mesnac.Equip.Mitsubishi\Mesnac.Equip.Mitsubishi.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\DeviceConfig\Mesnac.Equips\Mesnac.Equip.OMRON\Mesnac.Equip.OMRON.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\DeviceConfig\设备接口目录.txt" />
+    <Content Include="Data\EventConfig\空项目\硫化曲线.园图监控.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\硫化曲线.园图监控1.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\系统日志.系统日志.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\数据管理.数据同步.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\硫化曲线.曲线监控.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\报警日志.报警日志.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\硫化群控监控.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\基础数据维护.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\图例.图例.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\设备管理.故障申报.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\设备管理_停机管理.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\设备管理_模具管理.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\设备管理_参数读取.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\技术管理.跳步.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\生产管理.计划产量管理.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\设备管理_IO状态.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\报警管理.报警标准.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\基础界面.单表界面.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\技术管理.工艺信息.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\硫化_系统初始化.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MCProject\nodeDevice - 复制.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MCProject\nodeDeviceOML.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Data\MCProject\Project1.mprj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MCProject\Report\MaterialCode.frx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MCProject\Report\PlanLot.frx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MCProject\Report\PlanLot1.frx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MCProject\Report\PptLotInfo.frx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\template\上辅机\00 上辅机空模板\Project.mprj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\template\上辅机\01 终炼机台模板\FSProject.mprj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\template\上辅机\02 母炼机台模板-6罐\FSProject0.mprj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\template\上辅机\03 母炼机台模板-8罐\FSProject0.mprj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\template\上辅机\04 完整上辅机系统模板\FSProject0.mprj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\template\上辅机\04 完整上辅机系统模板\Report\MaterialCode.frx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\template\上辅机\04 完整上辅机系统模板\Report\PlanLot.frx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\template\上辅机\04 完整上辅机系统模板\Report\PlanLot1.frx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\template\上辅机\04 完整上辅机系统模板\Report\PptLotInfo.frx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\template\上辅机\05 工艺回溯模板\ProcessDisplay.mprj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\template\小料称量\template1\FSProject.mprj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\MesnacResource.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\SDRes.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\DeviceConfig\Mesnac.Maths\Mesnac.Math.Feeding.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\RunSchema.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\系统配置.权限管理.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MCProject\MenuConfig.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\MCProject\nodeCommand.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MCProject\nodeDataSource.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\MCProject\nodeDevice.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\MCProject\nodeForm\CuringAlarmTech.xml" />
+    <Content Include="Data\MCProject\nodeForm\CurrentPlanForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MCProject\nodeForm\Form1.xml" />
+    <Content Include="Data\MCProject\nodeForm\Form2.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\MCProject\nodeForm\HRClass.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MCProject\nodeForm\HRShift.xml" />
+    <Content Include="Data\MCProject\nodeForm\MainBottom.xml" />
+    <Content Include="Data\MCProject\nodeForm\MointerMain.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\MCProject\nodeForm\PlanInfo.xml" />
+    <Content Include="Data\MCProject\nodeForm\PostInfo.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MCProject\nodeForm\ProductShift.xml" />
+    <Content Include="Data\MCProject\nodeForm\SulfMointer.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\MCProject\nodeForm\TechnologyInfo.xml" />
+    <Content Include="Data\MCProject\nodeForm\MaterialManager.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MCProject\nodeForm\UserInfo.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MCProject\PlcSchema.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\MCProject\RunSchema.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\MCProject\nodeDevice3.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MCProject\PlcSchema1.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MCProject\组态工程目录.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MCProject\nodeDevice2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\TempData.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeCommand.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeDataSource.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeDevice.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\AlarmRecord.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\BasRoleForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\BasUserForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\CommonParaForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\CurrentPlanForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\CurveForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\LotReportForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\MaterialCount.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\MaterialForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\ModifyWeightNum.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\OperationRecord.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\PlanLotReportForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\PmtActionForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\PmtTermForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\PptClassForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\PptShiftForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\RecipeForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\RolePurviewForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\SytBigForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\SytJarForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\SytParForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\nodeForm\WeightMonitor.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\PlcSchema.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\04 完整上辅机系统模板\RunSchema.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\05 工艺回溯模板\nodeDevice.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\05 工艺回溯模板\nodeForm\CurveForm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\designer.ico" />
+    <Content Include="images\sulf\2014-35_15.jpg" />
+    <Content Include="images\sulf\201435_06.jpg" />
+    <Content Include="images\sulf\201435_11.jpg" />
+    <Content Include="images\sulf\201435_15.jpg" />
+    <Content Include="images\sulf\201435_19.jpg" />
+    <Content Include="images\sulf\201435_21.jpg" />
+    <Content Include="images\sulf\201435_26.jpg" />
+    <Content Include="images\sulf\201435_28.jpg" />
+    <Content Include="images\sulf\201435_32.jpg" />
+    <Content Include="images\sulf\201435_33.jpg" />
+    <Content Include="images\sulf\201435_36.jpg" />
+    <Content Include="images\sulf\201435_39.jpg" />
+    <Content Include="images\sulf\201435_42.jpg" />
+    <Content Include="images\sulf\201435_44.jpg" />
+    <Content Include="images\sulf\btn-hover_1.jpg" />
+    <Content Include="images\sulf\btn-hover_2.jpg" />
+    <Content Include="images\sulf\btn-hover_3.jpg" />
+    <Content Include="images\sulf\btn-hover_4.jpg" />
+    <Content Include="images\sulf\btnAdd.jpg" />
+    <Content Include="images\sulf\btnClock.jpg" />
+    <Content Include="images\sulf\btnDelete.jpg" />
+    <Content Include="images\sulf\btnDown.jpg" />
+    <Content Include="images\sulf\btnEdit.jpg" />
+    <Content Include="images\sulf\btnRead.jpg" />
+    <Content Include="images\sulf\btnRefresh.jpg" />
+    <Content Include="images\sulf\btnReturn.jpg" />
+    <Content Include="images\sulf\btnSave.jpg" />
+    <Content Include="images\sulf\btnSearch.jpg" />
+    <Content Include="images\sulf\btnShift.jpg" />
+    <Content Include="images\sulf\btn_01.jpg" />
+    <Content Include="images\sulf\btn_1.jpg" />
+    <Content Include="images\sulf\btn_2.jpg" />
+    <Content Include="images\sulf\btn_3.jpg" />
+    <Content Include="images\sulf\btn_4.jpg" />
+    <Content Include="images\sulf\download.jpg" />
+    <Content Include="images\sulf\info_21_21.jpg" />
+    <Content Include="images\sulf\main.jpg" />
+    <Content Include="images\sulf\main5_03.jpg" />
+    <Content Include="images\sulf\main5_39.jpg" />
+    <Content Include="images\sulf\main5_42.jpg" />
+    <Content Include="images\sulf\remark.jpg" />
+    <Content Include="images\toolbarico\Icons_16x16_Help.png" />
+    <Content Include="ReceiveText.Txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ComponentAction.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\ComponentEvent.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ComponentProperty.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\Config\layouts\LayoutConfigFile.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\空项目\LanguageDefault.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\ProjectWizardList.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\SharpDevelopControlLibrary.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\SharpPlugIn\Mesnac.addin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\01 终炼机台模板\nodeDevice.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\01 终炼机台模板\nodeForm\frm_Curve.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\02 母炼机台模板-6罐\nodeDevice.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\02 母炼机台模板-6罐\nodeForm\frm_Curve.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\03 母炼机台模板-8罐\nodeDevice.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\上辅机\03 母炼机台模板-8罐\nodeForm\frm_Curve.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\小料称量\template1\nodeDevice.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\template\小料称量\template1\nodeForm\Form1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\layout\Icons_16x16_AlignBottom.png" />
+    <Content Include="images\layout\Icons_16x16_AlignHorizontalCenters.png" />
+    <Content Include="images\layout\Icons_16x16_AlignLeft.png" />
+    <Content Include="images\layout\Icons_16x16_AlignRight.png" />
+    <Content Include="images\layout\Icons_16x16_AlignToGrid.png" />
+    <Content Include="images\layout\Icons_16x16_AlignTop.png" />
+    <Content Include="images\layout\Icons_16x16_AlignVerticalCenters.png" />
+    <Content Include="images\layout\Icons_16x16_BringToFront.png" />
+    <Content Include="images\layout\Icons_16x16_CenterHorizontally.png" />
+    <Content Include="images\layout\Icons_16x16_CenterVertically.png" />
+    <Content Include="images\layout\Icons_16x16_HorizSpaceConcatenate.png" />
+    <Content Include="images\layout\Icons_16x16_HorizSpaceDecrease.png" />
+    <Content Include="images\layout\Icons_16x16_HorizSpaceIncrease.png" />
+    <Content Include="images\layout\Icons_16x16_HorizSpaceMakeEqual.png" />
+    <Content Include="images\layout\Icons_16x16_SendToBack.png" />
+    <Content Include="images\layout\Icons_16x16_SizeToControlHeight.png" />
+    <Content Include="images\layout\Icons_16x16_SizeToControlWidth.png" />
+    <Content Include="images\layout\Icons_16x16_SizeToControl.png" />
+    <Content Include="images\layout\Icons_16x16_SizeToGrid.png" />
+    <Content Include="images\layout\Icons_16x16_VertSpaceConcatenate.png" />
+    <Content Include="images\layout\Icons_16x16_VertSpaceDecrease.png" />
+    <Content Include="images\layout\Icons_16x16_VertSpaceIncrease.png" />
+    <Content Include="images\layout\Icons_16x16_VertSpaceMakeEqual.png" />
+    <Content Include="images\project\dataSource.png" />
+    <Content Include="images\project\datSourceItem.png" />
+    <Content Include="images\project\dev.png" />
+    <Content Include="images\project\devdoc.png" />
+    <Content Include="images\project\devDriver.png" />
+    <Content Include="images\project\devItem.png" />
+    <Content Include="images\project\frm.png" />
+    <Content Include="images\project\frmdoc.png" />
+    <Content Include="images\project\frmItem.png" />
+    <Content Include="images\project\prj.png" />
+    <Content Include="images\template\big_0.png" />
+    <Content Include="images\template\big_1.png" />
+    <Content Include="images\template\big_10.png" />
+    <Content Include="images\template\big_11.png" />
+    <Content Include="images\template\big_12.png" />
+    <Content Include="images\template\big_13.png" />
+    <Content Include="images\template\big_2.png" />
+    <Content Include="images\template\big_3.png" />
+    <Content Include="images\template\big_4.png" />
+    <Content Include="images\template\big_5.png" />
+    <Content Include="images\template\big_6.png" />
+    <Content Include="images\template\big_7.png" />
+    <Content Include="images\template\big_8.png" />
+    <Content Include="images\template\big_9.png" />
+    <Content Include="images\template\big_big_12.png" />
+    <Content Include="images\template\big_big_13.png" />
+    <Content Include="images\template\small_0.png" />
+    <Content Include="images\template\small_1.png" />
+    <Content Include="images\template\small_10.png" />
+    <Content Include="images\template\small_11.png" />
+    <Content Include="images\template\small_12.png" />
+    <Content Include="images\template\small_13.png" />
+    <Content Include="images\template\small_2.png" />
+    <Content Include="images\template\small_3.png" />
+    <Content Include="images\template\small_4.png" />
+    <Content Include="images\template\small_5.png" />
+    <Content Include="images\template\small_6.png" />
+    <Content Include="images\template\small_7.png" />
+    <Content Include="images\template\small_8.png" />
+    <Content Include="images\template\small_9.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Action.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Cancel.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Close.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Copy.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Cut.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Event.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Extends.png" />
+    <Content Include="images\toolbarico\Icons_16x16_New.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Objects.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Open.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Output.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Paste.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Property.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Redo.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Run.png" />
+    <Content Include="images\toolbarico\Icons_16x16_SaveAll.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Save.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Solution.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Start.png" />
+    <Content Include="images\toolbarico\Icons_16x16_ToolBox.png" />
+    <Content Include="images\toolbarico\Icons_16x16_Undo.png" />
+    <Content Include="Data\DeviceConfig\Mesnac.Equips\Mesnac.Equip.AllenBradley\Mesnac.Equip.AllenBradley.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\DeviceConfig\Mesnac.Equips\Mesnac.Equip.ConfigInfo\Mesnac.Equip.ConfigInfo.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\DeviceConfig\Mesnac.Equips\Mesnac.Equip.Display\Mesnac.Equip.Display.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\DeviceConfig\Mesnac.Equips\Mesnac.Equip.Siemens\Mesnac.Equip.Siemens.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\DeviceConfig\Mesnac.Maths\Mesnac.Math.Database.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\DeviceConfig\Mesnac.Maths\Mesnac.Math.Default.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\DeviceConfig\Mesnac.Maths\Mesnac.Math.New.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\EventConfig\上位机\" />
+    <Folder Include="Data\EventConfig\上辅机\" />
+    <Folder Include="Data\MesnacPlugIn\" />
+    <Folder Include="Data\template\X光机\" />
+    <Folder Include="Data\template\低温一次法\" />
+    <Folder Include="Data\template\内衬层\" />
+    <Folder Include="Data\template\动平衡\" />
+    <Folder Include="Data\template\均匀性\" />
+    <Folder Include="Data\template\成型机\" />
+    <Folder Include="Data\template\激光散癍\" />
+    <Folder Include="Data\template\硫化机\" />
+    <Folder Include="Data\template\空项目\" />
+    <Folder Include="Data\template\立体库\" />
+    <Folder Include="Data\template\裁断机\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>XCOPY "$(SolutionDir)bin\*.*" /S/Y "$(TargetDir)"
+XCOPY "$(SolutionDir)packages\*.*" /S/Y "$(TargetDir)"</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

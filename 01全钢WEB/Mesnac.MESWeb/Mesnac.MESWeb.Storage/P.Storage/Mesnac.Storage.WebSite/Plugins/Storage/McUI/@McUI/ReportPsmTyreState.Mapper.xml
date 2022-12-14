@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportPsmTyreState" parameterClass="map" resultClass="row">
+      <![CDATA[    
+     select t1.objid,t1.tyre_no,t1.green_tyre_no,t0.green_tyre_no  Tyre_GREEN_TYRENO,t1.material_name,t1.plan_material_name,t1.curing_time,t1.x_time,t1.fcheck_time,t1.xcheck_grade,t1.fcheck_grade,t1.fcheck_new
+       from(    
+      select t0.objid,t0.tyre_no,t0.green_tyre_no 
+      ,t2.material_name,t6.material_name plan_material_name 
+      , t0.record_time CURING_TIME,t3.record_time x_time,t4.record_time fcheck_time
+      , t3.gradeid XCHECK_GRADE, case t3.new_flag when 0 then '经过改判' when 1 then '是' end as XCHECK_NEW,
+      case t4.gradeid when 1 then '一级品' when 2 then '二级品' when 3 then '废品' when 4 then '特废品' when 5 then '返修品' end as FCHECK_GRADE,
+      case t4.new_flag when 0 then '经过改判' when 1 then '是' end as FCHECK_NEW
+      from spp_tyre_state t0      
+      left join cpp_curing_production t1  on t0.tyre_no=t1.tyre_no
+      left join sbm_material t2 on t1.material_id=t2.objid
+      inner join fqx_xcheck_info t3 on t0.tyre_no =t3.tyrdid
+      inner join fqf_fcheck_info t4 on t0.tyre_no=t4.tyreid
+      left join cpp_curing_plan_detail t5 on t1.plan_detail_id=t5.objid 
+      left join sbm_material t6 on t5.material_id=t6.objid
+      where t0.delete_flag=0
+       UNION 
+
+    select t0.objid,t0.tyre_no,t0.green_tyre_no 
+      ,t5.material_name,t7.material_name plan_material_name
+      ,t0.record_time CURING_TIME,t3.record_time x_time,t4.record_time fcheck_time
+      , t3.gradeid XCHECK_GRADE, case t3.new_flag when 0 then '经过改判' when 1 then '是' end as XCHECK_NEW,
+      case t4.gradeid when 1 then '一级品' when 2 then '二级品' when 3 then '废品' when 4 then '特废品' when 5 then '返修品' end as FCHECK_GRADE,
+      case t4.new_flag when 0 then '经过改判' when 1 then '是' end as FCHECK_NEW
+      from spp_tyre_state t0
+      left join cpp_curing_production t1 on t0.tyre_no=t1.tyre_no
+      left join bpm_production t2 on t0.green_tyre_no=t2.green_tyre_no
+      inner join fqx_xcheck_info t3 on t0.green_tyre_no=t3.tyrdid 
+      inner join fqf_fcheck_info t4 on t0.green_tyre_no=t4.tyreid
+      left join sbm_material t5 on t1.material_id=t5.objid
+      left join cpp_curing_plan_detail t6 on t1.plan_detail_id=t6.objid 
+       left join sbm_material t7 on t6.material_id=t7.objid
+       where t0.delete_flag=0
+      )t1 
+       left join spp_tyre_state t0 on t0.tyre_no =t1.tyre_no  
+            
+	]]>	
+	<dynamic prepend="WHERE">
+		<isNotNull property="where.BeginDate" prepend="AND">
+          <![CDATA[T1.CURING_TIME >= #where.BeginDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EndDate" prepend="AND">
+          <![CDATA[T1.CURING_TIME <= #where.EndDate#+1]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[T1.CURING_TIME  >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[T1.CURING_TIME <= #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[T1.green_tyre_no = #where.GreenTyreNo#]]>
+        </isNotNull>        	
+		 <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[T1.tyre_no = #where.TyreNo#]]>
+       	 </isNotNull>   
+       	 <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[T1.material_name LIKE '%' || #where.MaterialName# || '%']]>
+       	 </isNotNull>       
+      	<isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      	</isNotNull>      	
+  	</dynamic>
+    <select id="Select@ReportPsmTyreState@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.OBJID,T1.RECORD_TIME,T1.DELETE_FLAG,T1.TYRE_NO,T1.GREEN_TYRE_NO,T1.TYRE_STATE FROM  SPP_TYRE_STATE T1
+      ]]>
+      <dynamic prepend="WHERE">
+      <![CDATA[(T1.OBJID = #where.OBJID#)]]>
+      </dynamic>
+    </select>
+
+
+    <select id="Select@ReportPsmTyreState@DetailGrid" parameterClass="map" resultClass="row">
+      <![CDATA[(T1.GREEN_TYRE_NO = #where.GreenTyreNo#)]]>
+      <![CDATA[(T1.OBJID = #where.OBJID#)]]>
+        <![CDATA[(T1.Tyre_No = #where.TyreNo#)]]>
+      <![CDATA[
+        SELECT T1.*
+        , CASE T1.SUMMARY_STATE WHEN 0 THEN '未确认' WHEN 1 THEN '已确认' ELSE '' END SUMMARY_STATE_CAPTION 
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '合格品' WHEN 2 THEN '次品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' WHEN 9 THEN '试验胎' ELSE '无品级' END CHECK_GRADE_NAME 
+        , T3.MATERIAL_NAME 
+        , T4.USER_NAME RECORD_USER_NAME 
+        , T5.USER_NAME UPDATE_USER_NAME 
+        , T6.USER_NAME AFFIRM_USER_NAME 
+        , T7.STORE_NAME
+        , T8.STORE_PLACE_NAME
+        FROM PSM_IN_LOAD_SUMMARY T1 
+        LEFT JOIN SBM_MATERIAL T3 ON T1.MATERIAL_ID = T3.OBJID
+        LEFT JOIN SSB_USER T4 ON T1.RECORD_USER_ID = T4.OBJID
+        LEFT JOIN SSB_USER T5 ON T1.UPDATE_USER_ID = T5.OBJID
+        LEFT JOIN SSB_USER T6 ON T1.AFFIRM_USER_ID = T6.OBJID
+        LEFT JOIN PSB_STORE T7 ON T1.STORE_ID = T7.OBJID
+        LEFT JOIN PSB_STORE_PLACE T8 ON T1.STORE_PLACE_ID = T8.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[
+        T1.DELETE_FLAG = 0
+        AND T1.BILL_ID = #where.OBJID#
+        ]]>
+      </dynamic>
+      <![CDATA[
+        ORDER BY T3.MATERIAL_NAME, T1.RECORD_TIME 
+      ]]>
+    </select>
+ 
+
+
+ 	<select id="Select+Update@ReportPsmTyreState" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM PSM_TYRE_STATE ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+</select>
+    <!--查询类型信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadAndStockStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmTyreState@SearchType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT '1' sskey, '按日期' ssValue FROM dual
+      UNION
+      SELECT '2' sskey, '按时间' ssValue FROM dual
+     ]]>
+    </select>
+
+    <!--查询汇总状态信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadAndStockStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmTyreState@SummaryState" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT 0 sskey, '未确认' ssValue FROM dual
+      UNION
+      SELECT 1 sskey, '已确认' ssValue FROM dual
+     ]]>
+    </select>
+
+    <!--查询班组信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadAndStockStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmTyreState@LoadClassId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey, CLASS_NAME ssValue FROM SSB_CLASS WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+    <!--查询班次信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadAndStockStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmTyreState@LoadShiftId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey, SHIFT_NAME ssValue FROM SSB_SHIFT WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询仓库类型信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadAndStockStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmTyreState@StoreTypeId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey,STORE_TYPE_NAME ssValue FROM PSB_STORE_TYPE WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询品级信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadAndStockStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmTyreState@CheckGradeCode" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+        SELECT 1 sskey, '合格品' ssValue FROM dual
+        union 
+        SELECT 2 sskey, '次品' ssValue FROM dual
+        union 
+        SELECT 3 sskey, '废品' ssValue FROM dual
+        union 
+        SELECT 4 sskey, '特废品' ssValue FROM dual
+        union 
+        SELECT 9 sskey, '试验胎' ssValue FROM dual
+        union 
+        SELECT 0 sskey, '无品级' ssValue FROM dual
+
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

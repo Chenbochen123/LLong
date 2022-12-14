@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CsmStorageDetail"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CsmStorageDetail" type="Mesnac.Curing.Entity.BasicEntity.CsmStorageDetail, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CsmStorageDetail" class="CsmStorageDetail">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="StorageMainId" column="STORAGE_MAIN_ID"/>
+    <result property="StorageToolingId" column="STORAGE_TOOLING_ID"/>
+    <result property="GreenTyreId" column="GREEN_TYRE_ID"/>
+    <result property="GreenTyreNo" column="GREEN_TYRE_NO"/>
+    <result property="ScanTime" column="SCAN_TIME"/>
+    <result property="ScannerId" column="SCANNER_ID"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CsmStorageDetail" class="CsmStorageDetail">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="StorageMainId" column="StorageMainId"/>
+    <parameter property="StorageToolingId" column="StorageToolingId"/>
+    <parameter property="GreenTyreId" column="GreenTyreId"/>
+    <parameter property="GreenTyreNo" column="GreenTyreNo"/>
+    <parameter property="ScanTime" column="ScanTime"/>
+    <parameter property="ScannerId" column="ScannerId"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CSM_STORAGE_DETAIL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.StorageMainId" prepend="AND">
+          <![CDATA[STORAGE_MAIN_ID = #where.StorageMainId#]]>
+        </isNotNull>
+        <isNotNull property="where.StorageToolingId" prepend="AND">
+          <![CDATA[STORAGE_TOOLING_ID = #where.StorageToolingId#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreId" prepend="AND">
+          <![CDATA[GREEN_TYRE_ID = #where.GreenTyreId#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.ScanTime" prepend="AND">
+          <![CDATA[SCAN_TIME = #where.ScanTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ScannerId" prepend="AND">
+          <![CDATA[SCANNER_ID = #where.ScannerId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CSM_STORAGE_DETAIL]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="StorageMainId" prepend=",">STORAGE_MAIN_ID</isNotNull>
+        <isNotNull property="StorageToolingId" prepend=",">STORAGE_TOOLING_ID</isNotNull>
+        <isNotNull property="GreenTyreId" prepend=",">GREEN_TYRE_ID</isNotNull>
+        <isNotNull property="GreenTyreNo" prepend=",">GREEN_TYRE_NO</isNotNull>
+        <isNotNull property="ScanTime" prepend=",">SCAN_TIME</isNotNull>
+        <isNotNull property="ScannerId" prepend=",">SCANNER_ID</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_CSM_STORAGE_DETAIL.NEXTVAL</isNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="StorageMainId" prepend=",">#StorageMainId#</isNotNull>
+        <isNotNull property="StorageToolingId" prepend=",">#StorageToolingId#</isNotNull>
+        <isNotNull property="GreenTyreId" prepend=",">#GreenTyreId#</isNotNull>
+        <isNotNull property="GreenTyreNo" prepend=",">#GreenTyreNo#</isNotNull>
+        <isNotNull property="ScanTime" prepend=",">#ScanTime#</isNotNull>
+        <isNotNull property="ScannerId" prepend=",">#ScannerId#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CSM_STORAGE_DETAIL
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.StorageMainId"  prepend=",">
+          STORAGE_MAIN_ID = #update.StorageMainId#
+        </isNotNull>
+        <isNotNull  property="update.StorageToolingId"  prepend=",">
+          STORAGE_TOOLING_ID = #update.StorageToolingId#
+        </isNotNull>
+        <isNotNull  property="update.GreenTyreId"  prepend=",">
+          GREEN_TYRE_ID = #update.GreenTyreId#
+        </isNotNull>
+        <isNotNull  property="update.GreenTyreNo"  prepend=",">
+          GREEN_TYRE_NO = #update.GreenTyreNo#
+        </isNotNull>
+        <isNotNull  property="update.ScanTime"  prepend=",">
+          SCAN_TIME = #update.ScanTime#
+        </isNotNull>
+        <isNotNull  property="update.ScannerId"  prepend=",">
+          SCANNER_ID = #update.ScannerId#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CSM_STORAGE_DETAIL
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CsmStorageDetail">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CsmStorageDetail">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CSM_STORAGE_DETAIL
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CSM_STORAGE_DETAIL
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CsmStorageDetail" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CSM_STORAGE_DETAIL
+    </statement>
+  </statements>
+</sqlMap>

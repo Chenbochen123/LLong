@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CsmStorageMain"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CSM_STORAGE_MAIN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreId" prepend="AND">
+          <![CDATA[STORE_ID = #where.StoreId#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceId" prepend="AND">
+          <![CDATA[STORE_PLACE_ID = #where.StorePlaceId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.StockAmount" prepend="AND">
+          <![CDATA[STOCK_AMOUNT = #where.StockAmount#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <update id="UpdateCsmStorageMain" parameterClass="map" >
+      <![CDATA[
+       UPDATE CSM_STORAGE_MAIN SET STOCK_AMOUNT = STOCK_AMOUNT-1
+       WHERE  OBJID = (SELECT STORAGE_MAIN_ID FROM CSM_STORAGE_DETAIL WHERE GREEN_TYRE_NO=#GreenTyreNo# and rownum=1 )
+       ]]>
+    </update>
+    <select id="GetStorageToolingID" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      select STORAGE_TOOLING_ID from csm_storage_detail where green_tyre_no=#GreenTyreNo#
+      ]]>
+    </select>
+    <delete id="DeleteCsmDetail" parameterClass="map">
+      <![CDATA[
+      delete from csm_storage_detail where green_tyre_no=#GreenTyreNo#
+      ]]>
+    </delete>
+    <select id="GetStorageToolingExists" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      select * from csm_storage_detail where STORAGE_TOOLING_ID=#StorageToolingID#
+      ]]>
+    </select>
+    <update id="UpdateStorageToolingAcount" parameterClass="map">
+      <![CDATA[
+      update csm_storage_tooling set load_amount = load_amount-1 where load_amount>0 and objid =#StorageToolingID#
+      ]]>
+    </update>
+    <delete id="DeleteCsmStorageTooling" parameterClass="map">
+      <![CDATA[
+      delete from csm_storage_tooling where objid =#StorageToolingID#
+      ]]>
+    </delete>
+   <select id="GetCuringStorageDetail" parameterClass="map" resultClass="Row">
+      <![CDATA[
+          SELECT  T.GREEN_TYRE_NO  , T3.MATERIAL_NAME  , T4.STORE_NAME , T5.STORE_PLACE_NAME , 
+         T2.TOOLING_BARCODE ,T.BACKUP_TIME  ,T6.USER_NAME
+         ,to_date(to_char(T7.RECORD_TIME+T11.valid_time/24,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') as YA_TIME,T7.SEQ_INDEX
+         FROM  CSM_STORAGE_DETAIL T
+          LEFT JOIN CSM_STORAGE_MAIN T1 ON T.STORAGE_MAIN_ID = T1.OBJID
+          LEFT JOIN CSM_STORAGE_TOOLING T2 ON T2.OBJID = T.STORAGE_TOOLING_ID
+          LEFT JOIN SBM_MATERIAL T3 ON T3.OBJID = T1.MATERIAL_ID
+          LEFT JOIN CSM_STORE T4 ON T4.OBJID=T1.STORE_ID
+          LEFT JOIN CSM_STORE_PLACE T5 ON T5.OBJID = T1.STORE_PLACE_ID
+          LEFT JOIN SSB_USER T6 ON T6.OBJID = T.RECORD_USER_ID
+        LEFT JOIN BPM_PRODUCTION T7 ON T7.GREEN_TYRE_NO = T.GREEN_TYRE_NO
+        LEFT JOIN  bpp_plan_detail T10 ON T7.PLAN_DETAIL_ID = T10.OBJID
+        LEFT JOIN  SBM_MATERIAL_INFO T11 ON T10.MATERIAL_ID = T11.MATERIAL_ID
+       ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="DeleteFlag" prepend="AND">
+          <![CDATA[T.DELETE_FLAG = #DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="MaterialId" prepend="AND">
+          <![CDATA[T1.MATERIAL_ID =#MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="StoreID" prepend="AND">
+          <![CDATA[T1.STORE_ID = #StoreID#]]>
+        </isNotNull>
+        <isNotNull property="StorePlaceID" prepend="AND">
+          <![CDATA[T1.STORE_PLACE_ID = #StorePlaceID#]]>
+        </isNotNull>
+        <isNotNull property="GreenTyreNo" prepend="AND">
+          <![CDATA[T.GREEN_TYRE_NO = #GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="ToolingBarcode" prepend="AND">
+          <![CDATA[T2.TOOLING_BARCODE = #ToolingBarcode#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+
+    <select id="GetCuringStorage" parameterClass="map" resultClass="Row">
+      <![CDATA[
+         
+        select MATERIAL_ID,MATERIAL_NAME, COUNT(1) TOTAL_COUNT,SUM(YJ_FLAG) YJ_NUM from (
+         SELECT  T1.MATERIAL_ID,T2.MATERIAL_NAME
+         ,CASE WHEN to_date(to_char(T5.RECORD_TIME+T4.valid_time/24,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') < (SYSDATE + (#YJHours#/24)) THEN 1 ELSE 0 END  YJ_FLAG
+          FROM CSM_STORAGE_DETAIL T
+        inner JOIN CSM_STORAGE_MAIN T1 ON T1.OBJID = T.STORAGE_MAIN_ID
+        LEFT JOIN SBM_MATERIAL T2 ON T2.OBJID = T1.MATERIAL_ID
+        inner JOIN CSM_STORAGE_TOOLING T3 ON T3.OBJID = T.STORAGE_TOOLING_ID
+        LEFT JOIN SBM_MATERIAL_INFO T4 ON T2.OBJID = T4.MATERIAL_ID
+        LEFT JOIN BPM_PRODUCTION T5 ON T5.GREEN_TYRE_NO = T.GREEN_TYRE_NO
+       ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="DeleteFlag" prepend="AND">
+          <![CDATA[T.DELETE_FLAG = #DeleteFlag#]]>
+        </isNotNull>
+
+        <isNotNull property="MaterialName" prepend="AND">
+          <![CDATA[T2.MATERIAL_NAME like '%' || #MaterialName# || '%']]>
+        </isNotNull>
+        <isNotNull property="StoreID" prepend="AND">
+          <![CDATA[T1.STORE_ID = #StoreID#]]>
+        </isNotNull>
+        <isNotNull property="StorePlaceID" prepend="AND">
+          <![CDATA[T1.STORE_PLACE_ID = #StorePlaceID#]]>
+        </isNotNull>
+        <isNotNull property="GreenTyreNo" prepend="AND">
+          <![CDATA[T.GREEN_TYRE_NO = #GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="ToolingBarcode" prepend="AND">
+          <![CDATA[T3.TOOLING_BARCODE = #ToolingBarcode#]]>
+        </isNotNull>
+      </dynamic>
+        <![CDATA[
+        group by T1.MATERIAL_ID,T2.MATERIAL_NAME,T5.RECORD_TIME,T4.valid_time)
+        group by  MATERIAL_ID,MATERIAL_NAME]]>
+    </select>
+
+    <select id="GetCuringStorageTwo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       select STORE_PLACE_ID,STORE_PLACE_NAME,MATERIAL_ID,MATERIAL_NAME, COUNT(1) TOTAL_COUNT,SUM(YJ_FLAG) YJ_NUM from 
+         ( SELECT T1.STORE_PLACE_ID,T4.STORE_PLACE_NAME, T1.MATERIAL_ID,T2.MATERIAL_NAME,
+            CASE WHEN to_date(to_char(T6.RECORD_TIME+T5.valid_time/24,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') < (SYSDATE + (#YJHours#/24)) THEN 1 ELSE 0 END  YJ_FLAG 
+        FROM CSM_STORAGE_DETAIL T
+        LEFT JOIN CSM_STORAGE_MAIN T1 ON T1.OBJID = T.STORAGE_MAIN_ID
+        LEFT JOIN SBM_MATERIAL T2 ON T2.OBJID = T1.MATERIAL_ID
+        LEFT JOIN CSM_STORAGE_TOOLING T3 ON T3.OBJID = T.STORAGE_TOOLING_ID 
+        LEFT JOIN CSM_STORE_PLACE T4 ON T4.OBJID=T1.STORE_PLACE_ID
+        LEFT JOIN SBM_MATERIAL_INFO T5 ON T2.OBJID = T5.MATERIAL_ID
+        LEFT JOIN BPM_PRODUCTION T6 ON T6.GREEN_TYRE_NO = T.GREEN_TYRE_NO
+       ]]>
+      <dynamic prepend="WHERE">
+
+        <isNotNull property="DeleteFlag" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #DeleteFlag#]]>
+        </isNotNull>
+
+        <isNotNull property="DeleteFlag" prepend="AND">
+          <![CDATA[T.DELETE_FLAG = #DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="GreenTyreNo" prepend="AND">
+          <![CDATA[T.GREEN_TYRE_NO = #GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="MaterialName" prepend="AND">
+          <![CDATA[T2.MATERIAL_NAME like '%' || #MaterialName# || '%']]>
+        </isNotNull>
+
+        <isNotNull property="StoreID" prepend="AND">
+          <![CDATA[T4.STORE_ID = #StoreID#]]>
+        </isNotNull>
+        <isNotNull property="StorePlaceID" prepend="AND">
+          <![CDATA[T1.STORE_PLACE_ID = #StorePlaceID#]]>
+        </isNotNull>
+        <isNotNull property="ToolingBarcode" prepend="AND">
+          <![CDATA[T3.TOOLING_BARCODE = #ToolingBarcode#]]>
+        </isNotNull>
+      </dynamic>
+        <![CDATA[
+        group by T1.STORE_PLACE_ID, T4.STORE_PLACE_NAME , T1.MATERIAL_ID , T2.MATERIAL_NAME,T6.RECORD_TIME,T5.valid_time)
+        group by STORE_PLACE_ID,STORE_PLACE_NAME,MATERIAL_ID,MATERIAL_NAME]]>
+    </select>
+
+
+    <delete id="DeleteStorageDetail" parameterClass="map">
+      <![CDATA[
+          DELETE FROM CSM_STORAGE_DETAIL T WHERE
+           T.STORAGE_MAIN_ID=(SELECT T1.OBJID FROM CSM_STORAGE_MAIN T1 WHERE T1.STORE_PLACE_ID=#StorePlaceId# AND T1.MATERIAL_ID=#MaterialId#)        
+
+      ]]>
+    </delete>
+    
+    <delete id="DeleteStorageMainTooling" parameterClass="map">
+      <![CDATA[
+          DELETE FROM  CSM_STORAGE_TOOLING T2 WHERE 
+           T2.STORAGE_MAIN_ID=(SELECT T1.OBJID FROM  CSM_STORAGE_MAIN T1 WHERE T1.STORE_PLACE_ID=#StorePlaceId# AND T1.MATERIAL_ID=#MaterialId#)
+      ]]>
+    </delete>
+
+    <delete id="DeleteStorageMain" parameterClass="map">
+      <![CDATA[
+          DELETE FROM CSM_STORAGE_MAIN T1
+           WHERE T1.STORE_PLACE_ID=#StorePlaceId# AND T1.MATERIAL_ID=#MaterialId#
+             
+        ]]>
+    </delete>
+
+    <select id="GetCuringCommitStorage" parameterClass="map" resultClass="Row">
+      <![CDATA[
+            SELECT T8.GREEN_TYRE_NO, T6.MATERIAL_NAME,T1.STORE_NAME AS OLD_STORE_NAME,T2.STORE_PLACE_NAME AS OLD_STORE_PLACE_NAME ,T.SHELF_NO AS TOOLING_BARCODE,T3.STORE_NAME AS NEW_STORE_NAME,T4.STORE_PLACE_NAME AS NEW_STORE_PLACE_NAME,T.UPDATE_TIME AS RECORD_TIME,T5.USER_NAME 
+                FROM CSM_TRANSFER_DETAIL T
+                LEFT JOIN CSM_STORAGE_TOOLING T7 ON T7.TOOLING_BARCODE = T.SHELF_NO
+                LEFT JOIN CSM_STORAGE_DETAIL T8 ON T8.STORAGE_TOOLING_ID = T7.OBJID
+                LEFT JOIN CSM_STORE T1  ON T.OLD_STORE_ID=T1.OBJID
+                LEFT JOIN CSM_STORE_PLACE T2 ON T.OLD_STORE_PLACE_ID=T2.OBJID
+                LEFT JOIN CSM_STORE T3  ON T.NEW_STORE_ID=T3.OBJID
+                LEFT JOIN CSM_STORE_PLACE T4 ON T.NEW_STORE_PLACE_ID = T4.OBJID
+                LEFT JOIN SSB_USER T5 ON T5.OBJID=T.UPDATE_USER_ID
+                LEFT JOIN SBM_MATERIAL T6 ON T6.OBJID=T.MATERIAL_ID
+       ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[T.DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+
+        <isNotNull property="MaterialName" prepend="AND">
+          <![CDATA[T6.MATERIAL_NAME like '%' || #MaterialName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.StoreID" prepend="AND">
+          <![CDATA[T.NEW_STORE_ID = #where.StoreID#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceID" prepend="AND">
+          <![CDATA[T.NEW_STORE_PLACE_ID = #where.StorePlaceID#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[T11.GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.ToolingBarcode" prepend="AND">
+          <![CDATA[T.SHELF_NO = #where.ToolingBarcode#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <select id="GetCuringStorageExist" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+          SELECT T.GREEN_TYRE_NO FROM CSM_STORAGE_DETAIL T
+          LEFT JOIN CSM_STORAGE_MAIN T1 ON T1.OBJID = T.STORAGE_MAIN_ID
+          LEFT JOIN CSM_STORE_PLACE T2 ON T2.OBJID = T1.STORE_PLACE_ID
+          WHERE T.DELETE_FLAG=0
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="greenTyreNo" prepend="AND">
+          <![CDATA[t.green_tyre_no=#greenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="equipId" prepend="AND">
+          <![CDATA[ t2.equip_id=#equipId#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+
+
+    <select id="GetBarcodeLock11" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+         
+           select a.objid,a.barcode,case a.lock_flag when 0 then '未锁定' when 1 then '已锁定' end lockname,a.reason,
+case D.ATTRIBUTE3  when '1' then '已入库' ELSE '未在库' end storename,a.lock_time,a.unlock_time,b.user_name lockuser,c.user_name unlockuser,
+  CASE F.GRADENAME when '一级品' then '合格品' when '二级品' then '次品' else F.GRADENAME end GRADENAME
+ from sbm_lock_record a
+ left join ssb_user b on b.objid = a.lock_user
+ left join ssb_user c on c.objid = a.unlock_user 
+ LEFT JOIN wms_upload_record D ON A.BARCODE = D.TYRE_NO
+ LEFT JOIN SPP_TYRE_STATE E ON E.TYRE_NO = A.BARCODE AND E.DELETE_FLAG = 0
+ LEFT JOIN FQG_GRADE_INFO F ON F.OBJID = E.FINAL_CHECK_GRADE AND F.WORK_PROCESS_ID = 500
+ WHERE 1=1
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[a.lock_time  > #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[a.lock_time < #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.barcode" prepend="AND">
+          <![CDATA[a.barcode like '%' || #where.barcode# || '%' ]]>
+        </isNotNull>
+        <isNotNull property="where.lock" prepend="AND">
+          <![CDATA[ a.lock_flag=#where.lock#]]>
+        </isNotNull>
+        <isNotNull property="where.store" prepend="AND">
+          <![CDATA[ a.store_flag=#where.store#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

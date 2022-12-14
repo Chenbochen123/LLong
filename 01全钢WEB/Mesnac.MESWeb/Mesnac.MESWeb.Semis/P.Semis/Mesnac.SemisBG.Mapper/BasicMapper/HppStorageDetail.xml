@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.SemisBG.Mapper.BasicMapper.HppStorageDetail"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HppStorageDetail" type="Mesnac.SemisBG.Entity.BasicEntity.HppStorageDetail, Mesnac.SemisBG.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HppStorageDetail" class="HppStorageDetail">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="CardNo" column="CARD_NO"/>
+    <result property="ShelfNo" column="SHELF_NO"/>
+    <result property="GradeCode" column="GRADE_CODE"/>
+    <result property="UpdateTime" column="UPDATE_TIME"/>
+    <result property="UpdateUserId" column="UPDATE_USER_ID"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="StorePlaceId" column="STORE_PLACE_ID"/>
+    <result property="SubStorePlaceId" column="SUB_STORE_PLACE_ID"/>
+    <result property="UsedFlag" column="USED_FLAG"/>
+    <result property="Dummy5" column="DUMMY5"/>
+    <result property="Dummy6" column="DUMMY6"/>
+    <result property="Dummy7" column="DUMMY7"/>
+    <result property="Dummy8" column="DUMMY8"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HppStorageDetail" class="HppStorageDetail">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="CardNo" column="CardNo"/>
+    <parameter property="ShelfNo" column="ShelfNo"/>
+    <parameter property="GradeCode" column="GradeCode"/>
+    <parameter property="UpdateTime" column="UpdateTime"/>
+    <parameter property="UpdateUserId" column="UpdateUserId"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="StorePlaceId" column="StorePlaceId"/>
+    <parameter property="SubStorePlaceId" column="SubStorePlaceId"/>
+    <parameter property="UsedFlag" column="UsedFlag"/>
+    <parameter property="Dummy5" column="Dummy5"/>
+    <parameter property="Dummy6" column="Dummy6"/>
+    <parameter property="Dummy7" column="Dummy7"/>
+    <parameter property="Dummy8" column="Dummy8"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_STORAGE_DETAIL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.CardNo" prepend="AND">
+          <![CDATA[CARD_NO = #where.CardNo#]]>
+        </isNotNull>
+        <isNotNull property="where.ShelfNo" prepend="AND">
+          <![CDATA[SHELF_NO = #where.ShelfNo#]]>
+        </isNotNull>
+        <isNotNull property="where.GradeCode" prepend="AND">
+          <![CDATA[GRADE_CODE = #where.GradeCode#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateUserId" prepend="AND">
+          <![CDATA[UPDATE_USER_ID = #where.UpdateUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceId" prepend="AND">
+          <![CDATA[STORE_PLACE_ID = #where.StorePlaceId#]]>
+        </isNotNull>
+        <isNotNull property="where.SubStorePlaceId" prepend="AND">
+          <![CDATA[SUB_STORE_PLACE_ID = #where.SubStorePlaceId#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy7" prepend="AND">
+          <![CDATA[DUMMY7 = #where.Dummy7#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy8" prepend="AND">
+          <![CDATA[DUMMY8 = #where.Dummy8#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HPP_STORAGE_DETAIL]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="CardNo" prepend=",">CARD_NO</isNotNull>
+        <isNotNull property="ShelfNo" prepend=",">SHELF_NO</isNotNull>
+        <isNotNull property="GradeCode" prepend=",">GRADE_CODE</isNotNull>
+        <isNotNull property="UpdateTime" prepend=",">UPDATE_TIME</isNotNull>
+        <isNotNull property="UpdateUserId" prepend=",">UPDATE_USER_ID</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="StorePlaceId" prepend=",">STORE_PLACE_ID</isNotNull>
+        <isNotNull property="SubStorePlaceId" prepend=",">SUB_STORE_PLACE_ID</isNotNull>
+        <isNotNull property="UsedFlag" prepend=",">USED_FLAG</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">DUMMY5</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">DUMMY6</isNotNull>
+        <isNotNull property="Dummy7" prepend=",">DUMMY7</isNotNull>
+        <isNotNull property="Dummy8" prepend=",">DUMMY8</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_HPP_STORAGE_DETAIL.NEXTVAL</isNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="CardNo" prepend=",">#CardNo#</isNotNull>
+        <isNotNull property="ShelfNo" prepend=",">#ShelfNo#</isNotNull>
+        <isNotNull property="GradeCode" prepend=",">#GradeCode#</isNotNull>
+        <isNotNull property="UpdateTime" prepend=",">#UpdateTime#</isNotNull>
+        <isNotNull property="UpdateUserId" prepend=",">#UpdateUserId#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="StorePlaceId" prepend=",">#StorePlaceId#</isNotNull>
+        <isNotNull property="SubStorePlaceId" prepend=",">#SubStorePlaceId#</isNotNull>
+        <isNotNull property="UsedFlag" prepend=",">#UsedFlag#</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">#Dummy5#</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">#Dummy6#</isNotNull>
+        <isNotNull property="Dummy7" prepend=",">#Dummy7#</isNotNull>
+        <isNotNull property="Dummy8" prepend=",">#Dummy8#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HPP_STORAGE_DETAIL
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.CardNo"  prepend=",">
+          CARD_NO = #update.CardNo#
+        </isNotNull>
+        <isNotNull  property="update.ShelfNo"  prepend=",">
+          SHELF_NO = #update.ShelfNo#
+        </isNotNull>
+        <isNotNull  property="update.GradeCode"  prepend=",">
+          GRADE_CODE = #update.GradeCode#
+        </isNotNull>
+        <isNotNull  property="update.UpdateTime"  prepend=",">
+          UPDATE_TIME = #update.UpdateTime#
+        </isNotNull>
+        <isNotNull  property="update.UpdateUserId"  prepend=",">
+          UPDATE_USER_ID = #update.UpdateUserId#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.StorePlaceId"  prepend=",">
+          STORE_PLACE_ID = #update.StorePlaceId#
+        </isNotNull>
+        <isNotNull  property="update.SubStorePlaceId"  prepend=",">
+          SUB_STORE_PLACE_ID = #update.SubStorePlaceId#
+        </isNotNull>
+        <isNotNull  property="update.UsedFlag"  prepend=",">
+          USED_FLAG = #update.UsedFlag#
+        </isNotNull>
+        <isNotNull  property="update.Dummy5"  prepend=",">
+          DUMMY5 = #update.Dummy5#
+        </isNotNull>
+        <isNotNull  property="update.Dummy6"  prepend=",">
+          DUMMY6 = #update.Dummy6#
+        </isNotNull>
+        <isNotNull  property="update.Dummy7"  prepend=",">
+          DUMMY7 = #update.Dummy7#
+        </isNotNull>
+        <isNotNull  property="update.Dummy8"  prepend=",">
+          DUMMY8 = #update.Dummy8#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HPP_STORAGE_DETAIL
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HppStorageDetail">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HppStorageDetail">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM HPP_STORAGE_DETAIL
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HPP_STORAGE_DETAIL
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HppStorageDetail" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HPP_STORAGE_DETAIL
+    </statement>
+  </statements>
+</sqlMap>

@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Tracing.Mapper.BusinessMapper.BpmProduction"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BPM_PRODUCTION ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftMasterId" prepend="AND">
+          <![CDATA[SHIFT_MASTER_ID = #where.ShiftMasterId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDetailId" prepend="AND">
+          <![CDATA[SHIFT_DETAIL_ID = #where.ShiftDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[BEGIN_TIME = #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[END_TIME = #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.IsFirst" prepend="AND">
+          <![CDATA[IS_FIRST = #where.IsFirst#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetTabMoldingProductionInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T.GREEN_TYRE_NO 成型号,T.MATERIAL_FULL_NAME 规格,T.SAP_CODE SAP编码,T.EQUIP_NAME 机台,T.SHIFT_DATE 生产日期,T.SHIFT_NAME 班次,
+        T.CLASS_NAME 班组,T.BEGIN_TIME 生产开始时间,T.END_TIME 生产结束时间,CASE T.IS_FIRST WHEN 0 THEN '否' ELSE '是' END 是否首件胎,
+        MAX(DECODE(T.WORK_NAME,'成型主机',T.USER_NAME,NULL)) 主机,MAX(DECODE(T.WORK_NAME,'成型副机',T.USER_NAME,NULL)) 副机,
+        MAX(DECODE(T.WORK_NAME,'成型帮车',T.USER_NAME,NULL)) 帮车 FROM
+      (SELECT T.GREEN_TYRE_NO, T4.MATERIAL_FULL_NAME,T7.EQUIP_NAME,T2.SHIFT_DATE,T5.SHIFT_NAME,
+      T6.CLASS_NAME,T8.USER_NAME,T9.WORK_NAME,T.BEGIN_TIME,T.END_TIME,T.IS_FIRST,T4.SAP_CODE FROM BPM_PRODUCTION T
+      LEFT JOIN BPP_PLAN T0 ON T0.OBJID = T.PLAN_ID
+      LEFT JOIN BPP_PLAN_DETAIL T1 ON T1.OBJID = T.PLAN_DETAIL_ID
+      LEFT JOIN BPM_SHIFT_MASTER T2 ON T2.OBJID = T.SHIFT_MASTER_ID
+      LEFT JOIN BPM_SHIFT_DETAIL T3 ON T3.MASTER_ID = T2.OBJID
+      LEFT JOIN SBM_MATERIAL T4 ON T4.OBJID = T1.MATERIAL_ID
+      LEFT JOIN SSB_SHIFT T5 ON T5.OBJID = T2.SHIFT_ID
+      LEFT JOIN SSB_CLASS T6 ON T6.OBJID = T2.CLASS_ID
+      LEFT JOIN SBE_EQUIP T7 ON T7.OBJID = T0.EQUIP_ID
+      LEFT JOIN SSB_USER T8 ON T8.OBJID = T3.WORKER_ID1
+      LEFT JOIN SSB_WORK T9 ON T9.OBJID = T3.WORKER_ID8
+      WHERE T.DELETE_FLAG=0 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="Green_Tyre_No" prepend="AND">
+           <![CDATA[T.GREEN_TYRE_NO=#Green_Tyre_No#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[)T
+GROUP BY T.GREEN_TYRE_NO,T.BEGIN_TIME,T.END_TIME,T.MATERIAL_FULL_NAME,T.EQUIP_NAME,T.SHIFT_NAME,T.CLASS_NAME,T.SHIFT_DATE,T.IS_FIRST,T.SAP_CODE]]>
+     </select>
+     <select id="GetTabMoldingQualityInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+             
+select a.green_tyre_no 胎胚号,NVL(c.grade_name,'合格') 胎胚品级,d.weight 胎胚重量,CASE WHEN E.DELETE_FLAG = 0 THEN '是' else '否' end 是否返修
+ ,(G.DEFECT_NAME||' '||G2.DEFECT_NAME||' '||G3.DEFECT_NAME) 返修病疵,i.user_name 返修人,e.record_time 返修时间  from  bpm_production a 
+left join BQC_QCRECORD b on a.green_tyre_no = b.tyreid and b.new_flag = 1 and b.delete_flag = 0
+left join bqc_grade c on c.objid = b.gradeid 
+left join bpm_weight_info d on d.green_tyre_no = a.green_tyre_no and d.delete_flag = 0 
+LEFT JOIN bqc_repair E ON E.TYREID = A.GREEN_TYRE_NO AND E.DELETE_FLAG = 0
+left JOIN BQC_QCRECORD F ON F.OBJID = E.objid
+left join BQC_DEFECT g ON G.OBJID = F.DEFECT_ID1
+left join BQC_DEFECT g2 ON G2.OBJID = F.DEFECT_ID2
+left join BQC_DEFECT g3 ON G3.OBJID = F.DEFECT_ID3
+left join BQC_QCRECORD h on h.objid = e.qc_id
+left join ssb_user i on i.objid = h.record_user_id
+where a.delete_flag = 0 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="Green_Tyre_No" prepend="AND">
+           <![CDATA[a.green_tyre_no=#Green_Tyre_No#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetTabMoldingTechInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      SELECT T.PDM_VERSION 版本, T1.PARM_TYPE_NAME 参数类型,T2.TYPE_NAME 工艺类型,T3.PARM_VALUE "主鼓灯标胎侧外定位：(MM)",T4.PARM_VALUE "主鼓灯标胎侧内定位：(MM)",
+T5.PARM_VALUE "主鼓灯标内衬定位：(MM)",T6.PARM_VALUE "主鼓灯标胎体帘布定位：(MM)",
+T7.PARM_VALUE "主鼓灯标1钢丝包布内定位：(MM)",T8.PARM_VALUE "主鼓灯标1钢丝包布外定位：(MM)",T9.PARM_VALUE "主鼓灯标2钢丝包布内定位：(MM)",
+T10.PARM_VALUE "主鼓灯标2钢丝包布外定位：(MM)",T11.PARM_VALUE "主鼓灯标1尼龙包布内定位：(MM)",T12.PARM_VALUE "主鼓灯标1尼龙包布外定位：(MM)",
+T13.PARM_VALUE "主鼓灯标2尼龙包布内定位：(MM)",T14.PARM_VALUE "主鼓灯标2尼龙包布外定位：(MM)",
+T15.PARM_VALUE "主鼓灯标型胶内定位：(MM)",T16.PARM_VALUE "灯标垫胶内定位：(MM)",T17.PARM_VALUE "辅鼓灯标1带束层定位：：(MM)",
+T18.PARM_VALUE "辅鼓灯标2带束层定位：：(MM)",T19.PARM_VALUE "辅鼓灯标3带束层定位：：(MM)",T20.PARM_VALUE "辅鼓灯标4带束层定位：：(MM)",
+T21.PARM_VALUE "辅鼓周长",T22.PARM_VALUE "平宽(钢丝圈内定位)",
+T23.PARM_VALUE "平宽(钢丝圈外定位)",T24.PARM_VALUE "机头宽度",T25.PARM_VALUE "预定型机头宽度",T26.PARM_VALUE "定型机头宽度",
+T27.PARM_VALUE "内衬层复合件裁断长度：MM",T28.PARM_VALUE "辅鼓灯标0°带束层定位：(MM)",
+T30.TECH_COLOR_NAME 下色标5,T32.TECH_COLOR_NAME 下色标4,T34.TECH_COLOR_NAME 下色标3,T36.TECH_COLOR_NAME 下色标2,T38.TECH_COLOR_NAME 下色标1,
+T40.TECH_COLOR_NAME 上色标5,T42.TECH_COLOR_NAME 上色标4,T44.TECH_COLOR_NAME 上色标3,T46.TECH_COLOR_NAME 上色标2,T48.TECH_COLOR_NAME 上色标1 FROM BPT_MOLDING_TECH T 
+INNER JOIN 
+(
+SELECT TD.TECH_ID FROM BPM_PRODUCTION TP
+LEFT JOIN BPP_PLAN_DETAIL TD ON TD.OBJID = TP.PLAN_DETAIL_ID
+WHERE TP.DELETE_FLAG=0
+  ]]>
+<dynamic prepend="AND">
+  <isNotNull property="Green_Tyre_No" prepend="AND">
+    <![CDATA[TP.GREEN_TYRE_NO=#Green_Tyre_No#]]>
+  </isNotNull>
+</dynamic>
+       <![CDATA[
+       )TT
+       ON TT.TECH_ID = T.OBJID
+       LEFT JOIN BPT_MOLDING_TECH_PARM_TYPE T1 ON T1.OBJID = T.PARM_TYPE
+       LEFT JOIN BPT_MOLDING_TECH_TYPE T2 ON T2.OBJID = T.TECH_TYPE
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T3 ON T3.OBJID = T.PAR32000001
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T4 ON T4.OBJID = T.PAR32000002
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T5 ON T5.OBJID = T.PAR32000003
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T6 ON T6.OBJID = T.PAR32000004
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T7 ON T7.OBJID = T.PAR32000005
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T8 ON T8.OBJID = T.PAR32000006
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T9 ON T9.OBJID = T.PAR32000007
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T10 ON T10.OBJID = T.PAR32000008
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T11 ON T11.OBJID = T.PAR32000009
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T12 ON T12.OBJID = T.PAR32000010
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T13 ON T13.OBJID = T.PAR32000011
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T14 ON T14.OBJID = T.PAR32000012
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T15 ON T15.OBJID = T.PAR32000013
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T16 ON T16.OBJID = T.PAR32000014
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T17 ON T17.OBJID = T.PAR32000015
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T18 ON T18.OBJID = T.PAR32000016
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T19 ON T19.OBJID = T.PAR32000017
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T20 ON T20.OBJID = T.PAR32000018
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T21 ON T21.OBJID = T.PAR32000019
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T22 ON T22.OBJID = T.PAR32000020
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T23 ON T23.OBJID = T.PAR32000021
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T24 ON T24.OBJID = T.PAR32000022
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T25 ON T25.OBJID = T.PAR32000023
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T26 ON T26.OBJID = T.PAR32000024
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T27 ON T27.OBJID = T.PAR32000025
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T28 ON T28.OBJID = T.PAR32000026
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T29 ON T29.OBJID = T.PAR32001010
+       LEFT JOIN CPT_CURING_TECH_PARM_COLOR T30 ON T30.TECH_COLOR_ID = T29.PARM_VALUE
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T31 ON T31.OBJID = T.PAR32001009
+       LEFT JOIN CPT_CURING_TECH_PARM_COLOR T32 ON T32.TECH_COLOR_ID = T31.PARM_VALUE
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T33 ON T33.OBJID = T.PAR32001008
+       LEFT JOIN CPT_CURING_TECH_PARM_COLOR T34 ON T34.TECH_COLOR_ID = T33.PARM_VALUE
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T35 ON T35.OBJID = T.PAR32001007
+       LEFT JOIN CPT_CURING_TECH_PARM_COLOR T36 ON T36.TECH_COLOR_ID = T35.PARM_VALUE
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T37 ON T37.OBJID = T.PAR32001006
+       LEFT JOIN CPT_CURING_TECH_PARM_COLOR T38 ON T38.TECH_COLOR_ID = T37.PARM_VALUE
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T39 ON T39.OBJID = T.PAR32001005
+       LEFT JOIN CPT_CURING_TECH_PARM_COLOR T40 ON T40.TECH_COLOR_ID = T39.PARM_VALUE
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T41 ON T41.OBJID = T.PAR32001004
+       LEFT JOIN CPT_CURING_TECH_PARM_COLOR T42 ON T42.TECH_COLOR_ID = T41.PARM_VALUE
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T43 ON T43.OBJID = T.PAR32001003
+       LEFT JOIN CPT_CURING_TECH_PARM_COLOR T44 ON T44.TECH_COLOR_ID = T43.PARM_VALUE
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T45 ON T45.OBJID = T.PAR32001002
+       LEFT JOIN CPT_CURING_TECH_PARM_COLOR T46 ON T46.TECH_COLOR_ID = T45.PARM_VALUE
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T47 ON T47.OBJID = T.PAR32001001
+       LEFT JOIN CPT_CURING_TECH_PARM_COLOR T48 ON T48.TECH_COLOR_ID = T47.PARM_VALUE
+       ]]>
+     </select>
+     <select id="GetTabMoldingStockInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T3.STORE_NAME 库区,T4.STORE_PLACE_NAME 库位,T2.TOOLING_BARCODE 胎胚车号,T5.USER_NAME 入库人,T.RECORD_TIME 入库时间 FROM BSM_STORAGE_DETAIL T 
+        LEFT JOIN BSM_STORAGE_MAIN T1 ON T1.OBJID = T.STORAGE_MAIN_ID
+        LEFT JOIN BSM_STORAGE_TOOLING T2 ON T2.OBJID = T.STORAGE_TOOLING_ID
+        LEFT JOIN BSM_STORE T3 ON T3.OBJID = T1.STORE_ID
+        LEFT JOIN BSM_STORE_PLACE T4 ON T4.OBJID = T1.STORE_PLACE_ID
+        LEFT JOIN SSB_USER T5 ON T5.OBJID = T.RECORD_USER_ID
+        WHERE T.DELETE_FLAG=0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="Green_Tyre_No" prepend="AND">
+           <![CDATA[T.GREEN_TYRE_NO=#Green_Tyre_No#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetMoldingTraceInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       
+        SELECT '31' AS PROCESS ,TO_CHAR(CAST(CARD_NO AS NVARCHAR2(20))) AS BARCODE , '(' || t2.minor_type_name || ')' AS TYPENAME
+        FROM BPM_TRACE_INFO T1 
+        left join sbm_material_minor_type t2 on t1.semis_minor_type_id = t2.objid
+        WHERE T1.GREEN_TYRE_NO = #Green_Tyre_No# AND T1.DELETE_FLAG=0
+       ]]>
+     </select>
+
+     <select id="GetTabRubberProductionInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select n1.barcode 条码号,n1.material_name 规格,n1.equip_name 机台,n1.produce_time 生产日期,
+       n1.dummy_3 最小停放时间,n1.dummy_4 最大停放时间, n1.proc_user_name 操作人,n1.qty 数量,'Kg' 单位
+       from hpp_rubber_production n1
+       where n1.delete_flag = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="barcode" prepend="AND">
+           <![CDATA[n1.barcode=#barcode#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+        <!--查询-->
+     <select id="Select@HptSemisTechFhx" parameterClass="map" resultClass="row" statementType="STATEMENT">
+       <![CDATA[select $PARAMS$,T.RECORD_TIME,M.Material_Name 
+       FROM HPT_SEMIS_TECH_FHX  T 
+       left join hpp_plan_detail P on T.Plan_Detail_Id=P.Objid
+       left join sbm_material M on P.MATERIAL_ID=M.objid  ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="ObjId" prepend="AND">
+           <![CDATA[T.OBJID = #OBJID#]]>
+         </isNotNull>
+         <isNotNull property="EquipId" prepend="AND">
+           <![CDATA[T.EQUIP_ID = #EquipId#]]>
+         </isNotNull>
+         <isNotNull property="BeginTime" prepend="AND">
+           <![CDATA[T.RECORD_TIME >= #BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="EndTime" prepend="AND">
+           <![CDATA[T.RECORD_TIME <= #EndTime#]]>
+         </isNotNull>
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+       <isNotNull property="OrderString" prepend=" ">
+         ORDER BY $OrderString$
+       </isNotNull>
+       <isNull property="OrderString" prepend=" ">
+         ORDER BY RECORD_TIME DESC
+       </isNull>
+     </select>
+
+     <select id="Select@HptSemisTechNcc" parameterClass="map" resultClass="row">
+       <![CDATA[select $PARAMS$,T.RECORD_TIME,M.MATERIAL_NAME
+       FROM HPT_SEMIS_TECH_NCC  T
+       left join hpp_plan_detail P on T.Plan_Detail_Id=P.Objid
+       left join sbm_material M on P.MATERIAL_ID=M.objid ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="ObjId" prepend="AND">
+           <![CDATA[T.OBJID = #OBJID#]]>
+         </isNotNull>
+         <isNotNull property="EquipId" prepend="AND">
+           <![CDATA[T.EQUIP_ID = #EquipId#]]>
+         </isNotNull>
+         <isNotNull property="BeginTime" prepend="AND">
+           <![CDATA[T.RECORD_TIME >= #BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="EndTime" prepend="AND">
+           <![CDATA[T.RECORD_TIME <= #EndTime#]]>
+         </isNotNull>
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+       <isNotNull property="OrderString" prepend=" ">
+         ORDER BY $OrderString$
+       </isNotNull>
+       <isNull property="OrderString" prepend=" ">
+         ORDER BY RECORD_TIME
+       </isNull>
+     </select>
+     <select id="Select@HptSemisTech15xc" parameterClass="map" resultClass="row">
+
+       <![CDATA[select $PARAMS$,T.RECORD_TIME,M.Material_Name
+       FROM HPT_SEMIS_TECH_15XC T 
+       left join hpp_plan_detail P on T.Plan_Detail_Id=P.Objid
+       left join sbm_material M on P.MATERIAL_ID=M.objid  ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="ObjId" prepend="AND">
+           <![CDATA[t.OBJID = #OBJID#]]>
+         </isNotNull>
+         <isNotNull property="EquipId" prepend="AND">
+           <![CDATA[t.EQUIP_ID = #EquipId#]]>
+         </isNotNull>
+         <isNotNull property="BeginTime" prepend="AND">
+           <![CDATA[t.RECORD_TIME >= #BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="EndTime" prepend="AND">
+           <![CDATA[t.RECORD_TIME <= #EndTime#]]>
+         </isNotNull>
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[t.DELETE_FLAG = #DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+       ORDER BY RECORD_TIME
+     </select>
+
+     <select id="Select@HptSemisTech90Zc" parameterClass="map" resultClass="row">
+
+       <![CDATA[select $PARAMS$,T.RECORD_TIME,M.Material_Name
+       FROM HPT_SEMIS_TECH_90ZC T 
+       left join hpp_plan_detail P on T.Plan_Detail_Id=P.Objid
+       left join sbm_material M on P.MATERIAL_ID=M.objid   ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="ObjId" prepend="AND">
+           <![CDATA[T.OBJID = #OBJID#]]>
+         </isNotNull>
+         <isNotNull property="EquipId" prepend="AND">
+           <![CDATA[T.EQUIP_ID = #EquipId#]]>
+         </isNotNull>
+         <isNotNull property="BeginTime" prepend="AND">
+           <![CDATA[T.RECORD_TIME >= #BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="EndTime" prepend="AND">
+           <![CDATA[T.RECORD_TIME <= #EndTime#]]>
+         </isNotNull>
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+       ORDER BY RECORD_TIME
+     </select>
+     <select id="Select@HptSemisTechBjp" parameterClass="map" resultClass="row" statementType="STATEMENT">
+       <![CDATA[select $PARAMS$,T.RECORD_TIME,M.MATERIAL_NAME
+       FROM HPT_SEMIS_TECH_BJP T
+       left join hpp_plan_detail P on T.Plan_Detail_Id=P.Objid
+       left join sbm_material M on P.MATERIAL_ID=M.objid  ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="ObjId" prepend="AND">
+           <![CDATA[T.OBJID = #OBJID#]]>
+         </isNotNull>
+         <isNotNull property="BeginTime" prepend="AND">
+           <![CDATA[T.RECORD_TIME >= #BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="EndTime" prepend="AND">
+           <![CDATA[T.RECORD_TIME <= #EndTime#]]>
+         </isNotNull>
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+       <isNotNull property="OrderString" prepend=" ">
+         ORDER BY $OrderString$
+       </isNotNull>
+       <isNull property="OrderString" prepend=" ">
+         ORDER BY RECORD_TIME DESC
+       </isNull>
+     </select>
+     <select id="Select@HptSemisTechGsyy" parameterClass="map" resultClass="row">
+
+       <![CDATA[select $PARAMS$,T.RECORD_TIME,M.Material_Name
+       FROM HPT_SEMIS_TECH_GSYY   T 
+       left join hpp_plan_detail P on T.Plan_Detail_Id=P.Objid
+       left join sbm_material M on P.MATERIAL_ID=M.objid ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="ObjId" prepend="AND">
+           <![CDATA[T.OBJID = #OBJID#]]>
+         </isNotNull>
+         <isNotNull property="EquipId" prepend="AND">
+           <![CDATA[T.EQUIP_ID = #EquipId#]]>
+         </isNotNull>
+         <isNotNull property="BeginTime" prepend="AND">
+           <![CDATA[T.RECORD_TIME >= #BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="EndTime" prepend="AND">
+           <![CDATA[T.RECORD_TIME <= #EndTime#]]>
+         </isNotNull>
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+       ORDER BY RECORD_TIME
+     </select>
+     
+  </statements>
+</sqlMap>

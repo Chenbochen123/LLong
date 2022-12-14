@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.HsmToolingLoad"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HSM_TOOLING_LOAD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.ToolingId" prepend="AND">
+          <![CDATA[TOOLING_ID = #where.ToolingId#]]>
+        </isNotNull>
+        <isNotNull property="where.CardN0" prepend="AND">
+          <![CDATA[CARD_N0 = #where.CardN0#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <select id="GetMaterialInfoByCardNo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       SELECT T1.MATERIAL_ID,T.TOOLING_ID,T2.MINOR_TYPE_ID FROM HSM_TOOLING_LOAD T 
+       LEFT JOIN HPP_SEMIS_PRODUCTION T1 ON T1.CARD_NO = T.CARD_NO AND T1.DELETE_FLAG=0
+       LEFT JOIN SBM_MATERIAL T2 ON T2.OBJID = T1.MATERIAL_ID
+       WHERE T.DELETE_FLAG=0
+       ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="cardNo" prepend="AND">
+          <![CDATA[T.CARD_NO=#cardNo#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <select id="GetSemisMaterialViaRFID" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      select * from ( SELECT T2.CARD_NO BARCODE,T2.EQUIP_ID,T2.MATERIAL_ID,T3.MATERIAL_NAME,T3.SAP_CODE,T3.MATERIAL_CODE,T3.MINOR_TYPE_ID MATERIAL_TYPE_ID,
+       T4.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T6.USER_NAME OPER_NAME,T5.EQUIP_NAME,T2.QTY SET_QUANTITY,T2.LEFT_QTY LEFT_QUANTITY,T2.END_TIME PRODUCE_TIME,
+       T2.END_TIME VALID_DATE,T7.MIN_TIME,T7.VALID_TIME,T2.DUMMY2,T2.MARK_FLAG,case t2.MARK_FLAG when 1 then t13.reason_name when 2 then t14.reason_name else null end reason_name 
+        ,nvl(t2.dummy8,'1') USED_FLAG 
+        ,T2.DUMMY9 YC_TIME,t2.batch
+        FROM HSM_TOOLING T 
+        INNER JOIN HSM_TOOLING_LOAD T1 ON T1.TOOLING_ID =T.OBJID
+        INNER JOIN HPP_SEMIS_PRODUCTION T2 ON T2.CARD_NO = T1.CARD_NO
+        INNER JOIN SBM_MATERIAL T3 ON T3.OBJID  =T2.MATERIAL_ID
+        INNER JOIN SBM_MATERIAL_MINOR_TYPE T4 ON T4.OBJID = T3.MINOR_TYPE_ID
+        INNER JOIN SBE_EQUIP T5 ON T5.OBJID = T2.EQUIP_ID
+        INNER JOIN SSB_USER T6 ON T6.OBJID = T2.RECORD_USER_ID
+        INNER JOIN SBM_MATERIAL_INFO T7 ON T7.MATERIAL_ID = T2.MATERIAL_ID
+               LEFT JOIN sbm_mark_info t12 on t12.barcode = t2.card_no and t12.delete_flag=0  and t2.mark_flag = t12.mark_flag
+        LEFT JOIN sbm_mark_reason t13 on t13.objid = t12.reason_id
+        left join sbm_freeze_reason t14 on t14.objid = t12.reason_id
+        WHERE T.DELETE_FLAG=0 
+       ]]>
+      <isNotNull property="RFIDNo" prepend="AND">
+        <![CDATA[T.TOOLING_RFID_BARCODE=#RFIDNo#]]>
+      </isNotNull>
+      <![CDATA[ order by t12.record_time desc) where rownum<=1]]>
+    </select>
+  </statements>
+</sqlMap>

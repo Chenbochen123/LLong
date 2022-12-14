@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudCppCuringProduction" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+      SELECT T1.* ,case t1.equip_position when 1 then t1.leftdxtime else t1.rightdxtime end dxtime,case t1.equip_position when 1 then t1.leftdxonemax else t1.rightdxonemax end dxonemax,
+       case t1.equip_position when 1 then t1.leftdxtwomax else t1.rightdxtwomax end dxtwomax
+       ,T16.PLAN_DATE P_DATE, T17.SHIFT_NAME S_NAME, T17.OBJID S_ID , T2.USER_NAME RECORD_USER_NAME, T4.SHIFT_NAME PLAN_SHIFT_NAME 
+        , T5.EQUIP_NAME, T6.SHOW_NAME EQUIP_POSITION_CAPTION, T7.MATERIAL_NAME, T7.MATERIAL_CODE,T21.PDM_CODE 
+        , T9.SHIFT_NAME, T10.CLASS_NAME, T11.USER_NAME WORKER_NAME
+        , T12.SHOW_NAME IS_ALARM_CAPTION, T13.SHOW_NAME IS_FIRST_CAPTION 
+        , case t14.degrade_id when 1 then '合格品' when 2 then '次品' when 3 then '废品' when 4 then '停机检测' when 5 then 'A0' else '合格品' end DEGRADE
+        , T19.MATERIAL_NAME OLD_MATERIALNAME
+        , T20.BL_REASON
+        FROM CPP_CURING_PRODUCTION T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+        LEFT JOIN CPP_CURING_PLAN T3 ON T1.PLAN_ID = T3.OBJID 
+        LEFT JOIN SSB_SHIFT T4 ON T1.PLAN_SHIFT_ID = T4.OBJID 
+        LEFT JOIN SBE_EQUIP T5 ON T1.EQUIP_ID = T5.OBJID 
+        LEFT JOIN CBE_EQUIP_POSITION T6 ON T1.EQUIP_POSITION = T6.OBJID 
+        LEFT JOIN V_CBM_MATERIAL T7 ON T1.MATERIAL_ID = T7.OBJID
+        LEFT JOIN CPP_CURING_SHIFT_MASTER T8 ON T1.SHIFT_MASTER_ID = T8.OBJID 
+        LEFT JOIN SSB_SHIFT T9 ON T8.SHIFT_ID = T9.OBJID 
+        LEFT JOIN SSB_CLASS T10 ON T8.CLASS_ID = T10.OBJID 
+        LEFT JOIN SSB_USER T11 ON T1.WORKER_ID = T11.OBJID
+        LEFT JOIN CBH_YES_OR_NO_HELPER T12 ON T1.IS_ALARM = T12.OBJID 
+        LEFT JOIN CBH_YES_OR_NO_HELPER T13 ON T1.IS_FIRST = T13.OBJID
+        LEFT JOIN CPP_CURING_DEGRADE T14 ON T1.TYRE_NO=T14.TYRE_NO
+        LEFT JOIN CPP_CURING_PLAN T16 ON T16.OBJID = T1.PLAN_ID
+        LEFT JOIN SSB_SHIFT T17 ON T17.OBJID = T16.SHIFT_ID
+        LEFT JOIN CPP_CURING_PLAN_DETAIL T18 ON T1.PLAN_DETAIL_ID_ORIGIN = T18.OBJID
+        LEFT JOIN SBM_MATERIAL T19 ON T18.MATERIAL_ID = T19.OBJID
+        LEFT JOIN CBE_BL_REASON T20 ON T20.OBJID = T1.BACKUP_FLAG AND T20.DELETE_FLAG = 0
+        left join (select distinct green_tyre_no,PLAN_DETAIL_ID from bpm_production) T22 ON T22.GREEN_TYRE_NO = T1.GREEN_TYRE_NO
+        LEFT JOIN BPP_PLAN_DETAIL T23 ON T22.PLAN_DETAIL_ID = T23.OBJID
+        LEFT JOIN SBM_MATERIAL T21 ON T23.MATERIAL_ID = T21.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.TYRE_NO" prepend="AND">
+          <![CDATA[T1.TYRE_NO like #where.TYRE_NO# || '%']]>
+        </isNotNull>
+        <isNull property="where.TYRE_NO" >
+
+          <isNotNull property="where.OBJID" prepend="AND">
+            <![CDATA[T1.OBJID = #where.OBJID#]]>
+          </isNotNull>
+          <isNotNull property="where.BL_FLAG" prepend="AND">
+            <![CDATA[T1.Bl_Flag = #where.BL_FLAG#]]>
+          </isNotNull>
+          <isNotNull property="where.EQUIP_POSITION" prepend="AND">
+            <![CDATA[T1.EQUIP_POSITION = #where.EQUIP_POSITION#]]>
+          </isNotNull>
+          <isNotNull property="where.GREEN_TYRE_NO" prepend="AND">
+            <![CDATA[T1.GREEN_TYRE_NO = #where.GREEN_TYRE_NO#]]>
+          </isNotNull>
+          <isNotNull property="where.MOLD_CODE" prepend="AND">
+            <![CDATA[T1.MOLD_CODE = #where.MOLD_CODE#]]>
+          </isNotNull>
+          <isNotNull property="where.PDM_CODE" prepend="AND">
+            <![CDATA[T21.PDM_CODE = #where.PDM_CODE#]]>
+          </isNotNull>
+          <isNotNull property="where.BEGIN_TIME" prepend="AND">
+            <![CDATA[T1.BEGIN_TIME >= #where.BEGIN_TIME#]]>
+          </isNotNull>
+          <isNotNull property="where.END_TIME" prepend="AND">
+            <![CDATA[T1.END_TIME <= #where.END_TIME#]]>
+          </isNotNull>
+          <isNotNull property="where.BEGIN_DATE" prepend="AND">
+            <![CDATA[T1.SHIFT_DATE >= #where.BEGIN_DATE#]]>
+          </isNotNull>
+          <isNotNull property="where.END_DATE" prepend="AND">
+            <![CDATA[T1.SHIFT_DATE <= #where.END_DATE#]]>
+          </isNotNull>
+          <isNotNull property="where.SHIFT_ID" prepend="AND">
+            <![CDATA[T8.SHIFT_ID = #where.SHIFT_ID#]]>
+          </isNotNull>
+          <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+            <![CDATA[T7.MATERIAL_NAME LIKE '%' || #where.MATERIAL_NAME# || '%' ]]>
+          </isNotNull>
+          <isNotNull property="where.MATERIAL_CODE" prepend="AND">
+            <![CDATA[T7.MATERIAL_CODE = #where.MATERIAL_CODE#]]>
+          </isNotNull>
+          <isNotNull property="where.EQUIP_NAME" prepend="AND">
+            <![CDATA[T5.EQUIP_NAME LIKE '%' || #where.EQUIP_NAME# || '%' ]]>
+          </isNotNull>
+          <isNotNull property="where.WORKER_NAME" prepend="AND">
+            <![CDATA[T11.USER_NAME LIKE '%' || #where.WORKDER_NAME# || '%' ]]>
+          </isNotNull>
+          <isNotNull property="where.DELETE_FLAG" prepend="AND">
+            <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+          </isNotNull>
+          <isNotNull property="where.REMARK" prepend="AND">
+            <![CDATA[T1.REMARK LIKE '%' || #where.REMARK# || '%']]>
+          </isNotNull>
+          <isNotNull property="where.OLD_MATERIAL_NAME" prepend="AND">
+            <![CDATA[T19.MATERIAL_NAME LIKE '%' || #where.OLD_MATERIAL_NAME# || '%']]>
+          </isNotNull>
+        </isNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    <select id="Select+Update@CrudCppCuringProduction" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM CPP_CURING_PRODUCTION ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询类型信息，ID值固定为GetComboBoxData@Select@CrudCppCuringProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCppCuringProduction@SearchType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select 1 sskey, '按接班日期' ssValue from dual union select 2 sskey, '按生产时间' ssValue from dual
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by sskey
+      </isNull>
+    </select>
+
+    <!--查询，ID值固定为GetComboBoxData@Select@CrudCppCuringProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCppCuringProduction@REMARK" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+         select t1.OBJID sskey, t1.remark ssValue from CPP_CURING_PRODUCTION t1
+        ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询左右模信息，ID值固定为GetComboBoxData@Select@CrudCppCuringProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCppCuringProduction@EQUIP_POSITION" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,SHOW_NAME ssValue from CBE_EQUIP_POSITION where DELETE_FLAG = '0'
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by OBJID
+      </isNull>
+    </select>
+
+    <!--查询接班班次信息，ID值固定为GetComboBoxData@Select@CrudCppCuringProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCppCuringProduction@SHIFT_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.SHIFT_NAME ssValue from SSB_SHIFT t1
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询接班班组信息，ID值固定为GetComboBoxData@Select@CrudCppCuringProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCppCuringProduction@CLASS_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.CLASS_NAME ssValue from SSB_CLASS t1
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询计划班次信息，ID值固定为GetComboBoxData@Select@CrudCppCuringProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCppCuringProduction@S_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.SHIFT_NAME ssValue from SSB_SHIFT t1
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询硫化机台信息，ID值固定为GetComboBoxData@Select@CrudCppCuringProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCppCuringProduction@EQUIP_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.EQUIP_NAME ssValue from SBE_EQUIP t1 join CBH_CONFIG_HELPER t2 on t1.MAJOR_TYPE_ID = t2.CONFIG_VALUE and t2.CONFIG_NAME = 'CuringEquipMajorTypeId'
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.EQUIP_NAME
+      </isNull>
+    </select>
+
+    <!--查询物料信息，ID值固定为GetComboBoxData@Select@CrudCppCuringProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCppCuringProduction@MATERIAL_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.MATERIAL_NAME || '|' || t1.MATERIAL_CODE ssValue from V_CBM_MATERIAL t1 join CBH_CONFIG_HELPER t2 on t1.MAJOR_TYPE_ID = t2.CONFIG_VALUE and t2.CONFIG_NAME = 'CuringMaterialMajorTypeId'
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.MATERIAL_NAME
+      </isNull>
+    </select>
+
+    <!--查询人员信息，ID值固定为GetComboBoxData@Select@CrudCppCuringProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCppCuringProduction@WORKER_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey, USER_NAME ssValue from SSB_USER
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by USER_NAME
+      </isNull>
+    </select>
+
+    <!--查询接班班次信息，ID值固定为GetComboBoxData@Select@CrudCppCuringProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCppCuringProduction@BL_FLAG" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+        select '0' sskey,'正常' ssValue from dual
+        union all
+        select '1' sskey,'补录' ssValue from dual
+     ]]>
+    </select>
+    <!--查询接班班次信息，ID值固定为GetComboBoxData@Select@CrudCppCuringProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCppCuringProduction@EQUIP_POSITION" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+        select '1' sskey,'左模' ssValue from dual
+        union all
+        select '2' sskey,'右模' ssValue from dual
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

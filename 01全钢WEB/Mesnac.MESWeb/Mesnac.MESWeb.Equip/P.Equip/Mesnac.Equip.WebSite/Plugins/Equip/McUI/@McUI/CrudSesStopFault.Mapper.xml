@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudSesStopFault" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT T1.*
+      , T2.USER_NAME RECORD_USER_NAME
+      , T3.EQUIP_STOP_TYPE_NAME STOP_TYPE_NAME, T3.EQUIP_STOP_TYPE_CODE STOP_TYPE_CODE
+      , T4.MAJOR_TYPE_NAME
+      FROM SES_STOP_FAULT T1 
+      LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+      LEFT JOIN SBE_EQUIP_STOP_TYPE T3 ON T1.STOP_TYPE_ID = T3.OBJID 
+      LEFT JOIN SBE_EQUIP_MAJOR_TYPE T4 ON T1.MAJOR_TYPE_ID = T4.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.FaultName" prepend="AND">
+          <![CDATA[T1.FAULT_NAME LIKE '%' || #where.FaultName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.FaultCode" prepend="AND">
+          <![CDATA[T1.FAULT_CODE = #where.FaultCode#]]>
+        </isNotNull>
+        <isNotNull property="where.MajorTypeId" prepend="AND">
+          <![CDATA[T1.MAJOR_TYPE_ID = #where.MajorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.StopTypeId" prepend="AND">
+          <![CDATA[T1.STOP_TYPE_ID = #where.StopTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.OBJID DESC
+      </isNull>
+    </select>
+    <select id="Select+Update@CrudSesStopFault" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT T1.* FROM SES_STOP_FAULT T1 ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T1.OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询设备大类信息，ID值固定为GetComboBoxData@Select@CrudSesStopFault@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSesStopFault@MajorTypeId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey,t1.MAJOR_TYPE_NAME ssValue from SBE_EQUIP_MAJOR_TYPE t1 where t1.DELETE_FLAG = '0'
+        order by t1.OBJID
+     ]]>
+    </select>
+
+    <!--查询设备细类信息，ID值固定为GetComboBoxData@Select@CrudSesStopFault@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSesStopFault@StopTypeId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey,t1.EQUIP_STOP_TYPE_NAME ssValue from SBE_EQUIP_STOP_TYPE t1 where t1.DELETE_FLAG = '0'
+        order by t1.OBJID
+     ]]>
+    </select>
+
+    <!--查询设备细类信息，ID值固定为GetComboBoxData@Select@CrudSesStopFault@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSesStopFault@MajorStopType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.EQUIP_MAJOR_TYPE_ID sskey,t1.OBJID ssValue from SBE_EQUIP_STOP_TYPE t1 where t1.DELETE_FLAG = '0'
+        order by t1.EQUIP_MAJOR_TYPE_ID, t1.OBJID
+     ]]>
+    </select>
+
+
+    <!--查询设备大类信息，ID值固定为GetComboBoxData@Select@CrudSesStopFault@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSesStopFault@MAJOR_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey,t1.MAJOR_TYPE_NAME ssValue from SBE_EQUIP_MAJOR_TYPE t1 where t1.DELETE_FLAG = '0'
+        order by t1.OBJID
+     ]]>
+    </select>
+
+    <!--查询设备细类信息，ID值固定为GetComboBoxData@Select@CrudSesStopFault@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSesStopFault@STOP_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey,t1.EQUIP_STOP_TYPE_NAME ssValue from SBE_EQUIP_STOP_TYPE t1 where t1.DELETE_FLAG = '0'
+        order by t1.OBJID
+     ]]>
+    </select>
+
+  </statements>
+</sqlMap>

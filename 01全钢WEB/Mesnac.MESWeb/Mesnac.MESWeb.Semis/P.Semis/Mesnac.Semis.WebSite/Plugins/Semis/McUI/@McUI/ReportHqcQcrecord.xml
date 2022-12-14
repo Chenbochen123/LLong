@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <!--
+    1、	查询条件：质检时间段、物料品号、质检班次、质检班组、条码号、质检品级。
+    2、	查询结果：条码号、物料名称、物料品号、质检品级、质检病疵、质检班次、质检班组、质检员、质检时间、生产班次、生产班组、生产机台、生产操作工、生产时间。
+    -->
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="CHECK_BEGIN_DATE" Value="质检开始日期"></Caption>
+    <Caption Name="CHECK_END_DATE" Value="质检结束日期"></Caption>
+    <Caption Name="CHECK_TIME" Value="质检时间"></Caption>
+    <Caption Name="PRODUCTION_TIME" Value="生产时间"></Caption>
+    <Caption Name="CHECK_SHIFT_NAME" Value="质检班次"></Caption>
+    <Caption Name="CHECK_CLASS_NAME" Value="质检班组"></Caption>
+    <Caption Name="CHECK_SHIFT_ID" Value="质检班次"></Caption>
+    <Caption Name="CHECK_CLASS_ID" Value="质检班组"></Caption>
+    <Caption Name="PRO_SHIFT_ID" Value="生产班次"></Caption>
+    <Caption Name="PRO_CLASS_ID" Value="生产班组"></Caption>
+    <Caption Name="PRO_SHIFT_NAME" Value="生产班次"></Caption>
+    <Caption Name="PRO_CLASS_NAME" Value="生产班组"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="物料规格"></Caption>
+    <Caption Name="CHECK_GRADE_NAME" Value="质检品级"></Caption>
+    <Caption Name="CARD_NO" Value="半制品卡号"></Caption>
+    <Caption Name="OPER_USER" Value="生产操作工"></Caption>
+    <Caption Name="CHECK_USER" Value="质检员"></Caption>
+    <Caption Name="CHECK_DEFECT1" Value="质检病疵1"></Caption>
+    <Caption Name="CHECK_DEFECT2" Value="质检病疵2"></Caption>
+    <Caption Name="CHECK_DEFECT3" Value="质检病疵3"></Caption>
+    <Caption Name="CHECK_DEFECT4" Value="质检病疵4"></Caption>
+    <Caption Name="CHECK_DEFECT5" Value="质检病疵5"></Caption>
+    <Caption Name="CHECK_DEFECT6" Value="质检病疵6"></Caption>
+    <Caption Name="CHECK_DEFECT7" Value="质检病疵7"></Caption>
+    <Caption Name="CHECK_DEFECT8" Value="质检病疵8"></Caption>
+    <Caption Name="CHECK_DEFECT9" Value="质检病疵9"></Caption>
+    <Caption Name="CHECK_DEFECT10" Value="质检病疵10"></Caption>
+    <Caption Name="CHECK_DEFECTPOS" Value="半制品类型"></Caption>
+    <Caption Name="EUQIP_NAME" Value="生产机台"></Caption>
+    <Caption Name="SAP_CODE" Value="物料品号"></Caption>
+    <Caption Name="QTY" Value="质检数量"></Caption>
+    <Caption Name="AMOUNT" Value="不合格数量"></Caption>
+    <Caption Name="RATE" Value="合格率"></Caption>
+
+  </Captions>
+  <WebPage Title="半制品质检记录查询">
+    <!--<JavaScripts>
+      <JavaScript FileUrl="../Plugins/Storage/McUI/@McUI/ReportPsmDailyStockStat.js" />
+    </JavaScripts>-->
+  </WebPage>
+  <Crud TableName="HQC_QCRECORD">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="CHECK_BEGIN_DATE" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="CHECK_END_DATE" Type="DateTimeBox" ></ParamField>
+        <ParamField FieldName="CHECK_GRADE_NAME" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="CHECK_SHIFT_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="CHECK_CLASS_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="PRO_SHIFT_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="PRO_CLASS_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="CARD_NO" ></ParamField>
+        <ParamField FieldName="SAP_CODE" ></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid>
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="CARD_NO" Width="140"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="120"></GridColumn>
+        <GridColumn ColumnName="SAP_CODE" Width="90"></GridColumn>
+        <GridColumn ColumnName="CHECK_GRADE_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="CHECK_DEFECT1" Width="200"></GridColumn>   
+        <GridColumn ColumnName="CHECK_DEFECTPOS" Width="90"></GridColumn>
+        <GridColumn ColumnName="CHECK_SHIFT_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="CHECK_CLASS_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="CHECK_USER" Width="60"></GridColumn>
+        <GridColumn ColumnName="CHECK_TIME" Width="120"></GridColumn>
+        <GridColumn ColumnName="QTY" Width="50"></GridColumn>
+        <GridColumn ColumnName="AMOUNT" Width="50"></GridColumn>
+        <GridColumn ColumnName="RATE" Width="50"></GridColumn>
+        <GridColumn ColumnName="PRO_SHIFT_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="PRO_CLASS_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="EUQIP_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="OPER_USER" Width="60"></GridColumn>
+        <GridColumn ColumnName="PRODUCTION_TIME" Width="120"></GridColumn>
+        
+      </GridColumns>
+    </MainGrid>
+    <DetailGrid Width="800">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="CHECK_DEFECT1" Width="300"></GridColumn>
+        <GridColumn ColumnName="CHECK_DEFECT2" Width="300"></GridColumn>
+        <GridColumn ColumnName="CHECK_DEFECT3" Width="300"></GridColumn>
+        <GridColumn ColumnName="CHECK_DEFECT4" Width="60"></GridColumn>
+        <GridColumn ColumnName="CHECK_DEFECT5" Width="30"></GridColumn>
+        <GridColumn ColumnName="CHECK_DEFECT6" Width="30"></GridColumn>
+        <GridColumn ColumnName="CHECK_DEFECT7" Width="30"></GridColumn>
+        <GridColumn ColumnName="CHECK_DEFECT8" Width="30"></GridColumn>
+        <GridColumn ColumnName="CHECK_DEFECT9" Width="30"></GridColumn>
+        <GridColumn ColumnName="CHECK_DEFECT10" Width="30"></GridColumn>
+      </GridColumns>
+    </DetailGrid>
+  </Select>
+</UiConfig>

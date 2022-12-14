@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.BqcRepair"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BQC_REPAIR ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Tyreid" prepend="AND">
+          <![CDATA[TYREID = #where.Tyreid#]]>
+        </isNotNull>
+        <isNotNull property="where.QcId" prepend="AND">
+          <![CDATA[QC_ID = #where.QcId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupFlag" prepend="AND">
+          <![CDATA[BAUP_FLAG = #where.BaupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupTime" prepend="AND">
+          <![CDATA[BAUP_TIME = #where.BaupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetQCRepairInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT TYREID,Material_Name,DEFECT_NAME,GRADE_NAME,SHIFT_NAME,CLASS_NAME,USER_NAME,EQUIP_NAME,RECORD_TIME
+               , MAX(DECODE(WORK_NAME2,'成型主机',USER_NAME2,NULL)) EMP1
+               , MAX(DECODE(WORK_NAME2,'成型副机',USER_NAME2,NULL)) EMP2
+               , MAX(DECODE(WORK_NAME2,'成型帮车',USER_NAME2,NULL)) EMP3
+ FROM ( SELECT T0.TYREID,T3.Material_Name,(T6.DEFECT_NAME||' '||T7.DEFECT_NAME||' '||T8.DEFECT_NAME) DEFECT_NAME,T5.GRADE_NAME,
+        T11.SHIFT_NAME,T12.CLASS_NAME, T14.USER_NAME,T15.EQUIP_NAME,T0.RECORD_TIME , l.user_name user_name2,m.work_name work_name2
+         FROM BQC_REPAIR T0
+        LEFT JOIN BQC_QCRECORD T1 ON T1.OBJID = T0.OBJID
+        LEFT JOIN BQC_QCRECORD T2 ON T2.OBJID = T0.QC_ID
+        LEFT JOIN V_BBM_MATERIALINFO T3 ON T3.ObjId = T1.MATERIAL_ID
+        LEFT JOIN BPM_PRODUCTION T4 ON T4.GREEN_TYRE_NO = T0.TYREID
+        LEFT JOIN BQC_GRADE T5 ON T5.OBJID = T2.GRADEID
+        LEFT JOIN BQC_DEFECT T6 ON T6.OBJID = T1.DEFECT_ID1
+        LEFT JOIN BQC_DEFECT T7 ON T7.OBJID = T1.DEFECT_ID2
+        LEFT JOIN BQC_DEFECT T8 ON T8.OBJID = T1.DEFECT_ID3
+        LEFT JOIN BPM_SHIFT_MASTER T9 ON T9.OBJID = T4.SHIFT_MASTER_ID
+        LEFT JOIN BPM_SHIFT_DETAIL T10 ON T10.MASTER_ID = T9.OBJID 
+        LEFT JOIN SSB_SHIFT T11 ON T11.OBJID = T9.SHIFT_ID
+        LEFT JOIN SSB_CLASS T12 ON T12.OBJID = T9.CLASS_ID
+        LEFT JOIN SSB_USER T14 ON T14.OBJID = T2.RECORD_USER_ID
+        LEFT JOIN SBE_EQUIP T15 ON T15.OBJID = T9.EQUIP_ID 
+          left join ssb_user l on l.objid = T10.worker_id1
+          left join ssb_work m on m.objid = T10.worker_id8
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[T0.RECORD_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[T0.RECORD_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T0.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.GreenTyreNo" prepend="AND">
+           <![CDATA[T0.TYREID = #where.GreenTyreNo#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialName" prepend="AND">
+           <![CDATA[T1.MATERIAL_ID IN (SELECT OBJID FROM V_BBM_MATERIALINFO WHERE MATERIAL_NAME LIKE '%'|| #where.MaterialName#||'%')]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftId" prepend="AND">
+           <![CDATA[T9.SHIFT_ID = #where.ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[T9.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.GradeId" prepend="AND">
+           <![CDATA[T2.GRADEID = #where.GradeId#]]>
+         </isNotNull>
+         <![CDATA[)X
+        group by TYREID,Material_Name,DEFECT_NAME,GRADE_NAME,SHIFT_NAME,CLASS_NAME,USER_NAME,EQUIP_NAME,RECORD_TIME]]>
+       </dynamic>
+     </select>
+
+     <select id="GetEquipControlRecord" parameterClass="map" resultClass="Row">
+       <![CDATA[  SELECT a.*,b.equip_name,c.user_name,d.DECONTROL_REASON from SBE_CONTROL_RECORD a
+left join sbe_equip b on b.objid=a.equip_id
+left join ssb_user c on c.objid = a.record_user_id
+left join SSB_DECONTROL_REASON d on d.OBJID = a.DECONTROL_REASON_ID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[a.RECORD_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[a.RECORD_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.MajorTypeId" prepend="AND">
+           <![CDATA[b.major_type_id in $where.MajorTypeId$ ]]>
+         </isNotNull>
+         <isNotNull property="where.equipname" prepend="AND">
+           <![CDATA[b.equip_name  LIKE '%'|| #where.equipname#||'%']]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetMoldingEquip" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select EQUIP_NAME,EQUIP_CODE from sbe_equip where major_type_id = 41 and delete_flag = 0 order by equip_code
+       ]]>
+     </select>
+     <select id="GetGreenWeightInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+          select t.tyre_no,t.curing_mater_name,t.curing_mater_code
+               , t.green_tyre_no,t.green_mater_name
+               , t.equip_name,t.shift_date,t.shift_name,t.class_name
+               , t.weight,t.weight_normal
+               , t.Quality,t.OE_RE_FLAG,t.w_flag,t.dummy3
+               , t.HGWC,t.BHGWC
+               ,t.ufrank,t.final_check_grade
+               , MAX(DECODE(T.WORK_NAME,'成型主机',T.USER_NAME,NULL)) EMP1
+               , MAX(DECODE(T.WORK_NAME,'成型副机',T.USER_NAME,NULL)) EMP2
+               , MAX(DECODE(T.WORK_NAME,'成型帮车',T.USER_NAME,NULL)) EMP3
+               , case when nvl(t.tyre_no,'123') = '123' then ''
+                      when t.final_check_grade = 2 then '次品' 
+                      when t.final_check_grade = 3 then '废品'
+                      when t.final_check_grade = 4 then '特废品'
+                      when t.final_check_grade = 5 then 'A0'
+                      when t.final_check_grade = 1 and t.OE_RE_FLAG = 'RE' then '合格品'
+                      when t.final_check_grade = 1 and t.OE_RE_FLAG = 'OE' and NVL(t.ufrank,1) = 7 then '合格品'
+                      when t.final_check_grade = 1 and t.OE_RE_FLAG = 'OE' and NVL(t.ufrank,1) < 7 and NVL(t.dummy3,1) = 2 then '合格品'
+                      when t.final_check_grade = 1 and t.OE_RE_FLAG = 'OE' and NVL(t.ufrank,1) < 7 and NVL(t.dummy3,1) = 1 then '合格品'
+                      else '合格品' end curing_grade,t.update_time,t.update_user,t.begin_time,t.end_time,t.old_weight,t.reason
+          from (
+          select b.tyre_no,d.material_name curing_mater_name,d.material_code curing_mater_code
+               , a.green_tyre_no,f.material_name green_mater_name
+               , i.equip_name,h.shift_date,j.shift_name,k.class_name
+               , a.weight,a.weight_normal
+               , a.w_flag,a.dummy3
+               , case  when a.dummy3 = '1' then '合格' when a.dummy3 ='2' then 'A0' when a.dummy3 ='3' then '次品' else '' end Quality
+               , case when d.material_code like '%OE%' then 'OE' else 'RE' END OE_RE_FLAG
+               , a.dummy1 HGWC,a.dummy2 BHGWC
+               , l.user_name,m.work_name
+               ,n.ufrank,o.final_check_grade,a.update_time,p.user_name update_user,c.begin_time,c.end_time,a.old_weight,a.reason
+          from bpm_weight_info a
+          left join cpp_curing_production b on a.green_tyre_no = b.green_tyre_no and b.delete_flag = 0
+          left join bpm_production c on a.green_tyre_no = c.green_tyre_no and c.delete_flag = 0
+          left join sbm_material d on b.material_id = d.objid
+          left join bpp_plan_detail e on c.plan_detail_id = e.objid
+          left join sbm_material f on e.material_id = f.objid
+          left join bpm_shift_master h on h.objid= c.shift_master_id
+          left join bpm_shift_detail g on g.master_id = h.objid
+          left join sbe_equip i on h.equip_id = i.objid
+          left join ssb_shift j on j.objid = h.shift_id
+          left join ssb_class k on k.objid = h.class_id
+          left join ssb_user l on l.objid = g.worker_id1
+          left join ssb_work m on m.objid = g.worker_id8
+          left join fqb_balance_info n on n.tyre_id = b.tyre_no and n.delete_flag = 0
+          left join spp_tyre_state o on o.tyre_no = b.tyre_no and o.delete_flag = 0
+          left join ssb_user p on p.objid = a.update_user_id
+          ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[A.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.Hege" prepend="AND">
+           <![CDATA[a.dummy3 = #where.Hege#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipCode" prepend="AND">
+           <![CDATA[i.equip_code = #where.EquipCode#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftObjid" prepend="AND">
+           <![CDATA[j.objid = #where.ShiftObjid#]]>
+         </isNotNull>
+         <isNotNull property="where.GreenTyreNo" prepend="AND">
+           <![CDATA[A.GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialName" prepend="AND">
+           <![CDATA[F.MATERIAL_NAME LIKE '%'|| #where.MaterialName# ||'%']]>
+         </isNotNull>
+         <isNotNull property="where.Gaipan1" prepend="AND">
+           <![CDATA[a.update_time is not null]]>
+         </isNotNull>
+         <isNotNull property="where.Gaipan2" prepend="AND">
+           <![CDATA[a.update_time is null]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+          ) t
+          group by t.tyre_no,t.curing_mater_name,t.curing_mater_code
+               , t.green_tyre_no,t.green_mater_name
+               , t.equip_name,t.shift_date,t.shift_name,t.class_name
+               , t.weight,t.weight_normal
+               , t.Quality,t.OE_RE_FLAG,t.w_flag,t.dummy3
+               , t.HGWC,t.BHGWC,t.ufrank,t.final_check_grade
+               , case when nvl(t.tyre_no,'123') = '123' then ''
+                      when t.final_check_grade = 2 then '二级品' 
+                      when t.final_check_grade = 3 then '废品'
+                      when t.final_check_grade = 4 then '特废品'
+                      when t.final_check_grade = 1 and t.OE_RE_FLAG = 'RE' then '一级品'
+                      when t.final_check_grade = 1 and t.OE_RE_FLAG = 'OE' and NVL(t.ufrank,1) = 7 then 'A0'
+                      when t.final_check_grade = 1 and t.OE_RE_FLAG = 'OE' and NVL(t.ufrank,1) < 7 and NVL(t.dummy3,1) = 2 then 'A0'
+                      when t.final_check_grade = 1 and t.OE_RE_FLAG = 'OE' and NVL(t.ufrank,1) < 7 and NVL(t.dummy3,1) = 1 then '一级品A'
+                      else '一级品' end,t.update_time,t.update_user,t.begin_time,t.end_time,T.old_weight,T.reason
+       ]]>
+     </select>
+
+     <select id="GetGreenWeightDC" parameterClass="map" resultClass="Row">
+       <![CDATA[
+              select a.green_tyre_no ,f.material_name
+               , a.weight,a.weight_normal
+               , case  when a.dummy3 = '1' then '合格' when a.dummy3 ='2' then 'A0' when a.dummy3 ='3' then '次品' else '' end Quality
+               , c.begin_time 
+          from bpm_weight_info a
+          left join bpm_production c on a.green_tyre_no = c.green_tyre_no and c.delete_flag = 0 
+          left join bpp_plan_detail e on c.plan_detail_id = e.objid
+          left join sbm_material f on e.material_id = f.objid 
+          ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[A.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.Hege" prepend="AND">
+           <![CDATA[a.dummy3 = #where.Hege#]]>
+         </isNotNull>
+         <isNotNull property="where.GreenTyreNo" prepend="AND">
+           <![CDATA[A.GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialName" prepend="AND">
+           <![CDATA[F.MATERIAL_NAME LIKE '%'|| #where.MaterialName# ||'%']]>
+         </isNotNull>
+         <isNotNull property="where.Gaipan1" prepend="AND">
+           <![CDATA[a.update_time is not null]]>
+         </isNotNull>
+         <isNotNull property="where.Gaipan2" prepend="AND">
+           <![CDATA[a.update_time is null]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+     <select id="GetGreenWeightQuality" parameterClass="map" resultClass="Row">
+       <![CDATA[  SELECT d.equip_name,e.shift_name,h.material_name,count(a.objid) amount,count(case when dummy3 = '1' then dummy3 when  dummy3 = '2' then dummy3  else null end) as hege
+,round((count(case when dummy3 = '1' then dummy3 when  dummy3 = '2' then dummy3  else null end)/count(a.objid)),4)*100 AS HEGELV
+ FROM bpm_weight_info a
+left join bpm_production b on a.green_tyre_no = b.green_tyre_no and b.delete_flag = 0
+left join bpm_shift_master c on c.objid= b.shift_master_id
+left join sbe_equip d on c.equip_id = d.objid
+left join ssb_shift e on e.objid = c.shift_id
+          left join cpp_curing_production f on a.green_tyre_no = f.green_tyre_no and f.delete_flag = 0
+          left join bpp_plan_detail g on b.plan_detail_id = g.objid
+          left join sbm_material h on g.material_id = h.objid
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipCode" prepend="AND">
+           <![CDATA[d.equip_code = #where.EquipCode# ]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftObjid" prepend="AND">
+           <![CDATA[e.objid = #where.ShiftObjid# ]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+   group by d.equip_name,e.shift_name,h.material_name
+   order by equip_name,shift_name]]>
+     </select>
+     
+     <select id="GetBpmWeightQujian" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select date1,shiftname,equip_name,material_name,sum(case when bi = '负二' then 1 else 0 end)  负二,sum(case when bi = '负2负点' then 1 else 0 end)  负2负点
+ ,sum(case when bi = '负点零' then 1 else 0 end)  负点零,sum(case when bi = '零点五' then 1 else 0 end)  零点五
+ ,sum(case when bi = '点二' then 1 else 0 end)  点二,sum(case when bi = '二点五' then 1 else 0 end) 二点五,count(1) num
+ from (
+select to_date(to_nchar(record_time,'yyyy-MM-dd'),'yyyy-MM-dd') date1,
+case when lv <=-2.5 then '负二' when lv>-2.5 and lv <=-0.5 then '负2负点' when lv>-0.5 and lv <=0 then '负点零'
+when lv>0 and lv<=0.5 then '零点五' when lv>0.5 and lv<=2.5 then '点二' when lv>2.5 then '二点五' else '空' end bi,
+  shiftname,equip_name,material_name
+ from (
+select a.record_time,round(((a.weight/a.weight_normal)-1)*100,2) lv,e.equip_name,case c.shift_id when 1 then '白' when 2 then '中' else '夜' end shiftname
+    ,f.material_name from bpm_weight_info a
+left join bpm_production b on a.green_tyre_no = b.green_tyre_no and b.delete_flag = 0
+left join bpp_plan c on c.objid = b.plan_id
+left join bpp_plan_detail d on d.objid = b.plan_detail_id
+left join sbe_equip e on e.objid = c.equip_id
+left join sbm_material f on f.objid = d.material_id
+where a.record_time >= to_date('$where.BeginTime$','yyyy-MM-dd hh24:mi:ss') and a.record_time <= to_date('$where.EndTime$','yyyy-MM-dd hh24:mi:ss') 
+and a.delete_flag = 0
+          ]]>
+       <isNotNull property="where.EquipCode" prepend="AND">
+         <![CDATA[e.equip_code = #where.EquipCode# ]]>
+       </isNotNull>
+       <isNotNull property="where.Mater" prepend="AND">
+         <![CDATA[f.material_name like '%'|| #where.Mater# || '%']]>
+       </isNotNull>
+       <isNotNull property="where.Shift" prepend="AND">
+         <![CDATA[c.shift_id = #where.Shift# ]]>
+       </isNotNull>
+       <![CDATA[
+) y  
+) yy  group by date1,shiftname,equip_name,material_name
+order by  date1,shiftname,equip_name,material_name ]]>
+     </select>
+     
+     
+  </statements>
+</sqlMap>

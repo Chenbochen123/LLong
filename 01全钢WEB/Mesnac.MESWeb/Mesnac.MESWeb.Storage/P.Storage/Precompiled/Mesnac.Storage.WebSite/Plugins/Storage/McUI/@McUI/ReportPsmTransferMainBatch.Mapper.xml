@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportPsmTransferMainBatch" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T0.DETAIL_BATCH, T0.BATCH_AMOUNT
+        , T0.DETAIL_BATCH || NVL(T1.DUMMY_2, '') FULL_BATCH
+        , T1.*
+        , CASE T3.MOV_TYPE WHEN '311' THEN '第三方库调拨单' WHEN 'Z07' THEN '赠品调拨单' ELSE '' END BILL_TYPE_CAPTION
+        , CASE T1.MAIN_STATE WHEN 0 THEN '新建' WHEN 1 THEN '已确认' ELSE '' END MAIN_STATE_CAPTION
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '合格品' WHEN 2 THEN '次品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' WHEN 9 THEN '试验胎' ELSE '无品级' END CHECK_GRADE_NAME 
+        , T2.USER_NAME RECORD_USER_NAME
+        , TO_DATE(T3.DEMONDS_DATE, 'YYYYMMDD') DEMONDS_DATE_SHOW
+        , T3.TRANSFER_DATE
+        , CASE T3.MOV_TYPE WHEN 'Z07' THEN T4.CUSTOME_NAME ELSE '' END CUSTOMER_NAME
+        , T5.MATERIAL_NAME
+        , T7.USER_NAME UPDATE_USER_NAME
+        , T8.USER_NAME AFFIRM_USER_NAME
+        FROM (
+            SELECT T1.OBJID, T2.DETAIL_BATCH, COUNT(*) BATCH_AMOUNT
+            FROM PSM_TRANSFER_MAIN T1
+            JOIN PSM_TRANSFER_DETAIL T2 ON T1.OBJID  = T2.MAIN_ID
+            JOIN PSM_TRANSFER_BILL T3 ON T3.OBJID = T1.BILL_ID
+            LEFT JOIN PSB_CUSTOMER T4 ON T3.DEPARTMENT = T4.CUSTOMER_ID AND T3.MOV_TYPE = 'Z07'
+            LEFT JOIN SBM_MATERIAL T5 ON T1.MATERIAL_ID = T5.OBJID
+            WHERE T1.DELETE_FLAG = 0
+            AND T2.DELETE_FLAG = 0
+            AND T3.DELETE_FLAG = 0
+      ]]>
+      <dynamic prepend="">
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[
+            EXISTS (
+                SELECT *
+                FROM PSM_TRANSFER_DETAIL D
+                WHERE D.DELETE_FLAG = 0
+                AND D.BILL_ID = T1.BILL_ID
+                AND D.MAIN_ID = T1.OBJID
+                AND D.DETAIL_BATCH = T2.DETAIL_BATCH
+                AND D.TYRE_NO = #where.TyreNo#
+            )
+          ]]>
+        </isNotNull>
+        <isNull property="where.TyreNo">
+          <isNotNull property="where.OBJID" prepend="AND">
+            <![CDATA[T1.OBJID = #where.OBJID#]]>
+          </isNotNull>
+          <isNotNull property="where.BeginDate" prepend="AND">
+            <![CDATA[T3.DEMONDS_DATE >= TO_CHAR(#where.BeginDate#, 'YYYYMMDD')]]>
+          </isNotNull>
+          <isNotNull property="where.EndDate" prepend="AND">
+            <![CDATA[T3.DEMONDS_DATE <= TO_CHAR(#where.EndDate#, 'YYYYMMDD')]]>
+          </isNotNull>
+          <isNotNull property="where.BeginTransferDate" prepend="AND">
+            <![CDATA[T3.TRANSFER_DATE >= #where.BeginTransferDate#]]>
+          </isNotNull>
+          <isNotNull property="where.EndTransferDate" prepend="AND">
+            <![CDATA[T3.TRANSFER_DATE <= #where.EndTransferDate#]]>
+          </isNotNull>
+          <isNotNull property="where.BeginTime" prepend="AND">
+            <![CDATA[T1.AFFIRM_TIME >= #where.BeginTime#]]>
+          </isNotNull>
+          <isNotNull property="where.EndTime" prepend="AND">
+            <![CDATA[T1.AFFIRM_TIME <= #where.EndTime#]]>
+          </isNotNull>
+          <isNotNull property="where.ReserNo" prepend="AND">
+            <![CDATA[T3.RESER_NO = #where.ReserNo#]]>
+          </isNotNull>
+          <isNotNull property="where.CustomerId" prepend="AND">
+            <![CDATA[T3.CUSTOMER_ID = #where.CustomerId#]]>
+          </isNotNull>
+          <isNotNull property="where.BillType" prepend="AND">
+            <![CDATA[T3.MOV_TYPE = #where.BillType#]]>
+          </isNotNull>
+          <isNotNull property="where.MainState" prepend="AND">
+            <![CDATA[T1.MAIN_STATE = #where.MainState#]]>
+          </isNotNull>
+          <isNotNull property="where.CustomerName" prepend="AND">
+            <![CDATA[T4.CUSTOME_NAME like '%' || #where.CustomerName# || '%']]>
+          </isNotNull>
+          <isNotNull property="where.MaterialName" prepend="AND">
+            <![CDATA[T5.MATERIAL_NAME like '%' || #where.MaterialName# || '%']]>
+          </isNotNull>
+          <isNotNull property="where.AffirmUserName" prepend="AND">
+            <![CDATA[T8.USER_NAME like '%' || #where.AffirmUserName# || '%']]>
+          </isNotNull>
+        </isNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG# AND T3.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+            GROUP BY T1.OBJID, T2.DETAIL_BATCH
+        ) T0
+        LEFT JOIN PSM_TRANSFER_MAIN T1 ON T0.OBJID = T1.OBJID
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        LEFT JOIN PSM_TRANSFER_BILL T3 ON T1.BILL_ID = T3.OBJID
+        LEFT JOIN PSB_CUSTOMER T4 ON T3.DEPARTMENT = T4.CUSTOMER_ID AND T3.MOV_TYPE = 'Z07'
+        LEFT JOIN SBM_MATERIAL T5 ON T1.MATERIAL_ID = T5.OBJID
+        LEFT JOIN SSB_USER T7 ON T1.UPDATE_USER_ID = T7.OBJID
+        LEFT JOIN SSB_USER T8 ON T1.AFFIRM_USER_ID = T8.OBJID
+          ]]>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T3.DEMONDS_DATE, T3.RESER_NO, T1.RESER_ITEM
+      </isNull>
+    </select>
+    <select id="Select+Update@ReportPsmTransferMainBatch" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM PSM_TRANSFER_MAIN ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <select id="Select@ReportPsmTransferMainBatch@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T0.DETAIL_BATCH, T0.BATCH_AMOUNT
+        , T0.DETAIL_BATCH || NVL(T1.DUMMY_2, '') FULL_BATCH
+        , T1.*
+        , CASE T3.MOV_TYPE WHEN '311' THEN '第三方库调拨单' WHEN 'Z07' THEN '赠品调拨单' ELSE '' END BILL_TYPE_CAPTION
+        , CASE T1.MAIN_STATE WHEN 0 THEN '新建' WHEN 1 THEN '已确认' ELSE '' END MAIN_STATE_CAPTION
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '合格品' WHEN 2 THEN '次品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' WHEN 9 THEN '试验胎' ELSE '无品级' END CHECK_GRADE_NAME 
+        , T2.USER_NAME RECORD_USER_NAME
+        , TO_DATE(T3.DEMONDS_DATE, 'YYYYMMDD') DEMONDS_DATE_SHOW
+        , T3.TRANSFER_DATE
+        , CASE T3.MOV_TYPE WHEN 'Z07' THEN T4.CUSTOME_NAME ELSE '' END CUSTOMER_NAME
+        , T5.MATERIAL_NAME
+        , T7.USER_NAME UPDATE_USER_NAME
+        , T8.USER_NAME AFFIRM_USER_NAME
+        FROM (
+            SELECT T1.OBJID, T2.DETAIL_BATCH, COUNT(*) BATCH_AMOUNT
+            FROM PSM_TRANSFER_MAIN T1
+            JOIN PSM_TRANSFER_DETAIL T2 ON T1.OBJID  = T2.MAIN_ID
+            JOIN PSM_TRANSFER_BILL T3 ON T3.OBJID = T1.BILL_ID
+            LEFT JOIN PSB_CUSTOMER T4 ON T3.DEPARTMENT = T4.CUSTOMER_ID AND T3.MOV_TYPE = 'Z07'
+            LEFT JOIN SBM_MATERIAL T5 ON T1.MATERIAL_ID = T5.OBJID
+            WHERE T1.DELETE_FLAG = 0
+            AND T2.DELETE_FLAG = 0
+            AND T3.DELETE_FLAG = 0
+            GROUP BY T1.OBJID, T2.DETAIL_BATCH
+        ) T0
+        LEFT JOIN PSM_TRANSFER_MAIN T1 ON T0.OBJID = T1.OBJID
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        LEFT JOIN PSM_TRANSFER_BILL T3 ON T1.BILL_ID = T3.OBJID
+        LEFT JOIN PSB_CUSTOMER T4 ON T3.DEPARTMENT = T4.CUSTOMER_ID AND T3.MOV_TYPE = 'Z07'
+        LEFT JOIN SBM_MATERIAL T5 ON T1.MATERIAL_ID = T5.OBJID
+        LEFT JOIN SSB_USER T7 ON T1.UPDATE_USER_ID = T7.OBJID
+        LEFT JOIN SSB_USER T8 ON T1.AFFIRM_USER_ID = T8.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T1.OBJID = #where.OBJID# AND T0.DETAIL_BATCH = #where.DETAIL_BATCH#)]]>
+      </dynamic>
+    </select>
+
+
+    <select id="Select@ReportPsmTransferMainBatch@DetailGrid" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*
+        , CASE T1.DETAIL_STATE WHEN 0 THEN '未确认' WHEN 1 THEN '已确认' ELSE '' END DETAIL_STATE_CAPTION
+        , CASE T4.CHECK_GRADE_CODE WHEN 1 THEN '合格品' WHEN 2 THEN '次品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' WHEN 9 THEN '试验胎' ELSE '无品级' END CHECK_GRADE_NAME 
+        , T2.USER_NAME RECORD_USER_NAME
+        , T4.RESER_ITEM, T4.STOR_LOC_FROM, T4.STOR_LOC_TO
+        , T5.STORE_NAME
+        , T6.STORE_PLACE_NAME
+        , T7.USER_NAME UPDATE_USER_NAME
+        , T8.USER_NAME AFFIRM_USER_NAME
+        , T9.RESER_NO
+        , T10.MATERIAL_NAME
+        FROM PSM_TRANSFER_DETAIL T1
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        LEFT JOIN PSM_TRANSFER_SUMMARY T3 ON T1.SUMMARY_ID = T3.OBJID AND T1.MAIN_ID = T3.MAIN_ID AND T1.BILL_ID = T3.BILL_ID
+        LEFT JOIN PSM_TRANSFER_MAIN T4 ON T1.MAIN_ID = T4.OBJID AND T1.BILL_ID = T4.BILL_ID
+        LEFT JOIN PSB_STORE T5 ON T3.STORE_ID = T5.OBJID
+        LEFT JOIN PSB_STORE_PLACE T6 ON T3.STORE_PLACE_ID = T6.OBJID
+        LEFT JOIN SSB_USER T7 ON T3.UPDATE_USER_ID = T7.OBJID
+        LEFT JOIN SSB_USER T8 ON T3.AFFIRM_USER_ID = T8.OBJID
+        LEFT JOIN PSM_TRANSFER_BILL T9 ON T1.BILL_ID = T9.OBJID
+        LEFT JOIN SBM_MATERIAL T10 ON T3.MATERIAL_ID = T10.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[
+        T1.DELETE_FLAG = 0
+        AND T1.MAIN_ID = #where.OBJID#
+        AND T1.DETAIL_BATCH = #where.DETAIL_BATCH#
+        ]]>
+      </dynamic>
+      <![CDATA[
+        ORDER BY T5.STORE_NAME, T6.STORE_PLACE_NAME, T1.TYRE_NO 
+      ]]>
+    </select>
+
+    <!--查询类型信息，ID值固定为GetComboBoxData@Select@ReportPsmTransferMainBatch@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmTransferMainBatch@SearchType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT '1' sskey, '按需求日期' ssValue FROM dual
+      UNION
+      SELECT '2' sskey, '按确认时间' ssValue FROM dual
+      --UNION
+      --SELECT '3' sskey, '按出库日期' ssValue FROM dual
+     ]]>
+    </select>
+
+    <!--查询单据状态信息，ID值固定为GetComboBoxData@Select@ReportPsmTransferMainBatch@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmTransferMainBatch@MainState" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT 0 sskey, '未确认' ssValue FROM dual
+      UNION
+      SELECT 1 sskey, '已确认' ssValue FROM dual
+     ]]>
+    </select>
+
+    <!--查询单据类型信息，ID值固定为GetComboBoxData@Select@ReportPsmTransferMainBatch@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmTransferMainBatch@BillType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT '311' sskey, '第三方库调拨单' ssValue FROM dual
+      UNION
+      SELECT 'Z07' sskey, '赠品调拨单' ssValue FROM dual
+     ]]>
+    </select>
+
+    <!--查询班组信息，ID值固定为GetComboBoxData@Select@ReportPsmTransferMainBatch@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmTransferMainBatch@InClassId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey, CLASS_NAME ssValue FROM SSB_CLASS WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询班次信息，ID值固定为GetComboBoxData@Select@ReportPsmTransferMainBatch@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmTransferMainBatch@InShiftId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey, SHIFT_NAME ssValue FROM SSB_SHIFT WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.SeeEquipStopRecord"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SEE_EQUIP_STOP_RECORD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.StopBeginTime" prepend="AND">
+          <![CDATA[STOP_BEGIN_TIME = #where.StopBeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.StopEndTime" prepend="AND">
+          <![CDATA[STOP_END_TIME = #where.StopEndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.StopTypeId" prepend="AND">
+          <![CDATA[STOP_TYPE_ID = #where.StopTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.StopReasonId" prepend="AND">
+          <![CDATA[STOP_REASON_ID = #where.StopReasonId#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetEquipStopDurationPercent" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select b.objid as StopTypeID,b.equip_stop_type_name as TypeName,sum(round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60)) as Duration,
+        trunc(sum(round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60))/(select sum(round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60)) from see_equip_stop_record where stop_type_id!=0 and Instr(#where.EquipIds#,equip_id)>0 and RECORD_TIME between #where.BeginTime# and #where.EndTime#),2)*100||'%' as DurationPercent
+        ,(select sum(round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60)) from see_equip_stop_record where stop_type_id!=0 and Instr(#where.EquipIds#,equip_id)>0) as TotalDuration
+        from see_equip_stop_record a inner join sbe_equip_stop_type b on a.stop_reason_id=b.objid 
+       ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.EquipIds" prepend="AND">
+           <![CDATA[Instr(#where.EquipIds#,a.EQUIP_ID)>0]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME <= #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.StopTypeID" prepend="AND">
+           <![CDATA[A.STOP_TYPE_ID = #where.StopTypeID#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+        group by b.objid,b.equip_stop_type_name
+      ]]>
+     </select>
+
+     <select id="GetEquipStopDurationPercentDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select b.objid,b.equip_stop_reason_name as FaultName,sum(round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60)) as Duration,
+        trunc(sum(round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60))/(select sum(round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60)) from see_equip_stop_record where stop_reason_id!=0 and Instr(#where.EquipIds#,equip_id)>0 and RECORD_TIME between #where.BeginTime# and #where.EndTime#),2)*100||'%' as DurationPercent
+        from see_equip_stop_record a inner join sbe_equip_stop_reason b on a.stop_reason_id=b.objid 
+       ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.EquipIds" prepend="AND">
+           <![CDATA[Instr(#where.EquipIds#,a.EQUIP_ID)>0]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME <= #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.TypeID" prepend="AND">
+           <![CDATA[A.STOP_TYPE_ID = #where.TypeID#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+        group by b.objid,b.equip_stop_reason_name
+      ]]>
+     </select>
+  </statements>
+</sqlMap>

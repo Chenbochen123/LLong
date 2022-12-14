@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Storage.Mapper.BusinessMapper.PsmStorageMateChangeBill"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSM_STORAGE_MATE_CHANGE_BILL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.ChangeAmount" prepend="AND">
+          <![CDATA[CHANGE_AMOUNT = #where.ChangeAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.ChangeType" prepend="AND">
+          <![CDATA[CHANGE_TYPE = #where.ChangeType#]]>
+        </isNotNull>
+        <isNotNull property="where.ChangeState" prepend="AND">
+          <![CDATA[CHANGE_STATE = #where.ChangeState#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateUserId" prepend="AND">
+          <![CDATA[UPDATE_USER_ID = #where.UpdateUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmUserId" prepend="AND">
+          <![CDATA[AFFIRM_USER_ID = #where.AffirmUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmTime" prepend="AND">
+          <![CDATA[AFFIRM_TIME = #where.AffirmTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+     
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <!--更新记录-->
+     <update id="UpdateAmountByObjId" parameterClass="map">
+       UPDATE PSM_STORAGE_MATE_CHANGE_BILL
+       SET CHANGE_AMOUNT = CHANGE_AMOUNT + #update.UpdateAmount#
+       WHERE OBJID = #ObjId#
+     </update>
+
+   </statements>
+</sqlMap>

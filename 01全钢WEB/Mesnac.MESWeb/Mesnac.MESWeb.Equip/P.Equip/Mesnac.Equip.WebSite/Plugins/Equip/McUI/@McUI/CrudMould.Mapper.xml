@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudMould" parameterClass="map" resultClass="row">
+      <![CDATA[
+       
+SELECT T.*,T2.USER_NAME,T3.SIZE_NAME,T4.PATTERN_NAME,T5.BRAND_NAME FROM CIM_MOULD_INFO T
+      LEFT JOIN SBE_EQUIP T1 ON T.EQUIP_ID=T1.OBJID
+      LEFT JOIN SSB_USER T2 ON T.RECORD_USER_ID=T2.OBJID
+      LEFT JOIN CBM_SIZE T3 ON T.SIZE_ID=T3.OBJID 
+      LEFT JOIN CBM_PATTERN T4 ON T.PATTERN_ID=T4.OBJID 
+      LEFT JOIN CBM_BRAND T5 ON T.BRAND_ID=T5.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.MOULD_NAME" prepend="AND">
+          <![CDATA[T.MOULD_NAME LIKE '%' || #where.MOULD_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MOULD_BARCODE" prepend="AND">
+          <![CDATA[T.MOULD_BARCODE LIKE '%' || #where.MOULD_BARCODE# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.SIZE_ID" prepend="AND">
+          <![CDATA[T.SIZE_ID = #where.SIZE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T.MOULD_BARCODE
+      </isNull>
+    </select>
+    <select id="Select+Update@CrudMould" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM CIM_MOULD_INFO ]]>
+        <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+          
+    </statements>
+</sqlMap>

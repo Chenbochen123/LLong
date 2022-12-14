@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8908C09B-793B-4BE6-B46B-7053C7E5A0EA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Equip</RootNamespace>
+    <AssemblyName>Mesnac.Equip</AssemblyName>
+    <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PlatformFamilyName>WindowsCE</PlatformFamilyName>
+    <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
+    <OSVersion>5.0</OSVersion>
+    <DeployDirSuffix>Mesnac.Equip</DeployDirSuffix>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <NativePlatformName>Windows CE</NativePlatformName>
+    <FormFactorID>
+    </FormFactorID>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;$(PlatformFamilyName)</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;$(PlatformFamilyName)</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
+  <ItemGroup>
+    <Reference Include="Mesnac.Framework, Version=1.0.6097.15986, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Mesnac.Framework\bin\Debug\Mesnac.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Scanner, Version=1.0.6097.15985, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Mesnac.Scanner\bin\Debug\Mesnac.Scanner.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.WebService, Version=1.0.6097.15985, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Mesnac.WebService\bin\Debug\Mesnac.WebService.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Windows, Version=1.0.6097.15985, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Mesnac.Windows\bin\Debug\Mesnac.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}">
+        <HostingProcess disable="1" />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <Compile Include="FrmAddInventoryMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddInventoryMain.Designer.cs">
+      <DependentUpon>FrmAddInventoryMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddInventorySummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddInventorySummary.Designer.cs">
+      <DependentUpon>FrmAddInventorySummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmClearMouldOk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmClearMouldOk.Designer.cs">
+      <DependentUpon>FrmClearMouldOk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmClearMouldSD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmClearMouldSD.designer.cs">
+      <DependentUpon>FrmClearMouldSD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmClearMouldUnlock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmClearMouldUnlock.Designer.cs">
+      <DependentUpon>FrmClearMouldUnlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmClearMouldYJ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmClearMouldYJ.designer.cs">
+      <DependentUpon>FrmClearMouldYJ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEquipBillCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEquipBillCreate.Designer.cs">
+      <DependentUpon>FrmEquipBillCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEquipRepairBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEquipRepairBill.Designer.cs">
+      <DependentUpon>FrmEquipRepairBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEquipWHBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEquipWHBill.Designer.cs">
+      <DependentUpon>FrmEquipWHBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEquipWHCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEquipWHCreate.Designer.cs">
+      <DependentUpon>FrmEquipWHCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEquipXJBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEquipXJBill.Designer.cs">
+      <DependentUpon>FrmEquipXJBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEquipXJCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEquipXJCreate.Designer.cs">
+      <DependentUpon>FrmEquipXJCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmInStorage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmInStorage.Designer.cs">
+      <DependentUpon>FrmInStorage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmInStorageDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmInStorageDetail.Designer.cs">
+      <DependentUpon>FrmInStorageDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmJgClearMould.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmJgClearMould.Designer.cs">
+      <DependentUpon>FrmJgClearMould.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmJgClearMouldOk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmJgClearMouldOk.Designer.cs">
+      <DependentUpon>FrmJgClearMouldOk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMouldChangePlace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMouldChangePlace.Designer.cs">
+      <DependentUpon>FrmMouldChangePlace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmOutStorage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmOutStorage.Designer.cs">
+      <DependentUpon>FrmOutStorage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmOutStorageDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmOutStorageDetail.Designer.cs">
+      <DependentUpon>FrmOutStorageDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmQueryInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmQueryInfo.Designer.cs">
+      <DependentUpon>FrmQueryInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSbeMouldLvLi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSbeMouldLvLi.Designer.cs">
+      <DependentUpon>FrmSbeMouldLvLi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FrmAddInventoryMain.resx">
+      <DependentUpon>FrmAddInventoryMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddInventorySummary.resx">
+      <DependentUpon>FrmAddInventorySummary.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmClearMouldOk.resx">
+      <DependentUpon>FrmClearMouldOk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmClearMouldSD.resx">
+      <DependentUpon>FrmClearMouldSD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmClearMouldUnlock.resx">
+      <DependentUpon>FrmClearMouldUnlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmClearMouldYJ.resx">
+      <DependentUpon>FrmClearMouldYJ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEquipBillCreate.resx">
+      <DependentUpon>FrmEquipBillCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEquipRepairBill.resx">
+      <DependentUpon>FrmEquipRepairBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEquipWHBill.resx">
+      <DependentUpon>FrmEquipWHBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEquipWHCreate.resx">
+      <DependentUpon>FrmEquipWHCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEquipXJBill.resx">
+      <DependentUpon>FrmEquipXJBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEquipXJCreate.resx">
+      <DependentUpon>FrmEquipXJCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmInStorage.resx">
+      <DependentUpon>FrmInStorage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmInStorageDetail.resx">
+      <DependentUpon>FrmInStorageDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmJgClearMould.resx">
+      <DependentUpon>FrmJgClearMould.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmJgClearMouldOk.resx">
+      <DependentUpon>FrmJgClearMouldOk.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMouldChangePlace.resx">
+      <DependentUpon>FrmMouldChangePlace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmOutStorage.resx">
+      <DependentUpon>FrmOutStorage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmOutStorageDetail.resx">
+      <DependentUpon>FrmOutStorageDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmQueryInfo.resx">
+      <DependentUpon>FrmQueryInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSbeMouldLvLi.resx">
+      <DependentUpon>FrmSbeMouldLvLi.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(TargetPath)" /S/Y "$(SolutionDir)bin\"</PostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mesnac.SysConfig\Mesnac.SysConfig.csproj">
+      <Project>{D14E2CF8-D2EF-4BA5-92A5-608C750275E9}</Project>
+      <Name>Mesnac.SysConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Utility\Mesnac.Utility.csproj">
+      <Project>{526D6F8D-C228-4F4A-9DD7-90ECCDCA3371}</Project>
+      <Name>Mesnac.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

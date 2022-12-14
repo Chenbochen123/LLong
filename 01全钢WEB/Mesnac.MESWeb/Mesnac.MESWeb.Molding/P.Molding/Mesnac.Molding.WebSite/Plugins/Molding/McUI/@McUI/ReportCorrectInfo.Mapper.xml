@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportCorrectInfo" parameterClass="map" resultClass="row">
+      <![CDATA[
+       SELECT B.EQUIP_NAME,C.USER_NAME, CASE A.CORRECT_FLAG WHEN 1 THEN '合格' WHEN 0 THEN '不合格' END FLAG,
+       (A.REAL_WEIGHT1 - A.FM_WEIGHT1) AS WC1,(A.REAL_WEIGHT2 - A.FM_WEIGHT2) AS WC2,(A.REAL_WEIGHT3 - A.FM_WEIGHT3) AS WC3,
+       A.*,'±0.02' WCHA  FROM BPM_CORRECT_INFO A 
+       INNER JOIN SBE_EQUIP B ON A.EQUIP_ID = B.OBJID
+       INNER JOIN SSB_USER C ON A.RECORD_USER_ID = C.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.EQUIP_NAME" prepend="AND">
+          <![CDATA[B.EQUIP_NAME LIKE '%' || #where.EQUIP_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.BEGIN_DATE" prepend="AND">
+          <![CDATA[A.CORRECT_TIME >= #where.BEGIN_DATE#]]>
+        </isNotNull>
+        <isNotNull property="where.END_DATE" prepend="AND">
+          <![CDATA[A.CORRECT_TIME <= #where.END_DATE#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[A.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+       ORDER BY A.CORRECT_TIME,C.USER_NAME
+      ]]>
+    </select>
+  
+  </statements>
+</sqlMap>

@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BasicMapper.SbeMoulddrum"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SbeMoulddrum" type="Mesnac.Molding.Entity.BasicEntity.SbeMoulddrum, Mesnac.Molding.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SbeMoulddrum" class="SbeMoulddrum">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Barcode" column="BARCODE"/>
+    <result property="EquipName" column="EQUIP_NAME"/>
+    <result property="Use" column="USE"/>
+    <result property="Size1" column="SIZE_1"/>
+    <result property="Amount" column="AMOUNT"/>
+    <result property="Factory" column="FACTORY"/>
+    <result property="InTime" column="IN_TIME"/>
+    <result property="EquipUse" column="EQUIP_USE"/>
+    <result property="Status" column="STATUS"/>
+    <result property="StorePlace" column="STORE_PLACE"/>
+    <result property="Reason" column="REASON"/>
+    <result property="Remark2" column="REMARK2"/>
+    <result property="Remark3" column="REMARK3"/>
+    <result property="Remark4" column="REMARK4"/>
+    <result property="Remark5" column="REMARK5"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SbeMoulddrum" class="SbeMoulddrum">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Barcode" column="Barcode"/>
+    <parameter property="EquipName" column="EquipName"/>
+    <parameter property="Use" column="Use"/>
+    <parameter property="Size1" column="Size1"/>
+    <parameter property="Amount" column="Amount"/>
+    <parameter property="Factory" column="Factory"/>
+    <parameter property="InTime" column="InTime"/>
+    <parameter property="EquipUse" column="EquipUse"/>
+    <parameter property="Status" column="Status"/>
+    <parameter property="StorePlace" column="StorePlace"/>
+    <parameter property="Reason" column="Reason"/>
+    <parameter property="Remark2" column="Remark2"/>
+    <parameter property="Remark3" column="Remark3"/>
+    <parameter property="Remark4" column="Remark4"/>
+    <parameter property="Remark5" column="Remark5"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_MOULDDRUM ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[BARCODE = #where.Barcode#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[EQUIP_NAME = #where.EquipName#]]>
+        </isNotNull>
+        <isNotNull property="where.Use" prepend="AND">
+          <![CDATA[USE = #where.Use#]]>
+        </isNotNull>
+        <isNotNull property="where.Size1" prepend="AND">
+          <![CDATA[SIZE_1 = #where.Size1#]]>
+        </isNotNull>
+        <isNotNull property="where.Amount" prepend="AND">
+          <![CDATA[AMOUNT = #where.Amount#]]>
+        </isNotNull>
+        <isNotNull property="where.Factory" prepend="AND">
+          <![CDATA[FACTORY = #where.Factory#]]>
+        </isNotNull>
+        <isNotNull property="where.InTime" prepend="AND">
+          <![CDATA[IN_TIME = #where.InTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipUse" prepend="AND">
+          <![CDATA[EQUIP_USE = #where.EquipUse#]]>
+        </isNotNull>
+        <isNotNull property="where.Status" prepend="AND">
+          <![CDATA[STATUS = #where.Status#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlace" prepend="AND">
+          <![CDATA[STORE_PLACE = #where.StorePlace#]]>
+        </isNotNull>
+        <isNotNull property="where.Reason" prepend="AND">
+          <![CDATA[REASON = #where.Reason#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark2" prepend="AND">
+          <![CDATA[REMARK2 = #where.Remark2#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark3" prepend="AND">
+          <![CDATA[REMARK3 = #where.Remark3#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark4" prepend="AND">
+          <![CDATA[REMARK4 = #where.Remark4#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark5" prepend="AND">
+          <![CDATA[REMARK5 = #where.Remark5#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SBE_MOULDDRUM]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="Barcode" prepend=",">BARCODE</isNotNull>
+        <isNotNull property="EquipName" prepend=",">EQUIP_NAME</isNotNull>
+        <isNotNull property="Use" prepend=",">USE</isNotNull>
+        <isNotNull property="Size1" prepend=",">SIZE_1</isNotNull>
+        <isNotNull property="Amount" prepend=",">AMOUNT</isNotNull>
+        <isNotNull property="Factory" prepend=",">FACTORY</isNotNull>
+        <isNotNull property="InTime" prepend=",">IN_TIME</isNotNull>
+        <isNotNull property="EquipUse" prepend=",">EQUIP_USE</isNotNull>
+        <isNotNull property="Status" prepend=",">STATUS</isNotNull>
+        <isNotNull property="StorePlace" prepend=",">STORE_PLACE</isNotNull>
+        <isNotNull property="Reason" prepend=",">REASON</isNotNull>
+        <isNotNull property="Remark2" prepend=",">REMARK2</isNotNull>
+        <isNotNull property="Remark3" prepend=",">REMARK3</isNotNull>
+        <isNotNull property="Remark4" prepend=",">REMARK4</isNotNull>
+        <isNotNull property="Remark5" prepend=",">REMARK5</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SBE_MOULDDRUM.NEXTVAL</isNull>
+        <isNotNull property="Barcode" prepend=",">#Barcode#</isNotNull>
+        <isNotNull property="EquipName" prepend=",">#EquipName#</isNotNull>
+        <isNotNull property="Use" prepend=",">#Use#</isNotNull>
+        <isNotNull property="Size1" prepend=",">#Size1#</isNotNull>
+        <isNotNull property="Amount" prepend=",">#Amount#</isNotNull>
+        <isNotNull property="Factory" prepend=",">#Factory#</isNotNull>
+        <isNotNull property="InTime" prepend=",">#InTime#</isNotNull>
+        <isNotNull property="EquipUse" prepend=",">#EquipUse#</isNotNull>
+        <isNotNull property="Status" prepend=",">#Status#</isNotNull>
+        <isNotNull property="StorePlace" prepend=",">#StorePlace#</isNotNull>
+        <isNotNull property="Reason" prepend=",">#Reason#</isNotNull>
+        <isNotNull property="Remark2" prepend=",">#Remark2#</isNotNull>
+        <isNotNull property="Remark3" prepend=",">#Remark3#</isNotNull>
+        <isNotNull property="Remark4" prepend=",">#Remark4#</isNotNull>
+        <isNotNull property="Remark5" prepend=",">#Remark5#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SBE_MOULDDRUM
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Barcode"  prepend=",">
+          BARCODE = #update.Barcode#
+        </isNotNull>
+        <isNotNull  property="update.EquipName"  prepend=",">
+          EQUIP_NAME = #update.EquipName#
+        </isNotNull>
+        <isNotNull  property="update.Use"  prepend=",">
+          USE = #update.Use#
+        </isNotNull>
+        <isNotNull  property="update.Size1"  prepend=",">
+          SIZE_1 = #update.Size1#
+        </isNotNull>
+        <isNotNull  property="update.Amount"  prepend=",">
+          AMOUNT = #update.Amount#
+        </isNotNull>
+        <isNotNull  property="update.Factory"  prepend=",">
+          FACTORY = #update.Factory#
+        </isNotNull>
+        <isNotNull  property="update.InTime"  prepend=",">
+          IN_TIME = #update.InTime#
+        </isNotNull>
+        <isNotNull  property="update.EquipUse"  prepend=",">
+          EQUIP_USE = #update.EquipUse#
+        </isNotNull>
+        <isNotNull  property="update.Status"  prepend=",">
+          STATUS = #update.Status#
+        </isNotNull>
+        <isNotNull  property="update.StorePlace"  prepend=",">
+          STORE_PLACE = #update.StorePlace#
+        </isNotNull>
+        <isNotNull  property="update.Reason"  prepend=",">
+          REASON = #update.Reason#
+        </isNotNull>
+        <isNotNull  property="update.Remark2"  prepend=",">
+          REMARK2 = #update.Remark2#
+        </isNotNull>
+        <isNotNull  property="update.Remark3"  prepend=",">
+          REMARK3 = #update.Remark3#
+        </isNotNull>
+        <isNotNull  property="update.Remark4"  prepend=",">
+          REMARK4 = #update.Remark4#
+        </isNotNull>
+        <isNotNull  property="update.Remark5"  prepend=",">
+          REMARK5 = #update.Remark5#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SBE_MOULDDRUM
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SbeMoulddrum">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SbeMoulddrum">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SBE_MOULDDRUM
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SBE_MOULDDRUM
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SbeMoulddrum" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SBE_MOULDDRUM
+    </statement>
+  </statements>
+</sqlMap>

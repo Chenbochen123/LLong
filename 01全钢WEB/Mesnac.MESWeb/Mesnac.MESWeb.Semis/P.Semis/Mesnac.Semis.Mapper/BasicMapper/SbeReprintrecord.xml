@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.SbeReprintrecord"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SbeReprintrecord" type="Mesnac.Semis.Entity.BasicEntity.SbeReprintrecord, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SbeReprintrecord" class="SbeReprintrecord">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Cardid" column="CARDID"/>
+    <result property="Equipid" column="EQUIPID"/>
+    <result property="Num" column="NUM"/>
+    <result property="RecordUser" column="RECORD_USER"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="Reason" column="REASON"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SbeReprintrecord" class="SbeReprintrecord">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Cardid" column="Cardid"/>
+    <parameter property="Equipid" column="Equipid"/>
+    <parameter property="Num" column="Num"/>
+    <parameter property="RecordUser" column="RecordUser"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="Reason" column="Reason"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_REPRINTRECORD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Cardid" prepend="AND">
+          <![CDATA[CARDID = #where.Cardid#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipid" prepend="AND">
+          <![CDATA[EQUIPID = #where.Equipid#]]>
+        </isNotNull>
+        <isNotNull property="where.Num" prepend="AND">
+          <![CDATA[NUM = #where.Num#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUser" prepend="AND">
+          <![CDATA[RECORD_USER = #where.RecordUser#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Reason" prepend="AND">
+          <![CDATA[REASON = #where.Reason#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SBE_REPRINTRECORD]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="Cardid" prepend=",">CARDID</isNotNull>
+        <isNotNull property="Equipid" prepend=",">EQUIPID</isNotNull>
+        <isNotNull property="Num" prepend=",">NUM</isNotNull>
+        <isNotNull property="RecordUser" prepend=",">RECORD_USER</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="Reason" prepend=",">REASON</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SBE_REPRINTRECORD.NEXTVAL</isNull>
+        <isNotNull property="Cardid" prepend=",">#Cardid#</isNotNull>
+        <isNotNull property="Equipid" prepend=",">#Equipid#</isNotNull>
+        <isNotNull property="Num" prepend=",">#Num#</isNotNull>
+        <isNotNull property="RecordUser" prepend=",">#RecordUser#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="Reason" prepend=",">#Reason#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SBE_REPRINTRECORD
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Cardid"  prepend=",">
+          CARDID = #update.Cardid#
+        </isNotNull>
+        <isNotNull  property="update.Equipid"  prepend=",">
+          EQUIPID = #update.Equipid#
+        </isNotNull>
+        <isNotNull  property="update.Num"  prepend=",">
+          NUM = #update.Num#
+        </isNotNull>
+        <isNotNull  property="update.RecordUser"  prepend=",">
+          RECORD_USER = #update.RecordUser#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.Reason"  prepend=",">
+          REASON = #update.Reason#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SBE_REPRINTRECORD
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SbeReprintrecord">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SbeReprintrecord">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SBE_REPRINTRECORD
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SBE_REPRINTRECORD
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SbeReprintrecord" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SBE_REPRINTRECORD
+    </statement>
+  </statements>
+</sqlMap>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SynConfig>
+    <Tables>
+        <Table name="Table.Source">
+            <DbSourceName>PDM200</DbSourceName>
+            <TableName>HR_PERSON</TableName>
+            <Primarykey FieldName="PERSON_ID"/>
+        </Table>
+        <Table name="Table.Target">
+           <DbSourceName>MES</DbSourceName>
+            <TableName>SSB_USER</TableName>
+            <Primarykey FieldName="OBJID"/>
+        </Table>
+    </Tables>
+    <SynDatas>
+        <SynData>
+            <SourceTable TableName="Table.Source">
+                <Command >
+                    <FileName value="Mesnac.DbSyn.dll"/>
+                    <ClassName value="Mesnac.DbSyn.TableSyn.Source"/>
+                </Command>
+                <SelectData>
+                    <add key="count" value="0"/>
+                    <add key="where">
+                        <![CDATA[MARK<>0]]>
+                    </add>
+                </SelectData>
+                <FinishRowSyn>
+                    <add key="update" value="MARK=0"/>
+                    <add key="where" value="PERSON_ID"/>
+                </FinishRowSyn>
+            </SourceTable>
+            <TargetTable TableName="Table.Target">
+                <Command >
+                    <FileName value="Mesnac.DbSyn.LLCommand.dll"/>
+                    <ClassName value="Mesnac.DbSyn.LLERP.HR_PERSON.Target"/>
+                </Command>
+                <ExcuteRowSyn>
+                    <add key="where" value="HR_CODE"/>
+                </ExcuteRowSyn>
+            </TargetTable>
+            <SourceTargetFields>
+                <SourceTargetField SourceFieldName="PERSON_ID" TargetFieldName="HR_CODE"/>
+                <SourceTargetField SourceFieldName="PERSONNAME" TargetFieldName="USER_NAME"/>
+                <SourceTargetField SourceFieldName="ACCOUNT1" TargetFieldName="WORK_BARCODE"/>
+                <SourceTargetField SourceFieldName="PERSONNAME" TargetFieldName="REAL_NAME"/>
+                <SourceTargetField SourceFieldName="SEX" TargetFieldName="SEX"/>
+                <SourceTargetField SourceFieldName="P_MOBILE" TargetFieldName="TELEPHONE"/>
+            </SourceTargetFields>
+        </SynData>
+    </SynDatas>
+</SynConfig>

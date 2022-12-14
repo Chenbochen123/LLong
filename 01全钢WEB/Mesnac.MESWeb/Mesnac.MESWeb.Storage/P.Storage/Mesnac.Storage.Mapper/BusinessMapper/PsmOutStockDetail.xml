@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Storage.Mapper.BusinessMapper.PsmOutStockDetail"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSM_OUT_STOCK_DETAIL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.DetailBatch" prepend="AND">
+          <![CDATA[DETAIL_BATCH = #where.DetailBatch#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BillId" prepend="AND">
+          <![CDATA[BILL_ID = #where.BillId#]]>
+        </isNotNull>
+        <isNotNull property="where.MainId" prepend="AND">
+          <![CDATA[MAIN_ID = #where.MainId#]]>
+        </isNotNull>
+        <isNotNull property="where.SummaryId" prepend="AND">
+          <![CDATA[SUMMARY_ID = #where.SummaryId#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[TYRE_NO = #where.TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckGradeCode" prepend="AND">
+          <![CDATA[CHECK_GRADE_CODE = #where.CheckGradeCode#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateUserId" prepend="AND">
+          <![CDATA[UPDATE_USER_ID = #where.UpdateUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.DetailState" prepend="AND">
+          <![CDATA[DETAIL_STATE = #where.DetailState#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetOutTyreNoInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT * FROM (
+        SELECT * FROM (
+        SELECT 
+        T1.S_N_NO 
+        ,T0.TYRE_NO
+        ,T4.MATERIAL_NAME
+        ,T1.AFFIRM_TIME OUT_DATE
+        ,T6.CUSTOME_NAME CUSTOMER_NAME
+        ,T5.MATERIAL_NAME P_MATERIAL_NAME
+        ,T3.BEGIN_TIME
+        ,T4.SAP_CODE
+        ,T5.SAP_CODE P_SAP_CODE
+        ,T0.REMARK
+        FROM psm_out_stock_detail T0
+        LEFT JOIN psm_out_stock_bill T1 ON T0.BILL_ID =T1.OBJID
+        LEFT JOIN psm_out_stock_main  T2 ON T0.MAIN_ID=T2.OBJID
+        LEFT JOIN cpp_curing_production T3 ON T0.TYRE_NO=T3.TYRE_NO
+        LEFT JOIN sbm_material T4 ON T2.MATERIAL_ID=T4.OBJID
+        LEFT JOIN sbm_material T5 ON T3.MATERIAL_ID=T5.OBJID
+        LEFT JOIN psb_customer T6 ON T1.CUSTOMER_OBJID=T6.OBJID
+        WHERE T0.DELETE_FLAG=0 ) 
+        UNION ALL
+        SELECT * FROM (
+        SELECT 
+        T1.RESER_NO  S_N_NO
+        ,T0.TYRE_NO
+        ,T4.MATERIAL_NAME
+        ,T1.AFFIRM_TIME OUT_DATE
+        ,T1.STOR_LOC_TO CUSTOMER_NAME
+        ,T5.MATERIAL_NAME P_MATERIAL_NAME
+        ,T3.BEGIN_TIME
+        ,T4.SAP_CODE
+        ,T5.SAP_CODE P_SAP_CODE
+        ,T0.REMARK
+        FROM psm_transfer_detail T0
+        LEFT JOIN psm_transfer_bill T1 ON T0.BILL_ID =T1.OBJID 
+        LEFT JOIN psm_transfer_main  T2 ON T0.MAIN_ID=T2.OBJID 
+        LEFT JOIN cpp_curing_production T3 ON T0.TYRE_NO=T3.TYRE_NO
+        LEFT JOIN sbm_material T4 ON T2.MATERIAL_ID=T4.OBJID
+        LEFT JOIN sbm_material T5 ON T3.MATERIAL_ID=T5.OBJID
+        WHERE T0.DELETE_FLAG=0    )) T
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.TYRE_NO" prepend="AND">
+           <![CDATA[T.TYRE_NO in ($where.TYRE_NO$)]]>
+         </isNotNull>
+         <isNull property="where.TYRE_NO">
+           <isNotNull property="where.BeginDate" prepend="AND">
+             <![CDATA[T.OUT_DATE >= #where.BeginDate#]]>
+           </isNotNull>
+           <isNotNull property="where.EndDate" prepend="AND">
+             <![CDATA[T.OUT_DATE <= #where.EndDate#]]>
+           </isNotNull>
+           <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+             <![CDATA[T.MATERIAL_NAME like '%' || #where.MATERIAL_NAME# || '%']]>
+           </isNotNull>
+           <isNotNull property="where.CUSTOMER_NAME" prepend="AND">
+             <![CDATA[T.CUSTOMER_NAME like '%' || #where.CUSTOMER_NAME# || '%']]>
+           </isNotNull>
+         </isNull>
+       </dynamic>
+       <isNotNull property="OrderString" prepend=" ">
+
+         ORDER BY $OrderString$
+
+       </isNotNull>
+       <isNull property="OrderString" prepend=" ">
+
+         ORDER BY T.OUT_DATE, T.TYRE_NO
+
+       </isNull>
+     </select>
+  </statements>
+</sqlMap>

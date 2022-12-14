@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudCsmStorePlace" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.* 
+        , CASE T1.STORE_PLACE_TYPE WHEN 99 THEN '虚拟' WHEN 1 THEN '正常' ELSE '' END STORE_PLACE_TYPE_CAPTION
+        , CASE T1.EQUIP_POSITION WHEN 1 THEN '左模' WHEN 2 THEN '右模' ELSE '' END EQUIP_POSITION_CAPTION
+        , T2.USER_NAME RECORD_USER_NAME 
+        , T3.STORE_NAME
+        , T4.EQUIP_NAME
+        FROM CSM_STORE_PLACE T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+        LEFT JOIN CSM_STORE T3 ON T1.STORE_ID = T3.OBJID 
+        LEFT JOIN SBE_EQUIP T4 ON T1.EQUIP_ID = T4.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.STORE_PLACE_NAME" prepend="AND">
+          <![CDATA[T1.STORE_PLACE_NAME LIKE '%' || #where.STORE_PLACE_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.STORE_PLACE_CODE" prepend="AND">
+          <![CDATA[T1.STORE_PLACE_CODE LIKE '%' || #where.STORE_PLACE_CODE# || '%' ]]>
+        </isNotNull>
+        <isNotNull property="where.STORE_ID" prepend="AND">
+          <![CDATA[T1.STORE_ID = #where.STORE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T3.STORE_TYPE, T3.STORE_NAME, T1.STORE_PLACE_NAME
+      </isNull>
+    </select>
+    <select id="Select+Update@CrudCsmStorePlace" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.* 
+        FROM CSM_STORE_PLACE T1 
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[T1.OBJID = #OBJID#]]>
+      </dynamic>
+    </select>
+
+    <!--查询仓库信息，ID值固定为GetComboBoxData@Select@CrudCsmStorePlace@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCsmStorePlace@STORE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.STORE_NAME ssValue from CSM_STORE t1 where t1.DELETE_FLAG = 0 and t1.STORE_TYPE = 1
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询仓库信息，ID值固定为GetComboBoxData@Select@CrudCsmStorePlace@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCsmStorePlace@EQUIP_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.EQUIP_NAME ssValue from SBE_EQUIP t1 where t1.DELETE_FLAG = 0 and t1.MAJOR_TYPE_ID = 51
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.EQUIP_CODE
+      </isNull>
+    </select>
+
+    <!--查询库位类型信息，ID值固定为GetComboBoxData@Select@CrudCsmStorePlace@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCsmStorePlace@STORE_PLACE_TYPE" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select 1 sskey, '正常' ssValue from dual
+      --union
+      --select 2 sskey, '返修' ssValue from dual
+      --union
+      --select 99 sskey, '虚拟' ssValue from dual
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by sskey
+      </isNull>
+    </select>
+
+    <!--查询左右模信息，ID值固定为GetComboBoxData@Select@CrudCsmStorePlace@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCsmStorePlace@EQUIP_POSITION" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select 1 sskey, '左' ssValue from dual
+      union
+      select 2 sskey, '右' ssValue from dual
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by sskey
+      </isNull>
+    </select>
+
+  </statements>
+</sqlMap>

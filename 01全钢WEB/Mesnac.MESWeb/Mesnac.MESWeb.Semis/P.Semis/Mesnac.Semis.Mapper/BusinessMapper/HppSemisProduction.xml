@@ -1,0 +1,1199 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HppSemisProduction"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_SEMIS_PRODUCTION ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.CardNo" prepend="AND">
+          <![CDATA[CARD_NO = #where.CardNo#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftMasterId" prepend="AND">
+          <![CDATA[SHIFT_MASTER_ID = #where.ShiftMasterId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDate" prepend="AND">
+          <![CDATA[SHIFT_DATE = #where.ShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.ClassId" prepend="AND">
+          <![CDATA[CLASS_ID = #where.ClassId#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[BEGIN_TIME = #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[END_TIME = #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.UnitId" prepend="AND">
+          <![CDATA[UNIT_ID = #where.UnitId#]]>
+        </isNotNull>
+        <isNotNull property="where.Qty" prepend="AND">
+          <![CDATA[QTY = #where.Qty#]]>
+        </isNotNull>
+        <isNotNull property="where.ShelfNo" prepend="AND">
+          <![CDATA[SHELF_NO = #where.ShelfNo#]]>
+        </isNotNull>
+        <isNotNull property="where.IsAlarm" prepend="AND">
+          <![CDATA[IS_ALARM = #where.IsAlarm#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Weight" prepend="AND">
+          <![CDATA[WEIGHT = #where.Weight#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+      <isNotNull property="where.WasteQty" prepend="AND">
+        <![CDATA[WASTE_QTY = #where.WasteQty#]]>
+      </isNotNull>
+      <isNotNull property="where.LeftQty" prepend="AND">
+        <![CDATA[LEFT_QTY = #where.LeftQty#]]>
+      </isNotNull>
+      <isNotNull property="where.Dummy1" prepend="AND">
+        <![CDATA[DUMMY1 = #where.Dummy1#]]>
+      </isNotNull>
+      <isNotNull property="where.Dummy2" prepend="AND">
+        <![CDATA[DUMMY2 = #where.Dummy2#]]>
+      </isNotNull>
+      <isNotNull property="where.Dummy3" prepend="AND">
+        <![CDATA[DUMMY3 = #where.Dummy3#]]>
+      </isNotNull>
+      <isNotNull property="where.Dummy4" prepend="AND">
+        <![CDATA[DUMMY4 = #where.Dummy4#]]>
+      </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id ="GetEquipMinorTypeInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select objid,minor_type_name from sbe_equip_minor_type where major_type_id in(21,22,31,32)
+       ]]>
+     </select>
+     <!--按机台班组统计产量-->
+     <select id="ProductionStat@EquipAndClass" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+          select t1.EQUIP_ID, t2.EQUIP_NAME 
+          , sum(case when t1.CLASS_ID = 1 then 1 else 0 end) TOTAL_1 
+          , sum(case when t1.CLASS_ID = 2 then 1 else 0 end) TOTAL_2 
+          , sum(case when t1.CLASS_ID = 3 then 1 else 0 end) TOTAL_3 
+          , sum(case when t1.CLASS_ID = 4 then 1 else 0 end) TOTAL_4 
+          , sum(case when nvl(t1.CLASS_ID, 0) not in (1, 2, 3, 4) then 1 else 0 end) TOTAL_N 
+          , COUNT(*) TOTAL 
+          , sum(t1.qty) TOTAL_QTY
+          from hpp_semis_production t1
+          left join SBE_EQUIP t2 on t1.EQUIP_ID = t2.OBJID 
+          left join SBM_MATERIAL t3 on t1.MATERIAL_ID = t3.OBJID 
+        ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.BeginDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE >= #where.BeginDate#]]>
+         </isNotNull>
+         <isNotNull property="where.EndDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE <= #where.EndDate#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftId" prepend="AND">
+           <![CDATA[t1.SHIFT_ID = #where.ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="where.ClassId" prepend="AND">
+           <![CDATA[t1.CLASS_ID = #where.ClassId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipMinorTypeId" prepend="AND">
+           <![CDATA[t2.MINOR_TYPE_ID = #where.EquipMinorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t1.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialId" prepend="AND">
+           <![CDATA[t1.MATERIAL_ID = #where.MaterialId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+          group by t1.EQUIP_ID, t2.EQUIP_NAME 
+        ]]>
+       <isNotNull property="OrderString" prepend="">
+         <![CDATA[
+          order by $OrderString$
+          ]]>
+       </isNotNull>
+       <isNull property="OrderString" prepend="">
+         <![CDATA[
+          order by t2.EQUIP_NAME
+          ]]>
+       </isNull>
+     </select>
+
+     <!--按机台规格班组统计产量-->
+     <select id="ProductionStat@EquipAndMaterAndClass" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select t1.EQUIP_ID, t2.EQUIP_NAME, t1.MATERIAL_ID, t3.MATERIAL_NAME
+        , sum(case when T1.CLASS_ID = 1 then 1 else 0 end) TOTAL_1
+        , sum(case when T1.CLASS_ID = 2 then 1 else 0 end) TOTAL_2
+        , sum(case when T1.CLASS_ID = 3 then 1 else 0 end) TOTAL_3
+        , sum(case when T1.CLASS_ID = 4 then 1 else 0 end) TOTAL_4
+        , sum(case when nvl(T1.CLASS_ID, 0) not in (1, 2, 3, 4) then 1 else 0 end) TOTAL_N
+        , COUNT(*) TOTAL
+        , sum(t1.qty) TOTAL_QTY
+        from hpp_semis_production t1 
+        left join SBE_EQUIP t2 on t1.EQUIP_ID = t2.OBJID 
+        left join SBM_MATERIAL t3 on t1.MATERIAL_ID = t3.OBJID 
+      ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.BeginDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE >= #where.BeginDate#]]>
+         </isNotNull>
+         <isNotNull property="where.EndDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE <= #where.EndDate#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftId" prepend="AND">
+           <![CDATA[t1.SHIFT_ID = #where.ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="where.ClassId" prepend="AND">
+           <![CDATA[t1.CLASS_ID = #where.ClassId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipMinorTypeId" prepend="AND">
+           <![CDATA[t2.MINOR_TYPE_ID = #where.EquipMinorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t1.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialId" prepend="AND">
+           <![CDATA[t1.MATERIAL_ID = #where.MaterialId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+        group by t1.EQUIP_ID, t2.EQUIP_NAME, t1.MATERIAL_ID, t3.MATERIAL_NAME
+      ]]>
+       <isNotNull property="OrderString" prepend="">
+         <![CDATA[
+        order by $OrderString$
+        ]]>
+       </isNotNull>
+       <isNull property="OrderString" prepend="">
+         <![CDATA[
+        order by t2.EQUIP_NAME
+        ]]>
+       </isNull>
+     </select>
+
+     <!--按规格班组统计产量-->
+     <select id="ProductionStat@MaterAndClass" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select t1.MATERIAL_ID, t3.MATERIAL_NAME
+        , sum(case when T1.CLASS_ID = 1 then 1 else 0 end) TOTAL_1
+        , sum(case when T1.CLASS_ID = 2 then 1 else 0 end) TOTAL_2
+        , sum(case when T1.CLASS_ID = 3 then 1 else 0 end) TOTAL_3
+        , sum(case when T1.CLASS_ID = 4 then 1 else 0 end) TOTAL_4
+        , sum(case when nvl(T1.CLASS_ID, 0) not in (1, 2, 3, 4) then 1 else 0 end) TOTAL_N
+        , COUNT(*) TOTAL
+        , sum(t1.qty) TOTAL_QTY
+        from Hpp_semis_production t1 
+        left join SBE_EQUIP t2 on t1.EQUIP_ID = t2.OBJID 
+        left join SBM_MATERIAL t3 on t1.MATERIAL_ID = t3.OBJID 
+      ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.BeginDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE >= #where.BeginDate#]]>
+         </isNotNull>
+         <isNotNull property="where.EndDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE <= #where.EndDate#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftId" prepend="AND">
+           <![CDATA[t1.SHIFT_ID = #where.ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="where.ClassId" prepend="AND">
+           <![CDATA[t1.CLASS_ID = #where.ClassId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipMinorTypeId" prepend="AND">
+           <![CDATA[t2.MINOR_TYPE_ID = #where.EquipMinorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t1.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialId" prepend="AND">
+           <![CDATA[t1.MATERIAL_ID = #where.MaterialId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+        group by t1.MATERIAL_ID, t3.MATERIAL_NAME
+      ]]>
+       <isNotNull property="OrderString" prepend="">
+         <![CDATA[
+        order by $OrderString$
+        ]]>
+       </isNotNull>
+     </select>
+
+     <!--按机台班次统计产量-->
+     <select id="ProductionStat@EquipAndShift" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select t1.EQUIP_ID, t2.EQUIP_NAME 
+        , sum(case when T1.SHIFT_ID = 1 then 1 else 0 end) TOTAL_1 
+        , sum(case when T1.SHIFT_ID = 2 then 1 else 0 end) TOTAL_2 
+        , sum(case when T1.SHIFT_ID = 3 then 1 else 0 end) TOTAL_3 
+        , sum(case when nvl(T1.SHIFT_ID, 0) not in (1, 2, 3) then 1 else 0 end) TOTAL_N 
+        , COUNT(*) TOTAL 
+        , sum(t1.qty) TOTAL_QTY
+        from hpp_semis_production t1 
+        left join SBE_EQUIP t2 on t1.EQUIP_ID = t2.OBJID 
+        left join SBM_MATERIAL t3 on t1.MATERIAL_ID = t3.OBJID 
+      ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.BeginDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE >= #where.BeginDate#]]>
+         </isNotNull>
+         <isNotNull property="where.EndDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE <= #where.EndDate#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftId" prepend="AND">
+           <![CDATA[t1.SHIFT_ID = #where.ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="where.ClassId" prepend="AND">
+           <![CDATA[t1.CLASS_ID = #where.ClassId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipMinorTypeId" prepend="AND">
+           <![CDATA[t2.MINOR_TYPE_ID = #where.EquipMinorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t1.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialId" prepend="AND">
+           <![CDATA[t1.MATERIAL_ID = #where.MaterialId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+        group by t1.EQUIP_ID, t2.EQUIP_NAME 
+      ]]>
+       <isNotNull property="OrderString" prepend="">
+         <![CDATA[
+        order by $OrderString$
+        ]]>
+       </isNotNull>
+       <isNull property="OrderString" prepend="">
+         <![CDATA[
+        order by t2.EQUIP_NAME
+        ]]>
+       </isNull>
+     </select>
+
+     <!--按机台规格班次统计产量-->
+     <select id="ProductionStat@EquipAndMaterAndShift" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select t1.EQUIP_ID, t2.EQUIP_NAME, t1.MATERIAL_ID, t3.MATERIAL_NAME
+        , sum(case when T1.SHIFT_ID = 1 then 1 else 0 end) TOTAL_1
+        , sum(case when T1.SHIFT_ID = 2 then 1 else 0 end) TOTAL_2
+        , sum(case when T1.SHIFT_ID = 3 then 1 else 0 end) TOTAL_3
+        , sum(case when nvl(T1.SHIFT_ID, 0) not in (1, 2, 3) then 1 else 0 end) TOTAL_N
+        , COUNT(*) TOTAL
+        , sum(t1.qty) TOTAL_QTY
+        from hpp_semis_production t1 
+        left join SBE_EQUIP t2 on t1.EQUIP_ID = t2.OBJID 
+        left join SBM_MATERIAL t3 on t1.MATERIAL_ID = t3.OBJID 
+      ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.BeginDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE >= #where.BeginDate#]]>
+         </isNotNull>
+         <isNotNull property="where.EndDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE <= #where.EndDate#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftId" prepend="AND">
+           <![CDATA[t1.SHIFT_ID = #where.ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="where.ClassId" prepend="AND">
+           <![CDATA[t1.CLASS_ID = #where.ClassId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipMinorTypeId" prepend="AND">
+           <![CDATA[t2.MINOR_TYPE_ID = #where.EquipMinorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t1.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialId" prepend="AND">
+           <![CDATA[t1.MATERIAL_ID = #where.MaterialId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+        group by t1.EQUIP_ID, t2.EQUIP_NAME, t1.MATERIAL_ID, t3.MATERIAL_NAME
+      ]]>
+       <isNotNull property="OrderString" prepend="">
+         <![CDATA[
+        order by $OrderString$
+        ]]>
+       </isNotNull>
+       <isNull property="OrderString" prepend="">
+         <![CDATA[
+        order by t2.EQUIP_NAME
+        ]]>
+       </isNull>
+     </select>
+
+     <!--按规格班次统计产量-->
+     <select id="ProductionStat@MaterAndShift" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select t1.MATERIAL_ID, t3.MATERIAL_NAME
+        , sum(case when T1.SHIFT_ID = 1 then 1 else 0 end) TOTAL_1
+        , sum(case when T1.SHIFT_ID = 2 then 1 else 0 end) TOTAL_2
+        , sum(case when T1.SHIFT_ID = 3 then 1 else 0 end) TOTAL_3
+        , sum(case when nvl(T1.SHIFT_ID, 0) not in (1, 2, 3) then 1 else 0 end) TOTAL_N
+        , COUNT(*) TOTAL
+        , sum(t1.qty) TOTAL_QTY
+        from hpp_semis_production t1 
+        left join SBE_EQUIP t2 on t1.EQUIP_ID = t2.OBJID 
+        left join SBM_MATERIAL t3 on t1.MATERIAL_ID = t3.OBJID 
+      ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.BeginDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE >= #where.BeginDate#]]>
+         </isNotNull>
+         <isNotNull property="where.EndDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE <= #where.EndDate#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftId" prepend="AND">
+           <![CDATA[t1.SHIFT_ID = #where.ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="where.ClassId" prepend="AND">
+           <![CDATA[t1.CLASS_ID = #where.ClassId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipMinorTypeId" prepend="AND">
+           <![CDATA[t2.MINOR_TYPE_ID = #where.EquipMinorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t1.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialId" prepend="AND">
+           <![CDATA[t1.MATERIAL_ID = #where.MaterialId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+        group by t1.MATERIAL_ID, t3.MATERIAL_NAME
+      ]]>
+       <isNotNull property="OrderString" prepend="">
+         <![CDATA[
+        order by $OrderString$
+        ]]>
+       </isNotNull>
+     </select>
+
+     <!--按机台规格统计产量-->
+     <select id="ProductionStat@EquipAndMater" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select t1.EQUIP_ID, t2.EQUIP_NAME, t1.MATERIAL_ID, t3.MATERIAL_NAME
+        , COUNT(*) TOTAL
+        , sum(t1.qty) TOTAL_QTY
+        from hpp_semis_production t1 
+        left join SBE_EQUIP t2 on t1.EQUIP_ID = t2.OBJID 
+        left join SBM_MATERIAL t3 on t1.MATERIAL_ID = t3.OBJID 
+      ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.BeginDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE >= #where.BeginDate#]]>
+         </isNotNull>
+         <isNotNull property="where.EndDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE <= #where.EndDate#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftId" prepend="AND">
+           <![CDATA[t1.SHIFT_ID = #where.ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="where.ClassId" prepend="AND">
+           <![CDATA[t1.CLASS_ID = #where.ClassId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipMinorTypeId" prepend="AND">
+           <![CDATA[t2.MINOR_TYPE_ID = #where.EquipMinorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t1.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialId" prepend="AND">
+           <![CDATA[t1.MATERIAL_ID = #where.MaterialId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+        group by t1.EQUIP_ID, t2.EQUIP_NAME, t1.MATERIAL_ID, t3.MATERIAL_NAME
+      ]]>
+       <isNotNull property="OrderString" prepend="">
+         <![CDATA[
+        order by $OrderString$
+        ]]>
+       </isNotNull>
+       <isNull property="OrderString" prepend="">
+         <![CDATA[
+        order by t2.EQUIP_NAME
+        ]]>
+       </isNull>
+     </select>
+
+     <!--按人员机台规格统计产量-->
+     <select id="ProductionStat@EmpAndEquipAndMater" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+       select t1.equip_id, t4.equip_name,t1.material_id,t5.material_name,t3.user_name emp_name,count(*) total, sum(t1.qty) TOTAL_QTY from hpp_semis_production t1
+        left join hpp_shift_master t2 on t2.objid = t1.shift_master_id
+        left join 
+        (
+            select td.master_id,to_char(wm_concat(tu.user_name)) user_name from hpp_shift_detail td
+            left join ssb_user tu on tu.objid = td.worker_id
+            group by td.master_id
+        )
+         t3 on t3.master_id = t2.objid
+        left join sbe_equip t4 on t4.objid =t1.equip_id
+        left join sbm_material t5 on t5.objid = t1.material_id
+      ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.BeginDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE >= #where.BeginDate#]]>
+         </isNotNull>
+         <isNotNull property="where.EndDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE <= #where.EndDate#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftId" prepend="AND">
+           <![CDATA[t1.SHIFT_ID = #where.ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="where.ClassId" prepend="AND">
+           <![CDATA[t1.CLASS_ID = #where.ClassId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipMinorTypeId" prepend="AND">
+           <![CDATA[t4.MINOR_TYPE_ID = #where.EquipMinorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t1.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialId" prepend="AND">
+           <![CDATA[t1.MATERIAL_ID = #where.MaterialId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+        group by t1.EQUIP_ID, t4.EQUIP_NAME, t1.MATERIAL_ID, t5.MATERIAL_NAME,T3.USER_NAME
+      ]]>
+       <isNotNull property="OrderString" prepend="">
+         <![CDATA[
+        order by $OrderString$
+        ]]>
+       </isNotNull>
+       <isNull property="OrderString" prepend="">
+         <![CDATA[
+        order by t3.USER_NAME, t4.EQUIP_NAME
+        ]]>
+       </isNull>
+     </select>
+
+     <!--按人员产机台班次统计产量-->
+     <select id="ProductionStat@EmpAndEquipAndShift" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select t1.EQUIP_ID,t3.USER_NAME EMP_NAME,  t4.EQUIP_NAME, t1.MATERIAL_ID, t5.MATERIAL_NAME
+        , sum(case when T1.SHIFT_ID = 1 then 1 else 0 end) TOTAL_1
+        , sum(case when T1.SHIFT_ID = 2 then 1 else 0 end) TOTAL_2
+        , sum(case when T1.SHIFT_ID = 3 then 1 else 0 end) TOTAL_3
+        , sum(case when nvl(T1.SHIFT_ID, 0) not in (1, 2, 3) then 1 else 0 end) TOTAL_N
+        , COUNT(*) TOTAL
+        , sum(t1.qty) TOTAL_QTY
+         from hpp_semis_production t1
+        left join hpp_shift_master t2 on t2.objid = t1.shift_master_id
+        left join 
+        (
+            select td.master_id,to_char(wm_concat(tu.user_name)) user_name from hpp_shift_detail td
+            left join ssb_user tu on tu.objid = td.worker_id
+            group by td.master_id
+        )
+         t3 on t3.master_id = t2.objid
+        left join sbe_equip t4 on t4.objid =t1.equip_id
+        left join sbm_material t5 on t5.objid = t1.material_id
+      ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.BeginDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE >= #where.BeginDate#]]>
+         </isNotNull>
+         <isNotNull property="where.EndDate" prepend="AND">
+           <![CDATA[t1.SHIFT_DATE <= #where.EndDate#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[t1.BEGIN_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftId" prepend="AND">
+           <![CDATA[t1.SHIFT_ID = #where.ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="where.ClassId" prepend="AND">
+           <![CDATA[t1.CLASS_ID = #where.ClassId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipMinorTypeId" prepend="AND">
+           <![CDATA[t4.MINOR_TYPE_ID = #where.EquipMinorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t1.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialId" prepend="AND">
+           <![CDATA[t1.MATERIAL_ID = #where.MaterialId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+        group by t3.USER_NAME,t1.EQUIP_ID, t4.EQUIP_NAME, t1.MATERIAL_ID, t5.MATERIAL_NAME
+      ]]>
+       <isNotNull property="OrderString" prepend="">
+         <![CDATA[
+        order by $OrderString$
+        ]]>
+       </isNotNull>
+       <isNull property="OrderString" prepend="">
+         <![CDATA[
+        order by t3.USER_NAME,t4.EQUIP_NAME
+        ]]>
+       </isNull>
+     </select>
+     <select id="GetCuttingPlanReport" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select tt.plan_date,tt.equip_minor_name,tt.material_name,tt.minor_type_name part_name,null as dajuan,null as banchan,null as danhao,null as requirements,
+        null as safe_stocks,null as shift_stocks,null as CIRCULATION_COEFFCIENT,
+        nvl(tz.plan_amount,0) zhong_plan_amount,nvl(tz.real_amount,0) zhong_real_amount,null as zhong_order ,null as zhong_reason,
+        nvl(tw.plan_amount,0) ye_plan_amount,nvl(tw.real_amount,0) ye_real_amount,null as ye_order ,null as ye_reason,
+        nvl(tzz.plan_amount,0) zao_plan_amount,nvl(tzz.real_amount,0) zao_real_amount, null as zao_order ,null as zao_reason
+        from 
+        (
+        select t1.plan_date,t6.minor_type_name equip_minor_name,t4.material_name,t5.minor_type_name, sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id
+        left join sbm_material t4 on t4.objid =t2.material_id
+        left join sbm_material_minor_type t5 on t5.objid = t4.minor_type_id
+        left join sbe_equip_minor_type t6 on t6.objid = t3.minor_type_id
+        where t1.procedure_id=31]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.procedureID" prepend="AND">
+           <![CDATA[t3.minor_type_id=#where.procedureID#]]>
+         </isNotNull>
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[t1.plan_date=#where.planDate#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        group by t4.material_name,t5.minor_type_name,t6.minor_type_name,t1.plan_date
+        )tt
+        left join 
+        (
+        select t4.material_name,t5.minor_type_name, sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id
+        left join sbm_material t4 on t4.objid =t2.material_id
+        left join sbm_material_minor_type t5 on t5.objid = t4.minor_type_id
+        where t1.procedure_id=31 and t1.shift_id=1]]>
+          <dynamic prepend="AND">
+         <isNotNull property="where.procedureID" prepend="AND">
+           <![CDATA[t3.minor_type_id=#where.procedureID#]]>
+        </isNotNull>
+        <isNotNull property="where.planDate" prepend="AND">
+          <![CDATA[t1.plan_date=#where.planDate#]]>
+        </isNotNull>
+        </dynamic>
+       <![CDATA[
+        group by t4.material_name,t5.minor_type_name
+        ) tzz
+        on tzz.material_name = tt.material_name
+        left join 
+        (
+        select t4.material_name,t5.minor_type_name, sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id
+        left join sbm_material t4 on t4.objid =t2.material_id
+        left join sbm_material_minor_type t5 on t5.objid = t4.minor_type_id
+        where t1.procedure_id=31 and t1.shift_id=2]]>
+          <dynamic prepend="AND">
+         <isNotNull property="where.procedureID" prepend="AND">
+           <![CDATA[t3.minor_type_id=#where.procedureID#]]>
+         </isNotNull>
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[t1.plan_date=#where.planDate#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        group by t4.material_name,t5.minor_type_name
+        ) tz
+        on tz.material_name = tt.material_name
+        left join
+        (
+        select t4.material_name,t5.minor_type_name, sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id
+        left join sbm_material t4 on t4.objid =t2.material_id
+        left join sbm_material_minor_type t5 on t5.objid = t4.minor_type_id
+        where t1.procedure_id=31 and t1.shift_id=3]]>
+          <dynamic prepend="AND">
+         <isNotNull property="where.procedureID" prepend="AND">
+           <![CDATA[t3.minor_type_id=#where.procedureID#]]>
+        </isNotNull>
+        <isNotNull property="where.planDate" prepend="AND">
+          <![CDATA[t1.plan_date=#where.planDate#]]>
+        </isNotNull>
+        </dynamic>
+       <![CDATA[
+        group by t4.material_name,t5.minor_type_name
+        )tw on tw.material_name = tt.material_name
+        order by material_name,part_name
+       ]]>
+     </select>
+     <select id="GetLaminatePlanReport" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select t1.plan_date,t3.equip_name,t4.material_name,t5.minor_type_name,null as banchan,null as danhao,null as requirements,null as safe_stocks,
+        null as shift_stocks,null as CIRCULATION_COEFFCIENT,
+        sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount ,round(sum(t.qty)/sum(t2.plan_amount),4)*100||'%' rate,null as plan_order ,null as reason
+        from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id
+        left join sbm_material t4 on t4.objid =t2.material_id
+        left join sbm_material_minor_type t5 on t5.objid = t4.minor_type_id
+        left join sbe_equip_minor_type t6 on t6.objid = t3.minor_type_id
+        where t1.procedure_id=32
+       
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[t1.PLAN_DATE=#where.planDate#]]>
+         </isNotNull>
+         <isNotNull property="where.equipId" prepend="AND">
+           <![CDATA[t.EQUIP_ID=#where.equipId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        group by t4.material_name,t5.minor_type_name,t3.equip_name,t1.plan_date
+        order by material_name,minor_type_name
+       ]]>
+     </select>
+   <select id="GetUnderlayerPlanReport" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select t1.plan_date,t3.equip_name,t4.material_name,null as banchan,null as danhao,null as requirements,null as safe_stocks,
+        null as shift_stocks,null as CIRCULATION_COEFFCIENT,
+        sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount ,round(sum(t.qty)/sum(t2.plan_amount),4)*100||'%' rate,null as plan_order ,null as reason
+        from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id
+        left join sbm_material t4 on t4.objid =t2.material_id
+        where t1.procedure_id=33
+       
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[t1.PLAN_DATE=#where.planDate#]]>
+         </isNotNull>
+         <isNotNull property="where.equipId" prepend="AND">
+           <![CDATA[t.EQUIP_ID=#where.equipId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        group by t4.material_name,t3.equip_name,t1.plan_date
+        order by material_name
+       ]]>
+     </select>
+     <select id="GetBJPPlanReport" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select t1.plan_date,t4.material_name,null as banchan,null as safe_stocks,
+        null as shift_stocks,null as CIRCULATION_COEFFCIENT,
+        sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount ,round(sum(t.qty)/sum(t2.plan_amount),4)*100||'%' rate,null as plan_order ,null as reason
+        from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id and t3.minor_type_id=3302
+        left join sbm_material t4 on t4.objid =t2.material_id
+        where t1.procedure_id=33
+       
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[t1.PLAN_DATE=#where.planDate#]]>
+         </isNotNull>
+         <isNotNull property="where.equipId" prepend="AND">
+           <![CDATA[t.EQUIP_ID=#where.equipId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        group by t4.material_name,t3.equip_name,t1.plan_date
+        order by material_name
+       ]]>
+     </select>
+     <select id="GetZeroPlanReport" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select tt.plan_date,tt.material_name,null as banchan,null as requirements,
+        null as safe_stocks,null as shift_stocks,null as CIRCULATION_COEFFCIENT,
+        nvl(tz.plan_amount,0) zhong_plan_amount,nvl(tz.real_amount,0) zhong_real_amount,null as zhong_order ,null as zhong_reason,
+        nvl(tw.plan_amount,0) ye_plan_amount,nvl(tw.real_amount,0) ye_real_amount,null as ye_order ,null as ye_reason,
+        nvl(tzz.plan_amount,0) zao_plan_amount,nvl(tzz.real_amount,0) zao_real_amount, null as zao_order ,null as zao_reason
+        from 
+        (
+        select t1.plan_date,t6.minor_type_name equip_minor_name,t4.material_name,t5.minor_type_name, sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id and t3.minor_type_id=2202
+        left join sbm_material t4 on t4.objid =t2.material_id
+        left join sbm_material_minor_type t5 on t5.objid = t4.minor_type_id
+        left join sbe_equip_minor_type t6 on t6.objid = t3.minor_type_id
+        where t1.procedure_id=22]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.procedureID" prepend="AND">
+           <![CDATA[t3.minor_type_id=#where.procedureID#]]>
+         </isNotNull>
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[t1.plan_date=#where.planDate#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        group by t4.material_name,t5.minor_type_name,t6.minor_type_name,t1.plan_date
+        )tt
+        left join 
+        (
+        select t4.material_name,t5.minor_type_name, sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id and t3.minor_type_id=2202
+        left join sbm_material t4 on t4.objid =t2.material_id
+        left join sbm_material_minor_type t5 on t5.objid = t4.minor_type_id
+        where t1.procedure_id=22 and t1.shift_id=1]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.procedureID" prepend="AND">
+           <![CDATA[t3.minor_type_id=#where.procedureID#]]>
+         </isNotNull>
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[t1.plan_date=#where.planDate#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        group by t4.material_name,t5.minor_type_name
+        ) tzz
+        on tzz.material_name = tt.material_name
+        left join 
+        (
+        select t4.material_name,t5.minor_type_name, sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id and t3.minor_type_id=2202
+        left join sbm_material t4 on t4.objid =t2.material_id
+        left join sbm_material_minor_type t5 on t5.objid = t4.minor_type_id
+        where t1.procedure_id=22 and t1.shift_id=2]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.procedureID" prepend="AND">
+           <![CDATA[t3.minor_type_id=#where.procedureID#]]>
+         </isNotNull>
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[t1.plan_date=#where.planDate#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        group by t4.material_name,t5.minor_type_name
+        ) tz
+        on tz.material_name = tt.material_name
+        left join
+        (
+        select t4.material_name,t5.minor_type_name, sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id and t3.minor_type_id=2202
+        left join sbm_material t4 on t4.objid =t2.material_id
+        left join sbm_material_minor_type t5 on t5.objid = t4.minor_type_id
+        where t1.procedure_id=22 and t1.shift_id=3]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.procedureID" prepend="AND">
+           <![CDATA[t3.minor_type_id=#where.procedureID#]]>
+         </isNotNull>
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[t1.plan_date=#where.planDate#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        group by t4.material_name,t5.minor_type_name
+        )tw on tw.material_name = tt.material_name
+        order by material_name
+       ]]>
+     </select>
+     <select id="GetGSQPlanReport" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select tt.plan_date,tt.equip_name,tt.material_name,null as banchan,null as requirements,
+        null as safe_stocks,null as shift_stocks,null as CIRCULATION_COEFFCIENT,
+        nvl(tz.plan_amount,0) zhong_plan_amount,nvl(tz.real_amount,0) zhong_real_amount,null as zhong_order ,null as zhong_reason,
+        nvl(tw.plan_amount,0) ye_plan_amount,nvl(tw.real_amount,0) ye_real_amount,null as ye_order ,null as ye_reason,
+        nvl(tzz.plan_amount,0) zao_plan_amount,nvl(tzz.real_amount,0) zao_real_amount, null as zao_order ,null as zao_reason
+        from 
+        (
+        select t1.plan_date,t3.equip_name,t6.minor_type_name equip_minor_name,t4.material_name,t5.minor_type_name, sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id and t3.minor_type_id=3401
+        left join sbm_material t4 on t4.objid =t2.material_id
+        left join sbm_material_minor_type t5 on t5.objid = t4.minor_type_id
+        left join sbe_equip_minor_type t6 on t6.objid = t3.minor_type_id
+        where t1.procedure_id=34]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.procedureID" prepend="AND">
+           <![CDATA[t3.minor_type_id=#where.procedureID#]]>
+         </isNotNull>
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[t1.plan_date=#where.planDate#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        group by t3.equip_name,t4.material_name,t5.minor_type_name,t6.minor_type_name,t1.plan_date
+        )tt
+        left join 
+        (
+        select t3.equip_name,t4.material_name,t5.minor_type_name, sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id and t3.minor_type_id=3401
+        left join sbm_material t4 on t4.objid =t2.material_id
+        left join sbm_material_minor_type t5 on t5.objid = t4.minor_type_id
+        where t1.procedure_id=34 and t1.shift_id=1]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.procedureID" prepend="AND">
+           <![CDATA[t3.minor_type_id=#where.procedureID#]]>
+         </isNotNull>
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[t1.plan_date=#where.planDate#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        group by t3.equip_name,t4.material_name,t5.minor_type_name
+        ) tzz
+        on tzz.material_name = tt.material_name
+        left join 
+        (
+        select t3.equip_name,t4.material_name,t5.minor_type_name, sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id and t3.minor_type_id=3401
+        left join sbm_material t4 on t4.objid =t2.material_id
+        left join sbm_material_minor_type t5 on t5.objid = t4.minor_type_id
+        where t1.procedure_id=34 and t1.shift_id=2]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.procedureID" prepend="AND">
+           <![CDATA[t3.minor_type_id=#where.procedureID#]]>
+         </isNotNull>
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[t1.plan_date=#where.planDate#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        group by t3.equip_name,t4.material_name,t5.minor_type_name
+        ) tz
+        on tz.material_name = tt.material_name
+        left join
+        (
+        select t3.equip_name,t4.material_name,t5.minor_type_name, sum(t.qty) real_amount,sum(t2.plan_amount) plan_amount from hpp_semis_production t
+        left join hpp_plan t1 on t1.objid = t.plan_id
+        left join hpp_plan_detail t2 on t2.objid = t.plan_detail_id
+        left join sbe_equip t3 on t3.objid = t.equip_id and t3.minor_type_id=3401
+        left join sbm_material t4 on t4.objid =t2.material_id
+        left join sbm_material_minor_type t5 on t5.objid = t4.minor_type_id
+        where t1.procedure_id=34 and t1.shift_id=3]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.procedureID" prepend="AND">
+           <![CDATA[t3.minor_type_id=#where.procedureID#]]>
+         </isNotNull>
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[t1.plan_date=#where.planDate#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        group by t3.equip_name,t4.material_name,t5.minor_type_name
+        )tw on tw.material_name = tt.material_name
+        order by equip_name,material_name
+       ]]>
+     </select>
+     <select id="GetSemisProductInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select * from (SELECT T.PLAN_DETAIL_ID,T5.UNIT_NAME,T.CARD_NO BARCODE,T.EQUIP_ID,T.MATERIAL_ID,T1.MATERIAL_NAME,T1.SAP_CODE,T1.MATERIAL_CODE,T1.MINOR_TYPE_ID MATERIAL_TYPE_ID,
+       T2.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T4.USER_NAME OPER_NAME,T3.EQUIP_NAME,T.QTY SET_QUANTITY,T.LEFT_QTY LEFT_QUANTITY,T.END_TIME PRODUCE_TIME,
+       T.dummy4 VALID_DATE,T.SHELF_NO,T9.OBJID STORE_PLACE_ID,T9.STORE_PLACE_NAME ,T. DUMMY2 ,T8.RECORD_TIME,t.dummy3 MIN_DATE,T10.MIN_TIME,T10.VALID_TIME
+       ,CASE WHEN NVL(STATE_FLAG,0) = 2 THEN '0' WHEN NVL(GRADEID,0) = 1 THEN '6' ELSE '-1' END  STATE,t.MARK_FLAG,case t.MARK_FLAG when 1 then t13.reason_name when 2 then t14.reason_name else null end reason_name
+       ,T.DUMMY9 YC_TIME,t.dummy8 use_state,t.batch
+       FROM HPP_SEMIS_PRODUCTION T
+        LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID  =T.MATERIAL_ID
+        LEFT JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T2.OBJID = T1.MINOR_TYPE_ID
+        LEFT JOIN SBE_EQUIP T3 ON T3.OBJID = T.EQUIP_ID
+        LEFT JOIN SSB_USER T4 ON T4.OBJID = T.RECORD_USER_ID
+        LEFT JOIN SSB_UNIT T5 ON T5.OBJID=T.UNIT_ID
+        LEFT JOIN HSM_TOOLING_LOAD T6 ON T6.CARD_NO = T.CARD_NO
+        LEFT JOIN HSM_TOOLING T7 ON T7.OBJID = T6.TOOLING_ID
+        LEFT JOIN HPP_STORAGE_DETAIL T8 ON T8.CARD_NO = T.CARD_NO 
+        LEFT JOIN HPP_STORE_PLACE T9 ON T9.OBJID = T8.STORE_PLACE_ID AND T9.POSITION_TYPE='1'
+        LEFT JOIN SBM_MATERIAL_INFO T10 ON T10.MATERIAL_ID = T.MATERIAL_ID
+        LEFT JOIN HQC_QCRECORD T11 ON T11.CARD_NO = T.CARD_NO and t11.new_flag = 1
+        LEFT JOIN sbm_mark_info t12 on t12.barcode = t.card_no and t12.delete_flag=0  and t.mark_flag = t12.mark_flag
+        LEFT JOIN sbm_mark_reason t13 on t13.objid = t12.reason_id
+        left join sbm_freeze_reason t14 on t14.objid = t12.reason_id
+       WHERE T.DELETE_FLAG=0
+       ]]>
+       <isNotNull property="cardNo" prepend="AND">
+         <![CDATA[T.CARD_NO=#cardNo#]]>
+       </isNotNull>
+       <isNotNull property="RFIDNo" prepend="AND">
+         <![CDATA[T7.TOOLING_RFID_BARCODE=#RFIDNo#]]>
+       </isNotNull>
+       <![CDATA[ order by t12.record_time desc) where rownum<=1]]>
+     </select>
+     <select id="GetSemisProductInfo3" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T5.UNIT_NAME,T.CARD_NO BARCODE,T.EQUIP_ID,T.MATERIAL_ID,T1.MATERIAL_NAME,T1.SAP_CODE,T1.MATERIAL_CODE,T1.MINOR_TYPE_ID MATERIAL_TYPE_ID,
+       T2.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T4.USER_NAME OPER_NAME,T3.EQUIP_NAME,T.QTY SET_QUANTITY,T.LEFT_QTY LEFT_QUANTITY,T.END_TIME PRODUCE_TIME,
+       T.END_TIME VALID_DATE,T.SHELF_NO,T9.OBJID STORE_PLACE_ID,T9.STORE_PLACE_NAME ,T.DUMMY2 ,T.END_TIME RECORD_TIME,NVL(T10.OBJID,0) ISBAD
+       FROM HPP_SEMIS_PRODUCTION T
+        LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID  =T.MATERIAL_ID
+        LEFT JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T2.OBJID = T1.MINOR_TYPE_ID
+        LEFT JOIN SBE_EQUIP T3 ON T3.OBJID = T.EQUIP_ID
+        LEFT JOIN SSB_USER T4 ON T4.OBJID = T.RECORD_USER_ID
+        LEFT JOIN SSB_UNIT T5 ON T5.OBJID=T.UNIT_ID
+        LEFT JOIN HSM_TOOLING_LOAD T6 ON T6.CARD_NO = T.CARD_NO
+        LEFT JOIN HSM_TOOLING T7 ON T7.OBJID = T6.TOOLING_ID
+        LEFT JOIN HPP_STORAGE_DETAIL T8 ON T8.CARD_NO = T.CARD_NO 
+        LEFT JOIN HPP_STORE_PLACE T9 ON T9.OBJID = T8.STORE_PLACE_ID AND T9.POSITION_TYPE='1'
+        LEFT JOIN HPP_BADRECORD T10 ON T10.BARCODE = T.CARD_NO
+       WHERE T.DELETE_FLAG=0
+       ]]>
+       <isNotNull property="cardNo" prepend="AND">
+         <![CDATA[T.CARD_NO=#cardNo#]]>
+       </isNotNull>
+       <isNotNull property="RFIDNo" prepend="AND">
+         <![CDATA[T7.TOOLING_RFID_BARCODE=#RFIDNo#]]>
+       </isNotNull>
+     </select>
+     <select id="GetSysDateTime" parameterClass="map" resultClass="Row">
+       select sysdate SYS_DATE from dual
+     </select>
+     <select id="GetToolingCurrentMaterial" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select t.card_no,t1.material_id,t3.material_name,t.record_time,case when t1.qty <>t1.left_qty then 1 else 0 end IS_USED 
+         from hsm_tooling_load t 
+          inner join hpp_semis_production t1 on t1.card_no = t.card_no
+          inner join hsm_tooling t2 on t2.objid = t.tooling_id
+          inner join sbm_material t3 on t3.objid = t1.material_id
+          where t2.tooling_rfid_barcode=#barcode#
+       ]]>
+     </select>
+<select id="GetSemisProductionInfo" parameterClass="map" resultClass="Row">
+  <![CDATA[
+  select material_id,left_qty from hpp_semis_production 
+  where delete_flag=0 and card_no=#Barcode#
+  ]]>
+</select>
+   <select id="GetRubberProductionInfo" parameterClass="map" resultClass="Row">
+  <![CDATA[
+  select t1.objid material_id,t.left_qty from hpp_rubber_production t
+  left join sbm_material t1 on t1.sap_code = t.sap_code
+  where t.delete_flag=0 and t.barcode=#Barcode#
+  ]]>
+</select>
+<select id="GetSemisProductInfo2" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T5.UNIT_NAME,T.CARD_NO BARCODE,T.EQUIP_ID,T.MATERIAL_ID,T1.MATERIAL_NAME,T1.SAP_CODE,T1.MATERIAL_CODE,T1.MINOR_TYPE_ID MATERIAL_TYPE_ID,
+          T2.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T4.USER_NAME OPER_NAME,T3.EQUIP_NAME,T.QTY SET_QUANTITY,T.LEFT_QTY LEFT_QUANTITY,T.END_TIME PRODUCE_TIME,
+          T.END_TIME VALID_DATE,T.SHELF_NO,T9.OBJID STORE_PLACE_ID,T9.STORE_PLACE_NAME ,T.DUMMY2 ,T8.RECORD_TIME
+        FROM HPP_SEMIS_PRODUCTION T
+        LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID  =T.MATERIAL_ID
+        LEFT JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T2.OBJID = T1.MINOR_TYPE_ID
+        LEFT JOIN SBE_EQUIP T3 ON T3.OBJID = T.EQUIP_ID
+        LEFT JOIN SSB_USER T4 ON T4.OBJID = T.RECORD_USER_ID
+        LEFT JOIN SSB_UNIT T5 ON T5.OBJID=T.UNIT_ID
+        LEFT JOIN HSM_TOOLING_LOAD T6 ON T6.CARD_NO = T.CARD_NO
+        LEFT JOIN HSM_TOOLING T7 ON T7.OBJID = T6.TOOLING_ID
+        LEFT JOIN HPP_STORAGE_DETAIL T8 ON T8.CARD_NO = T.CARD_NO 
+        LEFT JOIN HPP_STORE_PLACE T9 ON T9.OBJID = T8.STORE_PLACE_ID AND T9.POSITION_TYPE='1'
+       WHERE T.DELETE_FLAG=0 AND T8.DUMMY1=0 
+       ]]>
+       <isNotNull property="cardNo" prepend="AND">
+         <![CDATA[T.CARD_NO=#cardNo#]]>
+       </isNotNull>
+     </select>
+
+     <select id="GetSemisProductInfoInMolding" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T5.UNIT_NAME,T.CARD_NO BARCODE,T.EQUIP_ID,T.MATERIAL_ID,T1.MATERIAL_NAME,T1.SAP_CODE,T1.MATERIAL_CODE,T1.MINOR_TYPE_ID MATERIAL_TYPE_ID,
+       T2.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T4.USER_NAME OPER_NAME,T3.EQUIP_NAME,T.QTY SET_QUANTITY,T.LEFT_QTY LEFT_QUANTITY,T.END_TIME PRODUCE_TIME,
+       T.END_TIME VALID_DATE,T.SHELF_NO,T9.OBJID STORE_PLACE_ID,T9.STORE_PLACE_NAME ,T.DUMMY2 ,T.END_TIME RECORD_TIME 
+        FROM HPP_SEMIS_PRODUCTION T
+        INNER JOIN SBM_MATERIAL T1 ON T1.OBJID  =T.MATERIAL_ID
+        INNER JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T2.OBJID = T1.MINOR_TYPE_ID
+        LEFT JOIN SBE_EQUIP T3 ON T3.OBJID = T.EQUIP_ID
+        LEFT JOIN SSB_USER T4 ON T4.OBJID = T.RECORD_USER_ID
+        LEFT JOIN SSB_UNIT T5 ON T5.OBJID=T.UNIT_ID
+        INNER JOIN HSM_TOOLING_LOAD T6 ON T6.CARD_NO = T.CARD_NO
+        INNER JOIN HSM_TOOLING T7 ON T7.OBJID = T6.TOOLING_ID
+        INNER JOIN HPP_STORAGE_DETAIL T8 ON T8.CARD_NO = T.CARD_NO 
+        INNER JOIN HPP_STORE_PLACE T9 ON T9.OBJID = T8.STORE_PLACE_ID AND T9.POSITION_TYPE='1'
+        INNER JOIN HPP_STORE T10 ON T9.STORE_ID = T10.OBJID 
+       WHERE T.DELETE_FLAG=0 AND T10.STORE_HIGHER_LEVEL = '0002001'
+       ]]>
+       <isNotNull property="CardNo" prepend="AND">
+         <![CDATA[T.CARD_NO=#CardNo#]]>
+       </isNotNull>
+       <isNotNull property="ShelfNo" prepend="AND">
+         <![CDATA[T7.TOOLING_RFID_BARCODE=#ShelfNo#]]>
+       </isNotNull>
+     </select>
+
+     <select id="GetSemisCardLeftQty" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT distinct A.CARD_NO,to_char(LEFT_QTY) LEFT_QTY 
+       FROM HPP_SEMIS_PRODUCTION A
+       LEFT JOIN HPP_STORAGE_DETAIL A1 ON A.CARD_NO = A1.CARD_NO
+       LEFT JOIN HPP_STORE_PLACE A2 ON A1.STORE_PLACE_ID = A2.OBJID
+       LEFT JOIN SBE_EQUIP A3 ON A2.DUMMY_8 = A3.OBJID
+       WHERE 1=1
+       ]]>
+       <isNotNull property="StrCardNo" prepend="AND">
+         <![CDATA[A.CARD_NO IN ($StrCardNo$)]]>
+       </isNotNull>
+       <![CDATA[
+       UNION
+       SELECT distinct B.BARCODE,to_char(LEFT_QTY) LEFT_QTY 
+       FROM HPP_RUBBER_PRODUCTION B
+       INNER JOIN HPP_STORAGE_DETAIL B1 ON B.BARCODE = B1.CARD_NO
+       
+       WHERE 1=1
+       ]]>
+       <isNotNull property="StrCardNo" prepend="AND">
+         <![CDATA[B.BARCODE IN ($StrCardNo$)]]>
+       </isNotNull>
+       <isNotNull property="EquipID" prepend="AND">
+         <![CDATA[B3.OBJID = #EquipID#]]>
+       </isNotNull>
+     </select>
+
+     <delete id="DelSemisProductionUpdate" parameterClass="map">
+       <![CDATA[
+       delete  from SSL_WEB_LOG where new_barcode = #newBarcode#
+       ]]>
+     </delete>
+     
+     <insert id="InsertSemisProductionUpdate" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       INSERT INTO SSL_WEB_LOG (OBJID,USER_ID,METHOD_RESULT,REMARK,RECORD_TIME,new_barcode)
+       VALUES(SEQ_SSL_WEB_LOG.NEXTVAL,#USER_ID#,#METHOD_RESULT#,#REMARK#,SYSDATE,#newBarcode#)
+       ]]>
+     </insert>
+
+     <select id="GetSemisProductInfoGS" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T.UNIT_NAME,T.barcode BARCODE,T1.objid MATERIAL_ID,T1.MATERIAL_NAME,T1.SAP_CODE,T1.MATERIAL_CODE,T1.MINOR_TYPE_ID MATERIAL_TYPE_ID,
+        T2.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T.QTY SET_QUANTITY,T.LEFT_QTY LEFT_QUANTITY,T.PRODUCE_TIME ,
+        T.PRODUCE_TIME VALID_DATE,t.dummy_2 DUMMY2,NVL(T.AMOUNT,0) AMOUNT
+        FROM hpp_rubber_production T
+        LEFT JOIN SBM_MATERIAL T1 ON T1.Sap_Code  =T.Sap_Code
+        LEFT JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T2.OBJID = T1.MINOR_TYPE_ID
+        WHERE T.DELETE_FLAG=0
+       ]]>
+       <isNotNull property="cardNo" prepend="AND">
+         <![CDATA[t.barcode = #cardNo#]]>
+       </isNotNull>
+     </select>
+     
+     <select id="GetMatertosapBUSID" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select BUSID from hpp_GetMatertosap  order by busid desc
+       ]]>
+     </select>
+
+   </statements>
+</sqlMap>

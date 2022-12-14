@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SynConfig>
+    <Tables>
+        <Table name="Table.Source">
+            <DbSourceName>Curing</DbSourceName>
+            <TableName>tb_PP_PressTemp</TableName>
+        </Table>
+        <Table name="Table.Target">
+           <DbSourceName>MES</DbSourceName>
+            <TableName>CRT_CURING_PRESS_TEMP</TableName>
+            <Primarykey FieldName="OBJID"/>
+            <SeqFields>
+                <SeqField FieldName="OBJID" SeqName="SEQ_CRT_CURING_PRESS_TEMP"/>
+            </SeqFields>
+        </Table>
+    </Tables>
+    <SynDatas>
+        <SynData>
+            <SourceTable TableName="Table.Source">
+                <Command >
+                    <FileName value="Mesnac.DbSyn.CuringCommand.dll"/>
+                    <ClassName value="Mesnac.DbSyn.CuringCommand.PressTempSource"/>
+                </Command>
+                <BeginSyn>
+                    <add key="sql" value=""/>
+                </BeginSyn>
+                <SelectData>
+                    <add key="count" value="0"/>
+                    <add key="where">
+                        <![CDATA[UpFlag='0']]>
+                    </add>
+                </SelectData>
+                <FinishRowSyn>
+                    <add key="update" value="UpFlag=1"/>
+                    <add key="where" value="Objid"/>
+                </FinishRowSyn>
+            </SourceTable>
+            <TargetTable TableName="Table.Target">
+                <Command >
+                    <FileName value="Mesnac.DbSyn.dll"/>
+                    <ClassName value="Mesnac.DbSyn.TableSyn.Target"/>
+                </Command>
+                
+            </TargetTable>
+            <SourceTargetFields>
+                <SourceTargetField SourceFieldName="LeftHotPlateTemp" TargetFieldName="LEFT_PLATE_TEMP"/>
+                <SourceTargetField SourceFieldName="RightHotPlateTemp" TargetFieldName="RIGHT_PLATE_TEMP"/>
+                <SourceTargetField SourceFieldName="LeftModelTemp" TargetFieldName="LEFT_MODEL_TEMP"/>
+                <SourceTargetField SourceFieldName="RightModelTemp" TargetFieldName="RIGHT_MODEL_TEMP"/>
+                <SourceTargetField SourceFieldName="LeftInnerTemp" TargetFieldName="LEFT_INNER_TEMP"/>
+                <SourceTargetField SourceFieldName="RightInnerTemp" TargetFieldName="RIGHT_INNER_TEMP"/>
+                <SourceTargetField SourceFieldName="LeftInnerPress" TargetFieldName="LEFT_INNER_PRESS"/>
+                <SourceTargetField SourceFieldName="RightInnerPress" TargetFieldName="RIGHT_INNER_PRESS"/>
+                <SourceTargetField SourceFieldName="LeftAlarmNo" TargetFieldName="LEFT_ALARM_NO"/>
+                <SourceTargetField SourceFieldName="RightAlarmNo" TargetFieldName="RIGHT_ALARM_NO"/>
+                <SourceTargetField SourceFieldName="TyreNoLeft" TargetFieldName="LEFT_TYRE_NO"/>
+                <SourceTargetField SourceFieldName="TyreNoRight" TargetFieldName="RIGHT_TYRE_NO"/>
+            </SourceTargetFields>
+        </SynData>
+    </SynDatas>
+</SynConfig>

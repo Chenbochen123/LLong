@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Interface.Mapper.BasicMapper.PsmTransferBill"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="PsmTransferBill" type="Mesnac.Interface.Entity.BasicEntity.PsmTransferBill, Mesnac.Interface.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_PsmTransferBill" class="PsmTransferBill">
+    <result property="InterfaceUpdateTime" column="INTERFACE_UPDATE_TIME"/>
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="ReserNo" column="RESER_NO"/>
+    <result property="ReserItem" column="RESER_ITEM"/>
+    <result property="MovType" column="MOV_TYPE"/>
+    <result property="MatCode" column="MAT_CODE"/>
+    <result property="Unit" column="UNIT"/>
+    <result property="Department" column="DEPARTMENT"/>
+    <result property="Qty" column="QTY"/>
+    <result property="PlantFrom" column="PLANT_FROM"/>
+    <result property="StorLocFrom" column="STOR_LOC_FROM"/>
+    <result property="PlantTo" column="PLANT_TO"/>
+    <result property="StorLocTo" column="STOR_LOC_TO"/>
+    <result property="CostCenter" column="COST_CENTER"/>
+    <result property="Order1" column="ORDER_1"/>
+    <result property="DemondsDate" column="DEMONDS_DATE"/>
+    <result property="Batch" column="BATCH"/>
+    <result property="Dummy1" column="DUMMY_1"/>
+    <result property="Dummy2" column="DUMMY_2"/>
+    <result property="Dummy3" column="DUMMY_3"/>
+    <result property="Dummy4" column="DUMMY_4"/>
+    <result property="BillCode" column="BILL_CODE"/>
+    <result property="TransferDate" column="TRANSFER_DATE"/>
+    <result property="UpdateTime" column="UPDATE_TIME"/>
+    <result property="UpdateUserId" column="UPDATE_USER_ID"/>
+    <result property="AffirmTime" column="AFFIRM_TIME"/>
+    <result property="AffirmUserId" column="AFFIRM_USER_ID"/>
+    <result property="BillState" column="BILL_STATE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_PsmTransferBill" class="PsmTransferBill">
+    <parameter property="InterfaceUpdateTime" column="InterfaceUpdateTime"/>
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="ReserNo" column="ReserNo"/>
+    <parameter property="ReserItem" column="ReserItem"/>
+    <parameter property="MovType" column="MovType"/>
+    <parameter property="MatCode" column="MatCode"/>
+    <parameter property="Unit" column="Unit"/>
+    <parameter property="Department" column="Department"/>
+    <parameter property="Qty" column="Qty"/>
+    <parameter property="PlantFrom" column="PlantFrom"/>
+    <parameter property="StorLocFrom" column="StorLocFrom"/>
+    <parameter property="PlantTo" column="PlantTo"/>
+    <parameter property="StorLocTo" column="StorLocTo"/>
+    <parameter property="CostCenter" column="CostCenter"/>
+    <parameter property="Order1" column="Order1"/>
+    <parameter property="DemondsDate" column="DemondsDate"/>
+    <parameter property="Batch" column="Batch"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="BillCode" column="BillCode"/>
+    <parameter property="TransferDate" column="TransferDate"/>
+    <parameter property="UpdateTime" column="UpdateTime"/>
+    <parameter property="UpdateUserId" column="UpdateUserId"/>
+    <parameter property="AffirmTime" column="AffirmTime"/>
+    <parameter property="AffirmUserId" column="AffirmUserId"/>
+    <parameter property="BillState" column="BillState"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSM_TRANSFER_BILL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.InterfaceUpdateTime" prepend="AND">
+          <![CDATA[INTERFACE_UPDATE_TIME = #where.InterfaceUpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.ReserNo" prepend="AND">
+          <![CDATA[RESER_NO = #where.ReserNo#]]>
+        </isNotNull>
+        <isNotNull property="where.ReserItem" prepend="AND">
+          <![CDATA[RESER_ITEM = #where.ReserItem#]]>
+        </isNotNull>
+        <isNotNull property="where.MovType" prepend="AND">
+          <![CDATA[MOV_TYPE = #where.MovType#]]>
+        </isNotNull>
+        <isNotNull property="where.MatCode" prepend="AND">
+          <![CDATA[MAT_CODE = #where.MatCode#]]>
+        </isNotNull>
+        <isNotNull property="where.Unit" prepend="AND">
+          <![CDATA[UNIT = #where.Unit#]]>
+        </isNotNull>
+        <isNotNull property="where.Department" prepend="AND">
+          <![CDATA[DEPARTMENT = #where.Department#]]>
+        </isNotNull>
+        <isNotNull property="where.Qty" prepend="AND">
+          <![CDATA[QTY = #where.Qty#]]>
+        </isNotNull>
+        <isNotNull property="where.PlantFrom" prepend="AND">
+          <![CDATA[PLANT_FROM = #where.PlantFrom#]]>
+        </isNotNull>
+        <isNotNull property="where.StorLocFrom" prepend="AND">
+          <![CDATA[STOR_LOC_FROM = #where.StorLocFrom#]]>
+        </isNotNull>
+        <isNotNull property="where.PlantTo" prepend="AND">
+          <![CDATA[PLANT_TO = #where.PlantTo#]]>
+        </isNotNull>
+        <isNotNull property="where.StorLocTo" prepend="AND">
+          <![CDATA[STOR_LOC_TO = #where.StorLocTo#]]>
+        </isNotNull>
+        <isNotNull property="where.CostCenter" prepend="AND">
+          <![CDATA[COST_CENTER = #where.CostCenter#]]>
+        </isNotNull>
+        <isNotNull property="where.Order1" prepend="AND">
+          <![CDATA[ORDER_1 = #where.Order1#]]>
+        </isNotNull>
+        <isNotNull property="where.DemondsDate" prepend="AND">
+          <![CDATA[DEMONDS_DATE = #where.DemondsDate#]]>
+        </isNotNull>
+        <isNotNull property="where.Batch" prepend="AND">
+          <![CDATA[BATCH = #where.Batch#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.BillCode" prepend="AND">
+          <![CDATA[BILL_CODE = #where.BillCode#]]>
+        </isNotNull>
+        <isNotNull property="where.TransferDate" prepend="AND">
+          <![CDATA[TRANSFER_DATE = #where.TransferDate#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateUserId" prepend="AND">
+          <![CDATA[UPDATE_USER_ID = #where.UpdateUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmTime" prepend="AND">
+          <![CDATA[AFFIRM_TIME = #where.AffirmTime#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmUserId" prepend="AND">
+          <![CDATA[AFFIRM_USER_ID = #where.AffirmUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.BillState" prepend="AND">
+          <![CDATA[BILL_STATE = #where.BillState#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO PSM_TRANSFER_BILL]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="InterfaceUpdateTime" prepend=",">INTERFACE_UPDATE_TIME</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="ReserNo" prepend=",">RESER_NO</isNotNull>
+        <isNotNull property="ReserItem" prepend=",">RESER_ITEM</isNotNull>
+        <isNotNull property="MovType" prepend=",">MOV_TYPE</isNotNull>
+        <isNotNull property="MatCode" prepend=",">MAT_CODE</isNotNull>
+        <isNotNull property="Unit" prepend=",">UNIT</isNotNull>
+        <isNotNull property="Department" prepend=",">DEPARTMENT</isNotNull>
+        <isNotNull property="Qty" prepend=",">QTY</isNotNull>
+        <isNotNull property="PlantFrom" prepend=",">PLANT_FROM</isNotNull>
+        <isNotNull property="StorLocFrom" prepend=",">STOR_LOC_FROM</isNotNull>
+        <isNotNull property="PlantTo" prepend=",">PLANT_TO</isNotNull>
+        <isNotNull property="StorLocTo" prepend=",">STOR_LOC_TO</isNotNull>
+        <isNotNull property="CostCenter" prepend=",">COST_CENTER</isNotNull>
+        <isNotNull property="Order1" prepend=",">ORDER_1</isNotNull>
+        <isNotNull property="DemondsDate" prepend=",">DEMONDS_DATE</isNotNull>
+        <isNotNull property="Batch" prepend=",">BATCH</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY_1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY_2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY_3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY_4</isNotNull>
+        <isNotNull property="BillCode" prepend=",">BILL_CODE</isNotNull>
+        <isNotNull property="TransferDate" prepend=",">TRANSFER_DATE</isNotNull>
+        <isNotNull property="UpdateTime" prepend=",">UPDATE_TIME</isNotNull>
+        <isNotNull property="UpdateUserId" prepend=",">UPDATE_USER_ID</isNotNull>
+        <isNotNull property="AffirmTime" prepend=",">AFFIRM_TIME</isNotNull>
+        <isNotNull property="AffirmUserId" prepend=",">AFFIRM_USER_ID</isNotNull>
+        <isNotNull property="BillState" prepend=",">BILL_STATE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_PSM_TRANSFER_BILL.NEXTVAL</isNull>
+        <isNotNull property="InterfaceUpdateTime" prepend=",">#InterfaceUpdateTime#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="ReserNo" prepend=",">#ReserNo#</isNotNull>
+        <isNotNull property="ReserItem" prepend=",">#ReserItem#</isNotNull>
+        <isNotNull property="MovType" prepend=",">#MovType#</isNotNull>
+        <isNotNull property="MatCode" prepend=",">#MatCode#</isNotNull>
+        <isNotNull property="Unit" prepend=",">#Unit#</isNotNull>
+        <isNotNull property="Department" prepend=",">#Department#</isNotNull>
+        <isNotNull property="Qty" prepend=",">#Qty#</isNotNull>
+        <isNotNull property="PlantFrom" prepend=",">#PlantFrom#</isNotNull>
+        <isNotNull property="StorLocFrom" prepend=",">#StorLocFrom#</isNotNull>
+        <isNotNull property="PlantTo" prepend=",">#PlantTo#</isNotNull>
+        <isNotNull property="StorLocTo" prepend=",">#StorLocTo#</isNotNull>
+        <isNotNull property="CostCenter" prepend=",">#CostCenter#</isNotNull>
+        <isNotNull property="Order1" prepend=",">#Order1#</isNotNull>
+        <isNotNull property="DemondsDate" prepend=",">#DemondsDate#</isNotNull>
+        <isNotNull property="Batch" prepend=",">#Batch#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="BillCode" prepend=",">#BillCode#</isNotNull>
+        <isNotNull property="TransferDate" prepend=",">#TransferDate#</isNotNull>
+        <isNotNull property="UpdateTime" prepend=",">#UpdateTime#</isNotNull>
+        <isNotNull property="UpdateUserId" prepend=",">#UpdateUserId#</isNotNull>
+        <isNotNull property="AffirmTime" prepend=",">#AffirmTime#</isNotNull>
+        <isNotNull property="AffirmUserId" prepend=",">#AffirmUserId#</isNotNull>
+        <isNotNull property="BillState" prepend=",">#BillState#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE PSM_TRANSFER_BILL
+       <dynamic prepend="SET">
+        <isNotNull  property="update.InterfaceUpdateTime"  prepend=",">
+          INTERFACE_UPDATE_TIME = #update.InterfaceUpdateTime#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.ReserNo"  prepend=",">
+          RESER_NO = #update.ReserNo#
+        </isNotNull>
+        <isNotNull  property="update.ReserItem"  prepend=",">
+          RESER_ITEM = #update.ReserItem#
+        </isNotNull>
+        <isNotNull  property="update.MovType"  prepend=",">
+          MOV_TYPE = #update.MovType#
+        </isNotNull>
+        <isNotNull  property="update.MatCode"  prepend=",">
+          MAT_CODE = #update.MatCode#
+        </isNotNull>
+        <isNotNull  property="update.Unit"  prepend=",">
+          UNIT = #update.Unit#
+        </isNotNull>
+        <isNotNull  property="update.Department"  prepend=",">
+          DEPARTMENT = #update.Department#
+        </isNotNull>
+        <isNotNull  property="update.Qty"  prepend=",">
+          QTY = #update.Qty#
+        </isNotNull>
+        <isNotNull  property="update.PlantFrom"  prepend=",">
+          PLANT_FROM = #update.PlantFrom#
+        </isNotNull>
+        <isNotNull  property="update.StorLocFrom"  prepend=",">
+          STOR_LOC_FROM = #update.StorLocFrom#
+        </isNotNull>
+        <isNotNull  property="update.PlantTo"  prepend=",">
+          PLANT_TO = #update.PlantTo#
+        </isNotNull>
+        <isNotNull  property="update.StorLocTo"  prepend=",">
+          STOR_LOC_TO = #update.StorLocTo#
+        </isNotNull>
+        <isNotNull  property="update.CostCenter"  prepend=",">
+          COST_CENTER = #update.CostCenter#
+        </isNotNull>
+        <isNotNull  property="update.Order1"  prepend=",">
+          ORDER_1 = #update.Order1#
+        </isNotNull>
+        <isNotNull  property="update.DemondsDate"  prepend=",">
+          DEMONDS_DATE = #update.DemondsDate#
+        </isNotNull>
+        <isNotNull  property="update.Batch"  prepend=",">
+          BATCH = #update.Batch#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY_1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY_2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY_3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY_4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.BillCode"  prepend=",">
+          BILL_CODE = #update.BillCode#
+        </isNotNull>
+        <isNotNull  property="update.TransferDate"  prepend=",">
+          TRANSFER_DATE = #update.TransferDate#
+        </isNotNull>
+        <isNotNull  property="update.UpdateTime"  prepend=",">
+          UPDATE_TIME = #update.UpdateTime#
+        </isNotNull>
+        <isNotNull  property="update.UpdateUserId"  prepend=",">
+          UPDATE_USER_ID = #update.UpdateUserId#
+        </isNotNull>
+        <isNotNull  property="update.AffirmTime"  prepend=",">
+          AFFIRM_TIME = #update.AffirmTime#
+        </isNotNull>
+        <isNotNull  property="update.AffirmUserId"  prepend=",">
+          AFFIRM_USER_ID = #update.AffirmUserId#
+        </isNotNull>
+        <isNotNull  property="update.BillState"  prepend=",">
+          BILL_STATE = #update.BillState#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM PSM_TRANSFER_BILL
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_PsmTransferBill">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_PsmTransferBill">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM PSM_TRANSFER_BILL
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM PSM_TRANSFER_BILL
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_PsmTransferBill" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE PSM_TRANSFER_BILL
+    </statement>
+  </statements>
+</sqlMap>

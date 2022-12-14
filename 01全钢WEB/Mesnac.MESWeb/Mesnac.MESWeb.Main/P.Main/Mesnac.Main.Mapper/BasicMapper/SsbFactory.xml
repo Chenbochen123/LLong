@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Main.Mapper.BasicMapper.SsbFactory"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SsbFactory" type="Mesnac.Main.Entity.BasicEntity.SsbFactory, Mesnac.Main.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SsbFactory" class="SsbFactory">
+    <result property="ObjId" column="OBJID"/>
+    <result property="FactoryName" column="FACTORY_NAME"/>
+    <result property="FactoryType" column="FACTORY_TYPE"/>
+    <result property="Description" column="DESCRIPTION"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="SeqIdx" column="SEQ_IDX"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BakupFlag" column="BAKUP_FLAG"/>
+    <result property="BakupTime" column="BAKUP_TIME"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SsbFactory" class="SsbFactory">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="FactoryName" column="FactoryName"/>
+    <parameter property="FactoryType" column="FactoryType"/>
+    <parameter property="Description" column="Description"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="SeqIdx" column="SeqIdx"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BakupFlag" column="BakupFlag"/>
+    <parameter property="BakupTime" column="BakupTime"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SSB_FACTORY ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryName" prepend="AND">
+          <![CDATA[FACTORY_NAME = #where.FactoryName#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryType" prepend="AND">
+          <![CDATA[FACTORY_TYPE = #where.FactoryType#]]>
+        </isNotNull>
+        <isNotNull property="where.Description" prepend="AND">
+          <![CDATA[DESCRIPTION = #where.Description#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIdx" prepend="AND">
+          <![CDATA[SEQ_IDX = #where.SeqIdx#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SSB_FACTORY]]>
+       <dynamic prepend="(">
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="FactoryName" prepend=",">FACTORY_NAME</isNotNull>
+        <isNotNull property="FactoryType" prepend=",">FACTORY_TYPE</isNotNull>
+        <isNotNull property="Description" prepend=",">DESCRIPTION</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="SeqIdx" prepend=",">SEQ_IDX</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BakupFlag" prepend=",">BAKUP_FLAG</isNotNull>
+        <isNotNull property="BakupTime" prepend=",">BAKUP_TIME</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="FactoryName" prepend=",">#FactoryName#</isNotNull>
+        <isNotNull property="FactoryType" prepend=",">#FactoryType#</isNotNull>
+        <isNotNull property="Description" prepend=",">#Description#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="SeqIdx" prepend=",">#SeqIdx#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BakupFlag" prepend=",">#BakupFlag#</isNotNull>
+        <isNotNull property="BakupTime" prepend=",">#BakupTime#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SSB_FACTORY
+       <dynamic prepend="SET">
+        <isNotNull  property="update.FactoryName"  prepend=",">
+          FACTORY_NAME = #update.FactoryName#
+        </isNotNull>
+        <isNotNull  property="update.FactoryType"  prepend=",">
+          FACTORY_TYPE = #update.FactoryType#
+        </isNotNull>
+        <isNotNull  property="update.Description"  prepend=",">
+          DESCRIPTION = #update.Description#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.SeqIdx"  prepend=",">
+          SEQ_IDX = #update.SeqIdx#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BakupFlag"  prepend=",">
+          BAKUP_FLAG = #update.BakupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BakupTime"  prepend=",">
+          BAKUP_TIME = #update.BakupTime#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SSB_FACTORY
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SsbFactory">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SsbFactory">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SSB_FACTORY
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SSB_FACTORY
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SsbFactory" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SSB_FACTORY
+    </statement>
+  </statements>
+</sqlMap>

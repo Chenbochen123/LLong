@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8D9F386D-DF39-4FCF-8789-98E3A6B9CB71}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Interface.Mapper</RootNamespace>
+    <AssemblyName>Mesnac.Interface.Mapper</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\PsmOutStockBill.xml" />
+    <EmbeddedResource Include="BasicMapper\PsmOutStockMain.xml" />
+    <EmbeddedResource Include="BusinessMapper\PsmOutStockBill.xml" />
+    <EmbeddedResource Include="BusinessMapper\PsmOutStockMain.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\PsbCustomer.xml" />
+    <EmbeddedResource Include="BusinessMapper\PsbCustomer.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SbmMaterial.xml" />
+    <EmbeddedResource Include="BusinessMapper\SbmMaterial.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SiiSapLog.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BusinessMapper\SiiSapLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\PsmTransferBill.xml" />
+    <EmbeddedResource Include="BasicMapper\PsmTransferMain.xml" />
+    <EmbeddedResource Include="BusinessMapper\PsmTransferBill.xml" />
+    <EmbeddedResource Include="BusinessMapper\PsmTransferMain.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\ItfSapProductionRecords.xml" />
+    <EmbeddedResource Include="BusinessMapper\ItfSapProductionRecords.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\PsmMesStorageQty.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BusinessMapper\PsmMesStorageQty.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\PsmOutStockDetail.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BusinessMapper\PsmOutStockDetail.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SbmMaterialProductionver.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BusinessMapper\SbmMaterialProductionver.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.BbeEquipControl"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BBE_EQUIP_CONTROL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.IsControl" prepend="AND">
+          <![CDATA[IS_CONTROL = #where.IsControl#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.CShoulderwedge" prepend="AND">
+          <![CDATA[C_SHOULDERWEDGE = #where.CShoulderwedge#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt1" prepend="AND">
+          <![CDATA[C_BELT1 = #where.CBelt1#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt2" prepend="AND">
+          <![CDATA[C_BELT2 = #where.CBelt2#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt3" prepend="AND">
+          <![CDATA[C_BELT3 = #where.CBelt3#]]>
+        </isNotNull>
+        <isNotNull property="where.CTread" prepend="AND">
+          <![CDATA[C_TREAD = #where.CTread#]]>
+        </isNotNull>
+        <isNotNull property="where.CInsideline" prepend="AND">
+          <![CDATA[C_INSIDELINE = #where.CInsideline#]]>
+        </isNotNull>
+        <isNotNull property="where.CLsidewall" prepend="AND">
+          <![CDATA[C_LSIDEWALL = #where.CLsidewall#]]>
+        </isNotNull>
+        <isNotNull property="where.CRsidewall" prepend="AND">
+          <![CDATA[C_RSIDEWALL = #where.CRsidewall#]]>
+        </isNotNull>
+        <isNotNull property="where.CBead" prepend="AND">
+          <![CDATA[C_BEAD = #where.CBead#]]>
+        </isNotNull>
+        <isNotNull property="where.CLwirecovering" prepend="AND">
+          <![CDATA[C_LWIRECOVERING = #where.CLwirecovering#]]>
+        </isNotNull>
+        <isNotNull property="where.CRwirecovering" prepend="AND">
+          <![CDATA[C_RWIRECOVERING = #where.CRwirecovering#]]>
+        </isNotNull>
+        <isNotNull property="where.CIsolatin" prepend="AND">
+          <![CDATA[C_ISOLATIN = #where.CIsolatin#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt0" prepend="AND">
+          <![CDATA[C_BELT0 = #where.CBelt0#]]>
+        </isNotNull>
+        <isNotNull property="where.CCarcass" prepend="AND">
+          <![CDATA[C_CARCASS = #where.CCarcass#]]>
+        </isNotNull>
+        <isNotNull property="where.CNylonc" prepend="AND">
+          <![CDATA[C_NYLONC = #where.CNylonc#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <insert id="InitEquip" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        insert into bbe_equip_control (objid,equip_id)
+        select seq_bbe_equip_control.nextval,t0.objid from sbe_equip t0 where t0.minor_type_id=4101 and 
+        not exists(select 1 from bbe_equip_control t1 where t1.equip_id = t0.objid)
+       ]]>
+     </insert>
+     <select id="GetEquipControlInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T0.*,T1.EQUIP_CODE,T1.EQUIP_NAME FROM BBE_EQUIP_CONTROL T0
+       LEFT JOIN SBE_EQUIP T1 ON T1.OBJID = T0.EQUIP_ID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T1.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.EQUIP_ID" prepend="AND">
+           <![CDATA[T0.EQUIP_ID = #where.EQUIP_ID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <update id="UpdateEquipControlInfo" parameterClass="map">
+       <![CDATA[
+       UPDATE BBE_EQUIP_CONTROL SET IS_CONTROL = #IsControl# ,RECORD_TIME = #RecordTime#
+       WHERE OBJID = #ObjId#
+       ]]>
+     </update>
+
+     <select id="GetEquipName" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T0.*,T1.EQUIP_CODE,T1.EQUIP_NAME FROM BBE_EQUIP_CONTROL T0
+       LEFT JOIN SBE_EQUIP T1 ON T1.OBJID = T0.EQUIP_ID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="OBJID" prepend="AND">
+           <![CDATA[T0.objid = #OBJID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+		 <select id="GetDeControlReason" parameterClass="map" resultClass="Row">
+			 <![CDATA[select OBJID,DECONTROL_REASON from SSB_DECONTROL_REASON where DELETE_FLAG='0' ]]>
+		 </select>
+
+     <select id="GetMouldDrumRecordInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select a.new_barcode,a.old_barcode,b.equip_name,a.reason,a.record_time,c.user_name
+from SBE_MOULDDRUM_record a
+left join sbe_equip b on a.equip_id = b.objid
+left join ssb_user c on a.record_user_id=c.objid
+where a.record_time >=to_date(#where.BeginTime#,'yyyy-MM-dd hh24:mi:ss') and a.record_time <=to_date(#where.EndTime#,'yyyy-MM-dd hh24:mi:ss')
+       ]]>
+     </select>
+
+     <select id="GetSemisWeight" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select substr(e.mastersap,0,10) ParentSap,substr(e.subitemsap,0,10) SonSap,e.weight,e.masterrevision,e.prophase  from   bpp_plan_detail   a
+left join sbm_bom b on a.material_id = b.material_parent_id and b.delete_flag = 0
+left join sbm_material c on c.objid = b.material_id and c.delete_flag = 0
+left join sbm_material d on d.objid = b.material_parent_id and d.delete_flag = 0
+left join plm_half_weight e on substr(e.mastersap,0,9) = substr(d.sap_code,0,9) and substr(e.subitemsap,0,9) = substr(c.sap_code,0,9) and dummy1 = 0
+where a.objid = #MoldPlanDetailId#
+
+       ]]>
+     </select>
+     <select id="GetUserPostLvInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select  post_level  from  ssb_user_post_level where user_id = #userid# and post_id = #postid#
+       ]]>
+     </select>
+     
+     <select id="GetByUserDutyInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select  procedure,plan_date,b.user_name,b.telephone,b.WORK_BARCODE,a.begin_time,a.end_time  from SBE_DUTY_INFO a
+left join ssb_user b on a.user_id = b.objid
+where a.plan_date = to_date(#Plandate#,'yyyy-MM-dd') 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="procedure" prepend="AND">
+           <![CDATA[a.procedure = #procedure#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <update id="UpdateEdgeStorageUsedFlag" parameterClass="map">
+       <![CDATA[
+       UPDATE HPP_STORAGE_DETAIL SET USED_FLAG=1 WHERE CARD_NO=#cardNo# 
+       AND STORE_PLACE_ID  = (SELECT OBJID FROM HPP_STORE_PLACE WHERE DUMMY_8=#equipId#)
+       ]]>
+     </update>
+     <select id="GetCardLeftQty" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select t.card_no ,nvl(t1.Left_qty,t2.Left_qty) Left_qty from BPM_EQUIP_CURRENT_MATERIAL t 
+       left join hpp_semis_production t1 on t1.card_no = t.card_no and t1.delete_flag = 0
+       left join hpp_rubber_production t2 on t2.barcode = t.card_no and t2.delete_flag = 0
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="EquipID" prepend="AND">
+           <![CDATA[T.EQUIP_ID=#EquipID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetMaterSize" parameterClass="map" resultClass="Row">
+       <![CDATA[
+   select  a.objid,mater,size1,case when unlock = 0 then '否' else '是' end unlock,a.record_time,b.user_name  from BPM_MATERSIZE a
+   left join ssb_user b on b.objid = a.record_userid
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+           <![CDATA[a.mater like '%' || #where.MATERIAL_NAME# || '%']]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <update id="UpdateMaterSize" parameterClass="map">
+       <![CDATA[
+   update  BPM_MATERSIZE set size1 = #size#,record_userid = #userid#,record_time = sysdate  where objid = #objid#
+       ]]>
+     </update>
+
+     <select id="GetBigInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select unlock from BPM_MATERSIZE where size1 = '大' and rownum = 1
+       ]]>
+     </select>
+     <update id="UpdateBigUnLock" parameterClass="map">
+       <![CDATA[
+update BPM_MATERSIZE set unlock = 1 where size1 = '大' 
+       ]]>
+     </update>
+     <update id="UpdateBigLock" parameterClass="map">
+       <![CDATA[
+update BPM_MATERSIZE set unlock = 0 where size1 = '大' 
+       ]]>
+     </update>
+     <select id="GetSmallInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select unlock from BPM_MATERSIZE where size1 = '小' and rownum = 1
+       ]]>
+     </select>
+     <update id="UpdateSmallUnLock" parameterClass="map">
+       <![CDATA[
+update BPM_MATERSIZE set unlock = 1 where size1 = '小' 
+       ]]>
+     </update>
+     <update id="UpdateSmallLock" parameterClass="map">
+       <![CDATA[
+update BPM_MATERSIZE set unlock = 0 where size1 = '小' 
+       ]]>
+     </update>
+     <select id="GetCarSize" parameterClass="map" resultClass="Row">
+       <![CDATA[  
+   select a.objid,a.carno,size1,a.remark,b.user_name,a.record_time  from BPM_CARSIZE a
+   left join ssb_user b on b.objid =a.record_userid
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.car" prepend="AND">
+           <![CDATA[a.carno like '%' || #where.car# || '%']]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <update id="UpdateCarSize" parameterClass="map">
+       <![CDATA[
+   update BPM_CARSIZE set size1 = #size#,record_userid = #userid#,record_time = sysdate where objid = #objid#
+       ]]>
+     </update>
+     <insert id="InsertCarsize" parameterClass="map" resultClass="Row">
+       <![CDATA[
+    insert into BPM_CARSIZE (objid,Carno,Record_Userid,record_time)
+    values(seq_bpm_carsize.nextval,#car#,#userid#,sysdate)
+       ]]>
+     </insert>
+
+     <update id="UpdateMoldIsFirst1" parameterClass="map">
+       <![CDATA[
+update bpm_production set is_first = #IsFirst# where green_tyre_no = #TyreNo#
+       ]]>
+     </update>
+     <update id="UpdateMoldIsFirst2" parameterClass="map">
+       <![CDATA[
+update bpp_trace_molding_info set is_first = #IsFirstx#  where green_tyre_no = #TyreNo#
+       ]]>
+     </update>
+     
+  </statements>
+</sqlMap>

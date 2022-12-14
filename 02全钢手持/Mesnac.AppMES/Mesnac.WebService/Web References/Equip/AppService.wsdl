@@ -1,0 +1,4645 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetStoreInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="storeCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="storeName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetStoreInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetStoreInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetStorePlaceInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="storeId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="storePlaceCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="storePlaceName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetStorePlaceInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetStorePlaceInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetSubStorePlaceInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="storePlaceId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="subStorePlaceCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="subStorePlaceName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetSubStorePlaceInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetSubStorePlaceInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetMouldInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldBarcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetMouldInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetMouldInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetEquip">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="equipId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetEquipResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetEquipResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInStorageMould">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldBarcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="storeId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="storePlaceId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="subStorePlace" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="equipId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInStorageMouldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsInStorageMouldResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsOutStorageMould">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldBarcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="equipId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="subStorePlace" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsOutStorageMouldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsOutStorageMouldResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsMouldScanLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldBarcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsMouldScanLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="wsMouldScanLogResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetMouldInStockInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldBarcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetMouldInStockInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetMouldInStockInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetMouldOutStockInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldBarcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetMouldOutStockInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetMouldOutStockInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetMouldStorageInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldBarcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetMouldStorageInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetMouldStorageInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetMouldInfo2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="subPlaceCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetMouldInfo2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetMouldInfo2Result">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsCreateInventoryBill">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="operId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operTime" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="storeId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsCreateInventoryBillResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsCreateInventoryBillResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetInventoryBill">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="storeId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetInventoryBillResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetInventoryBillResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetInventoryDetail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="mainId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetInventoryDetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetInventoryDetailResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsBarcodeBinding">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="billObjid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="storeBarcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mouldBarcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsBarcodeBindingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsBarcodeBindingResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsCancelBarcodeBinding">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="storeBarcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mouldBarcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsCancelBarcodeBindingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsCancelBarcodeBindingResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsSubmitBill">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="billObjid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="storeId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsSubmitBillResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsSubmitBillResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEquipInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetEquipInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEquipInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAloneEquipInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EquipID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAloneEquipInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAloneEquipInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEquipStopInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EquipID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEquipStopInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEquipStopInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSemisEquipStopType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EquipID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSemisEquipStopTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSemisEquipStopTypeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSemisEquipStopReason">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TypeID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSemisEquipStopReasonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSemisEquipStopReasonResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadSemisEquipRepairRecoed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EquipID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StopTypeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StopReasonID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserID4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Time" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Objid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadSemisEquipRepairRecoedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadSemisEquipRepairRecoedResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEquipWHInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EquipID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEquipWHInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEquipWHInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadEquipWHRepairRecoed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EquipID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PlanTypeId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepairDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RepairTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ResponseUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FinishUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PlanRepaircontent" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NeedStoptime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PlanStopTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PlanStopdate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Objid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Time" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FinishDesc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmDesc" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadEquipWHRepairRecoedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadEquipWHRepairRecoedResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEquipXJInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EquipID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEquipXJInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEquipXJInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadEquipXJRecoed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EquipID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InspectionUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PlanDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Time" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="RecordUserId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Objid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UploadEquipXJRecoedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UploadEquipXJRecoedResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetSizeInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SizeName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Objid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetSizeInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetSizeInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetPatternInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PatternName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Objid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetPatternInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetPatternInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInStorageMouldNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MouldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StorePlaceId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SubStorePlace" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SizeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PatternID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sap" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInStorageMouldNewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsInStorageMouldNewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsOutStorageMouldNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MouldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SizeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PatternID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EquipId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsOutStorageMouldNewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsOutStorageMouldNewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMouldStorageInfoNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MouldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SizeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PatternID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMouldStorageInfoNewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMouldStorageInfoNewResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetSubStorePlaceInfoNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="storePlaceId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsGetSubStorePlaceInfoNewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsGetSubStorePlaceInfoNewResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitMoldStorageDB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MouldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StorePlaceId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SubStorePlace" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SizeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PatternID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StoreIdTo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StorePlaceIdTo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SubStorePlaceTo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitMoldStorageDBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitMoldStorageDBResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClearWarning">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="equip_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="leftOrright" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClearWarningResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClearWarningResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClearWarningnumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="equip_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="leftOrright" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClearWarningnumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClearWarningnumberResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPdateClearMould">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="equipname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="left" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPdateClearMouldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPdateClearMouldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPdateClearMouldYJ">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="equipname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="left" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPdateClearMouldYJResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPdateClearMouldYJResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPdateClearMouldUnlockBegin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPdateClearMouldUnlockBeginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPdateClearMouldUnlockBeginResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPdateClearMouldUnlockEnd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPdateClearMouldUnlockEndResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPdateClearMouldUnlockEndResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPdateJgClearMouldUnlockBegin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPdateJgClearMouldUnlockBeginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPdateJgClearMouldUnlockBeginResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPdateJgClearMouldUnlockEnd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UPdateJgClearMouldUnlockEndResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UPdateJgClearMouldUnlockEndResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIfClearMouldOk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIfClearMouldOkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIfClearMouldOkResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOutMouldInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOutMouldInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOutMouldInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInStoragePlace">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="placeAll" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInStoragePlaceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInStoragePlaceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsDelStorageMouldNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MouldName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SizeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PatternID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsDelStorageMouldNewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsDelStorageMouldNewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateWashMouldOkFlag">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="okflag" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateWashMouldOkFlagResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateWashMouldOkFlagResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateJgWashMouldOkFlag">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mouldname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userid" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="okflag" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateJgWashMouldOkFlagResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateJgWashMouldOkFlagResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="int" type="s:int" />
+      <s:element name="DataTable" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetStoreInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetStoreInfo" />
+  </wsdl:message>
+  <wsdl:message name="wsGetStoreInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetStoreInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetStorePlaceInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetStorePlaceInfo" />
+  </wsdl:message>
+  <wsdl:message name="wsGetStorePlaceInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetStorePlaceInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSubStorePlaceInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetSubStorePlaceInfo" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSubStorePlaceInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetSubStorePlaceInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetMouldInfo" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetMouldInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetEquipSoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetEquip" />
+  </wsdl:message>
+  <wsdl:message name="wsGetEquipSoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetEquipResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsInStorageMouldSoapIn">
+    <wsdl:part name="parameters" element="tns:wsInStorageMould" />
+  </wsdl:message>
+  <wsdl:message name="wsInStorageMouldSoapOut">
+    <wsdl:part name="parameters" element="tns:wsInStorageMouldResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsOutStorageMouldSoapIn">
+    <wsdl:part name="parameters" element="tns:wsOutStorageMould" />
+  </wsdl:message>
+  <wsdl:message name="wsOutStorageMouldSoapOut">
+    <wsdl:part name="parameters" element="tns:wsOutStorageMouldResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsMouldScanLogSoapIn">
+    <wsdl:part name="parameters" element="tns:wsMouldScanLog" />
+  </wsdl:message>
+  <wsdl:message name="wsMouldScanLogSoapOut">
+    <wsdl:part name="parameters" element="tns:wsMouldScanLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInStockInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetMouldInStockInfo" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInStockInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetMouldInStockInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldOutStockInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetMouldOutStockInfo" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldOutStockInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetMouldOutStockInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldStorageInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetMouldStorageInfo" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldStorageInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetMouldStorageInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInfo2SoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetMouldInfo2" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInfo2SoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetMouldInfo2Response" />
+  </wsdl:message>
+  <wsdl:message name="wsCreateInventoryBillSoapIn">
+    <wsdl:part name="parameters" element="tns:wsCreateInventoryBill" />
+  </wsdl:message>
+  <wsdl:message name="wsCreateInventoryBillSoapOut">
+    <wsdl:part name="parameters" element="tns:wsCreateInventoryBillResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetInventoryBillSoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetInventoryBill" />
+  </wsdl:message>
+  <wsdl:message name="wsGetInventoryBillSoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetInventoryBillResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetInventoryDetailSoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetInventoryDetail" />
+  </wsdl:message>
+  <wsdl:message name="wsGetInventoryDetailSoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetInventoryDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsBarcodeBindingSoapIn">
+    <wsdl:part name="parameters" element="tns:wsBarcodeBinding" />
+  </wsdl:message>
+  <wsdl:message name="wsBarcodeBindingSoapOut">
+    <wsdl:part name="parameters" element="tns:wsBarcodeBindingResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsCancelBarcodeBindingSoapIn">
+    <wsdl:part name="parameters" element="tns:wsCancelBarcodeBinding" />
+  </wsdl:message>
+  <wsdl:message name="wsCancelBarcodeBindingSoapOut">
+    <wsdl:part name="parameters" element="tns:wsCancelBarcodeBindingResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsSubmitBillSoapIn">
+    <wsdl:part name="parameters" element="tns:wsSubmitBill" />
+  </wsdl:message>
+  <wsdl:message name="wsSubmitBillSoapOut">
+    <wsdl:part name="parameters" element="tns:wsSubmitBillResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEquipInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEquipInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAloneEquipInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAloneEquipInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetAloneEquipInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAloneEquipInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipStopInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEquipStopInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipStopInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEquipStopInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSemisEquipStopTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSemisEquipStopType" />
+  </wsdl:message>
+  <wsdl:message name="GetSemisEquipStopTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSemisEquipStopTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSemisEquipStopReasonSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSemisEquipStopReason" />
+  </wsdl:message>
+  <wsdl:message name="GetSemisEquipStopReasonSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSemisEquipStopReasonResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadSemisEquipRepairRecoedSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadSemisEquipRepairRecoed" />
+  </wsdl:message>
+  <wsdl:message name="UploadSemisEquipRepairRecoedSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadSemisEquipRepairRecoedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipWHInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEquipWHInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipWHInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEquipWHInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadEquipWHRepairRecoedSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadEquipWHRepairRecoed" />
+  </wsdl:message>
+  <wsdl:message name="UploadEquipWHRepairRecoedSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadEquipWHRepairRecoedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipXJInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEquipXJInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipXJInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEquipXJInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadEquipXJRecoedSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadEquipXJRecoed" />
+  </wsdl:message>
+  <wsdl:message name="UploadEquipXJRecoedSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadEquipXJRecoedResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSizeInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetSizeInfo" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSizeInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetSizeInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetPatternInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetPatternInfo" />
+  </wsdl:message>
+  <wsdl:message name="wsGetPatternInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetPatternInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsInStorageMouldNewSoapIn">
+    <wsdl:part name="parameters" element="tns:wsInStorageMouldNew" />
+  </wsdl:message>
+  <wsdl:message name="wsInStorageMouldNewSoapOut">
+    <wsdl:part name="parameters" element="tns:wsInStorageMouldNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsOutStorageMouldNewSoapIn">
+    <wsdl:part name="parameters" element="tns:wsOutStorageMouldNew" />
+  </wsdl:message>
+  <wsdl:message name="wsOutStorageMouldNewSoapOut">
+    <wsdl:part name="parameters" element="tns:wsOutStorageMouldNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldStorageInfoNewSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMouldStorageInfoNew" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldStorageInfoNewSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMouldStorageInfoNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSubStorePlaceInfoNewSoapIn">
+    <wsdl:part name="parameters" element="tns:wsGetSubStorePlaceInfoNew" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSubStorePlaceInfoNewSoapOut">
+    <wsdl:part name="parameters" element="tns:wsGetSubStorePlaceInfoNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitMoldStorageDBSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitMoldStorageDB" />
+  </wsdl:message>
+  <wsdl:message name="SubmitMoldStorageDBSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitMoldStorageDBResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetClearWarningSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClearWarning" />
+  </wsdl:message>
+  <wsdl:message name="GetClearWarningSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClearWarningResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetClearWarningnumberSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClearWarningnumber" />
+  </wsdl:message>
+  <wsdl:message name="GetClearWarningnumberSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClearWarningnumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldSoapIn">
+    <wsdl:part name="parameters" element="tns:UPdateClearMould" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldSoapOut">
+    <wsdl:part name="parameters" element="tns:UPdateClearMouldResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldYJSoapIn">
+    <wsdl:part name="parameters" element="tns:UPdateClearMouldYJ" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldYJSoapOut">
+    <wsdl:part name="parameters" element="tns:UPdateClearMouldYJResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldUnlockBeginSoapIn">
+    <wsdl:part name="parameters" element="tns:UPdateClearMouldUnlockBegin" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldUnlockBeginSoapOut">
+    <wsdl:part name="parameters" element="tns:UPdateClearMouldUnlockBeginResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldUnlockEndSoapIn">
+    <wsdl:part name="parameters" element="tns:UPdateClearMouldUnlockEnd" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldUnlockEndSoapOut">
+    <wsdl:part name="parameters" element="tns:UPdateClearMouldUnlockEndResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPdateJgClearMouldUnlockBeginSoapIn">
+    <wsdl:part name="parameters" element="tns:UPdateJgClearMouldUnlockBegin" />
+  </wsdl:message>
+  <wsdl:message name="UPdateJgClearMouldUnlockBeginSoapOut">
+    <wsdl:part name="parameters" element="tns:UPdateJgClearMouldUnlockBeginResponse" />
+  </wsdl:message>
+  <wsdl:message name="UPdateJgClearMouldUnlockEndSoapIn">
+    <wsdl:part name="parameters" element="tns:UPdateJgClearMouldUnlockEnd" />
+  </wsdl:message>
+  <wsdl:message name="UPdateJgClearMouldUnlockEndSoapOut">
+    <wsdl:part name="parameters" element="tns:UPdateJgClearMouldUnlockEndResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIfClearMouldOkSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIfClearMouldOk" />
+  </wsdl:message>
+  <wsdl:message name="GetIfClearMouldOkSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIfClearMouldOkResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOutMouldInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOutMouldInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetOutMouldInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOutMouldInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInStoragePlaceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInStoragePlace" />
+  </wsdl:message>
+  <wsdl:message name="GetInStoragePlaceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInStoragePlaceResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsDelStorageMouldNewSoapIn">
+    <wsdl:part name="parameters" element="tns:wsDelStorageMouldNew" />
+  </wsdl:message>
+  <wsdl:message name="wsDelStorageMouldNewSoapOut">
+    <wsdl:part name="parameters" element="tns:wsDelStorageMouldNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWashMouldOkFlagSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateWashMouldOkFlag" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWashMouldOkFlagSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateWashMouldOkFlagResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateJgWashMouldOkFlagSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateJgWashMouldOkFlag" />
+  </wsdl:message>
+  <wsdl:message name="UpdateJgWashMouldOkFlagSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateJgWashMouldOkFlagResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetStoreInfoHttpGetIn">
+    <wsdl:part name="storeCode" type="s:string" />
+    <wsdl:part name="storeName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetStoreInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetStorePlaceInfoHttpGetIn">
+    <wsdl:part name="storeId" type="s:string" />
+    <wsdl:part name="storePlaceCode" type="s:string" />
+    <wsdl:part name="storePlaceName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetStorePlaceInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSubStorePlaceInfoHttpGetIn">
+    <wsdl:part name="storePlaceId" type="s:string" />
+    <wsdl:part name="subStorePlaceCode" type="s:string" />
+    <wsdl:part name="subStorePlaceName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSubStorePlaceInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInfoHttpGetIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetEquipHttpGetIn">
+    <wsdl:part name="equipId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetEquipHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsInStorageMouldHttpGetIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+    <wsdl:part name="storeId" type="s:string" />
+    <wsdl:part name="storePlaceId" type="s:string" />
+    <wsdl:part name="subStorePlace" type="s:string" />
+    <wsdl:part name="equipId" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="operTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsInStorageMouldHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsOutStorageMouldHttpGetIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+    <wsdl:part name="equipId" type="s:string" />
+    <wsdl:part name="subStorePlace" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="operTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsOutStorageMouldHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsMouldScanLogHttpGetIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="operTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsMouldScanLogHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInStockInfoHttpGetIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInStockInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldOutStockInfoHttpGetIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldOutStockInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldStorageInfoHttpGetIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldStorageInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInfo2HttpGetIn">
+    <wsdl:part name="subPlaceCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInfo2HttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsCreateInventoryBillHttpGetIn">
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="operTime" type="s:string" />
+    <wsdl:part name="storeId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsCreateInventoryBillHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetInventoryBillHttpGetIn">
+    <wsdl:part name="storeId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetInventoryBillHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetInventoryDetailHttpGetIn">
+    <wsdl:part name="mainId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetInventoryDetailHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsBarcodeBindingHttpGetIn">
+    <wsdl:part name="billObjid" type="s:string" />
+    <wsdl:part name="storeBarcode" type="s:string" />
+    <wsdl:part name="mouldBarcode" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="operTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsBarcodeBindingHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsCancelBarcodeBindingHttpGetIn">
+    <wsdl:part name="storeBarcode" type="s:string" />
+    <wsdl:part name="mouldBarcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsCancelBarcodeBindingHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsSubmitBillHttpGetIn">
+    <wsdl:part name="billObjid" type="s:string" />
+    <wsdl:part name="storeId" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="operTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsSubmitBillHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipInfoHttpGetIn" />
+  <wsdl:message name="GetEquipInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAloneEquipInfoHttpGetIn">
+    <wsdl:part name="EquipID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAloneEquipInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipStopInfoHttpGetIn">
+    <wsdl:part name="EquipID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipStopInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetSemisEquipStopTypeHttpGetIn">
+    <wsdl:part name="EquipID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSemisEquipStopTypeHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetSemisEquipStopReasonHttpGetIn">
+    <wsdl:part name="TypeID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSemisEquipStopReasonHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="UploadSemisEquipRepairRecoedHttpGetIn">
+    <wsdl:part name="EquipID" type="s:string" />
+    <wsdl:part name="StopTypeID" type="s:string" />
+    <wsdl:part name="StopReasonID" type="s:string" />
+    <wsdl:part name="Status" type="s:string" />
+    <wsdl:part name="UserID1" type="s:string" />
+    <wsdl:part name="UserID2" type="s:string" />
+    <wsdl:part name="UserID3" type="s:string" />
+    <wsdl:part name="UserID4" type="s:string" />
+    <wsdl:part name="Time" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="Objid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UploadSemisEquipRepairRecoedHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipWHInfoHttpGetIn">
+    <wsdl:part name="EquipID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipWHInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="UploadEquipWHRepairRecoedHttpGetIn">
+    <wsdl:part name="EquipID" type="s:string" />
+    <wsdl:part name="PlanTypeId" type="s:string" />
+    <wsdl:part name="RepairDate" type="s:string" />
+    <wsdl:part name="RepairTime" type="s:string" />
+    <wsdl:part name="ResponseUser" type="s:string" />
+    <wsdl:part name="FinishUser" type="s:string" />
+    <wsdl:part name="ConfirmUser" type="s:string" />
+    <wsdl:part name="PlanRepaircontent" type="s:string" />
+    <wsdl:part name="NeedStoptime" type="s:string" />
+    <wsdl:part name="PlanStopTime" type="s:string" />
+    <wsdl:part name="PlanStopdate" type="s:string" />
+    <wsdl:part name="Objid" type="s:string" />
+    <wsdl:part name="Status" type="s:string" />
+    <wsdl:part name="Time" type="s:string" />
+    <wsdl:part name="FinishDesc" type="s:string" />
+    <wsdl:part name="ConfirmDesc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UploadEquipWHRepairRecoedHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipXJInfoHttpGetIn">
+    <wsdl:part name="EquipID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipXJInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="UploadEquipXJRecoedHttpGetIn">
+    <wsdl:part name="EquipID" type="s:string" />
+    <wsdl:part name="InspectionUser" type="s:string" />
+    <wsdl:part name="PlanDate" type="s:string" />
+    <wsdl:part name="Status" type="s:string" />
+    <wsdl:part name="Time" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="RecordUserId" type="s:string" />
+    <wsdl:part name="Objid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UploadEquipXJRecoedHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSizeInfoHttpGetIn">
+    <wsdl:part name="SizeName" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="Objid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSizeInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetPatternInfoHttpGetIn">
+    <wsdl:part name="PatternName" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="Objid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetPatternInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsInStorageMouldNewHttpGetIn">
+    <wsdl:part name="MouldName" type="s:string" />
+    <wsdl:part name="StoreId" type="s:string" />
+    <wsdl:part name="StorePlaceId" type="s:string" />
+    <wsdl:part name="SubStorePlace" type="s:string" />
+    <wsdl:part name="SizeID" type="s:string" />
+    <wsdl:part name="PatternID" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="sap" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsInStorageMouldNewHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="wsOutStorageMouldNewHttpGetIn">
+    <wsdl:part name="MouldName" type="s:string" />
+    <wsdl:part name="SizeID" type="s:string" />
+    <wsdl:part name="PatternID" type="s:string" />
+    <wsdl:part name="EquipId" type="s:string" />
+    <wsdl:part name="LR" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsOutStorageMouldNewHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldStorageInfoNewHttpGetIn">
+    <wsdl:part name="MouldName" type="s:string" />
+    <wsdl:part name="SizeID" type="s:string" />
+    <wsdl:part name="PatternID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldStorageInfoNewHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSubStorePlaceInfoNewHttpGetIn">
+    <wsdl:part name="storePlaceId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSubStorePlaceInfoNewHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="SubmitMoldStorageDBHttpGetIn">
+    <wsdl:part name="MouldName" type="s:string" />
+    <wsdl:part name="StoreId" type="s:string" />
+    <wsdl:part name="StorePlaceId" type="s:string" />
+    <wsdl:part name="SubStorePlace" type="s:string" />
+    <wsdl:part name="SizeID" type="s:string" />
+    <wsdl:part name="PatternID" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="StoreIdTo" type="s:string" />
+    <wsdl:part name="StorePlaceIdTo" type="s:string" />
+    <wsdl:part name="SubStorePlaceTo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitMoldStorageDBHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetClearWarningHttpGetIn">
+    <wsdl:part name="equip_id" type="s:string" />
+    <wsdl:part name="leftOrright" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetClearWarningHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetClearWarningnumberHttpGetIn">
+    <wsdl:part name="equip_id" type="s:string" />
+    <wsdl:part name="leftOrright" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetClearWarningnumberHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldHttpGetIn">
+    <wsdl:part name="equipname" type="s:string" />
+    <wsdl:part name="left" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldYJHttpGetIn">
+    <wsdl:part name="equipname" type="s:string" />
+    <wsdl:part name="left" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldYJHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldUnlockBeginHttpGetIn">
+    <wsdl:part name="mouldname" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldUnlockBeginHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldUnlockEndHttpGetIn">
+    <wsdl:part name="mouldname" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldUnlockEndHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateJgClearMouldUnlockBeginHttpGetIn">
+    <wsdl:part name="mouldname" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateJgClearMouldUnlockBeginHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateJgClearMouldUnlockEndHttpGetIn">
+    <wsdl:part name="mouldname" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateJgClearMouldUnlockEndHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIfClearMouldOkHttpGetIn">
+    <wsdl:part name="mouldcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIfClearMouldOkHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOutMouldInfoHttpGetIn">
+    <wsdl:part name="mouldcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOutMouldInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetInStoragePlaceHttpGetIn">
+    <wsdl:part name="placeAll" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInStoragePlaceHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="wsDelStorageMouldNewHttpGetIn">
+    <wsdl:part name="MouldName" type="s:string" />
+    <wsdl:part name="SizeID" type="s:string" />
+    <wsdl:part name="PatternID" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsDelStorageMouldNewHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWashMouldOkFlagHttpGetIn">
+    <wsdl:part name="mouldname" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+    <wsdl:part name="okflag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWashMouldOkFlagHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateJgWashMouldOkFlagHttpGetIn">
+    <wsdl:part name="mouldname" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+    <wsdl:part name="okflag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateJgWashMouldOkFlagHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetStoreInfoHttpPostIn">
+    <wsdl:part name="storeCode" type="s:string" />
+    <wsdl:part name="storeName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetStoreInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetStorePlaceInfoHttpPostIn">
+    <wsdl:part name="storeId" type="s:string" />
+    <wsdl:part name="storePlaceCode" type="s:string" />
+    <wsdl:part name="storePlaceName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetStorePlaceInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSubStorePlaceInfoHttpPostIn">
+    <wsdl:part name="storePlaceId" type="s:string" />
+    <wsdl:part name="subStorePlaceCode" type="s:string" />
+    <wsdl:part name="subStorePlaceName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSubStorePlaceInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInfoHttpPostIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetEquipHttpPostIn">
+    <wsdl:part name="equipId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetEquipHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsInStorageMouldHttpPostIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+    <wsdl:part name="storeId" type="s:string" />
+    <wsdl:part name="storePlaceId" type="s:string" />
+    <wsdl:part name="subStorePlace" type="s:string" />
+    <wsdl:part name="equipId" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="operTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsInStorageMouldHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsOutStorageMouldHttpPostIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+    <wsdl:part name="equipId" type="s:string" />
+    <wsdl:part name="subStorePlace" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="operTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsOutStorageMouldHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsMouldScanLogHttpPostIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+    <wsdl:part name="type" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="operTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsMouldScanLogHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInStockInfoHttpPostIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInStockInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldOutStockInfoHttpPostIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldOutStockInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldStorageInfoHttpPostIn">
+    <wsdl:part name="mouldBarcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldStorageInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInfo2HttpPostIn">
+    <wsdl:part name="subPlaceCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetMouldInfo2HttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsCreateInventoryBillHttpPostIn">
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="operTime" type="s:string" />
+    <wsdl:part name="storeId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsCreateInventoryBillHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetInventoryBillHttpPostIn">
+    <wsdl:part name="storeId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetInventoryBillHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetInventoryDetailHttpPostIn">
+    <wsdl:part name="mainId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetInventoryDetailHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsBarcodeBindingHttpPostIn">
+    <wsdl:part name="billObjid" type="s:string" />
+    <wsdl:part name="storeBarcode" type="s:string" />
+    <wsdl:part name="mouldBarcode" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="operTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsBarcodeBindingHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsCancelBarcodeBindingHttpPostIn">
+    <wsdl:part name="storeBarcode" type="s:string" />
+    <wsdl:part name="mouldBarcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsCancelBarcodeBindingHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsSubmitBillHttpPostIn">
+    <wsdl:part name="billObjid" type="s:string" />
+    <wsdl:part name="storeId" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="operTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsSubmitBillHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipInfoHttpPostIn" />
+  <wsdl:message name="GetEquipInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAloneEquipInfoHttpPostIn">
+    <wsdl:part name="EquipID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAloneEquipInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipStopInfoHttpPostIn">
+    <wsdl:part name="EquipID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipStopInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetSemisEquipStopTypeHttpPostIn">
+    <wsdl:part name="EquipID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSemisEquipStopTypeHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetSemisEquipStopReasonHttpPostIn">
+    <wsdl:part name="TypeID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSemisEquipStopReasonHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="UploadSemisEquipRepairRecoedHttpPostIn">
+    <wsdl:part name="EquipID" type="s:string" />
+    <wsdl:part name="StopTypeID" type="s:string" />
+    <wsdl:part name="StopReasonID" type="s:string" />
+    <wsdl:part name="Status" type="s:string" />
+    <wsdl:part name="UserID1" type="s:string" />
+    <wsdl:part name="UserID2" type="s:string" />
+    <wsdl:part name="UserID3" type="s:string" />
+    <wsdl:part name="UserID4" type="s:string" />
+    <wsdl:part name="Time" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="Objid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UploadSemisEquipRepairRecoedHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipWHInfoHttpPostIn">
+    <wsdl:part name="EquipID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipWHInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="UploadEquipWHRepairRecoedHttpPostIn">
+    <wsdl:part name="EquipID" type="s:string" />
+    <wsdl:part name="PlanTypeId" type="s:string" />
+    <wsdl:part name="RepairDate" type="s:string" />
+    <wsdl:part name="RepairTime" type="s:string" />
+    <wsdl:part name="ResponseUser" type="s:string" />
+    <wsdl:part name="FinishUser" type="s:string" />
+    <wsdl:part name="ConfirmUser" type="s:string" />
+    <wsdl:part name="PlanRepaircontent" type="s:string" />
+    <wsdl:part name="NeedStoptime" type="s:string" />
+    <wsdl:part name="PlanStopTime" type="s:string" />
+    <wsdl:part name="PlanStopdate" type="s:string" />
+    <wsdl:part name="Objid" type="s:string" />
+    <wsdl:part name="Status" type="s:string" />
+    <wsdl:part name="Time" type="s:string" />
+    <wsdl:part name="FinishDesc" type="s:string" />
+    <wsdl:part name="ConfirmDesc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UploadEquipWHRepairRecoedHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipXJInfoHttpPostIn">
+    <wsdl:part name="EquipID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipXJInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="UploadEquipXJRecoedHttpPostIn">
+    <wsdl:part name="EquipID" type="s:string" />
+    <wsdl:part name="InspectionUser" type="s:string" />
+    <wsdl:part name="PlanDate" type="s:string" />
+    <wsdl:part name="Status" type="s:string" />
+    <wsdl:part name="Time" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="RecordUserId" type="s:string" />
+    <wsdl:part name="Objid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UploadEquipXJRecoedHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSizeInfoHttpPostIn">
+    <wsdl:part name="SizeName" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="Objid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSizeInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetPatternInfoHttpPostIn">
+    <wsdl:part name="PatternName" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="Objid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetPatternInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsInStorageMouldNewHttpPostIn">
+    <wsdl:part name="MouldName" type="s:string" />
+    <wsdl:part name="StoreId" type="s:string" />
+    <wsdl:part name="StorePlaceId" type="s:string" />
+    <wsdl:part name="SubStorePlace" type="s:string" />
+    <wsdl:part name="SizeID" type="s:string" />
+    <wsdl:part name="PatternID" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="sap" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsInStorageMouldNewHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="wsOutStorageMouldNewHttpPostIn">
+    <wsdl:part name="MouldName" type="s:string" />
+    <wsdl:part name="SizeID" type="s:string" />
+    <wsdl:part name="PatternID" type="s:string" />
+    <wsdl:part name="EquipId" type="s:string" />
+    <wsdl:part name="LR" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsOutStorageMouldNewHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldStorageInfoNewHttpPostIn">
+    <wsdl:part name="MouldName" type="s:string" />
+    <wsdl:part name="SizeID" type="s:string" />
+    <wsdl:part name="PatternID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldStorageInfoNewHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSubStorePlaceInfoNewHttpPostIn">
+    <wsdl:part name="storePlaceId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsGetSubStorePlaceInfoNewHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="SubmitMoldStorageDBHttpPostIn">
+    <wsdl:part name="MouldName" type="s:string" />
+    <wsdl:part name="StoreId" type="s:string" />
+    <wsdl:part name="StorePlaceId" type="s:string" />
+    <wsdl:part name="SubStorePlace" type="s:string" />
+    <wsdl:part name="SizeID" type="s:string" />
+    <wsdl:part name="PatternID" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="StoreIdTo" type="s:string" />
+    <wsdl:part name="StorePlaceIdTo" type="s:string" />
+    <wsdl:part name="SubStorePlaceTo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitMoldStorageDBHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetClearWarningHttpPostIn">
+    <wsdl:part name="equip_id" type="s:string" />
+    <wsdl:part name="leftOrright" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetClearWarningHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetClearWarningnumberHttpPostIn">
+    <wsdl:part name="equip_id" type="s:string" />
+    <wsdl:part name="leftOrright" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetClearWarningnumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldHttpPostIn">
+    <wsdl:part name="equipname" type="s:string" />
+    <wsdl:part name="left" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldYJHttpPostIn">
+    <wsdl:part name="equipname" type="s:string" />
+    <wsdl:part name="left" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldYJHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldUnlockBeginHttpPostIn">
+    <wsdl:part name="mouldname" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldUnlockBeginHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldUnlockEndHttpPostIn">
+    <wsdl:part name="mouldname" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateClearMouldUnlockEndHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateJgClearMouldUnlockBeginHttpPostIn">
+    <wsdl:part name="mouldname" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateJgClearMouldUnlockBeginHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateJgClearMouldUnlockEndHttpPostIn">
+    <wsdl:part name="mouldname" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UPdateJgClearMouldUnlockEndHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIfClearMouldOkHttpPostIn">
+    <wsdl:part name="mouldcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetIfClearMouldOkHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOutMouldInfoHttpPostIn">
+    <wsdl:part name="mouldcode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOutMouldInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetInStoragePlaceHttpPostIn">
+    <wsdl:part name="placeAll" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetInStoragePlaceHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="wsDelStorageMouldNewHttpPostIn">
+    <wsdl:part name="MouldName" type="s:string" />
+    <wsdl:part name="SizeID" type="s:string" />
+    <wsdl:part name="PatternID" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="wsDelStorageMouldNewHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWashMouldOkFlagHttpPostIn">
+    <wsdl:part name="mouldname" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+    <wsdl:part name="okflag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateWashMouldOkFlagHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateJgWashMouldOkFlagHttpPostIn">
+    <wsdl:part name="mouldname" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+    <wsdl:part name="okflag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateJgWashMouldOkFlagHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="AppServiceSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStoreInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具库房信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetStoreInfoSoapIn" />
+      <wsdl:output message="tns:wsGetStoreInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStorePlaceInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具库位信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetStorePlaceInfoSoapIn" />
+      <wsdl:output message="tns:wsGetStorePlaceInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具子库位信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetSubStorePlaceInfoSoapIn" />
+      <wsdl:output message="tns:wsGetSubStorePlaceInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">通过模具条码获取模具信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldInfoSoapIn" />
+      <wsdl:output message="tns:wsGetMouldInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetEquip">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">出库时获取目的机台设备</wsdl:documentation>
+      <wsdl:input message="tns:wsGetEquipSoapIn" />
+      <wsdl:output message="tns:wsGetEquipSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMould">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">模具入库</wsdl:documentation>
+      <wsdl:input message="tns:wsInStorageMouldSoapIn" />
+      <wsdl:output message="tns:wsInStorageMouldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMould">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">模具出库</wsdl:documentation>
+      <wsdl:input message="tns:wsOutStorageMouldSoapIn" />
+      <wsdl:output message="tns:wsOutStorageMouldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsMouldScanLog">
+      <wsdl:input message="tns:wsMouldScanLogSoapIn" />
+      <wsdl:output message="tns:wsMouldScanLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInStockInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取入库信息,通过模具条码</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldInStockInfoSoapIn" />
+      <wsdl:output message="tns:wsGetMouldInStockInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldOutStockInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取出库信息,通过模具条码</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldOutStockInfoSoapIn" />
+      <wsdl:output message="tns:wsGetMouldOutStockInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldStorageInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">通过模具条码获取库存信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldStorageInfoSoapIn" />
+      <wsdl:output message="tns:wsGetMouldStorageInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">通过库位条码获取模具信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldInfo2SoapIn" />
+      <wsdl:output message="tns:wsGetMouldInfo2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsCreateInventoryBill">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">创建库存盘点单，operTime格式为:0000-00-00</wsdl:documentation>
+      <wsdl:input message="tns:wsCreateInventoryBillSoapIn" />
+      <wsdl:output message="tns:wsCreateInventoryBillSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryBill">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取库存盘点单</wsdl:documentation>
+      <wsdl:input message="tns:wsGetInventoryBillSoapIn" />
+      <wsdl:output message="tns:wsGetInventoryBillSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryDetail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取库存盘点单详情</wsdl:documentation>
+      <wsdl:input message="tns:wsGetInventoryDetailSoapIn" />
+      <wsdl:output message="tns:wsGetInventoryDetailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsBarcodeBinding">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">条码绑定</wsdl:documentation>
+      <wsdl:input message="tns:wsBarcodeBindingSoapIn" />
+      <wsdl:output message="tns:wsBarcodeBindingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsCancelBarcodeBinding">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">条码取消绑定</wsdl:documentation>
+      <wsdl:input message="tns:wsCancelBarcodeBindingSoapIn" />
+      <wsdl:output message="tns:wsCancelBarcodeBindingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsSubmitBill">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">提交盘点单</wsdl:documentation>
+      <wsdl:input message="tns:wsSubmitBillSoapIn" />
+      <wsdl:output message="tns:wsSubmitBillSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取所有机台</wsdl:documentation>
+      <wsdl:input message="tns:GetEquipInfoSoapIn" />
+      <wsdl:output message="tns:GetEquipInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAloneEquipInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取单个机台</wsdl:documentation>
+      <wsdl:input message="tns:GetAloneEquipInfoSoapIn" />
+      <wsdl:output message="tns:GetAloneEquipInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipStopInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取机台停机信息</wsdl:documentation>
+      <wsdl:input message="tns:GetEquipStopInfoSoapIn" />
+      <wsdl:output message="tns:GetEquipStopInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopType">
+      <wsdl:input message="tns:GetSemisEquipStopTypeSoapIn" />
+      <wsdl:output message="tns:GetSemisEquipStopTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopReason">
+      <wsdl:input message="tns:GetSemisEquipStopReasonSoapIn" />
+      <wsdl:output message="tns:GetSemisEquipStopReasonSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadSemisEquipRepairRecoed">
+      <wsdl:input message="tns:UploadSemisEquipRepairRecoedSoapIn" />
+      <wsdl:output message="tns:UploadSemisEquipRepairRecoedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipWHInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取机台维护信息</wsdl:documentation>
+      <wsdl:input message="tns:GetEquipWHInfoSoapIn" />
+      <wsdl:output message="tns:GetEquipWHInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipWHRepairRecoed">
+      <wsdl:input message="tns:UploadEquipWHRepairRecoedSoapIn" />
+      <wsdl:output message="tns:UploadEquipWHRepairRecoedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipXJInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取机台巡检信息</wsdl:documentation>
+      <wsdl:input message="tns:GetEquipXJInfoSoapIn" />
+      <wsdl:output message="tns:GetEquipXJInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipXJRecoed">
+      <wsdl:input message="tns:UploadEquipXJRecoedSoapIn" />
+      <wsdl:output message="tns:UploadEquipXJRecoedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSizeInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具规格信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetSizeInfoSoapIn" />
+      <wsdl:output message="tns:wsGetSizeInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetPatternInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具花纹信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetPatternInfoSoapIn" />
+      <wsdl:output message="tns:wsGetPatternInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMouldNew">
+      <wsdl:input message="tns:wsInStorageMouldNewSoapIn" />
+      <wsdl:output message="tns:wsInStorageMouldNewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMouldNew">
+      <wsdl:input message="tns:wsOutStorageMouldNewSoapIn" />
+      <wsdl:output message="tns:wsOutStorageMouldNewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldStorageInfoNew">
+      <wsdl:input message="tns:GetMouldStorageInfoNewSoapIn" />
+      <wsdl:output message="tns:GetMouldStorageInfoNewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfoNew">
+      <wsdl:input message="tns:wsGetSubStorePlaceInfoNewSoapIn" />
+      <wsdl:output message="tns:wsGetSubStorePlaceInfoNewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitMoldStorageDB">
+      <wsdl:input message="tns:SubmitMoldStorageDBSoapIn" />
+      <wsdl:output message="tns:SubmitMoldStorageDBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarning">
+      <wsdl:input message="tns:GetClearWarningSoapIn" />
+      <wsdl:output message="tns:GetClearWarningSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarningnumber">
+      <wsdl:input message="tns:GetClearWarningnumberSoapIn" />
+      <wsdl:output message="tns:GetClearWarningnumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMould">
+      <wsdl:input message="tns:UPdateClearMouldSoapIn" />
+      <wsdl:output message="tns:UPdateClearMouldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldYJ">
+      <wsdl:input message="tns:UPdateClearMouldYJSoapIn" />
+      <wsdl:output message="tns:UPdateClearMouldYJSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockBegin">
+      <wsdl:input message="tns:UPdateClearMouldUnlockBeginSoapIn" />
+      <wsdl:output message="tns:UPdateClearMouldUnlockBeginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockEnd">
+      <wsdl:input message="tns:UPdateClearMouldUnlockEndSoapIn" />
+      <wsdl:output message="tns:UPdateClearMouldUnlockEndSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockBegin">
+      <wsdl:input message="tns:UPdateJgClearMouldUnlockBeginSoapIn" />
+      <wsdl:output message="tns:UPdateJgClearMouldUnlockBeginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockEnd">
+      <wsdl:input message="tns:UPdateJgClearMouldUnlockEndSoapIn" />
+      <wsdl:output message="tns:UPdateJgClearMouldUnlockEndSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIfClearMouldOk">
+      <wsdl:input message="tns:GetIfClearMouldOkSoapIn" />
+      <wsdl:output message="tns:GetIfClearMouldOkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOutMouldInfo">
+      <wsdl:input message="tns:GetOutMouldInfoSoapIn" />
+      <wsdl:output message="tns:GetOutMouldInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInStoragePlace">
+      <wsdl:input message="tns:GetInStoragePlaceSoapIn" />
+      <wsdl:output message="tns:GetInStoragePlaceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsDelStorageMouldNew">
+      <wsdl:input message="tns:wsDelStorageMouldNewSoapIn" />
+      <wsdl:output message="tns:wsDelStorageMouldNewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWashMouldOkFlag">
+      <wsdl:input message="tns:UpdateWashMouldOkFlagSoapIn" />
+      <wsdl:output message="tns:UpdateWashMouldOkFlagSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateJgWashMouldOkFlag">
+      <wsdl:input message="tns:UpdateJgWashMouldOkFlagSoapIn" />
+      <wsdl:output message="tns:UpdateJgWashMouldOkFlagSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AppServiceHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStoreInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具库房信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetStoreInfoHttpGetIn" />
+      <wsdl:output message="tns:wsGetStoreInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStorePlaceInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具库位信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetStorePlaceInfoHttpGetIn" />
+      <wsdl:output message="tns:wsGetStorePlaceInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具子库位信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetSubStorePlaceInfoHttpGetIn" />
+      <wsdl:output message="tns:wsGetSubStorePlaceInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">通过模具条码获取模具信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldInfoHttpGetIn" />
+      <wsdl:output message="tns:wsGetMouldInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetEquip">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">出库时获取目的机台设备</wsdl:documentation>
+      <wsdl:input message="tns:wsGetEquipHttpGetIn" />
+      <wsdl:output message="tns:wsGetEquipHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMould">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">模具入库</wsdl:documentation>
+      <wsdl:input message="tns:wsInStorageMouldHttpGetIn" />
+      <wsdl:output message="tns:wsInStorageMouldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMould">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">模具出库</wsdl:documentation>
+      <wsdl:input message="tns:wsOutStorageMouldHttpGetIn" />
+      <wsdl:output message="tns:wsOutStorageMouldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsMouldScanLog">
+      <wsdl:input message="tns:wsMouldScanLogHttpGetIn" />
+      <wsdl:output message="tns:wsMouldScanLogHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInStockInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取入库信息,通过模具条码</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldInStockInfoHttpGetIn" />
+      <wsdl:output message="tns:wsGetMouldInStockInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldOutStockInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取出库信息,通过模具条码</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldOutStockInfoHttpGetIn" />
+      <wsdl:output message="tns:wsGetMouldOutStockInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldStorageInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">通过模具条码获取库存信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldStorageInfoHttpGetIn" />
+      <wsdl:output message="tns:wsGetMouldStorageInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">通过库位条码获取模具信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldInfo2HttpGetIn" />
+      <wsdl:output message="tns:wsGetMouldInfo2HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsCreateInventoryBill">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">创建库存盘点单，operTime格式为:0000-00-00</wsdl:documentation>
+      <wsdl:input message="tns:wsCreateInventoryBillHttpGetIn" />
+      <wsdl:output message="tns:wsCreateInventoryBillHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryBill">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取库存盘点单</wsdl:documentation>
+      <wsdl:input message="tns:wsGetInventoryBillHttpGetIn" />
+      <wsdl:output message="tns:wsGetInventoryBillHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryDetail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取库存盘点单详情</wsdl:documentation>
+      <wsdl:input message="tns:wsGetInventoryDetailHttpGetIn" />
+      <wsdl:output message="tns:wsGetInventoryDetailHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsBarcodeBinding">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">条码绑定</wsdl:documentation>
+      <wsdl:input message="tns:wsBarcodeBindingHttpGetIn" />
+      <wsdl:output message="tns:wsBarcodeBindingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsCancelBarcodeBinding">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">条码取消绑定</wsdl:documentation>
+      <wsdl:input message="tns:wsCancelBarcodeBindingHttpGetIn" />
+      <wsdl:output message="tns:wsCancelBarcodeBindingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsSubmitBill">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">提交盘点单</wsdl:documentation>
+      <wsdl:input message="tns:wsSubmitBillHttpGetIn" />
+      <wsdl:output message="tns:wsSubmitBillHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取所有机台</wsdl:documentation>
+      <wsdl:input message="tns:GetEquipInfoHttpGetIn" />
+      <wsdl:output message="tns:GetEquipInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAloneEquipInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取单个机台</wsdl:documentation>
+      <wsdl:input message="tns:GetAloneEquipInfoHttpGetIn" />
+      <wsdl:output message="tns:GetAloneEquipInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipStopInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取机台停机信息</wsdl:documentation>
+      <wsdl:input message="tns:GetEquipStopInfoHttpGetIn" />
+      <wsdl:output message="tns:GetEquipStopInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopType">
+      <wsdl:input message="tns:GetSemisEquipStopTypeHttpGetIn" />
+      <wsdl:output message="tns:GetSemisEquipStopTypeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopReason">
+      <wsdl:input message="tns:GetSemisEquipStopReasonHttpGetIn" />
+      <wsdl:output message="tns:GetSemisEquipStopReasonHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadSemisEquipRepairRecoed">
+      <wsdl:input message="tns:UploadSemisEquipRepairRecoedHttpGetIn" />
+      <wsdl:output message="tns:UploadSemisEquipRepairRecoedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipWHInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取机台维护信息</wsdl:documentation>
+      <wsdl:input message="tns:GetEquipWHInfoHttpGetIn" />
+      <wsdl:output message="tns:GetEquipWHInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipWHRepairRecoed">
+      <wsdl:input message="tns:UploadEquipWHRepairRecoedHttpGetIn" />
+      <wsdl:output message="tns:UploadEquipWHRepairRecoedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipXJInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取机台巡检信息</wsdl:documentation>
+      <wsdl:input message="tns:GetEquipXJInfoHttpGetIn" />
+      <wsdl:output message="tns:GetEquipXJInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipXJRecoed">
+      <wsdl:input message="tns:UploadEquipXJRecoedHttpGetIn" />
+      <wsdl:output message="tns:UploadEquipXJRecoedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSizeInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具规格信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetSizeInfoHttpGetIn" />
+      <wsdl:output message="tns:wsGetSizeInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetPatternInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具花纹信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetPatternInfoHttpGetIn" />
+      <wsdl:output message="tns:wsGetPatternInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMouldNew">
+      <wsdl:input message="tns:wsInStorageMouldNewHttpGetIn" />
+      <wsdl:output message="tns:wsInStorageMouldNewHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMouldNew">
+      <wsdl:input message="tns:wsOutStorageMouldNewHttpGetIn" />
+      <wsdl:output message="tns:wsOutStorageMouldNewHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldStorageInfoNew">
+      <wsdl:input message="tns:GetMouldStorageInfoNewHttpGetIn" />
+      <wsdl:output message="tns:GetMouldStorageInfoNewHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfoNew">
+      <wsdl:input message="tns:wsGetSubStorePlaceInfoNewHttpGetIn" />
+      <wsdl:output message="tns:wsGetSubStorePlaceInfoNewHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitMoldStorageDB">
+      <wsdl:input message="tns:SubmitMoldStorageDBHttpGetIn" />
+      <wsdl:output message="tns:SubmitMoldStorageDBHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarning">
+      <wsdl:input message="tns:GetClearWarningHttpGetIn" />
+      <wsdl:output message="tns:GetClearWarningHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarningnumber">
+      <wsdl:input message="tns:GetClearWarningnumberHttpGetIn" />
+      <wsdl:output message="tns:GetClearWarningnumberHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMould">
+      <wsdl:input message="tns:UPdateClearMouldHttpGetIn" />
+      <wsdl:output message="tns:UPdateClearMouldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldYJ">
+      <wsdl:input message="tns:UPdateClearMouldYJHttpGetIn" />
+      <wsdl:output message="tns:UPdateClearMouldYJHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockBegin">
+      <wsdl:input message="tns:UPdateClearMouldUnlockBeginHttpGetIn" />
+      <wsdl:output message="tns:UPdateClearMouldUnlockBeginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockEnd">
+      <wsdl:input message="tns:UPdateClearMouldUnlockEndHttpGetIn" />
+      <wsdl:output message="tns:UPdateClearMouldUnlockEndHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockBegin">
+      <wsdl:input message="tns:UPdateJgClearMouldUnlockBeginHttpGetIn" />
+      <wsdl:output message="tns:UPdateJgClearMouldUnlockBeginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockEnd">
+      <wsdl:input message="tns:UPdateJgClearMouldUnlockEndHttpGetIn" />
+      <wsdl:output message="tns:UPdateJgClearMouldUnlockEndHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIfClearMouldOk">
+      <wsdl:input message="tns:GetIfClearMouldOkHttpGetIn" />
+      <wsdl:output message="tns:GetIfClearMouldOkHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOutMouldInfo">
+      <wsdl:input message="tns:GetOutMouldInfoHttpGetIn" />
+      <wsdl:output message="tns:GetOutMouldInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInStoragePlace">
+      <wsdl:input message="tns:GetInStoragePlaceHttpGetIn" />
+      <wsdl:output message="tns:GetInStoragePlaceHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsDelStorageMouldNew">
+      <wsdl:input message="tns:wsDelStorageMouldNewHttpGetIn" />
+      <wsdl:output message="tns:wsDelStorageMouldNewHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWashMouldOkFlag">
+      <wsdl:input message="tns:UpdateWashMouldOkFlagHttpGetIn" />
+      <wsdl:output message="tns:UpdateWashMouldOkFlagHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateJgWashMouldOkFlag">
+      <wsdl:input message="tns:UpdateJgWashMouldOkFlagHttpGetIn" />
+      <wsdl:output message="tns:UpdateJgWashMouldOkFlagHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AppServiceHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStoreInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具库房信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetStoreInfoHttpPostIn" />
+      <wsdl:output message="tns:wsGetStoreInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStorePlaceInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具库位信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetStorePlaceInfoHttpPostIn" />
+      <wsdl:output message="tns:wsGetStorePlaceInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具子库位信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetSubStorePlaceInfoHttpPostIn" />
+      <wsdl:output message="tns:wsGetSubStorePlaceInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">通过模具条码获取模具信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldInfoHttpPostIn" />
+      <wsdl:output message="tns:wsGetMouldInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetEquip">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">出库时获取目的机台设备</wsdl:documentation>
+      <wsdl:input message="tns:wsGetEquipHttpPostIn" />
+      <wsdl:output message="tns:wsGetEquipHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMould">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">模具入库</wsdl:documentation>
+      <wsdl:input message="tns:wsInStorageMouldHttpPostIn" />
+      <wsdl:output message="tns:wsInStorageMouldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMould">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">模具出库</wsdl:documentation>
+      <wsdl:input message="tns:wsOutStorageMouldHttpPostIn" />
+      <wsdl:output message="tns:wsOutStorageMouldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsMouldScanLog">
+      <wsdl:input message="tns:wsMouldScanLogHttpPostIn" />
+      <wsdl:output message="tns:wsMouldScanLogHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInStockInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取入库信息,通过模具条码</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldInStockInfoHttpPostIn" />
+      <wsdl:output message="tns:wsGetMouldInStockInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldOutStockInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取出库信息,通过模具条码</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldOutStockInfoHttpPostIn" />
+      <wsdl:output message="tns:wsGetMouldOutStockInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldStorageInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">通过模具条码获取库存信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldStorageInfoHttpPostIn" />
+      <wsdl:output message="tns:wsGetMouldStorageInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">通过库位条码获取模具信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetMouldInfo2HttpPostIn" />
+      <wsdl:output message="tns:wsGetMouldInfo2HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsCreateInventoryBill">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">创建库存盘点单，operTime格式为:0000-00-00</wsdl:documentation>
+      <wsdl:input message="tns:wsCreateInventoryBillHttpPostIn" />
+      <wsdl:output message="tns:wsCreateInventoryBillHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryBill">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取库存盘点单</wsdl:documentation>
+      <wsdl:input message="tns:wsGetInventoryBillHttpPostIn" />
+      <wsdl:output message="tns:wsGetInventoryBillHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryDetail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取库存盘点单详情</wsdl:documentation>
+      <wsdl:input message="tns:wsGetInventoryDetailHttpPostIn" />
+      <wsdl:output message="tns:wsGetInventoryDetailHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsBarcodeBinding">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">条码绑定</wsdl:documentation>
+      <wsdl:input message="tns:wsBarcodeBindingHttpPostIn" />
+      <wsdl:output message="tns:wsBarcodeBindingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsCancelBarcodeBinding">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">条码取消绑定</wsdl:documentation>
+      <wsdl:input message="tns:wsCancelBarcodeBindingHttpPostIn" />
+      <wsdl:output message="tns:wsCancelBarcodeBindingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsSubmitBill">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">提交盘点单</wsdl:documentation>
+      <wsdl:input message="tns:wsSubmitBillHttpPostIn" />
+      <wsdl:output message="tns:wsSubmitBillHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取所有机台</wsdl:documentation>
+      <wsdl:input message="tns:GetEquipInfoHttpPostIn" />
+      <wsdl:output message="tns:GetEquipInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAloneEquipInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取单个机台</wsdl:documentation>
+      <wsdl:input message="tns:GetAloneEquipInfoHttpPostIn" />
+      <wsdl:output message="tns:GetAloneEquipInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipStopInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取机台停机信息</wsdl:documentation>
+      <wsdl:input message="tns:GetEquipStopInfoHttpPostIn" />
+      <wsdl:output message="tns:GetEquipStopInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopType">
+      <wsdl:input message="tns:GetSemisEquipStopTypeHttpPostIn" />
+      <wsdl:output message="tns:GetSemisEquipStopTypeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopReason">
+      <wsdl:input message="tns:GetSemisEquipStopReasonHttpPostIn" />
+      <wsdl:output message="tns:GetSemisEquipStopReasonHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadSemisEquipRepairRecoed">
+      <wsdl:input message="tns:UploadSemisEquipRepairRecoedHttpPostIn" />
+      <wsdl:output message="tns:UploadSemisEquipRepairRecoedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipWHInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取机台维护信息</wsdl:documentation>
+      <wsdl:input message="tns:GetEquipWHInfoHttpPostIn" />
+      <wsdl:output message="tns:GetEquipWHInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipWHRepairRecoed">
+      <wsdl:input message="tns:UploadEquipWHRepairRecoedHttpPostIn" />
+      <wsdl:output message="tns:UploadEquipWHRepairRecoedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipXJInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取机台巡检信息</wsdl:documentation>
+      <wsdl:input message="tns:GetEquipXJInfoHttpPostIn" />
+      <wsdl:output message="tns:GetEquipXJInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipXJRecoed">
+      <wsdl:input message="tns:UploadEquipXJRecoedHttpPostIn" />
+      <wsdl:output message="tns:UploadEquipXJRecoedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSizeInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具规格信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetSizeInfoHttpPostIn" />
+      <wsdl:output message="tns:wsGetSizeInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetPatternInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取模具花纹信息</wsdl:documentation>
+      <wsdl:input message="tns:wsGetPatternInfoHttpPostIn" />
+      <wsdl:output message="tns:wsGetPatternInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMouldNew">
+      <wsdl:input message="tns:wsInStorageMouldNewHttpPostIn" />
+      <wsdl:output message="tns:wsInStorageMouldNewHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMouldNew">
+      <wsdl:input message="tns:wsOutStorageMouldNewHttpPostIn" />
+      <wsdl:output message="tns:wsOutStorageMouldNewHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldStorageInfoNew">
+      <wsdl:input message="tns:GetMouldStorageInfoNewHttpPostIn" />
+      <wsdl:output message="tns:GetMouldStorageInfoNewHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfoNew">
+      <wsdl:input message="tns:wsGetSubStorePlaceInfoNewHttpPostIn" />
+      <wsdl:output message="tns:wsGetSubStorePlaceInfoNewHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitMoldStorageDB">
+      <wsdl:input message="tns:SubmitMoldStorageDBHttpPostIn" />
+      <wsdl:output message="tns:SubmitMoldStorageDBHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarning">
+      <wsdl:input message="tns:GetClearWarningHttpPostIn" />
+      <wsdl:output message="tns:GetClearWarningHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarningnumber">
+      <wsdl:input message="tns:GetClearWarningnumberHttpPostIn" />
+      <wsdl:output message="tns:GetClearWarningnumberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMould">
+      <wsdl:input message="tns:UPdateClearMouldHttpPostIn" />
+      <wsdl:output message="tns:UPdateClearMouldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldYJ">
+      <wsdl:input message="tns:UPdateClearMouldYJHttpPostIn" />
+      <wsdl:output message="tns:UPdateClearMouldYJHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockBegin">
+      <wsdl:input message="tns:UPdateClearMouldUnlockBeginHttpPostIn" />
+      <wsdl:output message="tns:UPdateClearMouldUnlockBeginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockEnd">
+      <wsdl:input message="tns:UPdateClearMouldUnlockEndHttpPostIn" />
+      <wsdl:output message="tns:UPdateClearMouldUnlockEndHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockBegin">
+      <wsdl:input message="tns:UPdateJgClearMouldUnlockBeginHttpPostIn" />
+      <wsdl:output message="tns:UPdateJgClearMouldUnlockBeginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockEnd">
+      <wsdl:input message="tns:UPdateJgClearMouldUnlockEndHttpPostIn" />
+      <wsdl:output message="tns:UPdateJgClearMouldUnlockEndHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIfClearMouldOk">
+      <wsdl:input message="tns:GetIfClearMouldOkHttpPostIn" />
+      <wsdl:output message="tns:GetIfClearMouldOkHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOutMouldInfo">
+      <wsdl:input message="tns:GetOutMouldInfoHttpPostIn" />
+      <wsdl:output message="tns:GetOutMouldInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInStoragePlace">
+      <wsdl:input message="tns:GetInStoragePlaceHttpPostIn" />
+      <wsdl:output message="tns:GetInStoragePlaceHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsDelStorageMouldNew">
+      <wsdl:input message="tns:wsDelStorageMouldNewHttpPostIn" />
+      <wsdl:output message="tns:wsDelStorageMouldNewHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWashMouldOkFlag">
+      <wsdl:input message="tns:UpdateWashMouldOkFlagHttpPostIn" />
+      <wsdl:output message="tns:UpdateWashMouldOkFlagHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateJgWashMouldOkFlag">
+      <wsdl:input message="tns:UpdateJgWashMouldOkFlagHttpPostIn" />
+      <wsdl:output message="tns:UpdateJgWashMouldOkFlagHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AppServiceSoap" type="tns:AppServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStoreInfo">
+      <soap:operation soapAction="http://tempuri.org/wsGetStoreInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStorePlaceInfo">
+      <soap:operation soapAction="http://tempuri.org/wsGetStorePlaceInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfo">
+      <soap:operation soapAction="http://tempuri.org/wsGetSubStorePlaceInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo">
+      <soap:operation soapAction="http://tempuri.org/wsGetMouldInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetEquip">
+      <soap:operation soapAction="http://tempuri.org/wsGetEquip" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMould">
+      <soap:operation soapAction="http://tempuri.org/wsInStorageMould" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMould">
+      <soap:operation soapAction="http://tempuri.org/wsOutStorageMould" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsMouldScanLog">
+      <soap:operation soapAction="http://tempuri.org/wsMouldScanLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInStockInfo">
+      <soap:operation soapAction="http://tempuri.org/wsGetMouldInStockInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldOutStockInfo">
+      <soap:operation soapAction="http://tempuri.org/wsGetMouldOutStockInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldStorageInfo">
+      <soap:operation soapAction="http://tempuri.org/wsGetMouldStorageInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo2">
+      <soap:operation soapAction="http://tempuri.org/wsGetMouldInfo2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsCreateInventoryBill">
+      <soap:operation soapAction="http://tempuri.org/wsCreateInventoryBill" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryBill">
+      <soap:operation soapAction="http://tempuri.org/wsGetInventoryBill" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryDetail">
+      <soap:operation soapAction="http://tempuri.org/wsGetInventoryDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsBarcodeBinding">
+      <soap:operation soapAction="http://tempuri.org/wsBarcodeBinding" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsCancelBarcodeBinding">
+      <soap:operation soapAction="http://tempuri.org/wsCancelBarcodeBinding" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsSubmitBill">
+      <soap:operation soapAction="http://tempuri.org/wsSubmitBill" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipInfo">
+      <soap:operation soapAction="http://tempuri.org/GetEquipInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAloneEquipInfo">
+      <soap:operation soapAction="http://tempuri.org/GetAloneEquipInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipStopInfo">
+      <soap:operation soapAction="http://tempuri.org/GetEquipStopInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopType">
+      <soap:operation soapAction="http://tempuri.org/GetSemisEquipStopType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopReason">
+      <soap:operation soapAction="http://tempuri.org/GetSemisEquipStopReason" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadSemisEquipRepairRecoed">
+      <soap:operation soapAction="http://tempuri.org/UploadSemisEquipRepairRecoed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipWHInfo">
+      <soap:operation soapAction="http://tempuri.org/GetEquipWHInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipWHRepairRecoed">
+      <soap:operation soapAction="http://tempuri.org/UploadEquipWHRepairRecoed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipXJInfo">
+      <soap:operation soapAction="http://tempuri.org/GetEquipXJInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipXJRecoed">
+      <soap:operation soapAction="http://tempuri.org/UploadEquipXJRecoed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSizeInfo">
+      <soap:operation soapAction="http://tempuri.org/wsGetSizeInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetPatternInfo">
+      <soap:operation soapAction="http://tempuri.org/wsGetPatternInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMouldNew">
+      <soap:operation soapAction="http://tempuri.org/wsInStorageMouldNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMouldNew">
+      <soap:operation soapAction="http://tempuri.org/wsOutStorageMouldNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldStorageInfoNew">
+      <soap:operation soapAction="http://tempuri.org/GetMouldStorageInfoNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfoNew">
+      <soap:operation soapAction="http://tempuri.org/wsGetSubStorePlaceInfoNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitMoldStorageDB">
+      <soap:operation soapAction="http://tempuri.org/SubmitMoldStorageDB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarning">
+      <soap:operation soapAction="http://tempuri.org/GetClearWarning" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarningnumber">
+      <soap:operation soapAction="http://tempuri.org/GetClearWarningnumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMould">
+      <soap:operation soapAction="http://tempuri.org/UPdateClearMould" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldYJ">
+      <soap:operation soapAction="http://tempuri.org/UPdateClearMouldYJ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockBegin">
+      <soap:operation soapAction="http://tempuri.org/UPdateClearMouldUnlockBegin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockEnd">
+      <soap:operation soapAction="http://tempuri.org/UPdateClearMouldUnlockEnd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockBegin">
+      <soap:operation soapAction="http://tempuri.org/UPdateJgClearMouldUnlockBegin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockEnd">
+      <soap:operation soapAction="http://tempuri.org/UPdateJgClearMouldUnlockEnd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIfClearMouldOk">
+      <soap:operation soapAction="http://tempuri.org/GetIfClearMouldOk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutMouldInfo">
+      <soap:operation soapAction="http://tempuri.org/GetOutMouldInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInStoragePlace">
+      <soap:operation soapAction="http://tempuri.org/GetInStoragePlace" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsDelStorageMouldNew">
+      <soap:operation soapAction="http://tempuri.org/wsDelStorageMouldNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWashMouldOkFlag">
+      <soap:operation soapAction="http://tempuri.org/UpdateWashMouldOkFlag" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateJgWashMouldOkFlag">
+      <soap:operation soapAction="http://tempuri.org/UpdateJgWashMouldOkFlag" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AppServiceSoap12" type="tns:AppServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStoreInfo">
+      <soap12:operation soapAction="http://tempuri.org/wsGetStoreInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStorePlaceInfo">
+      <soap12:operation soapAction="http://tempuri.org/wsGetStorePlaceInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfo">
+      <soap12:operation soapAction="http://tempuri.org/wsGetSubStorePlaceInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo">
+      <soap12:operation soapAction="http://tempuri.org/wsGetMouldInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetEquip">
+      <soap12:operation soapAction="http://tempuri.org/wsGetEquip" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMould">
+      <soap12:operation soapAction="http://tempuri.org/wsInStorageMould" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMould">
+      <soap12:operation soapAction="http://tempuri.org/wsOutStorageMould" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsMouldScanLog">
+      <soap12:operation soapAction="http://tempuri.org/wsMouldScanLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInStockInfo">
+      <soap12:operation soapAction="http://tempuri.org/wsGetMouldInStockInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldOutStockInfo">
+      <soap12:operation soapAction="http://tempuri.org/wsGetMouldOutStockInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldStorageInfo">
+      <soap12:operation soapAction="http://tempuri.org/wsGetMouldStorageInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo2">
+      <soap12:operation soapAction="http://tempuri.org/wsGetMouldInfo2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsCreateInventoryBill">
+      <soap12:operation soapAction="http://tempuri.org/wsCreateInventoryBill" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryBill">
+      <soap12:operation soapAction="http://tempuri.org/wsGetInventoryBill" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryDetail">
+      <soap12:operation soapAction="http://tempuri.org/wsGetInventoryDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsBarcodeBinding">
+      <soap12:operation soapAction="http://tempuri.org/wsBarcodeBinding" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsCancelBarcodeBinding">
+      <soap12:operation soapAction="http://tempuri.org/wsCancelBarcodeBinding" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsSubmitBill">
+      <soap12:operation soapAction="http://tempuri.org/wsSubmitBill" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetEquipInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAloneEquipInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetAloneEquipInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipStopInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetEquipStopInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopType">
+      <soap12:operation soapAction="http://tempuri.org/GetSemisEquipStopType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopReason">
+      <soap12:operation soapAction="http://tempuri.org/GetSemisEquipStopReason" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadSemisEquipRepairRecoed">
+      <soap12:operation soapAction="http://tempuri.org/UploadSemisEquipRepairRecoed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipWHInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetEquipWHInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipWHRepairRecoed">
+      <soap12:operation soapAction="http://tempuri.org/UploadEquipWHRepairRecoed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipXJInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetEquipXJInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipXJRecoed">
+      <soap12:operation soapAction="http://tempuri.org/UploadEquipXJRecoed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSizeInfo">
+      <soap12:operation soapAction="http://tempuri.org/wsGetSizeInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetPatternInfo">
+      <soap12:operation soapAction="http://tempuri.org/wsGetPatternInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMouldNew">
+      <soap12:operation soapAction="http://tempuri.org/wsInStorageMouldNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMouldNew">
+      <soap12:operation soapAction="http://tempuri.org/wsOutStorageMouldNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldStorageInfoNew">
+      <soap12:operation soapAction="http://tempuri.org/GetMouldStorageInfoNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfoNew">
+      <soap12:operation soapAction="http://tempuri.org/wsGetSubStorePlaceInfoNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitMoldStorageDB">
+      <soap12:operation soapAction="http://tempuri.org/SubmitMoldStorageDB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarning">
+      <soap12:operation soapAction="http://tempuri.org/GetClearWarning" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarningnumber">
+      <soap12:operation soapAction="http://tempuri.org/GetClearWarningnumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMould">
+      <soap12:operation soapAction="http://tempuri.org/UPdateClearMould" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldYJ">
+      <soap12:operation soapAction="http://tempuri.org/UPdateClearMouldYJ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockBegin">
+      <soap12:operation soapAction="http://tempuri.org/UPdateClearMouldUnlockBegin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockEnd">
+      <soap12:operation soapAction="http://tempuri.org/UPdateClearMouldUnlockEnd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockBegin">
+      <soap12:operation soapAction="http://tempuri.org/UPdateJgClearMouldUnlockBegin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockEnd">
+      <soap12:operation soapAction="http://tempuri.org/UPdateJgClearMouldUnlockEnd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIfClearMouldOk">
+      <soap12:operation soapAction="http://tempuri.org/GetIfClearMouldOk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutMouldInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetOutMouldInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInStoragePlace">
+      <soap12:operation soapAction="http://tempuri.org/GetInStoragePlace" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsDelStorageMouldNew">
+      <soap12:operation soapAction="http://tempuri.org/wsDelStorageMouldNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWashMouldOkFlag">
+      <soap12:operation soapAction="http://tempuri.org/UpdateWashMouldOkFlag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateJgWashMouldOkFlag">
+      <soap12:operation soapAction="http://tempuri.org/UpdateJgWashMouldOkFlag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AppServiceHttpGet" type="tns:AppServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStoreInfo">
+      <http:operation location="/wsGetStoreInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStorePlaceInfo">
+      <http:operation location="/wsGetStorePlaceInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfo">
+      <http:operation location="/wsGetSubStorePlaceInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo">
+      <http:operation location="/wsGetMouldInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetEquip">
+      <http:operation location="/wsGetEquip" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMould">
+      <http:operation location="/wsInStorageMould" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMould">
+      <http:operation location="/wsOutStorageMould" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsMouldScanLog">
+      <http:operation location="/wsMouldScanLog" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInStockInfo">
+      <http:operation location="/wsGetMouldInStockInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldOutStockInfo">
+      <http:operation location="/wsGetMouldOutStockInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldStorageInfo">
+      <http:operation location="/wsGetMouldStorageInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo2">
+      <http:operation location="/wsGetMouldInfo2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsCreateInventoryBill">
+      <http:operation location="/wsCreateInventoryBill" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryBill">
+      <http:operation location="/wsGetInventoryBill" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryDetail">
+      <http:operation location="/wsGetInventoryDetail" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsBarcodeBinding">
+      <http:operation location="/wsBarcodeBinding" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsCancelBarcodeBinding">
+      <http:operation location="/wsCancelBarcodeBinding" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsSubmitBill">
+      <http:operation location="/wsSubmitBill" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipInfo">
+      <http:operation location="/GetEquipInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAloneEquipInfo">
+      <http:operation location="/GetAloneEquipInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipStopInfo">
+      <http:operation location="/GetEquipStopInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopType">
+      <http:operation location="/GetSemisEquipStopType" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopReason">
+      <http:operation location="/GetSemisEquipStopReason" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadSemisEquipRepairRecoed">
+      <http:operation location="/UploadSemisEquipRepairRecoed" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipWHInfo">
+      <http:operation location="/GetEquipWHInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipWHRepairRecoed">
+      <http:operation location="/UploadEquipWHRepairRecoed" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipXJInfo">
+      <http:operation location="/GetEquipXJInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipXJRecoed">
+      <http:operation location="/UploadEquipXJRecoed" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSizeInfo">
+      <http:operation location="/wsGetSizeInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetPatternInfo">
+      <http:operation location="/wsGetPatternInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMouldNew">
+      <http:operation location="/wsInStorageMouldNew" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMouldNew">
+      <http:operation location="/wsOutStorageMouldNew" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldStorageInfoNew">
+      <http:operation location="/GetMouldStorageInfoNew" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfoNew">
+      <http:operation location="/wsGetSubStorePlaceInfoNew" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitMoldStorageDB">
+      <http:operation location="/SubmitMoldStorageDB" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarning">
+      <http:operation location="/GetClearWarning" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarningnumber">
+      <http:operation location="/GetClearWarningnumber" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMould">
+      <http:operation location="/UPdateClearMould" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldYJ">
+      <http:operation location="/UPdateClearMouldYJ" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockBegin">
+      <http:operation location="/UPdateClearMouldUnlockBegin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockEnd">
+      <http:operation location="/UPdateClearMouldUnlockEnd" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockBegin">
+      <http:operation location="/UPdateJgClearMouldUnlockBegin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockEnd">
+      <http:operation location="/UPdateJgClearMouldUnlockEnd" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIfClearMouldOk">
+      <http:operation location="/GetIfClearMouldOk" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutMouldInfo">
+      <http:operation location="/GetOutMouldInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInStoragePlace">
+      <http:operation location="/GetInStoragePlace" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsDelStorageMouldNew">
+      <http:operation location="/wsDelStorageMouldNew" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWashMouldOkFlag">
+      <http:operation location="/UpdateWashMouldOkFlag" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateJgWashMouldOkFlag">
+      <http:operation location="/UpdateJgWashMouldOkFlag" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AppServiceHttpPost" type="tns:AppServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStoreInfo">
+      <http:operation location="/wsGetStoreInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetStorePlaceInfo">
+      <http:operation location="/wsGetStorePlaceInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfo">
+      <http:operation location="/wsGetSubStorePlaceInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo">
+      <http:operation location="/wsGetMouldInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetEquip">
+      <http:operation location="/wsGetEquip" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMould">
+      <http:operation location="/wsInStorageMould" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMould">
+      <http:operation location="/wsOutStorageMould" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsMouldScanLog">
+      <http:operation location="/wsMouldScanLog" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInStockInfo">
+      <http:operation location="/wsGetMouldInStockInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldOutStockInfo">
+      <http:operation location="/wsGetMouldOutStockInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldStorageInfo">
+      <http:operation location="/wsGetMouldStorageInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetMouldInfo2">
+      <http:operation location="/wsGetMouldInfo2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsCreateInventoryBill">
+      <http:operation location="/wsCreateInventoryBill" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryBill">
+      <http:operation location="/wsGetInventoryBill" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetInventoryDetail">
+      <http:operation location="/wsGetInventoryDetail" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsBarcodeBinding">
+      <http:operation location="/wsBarcodeBinding" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsCancelBarcodeBinding">
+      <http:operation location="/wsCancelBarcodeBinding" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsSubmitBill">
+      <http:operation location="/wsSubmitBill" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipInfo">
+      <http:operation location="/GetEquipInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAloneEquipInfo">
+      <http:operation location="/GetAloneEquipInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipStopInfo">
+      <http:operation location="/GetEquipStopInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopType">
+      <http:operation location="/GetSemisEquipStopType" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSemisEquipStopReason">
+      <http:operation location="/GetSemisEquipStopReason" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadSemisEquipRepairRecoed">
+      <http:operation location="/UploadSemisEquipRepairRecoed" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipWHInfo">
+      <http:operation location="/GetEquipWHInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipWHRepairRecoed">
+      <http:operation location="/UploadEquipWHRepairRecoed" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipXJInfo">
+      <http:operation location="/GetEquipXJInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadEquipXJRecoed">
+      <http:operation location="/UploadEquipXJRecoed" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSizeInfo">
+      <http:operation location="/wsGetSizeInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetPatternInfo">
+      <http:operation location="/wsGetPatternInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInStorageMouldNew">
+      <http:operation location="/wsInStorageMouldNew" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsOutStorageMouldNew">
+      <http:operation location="/wsOutStorageMouldNew" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldStorageInfoNew">
+      <http:operation location="/GetMouldStorageInfoNew" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsGetSubStorePlaceInfoNew">
+      <http:operation location="/wsGetSubStorePlaceInfoNew" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitMoldStorageDB">
+      <http:operation location="/SubmitMoldStorageDB" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarning">
+      <http:operation location="/GetClearWarning" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClearWarningnumber">
+      <http:operation location="/GetClearWarningnumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMould">
+      <http:operation location="/UPdateClearMould" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldYJ">
+      <http:operation location="/UPdateClearMouldYJ" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockBegin">
+      <http:operation location="/UPdateClearMouldUnlockBegin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateClearMouldUnlockEnd">
+      <http:operation location="/UPdateClearMouldUnlockEnd" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockBegin">
+      <http:operation location="/UPdateJgClearMouldUnlockBegin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPdateJgClearMouldUnlockEnd">
+      <http:operation location="/UPdateJgClearMouldUnlockEnd" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIfClearMouldOk">
+      <http:operation location="/GetIfClearMouldOk" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutMouldInfo">
+      <http:operation location="/GetOutMouldInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInStoragePlace">
+      <http:operation location="/GetInStoragePlace" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsDelStorageMouldNew">
+      <http:operation location="/wsDelStorageMouldNew" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateWashMouldOkFlag">
+      <http:operation location="/UpdateWashMouldOkFlag" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateJgWashMouldOkFlag">
+      <http:operation location="/UpdateJgWashMouldOkFlag" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AppService">
+    <wsdl:port name="AppServiceSoap" binding="tns:AppServiceSoap">
+      <soap:address location="http://localhost/DZLLEquipWebservice/Equip/AppService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AppServiceSoap12" binding="tns:AppServiceSoap12">
+      <soap12:address location="http://localhost/DZLLEquipWebservice/Equip/AppService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AppServiceHttpGet" binding="tns:AppServiceHttpGet">
+      <http:address location="http://localhost/DZLLEquipWebservice/Equip/AppService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AppServiceHttpPost" binding="tns:AppServiceHttpPost">
+      <http:address location="http://localhost/DZLLEquipWebservice/Equip/AppService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

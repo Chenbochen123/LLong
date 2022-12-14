@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.SbmBom"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBM_BOM ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.LastmodifyDate" prepend="AND">
+          <![CDATA[LASTMODIFY_DATE = #where.LastmodifyDate#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.UnitId" prepend="AND">
+          <![CDATA[UNIT_ID = #where.UnitId#]]>
+        </isNotNull>
+        <isNotNull property="where.GroupNum" prepend="AND">
+          <![CDATA[GROUP_NUM = #where.GroupNum#]]>
+        </isNotNull>
+        <isNotNull property="where.GreentyreVersion" prepend="AND">
+          <![CDATA[GREENTYRE_VERSION = #where.GreentyreVersion#]]>
+        </isNotNull>
+        <isNotNull property="where.BomType" prepend="AND">
+          <![CDATA[BOM_TYPE = #where.BomType#]]>
+        </isNotNull>
+        <isNotNull property="where.BomFactroy" prepend="AND">
+          <![CDATA[BOM_FACTROY = #where.BomFactroy#]]>
+        </isNotNull>
+        <isNotNull property="where.BomVersion" prepend="AND">
+          <![CDATA[BOM_VERSION = #where.BomVersion#]]>
+        </isNotNull>
+        <isNotNull property="where.GroupUnitNum" prepend="AND">
+          <![CDATA[GROUP_UNIT_NUM = #where.GroupUnitNum#]]>
+        </isNotNull>
+        <isNotNull property="where.EffectDate" prepend="AND">
+          <![CDATA[EFFECT_DATE = #where.EffectDate#]]>
+        </isNotNull>
+        <isNotNull property="where.LoseEffectDate" prepend="AND">
+          <![CDATA[LOSE_EFFECT_DATE = #where.LoseEffectDate#]]>
+        </isNotNull>
+        <isNotNull property="where.PdmCode" prepend="AND">
+          <![CDATA[PDM_CODE = #where.PdmCode#]]>
+        </isNotNull>
+        <isNotNull property="where.DropFlag" prepend="AND">
+          <![CDATA[DROP_FLAG = #where.DropFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.GreentyreMaterialId" prepend="AND">
+          <![CDATA[GREENTYRE_MATERIAL_ID = #where.GreentyreMaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialParentId" prepend="AND">
+          <![CDATA[MATERIAL_PARENT_ID = #where.MaterialParentId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetMoldingBomInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select t1.sap_code,t2.type_name,t1.minor_type_id,t3.minor_type_name,
+        t.objid,t.material_id,t1.material_name,ts.material_name sub1,ts1.material_name sub2,t.unit_id,t.group_num,t.greentyre_version,t.bom_type,t.bom_factroy,t.bom_version,t.pdm_code,t.greentyre_material_id,
+        t.material_parent_id,t.group_unit_num,t.lastmodify_date from sbm_bom_data t 
+        left join sbm_material t1 on t1.objid  =t.material_id
+        left join sbm_bom_type t2 on t2.objid= t.bom_type
+        left join sbm_material_minor_type t3 on t3.objid = t1.minor_type_id
+        left join (
+        select ttt.material_name,t3.minor_type_name,ttt.minor_type_id,tt.* from sbm_bom_data tt 
+        left join sbm_material ttt on ttt.objid = tt.material_id
+        left join sbm_material_minor_type t3 on t3.objid = ttt.minor_type_id
+        where  tt.delete_flag=0) ts on ts.material_parent_id = t.material_id and ts.greentyre_material_id = t.material_parent_id and ts.minor_type_id in(5,20)
+        left join (
+        select ttt.material_name,t3.minor_type_name,ttt.minor_type_id,tt.* from sbm_bom_data tt 
+        left join sbm_material ttt on ttt.objid = tt.material_id
+        left join sbm_material_minor_type t3 on t3.objid = ttt.minor_type_id
+        where  tt.delete_flag=0) ts1 on ts1.material_parent_id = t.material_id and ts1.greentyre_material_id = t.material_parent_id and ts1.minor_type_id in(17)
+        where t.delete_flag=0 and t.material_parent_id = (select material_id from v_bpt_molding_tech where objid = #techId#)
+        and t.bom_version=#bomId# and t.greentyre_version = (select pdm_version from v_bpt_molding_tech where objid =#techId#)
+       ]]>
+     </select>
+     <select id="GetBomConsumeInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T1.MATERIAL_ID,T1.GROUP_NUM,T1.GROUP_UNIT_NUM,T2.MINOR_TYPE_ID FROM SBM_BOM_DATA T1 
+        LEFT JOIN SBM_MATERIAL T2 ON T2.OBJID = T1.MATERIAL_ID
+        WHERE T1.DELETE_FLAG=0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="materialId" prepend="AND">
+           <![CDATA[T1.MATERIAL_PARENT_ID=#materialId#]]>
+         </isNotNull>
+         <isNotNull property="greentyreversion" prepend="AND">
+           <![CDATA[T1.GREENTYRE_VERSION=#greentyreversion#]]>
+         </isNotNull>
+         <isNotNull property="semisMaterialId" prepend="AND">
+           <![CDATA[T1.MATERIAL_ID=#semisMaterialId#]]>
+         </isNotNull>
+         <isNotNull property="version" prepend="AND">
+           <![CDATA[T1.GREENTYRE_MATERIAL_ID=#greentyrematerialid#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetBomInfoByObjID" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T1.OBJID,T1.GREENTYRE_VERSION,T1.GREENTYRE_MATERIAL_ID
+        FROM SBM_BOM_DATA T1 
+        WHERE T1.DELETE_FLAG=0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="OBJID" prepend="AND">
+           <![CDATA[T1.OBJID=#OBJID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetBeadRingBom" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT A.MATERIAL_ID,A.MATERIAL_NAME,A.GROUP_NUM*A.GROUP_UNIT_NUM*#Qty# QTY,A.MINOR_TYPE_ID FROM (
+      SELECT* FROM SBM_BOM_DATA T 
+      LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID = T.MATERIAL_ID
+      WHERE T.MATERIAL_PARENT_ID=#MaterialId# AND T.DELETE_FLAG=0 AND T1.MAJOR_TYPE_ID=21 ORDER BY T.RECORD_TIME DESC) A 
+      WHERE ROWNUM=1
+       ]]>
+     </select>
+
+     
+     <!--获取WMS所需轮胎信息-->
+     <select id="GetTyreNoWMSInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+            select a.tyre_no,a.green_tyre_no,nvl(a.end_time,a.begin_time) end_time,b.material_code,b.sap_code
+                  ,case nvl(e.objid,0) when 22 then 1 else 0 end AS testFlag
+                  ,nvl(to_char(i.plan_date,'yyyy'),to_char(sysdate,'yyyy')) batchCuring
+                  ,to_char(i.plan_date, 'WWYY') weekYear
+                  ,f.final_check_grade
+                  ,case when f.final_check_grade <> 1 then 1
+                        else nvl(nullif(g.UFRANK,0),1) end dph_grade_code,J.LOT_NUMBER            
+            from cpp_curing_production a
+            left join sbm_material b on a.material_id = b.objid and b.delete_flag = 0
+            left join cpp_curing_plan_detail c on a.plan_detail_id = c.objid
+            left join sbm_bom d on c.bom_id = d.objid
+            left join sbm_bom_type e on d.bom_type = e.objid
+            left join spp_tyre_state f on a.tyre_no = f.tyre_no and f.delete_flag = 0
+            left join fqb_balance_info g on a.tyre_no = g.tyre_id and g.delete_flag = 0
+            left join cpp_curing_plan i on a.plan_id = i.objid and i.delete_flag =0
+            left join wms_upload_record J ON J.TYRE_NO = A.TYRE_NO
+            where a.delete_flag = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="TyreNo" prepend="AND">
+           <![CDATA[a.tyre_no = #TyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <!--获取WMS所需轮胎信息-->
+     <select id="GetWMSInfoByTyreNo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+            select * from WMS_UPLOAD_RECORD where delete_flag = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="TyreNo" prepend="AND">
+           <![CDATA[tyre_no = #TyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <!--更新WMS轮胎信息-->
+     <update id="UpdateWMSInfoByTyreNo" parameterClass="map">
+       <![CDATA[ 
+        update WMS_UPLOAD_RECORD set BACKUP_TIME = SYSDATE,ITEM_NUMBER = #ITEM_NUMBER#
+                                    ,ITEM_DESC= #ITEM_DESC#,LOT_NUMBER = #LOT_NUMBER#
+                                    ,MES_LOT = #MES_LOT#
+                                    ,TEST_FLAG = #TEST_FLAG#
+                                    ,PRODUCTION_TIME = to_date(#PRODUCTION_TIME#,'yyyy-mm-dd hh24:mi:ss'),UPLOAD_FLAG=0
+                                    ,RETURN_FLAG = #RETURN_FLAG#
+        where TYRE_NO = #TyreNo#
+      ]]>
+     </update>
+
+     <!--插入WMS轮胎信息-->
+     <insert id="InsertWMSInfoByTyreNo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+       INSERT INTO WMS_UPLOAD_RECORD(OBJID,RECORD_TIME,BACKUP_TIME,DELETE_FLAG,TYRE_NO,GREEN_TYRE_NO,WH_ID
+                                           ,SUB_WARE_HOUSE,ITEM_NUMBER,ITEM_DESC,SAP_LINE_LOC,LOT_NUMBER,MES_LOT,TEST_FLAG,RETURN_FLAG,GRADE
+                                           ,WEEK,SHIFT,PRODUCTION_TIME,UPLOAD_FLAG,UPLOAD_TIME)
+       VALUES(SEQ_WMS_UPLOAD_RECORD.NEXTVAL,SYSDATE,SYSDATE,0,#TyreNo#,#GreenTyreNo#,'8002'
+             ,'3',#ITEM_NUMBER#,#ITEM_DESC#,#SAP_LINE_LOC#,#LOT_NUMBER#,#MES_LOT#,#TEST_FLAG#,#RETURN_FLAG#,#GRADE#
+             ,#WEEK#,#SHIFT#,to_date(#PRODUCTION_TIME#,'yyyy-mm-dd hh24:mi:ss'),0,SYSDATE)
+      ]]>
+     </insert>
+
+     <select id="UpdateWMSIsStore2" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+         update sbm_lock_record set store_flag =  #ioFlag# where barcode =  #barCode#
+       ]]>
+     </select>
+     <select id="UpdateWMSIsStore4" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+       UPDATE wms_upload_record SET ATTRIBUTE3 = #ioFlag#,attribute4 = to_char(to_date(#date#,'yyyy-MM-dd hh24:mi:ss'),'yyyy-MM-dd hh24:mi:ss')  WHERE TYRE_NO = #barCode#
+       ]]>
+     </select>
+     <select id="UpdateWMSIsStore6" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+       UPDATE wms_upload_record SET reflag = 3 WHERE TYRE_NO = #barCode#
+       ]]>
+     </select>
+
+     <select id="GetOldStoreInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select store_place_name,objid from HPP_STORE_PLACE where objid = (
+      select store_place_id from HPP_STORAGE_DETAIL where card_no = #barCode#)
+       ]]>
+     </select>
+
+     <select id="GetDingziOldBarcode" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+       select * from hpp_dingzistore where substr(barcode,0,9)=#barCode#  order by record_time
+       ]]>
+     </select>
+     
+     <select id="GetGreentyreName" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select material_name from sbm_material where objid in(
+       select distinct  material_parent_id from sbm_bom where material_id in 
+       (select distinct  material_parent_id from sbm_bom where material_id in (
+          select distinct material_parent_ID from sbm_bom where material_id =#MaterialId#
+          )
+        ))
+       ]]>
+     </select>
+     <select id="GetDingziSapInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+          select distinct b.sap_code,b.material_full_name from SBM_BOM_DATA a
+        left join SBM_MATERIAL b on a.material_id = b.objid
+         where material_parent_id = 
+         (
+         select* from( select distinct t2.objid
+            from SBM_BOM_DATA t1
+            INNER JOIN SBM_MATERIAL T2 ON T2.OBJID = T1.MATERIAL_PARENT_ID
+        where t2.SAP_CODE  =#sapcode# and t1.delete_flag = 0) where rownum <2)
+       ]]>
+     </select>
+
+     <update id="UpdateGetMaterInfoQG" parameterClass="map">
+       <![CDATA[ 
+       update hpp_getmatertosap set processcode = #ProcessCode#,tlgnam=#TLGNAM#,mstyp=#MSTYP#,errdes=#ERRDES#,sapid=#SAPID#,docty=#DOCTY# 
+       where busid=#BUSID#
+      ]]>
+     </update>
+
+     <select id="GetUserAction" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      SELECT * FROM (SELECT ACTION_ID FROM SSP_USER_ACTION T 
+      WHERE USER_ID =#UserId#
+      UNION ALL
+      SELECT ACTION_ID FROM SSP_USER_ROLE T1 
+      LEFT JOIN SSP_ROLE_ACTION T2 ON T2.ROLE_ID = T1.ROLE_ID
+      WHERE T1.USER_ID =#UserId#)
+      WHERE ACTION_ID=#ActionId#
+      ]]>
+     </select>
+
+     <select id="GetMaterialNameInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select material_full_name from sbm_material 
+       where delete_flag=0 
+       ]]>
+       <isNotNull property="materialId" prepend="AND">
+         <![CDATA[objid = #materialId#]]>
+       </isNotNull>
+     </select>
+     
+     
+  </statements>
+</sqlMap>

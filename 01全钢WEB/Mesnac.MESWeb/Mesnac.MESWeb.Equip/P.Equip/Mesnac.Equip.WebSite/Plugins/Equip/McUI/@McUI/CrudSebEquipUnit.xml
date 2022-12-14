@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="MajorTypeId" Value="设备大类"></Caption>
+    <Caption Name="MinorTypeId" Value="设备细类"></Caption>
+    <Caption Name="UnitId" Value="部件"></Caption>
+
+    <Caption Name="UNIT_CODE" Value="部件编号"></Caption>
+    <Caption Name="UNIT_NAME" Value="部件名称"></Caption>
+    <Caption Name="UNIT_ID" Value="部件"></Caption>
+    <Caption Name="MAJOR_TYPE_ID" Value="设备大类"></Caption>
+    <Caption Name="MAJOR_TYPE_NAME" Value="设备大类"></Caption>
+    <Caption Name="MINOR_TYPE_ID" Value="设备细类"></Caption>
+    <Caption Name="MINOR_TYPE_NAME" Value="设备细类"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+  </Captions>
+  <WebPage Title="设备部件关联">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Equip/McUI/@McUI/CrudSebEquipUnit.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="SEB_EQUIP_UNIT">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_SEB_EQUIP_UNIT"></SeqField>
+    </SeqFields>
+    <Uniques>
+      <Unique Fields="MINOR_TYPE_ID,UNIT_ID"></Unique>
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="MAJOR_TYPE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="MINOR_TYPE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="UNIT_ID" Type="SearchBox"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="MAJOR_TYPE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="MINOR_TYPE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="UNIT_ID" Type="SearchBox"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="MajorTypeId" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MinorTypeId" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="UnitId" Type="SearchBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="MAJOR_TYPE_NAME"></GridColumn>
+        <GridColumn ColumnName="MINOR_TYPE_NAME"></GridColumn>
+        <GridColumn ColumnName="UNIT_CODE"></GridColumn>
+        <GridColumn ColumnName="UNIT_NAME"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

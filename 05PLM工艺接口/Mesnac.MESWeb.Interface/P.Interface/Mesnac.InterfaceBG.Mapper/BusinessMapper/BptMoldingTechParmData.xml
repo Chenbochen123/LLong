@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.InterfaceBG.Mapper.BusinessMapper.BptMoldingTechParmData"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BPT_MOLDING_TECH_PARM_DATA ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.PdmCode" prepend="AND">
+          <![CDATA[PDM_CODE = #where.PdmCode#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmGroupId" prepend="AND">
+          <![CDATA[PARM_GROUP_ID = #where.ParmGroupId#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmTypeId" prepend="AND">
+          <![CDATA[PARM_TYPE_ID = #where.ParmTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmInfoId" prepend="AND">
+          <![CDATA[PARM_INFO_ID = #where.ParmInfoId#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmValue" prepend="AND">
+          <![CDATA[PARM_VALUE = #where.ParmValue#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmValueMax" prepend="AND">
+          <![CDATA[PARM_VALUE_MAX = #where.ParmValueMax#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmValueMin" prepend="AND">
+          <![CDATA[PARM_VALUE_MIN = #where.ParmValueMin#]]>
+        </isNotNull>
+        <isNotNull property="where.PdmVersion" prepend="AND">
+          <![CDATA[PDM_VERSION = #where.PdmVersion#]]>
+        </isNotNull>
+        <isNotNull property="where.Lastmodifier" prepend="AND">
+          <![CDATA[LASTMODIFIER = #where.Lastmodifier#]]>
+        </isNotNull>
+        <isNotNull property="where.LastmodifyDate" prepend="AND">
+          <![CDATA[LASTMODIFY_DATE = #where.LastmodifyDate#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmCombine" prepend="AND">
+          <![CDATA[PARM_COMBINE = #where.ParmCombine#]]>
+        </isNotNull>
+        <isNotNull property="where.ProcessRoute" prepend="AND">
+          <![CDATA[PROCESS_ROUTE = #where.ProcessRoute#]]>
+        </isNotNull>
+        <isNotNull property="where.ProcessVersion" prepend="AND">
+          <![CDATA[PROCESS_VERSION = #where.ProcessVersion#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     
+     <!--查询objid-->
+     <select id="GetBptobjid" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select max(objid) from bpt_molding_tech_parm_data
+       ]]>
+     </select>
+
+     <!--查询具体参数id-->
+     <select id="GetBptInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select OBJID from bpt_molding_tech_parm_info where 1=1
+       ]]>
+       <isNotNull property="PARM_NAME" prepend="AND">
+         <![CDATA[PARM_NAME=#PARM_NAME#]]>
+       </isNotNull>
+     </select>
+     <update id="UpdateBGTechFlag" parameterClass="map">
+       <![CDATA[
+        update bpt_molding_tech_all_data set delete_flag=1 where DELETE_FLAG=0 and SAP_CODE=#SAP_CODE# and TECH_VERSION=#TECH_VERSION#
+       ]]>
+     </update>
+  </statements>
+</sqlMap>

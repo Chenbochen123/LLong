@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="用户编号"></Caption>
+    <Caption Name="USER_NAME" Value="用户名称"></Caption>
+    <Caption Name="REAL_NAME" Value="真实姓名"></Caption>
+    <Caption Name="SEX" Value="性别"></Caption>
+    <Caption Name="TELEPHONE" Value="电话"></Caption>
+    <Caption Name="WORK_BARCODE" Value="用户工号"></Caption>
+    <Caption Name="DEPT_ID" Value="部门"></Caption>
+    <Caption Name="WORK_ID" Value="岗位"></Caption>
+    <Caption Name="SHIFT_ID" Value="班次"></Caption>
+    <Caption Name="CLASS_ID" Value="班组"></Caption>
+    <Caption Name="WORKSHOP_ID" Value="车间"></Caption>
+    <Caption Name="HR_CODE" Value="HR编码"></Caption>
+    <Caption Name="ERP_CODE" Value="ERP编码"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="IS_EMPLOYEE" Value="是否员工"></Caption>
+  </Captions>
+  <WebPage Title="人员管理">
+  </WebPage>
+  <Crud TableName="SSB_USER">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <Uniques>
+      <Unique Fields="USER_NAME"></Unique>
+      <Unique Fields="WORK_BARCODE"></Unique>
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="USER_NAME"></ParamField>
+        <ParamField FieldName="REAL_NAME"></ParamField>
+        <ParamField FieldName="SEX" Type="ComboBox"></ParamField>
+        <ParamField FieldName="TELEPHONE"></ParamField>
+        <ParamField FieldName="WORK_BARCODE"></ParamField>
+        <ParamField FieldName="DEPT_ID"     Type="ComboBox"></ParamField>
+        <ParamField FieldName="WORK_ID"     Type="ComboBox"></ParamField>
+        <ParamField FieldName="SHIFT_ID"    Type="ComboBox"></ParamField>
+        <ParamField FieldName="CLASS_ID"    Type="ComboBox"></ParamField>
+        <ParamField FieldName="WORKSHOP_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="HR_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="ERP_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+        <ParamField FieldName="IS_EMPLOYEE" Type="ComboBox"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update>
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="USER_NAME"></ParamField>
+        <ParamField FieldName="REAL_NAME"></ParamField>
+        <ParamField FieldName="SEX" Type="ComboBox"></ParamField>
+        <ParamField FieldName="TELEPHONE"></ParamField>
+        <ParamField FieldName="WORK_BARCODE"></ParamField>
+        <ParamField FieldName="DEPT_ID"     Type="ComboBox"></ParamField>
+        <ParamField FieldName="WORK_ID"     Type="ComboBox"></ParamField>
+        <ParamField FieldName="SHIFT_ID"    Type="ComboBox"></ParamField>
+        <ParamField FieldName="CLASS_ID"    Type="ComboBox"></ParamField>
+        <ParamField FieldName="WORKSHOP_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="HR_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="ERP_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+        <ParamField FieldName="IS_EMPLOYEE" Type="ComboBox"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="USER_NAME"></ParamField>
+        <ParamField FieldName="REMARK" ></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="T1.OBJID">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" Width="60"></GridColumn>
+        <GridColumn ColumnName="USER_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="REAL_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="SEX" Width="40"></GridColumn>
+        <GridColumn ColumnName="TELEPHONE" Width="100"></GridColumn>
+        <GridColumn ColumnName="WORK_BARCODE" Width="60"></GridColumn>
+        <GridColumn ColumnName="DEPT_ID" Width="150"></GridColumn>
+        <GridColumn ColumnName="WORK_ID" Width="80"></GridColumn>
+        <GridColumn ColumnName="SHIFT_ID" Width="40"></GridColumn>
+        <GridColumn ColumnName="CLASS_ID" Width="40"></GridColumn>
+        <GridColumn ColumnName="WORKSHOP_ID" Width="80"></GridColumn>
+        <GridColumn ColumnName="HR_CODE" Width="60"></GridColumn>
+        <GridColumn ColumnName="ERP_CODE" Width="60"></GridColumn>
+        <GridColumn ColumnName="REMARK" Width="100"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

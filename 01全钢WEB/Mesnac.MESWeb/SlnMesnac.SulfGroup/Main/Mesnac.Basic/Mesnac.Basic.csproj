@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{28ACACF1-9936-4E97-A866-F84366EC5286}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Basic</RootNamespace>
+    <AssemblyName>Mesnac.Basic</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.Core, Version=4.3.0.9338, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Data.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Data.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Codd">
+      <HintPath>..\..\Libraries\Mesnac.Codd.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Core">
+      <HintPath>..\..\PlugInPlatform\Mesnac.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\..\Libraries\NPOI\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="OpcDaNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\OpcDaNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.DataAccess">
+      <HintPath>..\..\Libraries\Oracle\Oracle.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analyzer.cs" />
+    <Compile Include="BasicInfo.cs" />
+    <Compile Include="CreateType.cs" />
+    <Compile Include="DataBaseInfo.cs" />
+    <Compile Include="DataProcessor.cs" />
+    <Compile Include="DataSourceFactory.cs" />
+    <Compile Include="DataSourceItem.cs" />
+    <Compile Include="DataToFileHandler.cs" />
+    <Compile Include="DeviceManage.cs" />
+    <Compile Include="FixNodeName.cs" />
+    <Compile Include="FormInfo.cs" />
+    <Compile Include="IntakePath.cs" />
+    <Compile Include="MessageBoxTimeOut.cs" />
+    <Compile Include="ModbusRTUInfo.cs" />
+    <Compile Include="OPCComm.cs" />
+    <Compile Include="OPCDriver.cs" />
+    <Compile Include="OPCServerInfo.cs" />
+    <Compile Include="ProcessHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Register.cs" />
+    <Compile Include="RunSchema.cs" />
+    <Compile Include="SerializeHandler.cs" />
+    <Compile Include="SetLocalTime.cs" />
+    <Compile Include="TreeViewHelper.cs" />
+    <Compile Include="UserInfo.cs" />
+    <Compile Include="Variable.cs" />
+    <Compile Include="Win32Tool.cs" />
+    <Compile Include="XmlHandler.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

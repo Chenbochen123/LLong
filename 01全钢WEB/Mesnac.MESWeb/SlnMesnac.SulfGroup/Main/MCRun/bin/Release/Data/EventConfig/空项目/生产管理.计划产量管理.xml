@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<ActionService>
+  <Design>
+    <Path path="生产管理/计划产量管理">
+      <Action action="C4BDBE568569447A8A78448BE00D5126">
+        <Caption>窗体初始化</Caption>
+        <Remark>绑定班次、班组，机台</Remark>
+      </Action>
+      <Action action="97D5DC2A59C944B88F25CDDAE9663316">
+        <Caption>查询</Caption>
+        <Remark>查询计划信息</Remark>
+      </Action>
+      <Action action="CDA8F4FC51C94511BC87808A87A66539">
+          <Caption>查询--产量查询初始化</Caption>
+          <Remark>产量查询</Remark>
+      </Action>
+      <Action action="5FF0897C882448FCAE7099D389EE3B14">
+          <Caption>查询--产量查询</Caption>
+          <Remark>产量查询</Remark>
+      </Action>
+      <Action action="8E1B80AF52DE430184E2E56E1F57FDD6">
+        <Caption>qunima</Caption>
+        <Remark>qunima</Remark>
+      </Action>
+    </Path>
+  </Design>
+  <DesignToRuntime>
+    <!--窗体初始化-->
+    <Design action="C4BDBE568569447A8A78448BE00D5126">
+      <Runtime action="33117D6BA2CE4772BE37AEB94406803B"/>
+      <Runtime action="7106000ED6714A5BBFA5E8BCBB913DB9"/>
+    </Design>
+    <Design action="97D5DC2A59C944B88F25CDDAE9663316">
+      <Runtime action="7106000ED6714A5BBFA5E8BCBB913DB9"/>
+    </Design>
+    <Design action="CDA8F4FC51C94511BC87808A87A66539">
+        <Runtime action="7726293DACFB484DB8178E7F14DD9536"/>
+    </Design>
+    <Design action="5FF0897C882448FCAE7099D389EE3B14">
+        <Runtime action="FDDED71C15214D5CB0FA8B523FFFFE7C"/>
+    </Design>
+    <Design action="8E1B80AF52DE430184E2E56E1F57FDD6">
+      <Runtime action="90507F24D9B14488A2FCF3CD893C2CDD"/>
+    </Design>
+  </DesignToRuntime>
+
+  <Runtime>
+    <Import assembly = "Data/Action/SulfGroup/Mesnac.Action.SulfGroup.dll">
+      <Action action="33117D6BA2CE4772BE37AEB94406803B" class="Mesnac.Action.SulfGroup.ProductPlan.DutyPlanInit"/>
+      <Action action="7106000ED6714A5BBFA5E8BCBB913DB9" class="Mesnac.Action.SulfGroup.ProductPlan.RefreshPlan"/>
+      <Action action="7726293DACFB484DB8178E7F14DD9536" class="Mesnac.Action.SulfGroup.ProductPlan.ProductInfoInit"/>
+      <Action action="FDDED71C15214D5CB0FA8B523FFFFE7C" class="Mesnac.Action.SulfGroup.ProductPlan.RefreshForm"/>
+      <Action action="90507F24D9B14488A2FCF3CD893C2CDD" class="Mesnac.Action.SulfGroup.ProductPlan.TestToPLC"/>
+    </Import>
+  </Runtime>
+</ActionService>

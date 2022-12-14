@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CrtCuringEquipMoniter"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CrtCuringEquipMoniter" type="Mesnac.Curing.Entity.BasicEntity.CrtCuringEquipMoniter, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CrtCuringEquipMoniter" class="CrtCuringEquipMoniter">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="UpdateTime" column="UPDATE_TIME"/>
+    <result property="EquipState" column="EQUIP_STATE"/>
+    <result property="CurrentStep" column="CURRENT_STEP"/>
+    <result property="AllStep" column="ALL_STEP"/>
+    <result property="StopTime" column="STOP_TIME"/>
+    <result property="StepTime" column="STEP_TIME"/>
+    <result property="CuringLeftTime" column="CURING_LEFT_TIME"/>
+    <result property="CuringTime" column="CURING_TIME"/>
+    <result property="LeftBladderCount" column="LEFT_BLADDER_COUNT"/>
+    <result property="RightBladderCount" column="RIGHT_BLADDER_COUNT"/>
+    <result property="LeftMaterialId" column="LEFT_MATERIAL_ID"/>
+    <result property="RightMaterialId" column="RIGHT_MATERIAL_ID"/>
+    <result property="LeftTyreNo" column="LEFT_TYRE_NO"/>
+    <result property="RightTyreNo" column="RIGHT_TYRE_NO"/>
+    <result property="LeftGreenTyreNo" column="LEFT_GREEN_TYRE_NO"/>
+    <result property="RightGreenTyreNo" column="RIGHT_GREEN_TYRE_NO"/>
+    <result property="LeftMouldCode" column="LEFT_MOULD_CODE"/>
+    <result property="RightMouldCode" column="RIGHT_MOULD_CODE"/>
+    <result property="LeftMouldCount" column="LEFT_MOULD_COUNT"/>
+    <result property="RightMouldCount" column="RIGHT_MOULD_COUNT"/>
+    <result property="ValveState" column="VALVE_STATE"/>
+    <result property="AlarmState" column="ALARM_STATE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CrtCuringEquipMoniter" class="CrtCuringEquipMoniter">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="UpdateTime" column="UpdateTime"/>
+    <parameter property="EquipState" column="EquipState"/>
+    <parameter property="CurrentStep" column="CurrentStep"/>
+    <parameter property="AllStep" column="AllStep"/>
+    <parameter property="StopTime" column="StopTime"/>
+    <parameter property="StepTime" column="StepTime"/>
+    <parameter property="CuringLeftTime" column="CuringLeftTime"/>
+    <parameter property="CuringTime" column="CuringTime"/>
+    <parameter property="LeftBladderCount" column="LeftBladderCount"/>
+    <parameter property="RightBladderCount" column="RightBladderCount"/>
+    <parameter property="LeftMaterialId" column="LeftMaterialId"/>
+    <parameter property="RightMaterialId" column="RightMaterialId"/>
+    <parameter property="LeftTyreNo" column="LeftTyreNo"/>
+    <parameter property="RightTyreNo" column="RightTyreNo"/>
+    <parameter property="LeftGreenTyreNo" column="LeftGreenTyreNo"/>
+    <parameter property="RightGreenTyreNo" column="RightGreenTyreNo"/>
+    <parameter property="LeftMouldCode" column="LeftMouldCode"/>
+    <parameter property="RightMouldCode" column="RightMouldCode"/>
+    <parameter property="LeftMouldCount" column="LeftMouldCount"/>
+    <parameter property="RightMouldCount" column="RightMouldCount"/>
+    <parameter property="ValveState" column="ValveState"/>
+    <parameter property="AlarmState" column="AlarmState"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_CURING_EQUIP_MONITER ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipState" prepend="AND">
+          <![CDATA[EQUIP_STATE = #where.EquipState#]]>
+        </isNotNull>
+        <isNotNull property="where.CurrentStep" prepend="AND">
+          <![CDATA[CURRENT_STEP = #where.CurrentStep#]]>
+        </isNotNull>
+        <isNotNull property="where.AllStep" prepend="AND">
+          <![CDATA[ALL_STEP = #where.AllStep#]]>
+        </isNotNull>
+        <isNotNull property="where.StopTime" prepend="AND">
+          <![CDATA[STOP_TIME = #where.StopTime#]]>
+        </isNotNull>
+        <isNotNull property="where.StepTime" prepend="AND">
+          <![CDATA[STEP_TIME = #where.StepTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringLeftTime" prepend="AND">
+          <![CDATA[CURING_LEFT_TIME = #where.CuringLeftTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime" prepend="AND">
+          <![CDATA[CURING_TIME = #where.CuringTime#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftBladderCount" prepend="AND">
+          <![CDATA[LEFT_BLADDER_COUNT = #where.LeftBladderCount#]]>
+        </isNotNull>
+        <isNotNull property="where.RightBladderCount" prepend="AND">
+          <![CDATA[RIGHT_BLADDER_COUNT = #where.RightBladderCount#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftMaterialId" prepend="AND">
+          <![CDATA[LEFT_MATERIAL_ID = #where.LeftMaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.RightMaterialId" prepend="AND">
+          <![CDATA[RIGHT_MATERIAL_ID = #where.RightMaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftTyreNo" prepend="AND">
+          <![CDATA[LEFT_TYRE_NO = #where.LeftTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.RightTyreNo" prepend="AND">
+          <![CDATA[RIGHT_TYRE_NO = #where.RightTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftGreenTyreNo" prepend="AND">
+          <![CDATA[LEFT_GREEN_TYRE_NO = #where.LeftGreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.RightGreenTyreNo" prepend="AND">
+          <![CDATA[RIGHT_GREEN_TYRE_NO = #where.RightGreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftMouldCode" prepend="AND">
+          <![CDATA[LEFT_MOULD_CODE = #where.LeftMouldCode#]]>
+        </isNotNull>
+        <isNotNull property="where.RightMouldCode" prepend="AND">
+          <![CDATA[RIGHT_MOULD_CODE = #where.RightMouldCode#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftMouldCount" prepend="AND">
+          <![CDATA[LEFT_MOULD_COUNT = #where.LeftMouldCount#]]>
+        </isNotNull>
+        <isNotNull property="where.RightMouldCount" prepend="AND">
+          <![CDATA[RIGHT_MOULD_COUNT = #where.RightMouldCount#]]>
+        </isNotNull>
+        <isNotNull property="where.ValveState" prepend="AND">
+          <![CDATA[VALVE_STATE = #where.ValveState#]]>
+        </isNotNull>
+        <isNotNull property="where.AlarmState" prepend="AND">
+          <![CDATA[ALARM_STATE = #where.AlarmState#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CRT_CURING_EQUIP_MONITER]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="UpdateTime" prepend=",">UPDATE_TIME</isNotNull>
+        <isNotNull property="EquipState" prepend=",">EQUIP_STATE</isNotNull>
+        <isNotNull property="CurrentStep" prepend=",">CURRENT_STEP</isNotNull>
+        <isNotNull property="AllStep" prepend=",">ALL_STEP</isNotNull>
+        <isNotNull property="StopTime" prepend=",">STOP_TIME</isNotNull>
+        <isNotNull property="StepTime" prepend=",">STEP_TIME</isNotNull>
+        <isNotNull property="CuringLeftTime" prepend=",">CURING_LEFT_TIME</isNotNull>
+        <isNotNull property="CuringTime" prepend=",">CURING_TIME</isNotNull>
+        <isNotNull property="LeftBladderCount" prepend=",">LEFT_BLADDER_COUNT</isNotNull>
+        <isNotNull property="RightBladderCount" prepend=",">RIGHT_BLADDER_COUNT</isNotNull>
+        <isNotNull property="LeftMaterialId" prepend=",">LEFT_MATERIAL_ID</isNotNull>
+        <isNotNull property="RightMaterialId" prepend=",">RIGHT_MATERIAL_ID</isNotNull>
+        <isNotNull property="LeftTyreNo" prepend=",">LEFT_TYRE_NO</isNotNull>
+        <isNotNull property="RightTyreNo" prepend=",">RIGHT_TYRE_NO</isNotNull>
+        <isNotNull property="LeftGreenTyreNo" prepend=",">LEFT_GREEN_TYRE_NO</isNotNull>
+        <isNotNull property="RightGreenTyreNo" prepend=",">RIGHT_GREEN_TYRE_NO</isNotNull>
+        <isNotNull property="LeftMouldCode" prepend=",">LEFT_MOULD_CODE</isNotNull>
+        <isNotNull property="RightMouldCode" prepend=",">RIGHT_MOULD_CODE</isNotNull>
+        <isNotNull property="LeftMouldCount" prepend=",">LEFT_MOULD_COUNT</isNotNull>
+        <isNotNull property="RightMouldCount" prepend=",">RIGHT_MOULD_COUNT</isNotNull>
+        <isNotNull property="ValveState" prepend=",">VALVE_STATE</isNotNull>
+        <isNotNull property="AlarmState" prepend=",">ALARM_STATE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (SEQ_CRT_CURING_EQUIP_MONITER.NEXTVAL,">
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="UpdateTime" prepend=",">#UpdateTime#</isNotNull>
+        <isNotNull property="EquipState" prepend=",">#EquipState#</isNotNull>
+        <isNotNull property="CurrentStep" prepend=",">#CurrentStep#</isNotNull>
+        <isNotNull property="AllStep" prepend=",">#AllStep#</isNotNull>
+        <isNotNull property="StopTime" prepend=",">#StopTime#</isNotNull>
+        <isNotNull property="StepTime" prepend=",">#StepTime#</isNotNull>
+        <isNotNull property="CuringLeftTime" prepend=",">#CuringLeftTime#</isNotNull>
+        <isNotNull property="CuringTime" prepend=",">#CuringTime#</isNotNull>
+        <isNotNull property="LeftBladderCount" prepend=",">#LeftBladderCount#</isNotNull>
+        <isNotNull property="RightBladderCount" prepend=",">#RightBladderCount#</isNotNull>
+        <isNotNull property="LeftMaterialId" prepend=",">#LeftMaterialId#</isNotNull>
+        <isNotNull property="RightMaterialId" prepend=",">#RightMaterialId#</isNotNull>
+        <isNotNull property="LeftTyreNo" prepend=",">#LeftTyreNo#</isNotNull>
+        <isNotNull property="RightTyreNo" prepend=",">#RightTyreNo#</isNotNull>
+        <isNotNull property="LeftGreenTyreNo" prepend=",">#LeftGreenTyreNo#</isNotNull>
+        <isNotNull property="RightGreenTyreNo" prepend=",">#RightGreenTyreNo#</isNotNull>
+        <isNotNull property="LeftMouldCode" prepend=",">#LeftMouldCode#</isNotNull>
+        <isNotNull property="RightMouldCode" prepend=",">#RightMouldCode#</isNotNull>
+        <isNotNull property="LeftMouldCount" prepend=",">#LeftMouldCount#</isNotNull>
+        <isNotNull property="RightMouldCount" prepend=",">#RightMouldCount#</isNotNull>
+        <isNotNull property="ValveState" prepend=",">#ValveState#</isNotNull>
+        <isNotNull property="AlarmState" prepend=",">#AlarmState#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CRT_CURING_EQUIP_MONITER
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.UpdateTime"  prepend=",">
+          UPDATE_TIME = #update.UpdateTime#
+        </isNotNull>
+        <isNotNull  property="update.EquipState"  prepend=",">
+          EQUIP_STATE = #update.EquipState#
+        </isNotNull>
+        <isNotNull  property="update.CurrentStep"  prepend=",">
+          CURRENT_STEP = #update.CurrentStep#
+        </isNotNull>
+        <isNotNull  property="update.AllStep"  prepend=",">
+          ALL_STEP = #update.AllStep#
+        </isNotNull>
+        <isNotNull  property="update.StopTime"  prepend=",">
+          STOP_TIME = #update.StopTime#
+        </isNotNull>
+        <isNotNull  property="update.StepTime"  prepend=",">
+          STEP_TIME = #update.StepTime#
+        </isNotNull>
+        <isNotNull  property="update.CuringLeftTime"  prepend=",">
+          CURING_LEFT_TIME = #update.CuringLeftTime#
+        </isNotNull>
+        <isNotNull  property="update.CuringTime"  prepend=",">
+          CURING_TIME = #update.CuringTime#
+        </isNotNull>
+        <isNotNull  property="update.LeftBladderCount"  prepend=",">
+          LEFT_BLADDER_COUNT = #update.LeftBladderCount#
+        </isNotNull>
+        <isNotNull  property="update.RightBladderCount"  prepend=",">
+          RIGHT_BLADDER_COUNT = #update.RightBladderCount#
+        </isNotNull>
+        <isNotNull  property="update.LeftMaterialId"  prepend=",">
+          LEFT_MATERIAL_ID = #update.LeftMaterialId#
+        </isNotNull>
+        <isNotNull  property="update.RightMaterialId"  prepend=",">
+          RIGHT_MATERIAL_ID = #update.RightMaterialId#
+        </isNotNull>
+        <isNotNull  property="update.LeftTyreNo"  prepend=",">
+          LEFT_TYRE_NO = #update.LeftTyreNo#
+        </isNotNull>
+        <isNotNull  property="update.RightTyreNo"  prepend=",">
+          RIGHT_TYRE_NO = #update.RightTyreNo#
+        </isNotNull>
+        <isNotNull  property="update.LeftGreenTyreNo"  prepend=",">
+          LEFT_GREEN_TYRE_NO = #update.LeftGreenTyreNo#
+        </isNotNull>
+        <isNotNull  property="update.RightGreenTyreNo"  prepend=",">
+          RIGHT_GREEN_TYRE_NO = #update.RightGreenTyreNo#
+        </isNotNull>
+        <isNotNull  property="update.LeftMouldCode"  prepend=",">
+          LEFT_MOULD_CODE = #update.LeftMouldCode#
+        </isNotNull>
+        <isNotNull  property="update.RightMouldCode"  prepend=",">
+          RIGHT_MOULD_CODE = #update.RightMouldCode#
+        </isNotNull>
+        <isNotNull  property="update.LeftMouldCount"  prepend=",">
+          LEFT_MOULD_COUNT = #update.LeftMouldCount#
+        </isNotNull>
+        <isNotNull  property="update.RightMouldCount"  prepend=",">
+          RIGHT_MOULD_COUNT = #update.RightMouldCount#
+        </isNotNull>
+        <isNotNull  property="update.ValveState"  prepend=",">
+          VALVE_STATE = #update.ValveState#
+        </isNotNull>
+        <isNotNull  property="update.AlarmState"  prepend=",">
+          ALARM_STATE = #update.AlarmState#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CRT_CURING_EQUIP_MONITER
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CrtCuringEquipMoniter">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CrtCuringEquipMoniter">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CRT_CURING_EQUIP_MONITER
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CRT_CURING_EQUIP_MONITER
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CrtCuringEquipMoniter" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CRT_CURING_EQUIP_MONITER
+    </statement>
+  </statements>
+</sqlMap>

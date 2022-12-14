@@ -1,0 +1,539 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Interface.Mapper.BasicMapper.PsbCustomer"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="PsbCustomer" type="Mesnac.Interface.Entity.BasicEntity.PsbCustomer, Mesnac.Interface.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_PsbCustomer" class="PsbCustomer">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="CompArea" column="COMP_AREA"/>
+    <result property="CustomerId" column="CUSTOMER_ID"/>
+    <result property="Pass" column="PASS"/>
+    <result property="Mark" column="MARK"/>
+    <result property="CustomeName" column="CUSTOME_NAME"/>
+    <result property="CustomeNick" column="CUSTOME_NICK"/>
+    <result property="CustomeNameEn" column="CUSTOME_NAME_EN"/>
+    <result property="CustomeNickEn" column="CUSTOME_NICK_EN"/>
+    <result property="CustomeNameTh" column="CUSTOME_NAME_TH"/>
+    <result property="CustomeNickTh" column="CUSTOME_NICK_TH"/>
+    <result property="TaxId" column="TAX_ID"/>
+    <result property="Contactor" column="CONTACTOR"/>
+    <result property="PassDesc" column="PASS_DESC"/>
+    <result property="AreaId" column="AREA_ID"/>
+    <result property="Area" column="AREA"/>
+    <result property="CountryId" column="COUNTRY_ID"/>
+    <result property="CountryDesc" column="COUNTRY_DESC"/>
+    <result property="DeptId" column="DEPT_ID"/>
+    <result property="DeptDesc" column="DEPT_DESC"/>
+    <result property="MarkDesc" column="MARK_DESC"/>
+    <result property="HeadComId" column="HEAD_COM_ID"/>
+    <result property="HeadCom" column="HEAD_COM"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="Authorize" column="AUTHORIZE"/>
+    <result property="SalesId" column="SALES_ID"/>
+    <result property="SalesName" column="SALES_NAME"/>
+    <result property="CTime" column="C_TIME"/>
+    <result property="CDate" column="C_DATE"/>
+    <result property="UDate" column="U_DATE"/>
+    <result property="UTime" column="U_TIME"/>
+    <result property="Dummy1" column="DUMMY_1"/>
+    <result property="Dummy2" column="DUMMY_2"/>
+    <result property="Dummy3" column="DUMMY_3"/>
+    <result property="Dummy4" column="DUMMY_4"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_PsbCustomer" class="PsbCustomer">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="CompArea" column="CompArea"/>
+    <parameter property="CustomerId" column="CustomerId"/>
+    <parameter property="Pass" column="Pass"/>
+    <parameter property="Mark" column="Mark"/>
+    <parameter property="CustomeName" column="CustomeName"/>
+    <parameter property="CustomeNick" column="CustomeNick"/>
+    <parameter property="CustomeNameEn" column="CustomeNameEn"/>
+    <parameter property="CustomeNickEn" column="CustomeNickEn"/>
+    <parameter property="CustomeNameTh" column="CustomeNameTh"/>
+    <parameter property="CustomeNickTh" column="CustomeNickTh"/>
+    <parameter property="TaxId" column="TaxId"/>
+    <parameter property="Contactor" column="Contactor"/>
+    <parameter property="PassDesc" column="PassDesc"/>
+    <parameter property="AreaId" column="AreaId"/>
+    <parameter property="Area" column="Area"/>
+    <parameter property="CountryId" column="CountryId"/>
+    <parameter property="CountryDesc" column="CountryDesc"/>
+    <parameter property="DeptId" column="DeptId"/>
+    <parameter property="DeptDesc" column="DeptDesc"/>
+    <parameter property="MarkDesc" column="MarkDesc"/>
+    <parameter property="HeadComId" column="HeadComId"/>
+    <parameter property="HeadCom" column="HeadCom"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="Authorize" column="Authorize"/>
+    <parameter property="SalesId" column="SalesId"/>
+    <parameter property="SalesName" column="SalesName"/>
+    <parameter property="CTime" column="CTime"/>
+    <parameter property="CDate" column="CDate"/>
+    <parameter property="UDate" column="UDate"/>
+    <parameter property="UTime" column="UTime"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSB_CUSTOMER ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.CompArea" prepend="AND">
+          <![CDATA[COMP_AREA = #where.CompArea#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomerId" prepend="AND">
+          <![CDATA[CUSTOMER_ID = #where.CustomerId#]]>
+        </isNotNull>
+        <isNotNull property="where.Pass" prepend="AND">
+          <![CDATA[PASS = #where.Pass#]]>
+        </isNotNull>
+        <isNotNull property="where.Mark" prepend="AND">
+          <![CDATA[MARK = #where.Mark#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomeName" prepend="AND">
+          <![CDATA[CUSTOME_NAME = #where.CustomeName#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomeNick" prepend="AND">
+          <![CDATA[CUSTOME_NICK = #where.CustomeNick#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomeNameEn" prepend="AND">
+          <![CDATA[CUSTOME_NAME_EN = #where.CustomeNameEn#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomeNickEn" prepend="AND">
+          <![CDATA[CUSTOME_NICK_EN = #where.CustomeNickEn#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomeNameTh" prepend="AND">
+          <![CDATA[CUSTOME_NAME_TH = #where.CustomeNameTh#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomeNickTh" prepend="AND">
+          <![CDATA[CUSTOME_NICK_TH = #where.CustomeNickTh#]]>
+        </isNotNull>
+        <isNotNull property="where.TaxId" prepend="AND">
+          <![CDATA[TAX_ID = #where.TaxId#]]>
+        </isNotNull>
+        <isNotNull property="where.Contactor" prepend="AND">
+          <![CDATA[CONTACTOR = #where.Contactor#]]>
+        </isNotNull>
+        <isNotNull property="where.PassDesc" prepend="AND">
+          <![CDATA[PASS_DESC = #where.PassDesc#]]>
+        </isNotNull>
+        <isNotNull property="where.AreaId" prepend="AND">
+          <![CDATA[AREA_ID = #where.AreaId#]]>
+        </isNotNull>
+        <isNotNull property="where.Area" prepend="AND">
+          <![CDATA[AREA = #where.Area#]]>
+        </isNotNull>
+        <isNotNull property="where.CountryId" prepend="AND">
+          <![CDATA[COUNTRY_ID = #where.CountryId#]]>
+        </isNotNull>
+        <isNotNull property="where.CountryDesc" prepend="AND">
+          <![CDATA[COUNTRY_DESC = #where.CountryDesc#]]>
+        </isNotNull>
+        <isNotNull property="where.DeptId" prepend="AND">
+          <![CDATA[DEPT_ID = #where.DeptId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeptDesc" prepend="AND">
+          <![CDATA[DEPT_DESC = #where.DeptDesc#]]>
+        </isNotNull>
+        <isNotNull property="where.MarkDesc" prepend="AND">
+          <![CDATA[MARK_DESC = #where.MarkDesc#]]>
+        </isNotNull>
+        <isNotNull property="where.HeadComId" prepend="AND">
+          <![CDATA[HEAD_COM_ID = #where.HeadComId#]]>
+        </isNotNull>
+        <isNotNull property="where.HeadCom" prepend="AND">
+          <![CDATA[HEAD_COM = #where.HeadCom#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Authorize" prepend="AND">
+          <![CDATA[AUTHORIZE = #where.Authorize#]]>
+        </isNotNull>
+        <isNotNull property="where.SalesId" prepend="AND">
+          <![CDATA[SALES_ID = #where.SalesId#]]>
+        </isNotNull>
+        <isNotNull property="where.SalesName" prepend="AND">
+          <![CDATA[SALES_NAME = #where.SalesName#]]>
+        </isNotNull>
+        <isNotNull property="where.CTime" prepend="AND">
+          <![CDATA[C_TIME = #where.CTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CDate" prepend="AND">
+          <![CDATA[C_DATE = #where.CDate#]]>
+        </isNotNull>
+        <isNotNull property="where.UDate" prepend="AND">
+          <![CDATA[U_DATE = #where.UDate#]]>
+        </isNotNull>
+        <isNotNull property="where.UTime" prepend="AND">
+          <![CDATA[U_TIME = #where.UTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO PSB_CUSTOMER]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="CompArea" prepend=",">COMP_AREA</isNotNull>
+        <isNotNull property="CustomerId" prepend=",">CUSTOMER_ID</isNotNull>
+        <isNotNull property="Pass" prepend=",">PASS</isNotNull>
+        <isNotNull property="Mark" prepend=",">MARK</isNotNull>
+        <isNotNull property="CustomeName" prepend=",">CUSTOME_NAME</isNotNull>
+        <isNotNull property="CustomeNick" prepend=",">CUSTOME_NICK</isNotNull>
+        <isNotNull property="CustomeNameEn" prepend=",">CUSTOME_NAME_EN</isNotNull>
+        <isNotNull property="CustomeNickEn" prepend=",">CUSTOME_NICK_EN</isNotNull>
+        <isNotNull property="CustomeNameTh" prepend=",">CUSTOME_NAME_TH</isNotNull>
+        <isNotNull property="CustomeNickTh" prepend=",">CUSTOME_NICK_TH</isNotNull>
+        <isNotNull property="TaxId" prepend=",">TAX_ID</isNotNull>
+        <isNotNull property="Contactor" prepend=",">CONTACTOR</isNotNull>
+        <isNotNull property="PassDesc" prepend=",">PASS_DESC</isNotNull>
+        <isNotNull property="AreaId" prepend=",">AREA_ID</isNotNull>
+        <isNotNull property="Area" prepend=",">AREA</isNotNull>
+        <isNotNull property="CountryId" prepend=",">COUNTRY_ID</isNotNull>
+        <isNotNull property="CountryDesc" prepend=",">COUNTRY_DESC</isNotNull>
+        <isNotNull property="DeptId" prepend=",">DEPT_ID</isNotNull>
+        <isNotNull property="DeptDesc" prepend=",">DEPT_DESC</isNotNull>
+        <isNotNull property="MarkDesc" prepend=",">MARK_DESC</isNotNull>
+        <isNotNull property="HeadComId" prepend=",">HEAD_COM_ID</isNotNull>
+        <isNotNull property="HeadCom" prepend=",">HEAD_COM</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="Authorize" prepend=",">AUTHORIZE</isNotNull>
+        <isNotNull property="SalesId" prepend=",">SALES_ID</isNotNull>
+        <isNotNull property="SalesName" prepend=",">SALES_NAME</isNotNull>
+        <isNotNull property="CTime" prepend=",">C_TIME</isNotNull>
+        <isNotNull property="CDate" prepend=",">C_DATE</isNotNull>
+        <isNotNull property="UDate" prepend=",">U_DATE</isNotNull>
+        <isNotNull property="UTime" prepend=",">U_TIME</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY_1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY_2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY_3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY_4</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_PSB_CUSTOMER.NEXTVAL</isNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="CompArea" prepend=",">#CompArea#</isNotNull>
+        <isNotNull property="CustomerId" prepend=",">#CustomerId#</isNotNull>
+        <isNotNull property="Pass" prepend=",">#Pass#</isNotNull>
+        <isNotNull property="Mark" prepend=",">#Mark#</isNotNull>
+        <isNotNull property="CustomeName" prepend=",">#CustomeName#</isNotNull>
+        <isNotNull property="CustomeNick" prepend=",">#CustomeNick#</isNotNull>
+        <isNotNull property="CustomeNameEn" prepend=",">#CustomeNameEn#</isNotNull>
+        <isNotNull property="CustomeNickEn" prepend=",">#CustomeNickEn#</isNotNull>
+        <isNotNull property="CustomeNameTh" prepend=",">#CustomeNameTh#</isNotNull>
+        <isNotNull property="CustomeNickTh" prepend=",">#CustomeNickTh#</isNotNull>
+        <isNotNull property="TaxId" prepend=",">#TaxId#</isNotNull>
+        <isNotNull property="Contactor" prepend=",">#Contactor#</isNotNull>
+        <isNotNull property="PassDesc" prepend=",">#PassDesc#</isNotNull>
+        <isNotNull property="AreaId" prepend=",">#AreaId#</isNotNull>
+        <isNotNull property="Area" prepend=",">#Area#</isNotNull>
+        <isNotNull property="CountryId" prepend=",">#CountryId#</isNotNull>
+        <isNotNull property="CountryDesc" prepend=",">#CountryDesc#</isNotNull>
+        <isNotNull property="DeptId" prepend=",">#DeptId#</isNotNull>
+        <isNotNull property="DeptDesc" prepend=",">#DeptDesc#</isNotNull>
+        <isNotNull property="MarkDesc" prepend=",">#MarkDesc#</isNotNull>
+        <isNotNull property="HeadComId" prepend=",">#HeadComId#</isNotNull>
+        <isNotNull property="HeadCom" prepend=",">#HeadCom#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="Authorize" prepend=",">#Authorize#</isNotNull>
+        <isNotNull property="SalesId" prepend=",">#SalesId#</isNotNull>
+        <isNotNull property="SalesName" prepend=",">#SalesName#</isNotNull>
+        <isNotNull property="CTime" prepend=",">#CTime#</isNotNull>
+        <isNotNull property="CDate" prepend=",">#CDate#</isNotNull>
+        <isNotNull property="UDate" prepend=",">#UDate#</isNotNull>
+        <isNotNull property="UTime" prepend=",">#UTime#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE PSB_CUSTOMER
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.CompArea"  prepend=",">
+          COMP_AREA = #update.CompArea#
+        </isNotNull>
+        <isNotNull  property="update.CustomerId"  prepend=",">
+          CUSTOMER_ID = #update.CustomerId#
+        </isNotNull>
+        <isNotNull  property="update.Pass"  prepend=",">
+          PASS = #update.Pass#
+        </isNotNull>
+        <isNotNull  property="update.Mark"  prepend=",">
+          MARK = #update.Mark#
+        </isNotNull>
+        <isNotNull  property="update.CustomeName"  prepend=",">
+          CUSTOME_NAME = #update.CustomeName#
+        </isNotNull>
+        <isNotNull  property="update.CustomeNick"  prepend=",">
+          CUSTOME_NICK = #update.CustomeNick#
+        </isNotNull>
+        <isNotNull  property="update.CustomeNameEn"  prepend=",">
+          CUSTOME_NAME_EN = #update.CustomeNameEn#
+        </isNotNull>
+        <isNotNull  property="update.CustomeNickEn"  prepend=",">
+          CUSTOME_NICK_EN = #update.CustomeNickEn#
+        </isNotNull>
+        <isNotNull  property="update.CustomeNameTh"  prepend=",">
+          CUSTOME_NAME_TH = #update.CustomeNameTh#
+        </isNotNull>
+        <isNotNull  property="update.CustomeNickTh"  prepend=",">
+          CUSTOME_NICK_TH = #update.CustomeNickTh#
+        </isNotNull>
+        <isNotNull  property="update.TaxId"  prepend=",">
+          TAX_ID = #update.TaxId#
+        </isNotNull>
+        <isNotNull  property="update.Contactor"  prepend=",">
+          CONTACTOR = #update.Contactor#
+        </isNotNull>
+        <isNotNull  property="update.PassDesc"  prepend=",">
+          PASS_DESC = #update.PassDesc#
+        </isNotNull>
+        <isNotNull  property="update.AreaId"  prepend=",">
+          AREA_ID = #update.AreaId#
+        </isNotNull>
+        <isNotNull  property="update.Area"  prepend=",">
+          AREA = #update.Area#
+        </isNotNull>
+        <isNotNull  property="update.CountryId"  prepend=",">
+          COUNTRY_ID = #update.CountryId#
+        </isNotNull>
+        <isNotNull  property="update.CountryDesc"  prepend=",">
+          COUNTRY_DESC = #update.CountryDesc#
+        </isNotNull>
+        <isNotNull  property="update.DeptId"  prepend=",">
+          DEPT_ID = #update.DeptId#
+        </isNotNull>
+        <isNotNull  property="update.DeptDesc"  prepend=",">
+          DEPT_DESC = #update.DeptDesc#
+        </isNotNull>
+        <isNotNull  property="update.MarkDesc"  prepend=",">
+          MARK_DESC = #update.MarkDesc#
+        </isNotNull>
+        <isNotNull  property="update.HeadComId"  prepend=",">
+          HEAD_COM_ID = #update.HeadComId#
+        </isNotNull>
+        <isNotNull  property="update.HeadCom"  prepend=",">
+          HEAD_COM = #update.HeadCom#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.Authorize"  prepend=",">
+          AUTHORIZE = #update.Authorize#
+        </isNotNull>
+        <isNotNull  property="update.SalesId"  prepend=",">
+          SALES_ID = #update.SalesId#
+        </isNotNull>
+        <isNotNull  property="update.SalesName"  prepend=",">
+          SALES_NAME = #update.SalesName#
+        </isNotNull>
+        <isNotNull  property="update.CTime"  prepend=",">
+          C_TIME = #update.CTime#
+        </isNotNull>
+        <isNotNull  property="update.CDate"  prepend=",">
+          C_DATE = #update.CDate#
+        </isNotNull>
+        <isNotNull  property="update.UDate"  prepend=",">
+          U_DATE = #update.UDate#
+        </isNotNull>
+        <isNotNull  property="update.UTime"  prepend=",">
+          U_TIME = #update.UTime#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY_1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY_2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY_3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY_4 = #update.Dummy4#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM PSB_CUSTOMER
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_PsbCustomer">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_PsbCustomer">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM PSB_CUSTOMER
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM PSB_CUSTOMER
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_PsbCustomer" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE PSB_CUSTOMER
+    </statement>
+  </statements>
+</sqlMap>

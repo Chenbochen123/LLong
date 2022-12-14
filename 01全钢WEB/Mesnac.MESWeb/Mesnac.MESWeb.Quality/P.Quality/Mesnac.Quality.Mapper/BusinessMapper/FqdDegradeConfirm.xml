@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BusinessMapper.FqdDegradeConfirm"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM FQD_DEGRADE_CONFIRM ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[TYRE_NO = #where.TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.DegradeCode" prepend="AND">
+          <![CDATA[DEGRADE_CODE = #where.DegradeCode#]]>
+        </isNotNull>
+        <isNotNull property="where.ConfirmGradeCode" prepend="AND">
+          <![CDATA[CONFIRM_GRADE_CODE = #where.ConfirmGradeCode#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkProcessId" prepend="AND">
+          <![CDATA[WORK_PROCESS_ID = #where.WorkProcessId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.DegradeReason" prepend="AND">
+          <![CDATA[DEGRADE_REASON = #where.DegradeReason#]]>
+        </isNotNull>
+        <isNotNull property="where.NewFlag" prepend="AND">
+          <![CDATA[NEW_FLAG = #where.NewFlag#]]>
+        </isNotNull>
+      <isNotNull property="where.DegradeReason" prepend="AND">
+        <![CDATA[DEGRADE_REASON = #where.DegradeReason#]]>
+      </isNotNull>
+      <isNotNull property="where.NewFlag" prepend="AND">
+        <![CDATA[NEW_FLAG = #where.NewFlag#]]>
+      </isNotNull>
+      <isNotNull property="where.MaterialId" prepend="AND">
+        <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+      </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    
+     <select id="GetCuringDegradeInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      SELECT T0.TYRE_NO,T0.GREEN_TYRE_NO,T0.DEGRADE_REASON,T0.DEGRADE_ID,T0.IS_CONFIRM,T1.MATERIAL_ID,T2.MATERIAL_NAME FROM CPP_CURING_DEGRADE T0
+      LEFT JOIN CPP_CURING_PRODUCTION T1 ON T1.TYRE_NO = T0.TYRE_NO AND T1.DELETE_FLAG=0
+      LEFT JOIN V_CBM_MATERIALINFO T2 ON T2.OBJID= T1.MATERIAL_ID
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="tyreNo" prepend="AND">
+           <![CDATA[T0.TYRE_NO = #tyreNo#]]>
+         </isNotNull>
+         <isNotNull property="greenTyreNo" prepend="AND">
+           <![CDATA[T0.GREEN_TYRE_NO = #greenTyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="CheckDegradeConfirmInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      SELECT T1.GRADENAME FROM FQD_DEGRADE_CONFIRM T0
+      LEFT JOIN FQG_GRADE_INFO T1 ON T1.FINAL_GRADE_CODE = T0.CONFIRM_GRADE_CODE
+      WHERE T1.WORK_PROCESS_ID=499
+      ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="tyreNo" prepend="AND">
+           <![CDATA[T0.TYRE_NO = #tyreNo#]]>
+         </isNotNull>
+         <isNotNull property="greenTyreNo" prepend="AND">
+           <![CDATA[T0.GREEN_TYRE_NO = #greenTyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <update id="UpdateCuringDegradeTable" parameterClass="map">
+       <![CDATA[
+         UPDATE CPP_CURING_DEGRADE SET IS_CONFIRM = 1 
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="greenTyreNo" prepend="AND">
+           <![CDATA[GREEN_TYRE_NO = #greenTyreNo#]]>
+         </isNotNull>
+         <isNotNull property="tyreNo" prepend="AND">
+           <![CDATA[TYRE_NO = #tyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </update>
+     <update id="SetNewFlag" parameterClass="map">
+       <![CDATA[
+         UPDATE FQD_DEGRADE_CONFIRM SET NEW_FLAG = 0 
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="greenTyreNo" prepend="AND">
+           <![CDATA[GREEN_TYRE_NO = #greenTyreNo#]]>
+         </isNotNull>
+         <isNotNull property="tyreNo" prepend="AND">
+           <![CDATA[TYRE_NO = #tyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </update>
+
+     <select id="TyreNoToGreenTyreNo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT GREEN_TYRE_NO FROM CPP_CURING_PRODUCTION 
+       WHERE DELETE_FLAG = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="TyreNo" prepend="AND">
+           <![CDATA[TYRE_NO = #TyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GreenTyreNoToTyreNo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT TYRE_NO FROM CPP_CURING_PRODUCTION 
+       WHERE DELETE_FLAG =0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="GreenTyreNo" prepend="AND">
+           <![CDATA[GREEN_TYRE_NO = #GreenTyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetDegradeName" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select t.degrade_id,t1.gradename from CPP_CURING_DEGRADE t
+       left join fqg_grade_info t1 on t1.final_grade_code = t.degrade_id and t1.work_process_id = 499
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="GreenTyreNo" prepend="AND">
+           <![CDATA[t.GREEN_TYRE_NO = #GreenTyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetCuringDegrade" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select t.degrade_id from CPP_CURING_DEGRADE t 
+       
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="tyreNo" prepend="AND">
+           <![CDATA[t.tyre_no = #tyreNo#]]>
+         </isNotNull>
+         <isNotNull property="greenTyreNo" prepend="AND">
+           <![CDATA[t.green_tyre_no = #greenTyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+   </statements>
+</sqlMap>

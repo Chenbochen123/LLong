@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Storage.Mapper.BusinessMapper.PsbStore"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSB_STORE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreName" prepend="AND">
+          <![CDATA[STORE_NAME = #where.StoreName#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreCode" prepend="AND">
+          <![CDATA[STORE_CODE = #where.StoreCode#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreTypeId" prepend="AND">
+          <![CDATA[STORE_TYPE_ID = #where.StoreTypeId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <!--查询仓库类型信息，ID值固定为GetComboBoxData@Select@CrudPsbStorePlace@字段，id值不允许重复-->
+     <select id="GetComboBoxData@Select@CrudPsbStorePlace@STORE_ID" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+      select t1.OBJID sskey, t1.STORE_NAME ssValue from PSB_STORE t1 where t1.DELETE_FLAG = '0' ORDER BY t1.OBJID
+         ]]>
+     </select>
+     <!--查询库存类型信息，ID值固定为GetComboBoxData@Select@CrudPsmStorageMain@OutSotreType字段，id值不允许重复-->
+     <select id="GetComboBoxData@Select@CrudPsmStorageMain@OutSotreType" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select 'chuku' sskey,'出库' ssValue from dual t1 
+        union 
+        select 'diaobo' sskey,'调拨' ssValue from dual t1 
+         ]]>
+     </select>
+  </statements>
+</sqlMap>

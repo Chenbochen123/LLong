@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="CARD_NO" Value="流水卡号"></Caption>
+    <Caption Name="TOOLING_RFID_BARCODE" Value="工装RFID条码"></Caption>
+    <Caption Name="TOOLING_TYPE_NAME" Value="工装类型名称"></Caption>
+    <Caption Name="TOOLING_TYPE" Value="工装类型"></Caption>
+    <Caption Name="IS_USED" Value="使用状态"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+    <Caption Name="SEQ_INDEX" Value="修改原因"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+  </Captions>
+  <WebPage Title="工装信息">
+  </WebPage>
+  <Crud TableName="HSM_TOOLING">
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_HSM_TOOLING"></SeqField>
+    </SeqFields>
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <!--<DeleteFlag Value="DELETE_FLAG"></DeleteFlag>-->
+    <!--<Uniques>
+      <Unique Fields="TOOLING_RFID_BARCODE"></Unique>
+    </Uniques>-->
+  </Crud>
+    <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <!--<ParamField FieldName="CARD_NO" Nullable="true"></ParamField>-->
+        <ParamField FieldName="TOOLING_RFID_BARCODE" ></ParamField>
+        <ParamField FieldName="TOOLING_TYPE" Type="ComboBox"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ExcuteCommands>
+      <Command FileName="Mesnac.Semis.McUI.dll" ClassName="Mesnac.Semis.McUI.Tooling.Update"></Command>
+    </ExcuteCommands>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="CARD_NO" Nullable="true"></ParamField>
+        <ParamField FieldName="TOOLING_RFID_BARCODE" ></ParamField>
+        <ParamField FieldName="TOOLING_TYPE" Nullable="true" Type="ComboBox" ></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true" ></ParamField>
+        <ParamField FieldName="SEQ_INDEX"  Type="ComboBox" Nullable="false"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+
+
+  
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="TOOLING_TYPE" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="CARD_NO"></ParamField>
+        <ParamField FieldName="TOOLING_RFID_BARCODE"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="T1.TOOLING_RFID_BARCODE, T4.CARD_NO">
+      <GridColumns>
+        <GridColumn ColumnName="CARD_NO"></GridColumn>
+        <GridColumn ColumnName="TOOLING_RFID_BARCODE"></GridColumn>
+        <GridColumn ColumnName="TOOLING_TYPE"></GridColumn>
+        <GridColumn ColumnName="TOOLING_TYPE_NAME"></GridColumn>
+        <GridColumn ColumnName="IS_USED"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

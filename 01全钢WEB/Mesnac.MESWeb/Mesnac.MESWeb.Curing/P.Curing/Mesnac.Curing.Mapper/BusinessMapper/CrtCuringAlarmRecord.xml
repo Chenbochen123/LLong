@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CrtCuringAlarmRecord"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_CURING_ALARM_RECORD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.AlarmReason" prepend="AND">
+          <![CDATA[ALARM_REASON = #where.AlarmReason#]]>
+        </isNotNull>
+        <isNotNull property="where.AlarmBeginTime" prepend="AND">
+          <![CDATA[ALARM_BEGIN_TIME = #where.AlarmBeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.AlarmEndTime" prepend="AND">
+          <![CDATA[ALARM_END_TIME = #where.AlarmEndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.MaxValue" prepend="AND">
+          <![CDATA[MAX_VALUE = #where.MaxValue#]]>
+        </isNotNull>
+        <isNotNull property="where.MinValue" prepend="AND">
+          <![CDATA[MIN_VALUE = #where.MinValue#]]>
+        </isNotNull>
+        <isNotNull property="where.SetValue" prepend="AND">
+          <![CDATA[SET_VALUE = #where.SetValue#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringStep" prepend="AND">
+          <![CDATA[CURING_STEP = #where.CuringStep#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[TYRE_NO = #where.TyreNo#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="SelectAlarmRecordInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select t1.item_name,count(*) item_count from crt_curing_alarm_record t
+       left join crt_alarm_standard_item t1 on t1.item_no = t.alarm_reason
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="BeginTime" prepend="AND">
+           <![CDATA[t.alarm_begin_time>=#BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="EndTime" prepend="AND">
+           <![CDATA[t.alarm_end_time<=#EndTime#]]>
+         </isNotNull>
+         <isNotNull property="EQUIP_ID" prepend="AND">
+           <![CDATA[t.equip_id=#EQUIP_ID#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[group by t1.item_name]]>
+     </select>
+     <select id="GetCuringAlarmCount" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT CONFIG_VALUE FROM SSB_CONFIG WHERE CONFIG_KEY = 'CuringAlarmCount'
+       ]]>
+     </select>
+     <update id="UpdateCuringAlarmCount" parameterClass="map">
+       <![CDATA[
+       UPDATE SSB_CONFIG SET CONFIG_VALUE=#AlarmCount# WHERE CONFIG_KEY='CuringAlarmCount'
+       ]]>
+     </update>
+  </statements>
+</sqlMap>

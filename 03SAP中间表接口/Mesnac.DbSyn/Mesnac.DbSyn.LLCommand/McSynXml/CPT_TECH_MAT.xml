@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SynConfig>
+    <Tables>
+        <Table name="Table.Source">
+           <DbSourceName>MES</DbSourceName>
+            <TableName>CPT_CURING_TECH_PARM_MAT</TableName>
+        </Table>
+        <Table name="Table.Target">
+           <DbSourceName>MES</DbSourceName>
+            <TableName>CPT_CURING_TECH</TableName>
+            <Primarykey FieldName="OBJID"/>
+        </Table>
+    </Tables>
+    <SynDatas>
+        <SynData>
+            <SourceTable TableName="Table.Source">
+                <Command >
+                  <FileName value="Mesnac.DbSyn.dll"/>
+                    <ClassName value="Mesnac.DbSyn.TableSyn.Source"/>
+                </Command>
+                <BeginSyn>
+                    <add key="sql" value=""/>
+                </BeginSyn>
+                <SelectData>
+                    <add key="count" value="0"/>
+                    <add key="sql">
+                        <![CDATA[
+                              select DISTINCT t1.material_id, t1.pdm_version
+                              from cpt_curing_tech_parm_mat t1
+                              where t1.delete_flag = 0
+                        ]]>
+                    </add>
+                </SelectData>
+            </SourceTable>
+            <TargetTable TableName="Table.Target">
+                <Command >
+                    <FileName value="Mesnac.DbSyn.LLCommand.dll"/>
+                    <ClassName value="Mesnac.DbSyn.LLERP.CPT_TECH_MAT.Target"/>
+                </Command>
+            </TargetTable>
+            <SourceTargetFields>
+            </SourceTargetFields>
+        </SynData>
+    </SynDatas>
+</SynConfig>

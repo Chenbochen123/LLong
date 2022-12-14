@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<ActionService>
+  <Design>
+    <Path path="设备管理/模具管理">
+      <Action action="F05551D1C4D64115B7CD0A250576BC37">
+        <Caption>模具管理_换模计划初始化</Caption>
+        <Remark>换模计划初始化</Remark>
+      </Action>
+      <Action action="3F087CFC9419485DBB9B7C312BB406AC">
+        <Caption>模具管理_计划执行</Caption>
+        <Remark>计划执行</Remark>
+      </Action>
+      <Action action="00A9BBDCF82E42B2A920A074AFDEA40B">
+        <Caption>模具管理_左胶囊清零</Caption>
+        <Remark>左胶囊清零</Remark>
+      </Action>
+      <Action action="919EDA3A11174B3C81067EED83934AFF">
+        <Caption>模具管理_右胶囊清零</Caption>
+        <Remark>右胶囊清零</Remark>
+      </Action>
+      <Action action="4F27AFB3104640CFAE40ED5DDD9720D9">
+          <Caption>模具管理_左模具清零</Caption>
+          <Remark>左模具清零</Remark>
+      </Action>
+        <Action action="CC2D5E521C6B4E11A444C8F60D0B2C53">
+            <Caption>模具管理_右模具清零</Caption>
+            <Remark>右模具清零</Remark>
+        </Action>
+    </Path>
+  </Design>
+
+  <DesignToRuntime>
+    <Design action="F05551D1C4D64115B7CD0A250576BC37">
+      <Runtime action="76BAE072391C4669B410AF2F7A6BDAC2"/>
+      <Runtime action="608E0D284ECA4992B213180D486R876T"/>
+    </Design>
+    <Design action="3F087CFC9419485DBB9B7C312BB406AC">
+      <Runtime action="953738A0CE0A46E0986BC60D0FBBA38F"/>
+    </Design>
+    <Design action="00A9BBDCF82E42B2A920A074AFDEA40B">
+      <Runtime action="2E24B44D9C054FEDA446131C6B88736A"/>
+    </Design>
+    <Design action="919EDA3A11174B3C81067EED83934AFF">
+      <Runtime action="4485830198B34A789A3BCF59D1EBCB0B"/>
+    </Design>
+    <Design action="B619789A059245278E634827FA0E04A0">
+      <Runtime action="608E0D284ECA4992B213180D486EC8C5"/>
+    </Design>
+    <Design action="4F27AFB3104640CFAE40ED5DDD9720D9">
+        <Runtime action="7EC9135528654D049364D65122581228"/>
+    </Design>
+    <Design action="CC2D5E521C6B4E11A444C8F60D0B2C53">
+        <Runtime action="C3CA0716054D4A0E824822EE60332081"/>
+    </Design>
+  </DesignToRuntime>
+
+  <Runtime>
+    <Import assembly = "Data/Action/Sulf/Mesnac.Action.Sulf.dll">
+      <Action action="76BAE072391C4669B410AF2F7A6BDAC2" class="Mesnac.Action.Sulf.MouldManger.MouldChangeInit"/>
+      <Action action="953738A0CE0A46E0986BC60D0FBBA38F" class="Mesnac.Action.Sulf.MouldManger.MouldExecute"/>
+      <Action action="608E0D284ECA4992B213180D486R876T" class="Mesnac.Action.Sulf.MouldManger.MouldMangerInit"/>
+      <Action action="2E24B44D9C054FEDA446131C6B88736A" class="Mesnac.Action.Sulf.Alarm.LeftCapsuleZron"/>
+      <Action action="4485830198B34A789A3BCF59D1EBCB0B" class="Mesnac.Action.Sulf.Alarm.RightCapsuleZron"/>
+      <Action action="7EC9135528654D049364D65122581228" class="Mesnac.Action.Sulf.Alarm.LeftMouldZron"/>
+      <Action action="C3CA0716054D4A0E824822EE60332081" class="Mesnac.Action.Sulf.Alarm.RightMouldZron"/>
+    </Import>
+  </Runtime>
+</ActionService>

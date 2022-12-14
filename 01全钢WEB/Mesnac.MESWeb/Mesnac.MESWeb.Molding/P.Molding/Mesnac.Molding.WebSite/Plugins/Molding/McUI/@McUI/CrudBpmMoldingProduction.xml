@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="GREEN_TYRE_NO" Value="成型号"></Caption>
+    <Caption Name="SHIFT_MASTER_ID" Value="接班信息"></Caption>
+    <Caption Name="MATERIAL_ID" Value="物料信息"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="物料名称"></Caption>
+    <Caption Name="HUAWEN" Value="规格花纹"></Caption>
+    <Caption Name="MATERIAL_FULL_NAME" Value="物料全名"></Caption>
+    <Caption Name="PLAN_ID" Value="计划编号"></Caption>
+    <Caption Name="PLAN_DETAIL_ID" Value="生产计划"></Caption>
+    <Caption Name="PLAN_DATE" Value="计划日期"></Caption>
+    <Caption Name="PLAN_SHIFT_ID" Value="计划班次"></Caption>
+    <Caption Name="PLAN_SHIFT_NAME" Value="计划班次"></Caption>
+    <Caption Name="SHIFT_DATE" Value="接班日期"></Caption>
+    <Caption Name="BEGIN_TIME" Value="开始时间"></Caption>
+    <Caption Name="END_TIME" Value="结束时间"></Caption>
+    <Caption Name="BEGIN_DATE" Value="开始日期"></Caption>
+    <Caption Name="END_DATE" Value="结束日期"></Caption>
+    <Caption Name="EQUIP_ID" Value="设备信息"></Caption>
+    <Caption Name="EQUIP_NAME" Value="设备名称"></Caption>
+    <Caption Name="SHIFT_ID" Value="接班班次"></Caption>
+    <Caption Name="SHIFT_NAME" Value="接班班次"></Caption>
+    <Caption Name="CLASS_ID" Value="接班班组"></Caption>
+    <Caption Name="CLASS_NAME" Value="接班班组"></Caption>
+    <Caption Name="WORKER_ID" Value="操作工"></Caption>
+    <Caption Name="WORKER_NAME" Value="操作工"></Caption>
+    <Caption Name="TOOLING_BARCODE" Value="工装"></Caption>
+    <Caption Name="IS_FIRST" Value="是否首件胎"></Caption>
+    <Caption Name="IS_FIRST_CAPTION" Value="是否首件胎"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+    <Caption Name="SearchType" Value="查询类型"></Caption>
+    <Caption Name="OLD_MATERIAL_NAME" Value="原物料名称"></Caption>
+    <Caption Name="EMP1" Value="主机"></Caption>
+    <Caption Name="EMP2" Value="副机"></Caption>
+    <Caption Name="EMP3" Value="帮车"></Caption>
+    <Caption Name="GRADE_NAME" Value="品级"></Caption>
+    <Caption Name="NEW_BARCODE" Value="成型鼓编号"></Caption>
+  </Captions>
+  <WebPage Title="成型生产信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Molding/McUI/@McUI/CrudBpmMoldingProduction.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="BPM_PRODUCTION">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_BPM_PRODUCTION"></SeqField>
+    </SeqFields>
+    <Uniques>
+      <!--<Unique Fields="GREEN_TYRE_NO"></Unique>-->
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ExcuteCommands>
+      <Command FileName="Mesnac.Molding.McUI.dll" ClassName="Mesnac.Molding.McUI.MoldingProduction.Insert"></Command>
+    </ExcuteCommands>
+    <VerifyCommands>
+      <Command FileName="Mesnac.Molding.McUI.dll" ClassName="Mesnac.Molding.McUI.MoldingProduction.VerifyInsert"></Command>
+    </VerifyCommands>
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="GREEN_TYRE_NO"></ParamField>
+        <ParamField FieldName="BEGIN_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="END_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="PLAN_DETAIL_ID" Type="SearchBox"></ParamField>
+        <ParamField FieldName="PLAN_DATE" Type="DateBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="PLAN_SHIFT_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="PLAN_EQUIP_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true" Caption="计划设备"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="SHIFT_MASTER_ID" Type="SearchBox"></ParamField>
+        <ParamField FieldName="SHIFT_DATE" Type="DateBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="SHIFT_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="CLASS_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true" Caption="接班设备"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+        <ParamField FieldName="PLAN_ID" ReadOnly="true" IsShow="false" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ExcuteCommands>
+      <Command FileName="Mesnac.Molding.McUI.dll" ClassName="Mesnac.Molding.McUI.MoldingProduction.Update"></Command>
+    </ExcuteCommands>
+    <VerifyCommands>
+      <Command FileName="Mesnac.Molding.McUI.dll" ClassName="Mesnac.Molding.McUI.MoldingProduction.VerifyUpdate"></Command>
+    </VerifyCommands>
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="GREEN_TYRE_NO"></ParamField>
+        <ParamField FieldName="BEGIN_TIME" Type="DateTimeBox" ReadOnly="true"></ParamField>
+        <ParamField FieldName="END_TIME" Type="DateTimeBox" ReadOnly="true"></ParamField>
+        <ParamField FieldName="PLAN_DETAIL_ID" Type="SearchBox"></ParamField>
+        <ParamField FieldName="PLAN_DATE" Type="DateBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="PLAN_SHIFT_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="PLAN_EQUIP_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true" Caption="计划设备"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="SHIFT_MASTER_ID" Type="SearchBox"></ParamField>
+        <ParamField FieldName="SHIFT_DATE" Type="DateBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="SHIFT_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="CLASS_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_NAME" Type="TextBox" ReadOnly="true" Nullable="true" Caption="接班设备"></ParamField>
+        <ParamField FieldName="PLAN_ID" ReadOnly="true" IsShow="false" Nullable="true"></ParamField>
+        <ParamField FieldName="OBJID" ReadOnly="true" IsShow="false" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="SearchType" Type="ComboBox"></ParamField>
+        <ParamField FieldName="BEGIN_TIME" Type="DateTimeBox" IsShow="true"></ParamField>
+        <ParamField FieldName="END_TIME" Type="DateTimeBox" IsShow="true"></ParamField>
+        <ParamField FieldName="SHIFT_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="BEGIN_DATE" Type="DateBox"></ParamField>
+        <ParamField FieldName="END_DATE" Type="DateBox"></ParamField>
+        <ParamField FieldName="EQUIP_NAME"  Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="MATERIAL_FULL_NAME"></ParamField>
+        <ParamField FieldName="WORKER_NAME" IsShow="false"></ParamField>
+        <ParamField FieldName="GREEN_TYRE_NO"></ParamField>
+        <ParamField FieldName="OLD_MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="TOOLING_BARCODE"></ParamField>
+        <ParamField FieldName="REMARK"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="T1.OBJID">
+      <GridColumns>
+        <GridColumn ColumnName="GREEN_TYRE_NO" Width="100"></GridColumn>
+        <GridColumn ColumnName="TOOLING_BARCODE" Width="100"></GridColumn>
+        <GridColumn ColumnName="PLAN_DATE" ColumnType="Date" ColumnFormt="yyyy-MM-dd" IsShow="true" Width="100"></GridColumn>
+        <GridColumn ColumnName="PLAN_SHIFT_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="PLAN_EQUIP_NAME" Width="100" Caption="计划设备"></GridColumn>
+        <GridColumn ColumnName="NEW_BARCODE" Width="100"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="160"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_FULL_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="HUAWEN" Width="160"></GridColumn>
+        <GridColumn ColumnName="GRADE_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="BEGIN_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="160"></GridColumn>
+        <GridColumn ColumnName="END_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="160"></GridColumn>
+        <GridColumn ColumnName="SHIFT_DATE" ColumnType="Date" ColumnFormt="yyyy-MM-dd" Width="100"></GridColumn>
+        <GridColumn ColumnName="SHIFT_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="CLASS_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="EQUIP_NAME" Width="100" Caption="接班设备"></GridColumn>
+        <GridColumn ColumnName="IS_FIRST_CAPTION" Width="100"></GridColumn>
+        <GridColumn ColumnName="EMP1" Width="100"></GridColumn>
+        <GridColumn ColumnName="EMP2" Width="100"></GridColumn>
+        <GridColumn ColumnName="EMP3" Width="100"></GridColumn>
+        <GridColumn ColumnName="REMARK" Width="100"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="160"></GridColumn>
+        <GridColumn ColumnName="OLD_MATERIAL_NAME" Width="160"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

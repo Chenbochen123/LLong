@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+
+    <!--按日期、物料统计，先停机原因(不含次数)concat,再机台concat-->
+    <select id="Select@ReportCppCuringProductionDailyStat" parameterClass="map" resultClass="row">
+      <![CDATA[
+        select t1.plan_date, t1.material_id, t1.material_name
+        , sum(t1.plan_amount) plan_amount
+        , sum(t1.real_amount) real_amount
+        , case when sum(t1.plan_amount) = 0 then 0 else round(sum(t1.real_amount) * 100 / sum(t1.plan_amount), 2) end complete_rate
+        , wm_concat(to_char(t1.equip_id)) equip_id
+        , wm_concat(to_char(t1.equip_name)) equip_name
+        , t1.stop_reason_name
+        from (
+            select t1.plan_date, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name
+            , t1.plan_amount
+            , t1.real_amount
+            , wm_concat(case when t1.stop_amount = 0 then '' else to_char(t1.stop_reason_name) end) stop_reason_name
+            from (
+                select t1.plan_date, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name
+                , t1.plan_amount, t1.real_amount
+                , case when t1.stop_amount = 1 then nvl(t2.objid, 999) else null end stop_reason_id
+                , case when t1.stop_amount = 1 then nvl(t2.equip_stop_reason_name, '其他') else null end stop_reason_name
+                , sum(stop_amount) stop_amount
+                from (
+                    select t1.*, case when nvl(t2.equip_id, 0) = 0 then 0 else 1 end stop_amount, t2.stop_reason_id
+                    from (
+                        select t1.plan_date, t2.material_id, t1.equip_id, t3.equip_name, t4.material_name
+                        , t1.plan_date + interval '8' hour start_time
+                        , t1.plan_date + interval '1' day + interval '8' hour stop_time
+                        , sum(t2.plan_amount) plan_amount, sum(t2.real_amount) real_amount
+                        from cpp_curing_plan t1
+                        join cpp_curing_plan_detail t2 on t1.objid = t2.plan_id and t2.delete_flag = 0 and t1.delete_flag = 0 and t2.plan_state > 0 and t2.plan_state > 0
+                        left join sbe_equip t3 on t1.equip_id = t3.objid
+                        left join sbm_material t4 on t2.material_id = t4.objid
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.BeginDate" prepend="AND">
+          <![CDATA[T1.PLAN_DATE >= #where.BeginDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EndDate" prepend="AND">
+          <![CDATA[T1.PLAN_DATE <= #where.EndDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[T3.EQUIP_NAME LIKE '%' || #where.EquipName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EQUIP_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[T4.MATERIAL_NAME LIKE '%' || #where.MaterialName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_ID" prepend="AND">
+          <![CDATA[T1.MATERIAL_ID = #where.MATERIAL_ID#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+                        group by t1.plan_date, t2.material_id, t1.equip_id, t3.equip_name, t4.material_name
+                        order by t1.plan_date, t4.material_name, t3.equip_name
+                    ) t1
+                    left join see_equip_stop_record t2 on t1.equip_id = t2.equip_id and t1.start_time <= t2.stop_end_time and t1.stop_time > t2.stop_end_time
+                ) t1
+                left join sbe_equip_stop_reason t2 on nvl(t1.stop_reason_id, 0) = t2.objid
+                --left join sbe_equip t3 on t1.equip_id = t3.objid
+                --where nvl(t1.stop_reason_id, 0) > 0
+                group by t1.plan_date, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name, t1.plan_amount, t1.real_amount
+                , case when t1.stop_amount = 1 then nvl(t2.objid, 999) else null end
+                , case when t1.stop_amount = 1 then nvl(t2.equip_stop_reason_name, '其他') else null end
+                --order by nvl(t2.objid, 999)
+                order by t1.plan_date, t1.material_name, t1.equip_name, case when t1.stop_amount = 1 then nvl(t2.objid, 999) else null end
+            ) t1
+            group by t1.plan_date, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name, t1.plan_amount, t1.real_amount
+            order by t1.plan_date, t1.material_name, t1.equip_name
+        ) t1
+        --left join ssb_shift t2 on t1.shift_id = t2.objid
+        --left join sbm_material t3 on t1.material_id = t3.objid
+        --left join sbe_equip t4 on t1.equip_id = t4.objid
+        -- where t1.equip_id  = 1
+        group by t1.plan_date, t1.material_id, t1.material_name, t1.stop_reason_name --, t1.equip_id
+        -- order by t1.plan_date, t1.shift_id, t1.material_name -- t4.equip_name
+      ]]>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        order by t1.plan_date, t1.material_name -- t4.equip_name
+      </isNull>
+    </select>
+
+    <!--按日期、班次、物料统计，先停机原因(不含次数)concat,再机台concat-->
+    <select id="Select@ReportCppCuringProductionDailyStat_1" parameterClass="map" resultClass="row">
+      <![CDATA[
+        select t1.plan_date, t1.shift_id, t1.material_id, t1.material_name
+        , sum(t1.plan_amount) plan_amount
+        , sum(t1.real_amount) real_amount
+        , case when sum(t1.plan_amount) = 0 then 0 else round(sum(t1.real_amount) * 100 / sum(t1.plan_amount), 2) end complete_rate
+        , wm_concat(to_char(t1.equip_id)) equip_id
+        , wm_concat(to_char(t1.equip_name)) equip_name
+        , t1.stop_reason_name
+        , t2.shift_name
+        from (
+            select t1.plan_date, t1.shift_id, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name
+            , max(t1.plan_amount) plan_amount
+            , max(t1.real_amount) real_amount
+            , wm_concat(case when t1.stop_amount = 0 then '' else to_char(t1.stop_reason_name) end) stop_reason_name
+            from (
+                select t1.plan_date, t1.shift_id, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name, t1.plan_amount, t1.real_amount
+                , case when t1.stop_amount = 1 then nvl(t2.objid, 999) else null end stop_reason_id
+                , case when t1.stop_amount = 1 then nvl(t2.equip_stop_reason_name, '其他') else null end stop_reason_name
+                , sum(stop_amount) stop_amount
+                from (
+                    select t1.*, case when nvl(t2.equip_id, 0) = 0 then 0 else 1 end stop_amount, t2.stop_reason_id
+                    from (
+                        select t1.*
+                        , to_date(to_char(t1.plan_date + t2.day_flag, 'yyyy-mm-dd') || ' ' || t2.start_time, 'yyyy-mm-dd hh24:mi:ss') start_time
+                        , to_date(to_char(t1.plan_date + t2.day_flag, 'yyyy-mm-dd') || ' ' || t2.stop_time, 'yyyy-mm-dd hh24:mi:ss') stop_time
+                        from (
+                            select t1.plan_date, t1.shift_id, t2.material_id, t1.equip_id, t3.equip_name, t4.material_name, sum(t2.plan_amount) plan_amount, sum(t2.real_amount) real_amount
+                            from cpp_curing_plan t1
+                            join cpp_curing_plan_detail t2 on t1.objid = t2.plan_id
+                            left join sbe_equip t3 on t1.equip_id = t3.objid
+                            left join sbm_material t4 on t2.material_id = t4.objid
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.BeginDate" prepend="AND">
+          <![CDATA[T1.PLAN_DATE >= #where.BeginDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EndDate" prepend="AND">
+          <![CDATA[T1.PLAN_DATE <= #where.EndDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[T3.EQUIP_NAME LIKE '%' || #where.EquipName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EQUIP_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[T4.MATERIAL_NAME LIKE '%' || #where.MaterialName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_ID" prepend="AND">
+          <![CDATA[T1.MATERIAL_ID = #where.MATERIAL_ID#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+                            group by t1.plan_date, t1.shift_id, t2.material_id, t1.equip_id, t3.equip_name, t4.material_name
+                            order by t1.plan_date, t1.shift_id, t4.material_name, t3.equip_name
+                        ) t1
+                        join ssb_shift_set_time t2 on t2.procedure_id = 400 and t2.shift_id = t1.shift_id
+                    ) t1
+                    left join see_equip_stop_record t2 on t1.equip_id = t2.equip_id and t1.start_time <= t2.stop_end_time and t1.stop_time >= t2.stop_end_time
+                ) t1
+                left join sbe_equip_stop_reason t2 on nvl(t1.stop_reason_id, 0) = t2.objid
+                --left join sbe_equip t3 on t1.equip_id = t3.objid
+                --where nvl(t1.stop_reason_id, 0) > 0
+                group by t1.plan_date, t1.shift_id, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name, t1.plan_amount, t1.real_amount
+                , case when t1.stop_amount = 1 then nvl(t2.objid, 999) else null end
+                , case when t1.stop_amount = 1 then nvl(t2.equip_stop_reason_name, '其他') else null end
+                --order by nvl(t2.objid, 999)
+                order by t1.plan_date, t1.shift_id, t1.material_name, t1.equip_name, case when t1.stop_amount = 1 then nvl(t2.objid, 999) else null end
+            ) t1
+            group by t1.plan_date, t1.shift_id, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name
+            order by t1.plan_date, t1.shift_id, t1.material_name, t1.equip_name
+        ) t1
+        left join ssb_shift t2 on t1.shift_id = t2.objid
+        --left join sbm_material t3 on t1.material_id = t3.objid
+        --left join sbe_equip t4 on t1.equip_id = t4.objid
+        -- where t1.equip_id  = 1
+        group by t1.plan_date, t1.shift_id, t2.shift_name, t1.material_id, t1.material_name, t1.stop_reason_name --, t1.equip_id
+        -- order by t1.plan_date, t1.shift_id, t1.material_name -- t4.equip_name
+      ]]>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        order by t1.plan_date, t1.shift_id, t1.material_name -- t4.equip_name
+      </isNull>
+    </select>
+
+
+    <!--按日期、班次、物料统计，机台、停机原因(不含次数)同时concat-->
+    <select id="Select@ReportCppCuringProductionDailyStat_1" parameterClass="map" resultClass="row">
+      <![CDATA[
+        select t1.plan_date, t1.shift_id, t1.material_id--, t1.equip_id
+        , sum(t1.plan_amount) plan_amount
+        , sum(t1.real_amount) real_amount
+        , case when sum(t1.plan_amount) = 0 then 0 else round(sum(t1.real_amount) * 100 / sum(t1.plan_amount), 2) end complete_rate
+        , wm_concat(to_char(t1.equip_id)) equip_id
+        , wm_concat(to_char(t1.equip_name)) equip_name
+        , wm_concat(case when t1.stop_amount = 0 then '' else to_char(t1.stop_reason_name) end) stop_reason_name
+        , t2.shift_name, t1.material_name
+        from (
+            select t1.plan_date, t1.shift_id, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name, t1.plan_amount, t1.real_amount
+            , case when t1.stop_amount = 1 then nvl(t2.objid, 999) else null end stop_reason_id
+            , case when t1.stop_amount = 1 then nvl(t2.equip_stop_reason_name, '其他') else null end stop_reason_name
+            , sum(stop_amount) stop_amount
+            from (
+                select t1.*, case when nvl(t2.equip_id, 0) = 0 then 0 else 1 end stop_amount, t2.stop_reason_id
+                from (
+                    select t1.*
+                    , to_date(to_char(t1.plan_date + t2.day_flag, 'yyyy-mm-dd') || ' ' || t2.start_time, 'yyyy-mm-dd hh24:mi:ss') start_time
+                    , to_date(to_char(t1.plan_date + t2.day_flag, 'yyyy-mm-dd') || ' ' || t2.stop_time, 'yyyy-mm-dd hh24:mi:ss') stop_time
+                    from (
+                        select t1.plan_date, t1.shift_id, t2.material_id, t1.equip_id, t3.equip_name, t4.material_name, sum(t2.plan_amount) plan_amount, sum(t2.real_amount) real_amount
+                        from cpp_curing_plan t1
+                        join cpp_curing_plan_detail t2 on t1.objid = t2.plan_id
+                        left join sbe_equip t3 on t1.equip_id = t3.objid
+                        left join sbm_material t4 on t2.material_id = t4.objid
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.BeginDate" prepend="AND">
+          <![CDATA[T1.PLAN_DATE >= #where.BeginDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EndDate" prepend="AND">
+          <![CDATA[T1.PLAN_DATE <= #where.EndDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[T3.EQUIP_NAME LIKE '%' || #where.EquipName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EQUIP_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[T4.MATERIAL_NAME LIKE '%' || #where.MaterialName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_ID" prepend="AND">
+          <![CDATA[T1.MATERIAL_ID = #where.MATERIAL_ID#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+                        group by t1.plan_date, t1.shift_id, t2.material_id, t1.equip_id, t3.equip_name, t4.material_name
+                        order by t1.plan_date, t1.shift_id, t4.material_name, t3.equip_name
+                    ) t1
+                    join ssb_shift_set_time t2 on t2.procedure_id = 400 and t2.shift_id = t1.shift_id
+                ) t1
+                left join see_equip_stop_record t2 on t1.equip_id = t2.equip_id and t1.start_time <= t2.stop_end_time and t1.stop_time >= t2.stop_end_time
+            ) t1
+            left join sbe_equip_stop_reason t2 on nvl(t1.stop_reason_id, 0) = t2.objid
+            --left join sbe_equip t3 on t1.equip_id = t3.objid
+            --where nvl(t1.stop_reason_id, 0) > 0
+            group by t1.plan_date, t1.shift_id, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name, t1.plan_amount, t1.real_amount
+            , case when t1.stop_amount = 1 then nvl(t2.objid, 999) else null end
+            , case when t1.stop_amount = 1 then nvl(t2.equip_stop_reason_name, '其他') else null end
+            --order by nvl(t2.objid, 999)
+            order by t1.plan_date, t1.shift_id, t1.material_name, t1.equip_name
+        ) t1
+        left join ssb_shift t2 on t1.shift_id = t2.objid
+        --left join sbm_material t3 on t1.material_id = t3.objid
+        --left join sbe_equip t4 on t1.equip_id = t4.objid
+        -- where t1.equip_id  = 1
+        group by t1.plan_date, t1.shift_id, t2.shift_name, t1.material_id, t1.material_name --, t1.equip_id
+        -- order by t1.plan_date, t1.shift_id, t1.material_name -- t4.equip_name
+      ]]>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        order by t1.plan_date, t1.shift_id, t1.material_name -- t4.equip_name
+      </isNull>
+    </select>
+
+    <!--按日期、班次、物料统计，先停机原因(含次数)concat,再机台concat-->
+    <select id="Select@ReportCppCuringProductionDailyStat_1" parameterClass="map" resultClass="row">
+      <![CDATA[
+        select t1.plan_date, t1.shift_id, t1.material_id, t1.material_name
+        , sum(t1.plan_amount) plan_amount
+        , sum(t1.real_amount) real_amount
+        , case when sum(t1.plan_amount) = 0 then 0 else round(sum(t1.real_amount) * 100 / sum(t1.plan_amount), 2) end complete_rate
+        , wm_concat(to_char(t1.equip_id)) equip_id
+        , wm_concat(to_char(t1.equip_name)) equip_name
+        , t1.stop_reason_name
+        , t2.shift_name
+        from (
+            select t1.plan_date, t1.shift_id, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name
+            , max(t1.plan_amount) plan_amount
+            , max(t1.real_amount) real_amount
+            , wm_concat(case when t1.stop_amount = 0 then '' else to_char(t1.stop_reason_name) || '(' || to_char(t1.stop_amount) || ')' end) stop_reason_name
+            from (
+                select t1.plan_date, t1.shift_id, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name, t1.plan_amount, t1.real_amount
+                , case when t1.stop_amount = 1 then nvl(t2.objid, 999) else null end stop_reason_id
+                , case when t1.stop_amount = 1 then nvl(t2.equip_stop_reason_name, '其他') else null end stop_reason_name
+                , sum(stop_amount) stop_amount
+                from (
+                    select t1.*, case when nvl(t2.equip_id, 0) = 0 then 0 else 1 end stop_amount, t2.stop_reason_id
+                    from (
+                        select t1.*
+                        , to_date(to_char(t1.plan_date + t2.day_flag, 'yyyy-mm-dd') || ' ' || t2.start_time, 'yyyy-mm-dd hh24:mi:ss') start_time
+                        , to_date(to_char(t1.plan_date + t2.day_flag, 'yyyy-mm-dd') || ' ' || t2.stop_time, 'yyyy-mm-dd hh24:mi:ss') stop_time
+                        from (
+                            select t1.plan_date, t1.shift_id, t2.material_id, t1.equip_id, t3.equip_name, t4.material_name, sum(t2.plan_amount) plan_amount, sum(t2.real_amount) real_amount
+                            from cpp_curing_plan t1
+                            join cpp_curing_plan_detail t2 on t1.objid = t2.plan_id
+                            left join sbe_equip t3 on t1.equip_id = t3.objid
+                            left join sbm_material t4 on t2.material_id = t4.objid
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.BeginDate" prepend="AND">
+          <![CDATA[T1.PLAN_DATE >= #where.BeginDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EndDate" prepend="AND">
+          <![CDATA[T1.PLAN_DATE <= #where.EndDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[T3.EQUIP_NAME LIKE '%' || #where.EquipName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EQUIP_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[T4.MATERIAL_NAME LIKE '%' || #where.MaterialName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_ID" prepend="AND">
+          <![CDATA[T1.MATERIAL_ID = #where.MATERIAL_ID#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+                            group by t1.plan_date, t1.shift_id, t2.material_id, t1.equip_id, t3.equip_name, t4.material_name
+                            order by t1.plan_date, t1.shift_id, t4.material_name, t3.equip_name
+                        ) t1
+                        join ssb_shift_set_time t2 on t2.procedure_id = 400 and t2.shift_id = t1.shift_id
+                    ) t1
+                    left join see_equip_stop_record t2 on t1.equip_id = t2.equip_id and t1.start_time <= t2.stop_end_time and t1.stop_time >= t2.stop_end_time
+                ) t1
+                left join sbe_equip_stop_reason t2 on nvl(t1.stop_reason_id, 0) = t2.objid
+                --left join sbe_equip t3 on t1.equip_id = t3.objid
+                --where nvl(t1.stop_reason_id, 0) > 0
+                group by t1.plan_date, t1.shift_id, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name, t1.plan_amount, t1.real_amount
+                , case when t1.stop_amount = 1 then nvl(t2.objid, 999) else null end
+                , case when t1.stop_amount = 1 then nvl(t2.equip_stop_reason_name, '其他') else null end
+                --order by nvl(t2.objid, 999)
+                order by t1.plan_date, t1.shift_id, t1.material_name, t1.equip_name, case when t1.stop_amount = 1 then nvl(t2.objid, 999) else null end
+            ) t1
+            group by t1.plan_date, t1.shift_id, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name
+            order by t1.plan_date, t1.shift_id, t1.material_name, t1.equip_name
+        ) t1
+        left join ssb_shift t2 on t1.shift_id = t2.objid
+        --left join sbm_material t3 on t1.material_id = t3.objid
+        --left join sbe_equip t4 on t1.equip_id = t4.objid
+        -- where t1.equip_id  = 1
+        group by t1.plan_date, t1.shift_id, t2.shift_name, t1.material_id, t1.material_name, t1.stop_reason_name --, t1.equip_id
+        -- order by t1.plan_date, t1.shift_id, t1.material_name -- t4.equip_name
+      ]]>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        order by t1.plan_date, t1.shift_id, t1.material_name -- t4.equip_name
+      </isNull>
+    </select>
+
+    <!--按日期、班次、物料统计，机台、停机原因(含次数)同时concat-->
+    <select id="Select@ReportCppCuringProductionDailyStat_1" parameterClass="map" resultClass="row">
+      <![CDATA[
+        select t1.plan_date, t1.shift_id, t1.material_id--, t1.equip_id
+        , sum(t1.plan_amount) plan_amount
+        , sum(t1.real_amount) real_amount
+        , case when sum(t1.plan_amount) = 0 then 0 else round(sum(t1.real_amount) * 100 / sum(t1.plan_amount), 2) end complete_rate
+        , wm_concat(to_char(t1.equip_id)) equip_id
+        , wm_concat(to_char(t1.equip_name)) equip_name
+        , wm_concat(case when t1.stop_amount = 0 then '' else to_char(t1.stop_reason_name) || '(' || to_char(t1.stop_amount) || ')' end) stop_reason_name
+        , t2.shift_name, t1.material_name
+        from (
+            select t1.plan_date, t1.shift_id, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name, t1.plan_amount, t1.real_amount
+            , case when t1.stop_amount = 1 then nvl(t2.objid, 999) else null end stop_reason_id
+            , case when t1.stop_amount = 1 then nvl(t2.equip_stop_reason_name, '其他') else null end stop_reason_name
+            , sum(stop_amount) stop_amount
+            from (
+                select t1.*, case when nvl(t2.equip_id, 0) = 0 then 0 else 1 end stop_amount, t2.stop_reason_id
+                from (
+                    select t1.*
+                    , to_date(to_char(t1.plan_date + t2.day_flag, 'yyyy-mm-dd') || ' ' || t2.start_time, 'yyyy-mm-dd hh24:mi:ss') start_time
+                    , to_date(to_char(t1.plan_date + t2.day_flag, 'yyyy-mm-dd') || ' ' || t2.stop_time, 'yyyy-mm-dd hh24:mi:ss') stop_time
+                    from (
+                        select t1.plan_date, t1.shift_id, t2.material_id, t1.equip_id, t3.equip_name, t4.material_name, sum(t2.plan_amount) plan_amount, sum(t2.real_amount) real_amount
+                        from cpp_curing_plan t1
+                        join cpp_curing_plan_detail t2 on t1.objid = t2.plan_id
+                        left join sbe_equip t3 on t1.equip_id = t3.objid
+                        left join sbm_material t4 on t2.material_id = t4.objid
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.BeginDate" prepend="AND">
+          <![CDATA[T1.PLAN_DATE >= #where.BeginDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EndDate" prepend="AND">
+          <![CDATA[T1.PLAN_DATE <= #where.EndDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[T3.EQUIP_NAME LIKE '%' || #where.EquipName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EQUIP_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[T4.MATERIAL_NAME LIKE '%' || #where.MaterialName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_ID" prepend="AND">
+          <![CDATA[T1.MATERIAL_ID = #where.MATERIAL_ID#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+                        group by t1.plan_date, t1.shift_id, t2.material_id, t1.equip_id, t3.equip_name, t4.material_name
+                        order by t1.plan_date, t1.shift_id, t4.material_name, t3.equip_name
+                    ) t1
+                    join ssb_shift_set_time t2 on t2.procedure_id = 400 and t2.shift_id = t1.shift_id
+                ) t1
+                left join see_equip_stop_record t2 on t1.equip_id = t2.equip_id and t1.start_time <= t2.stop_end_time and t1.stop_time >= t2.stop_end_time
+            ) t1
+            left join sbe_equip_stop_reason t2 on nvl(t1.stop_reason_id, 0) = t2.objid
+            --left join sbe_equip t3 on t1.equip_id = t3.objid
+            --where nvl(t1.stop_reason_id, 0) > 0
+            group by t1.plan_date, t1.shift_id, t1.material_id, t1.material_name, t1.equip_id, t1.equip_name, t1.plan_amount, t1.real_amount
+            , case when t1.stop_amount = 1 then nvl(t2.objid, 999) else null end
+            , case when t1.stop_amount = 1 then nvl(t2.equip_stop_reason_name, '其他') else null end
+            --order by nvl(t2.objid, 999)
+            order by t1.plan_date, t1.shift_id, t1.material_name, t1.equip_name
+        ) t1
+        left join ssb_shift t2 on t1.shift_id = t2.objid
+        --left join sbm_material t3 on t1.material_id = t3.objid
+        --left join sbe_equip t4 on t1.equip_id = t4.objid
+        -- where t1.equip_id  = 1
+        group by t1.plan_date, t1.shift_id, t2.shift_name, t1.material_id, t1.material_name --, t1.equip_id
+        -- order by t1.plan_date, t1.shift_id, t1.material_name -- t4.equip_name
+      ]]>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        order by t1.plan_date, t1.shift_id, t1.material_name -- t4.equip_name
+      </isNull>
+    </select>
+
+    <select id="Select+Update@ReportCppCuringProductionDailyStat" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM CPP_CURING_PRODUCTION ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询物料信息，ID值固定为GetComboBoxData@Select@ReportCppCuringProductionDailyStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportCppCuringProductionDailyStat@MaterialId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey,MATERIAL_NAME ssValue FROM V_CBM_MATERIAL WHERE DELETE_FLAG = '0' ORDER BY MATERIAL_NAME
+     ]]>
+    </select>
+
+    <!--查询物料信息，ID值固定为GetComboBoxData@Select@ReportCppCuringProductionDailyStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportCppCuringProductionDailyStat@LastMaterialId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey,MATERIAL_NAME ssValue FROM V_CBM_MATERIAL WHERE DELETE_FLAG = '0' ORDER BY MATERIAL_NAME
+     ]]>
+    </select>
+
+    <!--查询左右模信息，ID值固定为GetComboBoxData@Select@ReportCppCuringProductionDailyStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportCppCuringProductionDailyStat@EquipPosition" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey,SHOW_NAME ssValue FROM CBE_EQUIP_POSITION WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

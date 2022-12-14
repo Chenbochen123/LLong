@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@SearchBoxVCbmMaterial" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+       select t1.*, t2.MAJOR_TYPE_NAME, t3.MINOR_TYPE_NAME 
+       from V_CBM_MATERIAL t1 
+       left join SBM_MATERIAL_MAJOR_TYPE t2 on t1.MAJOR_TYPE_ID = t2.OBJID
+       left join SBM_MATERIAL_MINOR_TYPE t3 on t1.MINOR_TYPE_ID = t3.OBJID
+       where t1.DELETE_FLAG = 0 
+      ]]>
+      <dynamic>
+        <isNotNull property="where.MAJOR_TYPE_ID" prepend="AND">
+          <![CDATA[t1.MAJOR_TYPE_ID = #where.MAJOR_TYPE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.MINOR_TYPE_ID" prepend="AND">
+          <![CDATA[t1.MINOR_TYPE_ID = #where.MINOR_TYPE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+          <![CDATA[t1.MATERIAL_NAME LIKE '%' || #where.MATERIAL_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_CODE" prepend="AND">
+          <![CDATA[t1.MATERIAL_CODE LIKE '%' || #where.MATERIAL_CODE# || '%']]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend="">
+        order by $OrderString$
+      </isNotNull>
+    </select>
+
+    <!--查询设备大类信息，ID值固定为GetComboBoxData@Select@SearchBoxVCbmMaterial@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@SearchBoxVCbmMaterial@MAJOR_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey,t1.MAJOR_TYPE_NAME ssValue from SBM_MATERIAL_MAJOR_TYPE t1 join CBH_CONFIG_HELPER t2 on t1.OBJID = t2.CONFIG_VALUE and t2.CONFIG_NAME = 'CuringMaterialMajorTypeId' where t1.DELETE_FLAG = '0'
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        order by $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询设备细类信息，ID值固定为GetComboBoxData@Select@SearchBoxVCbmMaterial@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@SearchBoxVCbmMaterial@MINOR_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey,t1.MINOR_TYPE_NAME ssValue from SBM_MATERIAL_MINOR_TYPE t1 join CBH_CONFIG_HELPER t2 on t1.MAJOR_TYPE_ID = t2.CONFIG_VALUE and t2.CONFIG_NAME = 'CuringEquipMajorTypeId' where t1.DELETE_FLAG = '0'
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        order by $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+  </statements>
+</sqlMap>

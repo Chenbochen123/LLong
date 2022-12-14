@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ECharts · Example</title>
+
+    <link href="./asset/css/echartsHome.css" rel="stylesheet">
+    <script src="./asset/js/echarts.js"></script>
+    <script>
+
+        var xdata0 = [];
+        debugger;
+        if (parent && parent.xdata0 && parent.xdata0.length > 0) {
+            for (var i = 0; i < parent.xdata0.length; i++) {
+                xdata0.push(parent.xdata0[i]);
+            }
+        }
+        var xdata1 = [];
+        if (parent && parent.xdata1 && parent.xdata1.length > 0) {
+            for (var i = 0; i < parent.xdata1.length; i++) {
+                xdata1.push(parent.xdata1[i]);
+            }
+        }
+        var xdata2 = [];
+        if (parent && parent.xdata2 && parent.xdata2.length > 0) {
+            for (var i = 0; i < parent.xdata2.length; i++) {
+                xdata2.push(parent.xdata2[i]);
+            }
+        }
+        var ydata1 = [];
+        if (parent && parent.ydata1 && parent.ydata1.length > 0) {
+            for (var i = 0; i < parent.ydata1.length; i++) {
+                ydata1.push(parent.ydata1[i]);
+            }
+        }
+
+        var ydata2 = [];
+        if (parent && parent.ydata2 && parent.ydata2.length > 0) {
+            for (var i = 0; i < parent.ydata2.length; i++) {
+                ydata2.push(parent.ydata2[i]);
+            }
+        }
+
+        var ydata3 = [];
+        if (parent && parent.ydata3 && parent.ydata3.length > 0) {
+            for (var i = 0; i < parent.ydata3.length; i++) {
+                ydata3.push(parent.ydata3[i]);
+            }
+        }
+
+        var ydata4 = [];
+        if (parent && parent.ydata4 && parent.ydata4.length > 0) {
+            for (var i = 0; i < parent.ydata4.length; i++) {
+                ydata4.push(parent.ydata4[i]);
+            }
+        }
+
+        var ydata5 = [];
+        if (parent && parent.ydata5 && parent.ydata5.length > 0) {
+            for (var i = 0; i < parent.ydata5.length; i++) {
+                ydata5.push(parent.ydata5[i]);
+            }
+        }
+
+        var ydata6 = [];
+        if (parent && parent.ydata6 && parent.ydata6.length > 0) {
+            for (var i = 0; i < parent.ydata6.length; i++) {
+                ydata6.push(parent.ydata6[i]);
+            }
+        }
+
+        var ydata7 = [];
+        if (parent && parent.ydata7 && parent.ydata7.length > 0) {
+            for (var i = 0; i < parent.ydata7.length; i++) {
+                ydata7.push(parent.ydata7[i]);
+            }
+        }
+
+        var ydata8 = [];
+        if (parent && parent.ydata8 && parent.ydata8.length > 0) {
+            for (var i = 0; i < parent.ydata8.length; i++) {
+                ydata8.push(parent.ydata8[i]);
+            }
+        }
+
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                formatter: function (params, ticket, callback) {
+                    var result = "左胎号：" + xdata1[params[0].dataIndex];
+                    result = result + "<br>" + "右胎号：" + xdata2[params[0].dataIndex];
+                    result = result + "<br>" + "时间：" + params[0].name;
+                    for (var i = 0; i < params.length; i++) {
+                        result = result + "<br>" + params[i].seriesName + ":" + params[i].value;
+                    }
+                    return result;
+                }
+            },
+            legend: {
+                data: ['左内温', '右内温', '左内压', '右内压', '左热板温度', '右热板温度', '左模套温度', '右模套温度']
+            },
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                feature: {
+                    mark: { show: false },
+                    dataZoom: { show: true },
+                    dataView: { show: false },
+                    magicType: { show: false, type: ['line', 'bar', 'stack', 'tiled'] },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            calculable: false,
+            dataZoom: {
+                show: true,
+                realtime: true,
+                start: 0,
+                end: 100
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: true,
+                    data: xdata0
+                }
+            ],
+            yAxis: [
+                {
+                    name: '温度',
+                    type: 'value',
+                    min: 100,
+                    max: 250
+                },
+                {
+                    name: '压力',
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '左内温',
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: 0,
+                    data: ydata1,
+                    itemStyle: {
+                        normal: {
+                            color: 'red'
+                        }
+                    }
+                },
+                {
+                    name: '右内温',
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: 0,
+                    data: ydata2
+                },
+                {
+                    name: '左内压',
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: 1,
+                    data: ydata3
+                },
+                {
+                    name: '右内压',
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: 1,
+                    data: ydata4
+                },
+                {
+                    name: '左热板温度',
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: 0,
+                    data: ydata5
+                },
+                {
+                    name: '右热板温度',
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: 0,
+                    data: ydata6
+                },
+                {
+                    name: '左模套温度',
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: 0,
+                    data: ydata7
+                },
+                {
+                    name: '右模套温度',
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: 0,
+                    data: ydata8
+                }
+            ]
+        };
+    </script>
+</head>
+<body>
+    <div id="main" class="main"></div>
+    <script src="./asset/js/jquery.min.js"></script>
+    <script src="./asset/js/echartsExample.js"></script>
+</body>
+</html>

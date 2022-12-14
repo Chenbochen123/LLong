@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EquipFactory>
+
+  <Equip name="C0" project="空项目" isEnableGroup="True" groupRange="2">
+    <Main>
+      <Brand value="OMRON" />
+      <Model value="FINS" />
+      <ReadHz value="800" />
+      <UnitLen value="8" />
+      <Connection mode="GroupNet">
+        <IPList value="C02:192.168.60.91" />
+      </Connection>
+    </Main>
+    <Group>
+      <Group name="D4330" block="4330" start="0" len="1" access="ReadWrite" remark="配方参数下传3" isautoread="True">
+        <Data>
+          <Data name="TechnologyFlag" runname="TechnologyFlag" start="0" len="1" method="" max="" issave="True" subtractor="" remark="技术信息状态" />
+        </Data>
+      </Group>
+    </Group>
+  </Equip>
+  <Equip name="" project="空项目" isEnableGroup="True" groupRange="C01">
+    <Main>
+      <Brand value="FictitiousPlc" />
+      <Model value="SqlitePlc" />
+      <ReadHz value="10000" />
+      <UnitLen value="8" />
+      <Connection mode="Default" />
+    </Main>
+    <Group>
+      <Group name="D4330" block="4" start="0" len="1" access="ReadWrite" remark="配方参数下传3" isautoread="True">
+        <Data>
+          <Data name="TechnologyFlag" runname="TechnologyFlag" start="0" len="1" method="" max="" issave="True" subtractor="" remark="技术信息状态" />
+        </Data>
+      </Group>
+    </Group>
+  </Equip>
+</EquipFactory>

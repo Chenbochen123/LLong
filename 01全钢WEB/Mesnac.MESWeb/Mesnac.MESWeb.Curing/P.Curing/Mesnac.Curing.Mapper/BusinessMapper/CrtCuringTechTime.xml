@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CrtCuringTechTime"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_CURING_TECH_TIME ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTechTimeCode" prepend="AND">
+          <![CDATA[CURING_TECH_TIME_CODE = #where.CuringTechTimeCode#]]>
+        </isNotNull>
+        <isNotNull property="where.MajorTypeId" prepend="AND">
+          <![CDATA[MAJOR_TYPE_ID = #where.MajorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.MinorTypeId" prepend="AND">
+          <![CDATA[MINOR_TYPE_ID = #where.MinorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.HotRingSet" prepend="AND">
+          <![CDATA[HOT_RING_SET = #where.HotRingSet#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempSet" prepend="AND">
+          <![CDATA[MODEL_TEMP_SET = #where.ModelTempSet#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempHigh" prepend="AND">
+          <![CDATA[MODEL_TEMP_HIGH = #where.ModelTempHigh#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempLow" prepend="AND">
+          <![CDATA[MODEL_TEMP_LOW = #where.ModelTempLow#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempSet" prepend="AND">
+          <![CDATA[PLATE_TEMP_SET = #where.PlateTempSet#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempHight" prepend="AND">
+          <![CDATA[PLATE_TEMP_HIGHT = #where.PlateTempHight#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempLow" prepend="AND">
+          <![CDATA[PLATE_TEMP_LOW = #where.PlateTempLow#]]>
+        </isNotNull>
+        <isNotNull property="where.AllCuringTime" prepend="AND">
+          <![CDATA[ALL_CURING_TIME = #where.AllCuringTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditFlag" prepend="AND">
+          <![CDATA[AUDIT_FLAG = #where.AuditFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ModifyTime" prepend="AND">
+          <![CDATA[MODIFY_TIME = #where.ModifyTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ModifyUserId" prepend="AND">
+          <![CDATA[MODIFY_USER_ID = #where.ModifyUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditTime" prepend="AND">
+          <![CDATA[AUDIT_TIME = #where.AuditTime#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditUserId" prepend="AND">
+          <![CDATA[AUDIT_USER_ID = #where.AuditUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.Guid" prepend="AND">
+          <![CDATA[GUID = #where.Guid#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+    <!--查询-->
+    <select id="Select@CppCuringTechTime" parameterClass="map" resultClass="row">
+      <![CDATA[
+       SELECT T1.*, T2.USER_NAME RECORD_USER_NAME, T3.MINOR_TYPE_NAME
+       FROM CRT_CURING_TECH_TIME T1 
+       LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+       LEFT JOIN SBE_EQUIP_MINOR_TYPE T3 ON T1.MAJOR_TYPE_ID = T3.MAJOR_TYPE_ID AND T1.MINOR_TYPE_ID = T3.OBJID 
+       ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTechTimeCode" prepend="AND">
+          <![CDATA[T1.CURING_TECH_TIME_CODE = #where.CuringTechTimeCode#]]>
+        </isNotNull>
+        <isNotNull property="where.MinorTypeId" prepend="AND">
+          <![CDATA[T1.MINOR_TYPE_ID = #where.MinorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+          <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+
+</statements>
+</sqlMap>

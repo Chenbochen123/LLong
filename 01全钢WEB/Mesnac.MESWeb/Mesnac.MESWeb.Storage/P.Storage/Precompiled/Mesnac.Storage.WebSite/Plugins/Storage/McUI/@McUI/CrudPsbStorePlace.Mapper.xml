@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudPsbStorePlace" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT T1.*
+      , T2.USER_NAME RECORD_USER_NAME 
+      , T3.STORE_NAME 
+      FROM PSB_STORE_PLACE T1 
+      LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+      LEFT JOIN PSB_STORE T3 ON T1.STORE_ID = T3.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.STORE_PLACE_NAME" prepend="AND">
+          <![CDATA[T1.STORE_PLACE_NAME LIKE '%' || #where.STORE_PLACE_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.STORE_PLACE_CODE" prepend="AND">
+          <![CDATA[T1.STORE_PLACE_CODE = #where.STORE_PLACE_CODE#]]>
+        </isNotNull>
+        <isNotNull property="where.STORE_ID" prepend="AND">
+          <![CDATA[T1.STORE_ID = #where.STORE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.SAP_CODE" prepend="AND">
+          <![CDATA[T1.STORE_ID = #where.STORE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.OBJID
+      </isNull>
+    </select>
+    <select id="Select+Update@CrudPsbStorePlace" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM PSB_STORE_PLACE ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询仓库类型信息，ID值固定为GetComboBoxData@Select@CrudPsbStorePlace@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudPsbStorePlace@STORE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.STORE_NAME ssValue from PSB_STORE t1 where t1.DELETE_FLAG = '0' ORDER BY t1.OBJID
+     ]]>
+    </select>
+    <!--查询仓库类型信息，ID值固定为GetComboBoxData@Select@CrudPsbStorePlace@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudPsbStorePlace@SAP_CODE" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      SELECT t1.STORAGE_LOC_CODE sskey,t1.STORAGE_LOC_NAME ssValue FROM (select distinct substr2(storage_loc, 1, 4) STORAGE_LOC_CODE, STORAGE_LOC STORAGE_LOC_NAME from psm_out_stock_main
+      union 
+      select distinct substr2(STOR_LOC_FROM, 1, 4) STORAGE_LOC_CODE, STOR_LOC_FROM STORAGE_LOC_NAME from psm_transfer_main
+      ) t1
+     ]]>
+    </select>
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SynConfig>
+  <Tables>
+    <Table name="Table.Source">
+      <DbSourceName>MENS</DbSourceName>
+      <TableName>SysPageMenu</TableName>
+    </Table>
+    <Table name="Table.Target">
+      <DbSourceName>MES</DbSourceName>
+      <TableName>SSP_PAGE_MENU_MENS</TableName>
+    </Table>
+  </Tables>
+  <SynDatas>
+    <SynData>
+      <SourceTable TableName="Table.Source">
+        <Command >
+          <FileName value="Mesnac.DbSyn.dll"/>
+          <ClassName value="Mesnac.DbSyn.TableSyn.Source"/>
+        </Command>
+        <BeginSyn>
+          <add key="sql" value=""/>
+        </BeginSyn>
+        <SelectData>
+          <add key="count" value="0"/>
+          <add key="where">
+          </add>
+        </SelectData>
+        <FinishRowSyn>
+        </FinishRowSyn>
+      </SourceTable>
+      <TargetTable TableName="Table.Target">
+        <Command >
+          <FileName value="Mesnac.DbSyn.dll"/>
+          <ClassName value="Mesnac.DbSyn.TableSyn.Target"/>
+        </Command>
+        <ExcuteRowSyn>
+          <add key="where" value="OBJID"/>
+        </ExcuteRowSyn>
+      </TargetTable>
+      <SourceTargetFields>
+        <SourceTargetField SourceFieldName="ObjID" TargetFieldName="OBJID"/>
+		<SourceTargetField SourceFieldName="MenuLevel" TargetFieldName="MENU_LEVEL"/>
+		<SourceTargetField SourceFieldName="ShowName" TargetFieldName="SHOW_NAME"/>
+		<SourceTargetField SourceFieldName="Remark" TargetFieldName="REMARK"/>
+		<SourceTargetField SourceFieldName="PageUrl" TargetFieldName="PAGE_URL"/>
+		<SourceTargetField SourceFieldName="IcoName" TargetFieldName="ICO_NAME"/>
+		<SourceTargetField SourceFieldName="IsShow" TargetFieldName="IS_SHOW"/>
+		<SourceTargetField SourceFieldName="SeqIdx" TargetFieldName="SEQ_IDX"/>
+		<SourceTargetField SourceFieldName="DeleteFlag" TargetFieldName="DELETE_FLAG"/>
+      </SourceTargetFields>
+    </SynData>
+  </SynDatas>
+</SynConfig>

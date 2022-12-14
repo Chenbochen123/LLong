@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="单位编号"></Caption>
+    <Caption Name="UNIT_NAME" Value="单位名称"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+  </Captions>
+  <WebPage Title="单位管理">
+  </WebPage>
+  <Crud TableName="SSB_UNIT">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <Uniques>
+      <Unique Fields="UNIT_NAME"></Unique>
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="UNIT_NAME"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="UNIT_NAME"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="UNIT_NAME"></ParamField>
+        <ParamField FieldName="REMARK" ></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="OBJID">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID"></GridColumn>
+        <GridColumn ColumnName="UNIT_NAME"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

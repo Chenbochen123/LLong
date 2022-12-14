@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.InterfaceBG.Mapper.BasicMapper.CptCuringPlmtechMain"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CptCuringPlmtechMain" type="Mesnac.InterfaceBG.Entity.BasicEntity.CptCuringPlmtechMain, Mesnac.InterfaceBG.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CptCuringPlmtechMain" class="CptCuringPlmtechMain">
+    <result property="ObjId" column="OBJID"/>
+    <result property="CreateUser" column="CREATE_USER"/>
+    <result property="Modifier" column="MODIFIER"/>
+    <result property="CreateDate" column="CREATE_DATE"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="ExpiredDate" column="EXPIRED_DATE"/>
+    <result property="Pdmmat" column="PDMMAT"/>
+    <result property="Version" column="VERSION"/>
+    <result property="Sapmat" column="SAPMAT"/>
+    <result property="Stage" column="STAGE"/>
+    <result property="ProcessRoute" column="PROCESS_ROUTE"/>
+    <result property="ProcessVersion" column="PROCESS_VERSION"/>
+    <result property="Factory" column="FACTORY"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="Dummy5" column="DUMMY5"/>
+    <result property="ParmTypeCode" column="PARM_TYPE_CODE"/>
+    <result property="ParmIndx" column="PARM_INDX"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="Dummy6" column="DUMMY6"/>
+    <result property="Dummy7" column="DUMMY7"/>
+    <result property="Dummy8" column="DUMMY8"/>
+    <result property="Dummy9" column="DUMMY9"/>
+    <result property="Dummy10" column="DUMMY10"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CptCuringPlmtechMain" class="CptCuringPlmtechMain">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="CreateUser" column="CreateUser"/>
+    <parameter property="Modifier" column="Modifier"/>
+    <parameter property="CreateDate" column="CreateDate"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="ExpiredDate" column="ExpiredDate"/>
+    <parameter property="Pdmmat" column="Pdmmat"/>
+    <parameter property="Version" column="Version"/>
+    <parameter property="Sapmat" column="Sapmat"/>
+    <parameter property="Stage" column="Stage"/>
+    <parameter property="ProcessRoute" column="ProcessRoute"/>
+    <parameter property="ProcessVersion" column="ProcessVersion"/>
+    <parameter property="Factory" column="Factory"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="Dummy5" column="Dummy5"/>
+    <parameter property="ParmTypeCode" column="ParmTypeCode"/>
+    <parameter property="ParmIndx" column="ParmIndx"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="Dummy6" column="Dummy6"/>
+    <parameter property="Dummy7" column="Dummy7"/>
+    <parameter property="Dummy8" column="Dummy8"/>
+    <parameter property="Dummy9" column="Dummy9"/>
+    <parameter property="Dummy10" column="Dummy10"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CPT_CURING_PLMTECH_MAIN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.CreateUser" prepend="AND">
+          <![CDATA[CREATE_USER = #where.CreateUser#]]>
+        </isNotNull>
+        <isNotNull property="where.Modifier" prepend="AND">
+          <![CDATA[MODIFIER = #where.Modifier#]]>
+        </isNotNull>
+        <isNotNull property="where.CreateDate" prepend="AND">
+          <![CDATA[CREATE_DATE = #where.CreateDate#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ExpiredDate" prepend="AND">
+          <![CDATA[EXPIRED_DATE = #where.ExpiredDate#]]>
+        </isNotNull>
+        <isNotNull property="where.Pdmmat" prepend="AND">
+          <![CDATA[PDMMAT = #where.Pdmmat#]]>
+        </isNotNull>
+        <isNotNull property="where.Version" prepend="AND">
+          <![CDATA[VERSION = #where.Version#]]>
+        </isNotNull>
+        <isNotNull property="where.Sapmat" prepend="AND">
+          <![CDATA[SAPMAT = #where.Sapmat#]]>
+        </isNotNull>
+        <isNotNull property="where.Stage" prepend="AND">
+          <![CDATA[STAGE = #where.Stage#]]>
+        </isNotNull>
+        <isNotNull property="where.ProcessRoute" prepend="AND">
+          <![CDATA[PROCESS_ROUTE = #where.ProcessRoute#]]>
+        </isNotNull>
+        <isNotNull property="where.ProcessVersion" prepend="AND">
+          <![CDATA[PROCESS_VERSION = #where.ProcessVersion#]]>
+        </isNotNull>
+        <isNotNull property="where.Factory" prepend="AND">
+          <![CDATA[FACTORY = #where.Factory#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmTypeCode" prepend="AND">
+          <![CDATA[PARM_TYPE_CODE = #where.ParmTypeCode#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmIndx" prepend="AND">
+          <![CDATA[PARM_INDX = #where.ParmIndx#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy7" prepend="AND">
+          <![CDATA[DUMMY7 = #where.Dummy7#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy8" prepend="AND">
+          <![CDATA[DUMMY8 = #where.Dummy8#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy9" prepend="AND">
+          <![CDATA[DUMMY9 = #where.Dummy9#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy10" prepend="AND">
+          <![CDATA[DUMMY10 = #where.Dummy10#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CPT_CURING_PLMTECH_MAIN]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="CreateUser" prepend=",">CREATE_USER</isNotNull>
+        <isNotNull property="Modifier" prepend=",">MODIFIER</isNotNull>
+        <isNotNull property="CreateDate" prepend=",">CREATE_DATE</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="ExpiredDate" prepend=",">EXPIRED_DATE</isNotNull>
+        <isNotNull property="Pdmmat" prepend=",">PDMMAT</isNotNull>
+        <isNotNull property="Version" prepend=",">VERSION</isNotNull>
+        <isNotNull property="Sapmat" prepend=",">SAPMAT</isNotNull>
+        <isNotNull property="Stage" prepend=",">STAGE</isNotNull>
+        <isNotNull property="ProcessRoute" prepend=",">PROCESS_ROUTE</isNotNull>
+        <isNotNull property="ProcessVersion" prepend=",">PROCESS_VERSION</isNotNull>
+        <isNotNull property="Factory" prepend=",">FACTORY</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">DUMMY5</isNotNull>
+        <isNotNull property="ParmTypeCode" prepend=",">PARM_TYPE_CODE</isNotNull>
+        <isNotNull property="ParmIndx" prepend=",">PARM_INDX</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">DUMMY6</isNotNull>
+        <isNotNull property="Dummy7" prepend=",">DUMMY7</isNotNull>
+        <isNotNull property="Dummy8" prepend=",">DUMMY8</isNotNull>
+        <isNotNull property="Dummy9" prepend=",">DUMMY9</isNotNull>
+        <isNotNull property="Dummy10" prepend=",">DUMMY10</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_CPT_CURING_PLMTECH_MAIN.NEXTVAL</isNull>
+        <isNotNull property="CreateUser" prepend=",">#CreateUser#</isNotNull>
+        <isNotNull property="Modifier" prepend=",">#Modifier#</isNotNull>
+        <isNotNull property="CreateDate" prepend=",">#CreateDate#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="ExpiredDate" prepend=",">#ExpiredDate#</isNotNull>
+        <isNotNull property="Pdmmat" prepend=",">#Pdmmat#</isNotNull>
+        <isNotNull property="Version" prepend=",">#Version#</isNotNull>
+        <isNotNull property="Sapmat" prepend=",">#Sapmat#</isNotNull>
+        <isNotNull property="Stage" prepend=",">#Stage#</isNotNull>
+        <isNotNull property="ProcessRoute" prepend=",">#ProcessRoute#</isNotNull>
+        <isNotNull property="ProcessVersion" prepend=",">#ProcessVersion#</isNotNull>
+        <isNotNull property="Factory" prepend=",">#Factory#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">#Dummy5#</isNotNull>
+        <isNotNull property="ParmTypeCode" prepend=",">#ParmTypeCode#</isNotNull>
+        <isNotNull property="ParmIndx" prepend=",">#ParmIndx#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">#Dummy6#</isNotNull>
+        <isNotNull property="Dummy7" prepend=",">#Dummy7#</isNotNull>
+        <isNotNull property="Dummy8" prepend=",">#Dummy8#</isNotNull>
+        <isNotNull property="Dummy9" prepend=",">#Dummy9#</isNotNull>
+        <isNotNull property="Dummy10" prepend=",">#Dummy10#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CPT_CURING_PLMTECH_MAIN
+       <dynamic prepend="SET">
+        <isNotNull  property="update.CreateUser"  prepend=",">
+          CREATE_USER = #update.CreateUser#
+        </isNotNull>
+        <isNotNull  property="update.Modifier"  prepend=",">
+          MODIFIER = #update.Modifier#
+        </isNotNull>
+        <isNotNull  property="update.CreateDate"  prepend=",">
+          CREATE_DATE = #update.CreateDate#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.ExpiredDate"  prepend=",">
+          EXPIRED_DATE = #update.ExpiredDate#
+        </isNotNull>
+        <isNotNull  property="update.Pdmmat"  prepend=",">
+          PDMMAT = #update.Pdmmat#
+        </isNotNull>
+        <isNotNull  property="update.Version"  prepend=",">
+          VERSION = #update.Version#
+        </isNotNull>
+        <isNotNull  property="update.Sapmat"  prepend=",">
+          SAPMAT = #update.Sapmat#
+        </isNotNull>
+        <isNotNull  property="update.Stage"  prepend=",">
+          STAGE = #update.Stage#
+        </isNotNull>
+        <isNotNull  property="update.ProcessRoute"  prepend=",">
+          PROCESS_ROUTE = #update.ProcessRoute#
+        </isNotNull>
+        <isNotNull  property="update.ProcessVersion"  prepend=",">
+          PROCESS_VERSION = #update.ProcessVersion#
+        </isNotNull>
+        <isNotNull  property="update.Factory"  prepend=",">
+          FACTORY = #update.Factory#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.Dummy5"  prepend=",">
+          DUMMY5 = #update.Dummy5#
+        </isNotNull>
+        <isNotNull  property="update.ParmTypeCode"  prepend=",">
+          PARM_TYPE_CODE = #update.ParmTypeCode#
+        </isNotNull>
+        <isNotNull  property="update.ParmIndx"  prepend=",">
+          PARM_INDX = #update.ParmIndx#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.Dummy6"  prepend=",">
+          DUMMY6 = #update.Dummy6#
+        </isNotNull>
+        <isNotNull  property="update.Dummy7"  prepend=",">
+          DUMMY7 = #update.Dummy7#
+        </isNotNull>
+        <isNotNull  property="update.Dummy8"  prepend=",">
+          DUMMY8 = #update.Dummy8#
+        </isNotNull>
+        <isNotNull  property="update.Dummy9"  prepend=",">
+          DUMMY9 = #update.Dummy9#
+        </isNotNull>
+        <isNotNull  property="update.Dummy10"  prepend=",">
+          DUMMY10 = #update.Dummy10#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CPT_CURING_PLMTECH_MAIN
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CptCuringPlmtechMain">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CptCuringPlmtechMain">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CPT_CURING_PLMTECH_MAIN
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CPT_CURING_PLMTECH_MAIN
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CptCuringPlmtechMain" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CPT_CURING_PLMTECH_MAIN
+    </statement>
+  </statements>
+</sqlMap>

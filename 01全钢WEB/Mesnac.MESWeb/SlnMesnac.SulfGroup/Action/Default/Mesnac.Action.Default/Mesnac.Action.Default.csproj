@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6A2190C6-B530-4D5B-BD34-29EFB0431F67}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Action.Default</RootNamespace>
+    <AssemblyName>Mesnac.Action.Default</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.Core, Version=4.3.0.9338, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\PlugInPlatform\ICSharpCode.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Codd">
+      <HintPath>..\..\..\Libraries\Mesnac.Codd.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Controls.Base">
+      <HintPath>..\..\..\Controls\Mesnac.Controls.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Equips">
+      <HintPath>..\..\..\Equips\Mesnac.Equips.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Gui">
+      <HintPath>..\..\..\PlugInPlatform\Mesnac.Gui.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.PlugIn">
+      <HintPath>..\..\..\PlugInPlatform\Mesnac.PlugIn.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Purview\CheckPurviewControl.cs" />
+    <Compile Include="Purview\Login.cs" />
+    <Compile Include="Purview\ManagePurview.cs" />
+    <Compile Include="Purview\LoadPurview.cs" />
+    <Compile Include="Purview\FrmSysLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Purview\FrmSysLogin.Designer.cs">
+      <DependentUpon>FrmSysLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Purview\RefreshSystemPurview.cs" />
+    <Compile Include="SynchroData\BaseDataSynchronous.cs" />
+    <Compile Include="SynchroData\ClearForm.cs" />
+    <Compile Include="SynchroData\Delete.cs" />
+    <Compile Include="SynchroData\EquipReadData.cs" />
+    <Compile Include="SynchroData\Insert.cs" />
+    <Compile Include="SynchroData\Select.cs" />
+    <Compile Include="SynchroData\Update.cs" />
+    <Compile Include="SynchroData\SelectRow.cs" />
+    <Compile Include="SynchroData\NextRow.cs" />
+    <Compile Include="SynchroData\PreRow.cs" />
+    <Compile Include="SynchroData\IniForm.cs" />
+    <Compile Include="SynchroData\FirstRow.cs" />
+    <Compile Include="SynchroData\LastRow.cs" />
+    <Compile Include="SynchroData\LastTimeRow.cs" />
+    <Compile Include="Test\TestAction.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Main\Mensac.Gui.Run.Global\Mesnac.Gui.Run.Global.csproj">
+      <Project>{CC98CB3B-F532-4510-AC08-7DDBD520CB06}</Project>
+      <Name>Mesnac.Gui.Run.Global</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Main\Mesnac.Basic\Mesnac.Basic.csproj">
+      <Project>{28ACACF1-9936-4E97-A866-F84366EC5286}</Project>
+      <Name>Mesnac.Basic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Main\Mesnac.Gui.Common\Mesnac.Gui.Common.csproj">
+      <Project>{235DF851-9EA7-43D4-B3F9-0CAB7F60AD17}</Project>
+      <Name>Mesnac.Gui.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mesnac.Action.Base\Mesnac.Action.Base.csproj">
+      <Project>{7C91BC10-712A-4391-BC2C-FA48DC59F806}</Project>
+      <Name>Mesnac.Action.Base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Purview\FrmSysLogin.resx">
+      <DependentUpon>FrmSysLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(TargetPath)" /S/Y "$(SolutionDir)bin\Data\Action\Default\"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

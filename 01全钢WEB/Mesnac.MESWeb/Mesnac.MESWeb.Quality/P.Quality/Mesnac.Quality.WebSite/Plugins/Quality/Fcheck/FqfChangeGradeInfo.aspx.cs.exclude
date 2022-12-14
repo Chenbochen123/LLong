@@ -1,0 +1,151 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+
+using Ext.Net;
+using Mesnac.DbAccess;
+using Mesnac.Quality.Business.Implements;
+using Mesnac.Quality.Business.Interface;
+using Mesnac.Quality.Entity.BasicEntity;
+using Mesnac.Main.Business.Implements;
+using Mesnac.Main.Business.Interface;
+using Mesnac.Main.Entity.BasicEntity;
+using Mesnac.Web.UI;
+using Mesnac.Web.UI.Entity;
+
+public partial class Plugins_Quality_Fcheck_FqfChangeGradeInfo : Mesnac.Web.UI.Page
+{
+    #region 权限定义
+    protected __ _ = new __();
+    public class __ : ___  //必须继承___   //Action不能重复，重复会被覆盖
+    {
+        public __()
+        {
+            查询 = new PageAction() { ActionId = 1, ActionName = "btnSearch" };
+        }
+        public PageAction 查询 { get; private set; } //必须为 public
+    }
+    #endregion
+
+    protected FqxXcheckInfoManager xcheckManager = new FqxXcheckInfoManager();
+    protected FqgGradeInfoManager gradeManager = new FqgGradeInfoManager();
+    protected FqdDefectInfoManager defectManager = new FqdDefectInfoManager();
+    protected FqxXcheckDetailManager detailManager = new FqxXcheckDetailManager();
+    protected IFqcChangegradeInfoManager changeGradeManager = new FqcChangegradeInfoManager();
+    protected Mesnac.Quality.Business.Interface.ISppTyreStateManager tyreStateManager = new Mesnac.Quality.Business.Implements.SppTyreStateManager();
+    protected ISbeEquipManager equipManager = new SbeEquipManager();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!X.IsAjaxRequest && !IsPostBack)
+        {
+            txtBeginDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            txtEndDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            txtBeginTime.Text = "0:00";
+            txtEndTime.Text = "23:59";
+            InitGradeInfo();
+        }
+    }
+
+    //private void InitDefect()
+    //{
+    //    FqdDefectInfo defectInfo = new FqdDefectInfo();
+    //    defectInfo.DeleteFlag = 0;
+    //    defectInfo.WorkProcessId = 510;
+    //    IList<FqdDefectInfo> lst = defectManager.GetEntityList(defectInfo);
+    //    cbxDefect.Items.Clear();
+    //    //if (true)
+    //    //{
+    //    //    Ext.Net.ListItem item = new Ext.Net.ListItem();
+    //    //    item.Text = "====全部====";
+    //    //    item.Value = " ";
+    //    //    cbxDefect.Items.Add(item); 
+    //    //}
+    //    foreach (FqdDefectInfo defect in lst)
+    //    {
+    //        Ext.Net.ListItem item = new Ext.Net.ListItem();
+    //        item.Text = defect.Defectname;
+    //        item.Value = defect.ObjId.ToString();
+    //        cbxDefect.Items.Add(item);
+            
+    //    }
+    //    cbxDefect.Select(0);
+    //}
+
+    #region
+    //等级绑定
+    private void InitGradeInfo()
+    {
+        FqgGradeInfo gradeInfo = new FqgGradeInfo();
+        gradeInfo.DeleteFlag = 0;
+        gradeInfo.WorkProcessId = 510;
+        IList<FqgGradeInfo> lst = gradeManager.GetEntityList(gradeInfo);
+        cbxGrade.Items.Clear();
+        if (true)
+        {
+            Ext.Net.ListItem item = new Ext.Net.ListItem();
+            item.Text = "====全部====";
+            item.Value = " ";
+            cbxGrade.Items.Add(item);
+        }
+        foreach (FqgGradeInfo grade in lst)
+        {
+            Ext.Net.ListItem item = new Ext.Net.ListItem();
+            item.Text = grade.Gradename;
+            item.Value = grade.FinalGradeCode.ToString();
+            cbxGrade.Items.Add(item);
+        }
+        cbxGrade.Select(0);
+
+    }
+    #endregion
+
+    #region 分页相关方法
+    private PageResult GetPageResultData(PageResult pageParams)
+    {
+        pageParams.StatementId = "GetFqfChangeGradeInfo";
+        Dictionary<string, object> dic = new Dictionary<string, object>();
+        DateTime beginTime = txtBeginDate.SelectedDate + txtBeginTime.SelectedTime;
+        DateTime endTime = txtEndDate.SelectedDate + txtEndTime.SelectedTime;
+        dic.Add("BeginRecordTime", beginTime);
+        dic.Add("EndRecordTime", endTime);
+        if (!string.IsNullOrEmpty(txtGreenTyreNo.Text))
+        {
+            dic.Add("GreenTyreNo", txtGreenTyreNo.Text);
+        }
+        if (!string.IsNullOrEmpty(txtTyreNo.Text))
+        {
+            dic.Add("TyreNo", txtTyreNo.Text);
+        }
+        if (cbxGrade.Value != null && !string.IsNullOrWhiteSpace(cbxGrade.Value.ToString()))
+        {
+            dic.Add("GradeID", cbxGrade.Value);
+        }
+        if (txtMaterialName.Text != null && !string.IsNullOrWhiteSpace(txtMaterialName.Text))
+        {
+            dic.Add("MaterialName", txtMaterialName.Text);
+        }
+        pageParams.ParameterObject = dic;
+        pageParams = xcheckManager.GetPageDataByReader(pageParams);
+        return pageParams;
+    }
+
+    [DirectMethod]
+    public object GridPanelBindData(string action, Dictionary<string, object> extraParams)
+    {
+        StoreRequestParameters prms = new StoreRequestParameters(extraParams);
+        PageResult pageParams = new PageResult();
+        pageParams.PageIndex = prms.Page;
+        pageParams.PageSize = prms.Limit;
+
+        pageParams = GetPageResultData(pageParams);
+        DataTable data = pageParams.ResultDataSet.Tables[0];
+
+        int total = pageParams.RecordCount;
+        return new { data, total };
+    }
+    #endregion
+}

@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportPsmInLoadBill" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT 
+        CASE T1.BILL_STATE WHEN 0 THEN '未确认' WHEN 1 THEN '已确认' ELSE '' END BILL_STATE_CAPTION
+        , T1.*
+        , T2.USER_NAME RECORD_USER_NAME 
+        , T4.USER_NAME UPDATE_USER_NAME 
+        , T5.USER_NAME AFFIRM_USER_NAME 
+        , T6.CLASS_NAME LOAD_CLASS_NAME 
+        , T7.SHIFT_NAME LOAD_SHIFT_NAME 
+        FROM PSM_IN_LOAD_BILL T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+        LEFT JOIN SSB_USER T4 ON T1.UPDATE_USER_ID = T4.OBJID
+        LEFT JOIN SSB_USER T5 ON T1.AFFIRM_USER_ID = T5.OBJID
+        LEFT JOIN SSB_CLASS T6 ON T1.LOAD_CLASS_ID = T6.OBJID 
+        LEFT JOIN SSB_SHIFT T7 ON T1.LOAD_SHIFT_ID = T7.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginDate" prepend="AND">
+          <![CDATA[T1.LOAD_DATE >= #where.BeginDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EndDate" prepend="AND">
+          <![CDATA[T1.LOAD_DATE <= #where.EndDate#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME <= #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BillState" prepend="AND">
+          <![CDATA[T1.BILL_STATE = #where.BillState#]]>
+        </isNotNull>
+        <isNotNull property="where.LoadClassId" prepend="AND">
+          <![CDATA[T1.LOAD_CLASS_ID = #where.LoadClassId#]]>
+        </isNotNull>
+        <isNotNull property="where.LoadShiftId" prepend="AND">
+          <![CDATA[T1.LOAD_SHIFT_ID = #where.LoadShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserName" prepend="AND">
+          <![CDATA[T2.USER_NAME like '%' || #where.RecordUserName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.BillCode" prepend="AND">
+          <![CDATA[T1.BILL_CODE = #where.BillCode#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.RECORD_TIME DESC
+      </isNull>
+    </select>
+    <select id="Select+Update@ReportPsmInLoadBill" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM PSM_IN_LOAD_BILL ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <select id="Select@ReportPsmInLoadBill@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*
+        , CASE T1.BILL_STATE WHEN 0 THEN '未确认' WHEN 1 THEN '已确认' ELSE '' END BILL_STATE_CAPTION
+        , T2.USER_NAME RECORD_USER_NAME 
+        , T4.USER_NAME UPDATE_USER_NAME 
+        , T5.USER_NAME AFFIRM_USER_NAME 
+        , T6.CLASS_NAME LOAD_CLASS_NAME 
+        , T7.SHIFT_NAME LOAD_SHIFT_NAME 
+        FROM PSM_IN_LOAD_BILL T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+        LEFT JOIN SSB_USER T4 ON T1.UPDATE_USER_ID = T4.OBJID
+        LEFT JOIN SSB_USER T5 ON T1.AFFIRM_USER_ID = T5.OBJID
+        LEFT JOIN SSB_CLASS T6 ON T1.LOAD_CLASS_ID = T6.OBJID 
+        LEFT JOIN SSB_SHIFT T7 ON T1.LOAD_SHIFT_ID = T7.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T1.OBJID = #where.OBJID#)]]>
+      </dynamic>
+    </select>
+
+
+    <select id="Select@ReportPsmInLoadBill@DetailGrid" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*
+        , CASE T1.SUMMARY_STATE WHEN 0 THEN '未确认' WHEN 1 THEN '已确认' ELSE '' END SUMMARY_STATE_CAPTION 
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '合格品' WHEN 2 THEN '次品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' WHEN 9 THEN '试验胎' ELSE '无品级' END CHECK_GRADE_NAME 
+        , T3.MATERIAL_NAME 
+        , T4.USER_NAME RECORD_USER_NAME 
+        , T5.USER_NAME UPDATE_USER_NAME 
+        , T6.USER_NAME AFFIRM_USER_NAME 
+        , T7.STORE_NAME
+        , T8.STORE_PLACE_NAME
+        FROM PSM_IN_LOAD_SUMMARY T1 
+        LEFT JOIN SBM_MATERIAL T3 ON T1.MATERIAL_ID = T3.OBJID
+        LEFT JOIN SSB_USER T4 ON T1.RECORD_USER_ID = T4.OBJID
+        LEFT JOIN SSB_USER T5 ON T1.UPDATE_USER_ID = T5.OBJID
+        LEFT JOIN SSB_USER T6 ON T1.AFFIRM_USER_ID = T6.OBJID
+        LEFT JOIN PSB_STORE T7 ON T1.STORE_ID = T7.OBJID
+        LEFT JOIN PSB_STORE_PLACE T8 ON T1.STORE_PLACE_ID = T8.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[
+        T1.DELETE_FLAG = 0
+        AND T1.BILL_ID = #where.OBJID#
+        ]]>
+      </dynamic>
+      <![CDATA[
+        ORDER BY T3.MATERIAL_NAME, T1.RECORD_TIME 
+      ]]>
+    </select>
+
+    <!--查询类型信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadBill@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInLoadBill@SearchType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT '1' sskey, '按接班日期' ssValue FROM dual
+      UNION
+      SELECT '2' sskey, '按创建时间' ssValue FROM dual
+     ]]>
+    </select>
+
+    <!--查询单据状态信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadBill@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInLoadBill@BillState" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT 0 sskey, '未确认' ssValue FROM dual
+      UNION
+      SELECT 1 sskey, '已确认' ssValue FROM dual
+     ]]>
+    </select>
+
+    <!--查询班组信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadBill@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInLoadBill@LoadClassId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey, CLASS_NAME ssValue FROM SSB_CLASS WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+    <!--查询班次信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadBill@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInLoadBill@LoadShiftId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey, SHIFT_NAME ssValue FROM SSB_SHIFT WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

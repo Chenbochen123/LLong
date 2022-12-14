@@ -1,0 +1,552 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{11002236-7486-4E17-9D45-FE6911E3C3B7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.TyreCheck</RootNamespace>
+    <AssemblyName>Mesnac.Curing</AssemblyName>
+    <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PlatformFamilyName>WindowsCE</PlatformFamilyName>
+    <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
+    <OSVersion>5.0</OSVersion>
+    <DeployDirSuffix>Mesnac.Curing</DeployDirSuffix>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <NativePlatformName>Windows CE</NativePlatformName>
+    <FormFactorID>
+    </FormFactorID>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BarcodeType.cs" />
+    <Compile Include="FrmAddProduce.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddProduce.designer.cs">
+      <DependentUpon>FrmAddProduce.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDelete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDelete.designer.cs">
+      <DependentUpon>FrmDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDownGrade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDownGrade.designer.cs">
+      <DependentUpon>FrmDownGrade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmProduce.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmProduce.designer.cs">
+      <DependentUpon>FrmProduce.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmQuery.designer.cs">
+      <DependentUpon>FrmQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmShift.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShift.designer.cs">
+      <DependentUpon>FrmShift.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuringManager.cs" />
+    <Compile Include="FrmTyreCheckInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTyreCheckInfo.designer.cs">
+      <DependentUpon>FrmTyreCheckInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmWashMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmWashMode.designer.cs">
+      <DependentUpon>FrmWashMode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FrmChangeMod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmChangeMod.designer.cs">
+      <DependentUpon>FrmChangeMod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFirstTyreCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFirstTyreCheck.designer.cs">
+      <DependentUpon>FrmFirstTyreCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmChangeModByDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmChangeModByDB.designer.cs">
+      <DependentUpon>FrmChangeModByDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmReplaceCapsule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReplaceCapsule.designer.cs">
+      <DependentUpon>FrmReplaceCapsule.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mesnac.Framework\Mesnac.Framework.csproj">
+      <Project>{82D95D33-9473-4246-8C99-C58E6A685B0F}</Project>
+      <Name>Mesnac.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Scanner\Mesnac.Scanner.csproj">
+      <Project>{9FEDCB60-B5DC-4F26-A1D3-4FFAA012EAB2}</Project>
+      <Name>Mesnac.Scanner</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.SysConfig\Mesnac.SysConfig.csproj">
+      <Project>{D14E2CF8-D2EF-4BA5-92A5-608C750275E9}</Project>
+      <Name>Mesnac.SysConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.TyreCheck\Mesnac.TyreCheck.csproj">
+      <Project>{61160FD8-59AF-42B3-B941-C4D810AA6092}</Project>
+      <Name>Mesnac.TyreCheck</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Utility\Mesnac.Utility.csproj">
+      <Project>{526D6F8D-C228-4F4A-9DD7-90ECCDCA3371}</Project>
+      <Name>Mesnac.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.WebService\Mesnac.WebService.csproj">
+      <Project>{60859A6C-5977-440E-BE59-A40B5B49F4DE}</Project>
+      <Name>Mesnac.WebService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Windows\Mesnac.Windows.csproj">
+      <Project>{1F4959E8-BFE7-48EB-8D3D-887303A6E838}</Project>
+      <Name>Mesnac.Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormBarcode.resx">
+      <DependentUpon>FormBarcode.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddProduce.resx">
+      <DependentUpon>FrmAddProduce.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBladderReturnStorage.resx">
+      <DependentUpon>FrmBladderReturnStorage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBomUpload.resx">
+      <DependentUpon>FrmBomUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBpmIsFirstUnlock.resx">
+      <DependentUpon>FrmBpmIsFirstUnlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCapsuleUnlock.resx">
+      <DependentUpon>FrmCapsuleUnlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmChangeCapsule.resx">
+      <DependentUpon>FrmChangeCapsule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmChangeCapsuleNew.resx">
+      <DependentUpon>FrmChangeCapsuleNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmClearAlarm.resx">
+      <DependentUpon>FrmClearAlarm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmClearStomata.resx">
+      <DependentUpon>FrmClearStomata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCppFX.resx">
+      <DependentUpon>FrmCppFX.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCuringBladderIn.resx">
+      <DependentUpon>FrmCuringBladderIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCuringEdgeGetMater1.resx">
+      <DependentUpon>FrmCuringEdgeGetMater1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCuringGetEquipManger.resx">
+      <DependentUpon>FrmCuringGetEquipManger.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCuringGetTechInfo.resx">
+      <DependentUpon>FrmCuringGetTechInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCuringTooling.resx">
+      <DependentUpon>FrmCuringTooling.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCuringYearWeek.resx">
+      <DependentUpon>FrmCuringYearWeek.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCuringYearWeekConfirm.resx">
+      <DependentUpon>FrmCuringYearWeekConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCZKUnlock.resx">
+      <DependentUpon>FrmCZKUnlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDelete.resx">
+      <DependentUpon>FrmDelete.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDownGrade.resx">
+      <DependentUpon>FrmDownGrade.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDxPressUnlock.resx">
+      <DependentUpon>FrmDxPressUnlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmHelper\FrmNotify.resx">
+      <DependentUpon>FrmNotify.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmKMRemind.resx">
+      <DependentUpon>FrmKMRemind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmKMRemind2.resx">
+      <DependentUpon>FrmKMRemind2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMouldMaterStopEquip.resx">
+      <DependentUpon>FrmMouldMaterStopEquip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmNoCuring.resx">
+      <DependentUpon>FrmNoCuring.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmProduce.resx">
+      <DependentUpon>FrmProduce.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmQuery.resx">
+      <DependentUpon>FrmQuery.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCuringCommitMaterial.resx">
+      <DependentUpon>FrmCuringCommitMaterial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShift.resx">
+      <DependentUpon>FrmShift.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTyreCheckInfo.resx">
+      <DependentUpon>FrmTyreCheckInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmChangeMod.resx">
+      <DependentUpon>FrmChangeMod.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFirstTyreCheck.resx">
+      <DependentUpon>FrmFirstTyreCheck.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpdateProduce.resx">
+      <DependentUpon>FrmUpdateProduce.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmWashMode.resx">
+      <DependentUpon>FrmWashMode.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmChangeModByDB.resx">
+      <DependentUpon>FrmChangeModByDB.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmReplaceCapsule.resx">
+      <DependentUpon>FrmReplaceCapsule.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFirstTyreCheck1.resx">
+      <DependentUpon>FrmFirstTyreCheck1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddProduceNew.resx">
+      <DependentUpon>FrmAddProduceNew.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCuringFictitious.resx">
+      <DependentUpon>FrmCuringFictitious.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmWashModeUnlock.resx">
+      <DependentUpon>FrmWashModeUnlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmWMSData.resx">
+      <DependentUpon>FrmWMSData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmWMSTestFlag.resx">
+      <DependentUpon>FrmWMSTestFlag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmWTTyreNo.resx">
+      <DependentUpon>FrmWTTyreNo.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FormBarcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBarcode.Designer.cs">
+      <DependentUpon>FormBarcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBladderReturnStorage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBladderReturnStorage.Designer.cs">
+      <DependentUpon>FrmBladderReturnStorage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBomUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBomUpload.Designer.cs">
+      <DependentUpon>FrmBomUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBpmIsFirstUnlock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBpmIsFirstUnlock.Designer.cs">
+      <DependentUpon>FrmBpmIsFirstUnlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCapsuleUnlock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCapsuleUnlock.designer.cs">
+      <DependentUpon>FrmCapsuleUnlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmChangeCapsule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmChangeCapsule.designer.cs">
+      <DependentUpon>FrmChangeCapsule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmChangeCapsuleNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmChangeCapsuleNew.Designer.cs">
+      <DependentUpon>FrmChangeCapsuleNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmClearAlarm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmClearAlarm.designer.cs">
+      <DependentUpon>FrmClearAlarm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmClearStomata.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmClearStomata.designer.cs">
+      <DependentUpon>FrmClearStomata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCppFX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCppFX.Designer.cs">
+      <DependentUpon>FrmCppFX.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCuringBladderIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCuringBladderIn.Designer.cs">
+      <DependentUpon>FrmCuringBladderIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCuringEdgeGetMater1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCuringEdgeGetMater1.Designer.cs">
+      <DependentUpon>FrmCuringEdgeGetMater1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCuringGetEquipManger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCuringGetEquipManger.Designer.cs">
+      <DependentUpon>FrmCuringGetEquipManger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCuringGetTechInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCuringGetTechInfo.Designer.cs">
+      <DependentUpon>FrmCuringGetTechInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCuringTooling.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCuringTooling.Designer.cs">
+      <DependentUpon>FrmCuringTooling.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCuringCommitMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCuringCommitMaterial.Designer.cs">
+      <DependentUpon>FrmCuringCommitMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCuringYearWeek.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCuringYearWeek.Designer.cs">
+      <DependentUpon>FrmCuringYearWeek.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCuringYearWeekConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCuringYearWeekConfirm.Designer.cs">
+      <DependentUpon>FrmCuringYearWeekConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCZKUnlock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCZKUnlock.designer.cs">
+      <DependentUpon>FrmCZKUnlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDxPressUnlock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDxPressUnlock.Designer.cs">
+      <DependentUpon>FrmDxPressUnlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmHelper\FrmNotify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHelper\FrmNotify.Designer.cs">
+      <DependentUpon>FrmNotify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmKMRemind.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmKMRemind.Designer.cs">
+      <DependentUpon>FrmKMRemind.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmKMRemind2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmKMRemind2.Designer.cs">
+      <DependentUpon>FrmKMRemind2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMouldMaterStopEquip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMouldMaterStopEquip.Designer.cs">
+      <DependentUpon>FrmMouldMaterStopEquip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmNoCuring.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmNoCuring.Designer.cs">
+      <DependentUpon>FrmNoCuring.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpdateProduce.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpdateProduce.Designer.cs">
+      <DependentUpon>FrmUpdateProduce.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmWashModeUnlock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmWashModeUnlock.Designer.cs">
+      <DependentUpon>FrmWashModeUnlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmWMSData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmWMSData.Designer.cs">
+      <DependentUpon>FrmWMSData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmWMSTestFlag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmWMSTestFlag.Designer.cs">
+      <DependentUpon>FrmWMSTestFlag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmWTTyreNo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmWTTyreNo.Designer.cs">
+      <DependentUpon>FrmWTTyreNo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IniAssenbly.cs" />
+    <Compile Include="FrmFirstTyreCheck1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFirstTyreCheck1.designer.cs">
+      <DependentUpon>FrmFirstTyreCheck1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddProduceNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddProduceNew.designer.cs">
+      <DependentUpon>FrmAddProduceNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCuringFictitious.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCuringFictitious.Designer.cs">
+      <DependentUpon>FrmCuringFictitious.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}">
+        <HostingProcess disable="1" />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(TargetPath)" /S/Y "$(SolutionDir)bin\"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

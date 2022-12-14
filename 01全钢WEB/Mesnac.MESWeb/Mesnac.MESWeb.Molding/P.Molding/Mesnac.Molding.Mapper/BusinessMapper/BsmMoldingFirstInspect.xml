@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.BsmMoldingFirstInspect"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BSM_MOLDING_FIRST_INSPECT ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Toolingplandetailid" prepend="AND">
+          <![CDATA[TOOLINGPLANDETAILID = #where.Toolingplandetailid#]]>
+        </isNotNull>
+        <isNotNull property="where.Techid" prepend="AND">
+          <![CDATA[TECHID = #where.Techid#]]>
+        </isNotNull>
+        <isNotNull property="where.Inserttime" prepend="AND">
+          <![CDATA[INSERTTIME = #where.Inserttime#]]>
+        </isNotNull>
+        <isNotNull property="where.Machineid" prepend="AND">
+          <![CDATA[MACHINEID = #where.Machineid#]]>
+        </isNotNull>
+        <isNotNull property="where.Lastmaterialid" prepend="AND">
+          <![CDATA[LASTMATERIALID = #where.Lastmaterialid#]]>
+        </isNotNull>
+        <isNotNull property="where.Currentmaterialid" prepend="AND">
+          <![CDATA[CURRENTMATERIALID = #where.Currentmaterialid#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000001" prepend="AND">
+          <![CDATA[ACTUALLPAR32000001 = #where.Actuallpar32000001#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000002" prepend="AND">
+          <![CDATA[ACTUALLPAR32000002 = #where.Actuallpar32000002#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000003" prepend="AND">
+          <![CDATA[ACTUALLPAR32000003 = #where.Actuallpar32000003#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000004" prepend="AND">
+          <![CDATA[ACTUALLPAR32000004 = #where.Actuallpar32000004#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000005" prepend="AND">
+          <![CDATA[ACTUALLPAR32000005 = #where.Actuallpar32000005#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000006" prepend="AND">
+          <![CDATA[ACTUALLPAR32000006 = #where.Actuallpar32000006#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000007" prepend="AND">
+          <![CDATA[ACTUALLPAR32000007 = #where.Actuallpar32000007#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000008" prepend="AND">
+          <![CDATA[ACTUALLPAR32000008 = #where.Actuallpar32000008#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000009" prepend="AND">
+          <![CDATA[ACTUALLPAR32000009 = #where.Actuallpar32000009#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000010" prepend="AND">
+          <![CDATA[ACTUALLPAR32000010 = #where.Actuallpar32000010#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000011" prepend="AND">
+          <![CDATA[ACTUALLPAR32000011 = #where.Actuallpar32000011#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000012" prepend="AND">
+          <![CDATA[ACTUALLPAR32000012 = #where.Actuallpar32000012#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000013" prepend="AND">
+          <![CDATA[ACTUALLPAR32000013 = #where.Actuallpar32000013#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000014" prepend="AND">
+          <![CDATA[ACTUALLPAR32000014 = #where.Actuallpar32000014#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000015" prepend="AND">
+          <![CDATA[ACTUALLPAR32000015 = #where.Actuallpar32000015#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000016" prepend="AND">
+          <![CDATA[ACTUALLPAR32000016 = #where.Actuallpar32000016#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000017" prepend="AND">
+          <![CDATA[ACTUALLPAR32000017 = #where.Actuallpar32000017#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000018" prepend="AND">
+          <![CDATA[ACTUALLPAR32000018 = #where.Actuallpar32000018#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000019" prepend="AND">
+          <![CDATA[ACTUALLPAR32000019 = #where.Actuallpar32000019#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000020" prepend="AND">
+          <![CDATA[ACTUALLPAR32000020 = #where.Actuallpar32000020#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000021" prepend="AND">
+          <![CDATA[ACTUALLPAR32000021 = #where.Actuallpar32000021#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000022" prepend="AND">
+          <![CDATA[ACTUALLPAR32000022 = #where.Actuallpar32000022#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000023" prepend="AND">
+          <![CDATA[ACTUALLPAR32000023 = #where.Actuallpar32000023#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000024" prepend="AND">
+          <![CDATA[ACTUALLPAR32000024 = #where.Actuallpar32000024#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000025" prepend="AND">
+          <![CDATA[ACTUALLPAR32000025 = #where.Actuallpar32000025#]]>
+        </isNotNull>
+        <isNotNull property="where.Actuallpar32000026" prepend="AND">
+          <![CDATA[ACTUALLPAR32000026 = #where.Actuallpar32000026#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000001" prepend="AND">
+          <![CDATA[ACTUALRPAR32000001 = #where.Actualrpar32000001#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000002" prepend="AND">
+          <![CDATA[ACTUALRPAR32000002 = #where.Actualrpar32000002#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000003" prepend="AND">
+          <![CDATA[ACTUALRPAR32000003 = #where.Actualrpar32000003#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000004" prepend="AND">
+          <![CDATA[ACTUALRPAR32000004 = #where.Actualrpar32000004#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000005" prepend="AND">
+          <![CDATA[ACTUALRPAR32000005 = #where.Actualrpar32000005#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000006" prepend="AND">
+          <![CDATA[ACTUALRPAR32000006 = #where.Actualrpar32000006#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000007" prepend="AND">
+          <![CDATA[ACTUALRPAR32000007 = #where.Actualrpar32000007#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000008" prepend="AND">
+          <![CDATA[ACTUALRPAR32000008 = #where.Actualrpar32000008#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000009" prepend="AND">
+          <![CDATA[ACTUALRPAR32000009 = #where.Actualrpar32000009#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000010" prepend="AND">
+          <![CDATA[ACTUALRPAR32000010 = #where.Actualrpar32000010#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000011" prepend="AND">
+          <![CDATA[ACTUALRPAR32000011 = #where.Actualrpar32000011#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000012" prepend="AND">
+          <![CDATA[ACTUALRPAR32000012 = #where.Actualrpar32000012#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000013" prepend="AND">
+          <![CDATA[ACTUALRPAR32000013 = #where.Actualrpar32000013#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000014" prepend="AND">
+          <![CDATA[ACTUALRPAR32000014 = #where.Actualrpar32000014#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000015" prepend="AND">
+          <![CDATA[ACTUALRPAR32000015 = #where.Actualrpar32000015#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000016" prepend="AND">
+          <![CDATA[ACTUALRPAR32000016 = #where.Actualrpar32000016#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000017" prepend="AND">
+          <![CDATA[ACTUALRPAR32000017 = #where.Actualrpar32000017#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000018" prepend="AND">
+          <![CDATA[ACTUALRPAR32000018 = #where.Actualrpar32000018#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000019" prepend="AND">
+          <![CDATA[ACTUALRPAR32000019 = #where.Actualrpar32000019#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000020" prepend="AND">
+          <![CDATA[ACTUALRPAR32000020 = #where.Actualrpar32000020#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000021" prepend="AND">
+          <![CDATA[ACTUALRPAR32000021 = #where.Actualrpar32000021#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000022" prepend="AND">
+          <![CDATA[ACTUALRPAR32000022 = #where.Actualrpar32000022#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000023" prepend="AND">
+          <![CDATA[ACTUALRPAR32000023 = #where.Actualrpar32000023#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000024" prepend="AND">
+          <![CDATA[ACTUALRPAR32000024 = #where.Actualrpar32000024#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000025" prepend="AND">
+          <![CDATA[ACTUALRPAR32000025 = #where.Actualrpar32000025#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualrpar32000026" prepend="AND">
+          <![CDATA[ACTUALRPAR32000026 = #where.Actualrpar32000026#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother01" prepend="AND">
+          <![CDATA[ACTUALOTHER01 = #where.Actualother01#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother02" prepend="AND">
+          <![CDATA[ACTUALOTHER02 = #where.Actualother02#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother03" prepend="AND">
+          <![CDATA[ACTUALOTHER03 = #where.Actualother03#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother04" prepend="AND">
+          <![CDATA[ACTUALOTHER04 = #where.Actualother04#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother05" prepend="AND">
+          <![CDATA[ACTUALOTHER05 = #where.Actualother05#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother06" prepend="AND">
+          <![CDATA[ACTUALOTHER06 = #where.Actualother06#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother07" prepend="AND">
+          <![CDATA[ACTUALOTHER07 = #where.Actualother07#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother08" prepend="AND">
+          <![CDATA[ACTUALOTHER08 = #where.Actualother08#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother09" prepend="AND">
+          <![CDATA[ACTUALOTHER09 = #where.Actualother09#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother10" prepend="AND">
+          <![CDATA[ACTUALOTHER10 = #where.Actualother10#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother11" prepend="AND">
+          <![CDATA[ACTUALOTHER11 = #where.Actualother11#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother12" prepend="AND">
+          <![CDATA[ACTUALOTHER12 = #where.Actualother12#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother13" prepend="AND">
+          <![CDATA[ACTUALOTHER13 = #where.Actualother13#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualother14" prepend="AND">
+          <![CDATA[ACTUALOTHER14 = #where.Actualother14#]]>
+        </isNotNull>
+        <isNotNull property="where.Empid1" prepend="AND">
+          <![CDATA[EMPID1 = #where.Empid1#]]>
+        </isNotNull>
+        <isNotNull property="where.Empid2" prepend="AND">
+          <![CDATA[EMPID2 = #where.Empid2#]]>
+        </isNotNull>
+        <isNotNull property="where.Empid3" prepend="AND">
+          <![CDATA[EMPID3 = #where.Empid3#]]>
+        </isNotNull>
+        <isNotNull property="where.Empid4" prepend="AND">
+          <![CDATA[EMPID4 = #where.Empid4#]]>
+        </isNotNull>
+        <isNotNull property="where.Empid5" prepend="AND">
+          <![CDATA[EMPID5 = #where.Empid5#]]>
+        </isNotNull>
+        <isNotNull property="where.Empid6" prepend="AND">
+          <![CDATA[EMPID6 = #where.Empid6#]]>
+        </isNotNull>
+        <isNotNull property="where.Empid7" prepend="AND">
+          <![CDATA[EMPID7 = #where.Empid7#]]>
+        </isNotNull>
+        <isNotNull property="where.Empid8" prepend="AND">
+          <![CDATA[EMPID8 = #where.Empid8#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+     <select id="ReportBsmMoldingFirstInspect" parameterClass="map" resultClass="row">
+       <![CDATA[
+        
+        SELECT T.*,T3.TOOLING_BARCODE,T4.EQUIP_NAME,T5.MATERIAL_NAME CURRENTMATERIALNAME,T6.MATERIAL_NAME LASTMATERIALNAME FROM BSM_MOLDING_FIRST_INSPECT  T
+        LEFT JOIN BPT_MOLDING_TECH_PARM_INFO T1 ON T.TECHID=T1.OBJID
+        LEFT JOIN BSM_TOOLING_LOAD_DETAIL T2 ON T.TOOLINGPLANDETAILID=T2.OBJID
+        LEFT JOIN BSM_TOOLING_LOAD_MAIN T3 ON T2.MAIN_ID=T3.OBJID
+        LEFT JOIN SBE_EQUIP T4 ON  T.MACHINEID=T4.OBJID 
+        LEFT JOIN V_BBM_MATERIALINFO T5 ON  T.CURRENTMATERIALID=T5.OBJID 
+        LEFT JOIN V_BBM_MATERIALINFO T6 ON T.LASTMATERIALID = T6.OBJID
+        where 1=1
+      ]]>
+         <isNotNull property="BeginTime" prepend="AND">
+           <![CDATA[T.INSERTTIME >= #BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="EndTime" prepend="AND">
+           <![CDATA[T.INSERTTIME <= #EndTime#]]>
+         </isNotNull>
+        <!-- <isNotNull property="EQUIP_NAME" prepend="AND">
+           <![CDATA[T4.EQUIP_NAME LIKE '%' || #EQUIP_NAME || '%'#]]>
+         </isNotNull>-->
+         <isNotNull property="MATERIAL_NAME" prepend="AND">
+           <![CDATA[T5.MATERIAL_NAME LIKE '%' || #MATERIAL_NAME# || '%'#]]>
+         </isNotNull>
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #DeleteFlag#]]>
+         </isNotNull>
+       <isNotNull property="OrderString" prepend=" ">
+         ORDER BY $OrderString$
+       </isNotNull>
+     </select>
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

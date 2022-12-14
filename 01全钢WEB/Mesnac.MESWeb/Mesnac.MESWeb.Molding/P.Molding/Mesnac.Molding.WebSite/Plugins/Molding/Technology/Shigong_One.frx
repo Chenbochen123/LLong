@@ -1,0 +1,704 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="01/07/2020 09:04:30" ReportInfo.Modified="09/02/2022 16:46:07" ReportInfo.CreatorVersion="2013.3.9.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils; 
+
+namespace FastReport
+{
+  public class ReportScript
+  {  
+    private void Table1_AfterData(object sender, EventArgs e)
+    {                                                               
+      DataSourceBase rowData = Report.GetDataSource(&quot;Table&quot;);   
+      
+      //施工表编号
+      Text4.Text=&quot;Q/LLJ 03-JS235.&quot;+rowData.Report.GetColumnValue(&quot;Table.PDM_CODE&quot;).ToString()+&quot;-&quot;+
+        rowData.Report.GetColumnValue(&quot;Table.LASTMODIFY_DATE&quot;).ToString().Substring(0,4);
+      
+      
+      //阶段
+      if(rowData.Report.GetColumnValue(&quot;Table.PDM_VERSION&quot;).ToString().Length== 1)
+      {
+        Text12.Text=&quot;投产&quot;;
+      }
+      else if(rowData.Report.GetColumnValue(&quot;Table.PDM_VERSION&quot;).ToString().Substring(0,2)==&quot;SC&quot;)
+      {
+        Text12.Text=&quot;试产&quot;;
+      } 
+      else if(rowData.Report.GetColumnValue(&quot;Table.PDM_VERSION&quot;).ToString().Substring(0,2)==&quot;SZ&quot;)
+      {
+        Text12.Text=&quot;试制&quot;;
+      }
+      else{Text12.Text=&quot;&quot;;}
+      
+      //适用机型
+      int a = rowData.Report.GetColumnValue(&quot;Table.PDM_CODE&quot;).ToString().Length-2;
+      if(rowData.Report.GetColumnValue(&quot;Table.PDM_CODE&quot;).ToString().Substring(a,1)==&quot;A&quot;)
+      {
+        Text13.Text=&quot;天津小两鼓-胶囊鼓&quot;;
+      }
+      else if (rowData.Report.GetColumnValue(&quot;Table.PDM_CODE&quot;).ToString().Substring(a,1)==&quot;C&quot;)  
+      {
+        Text13.Text=&quot;二次法-胶囊鼓&quot;;
+      }  
+      else if (rowData.Report.GetColumnValue(&quot;Table.PDM_CODE&quot;).ToString().Substring(a,1)==&quot;D&quot;)  
+      {
+        Text13.Text=&quot;三鼓-机械鼓(EBR)&quot;;
+      }  
+      else if (rowData.Report.GetColumnValue(&quot;Table.PDM_CODE&quot;).ToString().Substring(a,1)==&quot;E&quot;)  
+      {
+        Text13.Text=&quot;三鼓-机械鼓&quot;;
+      }  
+      else if (rowData.Report.GetColumnValue(&quot;Table.PDM_CODE&quot;).ToString().Substring(a,1)==&quot;I&quot;)  
+      {
+        Text13.Text=&quot;TBR2三鼓-高校机械鼓&quot;;
+      }  
+      else if (rowData.Report.GetColumnValue(&quot;Table.PDM_CODE&quot;).ToString().Substring(a,1)==&quot;J&quot;)  
+      {
+        Text13.Text=&quot;TBR2三鼓-机械鼓&quot;;
+      }  
+      else if (rowData.Report.GetColumnValue(&quot;Table.PDM_CODE&quot;).ToString().Substring(a,1)==&quot;K&quot;)  
+      {
+        Text13.Text=&quot;三鼓-高校机械鼓&quot;;
+      }  
+      else if (rowData.Report.GetColumnValue(&quot;Table.PDM_CODE&quot;).ToString().Substring(a,1)==&quot;L&quot;)  
+      {
+        Text13.Text=&quot;VMI-机械鼓&quot;;
+      }
+      else if (rowData.Report.GetColumnValue(&quot;Table.PDM_CODE&quot;).ToString().Substring(a,1)==&quot;M&quot;)  
+      {
+        Text13.Text=&quot;沈阳小三鼓-广东机械鼓/沈阳机械鼓&quot;;
+      }  
+      else if (rowData.Report.GetColumnValue(&quot;Table.PDM_CODE&quot;).ToString().Substring(a,1)==&quot;T&quot;)  
+      {
+        Text13.Text=&quot;三鼓-广东机械鼓&quot;;
+      }  
+      else if (rowData.Report.GetColumnValue(&quot;Table.PDM_CODE&quot;).ToString().Substring(a,1)==&quot;X&quot;)  
+      {
+        Text13.Text=&quot;试制专用&quot;;
+      }  
+      else{Text13.Text=&quot;&quot;;}
+      
+      //部件代码                                                
+               
+      
+      
+      
+      // Cell68.Text=rowData2.Report.GetColumnValue(&quot;Table2.SPEC&quot;).ToString();
+        
+     /* 
+      
+         
+      DataSourceBase rowData2 = Report.GetDataSource(&quot;Table2&quot;);  
+      
+      string aa = &quot;&quot;;
+      while(rowData2.HasMoreRows)
+      {
+      String bb = rowData2.Report.GetColumnValue(&quot;Table2.SPEC&quot;).ToString();
+      aa+=bb;
+      rowData2.Next;
+      }
+      
+      
+      Cell68.Text= aa.ToString();
+      
+      
+      
+      
+      
+      
+      rowData2.Init();  
+      Table1.PrintRow(0);
+      Table1.PrintColumns();
+      while (rowData2.HasMoreRows)
+      {   
+        if(rowData2.Report.GetColumnValue(&quot;Table2.MATERIAL_TYPE_NAME&quot;).ToString()==&quot;全钢胎侧卷&quot;)
+        {
+          Cell68.Text=rowData2.Report.GetColumnValue(&quot;Table2.SPEC&quot;).ToString();
+        }      
+        Table1.PrintRow(1);
+        Table1.PrintColumns();
+        rowData2.Next;  
+      }
+        */                         
+    
+      
+      
+    } 
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="weight" ConnectionString="rijcmlqPJ0Cq8Y2NHHCeotpTIiRTFuZRkK74hrP4FXglzMPfwdPm/vVLwZzXoD55Fm6gUEbHx9iJLQDKy/XYKxCNrE78KTyb0u+KL8YizqW6wq8Q534V3e81h7i+/Rj78iMPi4aYHqjcmp+jaZgNx/iYZE33MfezN4G9ejNGovC6MPOw1rPujWNaNUsrKAImoe1zVai">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" TableName="Table" SelectCommand=" select '' as OBJID,'' as PDM_CODE,'' as MATERIAL_NAME,'' as MATERIAL_SAP_CODE,'' as PDM_VERSION,'' as PROCESS_ROUTE,'' as LASTMODIFY_DATE,'' as PAR32000001,'' as PAR32000002,'' as PAR32000003,&#13;&#10;     '' as PAR32000004,'' as PAR32000005,'' as PAR32000006,'' as PAR32000007,'' as PAR32000008,'' as PAR32000009,'' as PAR32000010,'' as PAR32000011,'' as PAR32000012,'' as PAR32000013,&#13;&#10;     '' as PAR32000014,'' as PAR32000015,'' as PAR32000016,'' as PAR32000017,'' as PAR32000018,'' as PAR32000019,'' as PAR32000020,'' as PAR32000021,'' as PAR32000022,&#13;&#10;     '' as PAR32000023,'' as PAR32000024,'' as PAR32000025,'' as PAR32000026,'' as PAR32001010,'' as PAR32001009,'' as PAR32001008,'' as PAR32001007,'' as PAR32001006,&#13;&#10;     '' as PAR32001005,'' as PAR32001004,'' as PAR32001003,'' as PAR32001002,'' as PAR32001001,'' as PAR33000001,'' as PAR33000002,'' as PAR33000003,'' as PAR33000004,&#13;&#10;     '' as PAR33000005,'' as PAR33000006,'' as PAR33000007,'' as PAR33000008,'' as PAR33000009,'' as PAR33000010,'' as PAR33000011,'' as PAR33000012,'' as PAR33000013,&#13;&#10;     '' as PAR33000014,'' as PAR33000015,'' as PAR33000016,'' as PAR33000017,'' as PAR33000018,'' as PAR33000019,'' as PAR33000020,'' as PAR33000021,'' as PAR33000022,&#13;&#10;     '' as PAR33000023,'' as PAR33000024,'' as PAR33000025,'' as PAR33000026,'' as PAR33000027,'' as PAR33000028,'' as PAR33000029,'' as PAR33000030,'' as PAR33000031,&#13;&#10;     '' as PAR33000032,'' as PAR33000033,'' as PAR33000034,'' as PAR33000035,'' as PAR33000036,'' as PAR33000037,'' as PAR33000038,'' as PAR33000039,'' as PAR33000040,&#13;&#10;     '' as PAR33000041,'' as PAR33000042,'' as PAR33000043,'' as PAR33000044,'' as PAR33000045,'' as PAR33000046,'' as PAR33000047,'' as PAR33000048,'' as PAR33000049,&#13;&#10;     '' as PAR33000050,'' as PAR33000051,'' as PAR33000052,'' as PAR33000053,'' as PAR33000054,'' as PAR33000055,'' as PAR33000056,&#13;&#10;     '' as PAR33000057,'' as PAR33000058,'' as PAR33000059,'' as PAR33000060,'' as PAR33000061,'' as PAR33000062,'' as PAR33000063,'' as PAR33000064,'' as PAR33000065,&#13;&#10;     '' as PAR33000066,'' as PAR33000067,'' as PAR33000068,'' as PAR33000069,'' as PAR33000070,'' as PAR33000071,'' as PAR33000072,&#13;&#10;     '' as PAR33000073,'' as PAR33000074,'' as PAR33000075,'' as PAR33000076,'' as PAR33000077,'' as PAR33000078,'' as PAR33000079,'' as PAR33000080,'' as PAR33000081,&#13;&#10;     '' as PAR33000082,'' as PAR33000083,'' as PAR33000084,'' as PAR33000085,'' as PAR33000086,'' as PAR33000087,'' as PAR33000088,&#13;&#10;     '' as PAR33000089,'' as PAR33000090,'' as PAR33000091,'' as PAR33000092,'' as PAR33000093,'' as PAR33000094,'' as PAR33000095,'' as PAR33000096,'' as PAR33000097,&#13;&#10;     '' as PAR33000098,'' as PAR33000099,'' as PAR33000100,'' as PAR33000101,'' as PAR33000102,'' as PAR33000103,'' as PAR33000104,&#13;&#10;     '' as PAR33000105,'' as PAR33000106,'' as PAR33000107,'' as PAR33000108,'' as PAR33000109,'' as PAR33000110,'' as PAR33000111,'' as PAR33000112,'' as X1,&#13;&#10;     '' as X2,'' as X3,'' as X4, '' as X5,'' as S1,'' as S2,'' as S3,'' as S4,'' as S5">
+        <Column Name="OBJID" DataType="System.String"/>
+        <Column Name="Column" DataType="System.Int32" Calculated="true" Expression=""/>
+        <Column Name="PDM_CODE" DataType="System.String"/>
+        <Column Name="MATERIAL_NAME" DataType="System.String"/>
+        <Column Name="MATERIAL_SAP_CODE" DataType="System.String"/>
+        <Column Name="PDM_VERSION" DataType="System.String"/>
+        <Column Name="PROCESS_ROUTE" DataType="System.String"/>
+        <Column Name="LASTMODIFY_DATE" DataType="System.String"/>
+        <Column Name="PAR32000001" DataType="System.String"/>
+        <Column Name="PAR32000002" DataType="System.String"/>
+        <Column Name="PAR32000003" DataType="System.String"/>
+        <Column Name="PAR32000004" DataType="System.String"/>
+        <Column Name="PAR32000005" DataType="System.String"/>
+        <Column Name="PAR32000006" DataType="System.String"/>
+        <Column Name="PAR32000007" DataType="System.String"/>
+        <Column Name="PAR32000008" DataType="System.String"/>
+        <Column Name="PAR32000009" DataType="System.String"/>
+        <Column Name="PAR32000010" DataType="System.String"/>
+        <Column Name="PAR32000011" DataType="System.String"/>
+        <Column Name="PAR32000012" DataType="System.String"/>
+        <Column Name="PAR32000013" DataType="System.String"/>
+        <Column Name="PAR32000014" DataType="System.String"/>
+        <Column Name="PAR32000015" DataType="System.String"/>
+        <Column Name="PAR32000016" DataType="System.String"/>
+        <Column Name="PAR32000017" DataType="System.String"/>
+        <Column Name="PAR32000018" DataType="System.String"/>
+        <Column Name="PAR32000019" DataType="System.String"/>
+        <Column Name="PAR32000020" DataType="System.String"/>
+        <Column Name="PAR32000021" DataType="System.String"/>
+        <Column Name="PAR32000022" DataType="System.String"/>
+        <Column Name="PAR32000023" DataType="System.String"/>
+        <Column Name="PAR32000024" DataType="System.String"/>
+        <Column Name="PAR32000025" DataType="System.String"/>
+        <Column Name="PAR32000026" DataType="System.String"/>
+        <Column Name="PAR32001010" DataType="System.String"/>
+        <Column Name="PAR32001009" DataType="System.String"/>
+        <Column Name="PAR32001008" DataType="System.String"/>
+        <Column Name="PAR32001007" DataType="System.String"/>
+        <Column Name="PAR32001006" DataType="System.String"/>
+        <Column Name="PAR32001005" DataType="System.String"/>
+        <Column Name="PAR32001004" DataType="System.String"/>
+        <Column Name="PAR32001003" DataType="System.String"/>
+        <Column Name="PAR32001002" DataType="System.String"/>
+        <Column Name="PAR32001001" DataType="System.String"/>
+        <Column Name="PAR33000001" DataType="System.String"/>
+        <Column Name="PAR33000002" DataType="System.String"/>
+        <Column Name="PAR33000003" DataType="System.String"/>
+        <Column Name="PAR33000004" DataType="System.String"/>
+        <Column Name="PAR33000005" DataType="System.String"/>
+        <Column Name="PAR33000006" DataType="System.String"/>
+        <Column Name="PAR33000007" DataType="System.String"/>
+        <Column Name="PAR33000008" DataType="System.String"/>
+        <Column Name="PAR33000009" DataType="System.String"/>
+        <Column Name="PAR33000010" DataType="System.String"/>
+        <Column Name="PAR33000011" DataType="System.String"/>
+        <Column Name="PAR33000012" DataType="System.String"/>
+        <Column Name="PAR33000013" DataType="System.String"/>
+        <Column Name="PAR33000014" DataType="System.String"/>
+        <Column Name="PAR33000015" DataType="System.String"/>
+        <Column Name="PAR33000016" DataType="System.String"/>
+        <Column Name="PAR33000017" DataType="System.String"/>
+        <Column Name="PAR33000018" DataType="System.String"/>
+        <Column Name="PAR33000019" DataType="System.String"/>
+        <Column Name="PAR33000020" DataType="System.String"/>
+        <Column Name="PAR33000021" DataType="System.String"/>
+        <Column Name="PAR33000022" DataType="System.String"/>
+        <Column Name="PAR33000023" DataType="System.String"/>
+        <Column Name="PAR33000024" DataType="System.String"/>
+        <Column Name="PAR33000025" DataType="System.String"/>
+        <Column Name="PAR33000026" DataType="System.String"/>
+        <Column Name="PAR33000027" DataType="System.String"/>
+        <Column Name="PAR33000028" DataType="System.String"/>
+        <Column Name="PAR33000029" DataType="System.String"/>
+        <Column Name="PAR33000030" DataType="System.String"/>
+        <Column Name="PAR33000031" DataType="System.String"/>
+        <Column Name="PAR33000032" DataType="System.String"/>
+        <Column Name="PAR33000033" DataType="System.String"/>
+        <Column Name="PAR33000034" DataType="System.String"/>
+        <Column Name="PAR33000035" DataType="System.String"/>
+        <Column Name="PAR33000036" DataType="System.String"/>
+        <Column Name="PAR33000037" DataType="System.String"/>
+        <Column Name="PAR33000038" DataType="System.String"/>
+        <Column Name="PAR33000039" DataType="System.String"/>
+        <Column Name="PAR33000040" DataType="System.String"/>
+        <Column Name="PAR33000041" DataType="System.String"/>
+        <Column Name="PAR33000042" DataType="System.String"/>
+        <Column Name="PAR33000043" DataType="System.String"/>
+        <Column Name="PAR33000044" DataType="System.String"/>
+        <Column Name="PAR33000045" DataType="System.String"/>
+        <Column Name="PAR33000046" DataType="System.String"/>
+        <Column Name="PAR33000047" DataType="System.String"/>
+        <Column Name="PAR33000048" DataType="System.String"/>
+        <Column Name="PAR33000049" DataType="System.String"/>
+        <Column Name="PAR33000050" DataType="System.String"/>
+        <Column Name="PAR33000051" DataType="System.String"/>
+        <Column Name="PAR33000052" DataType="System.String"/>
+        <Column Name="PAR33000053" DataType="System.String"/>
+        <Column Name="PAR33000054" DataType="System.String"/>
+        <Column Name="PAR33000055" DataType="System.String"/>
+        <Column Name="PAR33000056" DataType="System.String"/>
+        <Column Name="PAR33000057" DataType="System.String"/>
+        <Column Name="PAR33000058" DataType="System.String"/>
+        <Column Name="PAR33000059" DataType="System.String"/>
+        <Column Name="PAR33000060" DataType="System.String"/>
+        <Column Name="PAR33000061" DataType="System.String"/>
+        <Column Name="PAR33000062" DataType="System.String"/>
+        <Column Name="PAR33000063" DataType="System.String"/>
+        <Column Name="PAR33000064" DataType="System.String"/>
+        <Column Name="PAR33000065" DataType="System.String"/>
+        <Column Name="PAR33000066" DataType="System.String"/>
+        <Column Name="PAR33000067" DataType="System.String"/>
+        <Column Name="PAR33000068" DataType="System.String"/>
+        <Column Name="PAR33000069" DataType="System.String"/>
+        <Column Name="PAR33000070" DataType="System.String"/>
+        <Column Name="PAR33000071" DataType="System.String"/>
+        <Column Name="PAR33000072" DataType="System.String"/>
+        <Column Name="PAR33000073" DataType="System.String"/>
+        <Column Name="PAR33000074" DataType="System.String"/>
+        <Column Name="PAR33000075" DataType="System.String"/>
+        <Column Name="PAR33000076" DataType="System.String"/>
+        <Column Name="PAR33000077" DataType="System.String"/>
+        <Column Name="PAR33000078" DataType="System.String"/>
+        <Column Name="PAR33000079" DataType="System.String"/>
+        <Column Name="PAR33000080" DataType="System.String"/>
+        <Column Name="PAR33000081" DataType="System.String"/>
+        <Column Name="PAR33000082" DataType="System.String"/>
+        <Column Name="PAR33000083" DataType="System.String"/>
+        <Column Name="PAR33000084" DataType="System.String"/>
+        <Column Name="PAR33000085" DataType="System.String"/>
+        <Column Name="PAR33000086" DataType="System.String"/>
+        <Column Name="PAR33000087" DataType="System.String"/>
+        <Column Name="PAR33000088" DataType="System.String"/>
+        <Column Name="PAR33000089" DataType="System.String"/>
+        <Column Name="PAR33000090" DataType="System.String"/>
+        <Column Name="PAR33000091" DataType="System.String"/>
+        <Column Name="PAR33000092" DataType="System.String"/>
+        <Column Name="PAR33000093" DataType="System.String"/>
+        <Column Name="PAR33000094" DataType="System.String"/>
+        <Column Name="PAR33000095" DataType="System.String"/>
+        <Column Name="PAR33000096" DataType="System.String"/>
+        <Column Name="PAR33000097" DataType="System.String"/>
+        <Column Name="PAR33000098" DataType="System.String"/>
+        <Column Name="PAR33000099" DataType="System.String"/>
+        <Column Name="PAR33000100" DataType="System.String"/>
+        <Column Name="PAR33000101" DataType="System.String"/>
+        <Column Name="PAR33000102" DataType="System.String"/>
+        <Column Name="PAR33000103" DataType="System.String"/>
+        <Column Name="PAR33000104" DataType="System.String"/>
+        <Column Name="PAR33000105" DataType="System.String"/>
+        <Column Name="PAR33000106" DataType="System.String"/>
+        <Column Name="PAR33000107" DataType="System.String"/>
+        <Column Name="PAR33000108" DataType="System.String"/>
+        <Column Name="PAR33000109" DataType="System.String"/>
+        <Column Name="PAR33000110" DataType="System.String"/>
+        <Column Name="PAR33000111" DataType="System.String"/>
+        <Column Name="PAR33000112" DataType="System.String"/>
+        <Column Name="X1" DataType="System.String"/>
+        <Column Name="X2" DataType="System.String"/>
+        <Column Name="X3" DataType="System.String"/>
+        <Column Name="X4" DataType="System.String"/>
+        <Column Name="X5" DataType="System.String"/>
+        <Column Name="S1" DataType="System.String"/>
+        <Column Name="S2" DataType="System.String"/>
+        <Column Name="S3" DataType="System.String"/>
+        <Column Name="S4" DataType="System.String"/>
+        <Column Name="S5" DataType="System.String"/>
+      </TableDataSource>
+      <TableDataSource Name="Table2" DataType="System.Int32" Enabled="true" SelectCommand="        &#13;&#10;  select '' as 全钢胎侧,'' as 全钢内衬层,'' as 封口胶片,'' as 全钢钢丝包布_1,'' as 全钢钢丝包布_2,'' as 全钢钢丝包布_3,'' as 全钢钢丝包布_1GY,&#13;&#10;  '' as 全钢钢丝包布_2GY,'' as 全钢钢丝包布_3GY,'' as 全钢尼龙包布_1,'' as 全钢尼龙包布_2,'' as 全钢尼龙包布_1FJ,'' as 全钢尼龙包布_2FJ,&#13;&#10;  '' as 全钢型胶1,'' as 全钢型胶2,&#13;&#10;  '' as 全钢胎体,'' as 全钢胎体GY,'' as 全钢垫胶,'' as 全钢胎圈,'' as 全钢胎圈GSQ,'' as 全钢胎圈JX,'' as 全钢带束层_1,&#13;&#10;  '' as 全钢带束层_2,'' as 全钢带束层_3,'' as 全钢带束层_4,'' as 全钢零度带束层,'' as 全钢带束层_1GY,'' as 全钢带束层_2GY,'' as 全钢带束层_3GY,&#13;&#10;  '' as 全钢带束层_4GY,'' as 全钢零度带束层GY,'' as 全钢胎面1,'' as 全钢胎面2,'' as 全钢胎面3">
+        <Column Name="全钢胎侧" DataType="System.String"/>
+        <Column Name="全钢内衬层" DataType="System.String"/>
+        <Column Name="封口胶片" DataType="System.String"/>
+        <Column Name="全钢钢丝包布_1" DataType="System.String"/>
+        <Column Name="全钢钢丝包布_2" DataType="System.String"/>
+        <Column Name="全钢钢丝包布_3" DataType="System.String"/>
+        <Column Name="全钢钢丝包布_1GY" DataType="System.String"/>
+        <Column Name="全钢钢丝包布_2GY" DataType="System.String"/>
+        <Column Name="全钢钢丝包布_3GY" DataType="System.String"/>
+        <Column Name="全钢尼龙包布_1" DataType="System.String"/>
+        <Column Name="全钢尼龙包布_2" DataType="System.String"/>
+        <Column Name="全钢尼龙包布_1FJ" DataType="System.String"/>
+        <Column Name="全钢尼龙包布_2FJ" DataType="System.String"/>
+        <Column Name="全钢型胶1" DataType="System.String"/>
+        <Column Name="全钢型胶2" DataType="System.String"/>
+        <Column Name="全钢胎体" DataType="System.String"/>
+        <Column Name="全钢胎体GY" DataType="System.String"/>
+        <Column Name="全钢垫胶" DataType="System.String"/>
+        <Column Name="全钢胎圈" DataType="System.String"/>
+        <Column Name="全钢胎圈GSQ" DataType="System.String"/>
+        <Column Name="全钢胎圈JX" DataType="System.String"/>
+        <Column Name="全钢带束层_1" DataType="System.String"/>
+        <Column Name="全钢带束层_2" DataType="System.String"/>
+        <Column Name="全钢带束层_3" DataType="System.String"/>
+        <Column Name="全钢带束层_4" DataType="System.String"/>
+        <Column Name="全钢零度带束层" DataType="System.String"/>
+        <Column Name="全钢带束层_1GY" DataType="System.String"/>
+        <Column Name="全钢带束层_2GY" DataType="System.String"/>
+        <Column Name="全钢带束层_3GY" DataType="System.String"/>
+        <Column Name="全钢带束层_4GY" DataType="System.String"/>
+        <Column Name="全钢零度带束层GY" DataType="System.String"/>
+        <Column Name="全钢胎面1" DataType="System.String"/>
+        <Column Name="全钢胎面2" DataType="System.String"/>
+        <Column Name="全钢胎面3" DataType="System.String"/>
+      </TableDataSource>
+      <TableDataSource Name="Table3" DataType="System.Int32" Enabled="true" SelectCommand="select '' as 全钢胎侧,'' as 全钢内衬层,'' as 封口胶片,'' as 全钢钢丝包布_1,'' as 全钢钢丝包布_2,'' as 全钢钢丝包布_3,'' as 全钢尼龙包布_1&#13;&#10;,'' as 全钢尼龙包布_2,'' as 全钢型胶1,'' as 全钢型胶2,'' as 全钢胎体,'' as 全钢垫胶,'' as 全钢胎圈&#13;&#10;,'' as 全钢带束层_1,'' as 全钢带束层_2,'' as 全钢带束层_3,'' as 全钢带束层_4,'' as 全钢零度带束层,'' as 全钢胎面1&#13;&#10;,'' as 全钢胎面2,'' as 全钢胎面3">
+        <Column Name="全钢胎侧" DataType="System.String"/>
+        <Column Name="全钢内衬层" DataType="System.String"/>
+        <Column Name="封口胶片" DataType="System.String"/>
+        <Column Name="全钢钢丝包布_1" DataType="System.String"/>
+        <Column Name="全钢钢丝包布_2" DataType="System.String"/>
+        <Column Name="全钢钢丝包布_3" DataType="System.String"/>
+        <Column Name="全钢尼龙包布_1" DataType="System.String"/>
+        <Column Name="全钢尼龙包布_2" DataType="System.String"/>
+        <Column Name="全钢型胶1" DataType="System.String"/>
+        <Column Name="全钢型胶2" DataType="System.String"/>
+        <Column Name="全钢胎体" DataType="System.String"/>
+        <Column Name="全钢垫胶" DataType="System.String"/>
+        <Column Name="全钢胎圈" DataType="System.String"/>
+        <Column Name="全钢带束层_1" DataType="System.String"/>
+        <Column Name="全钢带束层_2" DataType="System.String"/>
+        <Column Name="全钢带束层_3" DataType="System.String"/>
+        <Column Name="全钢带束层_4" DataType="System.String"/>
+        <Column Name="全钢零度带束层" DataType="System.String"/>
+        <Column Name="全钢胎面1" DataType="System.String"/>
+        <Column Name="全钢胎面2" DataType="System.String"/>
+        <Column Name="全钢胎面3" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="211" Guides="5962.95,7474.95,7484.4,7456.05,7446.6,10328.85,10328.85,10338.3,718.2">
+    <ReportTitleBand Name="ReportTitle1" Width="721.98" Guides="9.45,28.35"/>
+    <DataBand Name="Data1" Top="15.85" Width="721.98" Height="699.3" Guides="0,75.6" DataSource="Table">
+      <TableObject Name="Table1" Top="113.4" Width="727.65" Height="585.9" Border.Lines="All" AfterDataEvent="Table1_AfterData">
+        <TableColumn Name="Column1" Width="74.08"/>
+        <TableColumn Name="Column2" Width="72.97"/>
+        <TableColumn Name="Column3" Width="70.3"/>
+        <TableColumn Name="Column4" Width="68.58"/>
+        <TableColumn Name="Column5" Width="61.1"/>
+        <TableColumn Name="Column6"/>
+        <TableColumn Name="Column7" Width="78.22"/>
+        <TableColumn Name="Column9" Width="89.26"/>
+        <TableColumn Name="Column8" Width="70.36"/>
+        <TableColumn Name="Column10" Width="76.63"/>
+        <TableRow Name="Row1" Height="28.35">
+          <TableCell Name="Cell1" Border.Lines="All" Text="胎胚代码" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell2" Border.Lines="All" Text="[Table.PDM_CODE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell3" Border.Lines="All" Text="轮胎规格" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell4" Border.Lines="All" Text="[Table.MATERIAL_NAME]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="3"/>
+          <TableCell Name="Cell5" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell81" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell97" Border.Lines="All" Text="胎胚SAP编码" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell129" Border.Lines="All" Text="[Table.MATERIAL_SAP_CODE]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="3"/>
+          <TableCell Name="Cell113" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell145" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="37.8">
+          <TableCell Name="Cell6" Border.Lines="All" Text="花纹代号" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell7" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="3"/>
+          <TableCell Name="Cell8" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell9" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell10" Border.Lines="All" Text="2#尼龙包布内定位" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell82" Border.Lines="All" Text="[Table.PAR32000011]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell98" Border.Lines="All" Text="2#尼龙包布外定位" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell130" Border.Lines="All" Text="[Table.PAR32000012]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell114" Border.Lines="All" Text="钢丝包布内定位（3#）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell146" Border.Lines="All" Text="[Table.PAR33000001]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="28.35">
+          <TableCell Name="Cell11" Border.Lines="All" Text="平宽（钢丝圈内定位）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell12" Border.Lines="All" Text="[Table.PAR32000020]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell13" Border.Lines="All" Text="平宽（钢丝圈外定位）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell14" Border.Lines="All" Text="[Table.PAR32000021]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell15" Border.Lines="All" Text="机头宽度" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell83" Border.Lines="All" Text="[Table.PAR32000022]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell99" Border.Lines="All" Text="预定型机头宽度" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell131" Border.Lines="All" Text="[Table.PAR32000023]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell115" Border.Lines="All" Text="定型机头宽度" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell147" Border.Lines="All" Text="[Table.PAR32000024]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row4" Height="28.35">
+          <TableCell Name="Cell16" Border.Lines="All" Text="垫胶内定位" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell17" Border.Lines="All" Text="[Table.PAR32000014]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell18" Border.Lines="All" Text="钢丝包布内定位（1#）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell19" Border.Lines="All" Text="[Table.PAR32000005]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell20" Border.Lines="All" Text="钢丝包布外定位（1#）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell84" Border.Lines="All" Text="[Table.PAR32000006]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell100" Border.Lines="All" Text="1#尼龙包布内定位" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell132" Border.Lines="All" Text="[Table.PAR32000009]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell116" Border.Lines="All" Text="1#尼龙包布外定位" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell148" Border.Lines="All" Text="[Table.PAR32000010]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row5" Height="28.35">
+          <TableCell Name="Cell21" Border.Lines="All" Text="胎侧内定位" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell22" Border.Lines="All" Text="[Table.PAR32000002]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell23" Border.Lines="All" Text="胎侧外定位" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell24" Border.Lines="All" Text="[Table.PAR32000001]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell25" Border.Lines="All" Text="型胶内定位（1#）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell85" Border.Lines="All" Text="[Table.PAR32000013]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell101" Border.Lines="All" Text="钢丝包布内定位（2#）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell133" Border.Lines="All" Text="[Table.PAR32000007]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell117" Border.Lines="All" Text="钢丝包布外定位（2#）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell149" Border.Lines="All" Text="[Table.PAR32000008]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row6" Height="28.35">
+          <TableCell Name="Cell26" Border.Lines="All" Text="型胶外定位（2#）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell27" Border.Lines="All" Text="[Table.PAR33000082]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell28" Border.Lines="All" Text="贴合鼓周长" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell29" Border.Lines="All" Text="[Table.PAR33000024]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell30" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell86" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell102" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell134" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell118" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell150" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row23">
+          <TableCell Name="Cell221" Border.Lines="All" Text="部件名称" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell222" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell223" Border.Lines="All" Text="部件代码（钢压大卷）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell224" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell225" Border.Lines="All" Text="部件宽度" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell226" Border.Lines="All" Text="部件厚度" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell227" Border.Lines="All" Text="成型长度" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell228" Border.Lines="All" Text="重量（单胎）kg" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell229" Border.Lines="All" Text="备注" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell230" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row14">
+          <TableCell Name="Cell66" Border.Lines="All" Text="全钢胎侧" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell67" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell68" Border.Lines="All" Text="[Table2.全钢胎侧]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell69" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell70" Border.Lines="All" Text="[Table.PAR33000008]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell89" Border.Lines="All" Text="[Table.PAR33000009]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell105" Border.Lines="All" Text="[Table.PAR33000010]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell137" Border.Lines="All" Text="[Table3.全钢胎侧]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell121" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell153" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row12">
+          <TableCell Name="Cell56" Border.Lines="All" Text="全钢内衬层" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2" RowSpan="2"/>
+          <TableCell Name="Cell57" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell58" Border.Lines="All" Text="[Table2.全钢内衬层]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2" RowSpan="2"/>
+          <TableCell Name="Cell59" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell60" Border.Lines="All" Text="[Table.PAR33000011]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell90" Border.Lines="All" Text="[Table.PAR33000012]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell106" Border.Lines="All" Text="[Table.PAR32000025]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell138" Border.Lines="All" Text="[Table3.全钢内衬层]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell122" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell154" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row11">
+          <TableCell Name="Cell51" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell52" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell53" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell54" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell55" Border.Lines="All" Text="[Table.PAR33000013]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell91" Border.Lines="All" Text="[Table.PAR33000014]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell107" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell139" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell123" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell155" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row10">
+          <TableCell Name="Cell46" Border.Lines="All" Text="RFID" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell47" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell48" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell49" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell50" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell92" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell108" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell140" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell124" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell156" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row9">
+          <TableCell Name="Cell41" Border.Lines="All" Text="封口胶片" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell42" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell43" Border.Lines="All" Text="[Table2.封口胶片]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell44" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell45" Border.Lines="All" Text="[Table.PAR33000043]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell93" Border.Lines="All" Text="[Table.PAR33000044]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell109" Border.Lines="All" Text="[Table.PAR33000045]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell141" Border.Lines="All" Text="[Table3.封口胶片]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell125" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell157" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row8">
+          <TableCell Name="Cell36" Border.Lines="All" Text="全钢钢丝包布（1#）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell37" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell38" Border.Lines="All" Text="[Table2.全钢钢丝包布_1]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell39" Border.Lines="All" Text="[Table2.全钢钢丝包布_1GY]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell40" Border.Lines="All" Text="[Table.PAR33000015]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell94" Border.Lines="All" Text="[Table.PAR33000016]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell110" Border.Lines="All" Text="[Table.PAR33000017]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell142" Border.Lines="All" Text="[Table3.全钢钢丝包布_1]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell126" Border.Lines="All" Text="贴合方向" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell158" Border.Lines="All" Text="[Table.PAR33000084]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row16">
+          <TableCell Name="Cell76" Border.Lines="All" Text="全钢钢丝包布（2#）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell77" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell78" Border.Lines="All" Text="[Table2.全钢钢丝包布_2]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell79" Border.Lines="All" Text="[Table2.全钢钢丝包布_2GY]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell80" Border.Lines="All" Text="[Table.PAR33000018]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell95" Border.Lines="All" Text="[Table.PAR33000019]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell111" Border.Lines="All" Text="[Table.PAR33000020]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell143" Border.Lines="All" Text="[Table3.全钢钢丝包布_2]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell127" Border.Lines="All" Text="贴合方向" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell159" Border.Lines="All" Text="[Table.PAR33000085]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row15">
+          <TableCell Name="Cell71" Border.Lines="All" Text="全钢钢丝包布（3#）" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell72" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell73" Border.Lines="All" Text="[Table2.全钢钢丝包布_3]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell74" Border.Lines="All" Text="[Table2.全钢钢丝包布_3GY]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell75" Border.Lines="All" Text="[Table.PAR33000021]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell96" Border.Lines="All" Text="[Table.PAR33000022]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell112" Border.Lines="All" Text="[Table.PAR33000023]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell144" Border.Lines="All" Text="[Table3.全钢钢丝包布_3]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell128" Border.Lines="All" Text="贴合方向" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell160" Border.Lines="All" Text="[Table.PAR33000086]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row24">
+          <TableCell Name="Cell231" Border.Lines="All" Text="全钢尼龙包布1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell232" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell233" Border.Lines="All" Text="[Table2.全钢尼龙包布_1]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell234" Border.Lines="All" Text="[Table2.全钢尼龙包布_1FJ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell235" Border.Lines="All" Text="[Table.PAR33000024]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell236" Border.Lines="All" Text="[Table.PAR33000025]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell237" Border.Lines="All" Text="[Table.PAR33000026]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell238" Border.Lines="All" Text="[Table3.全钢尼龙包布_1]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell239" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell240" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row25">
+          <TableCell Name="Cell241" Border.Lines="All" Text="全钢尼龙包布2" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell242" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell243" Border.Lines="All" Text="[Table2.全钢尼龙包布_2]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell244" Border.Lines="All" Text="[Table2.全钢尼龙包布_2FJ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell245" Border.Lines="All" Text="[Table.PAR33000027]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell246" Border.Lines="All" Text="[Table.PAR33000028]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell247" Border.Lines="All" Text="[Table.PAR33000029]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell248" Border.Lines="All" Text="[Table3.全钢尼龙包布_2]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell249" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell250" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row17">
+          <TableCell Name="Cell161" Border.Lines="All" Text="全钢型胶1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell162" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell163" Border.Lines="All" Text="[Table2.全钢型胶1]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell164" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell165" Border.Lines="All" Text="[Table.PAR33000030]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell166" Border.Lines="All" Text="[Table.PAR33000031]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell167" Border.Lines="All" Text="[Table.PAR33000032]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell168" Border.Lines="All" Text="[Table3.全钢型胶1]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell169" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell170" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row18">
+          <TableCell Name="Cell171" Border.Lines="All" Text="全钢型胶2" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell172" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell173" Border.Lines="All" Text="[Table2.全钢型胶2]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell174" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell175" Border.Lines="All" Text="[Table.PAR33000030]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell176" Border.Lines="All" Text="[Table.PAR33000031]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell177" Border.Lines="All" Text="[Table.PAR33000032]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell178" Border.Lines="All" Text="[Table3.全钢型胶2]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell179" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell180" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row22">
+          <TableCell Name="Cell211" Border.Lines="All" Text="全钢胎体" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell212" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell213" Border.Lines="All" Text="[Table2.全钢胎体]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell214" Border.Lines="All" Text="[Table2.全钢胎体GY]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell215" Border.Lines="All" Text="[Table.PAR33000033]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell216" Border.Lines="All" Text="[Table.PAR33000034]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell217" Border.Lines="All" Text="[Table.PAR33000035]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell218" Border.Lines="All" Text="[Table3.全钢胎体]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell219" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell220" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row26" Height="28.35">
+          <TableCell Name="Cell251" Border.Lines="All" Text="全钢垫胶" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell252" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell253" Border.Lines="All" Text="[Table2.全钢垫胶]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell254" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell255" Border.Lines="All" Text="[Table.PAR33000036]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell256" Border.Lines="All" Text="[Table.PAR33000037]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell257" Border.Lines="All" Text="[Table.PAR33000038]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell258" Border.Lines="All" Text="[Table3.全钢垫胶]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell259" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell260" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row19">
+          <TableCell Name="Cell181" Border.Lines="All" Text="全钢胎圈" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2" RowSpan="2"/>
+          <TableCell Name="Cell182" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell183" Border.Lines="All" Text="[Table2.全钢胎圈]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell184" Border.Lines="All" Text="[Table2.全钢胎圈GSQ]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell185" Border.Lines="All" Text="钢丝排列" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell186" Border.Lines="All" Text="[Table.PAR33000039]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell187" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell188" Border.Lines="All" Text="[Table3.全钢胎圈]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell189" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold" ColSpan="2" RowSpan="2"/>
+          <TableCell Name="Cell190" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row27">
+          <TableCell Name="Cell261" Border.Lines="All" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell262" Border.Lines="All" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell263" Border.Lines="All" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell264" Border.Lines="All" Text="[Table2.全钢胎圈JX]" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell265" Border.Lines="All" Text="[Table.PAR33000040]" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell266" Border.Lines="All" Text="[Table.PAR33000041]" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell267" Border.Lines="All" Text="[Table.PAR33000042]" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell268" Border.Lines="All" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell269" Border.Lines="All" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell270" Border.Lines="All" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row20" Height="47.25">
+          <TableCell Name="Cell191" Border.Lines="All" Text="备注：1、主机各部件长度仅作参考，所有未标注的尺寸单位均为mm。&#13;&#10;      2、成型机装配沈阳成型鼓时，机头宽度、定型机头宽度再以上数据的基础上加10mm（除20寸规格以外）。&#13;&#10;      3、如机头宽度参数小于设备所能达到的最小值，以设备所能达到的最小值为准。" Font="宋体, 9pt, style=Bold" ColSpan="10"/>
+          <TableCell Name="Cell192" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell193" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell194" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell195" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell196" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell197" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell198" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell199" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell200" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row21" Height="28.35">
+          <TableCell Name="Cell201" Text="批准：" HorzAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell202" Font="宋体, 9pt"/>
+          <TableCell Name="Cell203" Text="审核：" HorzAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell204" Font="宋体, 9pt"/>
+          <TableCell Name="Cell205" Font="宋体, 9pt"/>
+          <TableCell Name="Cell206" Text="校对：" HorzAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell207" Font="宋体, 9pt"/>
+          <TableCell Name="Cell208" Text="制表：" HorzAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell209" Font="宋体, 9pt"/>
+          <TableCell Name="Cell210" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+      <PictureObject Name="Picture1" Width="425.25" Height="75.6" Image="iVBORw0KGgoAAAANSUhEUgAABBEAAAB4CAIAAAArLf29AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAScQAAEnEB89x6jgAAUzhJREFUeF7tnQmcXUWV8BsEVFBHx89xXEc/t/nGJH7op87kc5TXrxMCAiqL+AHKHnEUycomOIgi4NooQq/pTkICISQkQJqQdLqzh5CEkJCQpclKEpJA9rX3r6ruqbp161bdqlvvvd48/9/9Jf3qVp0651TVvefc5b2iTgRBEARBEARBEDOYMyAIgiAIgiAIkgTmDAiCIAiCIAiCJIE5A4IgCIIgCIIgSWDOgCAIgiAIgiBIEpgzdBEn2o4Oe2HALS/089tGLxiwanc9yEIQBEEQBEGQLgRzhi5i77Ftt7zQX8kEHLfhs/vdWv/1LQdXgiwEQRAEQRAE6UIwZ+gintv40LBZajLguI2aN2DcqltPth0DWQiCIAiCIAjShWDO0EX8dsGFw+d43mcYNX/A85seBUEIgiAIgiAI0rVgztAV7D229e655wyv98kZhs3uf3vjv6/cPQtkIQiCIAiCIEjXgjlDVzB7c9WwWQP8nk0a2dj/j0v+X1t7C8jq7Ozo6Ghv72hrb2+j/3a0tLabttY2qNPRQVtBewRBEARBEARJA+YMXcFjr94xar7nlyaNbBhQtuImEMSY+dL2W/666Kr7Zn/nF89fdOfzZ984+X/96Il/u1rdvnjNE5lh00md798za/jfFt1Tu6xqxrrH5zTVvbht3iu71m3bv2nnIbrtOrR195G3Dh5vbcOkAkEQBEEQBNGAOUPBOXzy7T+/eOXIRq+cYVa/kbPPXrn7BZDV2dnc0nbdg41FJWOLMuWwnVNm3DJk49UyFWyrLCoWWxXdslWnnlP29Zum3FX10pR5m6Yv2vzCS9sbXt6x6NU3t+85Ar0iCIIgCIIgf8dgzlBwXto5bUQDif69XmaY1e+2Of9+sjX8xqRl6/Z87LIJLFV4NJ8bSSey1UXZmqISstWS1OKdJeXf/Pm0+x5b/tCU1Y9OX0PSiXXbDoASCIIgCIIgyN8TmDPkn5MtbfAXY8H2iaMXeD6YNGx2/3saS0AQg8Tu9CaDEvEXYsuU0bsQJH8g3WWrzhpS9eUbJ//ot3N+/Kf5D05cuXrT26AQgiAIgiAI0tfBnCFXOjo69uw/Xvv8+gtvn/HNW6b/x0+nrtu2D/Z1dh5p3v+3ZTeMaPT8ltURc/qv2jMbZHV2tnd03FOzrKi4Wo3vu2DLlNPHmbJjikpqTs2UffbKiQN/9vQ3fz710WmvHj0evp+NIAiCIAiC9D0wZ0hHc0vbiWa6zV25c9DIZz9x2diPXVL74e/VnnluJX28p7iqKFP59qETULuzc8eR9aPmfknJBNy3EQ39953YCbI6O986ePwTl41/1+Cqdw2ueNfgyncOqiDbGSXlZwyqOC1b9o7islPgBYbg1YVgIx+D1xtiaYD/RnphxhZTTT5ySe3HLxv3i6oXjxxvUe6xIAiCIAiCIH0AzBksdHSQSP3Epp2HmnYc/OvU1V++YfKZg0mAXn4qjc6lN4yDoDxTcd7o5+S4edWe2SN9bzIMq+/3q3lDDp3cC7LYPY2W1nYif//hE/sPn9y97+jW3Ydf27p/9aZ9s5e/MaZu3R2VL2ZHPvOZKyd+5ooJZPvUDx4j+cz7zq+m2tKXnqtZVkMSiTymENwJ5zx6Wrbio98b+7dpa17feejg0WZQGkEQBEEQBOnlYM6gZ8/+Y3Nf2fn80u0PPr7yP/5rKo2MrdE2iZsHj29cuQNEdHa2t7dVvvwzv59yI9uo+QNmba7I5XcVWlrbVm96+6l5m24rW3LRnTPOHT0jM/wZkki8o5iYU03fVSBGFeIWRLb6wtvrnpq3ee2W8DEtBEEQBEEQpJeCOUOEea/s+vNTq+8du/zCO+toBEyi6uwYGgRHwmJpK66kXzSUJduYd59b8YNf12/edQhk0dsC7SNmne33U270W1Yb+6/aUw+y8sfiNW+WTl5166NLhj286D9vnsZCfGJmTXCvIG8b8cygcV+4auJvJ7z8/IvboG8EQRAEQRCkF4I5Q+eJk61/enLVTX+ad/X9DZ/8/mP0a4LoBfhq4wV4dh09yBO+/pMpvxm34tFpr1bPeG36ws3N0af5m/a9NPwFz5cZRszpf++8ITsPbwBZhWHrm4cnzN5Y/szae2qXfezScSxHqs7nk0vEVyVjP/Sd2ht+P1e+A4MgCIIgCIL0Iv5+c4Yde4/eUf5i8bDpX/nxU6eXlNP7CfRau/aWAomhg6f26VvFA386tfSp1fUrdixYvWtb4q+e1a66dfhszweTRs8fMHHN3e0dXfdK8Zot+xpX7vzDpFc+evFYepeA3nbIU/JAs6yaj106/qI7ZmzYjj/ygCAIgiAI0sv4O8oZOjo6j59s27Tz4KhHFn/qBxM+9N1a/mYwiY9jwTFkCOWnZcvPHFL1qcsfG/nIoldef3vHW0cPHDnp+I7B7xdfNqLB92WGef2f2fhHENSFEMv2Hjixdsv+6x9s/IdvV59aHL7inOvGMq4PXjT21keWHD3RCv0hCIIgCIIgPZ6/i5xh65uHV73+9t3VS88oqaB5Ao1fpS87kjeSP2Sryb//9N3az1018Zs/f3rSnKa29o729C8ibz246u55Gb8XoEmrX84t3nbwVZDVTRDD/zp1db9rH3/f+dXsmSXzex3uG/V82Ycuqpm/aheRDz0hCIIgCIIgPZi+nDNs2nlo5kvby6evfd95lUUZ9q1HSvwqNvbwTFFx9eevmjho1IzL7nnhpXV7QIovU9Y9MHJu/1u8XoAe0dD/wUUXd3S0g6zuZnLj60NunfGRS8bl71Vpkq09cu/Y5bv3HYM+EARBEARBkJ5KH8wZjh5vmTJ/833jX/76TVPgZWXTS72knP6wce2nf/DYdQ/Ova1sycqN4Y8h5MjEtXePmj9ASQYct+H1/atW3AyCegwvLHvj2gfnnnkuewVc8aTPRp3/7TtmrtuKbzggvYi60oGEoXVN8LnLaCodWFQ0cGhpgXpuKh0KhuVBPtHVzUl1vFP4XDBAo0J5L/802cchHDIoyAOBzF7kp1TUDS2CNdQnzUOQQtOncgYS8d9cOv/btz//nvOq2HcfVcbiVL5lykkucXq2/Kel86vr1i1ZsxtE5IkdhzfcO/+8EXN8HkwaNqvfyNln7zj0GsjqYTy3eOt5t82guZbiUr8tW3P2jU/NWYFfqYTkShBS5ynmNcOijoCBpV0ZeDD7ABL15L/r0DLiRNYfBKQeXUmyEqNPuc+CelPyXldkKDkTOMYWu0OtPAb40VnmL7eudChBmTtNdbQQBjqokTjouSWUwQSO9gDmddsU6LIUGUEKQx/JGR6dvnbgT5/+9A8msBcSxpifn4E3ev/t6scbVuxYvn7vieaCfDHR8l0zvG8ykJzhtoavg6AeyZ79x8fOXH8q8WdenlMqrv7IxeMqn+2hORLSawjjz6LCnZTlYLgwfTRR4G+JSDCXj65ZP7IcbpqQHnaZNsqRvZTU0tebcDE8KjoQpldVMiVdRyyyVdOmIBqVJDHxpEDtuqmurrS0Lp3vGKFjIgapJgZm5WU6BIR+ylGq5HABFBCobGnsDcBugpcuUgehC8GDvraRrAeU84Jpw9BPUwTp6fTinOFkS9u+Qycu/eXMj1029p2DKuB3mpV4NNhYnnB6ScV7z6u6o2LJjreO7j98EqQUhudff8Q/Z5jdv3TpVV35Lat+vLnv2IV31J1aUp2HzKG48sxzKyfWbwTRCOIBjxHyGEKpSJGQrZMgWoQPzvAOSEgBJYAczNFoGYp9IbFPIEySpPNfGHelcatoZdFTkm6rGiU5Io2njK4KxdB1JPXEfRIdHQEUaRSyEDomonBkNNiOoCStVUYkO6wySfRMrTXMCi5J2i+EB2XcGOO8Cut7xdehsyJ3a6DY32VBru1z8y3mAgTpdfTKnGHnW0frV+z4vz+dSr8JNLh1EP8GpGBjicQ/XzLuP/5r6rSFW9oL80U9ylevHmne9+Dii/2+MYlsIxv7r9k7D2T1bIjhf5y06n98p7YoY34MzHEjw3Tx2IWrd4FoBEmLNQjJGRGG2LoIK2piE3gKXQe0YkT6kII5hpON5o5ACkOoqPdf2LOzX0UT2fh4oCVJpn+kSoS4rlIbLi6uplYfN7RNhaNEob4HeRY4uo4hOSZiSygvLA7K0humRXRgFRjW1DmcEB8N1UfxGgp6p7qicxYDduTJZenIzSQE6X56Wc6wYsPeqrr1X7hqIvvqz8TL29kxJGH42k1Trr5vzsqmt6C9gc27Dv1x8uo/T17ltz0ybc3xk+EPDuw5upV+Y1IsGXDaZvW7tfHLu49uAlm9gXkrd372yidoeqYMQdotU3H2DU/uO3QC5CJIKniUYAxCHAhecDYQiGdAiR6oA2jTBoD+7aJ2JAAKPrhZCf3QqtYYjXei6pvWr5rASBRJMuSy4G/XDggaXY32xeo21ZVSXDrT2KJziLZaascBQlhUmhAXkQeVozV1JGSqAiY9AEr0QJ2QuIXx0QD1RUG8hoLeqW6YfEhRFelCcjEJQXoCvSZneLLx9buqln780nFFg8bZsoXqouLq798z+57aZXsPHIf2ZtrbO+4du6xo0HiaZnhsg8adO+pZOWdY+MaTfm8/k21EQ/+HX7r+WPNBkNVLWLZu7+d/SNKGnO82FFeO+NsiEIogqfAM0VQgyo7JSApDcsGuttozfE5pJ5dibMYViZlHWhJosd4zSqYVSKFAgVRCgGvuitnw0dW1Gl0N9umtCkrtLw8L18vNFdUJ2mqaei7oZYXSlHKo7tJHMHqa8WOIflPqq4dLE7JA/bjPjL2ZHOGA8JVWON+bXm6u5GASgvQIekHO8Picjdc80HDWEPZVSMk/K0Zi1uKqq+6rn1DfdMz5l4aPHG/59A/GG59usm7ZmqfmyrcFOn678DvDZqvJgOM2euGXGreOBUm9iuXrd3/miomWAbJvZacPqhz3wgYQiiDu+IVorhhCttyxqq0JNKBNKkutMZotlBJ6aCRANErK3cKieC2rehE0umoFmB3l1p/WmviIxUso+lILhkZCkbgwaJHobzu835wFBajujStpHQCt710QDU0tvSWnhq8KoOs6RpDC0KNzhsmNm75201Pvv6CaXs5PurdQRn9pIVNx9f1zlqzdfehoM7R3Y8/+48YfcLBumbKzhlQvjn5V621z/n2Y10+53TKr38i5A5btmA6CehvL1u352KW2u0DWLTvmnFumpx1E5O8B5QSsYg3RLO2TEBGVUbg3FrX1YYZH8MGbiH7U57DYXgYURIF9AfZAjz7Db72krbfJwcfcaZKAmH2ilsFHoj9SwdShVtP4iGnUIVhGVofeM+Zyhr73VMi+gKLc4ALBdvgoCw+7hAkWA3anVYm7I8nvHkOTHmGh6EWU5MnLCNLV9MSc4fjJ1plLt3/p+ifPHDKG3jpIiEHJrkz5uwZXZYdPX7/tgN8Xp/52/Ar/nKG4+rxbn3v7YPgI/rJdz4yY/SW/n38mCcNfXrr6SPM+kNULeWbRltOyZLxyShtOGzx2TN16kIggHHGi139rvS0OEGFM6h+sCsMbfq5n38GZVoyeZLX53liQIevkpIYwX+qnqY4AoX0knvGNqXi7oqGlZm9DJY1s0dz21rDGLap98DnJgtCHcf8Cmo5EmRCtcy0hVs+KqYVOCwlhh3tPEUI/eAqIE3VJ8Ckq3OC0EKGVaWy0iFbJpohqjtITX3TSA/IDZD8QUpmEID2HnpUzHDhyctn6vZ+7cgJLBth3IsUCSr6VFWWr339BzTdvfnrFBssrzsl89cbJ/k/UlIz9RdVSEMR4eOm1Ixo8X2YYNX/AuFW3gaBeyx+eWHnGuTX+z3qRLVt9+T2zjh53fboM+TuBR070lKuJB2whWhgmWOIJBW14ITrLOXOIqK3cCZFiRaIF/YEqubPQHy5fzMPNsLqHWmnzpQG5mdAuKoN3Y4iaQmdTq4y+lUwX8ILSJvot+vCBiGCUsl8QiyFFdnqFEjoShplMCm0J1CAqsAKD6XL9yIDy8oTBCJs6ZpASUreW0Q6c4TLZFJ3ZrxooZlutEnqZ/KVBtLGZksbsADKrRH7ti49JCNKT6Ck5Q0tr2+zlb3zvrpn0MSTrVeps9amZsnOGPzdtwWZo7wsJTD/5/fGeOUOm7Kzza6ufWweyOjvb2lt/v/jyEY2+OUPj2TM2/hVk9WZKRjyb09coZcreObjqta29+H4LUggsZ1w5YNWRIp6QEVFjpFdRmk6YhlDtOv4n9AQfeQ/8o/TLtmHcw8oTYzleF8Qp2YmyP1RKqsOaJHURaaUYEwCdJEadslEUXYyqES7rz3eH0JiVAilEYAoxRupMO6t0VkTMFB8jrgJE7hJFVzUUGyDqRMbFjNTa/mq3RMTbLCUyApUoFmVUretodqb412qX0Ew7MDpStpBMT59peZHeJATpWfSInGHWsjdu+tO8UzLsK4+U8FHdyoqyNV/58dS/TFl9Mh8/4fzXKavffW6157NJxVX/58eTDx0Ln7xfvWfOL+Z+Y/hsn5xheH3/e+aV7DuxE2T1ZsiAvsP7ca9gK66euXQ7iEMQhuWMq4RyMURza8ATEoYVSiNbZ0lEf0w2kKMQJhCyrWFcGJYqYWn0CrUMN4VqzBvJ2nPhTLTOPChTY7+QaKOIPBqf0wvtdC9RkMHa6Al1NRgTER4g2wcfmDOS+qHoTA3RdBRtEXwwO8UVLhQQ8qDcQX44Vwm2DBKQetXbLyPsdoiwI6NBYG0jXag1Ygh77JoxRH2NryBThE8hqewHSD+EBB8EFXQ/d5ekIoL0Bro5Z9i4/cCNv5/7kUvGF5U4PM1Cv8qz7N6xy9dvOwDtc+aSu4M7G7G+XLbiqkEjngVBjGkb/nDrQs+ffx4xp//vFl8Ggno/37mzLqeXoTPl2RHPgCwEYVjOuCKkMZz8RfM00UHQIt4kqTNrSMyrsEpaSdCzKl2vUJg20BhbbhF5ChvqKHBfRp2rUcoWXqnu5fVJcCX2QCALuxzjWh2hcCgI+9cqlwR9ZmiodPMmgqaj0BPg0+QegwTREmYLkRzoLyh3NklJIG3RfaRXeye8uos6sdGAgtCP1vEKp42L+YnKiZ1xf4heKE53aKQWbF3FgJ0EtT/RVJ5OCNKL6M6cYcTDiz5zxQT6EIv90aAyUq142PQcX11QONncPuTW54qKrTc3tFvZO7LlD0x4GWQRaa1Hx6wcPmqeZ84wbHa/ya/dB7J6P8vW783p8aRzHn3PkEqQhSAMyxnXFtKki0Hk0EDTn7GzsBfHuEAjKSjSxXsmFzSZXslmbzmzRII3NVgfVSOmFC8wOV/yFkRS8CFKVDr5rMbq9M2DOrvjuARJGYt9nmg6CtUfSJxeavmtNKhKMMfvgUA6YSLjCx/0Do8iEhPxKoc1/A0HIcDuN97CxcOa0VDMEaYaIu/Qdfb+NL1JhD0RiF+gWKBkWsyNsEuHEGfSS/gpNnKiqcuYIkgPpBtyhta29vrlb3zxmidOIamCNVvI0O9RPWtI5aSG148cbwEReWJy4+tnlBAdvJ6iyZT/44VjmlvbQVZn59aDq+9s/M/h9Z4vMwx7oV/feDAp4ODR5v/7s6f9Xy4/59HTs4+CLARhWM64tpDGeq6XiIQZuqAG9hCgAIDCAKe0QVWbRTBGFWlyYLwongg3SS9a8a2ilJPr6qhmoWpchMYHJlWcumFohKtC2T2WxDsZpAXFHMsTdFaoI0ZvGJWy1yVipgqLiABTL4G4oK2oP7QumAe0OPosm46gDSXRmBDJWao1ZtxrRjqAkrAsampQg8mOCg4qWG/RCL1ManG1CfEBAqJpA+kzoVOuuLXD+H7R1KgIgvRsujpn2LTz0M0PLaBvObtE6sWVZwyu/s6dz2/bcwTa55U/PbmK/k6c0qnjlin/7JWPgSDGqt2zRy/wvMlAttvmfL25LfzO1j7Aw1NfLcrWqH5Ls4EgBGFYzri2kMZ6ro8C1Q2VbZ25E5MUPLLkQrKKCtx8fW1Fi8jHlI4DuAjNYOlV4Q0CkqMqjXBVaCgOAmsV2EuxBfRRdXiZrD7pnaAqbfccqxGGxaIBKYukhjQvkd7tjnYkTHfLGER1Jt/qJwFUMxsjEe0D4IVM+2iN4JPqP0KQJCcNEBNjrMC7IWikS0BFu3FCoqmqbn4EiKbJqiBIj6XrcoajJ1qmzt/8jxfWuD6yUlz9mSufeFB6+Ce/HDne8v17XvB9MInmDPfWLgNZ9BuTWiav/c3IRv+XGaasu7+jswPE9QkmNbzOXlOJuc55A0EIwrCccc2n6gDruT6R4KcM4IO9M3dMkkiwBLGaiaAdw0ENbr62quraUCnpbYR0pnIR2jhQVUVc7SaFDoGv0IlUF/ACEKqaFMNagZDUUdQhzADFRaK10XUsFZByxGSdTPJ4ubEbCYixw6qm+RfHvaZJJXlOKDWCXYrZwmCCziOBMUn68B6dlHbDNAoCs59E04QphyA9mS7KGbbsOnTVfQ30pVinh1XKikrGnjv6uRdfi/y+cn5Zu2X/+y+stb94bdqKqzbtPASyOjsPndw7uv6rfj/lRrbR8wese3shyOorvNL01qd/8FgOjyeVgSAEYVjOuLaQxnquT0DI5gFtpLOmulKCPdTVkqA2RJQGuXJA5RBp8+o662Oe5UqFpI5yuAjekDqJZEH0krGiSjgwrg9dxfQlqPbp6kSwViBo6+hHjJVGioQTEzpQSNbJtFevUBzIzKJzxbVxmpqhqhofQalaA3QL60t5JH1aiKwve7cKQoKLyq6IUTAJNfspeXgRpOfTFTlD+fS1X/vJVPaYikOAnik/LVt+a/lLu/cfh/aFYd4ru/y/MSlT/i+XP7ZH0vBw89vD53i+yXDLrP63Nnx156G+9svH7R0d1/+u0fvxpDNKMGdAIljOuOZTdYD1XG9ECl5oa9q70hl95Jx+8vgmIJvaJkKlHC7ME9QYTYbLEo6NWJxeN4qwayDJFOAPCPskVcBxKT2nmwmqfbo6EawVCNo6+hGDqmFFfbVkknUySXTpKXC0xs3uaqYxiBsSrStLUGvAZ/goHCEmTXp4b04KuxOqZhBr9pNomjDlEKQnU9ic4ejxlpv+MO+s82qdv0Kn/N3nlj+7eGuL9G5xIWhta7/8V7P8L4Fnq28vX9LWHj5KNGXt/d5vP4+cN2Diq3e3tJ0EWX2Im/+ywDdnKPvghdUgBUEYljOuLaSxnusNiNCDtuQRl6YzLt9+yT+CThL7+s/EIFryhWNnQr249VyFeLxLSekuBrUAFCSocZ9QnuERFWp8FrNP8hD7HMNagaB1mq53AtSFUuFBpVYyiToZdxoUimK6Y+XUmOFeU3LcUJIXQnWhPzNA1BDSQP5Aej+K/ZFuISmIAVC8Rb+ZK31mLyHMMPnB7CfjCCJIL6GAOcOKDXs/f9VE9jySy/f0l5Fq//Sd2pc35vPbVE00t7S/7zySxvg+mJStebJxE8hi3N14zjCvn3Ij2+iFAxo3jwVBfYufPeSbM2TKv3fXTJCCIAzLGdcW0ljP9TpEIyWC0Xdmqp1EKKmORdpUArskD/u18EYpYg+uW6hxU/BMFdwGiAjj8qkdUGSHyhsqpQoBGgHSSPgFbzrvq/aJTkwWWCsQtMOsLSRwgTQHCi1MZWCiTqZ+xY4UYxXCGxO5FqCak02hA8T0CmECeA1JmqRKTukCQYiK+yTYlXJgJIRpRIgW2KnpInF4EaQXUJCc4URz6/NLt55R4pgtkI3+/MKQW597fedBEFFgdrx19LSs7y+OZco/eFHN4jXhuxYHT+65Y87AYbPVZMBlI61GN3zl5V3Pg6y+hX/OkK1entff4kD6AJYzLg8TTNFAGMY4hwsi8og1MXYWeQrbpSOpPkF5eER/cRgscbeDws0nPYgLuSQ0C77Tk34IpfEiXRdNNM2Ifsc9fVsb6gP08fOEwRKq6A2A35SATxq0E0EVqq0kY61gqmKeaNGxJJhF60nSyTzl7IYkYLZGxb1mqBOrK68J0TxSA8jNkhCLprwbv8REKGnyg7n3fNmHIN1F/nOGfYdODHt4AftdBeegPFt95W/qDx1tBhGFZ+gf5qVQT9myY274fSMIYszeXDmi/n8P83oBetTc/g+/dH1zW2Ff3uguflo63ytnKDtjUPXqTftACoIwLGdcW0hjPdcriGBaF1okdRYJkRI6Y9flQSfaTfyiOzztH74JQAE7HK3ggKiA+KsFwqfa+E4i+BUGZQDCNuEdEl6mGSzeqcEEbRcyvH2kjio0ZpmKtYJplPWlDCGTkWSDngSdzL06GJJAgjUK7jVDnaBu8DGcHASlBiBscenEANczwR25dGNtW6iRQpDuJ885w5v7jn33rplFxZUpfigtW33dg3OaW9pARJfwhR8+TpVUNHHcstWjHol8x9Ejy2/0/vnnkY0Dxq++EwT1OTzfZyiuuuiO5w92YQ6J9AosZ1xbSJMqTtBcfY9g6Uz0RVCriCeQBNqsRBDqzbKKoGcXG2hSoj4tFMk+YuEV70o8YBHvhjiGoC+OmKGIlhHd6I2w5Qz65mqpcJtJkrWCSc+ksRdCjdYlYtYpoVODmo4kWRPFvaaLTroa9K5amNt62ePqDOHp1N0ELXUpPkd/d5AgOk2Y3QjSk8lnzrB2y/5v3TItTYxYVpSpvv7BxhPNXZowbH3z8L9c/pjnfYZM+Ye+W/vC0u0gq7Nz3/EdDy6+eESDz8sMw2b3G1X/5UVvPAmy+hZ79h8vGfGszy9glIz98+RVIAVBOCKa0J9xbSGNOGFbwwmQlFTPGj+FMUmsDm9LSIo8ZCRpFJsFAdFGmsSEK8L8CbWDakbzoJZDzBMRHoUrZjDDkJYIQLJSQxUqrDfpaq1g6CjBOWG8y0jOBXWYdDJ2SUncacW9dZp+7M6NjhfccmPrQb7Vle6NF7Fyjb1KCBXdLMoHdq8gSM8mbznD1PmbP3PFhKKs4/cjsS1TedVvGo4cbwERXcVd1UtPG+T7LavFVV+9aUprW/i1Tot2TBlR/yW/B5OG1/f/5dzik63HQFbfYvqiLWecSxLIlC+aF1d+8don123bD1IQJEAKJMhJXgPsIkCBCuxNjBBI7ELrkdglOYpwiJ9EgBCrA3tSRpRSjBPEVlCeADTRBl5cHNWOvZEgyzSax3fYg56EmnLXcYR34LMKCFYbq0L5ZwKMvwrsNfZk6MjgHNEf9WPYN41f9ReddQghEZ30HXL0bZxJFi7jXtNFKV5joPguXmk9iOYMt9me1g/00UDRi4tNuZPjUCFIt5OfnOG5JVv+4dvVRcVpvrq0uOLbt8442bWPJBE6OjqueaDB88VcsmUqLv3vyPf5zNz06OiFX1KSAceN5AwPLPweCOpzTKxvKiqpVR1o204pGXPdg5HXRRAkgJ9xPU+44oRtjA+CGoYImz4vU1pKX86lWGVRSC2CLv1gMuDvFMhXYHOLc0CQSYSwj8VrAvllZ0vvSR5K9p6wUZ9Twe5gEjA/BqgRrejENF1sFeSOiPQQ7oOwXWhQONiijEGngV/cy4uEr0ikS2cVzEYp7jUZmkioumYs6MNtbMKzD0k1VTSGKIhhZsRlRuc6w+zESGUpHTRAHUiQxtLTe8kEBw0YJ+LGUqFkATpDkK4gDzlD3Ytbi855JN3l5Ezl2TdMOnqiq+8wEDZsP9D/2kneLzOcXlL+7KJtIKuz80jzvr8tu35ko+fLDMNm91u4fRLI6lu0tXfcXr6kKJvywaRM+UcvGffm233zxguSOyw6hL/Tkirm0RB5Y5njKcufSHTkGXrAIzSJuse/DEnG/tRNorclG2jgFkHuNW4fiBVC4y+H8DaiD5OTkucD7JUbE9fHlQsL4z7RzRgSqia4XVWam6sRrZjtOxMtXvCd80KsyfuRIN8kUEihJM+5SFVSmWUEYbhuOnBIapg0zQmtA33HCkG6nVxzhjnLt78jW5HijWeyZcd8/sqJ23YfARFdy5T5m0/NVhZlYlo5bWVnDKoAQYzX9y8fPrv/sFgy4LgNn9P/7eNvgKy+xZ79xz96yfh0E4NsxVW3PboERCBIXmFRhdvl3gSiVzS75dwfhkce/UOMW3DNhZL6npJTEoJ+oALnx0TqPMLHyWgpVYFElvonhwIvxcNI6InFryJdSJxU8lu9iVEvRUwuUhMGKkF2ThMBsIwTgwS+vCOCU2wtxJpr8yoWedQP9AaD1UBWLzmx0CA87u9CB6Q5UOCeEKSg5JQzLHp114cvJnFhmmv2mcp/vnTC0tf2gIgu56GnVns8MMO38m/8bFp7R/jzz2v2zhs93/cmw6x+v5xXfKK1e3KnQvPckq2p337OlP+vHz0huxdBeiIk2PGJTvIJhCBpL42S0IVFoV2geOCkXDO0KEGUr9UeHqKBT7mS0FFAkPKksc90oTtKEPfSJ/zZf3bh1O6czIZxsvYEEbnr1GGhuFWum1MKS5C6dEEcH7ikSxYfghQK/5xhVdNb//OKJ4qKU730XPbuc6unzHsdRHQ5ew+c+MoNk9O9dyFvxZVT520GWZ2dLe0nHll2w/B6z59/Hjl3wNxt4zs6+2aI/PWbpqT7Zip656fsyYZumxsIgiAIgiCICc+cYfe+45/4/vh0CQPZMhWX/vIFENEdvLZ1X9E5vj/lRrbi6jVbwh8aO9ZywO+3n4NtZGP/jfteAll9i4Wv7j6jhCRmaR5MKqn5Wen8ltbwC6kQBEEQBEGQHoJPznCiuXXAdelfI86U/9N3a97Y052P4sxdudP/p9wyFV/98ZQ9B06ArM7OjfuWeucMpOFtcwZuO7gGZPUhWts6BtGfZUjj52z1+bfVYcKAIAiCIAjSM0mdM5xobvvhffUkgFbDPstW9q4htc8t3gpSuoOOjo4v3zA53QMz8patKX8mEuKPXTV62GzPB5NGLxgwdd2DIKhvMWbGuncOrkrh5+Lyj14y9qV13faKC4IgCIIgCJJM6pxh/AsbzjqvJnXkna258I4Zh441g5Tu4NjJ1nefW5nugRl5y1RMrN8Ishj3zCvJ5WWGhi01IKgPsf/wyczwZ9M8tFZ2xqDKMXWvQXsEQRAEQRCk55EuZ9j19tH+1z/l8RrDRy+b0PjyDpDSTdS9uO30Et+bDMVVZ98wedOuQyCrs3ProdW3Nwwc7vVs0vA5/e5q/FbTvmUgq6/Q1t4x4uGFaX4vr4w4dvSji6E9giAIgiAI0iNJkTO0tLZd/qtZRdkxscjPthVXDhn1LEjpPr73i7r0j1TxLVtz7QMNIIjx5Gv3jmjw/JbVkXMH/HXZta3t3XnXpRC8uHbPu891ziczZWQ4rrl/zpHj3fDTfgiCIAiCIIg7KXKGhpd3qGGf01Z25pDKxa/uBindx1dunOz7AnTZqcXlD0x4GQQxxrwyfNQ8z5xhRGP/mpUjQFBfobml7exU32ObKb/y3vrD3fq4GoIgCIIgCOKCa85AI8LrnvS5Tp8p/9Tl40FK91H34rYPXpT+NYxgy1R87NKx67buB1mdndsOrvn1giHD5/i8zDBsdr9b53z99f3LQVafoKW1/cI7n3f9ETd6h6Hsqt/UN7fgFyUhCIIgCIL0AlxzhoeeWn1atoJGe0r8Z90yFX968hWQ0n38csxSdpPB6wXo4sp+104CQYwF2x8fMXfALbPUfMBlGza7/+1zBra1t4Gs3k9rW/vNpQucE4by0wdVXv+7xmMn8ZEkBEEQBEGQ3oFTznDwaPOgkc8UZd2CQmXLjtny5mEQ1E00t7Rf92Cjz5sYbDslU/GTP84DWZ2dHZ0dM5r+OnrBl5RkwHEjOcOfl14BsvoE9z+2oijj9tBXpvy0QVW/ql3W3OKeMjWVDh1IGFrXa39yv6l0YFFR0cChpXVNcRvqAuvIPijoApqa6qhTqVKlPdyr4J5CeqeJAR805EsFMg3c5HSBzQGgUZfOvfxjGT/hzd5qZIEMKMgsC2aUg7LhUb1nDktTHcVBt7qhlN69hNgJqlevEQ45rxGig1HXC49yXXYK8MApZ5i+aOt7vj3W5yJ9pvzzP3rizX3HQFA3sWz9no9eMtb7BejTsuWbdobfmPT28R2/XXiR34NJZCMNN+xbArJ6PxXPrj2FTAyXG1CZcrI9Oj3lz9gFAXdAfiJcOIZ03XoMTdB0KtlXOJVITEXOgOR4yhKFKF3iCBEiwGdX6oaCljTnKoyifAAGmk4qkg5Dc5mAoRxjVwypXk79WZGmXgGcC6c9YmoguYlGV3k/cROpYIHJVbLbC+lNO7qAhhN4S6uhPP/y5r7I2OfPL5GjGZRp6ZLDXg6AflbfyIu1J9rhRE8fDHfkxc7nX/6tS75IYSJY4k5rTVry3X3QimPPGZpb239WuiDNF2hKW7b69vIlbe3d/Nj6k42ve+rPtlMyZcdOtoKszs7NB14ZvcDz7edbZvUbPmvA4ea3QVYvp+rZ1846bwxNBmJOU7dMxQcuGDNu5npo6Yy0eixnIVekQ0hXrUduhM4AoQ7dKc5UHld82IGM5QYkO2DRCT1EMdEM+onEcJTSUloJGjj3FORaPoAGlHQu74Jjpzwd9KcUoQQZIR6iSrGwK6EtzilDKpODtEwxIRCmNyy0vCC+De2ADsTkdkwciK+D6ZMAk87Rm8H1KNQECmki644sLWM30siqQDkhrmYhDJAGJ6+xbuRoloRzxRDu3kIPIyA0JA6CojjSkDrO6p6I02DQs4rTnZecsa2jBMR4SJZ4TLVEoI90y1Eo4dJOnlW0ctLFhhDowio/13Vkzxle33How9+pdYoL41u2puKZtSCo+/jDpFe8H0wqKq648fdzOzpAFGH+tokjG/1vMvxh8WXHWg6CrN7M4/VNZ53vdvemuOrsGycvWZv+u7OkUxsjD6s+YfGyoNgpouHXUB2XHTcjUJ/GQvRT0L96RJOOF24ncxIrsjyAJQshkA9Eu84VlpEQqfDRCW6uwOGgCYS+yNPhPk44HYxdCC1iI0Tj39S2WEyRpKezWprYAiigxCaTq0K+aBaaVOTYKZvD9H9llYiC2GSKPfRirJlXaLe0kyS7uMc1mvBduuYJzTwJx4GRxwkQGycTzhVloFGKVZcT4VI0KSlqFHZymYELBTn2bh+M8Biex8miw2UdJSAGRGrvM9Xg2puGyMmMHmmcgPqARZHYvAsLQJwOqEGxzcbc1pE9Z3h541uur7fGt5Kax+d0z2IS7Hr72PvPJ/r7/vxztnrJmjdBVmdnS3vzA4svHjbbM2cYvWDA8l3PdsgpSC+kvb1j+sItZ5RU2TPJTPmpxZXfuuXpI8c83ngWi50uHvjgeSwJ0R1VAKelSYFaBN3qjF+Ph8qEyAfWPH5Ek8zO/VzEbUrym/Ozu+mRbaHHqDRXN8K2zoPOLqHUpZgioo8ER2tmTDhTXHWLDzOBRcSRfkOb2URJderUDDUXF7dOq09+EU6Seg/tSze1Y+qaLQvHJqhrrpkvXHvgmmnqacZOkNDMD8lDpaXs77yJjo0TAcqifegquiCuQORN5QSEknotLbsJwTUW+JB3xAUhQoIbHe4PgxACFCjAzgDfeN4K92cOQys8IunoN9VIKwrclOciFNWC1EI5hut0SINoLzpzkii859RtDuvInjM8NHm1788a9IicYf32A65v6Gq2sncPrnh10z6Q1dl5rOXQ8Fn+DybdOv/stW/NB1m9k2MnWkqfWs1eYLClYcVVH7iw9tYyz5c3wiMyLBUoyO1koV9+warn+6w9WCsqhxJeX7eadUe0mOn+JHXNCPvKzbEawmsyLFuAUleEYq56hadQ57Oa04jrRkhfaEZTXWefXBb8nWJQNEPN5cWkxOoGN6zdO3MgHA5ZrChNY1rcf0bLYqaZa+aFFOderpmmamw8JBKa+RAOQNAZfNb1nIg+FGWyGFAglZA+hAWxAU1BgUdUItYTzfF5p8IEgx7i8KfdT4O23AiEC5IOerrQViKXwcgX/jGsjJjckiXJ1skjaibFGtSpkAZNeyeR6VdF+hYMe87wuSsm+nzFarD1gJzhD5Ne9n77uShb/YNfzTpw5CTI6ux8adczw2Z53mQY0dD/D0su339iF8jqhex6++hP/ryAZgvWKZGt+ddrJk9ufB1apkasE2mheE5yCc3a56Hm0LrgmpuDeI2URHh97ZLX7nSw1OHyEYFJYUCBAuwE/B2rEgngfYSK9ibNVaAy4JQ2xFxP3E6JJjh8LJThCxqHr9opRIeHtWdAQVRdcBHXB4YBPrpYQolZY5xGmpoEYZDPcGkQfov2Dp3TaeH+iHRsDAyWEVTjzDVzJ12gwzVjtflTJdGR1411pFkIWWH2Z5xjcGGyNChzzrQ5LBKN3jmMjZMJTUVe5KKGwSd5hw0wd0x0JglPkgIdsC9Aq6clkieIPtIOTTqcR61Q5CdhIOgclmAd79e6jtznW65DpuvJSWZ0djribleIPWd4zxDvi/Q9Imfod+0kz5cxyDZo3CPTIt/z85elVw+v938w6en1vwNBvZDte44MHv0cGVPLHQbi7Wztzx5asGLDXmiZGrHMY5PZZ5KHiMVHBADwUUYnm2hECc7xaZXg9bVL3rCTn5DZv1Cmwq6REOCjjsSuC4U4fHk/aCsGKq53wq50cC1DOeG0k4dWlMY6hFOOISuCwSG7zBJk4rV4ids80wy1VgDU0wh17i9IiCxnWmFPzGzqFHqdVey2mhfzjaKqtExUNzgblRrek6vkSP3QO9R+zdgJdN2EKbmuhQnjiAgfOQxFIqKHaAea6xtBNUqswCl7MfTkD52QiQTdBQwcymdvvrrX4jXK6bH4MvEclAd0E9xM4rWyQBBBsiSc9WpyB6WMZA87q5jjiOlHwkkob+p6NALSryN7znBqJhYUum8lNU80eF9pzgMHjzS/7/xqz/skmfIPXFj77OKtIItx34IL/L9ltb7/bxZcULXy5z1wG7P6lhc2lYOROibWb/w/P55if5W8uOoTl40vf2ZtLq9shItcN//F3pSLg2BZ+WK35rl7sWzp4nK+IQHwxtplad4ZhlXpTeUkdp1PghyHJjmJgbQTiYc/MRK5maTpIxzjSMeaoyrLBcLqhKQRCmcs8Ykpw9P0Qgib2meAZqjNRhqcJ/ojFRI6lEyH068OqEGBEgnYAdgmS8w7smXRZaK6QeODfBDTyA7XjGkSba8ZO0HobHBd3HlQM5Fwvmo9kbzXlfg4gdyB7Dsawtnv4T4VISJ/I8vWNfmfO8MoWVjF9hfsG53EoPh7yYWkwSiAlyN4TAR2IU1/INU5LA9TzT4hAkRXnn3x9ko3TtPA0NaOUNqxpT1nUIPCVFu2pvLZ10BQd/CXyaveUVzu+QJ0cfW3fv70oaPNIKuzc+kb00bO/vKw2Woy4L6RfGPUvAE9bps/YOTc/rM3V4KdMX5R+eL7LhhH8gHVRfJGErNMxUW/mLl5V/hbFj6IBWJeIWGVNAvEuqhCsZRItejBwHAEga9siRPUpkCBDOwhQAEHSoFES8lJi311UrwKVzXuyyDSSuPAREIPUaG5XJayjJMYJb/DMgBSpD5CA4L4hsG+tFYYBgND34xj8Hos1DBaHCpcyi2LD1VcH45obsvCeEXJL6or4XPSoEvjaHawqJQkybGWFpp5RggEUWIFEQbCW72h9qoP8gN3dhqpkTbCOUxPzdgJfLpSsSQMDCkJdl3AsWFSxwn+pkQ7jprvSQ4TLBmLy2G32Cv0yOlKiQYxIrl4KSA+VBLQCwEKBFAckG83EyyeTovOYfmYam5q5jofhfbK+nOaBrxzj77T6V3onKH6zsoXu/Fbgi64bYYl0k3YsmOu+HU9CGI88ep/j5rr+wJ0D96Gzep3a/1X29o1X21EEoCSEc+cWlyZ9HwX3VX2gQuqHpu1obk1t9/iCI++lgUuri2Sie52nOaizYLDAwN8S1O4hKLHDPMRJIgeI/FjrEAhh7UuCN0Gh3oBFBOggAOlhFw6DglVoCFxzqaQQYUCFacDaDJcV1lCKLa0jv20BbvZRKnjlvl1KE8W0UnU5zp9JCTXUt+aZrsQLg01LygV938CEYzgVzxiSHPDZLHQKHHuuNUyETwRAStHiOIa8YK4aO4Ge01/Yuo4Ic8ERYSqtEykmQ+iK6uIcJKQuuaZJhMZJnf8PBhDzPncxKgkujzYGdkV1s9rypBn84JbwZqhytNgpCfvHesclo9OEicER3ROF0/6iRAuU4J2eiVawJvb1riWNBPNnjOc4v0CNNky5f/6o8f3HjgOsrqWw8eaB/70ad+coexdgyvGztwAsjo72zpaKlb8bNS8vpkz3DN3cGc0tzt4tPmFZdvPGpL8haplJC187/nVl9/zwht7jkJLb8JF47TiomuMrtKkRrAq1BUVFAelfOGwTyA90CSyJ/YxEVHXaBOvoSxXFq/C3zaEK2IaGYQn7PAkHI1cTpzC6/BZA1fcU/NY7Ay/fxeUaYWKIXQY7hiRxlqnR2aagdC7AbrZpBHOm9HOhd8EJKdgSQKkEGzCEeTODD4WNZJdIrqMiYGenIl4kSJbFkV1g7mmN2a7EokYIVzIZKhKy8RsT4M83R2WJb1hCfUBx9QhLVHz/RFDkcfhTXQ57BoaeRgpafhyQViXb8FRnAcDbmfDp5zJv3k6ifmYalwunRCwomJzQ/QdkLa3SPNoY2lXcClIC6/htRBEF/bm9pzh3YN9v3Qo2Iqr1mzZD7K6lrEz159Jf6XY82WGf7n8seMn20BWZ+fG/Ut/ueAc7xege/I2fE7/udvGg52dNHdYvObNK+9rYG8vmL1XXFlUXDF49Iza59dBy1wQK5uc26AoGdEgCjnH0YO5MvHDyrDAAqCMQtaKfGCgwGf+JeaxHS7L07AW5ZBJK40r7BaAh85TNeLCY0417vDErEIE+mUv5LSjrxLoZIlthEc9NRftGUHiwHXXi+QttJZZTqPRtvwT64dOAdI1LWIJL4W10WOdERHhAWEb0iT4YE2uKYkWExwH21jNJl9FCBK2RSyLoLrBXNOXuDZuRKyOCtGMnSCtswQiX3C9ZcBVih4ZA9iNN42UpmD+G8Qbf3Ms7kOiLK2azqWhd9IORiIxlxN1mXb0vQV6euHaU9eSKvHh4w1c/G6mIMbFiQ+GDpF90sMVlOWEW7ep0DnMr5vog8aBABV5RYZTgpF2sQrFA6Kqxq3S2MSLyPkBSlLhPtXsOcOnL3/M832AYMuU317+IsjqWu6sfLGopFbVx3HLVHzuigkgiLFw+xO3Lf6SEm33jW3UvAG7joRT/ODR5k9+f3zi685lxLFfvGbSHyetPHwsfN/DG/mWeFImLQO1DURPU7CcgnUslltsWfNlE+6IrmRRHq9oQN9XuLpZofKRIRoSHM47dptiRwLjDk/MKoRIw6yp5XgRS4yJr+agaXg+t7nCPNzSMGnNVp0S9hTugYALdvGPHmjM4L0kjIkeNhbmR8xUu0xwlRTXimKCk2px04yWCdV4XW8fmHA1Pga3grWL6qkZO0GkmSPigToa5srBTwKsPodEHmQOyGWGmRmOJYiRgT0UKBFAMUH9mM6rwo9a33kSMwo+ce3CwQuUjQ6f9BwgIRe1hB5+QhK/YkgGeiFAgQaoAKSd+xq811ECOodFV5oMDJOp/+AyDrvAwuUaq4pZCLD1w/JLqJEIiCdrVatqMI7y+jPb5EtogU2kPWf48+RX/H/TjWyZso9eMg5kdSFHj7f84N7Z/r9gfU7Z2JnrQVZnZ2tH81Pr7uubLzPU9793/pCDJ/eAqZ2dK9bvTXqgK1N5Wrb8j0+uWrsl/Km7HODHV7YkOLCPY1uxBOkwHYuxg+Z8KZgPVbpueBkhXEsmfagSEYJqFCigQAmDSeDiwg7CBZxgsoR0yIJOOFBKgAIOlCYfIYxvdWsAeQQoiAG7OW6mxRAjknxsc8xAdN5XkXpkX9lBoykKGMRso5/VE4Q0KuAT+BAl8IPohK6EqBx69nH4cWuNIVwDT1cbMa+hYM9AKNfXk0x10ktIcbEMdnANEmr6ojfKAW43axc1SjN2gkgzO+LxIumGkv6w6gATRjH2LQYzSfVgRvNYWlNTeINY6RZmCYQCeRvguMvVORQdPEmHIijn1mi94k6ic52wv24S6p5XF9rxXkfx86wgEEiQHBbOLeXMBIUUm3/VCaEg+zCAVgw6jh3OYwStWdjCBdn0USeggs9qFzbYhsOeM7y88a0cIm+6nVJccVv5YhDXVcx9ZeeZ59fmcodE/im3t49vv7NhYC7fmNRjt1HzB7ywqby9I3wK65rfNujeYaC/43ZKtnrUI0s2vnEQquYInEMMV7BCLCs2meD4ErY0H6q03YRHnHB5JujDViuB/hmu6yDIFKdwBV5RiNP1mYjdppgg4w4FsEevuYRZhTzDFU/SPJhXFMtt9JjrA3vlxEA+udCZSmGVXMxUHsVKcHpckwB3v2qEq0LZBavE1UZaUGJ5dxQxBkR0BCiksD51gxU2tprE4PUjtU3uiuNe0xH3EVGIGCKkMM/wXewDDdSlDFRjPxTFFIBgynikKQBcO92cjppFCaZXrKq3SwlCAY+2JlSXx+ZQaBg5WIT3Y9jaolWio+tNonPzgughQOvDoI7lSJqeXAbddFrSOSwfY8HlJviHQDpQKia2YwTa8f28vk3VJJv4vpQDJqywDYc9Z9i2+/AXfvi4/08pk6246uwbn8rLQyzuPD1/c1G2RtXEccuUffb/TThyPPweoe0H145s7INvMpBt1IIBy9+cAXaylxk+8f3xkZyB/J2peO+3x3zj5mmbdh5qa8/P12DxJ12Tg5MA+8pLge5QFRx8dN2IlURRV3aiPrwSXbmiT30TRZ7oM1G+jM6mAFmLCMYdnphVcML5Njp3JAVKYsBuwHzsFEdXrjIksTw34CclZXw4dHe64CzB6TFdGGIqMJLHSiNcFRqKA0+pwF5KUtog5KgahTuCHuOzQpTYzAH0fjEVE+g7IvS+DIyfSB/jNT2J2+QIdw5rJ6QwL0TGLnSRMibsIwE+Upx8WEiMU4ESsVgqUeomyrDhPRwJRIaDEJttQmPKQHImC/4S+kdH15ucHGNHmmil/B0NtaewDjU0n2oIyQUYONmMfIwFl6tRNSo+VjH0n85MuDwgdojmpBQWu56gGgUKBFDMSDNgzsNhzxkI941fUZT1fTEg2Epqrrm/obklty/idKaltf26Bxr9H6kqrvrN+BXia4Q6Ojue3vDgCN+fcuvJ2/A5/e5qPGfLwVfA1M7OFRv2vv+CasgZyL/ZMR+4cEzJyGfql++AGt1AwopNj7o2SFTBPup+qo3XFSsx2OWgD68SLFohJ5Qsh5tCJVpbfEhxjFNtConqIWHc4YlZBVfst9EZXPGcNXf3QGR8OLzQckk+QkKXXJw0RYSl9Nhv7UQoSaoLeAEI1RoiY60QYBwDvkNYIQRCSail0zzh1WPqGDUgBJd+eT+cZItSoJrkTMQ5XEogRLvLqHK0bfeSNBDx6cCLIppraqUgUQFPuEwuUjg8eDuE/c2ACmp9+xC6UQjbONLhJWKFPAryIcjp6l4ahI/yOI11DsvHWHC5MVXVpairKDnRpgKvyupFYgRBKC2A3sj2NyxEyLVJc8oZlqzd/ZFLxuZ0q+GcsncOqhpTl48v2HHgwJFmFvgqOjhv2TELVr8Jsjo72zvafjmvuE8+mDR6wYDH1/w32MkY/eiSU7MVLFuoOT1bccWv659s7M5f8mboFiKgX1cR1IfyA1mU6CeB6Ab6JZ/DgyfdmaAPI3aUUo4s6oFGXq/Sn8E+F0SHMY24uJg0mw1pMauQZ7wcFENcfhZSyDyiV6jp9Z3YixBxZwlzKc5pgzoaJLilk5M9tqafIjRMcRMuWkh+UYRq60SwVggwjUGotVBaVGVF4pOlA0aYzcc9wHZZblNGky4ozANCbEqhvF3EE4GnIp+cRyn0chLEDfRapuMcDRaGu79CH8eueIYHV1nRQPmwxHHKmRDNPdvriKkkhge+nFjMLKigfAwluI2QEeHc/NkWIC+NUEUohM5EHZcrFj4UwDqdyBwnGEO4IjKe6jQg6CsKtWxKxAWqSKIoZDbShZbbNKO4ryOnnIFw0x/n+f7QAd8yFZ+8/LH12w6AxEKysumtomLfDCdT8dkrJmzYHurZ2t48cvaXb5mlBtx9YBvR0P+ZDX8COxnn31ZXdO7j7z63csTfFo+ftRFKuxn9QqTljkdmllkQ2N98ccRaKd1AxegnQhjX6/uVVzU7cxLgY1AAfzJggSpHApNoE6Fy6okbSglQwIHSlB2ZMbs1zwhX2Y5tJsiRXvIWO+aKD/A4soowLj5cqcwVE4c/zkD+gB55F0QeV9ASEiuoOlIkoZHPRt9ZKwQIOxTjdc2Fr6jR8KeD1+B8bKkIlYyOokmZYUxzwGS+BbmZ4qmIROdRcutfiCMNrEBFguN3NnLNtcrCzmjQCfoEygvlUvpSkNi/JzH/8k5EH0pBbH+6ETJSCOOiEyKqnxga/r1uzlcsvODm5eglCZ3DhLkmJ4rQwIysKTs+Cw8q2htMMrs8Cm9uUlXYx+HBSM4TREi2SnLNGTbvOvTxS8bndquBfqP/wJ9O3bb7CAgtGNc/qH2L120rGTP84UXyU/vT1v9+RH0f/Mak4bP739nwn037loGd7IbSF69+4lfjXp6/ahcUdRlsIRqA2UyAggAoY7gfdsTyjTWJrHdx+OSVwmVPcvvgD1OnLFIplXbytmYtowcDcz09dptiR4KIsXnArEKecT+4mYj6mmhsj83lTsOJkM5W9sQMNKSdRkNZSSpB3euAbkDVeSc6MfnOWoFhrKXdobrbwW3kYECOBg6XN0PZLrXzhs7XduRW/G9wVPCR26DsjKEOq4UU2ooBJH27mUbvzunmKgvEDHMYFCJdcNWMptrIWYCOmP9tBcb96SZIDC4mj9aFI0yIqyd6DGdjAcmTm0J0DjMerRhua0lyC4WcMeBYrjYzWiQkJHbEa+nHW1hCr3QFf5GKUJrbFNE5zoBrzkBYvGY3+03oHH6rgWzZ6pKRz+7Ym/NvBifyL5dH3+JNtZXU3j9hJQhi/G7RJSMa+uDLDMSoBxdd3N4RvmRy8Ggze8u5i147UQm+rkZznjEuRB/ChWda1uFllugCEvt5uuKsj8OBSSzaFGIF7MStjTK52NihIGgSvCcKRTlhdmueEY7yP0iGurpeyRctJJxOqcTN9HEnaMLRqC75z+9UHc7esLk670QnJt9ZKzBUsQKdDpJQwH/gYiROBpp5FOg6qd5QC+yqSDDjpPYaAXyvbZQce0+hrBiqNIaxRkqEKVTUrjAxbIDvjAhnVh7nlJAayowNiFIQejg4qPI343JVS/gpL+aRQxF3F6Ab5ZithSR0nNt0S7qySAmkESTtw0miuc8GOxgmJdiNBV6HzXPIdTUNzAaBGsmWJjlf2EFEiL9ZRWjlP2KhixxkpMgZCKVPrT5tULXnLyuLrbjyGzdPW73pbRCabw4dbf7ni8d65gyZiv95xYQVG/aCrM7OIy3771t4Qd98Abq+f/WqEWBnjybtkSUReelBEYWEzmLhBMR7g99WsTybpIGLDhvQUJ2dXqBA6jwmtYndtfA7ILgehKDIn7wKS4JblMMhMnB/qlxJnRxKwkBPZZHwlL5EA1UBWoEL0agenyIRIpNFh1BQlq0K1VaSsVZgGCeVaWGIMSPEJQdfSJvUoRHzZBCWFGhCmkx1QvaHJqzmu00+UYfVQgpVhdfSmQU9SI3CPrWTNhwdgt/Qy0J8JWjReDc2IEpB+FEKLwm56sXl5m5gqBc9fyWPcjh2aeaAJ6k7Cw7dhoO3zmFimqR0IrvcI2UVYp0GeYte3yRzEvTm8OZxVaMrU7FJM2VTIIS5eShdznCiue2Wvyw8pbjS/yo+bOVnDq5aUJgHYK5/cG4O35hUPXjUcyCI0bClduTc/qMXDhg9v29tCwaMbBywaf8KsLNHk9eDWHTxsZLgGBq56kCOrMFOHSn1iV6ngP/oW4nizkC4ahmKXHaM0utDGiYDEglQEALlATm7Nu7WAqE7LeQXcmCPR+jyEMV6ZjrFRi2oTD3PMwxeplGdyze4zxpX8/aROqpQYYRJkrUCRdsVxdRalDPUZkmnYAJdPEZAJAVKACgECjIn/SeiNA24ayKJQ8I0YYhGbmZxcQ7VxUil9Jiqkc0CaUr4jk0oIbX/kwHdJb3i/lbsi34MjvZs0TexH3nxtDCUm5OJ4uwjjkPWURb9iiNXAcmLkYBOlrDWXX44twLiab0JroDnrObNVVXVEYvZ5O/E0FbHpulyBsK+Qydv+H1jUTbnuw2Z8veeX13z/HqSh4DoPHHB7TOoekp3jltx5ZW/rgdBjGU7n5nc9N8T19zd17a1d09a+6v29laws0eT40KMEl1+/HowPTY6d5NUkYWb9Ot3WKQT1BOwY0+sjVjvYX1ZcrDbuKBZh8brF1x26kNJWtSjWsEQ3sqjSSxLYF+ZxCTTWwLyOUK9qa/2bBghyPUkQQmjwf1ncJ8tZ9A3V0vFIJkkWStQwApaBWIilv6GN+oiSojSEOIU2EkwOE+GyqbAR4lCTAZ39Abb4K14I2GDiNASpgnDaZRCuDgHLf0sIkSNgk9GIaHJjLSdEYQEj7bJgGRZrjpi6giZvda9OQO7UE6bq8cz+yiTRCOoQhvLbQuBgz6O6BwmpKdxYqiSc7rA4Ap4WhKdVxyuTHjc1NgUDlia8RKt3BVOnTMQDhw5OeqRxUXFY9SAO+2WqTglU3b5vfXrtu4D0Tmz9c3DA66bVJTx+oonmsZULXo1/JZVpGeQ40KMEh4N+Pe4qKdqazcJFcOVy4DbCTzm1DRQjgdhe77ygwq+pnN5aY6XXoRuzccgJSA85G8SCT9pYkfO5pG0TpvRSfeIDDkd18hBn4TREPNA777gYrvZtSBZqaEKFYNk0tVagaCYKzsICBuHoQdRQQinKCol9JeEEO/ZPmeETQljE0UzB2TH0GJNlQguoyTBxTmomN4cTtBJ0CyQYhAhTwnx3H+6/iQJKbW0A7Ijno07kJcE1bjX4tG1bdlaEIYmDTTpnRKrEnwRhy5+1I4yvxtOjoJBYWRhU9N8rXDBf+JF0DlMiE5yYhxy0qanbvjkSnyqpCI6rwJ0ZVqbRCEbRAfVhbdSaeuTMxBaWtvvrV3G0obc7jaQ5tmaf7tm0i+qloLo3CibvuaMc2s9tcqUf+TiGhCE9CByXIhRpJVFkY61zt0kVaQ3LtgRXD7E8j7VBqJcWvryyqfVg858TeeqyscWHezklssLo0JtX01d4RalPAVwRHMBtVt7gBWX6WilYEDVwWHVoMxBn4TREFNB6z7Ya+wCBKuNVaGy+npgr7knvbWS4HCPKAynt1yPqsUfrfadNDlOhrwgYis6R6DMiN590qwknpCcBKOiAnsdrebCHZwcDpnngFD4IZBdY+f6ks/0hpQqX54QTm//SxqmDujscOnBy8xwCNdMMl4EJabbYCDOe3Lap3fEf679SD4kSrNkQZgdtUIWT6GjSuoUJH1ItY4M6BwWtbbA2EcsEWVehcorLhE2Kd2I7hlJmYPklZTe9swZCG3tHVPnb/n4ZeOKMpW5Zg7FlacWl/3rjx6fuXRbu/Qlpx7cXb20qMT3J6sz5RfeMQMEIT0IvhISF73rbeDIsoosucRu5LOCkz4y2iXOC+NSRHUCDxD8jkFC1cTmkktcu2FX6QPY6VWKrl2d4olQ1rOj0LkJh1QpXVBrRQaHnj+NwxhDNNXUTdonGa0/ncLuYPDYTA3gzbhM0YlpmF0rxJUkO1icCPqZAwDRhYyD87RIfoESDcFzXa4z24vQ3ERDjN4LLSH7XAch2eoQ4SRTCiIBFa0Dwu7U0XUPx4FIYwZNEoKH1niT0EfGBZUY5oiapFKydr5AB2TKCmUlJG+rC0uPNE5yNZInOxK0ZkCJAuwUuKUNocelAdcfWQg0BYRKEoUZA8d1ZER3PBDWespMhdMByQxvHrQGzTV6SzMLSjjSgVf7nWwU3tpvDP1zhoC9B44P/MnT7xxcxTKHWBSeYisrylScPqjyGzc/vWbz/oNHT0IHadj51tH/+K+p/i9AZ8rrl78BspAehMMRWqxV65EhPGCq6y2pG3qnMnbodD4IxZY4X9lGCbFzlqwsXMhzAVoToCAO7BfEDkMm5OvwIc7NPREj7ex9FXbT3niGFEaZw5dwCkk4qCPa6eqGM5j0rCB3F/cviBVCmQkRDXkb0YdpkBI1JAQCLKaKyZ3gQHXieM4aq0GkhujJ+TqsHyTOpBPL/AVnoKxBi9C1saOFirVCFO4ky7BRbOMfImqGsCyBvdkCdQTEM0FtQ2SqCtM+zsPdazXCm8BRoVNltaKTR8w7ZrSByNE3alDyS2gFJjZ09kvN4VGR4DCPcsG6jhIQ4yKNlvuczgM6BdyRVQ0OXIahERW13dDZZTY113WUa84Q8PDUV7/wwyfpD0V7x+tiy5QROd/6+dMzX3pj085D0IEbyzfsPbW43P+mR6a89vn1zy7aMn1hj9q2zly6/e2DJ8DIPoXjFZdgeVCgQAX2cmwHB3IA1N2RcDi3RkJ598NC5EjCjwbGCzucaN4Q7Y1dRibAx26EaAkaUrwOlakQ3eX7FECOw8G4kMOpVXLkJBpgN91y9tJf0JPQB+GBQ2IiRWfSLusMD7JRep0VCiIE8zHRTjG57eckGhuEBkelul6KhcYUKFGAnZwCpw0JBMNhX/SE5ICAQGcqwcHHFMusi+BRl6qRoAedEIHlFm151y4eKghUUTVZYWcKqrmqk3WtShCh3TXr9EhHbKcJyQluLnXT8DghLJOWjlRWeNV1Crgjlh9pTzDrKyp2w/EsPzkDYeMbB37+lwUfv2w8fTQo129iJeF7BZEz4LpJf5366nOLt0IfiXR0dDw2e2NRNrc3s0nznrYNGveZKya8sbfgP57dPbDDUI+IffkJwhYwkuXKTthpDkAstWeC2Sk0RWMWV/GTKZT1ONiBMqVLvAnCSeswdQVK4mCNs4Kp4xjqORJE+dqe4WImfMoZpn3y3WzSI5nnqc3TZr+skAAfezcJo6Qhv4anmXV0RrMYGT7nRBDY5Hm+Fwo4+MOnvg5cG3CdkL2GIO+LnogKfntKRqeAO86xBZwEu2Vl5S1nCJi7cucdlS994MIx7KWCHF+PfrSomGQOY98zpPLq+xvuqlo6P/H3HE40t379pil5SFd62lZclR3+LBiJIEiPgwXnND6HzwiCIAjS98hzzhCw9LU9909c+f4LxrBHlXLOHEgakK0pylR+8vLxJaOevfaBOc8v3d7Sqv6qw8GjzafRB5NizXv3VnZ6ScXDU18FIxEEQRAEQRCkyylIzkBob+/YtvvI2Oc3fPzSsaeVVLBXnMtz/hm4CvZbcuXvv6D6U1c++bvHV0JnjBUb9qr1+8CWKXvveVV99GUGBEEQBEEQpHdQqJxBcLKlbe+B4+fd+tzHLh3/nvPYS9LFVbk+QUSaDxr/lymroQ9Gv2sn0aRCqdnbt0zZh783FixEEARBEARBkO6g4DmDzNR5m7MjnvnaTVM/cEHwgm8NfWPB4+Gl4vJ/vGDMnBXh96K2trV/7qqJfTFnqPj12BVgJIIgCIIgCIJ0B12aMwQ0t7RNamj6aemCH93f8NkrJ9A7DyVjaQrhfvMhO+bye2aBOMbcV3Z+4AL62JJas7dvxZWbdx0GIxEEQRAEQRCkO+iGnEHmxbW7K5977aEpr/7kz/M/eGENfWyppJbff4gF0LDRH3AY+vtGEMH4+V8W5uGnIXrcVvaeIVXbdvfRb1lFEARBEARBegndnDMITra0LV+/d86KHXUvbqt9fn3J8GeKzikvygbvP1TSh47E+9OZ8g9cOGbOyzugZWdnS2v7t2+fQe9UhNF2n9iKq0c/uqS5tR3sRBAEQRAEQZDuoKfkDAr7D5/c8ubhTbsOrd60b9qCLffULPvmzdPOHFx5ekn56YOq/u3qJ9rbO6BqZ+ei1W9+7NJxffDBpJKaJxrwK98RBEEQBEGQbqaH5gwKHR0drW3tJ1vagm3/och3j1Y/91pRcZ+7yZAp/9B3ahe9+iYYiSAIgiAIgiDdRO/IGRJobmm/q/ol+gqEEnP39q24+rt3zTxyvBXsRBAEQRAEQZBuotfnDK/vOPjh79bSlx+UmLu3b9mamx9aAEYiCIIgCIIgSPfR63OGFRvfKsr0uW9Mor91XfNkw+tgJIIgCIIgCIJ0H70+Z/jb06vpN7QqMXdv34or+1836WRLGxiJIAiCIAiCIN1H784ZSFT9oe/W+PySdA/fiiu/dtNkMBJBEARBEARBupVef58BQRAEQRAEQZCCgjkDgiAIgiAIgiBJYM6AIAiCIAiCIEgSmDMgCIIgCIIgCJIE5gwIgiAIgiAIgiSBOQOCIAiCIAiCIElgzoAgCIIgCIIgSBKYMyAIgiAIgiAIYqaz8/8DYvnsgIM2LGcAAAAASUVORK5CYII="/>
+      <TextObject Name="Text1" Left="434.7" Top="37.8" Width="75.6" Height="18.9" Text="适用机型：" Font="宋体, 9pt"/>
+      <TextObject Name="Text2" Top="75.6" Width="85.05" Height="12.47" Text="施工表编号：" Font="宋体, 9pt"/>
+      <TextObject Name="Text4" Left="85.05" Top="75.6" Width="189" Height="12.47" Text="ok&#13;&#10;" Font="宋体, 9pt"/>
+      <TextObject Name="Text5" Left="406.35" Top="75.6" Width="85.05" Height="12.47" Text="受控号：" Font="宋体, 9pt"/>
+      <TextObject Name="Text6" Left="491.4" Top="75.6" Width="189" Height="12.47" Font="宋体, 9pt"/>
+      <TextObject Name="Text7" Top="94.5" Width="85.05" Height="12.47" Text="发放日期：" Font="宋体, 9pt"/>
+      <TextObject Name="Text8" Left="85.05" Top="94.5" Width="189" Height="12.47" Text="[Table.LASTMODIFY_DATE]" Font="宋体, 9pt"/>
+      <TextObject Name="Text9" Left="283.5" Top="94.5" Width="85.05" Height="12.47" Text="版本：&#13;&#10;" Font="宋体, 9pt"/>
+      <TextObject Name="Text10" Left="368.55" Top="94.5" Width="103.95" Height="12.47" Text="[Table.PDM_VERSION]" Font="宋体, 9pt"/>
+      <TextObject Name="Text11" Left="491.4" Top="94.5" Width="85.05" Height="12.47" Text="阶段：" Font="宋体, 9pt"/>
+      <TextObject Name="Text12" Left="576.45" Top="94.5" Width="103.95" Height="12.47" Text="ok" Font="宋体, 9pt"/>
+      <TextObject Name="Text13" Left="510.3" Top="37.8" Width="198.45" Height="18.9" Text="ok" Font="宋体, 9pt"/>
+      <DataHeaderBand Name="DataHeader1" Top="3.2" Width="721.98" Height="9.45" Guides="9.45,28.35,0" KeepWithData="true"/>
+    </DataBand>
+  </ReportPage>
+</Report>

@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Storage.Mapper.BusinessMapper.PsmInStockDetail"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSM_IN_STOCK_DETAIL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BillId" prepend="AND">
+          <![CDATA[BILL_ID = #where.BillId#]]>
+        </isNotNull>
+        <isNotNull property="where.SummaryId" prepend="AND">
+          <![CDATA[SUMMARY_ID = #where.SummaryId#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[TYRE_NO = #where.TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckGradeCode" prepend="AND">
+          <![CDATA[CHECK_GRADE_CODE = #where.CheckGradeCode#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateUserId" prepend="AND">
+          <![CDATA[UPDATE_USER_ID = #where.UpdateUserId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <!--插入信息 入库表-->
+     <insert id="InsertInStockDetail" parameterClass="map">
+       INSERT INTO PSM_IN_STOCK_DETAIL
+       (OBJID,BILL_ID, SUMMARY_ID, GREEN_TYRE_NO, TYRE_NO, CHECK_GRADE_CODE, UPDATE_TIME, UPDATE_USER_ID)
+       SELECT SEQ_PSM_IN_STOCK_DETAIL .NEXTVAL, T3.BILL_ID,T3.OBJID,T2.GREEN_TYRE_NO,T2.TYRE_NO,T2.CHECK_GRADE_CODE,#UPDATE_TIME#,#UPDATE_USER_ID#
+       FROM PSM_IN_LOAD_DETAIL T2
+       LEFT JOIN  PSM_IN_STOCK_SUMMARY T3 ON T3.OBJID=#IN_STOCK_SUMMARY_ID#
+       WHERE T2.SUMMARY_ID=#IN_LOAD_SUMMARY_ID#
+       AND T2.BILL_ID=#IN_LOAD_BILL_ID#
+       AND T2.DELETE_FLAG=0
+     </insert>
+
+     <select id="GetGradeInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+            SELECT T.GRADEID FROM BQC_QCRECORD T WHERE T.NEW_FLAG=1 AND T.TYREID=#GreenTyreNo#
+       ]]>
+     </select>
+
+     <select id="GetXCheckInfoMan" parameterClass="map" resultClass="Row">
+       <![CDATA[
+            SELECT * FROM FQA_ARTIFICIALCHECK_INFO T 
+            WHERE  T.TYREID =#TyreNo#
+       ]]>
+     </select>
+
+     <select id="GetTyreNoBatch" parameterClass="map" resultClass="Row">
+       <![CDATA[
+            select nvl(b.ufrank,2) dph_grade ,
+case when a.final_check_grade = 1 and nvl(b.ufrank,2)=1 then to_char(sysdate,'YYMM') || 'A+1'
+     when a.final_check_grade = 1 and nvl(b.ufrank,2)=2 then to_char(sysdate,'YYMM') || 'A'
+     when a.final_check_grade = 1 and nvl(b.ufrank,2)=3 then to_char(sysdate,'YYMM') || 'A0'
+     when a.final_check_grade = 1 and nvl(b.ufrank,2)=4 then '1111C'
+     when a.final_check_grade = 2 then '1111C'
+     when a.final_check_grade = 3 then '1111F'
+     when a.final_check_grade = 4 then '1111TF'
+end full_batch
+ ,a.* from spp_tyre_state a 
+left join fqb_balance_info b on a.tyre_no = b.tyre_id
+where a.tyre_no = #TyreNo# or a.green_tyre_no = #TyreNo#
+       ]]>
+     </select>
+     
+     <select id="GetStockDetailTyreNoBatch" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select case when e.final_check_grade =1 and nvl(b.ufrank,2) = 1 then a.detail_batch || 'A+1'
+            when e.final_check_grade =1 and nvl(b.ufrank,2) = 2 then a.detail_batch || 'A'
+            when e.final_check_grade =1 and nvl(b.ufrank,2) = 3 then a.detail_batch || 'A0'
+            when e.final_check_grade =1 and nvl(b.ufrank,2) = 4 then '1111C'
+            when e.final_check_grade = 2 then '1111C'
+            when e.final_check_grade = 3 then '1111F'
+            when e.final_check_grade = 4 then '1111TF' end full_batch,
+d.material_name,c.storage_loc, count(a.tyre_no) amount ,c.objid
+from Psm_Out_Stock_Detail a
+left join Psm_Out_Stock_Bill f on f.objid = a.bill_id 
+left join fqb_balance_info b on a.tyre_no = b.tyre_id
+left join psm_out_stock_main c on c.bill_id = f.objid and a.main_id = c.objid
+left join sbm_material d on c.material_id = d.objid 
+left join spp_tyre_state e on e.tyre_no = a.tyre_no
+where f.objid = #outStockBillId#
+group by case when e.final_check_grade =1 and nvl(b.ufrank,2) = 1 then a.detail_batch || 'A+1'
+            when e.final_check_grade =1 and nvl(b.ufrank,2) = 2 then a.detail_batch || 'A'
+            when e.final_check_grade =1 and nvl(b.ufrank,2) = 3 then a.detail_batch || 'A0'
+            when e.final_check_grade =1 and nvl(b.ufrank,2) = 4 then '1111C'
+            when e.final_check_grade = 2 then '1111C'
+            when e.final_check_grade = 3 then '1111F'
+            when e.final_check_grade = 4 then '1111TF' end,d.material_name,c.storage_loc,c.objid
+       ]]>
+     </select>
+
+     <select id="GetDBTyreNoInfoBatch" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select case when b.final_check_grade =1 and nvl(c.ufrank,2) = 1 then a.detail_batch || 'A+1'
+            when b.final_check_grade =1 and nvl(c.ufrank,2) = 2 then a.detail_batch || 'A'
+            when b.final_check_grade =1 and nvl(c.ufrank,2) = 3 then a.detail_batch || 'A0'
+            when b.final_check_grade =1 and nvl(c.ufrank,2) = 4 then '1111C'
+            when b.final_check_grade = 2 then '1111C'
+            when b.final_check_grade = 3 then '1111F'
+            when b.final_check_grade = 4 then '1111TF' end full_batch,
+a.* from Psm_Transfer_Detail a
+left join spp_tyre_state b on a.tyre_no = b.tyre_no
+left join fqb_balance_info c on a.tyre_no = c.tyre_id
+where a.main_id = #MainId#
+and a.bill_id = #BillId#
+and a.delete_flag =0
+order by a.tyre_no
+       ]]>
+     </select>
+     
+  </statements>
+</sqlMap>

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CbmMaterial"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CBM_MATERIAL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.BrandId" prepend="AND">
+          <![CDATA[BRAND_ID = #where.BrandId#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeId" prepend="AND">
+          <![CDATA[SIZE_ID = #where.SizeId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlyratingId" prepend="AND">
+          <![CDATA[PLYRATING_ID = #where.PlyratingId#]]>
+        </isNotNull>
+        <isNotNull property="where.PatternId" prepend="AND">
+          <![CDATA[PATTERN_ID = #where.PatternId#]]>
+        </isNotNull>
+        <isNotNull property="where.LoadIndexId" prepend="AND">
+          <![CDATA[LOAD_INDEX_ID = #where.LoadIndexId#]]>
+        </isNotNull>
+        <isNotNull property="where.SpeedLevelId" prepend="AND">
+          <![CDATA[SPEED_LEVEL_ID = #where.SpeedLevelId#]]>
+        </isNotNull>
+        <isNotNull property="where.StandardId" prepend="AND">
+          <![CDATA[STANDARD_ID = #where.StandardId#]]>
+        </isNotNull>
+        <isNotNull property="where.AttributeId" prepend="AND">
+          <![CDATA[ATTRIBUTE_ID = #where.AttributeId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaxStockAmount" prepend="AND">
+          <![CDATA[MAX_STOCK_AMOUNT = #where.MaxStockAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.MinStockAmount" prepend="AND">
+          <![CDATA[MIN_STOCK_AMOUNT = #where.MinStockAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.StandardStockAmount" prepend="AND">
+          <![CDATA[STANDARD_STOCK_AMOUNT = #where.StandardStockAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.MaxStockTime" prepend="AND">
+          <![CDATA[MAX_STOCK_TIME = #where.MaxStockTime#]]>
+        </isNotNull>
+        <isNotNull property="where.MinStockTime" prepend="AND">
+          <![CDATA[MIN_STOCK_TIME = #where.MinStockTime#]]>
+        </isNotNull>
+        <isNotNull property="where.StandardWeight" prepend="AND">
+          <![CDATA[STANDARD_WEIGHT = #where.StandardWeight#]]>
+        </isNotNull>
+        <isNotNull property="where.WeightTolerance" prepend="AND">
+          <![CDATA[WEIGHT_TOLERANCE = #where.WeightTolerance#]]>
+        </isNotNull>
+        <isNotNull property="where.SpellCode" prepend="AND">
+          <![CDATA[SPELL_CODE = #where.SpellCode#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.VoiceFilePath" prepend="AND">
+          <![CDATA[VOICE_FILE_PATH = #where.VoiceFilePath#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

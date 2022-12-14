@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BasicMapper.FqaArtificialcheckInfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="FqaArtificialcheckInfo" type="Mesnac.Quality.Entity.BasicEntity.FqaArtificialcheckInfo, Mesnac.Quality.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_FqaArtificialcheckInfo" class="FqaArtificialcheckInfo">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Tyreid" column="TYREID"/>
+    <result property="Gradeid" column="GRADEID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="Materialid" column="MATERIALID"/>
+    <result property="ShiftId" column="SHIFT_ID"/>
+    <result property="TeamId" column="TEAM_ID"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="Artificialcheck" column="ARTIFICIALCHECK"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="Dummy5" column="DUMMY5"/>
+    <result property="Dummy6" column="DUMMY6"/>
+    <result property="Dummy7" column="DUMMY7"/>
+    <result property="Dummy8" column="DUMMY8"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_FqaArtificialcheckInfo" class="FqaArtificialcheckInfo">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Tyreid" column="Tyreid"/>
+    <parameter property="Gradeid" column="Gradeid"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="Materialid" column="Materialid"/>
+    <parameter property="ShiftId" column="ShiftId"/>
+    <parameter property="TeamId" column="TeamId"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="Artificialcheck" column="Artificialcheck"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="Dummy5" column="Dummy5"/>
+    <parameter property="Dummy6" column="Dummy6"/>
+    <parameter property="Dummy7" column="Dummy7"/>
+    <parameter property="Dummy8" column="Dummy8"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM FQA_ARTIFICIALCHECK_INFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Tyreid" prepend="AND">
+          <![CDATA[TYREID = #where.Tyreid#]]>
+        </isNotNull>
+        <isNotNull property="where.Gradeid" prepend="AND">
+          <![CDATA[GRADEID = #where.Gradeid#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Materialid" prepend="AND">
+          <![CDATA[MATERIALID = #where.Materialid#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.TeamId" prepend="AND">
+          <![CDATA[TEAM_ID = #where.TeamId#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Artificialcheck" prepend="AND">
+          <![CDATA[ARTIFICIALCHECK = #where.Artificialcheck#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy7" prepend="AND">
+          <![CDATA[DUMMY7 = #where.Dummy7#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy8" prepend="AND">
+          <![CDATA[DUMMY8 = #where.Dummy8#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO FQA_ARTIFICIALCHECK_INFO]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="Tyreid" prepend=",">TYREID</isNotNull>
+        <isNotNull property="Gradeid" prepend=",">GRADEID</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="Materialid" prepend=",">MATERIALID</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">SHIFT_ID</isNotNull>
+        <isNotNull property="TeamId" prepend=",">TEAM_ID</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="Artificialcheck" prepend=",">ARTIFICIALCHECK</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">DUMMY5</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">DUMMY6</isNotNull>
+        <isNotNull property="Dummy7" prepend=",">DUMMY7</isNotNull>
+        <isNotNull property="Dummy8" prepend=",">DUMMY8</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_FQA_ARTIFICIALCHECK_INFO.NEXTVAL</isNull>
+        <isNotNull property="Tyreid" prepend=",">#Tyreid#</isNotNull>
+        <isNotNull property="Gradeid" prepend=",">#Gradeid#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="Materialid" prepend=",">#Materialid#</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">#ShiftId#</isNotNull>
+        <isNotNull property="TeamId" prepend=",">#TeamId#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="Artificialcheck" prepend=",">#Artificialcheck#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">#Dummy5#</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">#Dummy6#</isNotNull>
+        <isNotNull property="Dummy7" prepend=",">#Dummy7#</isNotNull>
+        <isNotNull property="Dummy8" prepend=",">#Dummy8#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE FQA_ARTIFICIALCHECK_INFO
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Tyreid"  prepend=",">
+          TYREID = #update.Tyreid#
+        </isNotNull>
+        <isNotNull  property="update.Gradeid"  prepend=",">
+          GRADEID = #update.Gradeid#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.Materialid"  prepend=",">
+          MATERIALID = #update.Materialid#
+        </isNotNull>
+        <isNotNull  property="update.ShiftId"  prepend=",">
+          SHIFT_ID = #update.ShiftId#
+        </isNotNull>
+        <isNotNull  property="update.TeamId"  prepend=",">
+          TEAM_ID = #update.TeamId#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.Artificialcheck"  prepend=",">
+          ARTIFICIALCHECK = #update.Artificialcheck#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.Dummy5"  prepend=",">
+          DUMMY5 = #update.Dummy5#
+        </isNotNull>
+        <isNotNull  property="update.Dummy6"  prepend=",">
+          DUMMY6 = #update.Dummy6#
+        </isNotNull>
+        <isNotNull  property="update.Dummy7"  prepend=",">
+          DUMMY7 = #update.Dummy7#
+        </isNotNull>
+        <isNotNull  property="update.Dummy8"  prepend=",">
+          DUMMY8 = #update.Dummy8#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM FQA_ARTIFICIALCHECK_INFO
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_FqaArtificialcheckInfo">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_FqaArtificialcheckInfo">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM FQA_ARTIFICIALCHECK_INFO
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM FQA_ARTIFICIALCHECK_INFO
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_FqaArtificialcheckInfo" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE FQA_ARTIFICIALCHECK_INFO
+    </statement>
+  </statements>
+</sqlMap>

@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.MENS.Mapper.BusinessMapper.Pptbarbom"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PptBarbom ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.FBarcode" prepend="AND">
+          <![CDATA[F_barcode = #where.FBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.SBarcode" prepend="AND">
+          <![CDATA[S_barcode = #where.SBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.ScanBarcode" prepend="AND">
+          <![CDATA[Scan_barcode = #where.ScanBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedWeigh" prepend="AND">
+          <![CDATA[Used_weigh = #where.UsedWeigh#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedTime" prepend="AND">
+          <![CDATA[Used_time = #where.UsedTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ShelfFlag" prepend="AND">
+          <![CDATA[Shelf_Flag = #where.ShelfFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FMatercode" prepend="AND">
+          <![CDATA[F_materCode = #where.FMatercode#]]>
+        </isNotNull>
+        <isNotNull property="where.SMatercode" prepend="AND">
+          <![CDATA[S_MaterCode = #where.SMatercode#]]>
+        </isNotNull>
+        <isNotNull property="where.Matercode" prepend="AND">
+          <![CDATA[MaterCode = #where.Matercode#]]>
+        </isNotNull>
+        <isNotNull property="where.Qlweight" prepend="AND">
+          <![CDATA[QLWeight = #where.Qlweight#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetPptLot" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT BARCODE FROM PPTLOT WHERE SHELF_BARCODE=#shelfBarcode#
+       ]]>
+     </select>
+     <select id="GetRubberByRecursion" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       with cte as  
+       (  
+       select a.F_barcode,a.S_barcode,a.S_MaterCode from pptbarbom a where F_barcode=#Barcode#
+       union all   
+       select k.F_barcode,k.S_barcode,k.S_MaterCode  from pptbarbom k inner join cte c on c.S_barcode = k.F_barcode  
+       )
+       select #Barcode# barcode,'' MATERIAL_CODE,'终炼胶' RUBBER_MAJOR_TYPE_NAME,''RUBBER_TYPE_ID,'终炼胶' RUBBER_MINOR_TYPE_NAME
+       union all
+       select S_barcode,S_MaterCode,t2.MajorTypeName,convert(varchar(2),t1.MajorTypeID)+','+convert(varchar(2),t1.MinorTypeID), case when (substring(S_MaterCode,1,1)='4') then t3.MinorTypeName+'段母胶' else t3.MinorTypeName end from cte t
+       left join BasMaterial t1 on t1.MaterialCode = t.S_MaterCode
+       left join BasMaterialMajorType t2 on t2.ObjID = t1.MajorTypeID
+       left join BasMaterialMinorType t3 on t3.MinorTypeID = t1.MinorTypeID and t3.MajorID = t1.MajorTypeID
+       ]]>
+     </select>
+     <select id="GetPptLotCompareDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select t.Barcode '车条码',t.Plan_Date '计划日期',t.Mater_Code '物料编码',
+        t.Mater_Name '物料名称',t1.RecipeName '配方名称',
+        t2.EquipName '机台',t.Serial_Id '密炼车次',t.Shelf_num '托盘车数',t3.ShiftName '班次',
+        t4.ClassName '班组',t.Start_Datetime '开始时间',
+        t.Set_Weight '设重',t.Real_Weight '实重',t.Shelf_Barcode '架子号',t.Warning_Sgn '超时报警',t.Error_Sgn '超差报警',t.Lot_Energy '每车能量',
+        t.Pj_Temp '排胶温度',t.Pj_Power '排胶功率',t.Pj_Ener '排胶能量',t6.ItemName '密炼状态',t.Done_Rtime '混炼时间',t.Done_AllRtime '消耗时间',t.Bwb_Time '间隔时间',t5.UserName '操作工' from pptlot t
+        left join PptPlan t1 on t1.PlanID = t.Plan_Id
+        left join BasEquip t2 on t2.EquipCode = t.Equip_Code
+        left join pptshift t3 on t3.ObjID = t.Shift_Id
+        left join PptClass t4 on t4.ObjID = t.Shift_Class
+        left join BasUser t5 on t5.HRCode = t.worker_barcode
+        LEFT JOIN  SysCode  t6 ON t.MixStatus=t6.ItemCode AND t6.TypeID='MixStatus'
+         where t.barcode in($barcodes$)
+       ]]>
+     </select>
+     <select id="GetWeightCompareDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select Barcode '车条码', Mater_name '物料名称',Set_weight '设重',Real_weight '实重',
+        Error_allow '公差',Error_out '超差',case Warning_sgn when 1 then '是' else '' end '是否超差',weigh_type '物料类型' 
+        from pptweigh where barcode in($barcodes$)
+       ]]>
+     </select>
+     <select id="GetMixCompareDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT	    M.BARCODE , M.MIXID , T.SHOWNAME AS TERMCODE , 
+        M.SETTIME , M.SETEMP , M.SETENER , M.SETPOWER , 
+        M.SETPRES , M.SETROTA , A.SHOWNAME AS ACTCODE , M.SAVETIME,
+        M.PFTIME,   M.PFTEMP,   M.PFENER, M.PFPOWER, M.PFPRES, M.PFROTA
+        FROM	    PPTMIXINGDATA M
+        LEFT JOIN  PMTTERM T  ON M.TERMCODE = T.TERMCODE
+        LEFT JOIN  PMTACTION A  ON M.ACTCODE = A.ACTIONCODE
+        WHERE M.BARCODE IN($barcodes$) ORDER BY M.BARCODE, M.MIXID
+       ]]>
+     </select>
+   <select id="GetMENSStockCompareDetail" parameterClass="map" resultClass="Row">
+     <![CDATA[
+     select t1.StorageName '库区',t2.StoragePlaceName '库位',t6.MaterialName '物料名称',t3.UserName '入库人',t4.ShiftName '班次',t5.ClassName '班组',t.RecordDate '入库时间'
+       from PpmRubberStorage t 
+      left join BasStorage t1 on t1.StorageID = t.StorageID
+      left join BasStoragePlace t2 on t2.StoragePlaceID = t.StoragePlaceID
+      left join BasUser t3 on t3.HRCode = t.OperPerson
+      left join pptshift t4 on t4.ObjID = t.ShiftID
+      left join PptClass t5 on t5.ObjID = t.ShiftClassID
+      left join BasMaterial t6 on t6.MaterialCode = t.MaterCode
+      where t.Barcode in ($barcodes$)
+     ]]>
+   </select>
+   <select id="GetMENSBatchCompareDetail" parameterClass="map" resultClass="Row">
+     <![CDATA[
+     SELECT     MATERIALINFO.MATERIALNAME, 
+                                          STOREINFO.BARCODE, 
+                                          STOREINFO.BILLNO , 
+                                          STOREINFO.PRODUCTNO,
+                                          CONVERT(VARCHAR(100), STOREINFO.PROCDATE, 23) AS PROCDATE,
+                                          CONVERT(VARCHAR(100), STOREINFO.RECORDDATE, 23) AS RECORDDATE,
+                                          FACTORYINFO.FACNAME,
+                                          STOREINFO.LLBARCODE
+                               FROM       PSTMATERIALSTOREINDETAIL STOREINFO
+                               LEFT JOIN  PSTMATERIALSTOREIN MATERIALSTORE ON STOREINFO.BILLNO = MATERIALSTORE.BILLNO
+                               LEFT JOIN  BASFACTORYINFO FACTORYINFO ON MATERIALSTORE.FACTORYID = FACTORYINFO.OBJID
+                               LEFT JOIN  BASMATERIAL MATERIALINFO ON MATERIALINFO.MATERIALCODE = STOREINFO.MATERCODE
+                               WHERE STOREINFO.BARCODE IN ($barcodes$)
+     ]]>
+   </select>
+     <select id="Test" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT GETDATE() as TIME
+       ]]>
+     </select>
+     <select id="GetMENSGroupInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T1.SHELF_BARCODE ID,T1.BARCODE,T1.SHELF_BARCODE,T1.PLAN_DATE,T2.EQUIPNAME,T3.MATERIALNAME,T1.SET_WEIGHT,
+        T1.REAL_WEIGHT,T4.SHIFTNAME,T5.CLASSNAME,('日期：'+t1.Plan_Date+'  机台：'+t2.equipName+'  班次：'+t4.shiftname+'  班组：'+t5.classname) G FROM PPTBARBOM T 
+        LEFT JOIN PPTLOT T1 ON T1.BARCODE = T.F_BARCODE
+        LEFT JOIN BASEQUIP T2 ON T2.EQUIPCODE = T1.EQUIP_CODE
+        LEFT JOIN BASMATERIAL T3 ON T3.MATERIALCODE = T1.MATER_CODE
+        LEFT JOIN PPTSHIFT T4 ON T4.OBJID = T1.SHIFT_ID
+        LEFT JOIN PPTCLASS T5 ON T5.OBJID = T1.SHIFT_CLASS
+       ]]>
+       <dynamic prepend="WHERE">
+         <![CDATA[T.SCAN_BARCODE =#Barcode#]]>
+       </dynamic>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[T1.SHELF_BARCODE,T1.BARCODE]]>
+       </dynamic>
+     </select>
+
+     <select id="GetRubberInfoDC1" parameterClass="map" resultClass="Row">
+       <![CDATA[
+          SELECT '11' AS PROCESS, a.Barcode AS BARCODE,'(混炼胶-车条码)' AS TYPENAME
+        ,a.shelf_barcode AS FATHER_BARCODE ,'(混炼胶)' AS FATHER_TYPENAME,
+        a.Mater_Name AS MATERIAL_NAME ,a.Mater_Code AS SAP_CODE,C.EquipName EQUIP_NAME,D.UserName USER_NAME ,b.RecordDate as END_TIME,'' as LEVELX
+        from PptLot a LEFT JOIN PpmRubberStorage b on a.Shelf_Barcode = b.Barcode
+		LEFT JOIN BasEquip C ON C.EquipCode = A.Equip_Code
+		LEFT JOIN BasUser D ON D.WorkBarcode = A.worker_barcode
+       ]]>
+       <dynamic prepend="WHERE">
+         <![CDATA[A.shelf_barcode =#shelfBarCode#]]>
+       </dynamic>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[a.Barcode]]>
+       </dynamic>
+     </select>
+
+     <select id="GetRubberInfoDC2" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         WITH CET (PROCESS,BARCODE,TYPENAME,FATHER_BARCODE,FATHER_TYPENAME,MATERIAL_NAME,SAP_CODE,EQUIP_NAME,USER_NAME,END_TIME,LEVELX)
+         AS
+        (
+        SELECT '12' AS PROCESS, cast(a.Barcode as varchar(40)) AS BARCODE
+        ,cast('(混炼胶-车条码)' as varchar(100)) AS TYPENAME
+        ,a.shelf_barcode AS FATHER_BARCODE ,cast('(混炼胶)' as varchar(100)) AS FATHER_TYPENAME,
+        cast(a.Mater_Name as varchar(100)) AS MATERIAL_NAME ,a.Mater_Code AS SAP_CODE, cast(C.EquipName as varchar(100)) as EQUIP_NAME,cast(D.UserName as varchar(100)) as USER_NAME ,B.RecordDate as END_TIME
+        ,cast(#Level# as varchar(100)) as LEVELX
+        from PptLot a 
+        inner JOIN PpmRubberStorage b on a.Shelf_Barcode = b.Barcode
+		LEFT JOIN BasEquip C ON C.EquipCode = A.Equip_Code
+		LEFT JOIN BasUser D ON D.WorkBarcode = A.worker_barcode
+        WHERE a.Barcode =#Barcode#
+        UNION ALL
+        SELECT '12' AS PROCESS, cast(TargetBarcode as varchar(40)) AS BARCODE
+        ,cast('(' + T2.MinorTypeName  + ')' as varchar(100)) AS TYPENAME
+        ,T.SourceBarcode AS FATHER_BARCODE,cast('(' + T4.MinorTypeName + ')' as varchar(100)) AS FATHER_TYPENAME
+        ,cast(T1.MaterialName as varchar(100)) AS MATERIAL_NAME, T1.MaterialCode AS SAP_CODE,cast('' as varchar(100)) as EQUIP_NAME,cast('' as varchar(100)) as USER_NAME,T.END_TIME AS END_TIME
+        ,cast(LEVELX + right('00'+(cast((ROW_NUMBER()over(Order by GETDATE())) as varchar(100))),2) as varchar(100)) AS LEVELX
+        FROM CET,PptBarBomDataDC T
+        inner JOIN BasMaterial T1 ON T.CurrentMaterCode = T1.MaterialCode
+        inner JOIN BasMaterialMinorType T2 ON T1.MinorTypeID = T2.MinorTypeID and t1.MajorTypeID = t2.MajorID and t2.DeleteFlag = 0
+        inner JOIN BasMaterial T3 ON T.SourceMaterCode = T3.MaterialCode
+        inner JOIN BasMaterialMinorType T4 ON T3.MinorTypeID = T4.MinorTypeID and t3.MajorTypeID = t4.MajorID and t4.DeleteFlag = 0
+        WHERE SourceBarcode = CET.BARCODE
+        )
+        SELECT  * FROM CET
+        order by LTRIM(LEVELX)
+       ]]>
+     </select>
+
+     <select id="GetRubberInfoDC3" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT '11' AS PROCESS, cast(TargetBarcode as varchar(40)) AS BARCODE
+        ,cast('(' + T2.MinorTypeName  + ')' as varchar(100)) AS TYPENAME
+        ,T.SourceBarcode AS FATHER_BARCODE,cast('(' + T4.MinorTypeName + ')' as varchar(100)) AS FATHER_TYPENAME
+        ,cast(T1.MaterialName as varchar(100)) AS MATERIAL_NAME, T1.MaterialCode AS SAP_CODE,T.END_TIME AS END_TIME
+        ,6 as LEVELX
+        FROM PptBarBomDataDC T
+        inner JOIN BasMaterial T1 ON T.CurrentMaterCode = T1.MaterialCode
+        inner JOIN BasMaterialMinorType T2 ON T1.MinorTypeID = T2.ObjID
+        inner JOIN BasMaterial T3 ON T.SourceMaterCode = T3.MaterialCode
+        inner JOIN BasMaterialMinorType T4 ON T3.MinorTypeID = T4.ObjID
+        WHERE SourceBarcode = #Barcode#
+       ]]>
+     </select>
+
+     <select id="GetTabSemisProductionInfoGS" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT TOP 1 T.Barcode 卡片号, T2.MaterialName 规格, T1.FacName 生产厂家
+        ,T.ProcDate 生产时间, T.RecordDate 入库时间
+        FROM PstMaterialStoreinDetail T 
+        LEFT JOIN BasFactoryInfo T1 ON RIGHT(T.Barcode,6) = T1.ERPCode
+        LEFT JOIN BasMaterial T2 ON T.MaterCode = T2.MaterialCode
+       ]]>
+       <dynamic prepend="WHERE">
+         <![CDATA[T.Barcode =#CardNo#]]>
+       </dynamic>
+     </select>
+  </statements>
+</sqlMap>

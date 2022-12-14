@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="SearchType" Value="查询类型"></Caption>
+    <Caption Name="BeginDate" Value="开始日期"></Caption>
+    <Caption Name="EndDate" Value="结束日期"></Caption>
+    <Caption Name="BeginTransferDate" Value="开始日期"></Caption>
+    <Caption Name="EndTransferDate" Value="结束日期"></Caption>
+    <Caption Name="BeginTime" Value="开始时间"></Caption>
+    <Caption Name="EndTime" Value="结束时间"></Caption>
+    <Caption Name="MainState" Value="汇总状态"></Caption>
+    <Caption Name="ReserNo" Value="调拨单号"></Caption>
+    <Caption Name="CustomerName" Value="客户名称"></Caption>
+    <Caption Name="MaterialName" Value="物料规格"></Caption>
+    <Caption Name="TyreNo" Value="硫化条码"></Caption>
+    <Caption Name="BillType" Value="单据类型"></Caption>
+    <Caption Name="RESER_NO" Value="调拨单号"></Caption>
+    <Caption Name="DEMONDS_DATE" Value="需求日期"></Caption>
+    <Caption Name="DEMONDS_DATE_SHOW" Value="需求日期"></Caption>
+    <Caption Name="TRANSFER_DATE" Value="调拨日期"></Caption>
+    <Caption Name="CUSTOMER_ID" Value="客户编码"></Caption>
+    <Caption Name="CUSTOMER_NAME" Value="客户名称"></Caption>
+    <Caption Name="BILL_TYPE_CAPTION" Value="单据类型"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="创建人"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_TIME" Value="创建时间"></Caption>
+    <Caption Name="UPDATE_TIME" Value="更新时间"></Caption>
+    <Caption Name="UPDATE_USER_NAME" Value="更新人"></Caption>
+    <Caption Name="CLASS_NAME" Value="班组"></Caption>
+    <Caption Name="SHIFT_NAME" Value="班次"></Caption>
+    <Caption Name="STORE_NAME" Value="仓库"></Caption>
+    <Caption Name="STORE_PLACE_NAME" Value="仓库"></Caption>
+    <Caption Name="STORE_TYPE_NAME" Value="仓库类型"></Caption>
+    <Caption Name="CHECK_GRADE_NAME" Value="品级"></Caption>
+    <Caption Name="DETAIL_STATE_CAPTION" Value="明细状态"></Caption>
+    <Caption Name="AFFIRM_USER_NAME" Value="确认人"></Caption>
+    <Caption Name="AFFIRM_TIME" Value="确认时间"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="物料规格"></Caption>
+    <Caption Name="RESER_ITEM" Value="行项目编号"></Caption>
+    <Caption Name="STOR_LOC_FROM" Value="发货库区"></Caption>
+    <Caption Name="STOR_LOC_TO" Value="收货库区"></Caption>
+    <Caption Name="PLAN_AMOUNT" Value="计划数量"></Caption>
+    <Caption Name="TRANSFER_AMOUNT" Value="实发数量"></Caption>
+    <Caption Name="MAIN_STATE_CAPTION" Value="状态"></Caption>
+    <Caption Name="TYRE_NO" Value="硫化条码"></Caption>
+    <Caption Name="GREEN_TYRE_NO" Value="成型条码"></Caption>
+    <Caption Name="FULL_BATCH" Value="发货批次"></Caption>
+    <Caption Name="DETAIL_BATCH" Value="发货批次"></Caption>
+    <Caption Name="BATCH_AMOUNT" Value="批次数量"></Caption>
+  </Captions>
+  <WebPage Title="成品调拨批次查询">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Storage/McUI/@McUI/ReportPsmTransferMainBatch.js?" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="PSM_TRANSFER_MAIN">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="SearchType" Type="ComboBox"></ParamField>
+        <ParamField FieldName="BeginDate" Type="DateBox"></ParamField>
+        <ParamField FieldName="EndDate" Type="DateBox"></ParamField>
+        <ParamField FieldName="PositionNull1" Type="TextBox" Nullable="true" IsShow="false"></ParamField>
+        <ParamField FieldName="BeginTransferDate" Type="DateBox"></ParamField>
+        <ParamField FieldName="EndTransferDate" Type="DateBox"></ParamField>
+        <ParamField FieldName="PositionNull2" Type="TextBox" Nullable="true" IsShow="false"></ParamField>
+        <ParamField FieldName="BeginTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EndTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="LastSearchType" Type="TextBox" Nullable="true" IsShow="false"></ParamField>
+        <ParamField FieldName="PositionNull3" Type="TextBox" Nullable="true" IsShow="false"></ParamField>
+        <ParamField FieldName="PositionNull4" Type="TextBox" Nullable="true" IsShow="false"></ParamField>
+        <ParamField FieldName="BillType" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MainState" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="ReserNo" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MaterialName" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="TyreNo" Type="TextBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="BILL_TYPE_CAPTION" Width="100"></GridColumn>
+        <GridColumn ColumnName="RESER_NO" Width="80"></GridColumn>
+        <GridColumn ColumnName="DEMONDS_DATE_SHOW" ColumnType="Date" ColumnFormt="yyyy-MM-dd" Width="80"></GridColumn>
+        <GridColumn ColumnName="TRANSFER_DATE" ColumnType="Date" ColumnFormt="yyyy-MM-dd" Width="80" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="STOR_LOC_FROM" Width="130"></GridColumn>
+        <GridColumn ColumnName="STOR_LOC_TO" Width="130"></GridColumn>
+        <GridColumn ColumnName="CUSTOMER_ID" Width="60"></GridColumn>
+        <GridColumn ColumnName="CUSTOMER_NAME" Width="180"></GridColumn>
+        <GridColumn ColumnName="RESER_ITEM" Width="80"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="250"></GridColumn>
+        <GridColumn ColumnName="CHECK_GRADE_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="PLAN_AMOUNT" Width="60"></GridColumn>
+        <GridColumn ColumnName="TRANSFER_AMOUNT" Width="60" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="FULL_BATCH" Width="80"></GridColumn>
+        <GridColumn ColumnName="DETAIL_BATCH" Width="60" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="BATCH_AMOUNT" Width="60"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME" Width="60" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="MAIN_STATE_CAPTION" Width="60"></GridColumn>
+        <GridColumn ColumnName="AFFIRM_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="AFFIRM_USER_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="UPDATE_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="UPDATE_USER_NAME" Width="60" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="REMARK" IsShow="false" Width="180"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+    <MainDetail>
+      <ParamFields>
+        <ParamField FieldName="OBJID" IsShow="false"></ParamField>
+        <ParamField FieldName="BILL_TYPE_CAPTION"></ParamField>
+        <ParamField FieldName="RESER_NO"></ParamField>
+        <ParamField FieldName="DEMONDS_DATE_SHOW" Type="DateBox"></ParamField>
+        <ParamField FieldName="TRANSFER_DATE" Type="DateBox" IsShow="false"></ParamField>
+        <ParamField FieldName="RESER_ITEM"></ParamField>
+        <ParamField FieldName="STOR_LOC_FROM"></ParamField>
+        <ParamField FieldName="STOR_LOC_TO"></ParamField>
+        <ParamField FieldName="CUSTOMER_ID"></ParamField>
+        <ParamField FieldName="CUSTOMER_NAME"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="CHECK_GRADE_NAME"></ParamField>
+        <ParamField FieldName="PLAN_AMOUNT"></ParamField>
+        <ParamField FieldName="TRANSFER_AMOUNT" IsShow="false"></ParamField>
+        <ParamField FieldName="FULL_BATCH"></ParamField>
+        <ParamField FieldName="DETAIL_BATCH" IsShow="false"></ParamField>
+        <ParamField FieldName="BATCH_AMOUNT"></ParamField>
+        <ParamField FieldName="RECORD_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="RECORD_USER_NAME" IsShow="false"></ParamField>
+        <ParamField FieldName="MAIN_STATE_CAPTION"></ParamField>
+        <ParamField FieldName="AFFIRM_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="AFFIRM_USER_NAME"></ParamField>
+        <ParamField FieldName="UPDATE_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="UPDATE_USER_NAME"></ParamField>
+        <ParamField FieldName="REMARK" IsShow="false"></ParamField>
+      </ParamFields>
+    </MainDetail>
+    <DetailGrid Width="800">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="TYRE_NO" Width="100"></GridColumn>
+        <GridColumn ColumnName="GREEN_TYRE_NO" Width="100"></GridColumn>
+        <GridColumn ColumnName="FULL_BATCH" Width="60"></GridColumn>
+        <GridColumn ColumnName="RESER_NO" Width="80"></GridColumn>
+        <GridColumn ColumnName="DEMONDS_DATE_SHOW" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="120" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="RESER_ITEM" Width="80"></GridColumn>
+        <GridColumn ColumnName="STORE_NAME" Width="130"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE_NAME" Width="130"></GridColumn>
+        <GridColumn ColumnName="STOR_LOC_FROM" Width="130"></GridColumn>
+        <GridColumn ColumnName="STOR_LOC_TO" Width="130"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="250"></GridColumn>
+        <GridColumn ColumnName="CHECK_GRADE_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="DETAIL_STATE_CAPTION" Width="100"></GridColumn>
+        <GridColumn ColumnName="UPDATE_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="UPDATE_USER_NAME" Width="100" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="REMARK" Width="180" IsShow="false"></GridColumn>
+      </GridColumns>
+    </DetailGrid>
+  </Select>
+</UiConfig>

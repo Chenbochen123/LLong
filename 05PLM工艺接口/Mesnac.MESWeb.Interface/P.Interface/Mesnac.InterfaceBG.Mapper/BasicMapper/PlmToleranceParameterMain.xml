@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.InterfaceBG.Mapper.BasicMapper.PlmToleranceParameterMain"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="PlmToleranceParameterMain" type="Mesnac.InterfaceBG.Entity.BasicEntity.PlmToleranceParameterMain, Mesnac.InterfaceBG.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_PlmToleranceParameterMain" class="PlmToleranceParameterMain">
+    <result property="Createuser" column="CREATEUSER"/>
+    <result property="Modifier" column="MODIFIER"/>
+    <result property="Createdate" column="CREATEDATE"/>
+    <result property="Sections" column="SECTIONS"/>
+    <result property="Classification" column="CLASSIFICATION"/>
+    <result property="Werks" column="WERKS"/>
+    <result property="Factory" column="FACTORY"/>
+    <result property="Parmname" column="PARMNAME"/>
+    <result property="Parcode" column="PARCODE"/>
+    <result property="Valuemax" column="VALUEMAX"/>
+    <result property="Valuemin" column="VALUEMIN"/>
+    <result property="Valuemaxsign" column="VALUEMAXSIGN"/>
+    <result property="Valueminsign" column="VALUEMINSIGN"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="Dummy5" column="DUMMY5"/>
+    <result property="Dummy6" column="DUMMY6"/>
+    <result property="Dummy7" column="DUMMY7"/>
+    <result property="Dummy8" column="DUMMY8"/>
+    <result property="Dummy9" column="DUMMY9"/>
+    <result property="Deleteflag" column="DELETEFLAG"/>
+    <result property="Processname" column="PROCESSNAME"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_PlmToleranceParameterMain" class="PlmToleranceParameterMain">
+    <parameter property="Createuser" column="Createuser"/>
+    <parameter property="Modifier" column="Modifier"/>
+    <parameter property="Createdate" column="Createdate"/>
+    <parameter property="Sections" column="Sections"/>
+    <parameter property="Classification" column="Classification"/>
+    <parameter property="Werks" column="Werks"/>
+    <parameter property="Factory" column="Factory"/>
+    <parameter property="Parmname" column="Parmname"/>
+    <parameter property="Parcode" column="Parcode"/>
+    <parameter property="Valuemax" column="Valuemax"/>
+    <parameter property="Valuemin" column="Valuemin"/>
+    <parameter property="Valuemaxsign" column="Valuemaxsign"/>
+    <parameter property="Valueminsign" column="Valueminsign"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="Dummy5" column="Dummy5"/>
+    <parameter property="Dummy6" column="Dummy6"/>
+    <parameter property="Dummy7" column="Dummy7"/>
+    <parameter property="Dummy8" column="Dummy8"/>
+    <parameter property="Dummy9" column="Dummy9"/>
+    <parameter property="Deleteflag" column="Deleteflag"/>
+    <parameter property="Processname" column="Processname"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PLM_TOLERANCE_PARAMETER_MAIN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.Createuser" prepend="AND">
+          <![CDATA[CREATEUSER = #where.Createuser#]]>
+        </isNotNull>
+        <isNotNull property="where.Modifier" prepend="AND">
+          <![CDATA[MODIFIER = #where.Modifier#]]>
+        </isNotNull>
+        <isNotNull property="where.Createdate" prepend="AND">
+          <![CDATA[CREATEDATE = #where.Createdate#]]>
+        </isNotNull>
+        <isNotNull property="where.Sections" prepend="AND">
+          <![CDATA[SECTIONS = #where.Sections#]]>
+        </isNotNull>
+        <isNotNull property="where.Classification" prepend="AND">
+          <![CDATA[CLASSIFICATION = #where.Classification#]]>
+        </isNotNull>
+        <isNotNull property="where.Werks" prepend="AND">
+          <![CDATA[WERKS = #where.Werks#]]>
+        </isNotNull>
+        <isNotNull property="where.Factory" prepend="AND">
+          <![CDATA[FACTORY = #where.Factory#]]>
+        </isNotNull>
+        <isNotNull property="where.Parmname" prepend="AND">
+          <![CDATA[PARMNAME = #where.Parmname#]]>
+        </isNotNull>
+        <isNotNull property="where.Parcode" prepend="AND">
+          <![CDATA[PARCODE = #where.Parcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Valuemax" prepend="AND">
+          <![CDATA[VALUEMAX = #where.Valuemax#]]>
+        </isNotNull>
+        <isNotNull property="where.Valuemin" prepend="AND">
+          <![CDATA[VALUEMIN = #where.Valuemin#]]>
+        </isNotNull>
+        <isNotNull property="where.Valuemaxsign" prepend="AND">
+          <![CDATA[VALUEMAXSIGN = #where.Valuemaxsign#]]>
+        </isNotNull>
+        <isNotNull property="where.Valueminsign" prepend="AND">
+          <![CDATA[VALUEMINSIGN = #where.Valueminsign#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy7" prepend="AND">
+          <![CDATA[DUMMY7 = #where.Dummy7#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy8" prepend="AND">
+          <![CDATA[DUMMY8 = #where.Dummy8#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy9" prepend="AND">
+          <![CDATA[DUMMY9 = #where.Dummy9#]]>
+        </isNotNull>
+        <isNotNull property="where.Deleteflag" prepend="AND">
+          <![CDATA[DELETEFLAG = #where.Deleteflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Processname" prepend="AND">
+          <![CDATA[PROCESSNAME = #where.Processname#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE ( = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO PLM_TOLERANCE_PARAMETER_MAIN]]>
+       <dynamic prepend="(">
+        <isNotNull property="Createuser" prepend=",">CREATEUSER</isNotNull>
+        <isNotNull property="Modifier" prepend=",">MODIFIER</isNotNull>
+        <isNotNull property="Createdate" prepend=",">CREATEDATE</isNotNull>
+        <isNotNull property="Sections" prepend=",">SECTIONS</isNotNull>
+        <isNotNull property="Classification" prepend=",">CLASSIFICATION</isNotNull>
+        <isNotNull property="Werks" prepend=",">WERKS</isNotNull>
+        <isNotNull property="Factory" prepend=",">FACTORY</isNotNull>
+        <isNotNull property="Parmname" prepend=",">PARMNAME</isNotNull>
+        <isNotNull property="Parcode" prepend=",">PARCODE</isNotNull>
+        <isNotNull property="Valuemax" prepend=",">VALUEMAX</isNotNull>
+        <isNotNull property="Valuemin" prepend=",">VALUEMIN</isNotNull>
+        <isNotNull property="Valuemaxsign" prepend=",">VALUEMAXSIGN</isNotNull>
+        <isNotNull property="Valueminsign" prepend=",">VALUEMINSIGN</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">DUMMY5</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">DUMMY6</isNotNull>
+        <isNotNull property="Dummy7" prepend=",">DUMMY7</isNotNull>
+        <isNotNull property="Dummy8" prepend=",">DUMMY8</isNotNull>
+        <isNotNull property="Dummy9" prepend=",">DUMMY9</isNotNull>
+        <isNotNull property="Deleteflag" prepend=",">DELETEFLAG</isNotNull>
+        <isNotNull property="Processname" prepend=",">PROCESSNAME</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="Createuser" prepend=",">#Createuser#</isNotNull>
+        <isNotNull property="Modifier" prepend=",">#Modifier#</isNotNull>
+        <isNotNull property="Createdate" prepend=",">#Createdate#</isNotNull>
+        <isNotNull property="Sections" prepend=",">#Sections#</isNotNull>
+        <isNotNull property="Classification" prepend=",">#Classification#</isNotNull>
+        <isNotNull property="Werks" prepend=",">#Werks#</isNotNull>
+        <isNotNull property="Factory" prepend=",">#Factory#</isNotNull>
+        <isNotNull property="Parmname" prepend=",">#Parmname#</isNotNull>
+        <isNotNull property="Parcode" prepend=",">#Parcode#</isNotNull>
+        <isNotNull property="Valuemax" prepend=",">#Valuemax#</isNotNull>
+        <isNotNull property="Valuemin" prepend=",">#Valuemin#</isNotNull>
+        <isNotNull property="Valuemaxsign" prepend=",">#Valuemaxsign#</isNotNull>
+        <isNotNull property="Valueminsign" prepend=",">#Valueminsign#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">#Dummy5#</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">#Dummy6#</isNotNull>
+        <isNotNull property="Dummy7" prepend=",">#Dummy7#</isNotNull>
+        <isNotNull property="Dummy8" prepend=",">#Dummy8#</isNotNull>
+        <isNotNull property="Dummy9" prepend=",">#Dummy9#</isNotNull>
+        <isNotNull property="Deleteflag" prepend=",">#Deleteflag#</isNotNull>
+        <isNotNull property="Processname" prepend=",">#Processname#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE PLM_TOLERANCE_PARAMETER_MAIN
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Createuser"  prepend=",">
+          CREATEUSER = #update.Createuser#
+        </isNotNull>
+        <isNotNull  property="update.Modifier"  prepend=",">
+          MODIFIER = #update.Modifier#
+        </isNotNull>
+        <isNotNull  property="update.Createdate"  prepend=",">
+          CREATEDATE = #update.Createdate#
+        </isNotNull>
+        <isNotNull  property="update.Sections"  prepend=",">
+          SECTIONS = #update.Sections#
+        </isNotNull>
+        <isNotNull  property="update.Classification"  prepend=",">
+          CLASSIFICATION = #update.Classification#
+        </isNotNull>
+        <isNotNull  property="update.Werks"  prepend=",">
+          WERKS = #update.Werks#
+        </isNotNull>
+        <isNotNull  property="update.Factory"  prepend=",">
+          FACTORY = #update.Factory#
+        </isNotNull>
+        <isNotNull  property="update.Parmname"  prepend=",">
+          PARMNAME = #update.Parmname#
+        </isNotNull>
+        <isNotNull  property="update.Parcode"  prepend=",">
+          PARCODE = #update.Parcode#
+        </isNotNull>
+        <isNotNull  property="update.Valuemax"  prepend=",">
+          VALUEMAX = #update.Valuemax#
+        </isNotNull>
+        <isNotNull  property="update.Valuemin"  prepend=",">
+          VALUEMIN = #update.Valuemin#
+        </isNotNull>
+        <isNotNull  property="update.Valuemaxsign"  prepend=",">
+          VALUEMAXSIGN = #update.Valuemaxsign#
+        </isNotNull>
+        <isNotNull  property="update.Valueminsign"  prepend=",">
+          VALUEMINSIGN = #update.Valueminsign#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.Dummy5"  prepend=",">
+          DUMMY5 = #update.Dummy5#
+        </isNotNull>
+        <isNotNull  property="update.Dummy6"  prepend=",">
+          DUMMY6 = #update.Dummy6#
+        </isNotNull>
+        <isNotNull  property="update.Dummy7"  prepend=",">
+          DUMMY7 = #update.Dummy7#
+        </isNotNull>
+        <isNotNull  property="update.Dummy8"  prepend=",">
+          DUMMY8 = #update.Dummy8#
+        </isNotNull>
+        <isNotNull  property="update.Dummy9"  prepend=",">
+          DUMMY9 = #update.Dummy9#
+        </isNotNull>
+        <isNotNull  property="update.Deleteflag"  prepend=",">
+          DELETEFLAG = #update.Deleteflag#
+        </isNotNull>
+        <isNotNull  property="update.Processname"  prepend=",">
+          PROCESSNAME = #update.Processname#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM PLM_TOLERANCE_PARAMETER_MAIN
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_PlmToleranceParameterMain">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_PlmToleranceParameterMain">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max()
+      </isNotPropertyAvailable>
+      FROM PLM_TOLERANCE_PARAMETER_MAIN
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM PLM_TOLERANCE_PARAMETER_MAIN
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_PlmToleranceParameterMain" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE PLM_TOLERANCE_PARAMETER_MAIN
+    </statement>
+  </statements>
+</sqlMap>

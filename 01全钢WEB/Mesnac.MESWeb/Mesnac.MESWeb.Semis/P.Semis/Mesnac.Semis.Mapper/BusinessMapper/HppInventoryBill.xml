@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HppInventoryBill"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_INVENTORY_BILL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BillCode" prepend="AND">
+          <![CDATA[BILL_CODE = #where.BillCode#]]>
+        </isNotNull>
+        <isNotNull property="where.InventoryDate" prepend="AND">
+          <![CDATA[INVENTORY_DATE = #where.InventoryDate#]]>
+        </isNotNull>
+        <isNotNull property="where.InventoryTime" prepend="AND">
+          <![CDATA[INVENTORY_TIME = #where.InventoryTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateUserId" prepend="AND">
+          <![CDATA[UPDATE_USER_ID = #where.UpdateUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmTime" prepend="AND">
+          <![CDATA[AFFIRM_TIME = #where.AffirmTime#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmUserId" prepend="AND">
+          <![CDATA[AFFIRM_USER_ID = #where.AffirmUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.BillState" prepend="AND">
+          <![CDATA[BILL_STATE = #where.BillState#]]>
+        </isNotNull>
+        <isNotNull property="where.BillType" prepend="AND">
+          <![CDATA[BILL_TYPE = #where.BillType#]]>
+        </isNotNull>
+        <isNotNull property="where.InventoryAmount" prepend="AND">
+          <![CDATA[INVENTORY_AMOUNT = #where.InventoryAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY_5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY_6 = #where.Dummy6#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+
+     <select id="GetInventoryBill" parameterClass="map" resultClass="Row">
+       <![CDATA[
+           SELECT T.OBJID,T.BILL_CODE,T.BILL_TYPE,T.INVENTORY_AMOUNT,
+          CASE T.BILL_STATE WHEN 0 THEN '新建' WHEN 1 THEN '正在盘点' WHEN 4 THEN '异常终止' 
+          WHEN 8 THEN '盘点完成' ELSE '其他' END BILL_STATE,T.RECORD_TIME,
+          CASE T.DUMMY_2 WHEN 0 THEN '工字轮' WHEN 1 THEN '百叶车' ELSE '' END STORE_TYPE,
+          T2.USER_NAME,T3.STORE_PLACE_NAME,T3.OBJID STOREPLACEID, T3.DUMMY_1 AMOUNT  FROM HPP_INVENTORY_BILL T
+          LEFT JOIN SSB_USER T2 ON T.RECORD_USER_ID=T2.OBJID
+          LEFT JOIN HPP_STORE_PLACE T3 ON T.DUMMY_1=T3.OBJID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="StorePlaceID" prepend="AND">
+           <![CDATA[T.DUMMY_1=#StorePlaceID# ]]>
+         </isNotNull>
+         <isNotNull property="DATE" prepend="AND">
+           <![CDATA[T.INVENTORY_DATE>=TO_DATE(#DATE#,'yyyy-MM-dd') ]]>
+         </isNotNull>
+         <isNotNull property="BillState" prepend="AND">
+           <![CDATA[T.BILL_STATE=#BillState# ]]>
+         </isNotNull>
+       </dynamic>
+       <isNotNull property="OrderString" prepend="">
+         ORDER BY $OrderString$
+       </isNotNull>
+     </select>
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     
+     <!--轮辋模块begin-->
+     <select id="GetRimBaseType" parameterClass="map" resultClass="Row">
+       <![CDATA[
+  select distinct item from rim_baseinfo where delete_flag = 0
+       ]]>
+     </select>
+     
+     <select id="GetRimBaseInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select a.*,b.user_name  from  rim_baseinfo a
+left join ssb_user b on a.record_userid = b.objid 
+where a.delete_flag = 0 
+       ]]>
+         <isNotNull property="where.Type" prepend="AND">
+           <![CDATA[a.item=#where.Type# ]]>
+         </isNotNull>
+       <![CDATA[order by item,a.record_time ]]>
+     </select>
+
+     <insert id="InsertRimBase" parameterClass="map" resultClass="Row">
+       <![CDATA[
+ insert into rim_baseinfo(objid,item,value,record_userid) values(seq_rim_baseinfo.nextval,#Item#,#Value#,#UserId#)
+       ]]>
+     </insert>
+     <update id="UpdateRimBase" parameterClass="map" >
+       <![CDATA[
+update rim_baseinfo set item = #item#,value = #value#,record_userid=#UserId#,record_time = sysdate  where objid = #objid#
+       ]]>
+     </update>
+     <update id="DeleteRimBase" parameterClass="map" >
+       <![CDATA[
+update rim_baseinfo set delete_flag = 1,record_userid=#UserId# ,record_time = sysdate  where objid = #objid#
+       ]]>
+     </update>
+     
+     
+     <select id="GetRimInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      select a.*,b.material_full_name material_name,e.user_name,c.store_name,d.storeplace_name from rim_info a
+left join sbm_material b on a.mater_sap = b.sap_code and b.delete_flag = 0
+left join rim_store c on c.objid = a.store_id and c.delete_flag=0
+left join rim_storeplace d on d.objid = a.storeplace_id and d.delete_flag = 0
+left join ssb_user e on e.objid = a.record_userid
+where a.delete_flag = 0 
+       ]]>
+       <isNotNull property="where.Type" prepend="AND">
+         <![CDATA[a.type=#where.Type# ]]>
+       </isNotNull>
+       <isNotNull property="where.state" prepend="AND">
+         <![CDATA[a.state=#where.state# ]]>
+       </isNotNull>
+       <isNotNull property="where.place" prepend="AND">
+         <![CDATA[a.storeplace_id=#where.place# ]]>
+       </isNotNull>
+       <isNotNull property="where.lwcode" prepend="AND">
+         <![CDATA[a.lw_code like '%' ||#where.lwcode# || '%' ]]>
+       </isNotNull>
+       <isNotNull property="where.dc" prepend="AND">
+         <![CDATA[a.dc like '%' ||#where.dc# || '%' ]]>
+       </isNotNull>
+       <isNotNull property="where.ck" prepend="AND">
+         <![CDATA[a.ck like '%' ||#where.ck# || '%' ]]>
+       </isNotNull>
+       <isNotNull property="objid" prepend="AND">
+         <![CDATA[a.objid=#objid# ]]>
+       </isNotNull>
+       <![CDATA[ order by a.type,a.lw_code ]]>
+     </select>
+     
+      <select id="GetRimType" parameterClass="map" resultClass="Row">
+       <![CDATA[select distinct value from rim_baseinfo where item = '轮辋类型' and delete_flag = 0
+       ]]>
+     </select>
+       <select id="GetRimFac" parameterClass="map" resultClass="Row">
+       <![CDATA[  select distinct value from rim_baseinfo where item = '轮辋生产厂家' and delete_flag = 0
+       ]]>
+     </select>
+       <select id="GetRimSupplier" parameterClass="map" resultClass="Row">
+       <![CDATA[  select distinct value from rim_baseinfo where item = '轮辋供应商' and delete_flag = 0
+       ]]>
+     </select>
+       <select id="GetRimSStore" parameterClass="map" resultClass="Row">
+       <![CDATA[  
+select objid,store_name from rim_store where delete_flag = 0 
+       ]]>
+     </select>
+       <select id="GetRimSStorePlace" parameterClass="map" resultClass="Row">
+       <![CDATA[  
+select objid,storeplace_name from rim_storeplace where delete_flag = 0 
+       ]]>
+     </select>
+       <select id="GetRimState" parameterClass="map" resultClass="Row">
+       <![CDATA[  select distinct value from rim_baseinfo where item = '轮辋状态' and delete_flag = 0
+       ]]>
+     </select>
+         <insert id="InsertRimInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ insert into rim_info (objid,lw_code,type,dc,ck,factory,mater_sap,store_id,storeplace_id,state,supplier,remark,record_userid)
+  values(seq_rim_info.nextval,#lwcode#,#type#,#dc#,#ck#,#fac#,#sap#,#storeid#,#storeplaceid#,#state#,#sup#,#remark#,#UserId#)
+       ]]>
+     </insert>
+     <update id="UpdateRimInfo" parameterClass="map" >
+       <![CDATA[update rim_info set lw_code = #lw_code#,type=#type#,dc=#dc#,ck=#ck#,factory=#fac#,mater_sap=#sap#,store_id=#storeid#,storeplace_id=#storeplaceid#,state=#state#,
+       supplier=#sup#,remark=#remark#,record_userid=#UserId#,record_time=sysdate where objid = #objid#
+       ]]>
+     </update>
+     
+     <update id="DeleteRimInfo" parameterClass="map" >
+       <![CDATA[
+update rim_info set delete_flag = 1,record_userid=#UserId# ,record_time = sysdate  where objid = #objid#
+       ]]>
+     </update>
+
+     <select id="GetRimStore" parameterClass="map" resultClass="Row">
+       <![CDATA[
+   select  a.*,b.user_name  from  rim_store a
+left join ssb_user b on a.record_userid= b.objid
+where a.delete_flag = 0
+       ]]>
+       <isNotNull property="where.code" prepend="AND">
+         <![CDATA[a.store_code like '%' || #where.code# || '%' ]]>
+       </isNotNull>
+       <isNotNull property="where.name" prepend="AND">
+         <![CDATA[a.store_name like '%' || #where.name# || '%' ]]>
+       </isNotNull>
+       <![CDATA[order by store_code,store_name ]]>
+     </select>
+
+     <insert id="InsertRimStore" parameterClass="map" resultClass="Row">
+       <![CDATA[insert into rim_store(objid,store_code,store_name,num,record_userid,remark)
+values(seq_rim_store.nextval,#code#,#name#,#num#,#UserId#,#remark#)
+       ]]>
+     </insert>
+     <update id="UpdateRimStore" parameterClass="map" >
+       <![CDATA[
+update rim_store set store_code = #code#,store_name = #name#,num=#num#,record_userid=#UserId#,record_time = sysdate,remark=#remark# where objid = #objid#
+       ]]>
+     </update>
+     <update id="DeleteRimStore" parameterClass="map" >
+       <![CDATA[
+update rim_store set delete_flag = 1,record_userid=#UserId# ,record_time = sysdate  where objid = #objid#
+       ]]>
+     </update>
+
+
+     <select id="GetRimPlace" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select a.*,b.store_name,c.user_name from rim_storeplace a 
+left join rim_store b on a.store_id = b.objid
+left join ssb_user c on c.objid = a.record_userid
+where a.delete_flag = 0 
+       ]]>
+       <isNotNull property="objid" prepend="AND">
+         <![CDATA[a.objid = #objid# ]]>
+       </isNotNull>
+       <isNotNull property="where.store" prepend="AND">
+         <![CDATA[a.store_id = #where.store#]]>
+       </isNotNull>
+       <isNotNull property="where.code" prepend="AND">
+         <![CDATA[a.storeplace_code like '%' || #where.code# || '%' ]]>
+       </isNotNull>
+       <isNotNull property="where.name" prepend="AND">
+         <![CDATA[a.storeplace_name like '%' || #where.name# || '%' ]]>
+       </isNotNull>
+       <![CDATA[order by store_code,store_name ]]>
+     </select>
+     <insert id="InsertRimPlace" parameterClass="map" resultClass="Row">
+       <![CDATA[insert into rim_storeplace(objid,store_id,storeplace_code,storeplace_name,type,num,remark,record_userid)
+values(seq_rim_storeplace.nextval,#storeid#,#code#,#name#,#type#,#num#,#remark#,#UserId#)
+       ]]>
+     </insert>
+     <update id="UpdateRimPlace" parameterClass="map" >
+       <![CDATA[update rim_storeplace set store_id = #storeid#,storeplace_code = #code#,storeplace_name = #name#,type = #type#,num = #num#,remark = #remark#,
+record_userid = #UserId#,record_time = sysdate where objid = #objid#
+       ]]>
+     </update>
+
+     <update id="DeleteRimPlace" parameterClass="map" >
+       <![CDATA[
+update rim_storeplace set delete_flag = 1,record_userid=#UserId# ,record_time = sysdate  where objid = #objid#
+       ]]>
+     </update>
+
+     <select id="GetRimStorage" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select a.*,b.store_name,c.storeplace_name,c.remark place_remark from rim_info a
+left join rim_store b on a.store_id = b.objid
+left join rim_storeplace c on a.storeplace_id = c.objid
+where a.delete_flag = 0 
+
+       ]]>
+       <isNotNull property="where.storeid" prepend="AND">
+         <![CDATA[a.store_id = #where.storeid#]]>
+       </isNotNull>
+       <isNotNull property="where.placeid" prepend="AND">
+         <![CDATA[a.storeplace_id = #where.placeid#]]>
+       </isNotNull>
+       <isNotNull property="where.type" prepend="AND">
+         <![CDATA[a.type = #where.type#]]>
+       </isNotNull>
+       <isNotNull property="where.sap" prepend="AND">
+         <![CDATA[a.mater_sap like '%' || #where.sap# || '%' ]]>
+       </isNotNull>
+       <isNotNull property="where.dc" prepend="AND">
+         <![CDATA[a.dc like '%' || #where.dc# || '%' ]]>
+       </isNotNull>
+       <isNotNull property="where.ck" prepend="AND">
+         <![CDATA[a.ck like '%' || #where.ck# || '%' ]]>
+       </isNotNull>
+       <![CDATA[order by store_name,storeplace_name]]>
+     </select>
+
+     <select id="GetRimInOutRecord" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select a.*,b.lw_code,c.storeplace_name old_place,d.storeplace_name new_place,e.user_name,
+b.type lw_type,b.mater_sap,f.material_full_name material_name,b.dc,b.ck
+  from  rim_inoutrecord a
+left join rim_info b on a.lw_id = b.objid
+left join rim_storeplace c on a.old_storeplaceid = c.objid
+left join rim_storeplace d on a.new_storeplaceid = d.objid
+left join ssb_user e on e.objid = a.record_userid
+left join sbm_material f on f.sap_code = b.mater_sap
+where a.record_time>=to_date(#where.begintime#,'yyyy-MM-dd hh24:mi:ss') and a.record_time<=to_date(#where.endtime#,'yyyy-MM-dd hh24:mi:ss') 
+       ]]>
+       <isNotNull property="where.oldplace" prepend="AND">
+         <![CDATA[a.old_storeplaceid = #where.oldplace#]]>
+       </isNotNull>
+       <isNotNull property="where.newplace" prepend="AND">
+         <![CDATA[a.new_storeplaceid = #where.newplace#]]>
+       </isNotNull>
+       <isNotNull property="where.sap" prepend="AND">
+         <![CDATA[b.mater_sap like '%' || #where.sap# || '%' ]]>
+       </isNotNull>
+       <isNotNull property="where.lwcode" prepend="AND">
+         <![CDATA[b.lw_code = #where.lwcode# ]]>
+       </isNotNull>
+       <![CDATA[order by a.record_time]]>
+     </select>
+
+
+     <select id="GetRimEquipRecord" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select  a.*,b.equip_name,c.lw_code,d.user_name up_username,e.user_name down_username
+,c.type,c.mater_sap,f.material_full_name material_name
+  from rim_equiprecord a
+left join sbe_equip b on a.equip_id = b.objid
+left join rim_info c on c.objid = a.lw_id
+left join ssb_user d on  a.uprecord_userid = d.objid
+left join ssb_user e on a.downrecord_userid = e.objid
+left join sbm_material f on f.sap_code = c.mater_sap and f.delete_flag = 0
+where a.uprecord_time>=to_date(#where.begintime#,'yyyy-MM-dd hh24:mi:ss') and a.uprecord_time<=to_date(#where.endtime#,'yyyy-MM-dd hh24:mi:ss') 
+       ]]>
+       <isNotNull property="where.sap" prepend="AND">
+         <![CDATA[c.mater_sap like '%' || #where.sap# || '%' ]]>
+       </isNotNull>
+       <isNotNull property="where.lwcode" prepend="AND">
+         <![CDATA[c.lw_code = #where.lwcode# ]]>
+       </isNotNull>
+       <![CDATA[order by a.uprecord_time]]>
+     </select>
+     
+        <select id="GetRimRepair" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select  a.*,b.lw_code,c.user_name begin_user,d.user_name end_user from rim_repairrecord a
+left join rim_info b on a.lw_id=b.objid
+left join ssb_user c on c.objid = a.begin_userid
+left join ssb_user d on d.objid = a.end_userid
+where a.begin_time>=to_date(#where.begintime#,'yyyy-MM-dd hh24:mi:ss') and a.end_time<=to_date(#where.endtime#,'yyyy-MM-dd hh24:mi:ss') 
+       ]]>
+       <isNotNull property="where.lwcode" prepend="AND">
+         <![CDATA[b.lw_code = #where.lwcode# ]]>
+       </isNotNull>
+       <![CDATA[order by a.begin_time]]>
+     </select>
+
+     <select id="GetRimLvlLi" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select x.*,y.lw_code,y.mater_sap,y.type lw_type,y.dc,y.ck,y.factory SC_fac from (
+select a.lw_id,a.type,a.record_time,d.user_name,b.storeplace_name old_place,c.storeplace_name new_place,'' num,'' factory,'' equip from rim_inoutrecord a
+left join rim_storeplace b on b.objid = a.old_storeplaceid
+left join rim_storeplace c on c.objid = a.new_storeplaceid
+left join ssb_user d on d.objid = a.record_userid
+union all
+select t.lw_id,to_nchar(t.type),t.record_time,b.user_name,null,null,to_char(t.num),null,to_char(c.equip_name) from (
+select a.lw_id,case when a.downrecord_userid is null then '轮辋上机' else '轮辋下机' end type,
+case when a.downrecord_userid is null then a.uprecord_time else downrecord_time end record_time,
+case when a.downrecord_userid is null then a.uprecord_userid else a.downrecord_userid end record_userid,a.num,a.equip_id
+   from rim_equiprecord a) t
+  left join ssb_user b on b.objid = t.record_userid
+  left join sbe_equip c on c.objid = t.equip_id
+union all
+select a.lw_id,a.item,a.begin_time,b.user_name,null,null,null,to_char(a.factory),null from rim_repairrecord a
+left join ssb_user b on b.objid = a.begin_userid
+union all
+select lw_id,item,a.record_time,b.user_name,null,null,null,null,null from rim_clean a
+left join ssb_user b on b.objid = a.record_userid
+) x
+left join rim_info y on x.lw_id = y.objid where x.record_time>=to_date(#where.begintime#,'yyyy-MM-dd hh24:mi:ss') and x.record_time<=to_date(#where.endtime#,'yyyy-MM-dd hh24:mi:ss') 
+       ]]>
+       <isNotNull property="where.lwcode" prepend="AND">
+         <![CDATA[y.lw_code = #where.lwcode# ]]>
+       </isNotNull>
+       <isNotNull property="where.newplacename" prepend="AND">
+         <![CDATA[x.NEW_PLACE = #where.newplacename# ]]>
+       </isNotNull>
+       <isNotNull property="where.sap" prepend="AND">
+         <![CDATA[y.mater_sap like '%'|| #where.sap# ||'%']]>
+       </isNotNull>
+       <![CDATA[order by x.record_time]]>
+     </select>
+     <!--轮辋模块end-->
+  </statements>
+</sqlMap>

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CrtAlarmStandardGrade"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_ALARM_STANDARD_GRADE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.AlarmStandardId" prepend="AND">
+          <![CDATA[ALARM_STANDARD_ID = #where.AlarmStandardId#]]>
+        </isNotNull>
+        <isNotNull property="where.AlarmSetId" prepend="AND">
+          <![CDATA[ALARM_SET_ID = #where.AlarmSetId#]]>
+        </isNotNull>
+        <isNotNull property="where.AlarmItemNo" prepend="AND">
+          <![CDATA[ALARM_ITEM_NO = #where.AlarmItemNo#]]>
+        </isNotNull>
+        <isNotNull property="where.AlarmStep" prepend="AND">
+          <![CDATA[ALARM_STEP = #where.AlarmStep#]]>
+        </isNotNull>
+        <isNotNull property="where.SetMinValue" prepend="AND">
+          <![CDATA[SET_MIN_VALUE = #where.SetMinValue#]]>
+        </isNotNull>
+        <isNotNull property="where.SetMaxValue" prepend="AND">
+          <![CDATA[SET_MAX_VALUE = #where.SetMaxValue#]]>
+        </isNotNull>
+        <isNotNull property="where.IncludeMaxValue" prepend="AND">
+          <![CDATA[INCLUDE_MAX_VALUE = #where.IncludeMaxValue#]]>
+        </isNotNull>
+        <isNotNull property="where.IncludeMinValue" prepend="AND">
+          <![CDATA[INCLUDE_MIN_VALUE = #where.IncludeMinValue#]]>
+        </isNotNull>
+        <isNotNull property="where.SetGradeRemain" prepend="AND">
+          <![CDATA[SET_GRADE_REMAIN = #where.SetGradeRemain#]]>
+        </isNotNull>
+        <isNotNull property="where.SetGradeValue" prepend="AND">
+          <![CDATA[SET_GRADE_VALUE = #where.SetGradeValue#]]>
+        </isNotNull>
+        <isNotNull property="where.Guid" prepend="AND">
+          <![CDATA[GUID = #where.Guid#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <!--查询-->
+     <select id="Select@CrtAlarmDegrade" parameterClass="map" resultClass="row">
+       <![CDATA[
+       SELECT T1.*, T2.USER_NAME RECORD_USER_NAME    
+       , T4.ITEM_NAME ALARM_ITEM_NAME,case t5.GRADENAME when '一级品' then '合格品' when '二级品' then '次品' when '一级品B' then '合格品B' else T5.GRADENAME end GRADENAME
+       FROM CRT_ALARM_STANDARD_GRADE T1 
+       LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+       LEFT JOIN CRT_ALARM_STANDARD T3 ON T1.ALARM_STANDARD_ID = T3.OBJID 
+       LEFT JOIN CRT_ALARM_STANDARD_ITEM T4 ON T1.ALARM_ITEM_NO = T4.OBJID
+       LEFT JOIN FQG_GRADE_INFO T5 ON T1.SET_GRADE_VALUE=T5.GRADE_CODE AND T5.WORK_PROCESS_ID=499
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.ObjId" prepend="AND">
+           <![CDATA[T1.OBJID = #where.OBJID#]]>
+         </isNotNull>
+         <isNotNull property="where.AlarmStandardId" prepend="AND">
+           <![CDATA[T1.ALARM_STANDARD_ID = #where.AlarmStandardId#]]>
+         </isNotNull>
+         <isNotNull property="where.Guid" prepend="AND">
+           <![CDATA[T1.GUID = #where.Guid#]]>
+         </isNotNull>
+         <isNotNull property="where.AlarmStandardType" prepend="AND">
+           <![CDATA[T1.ALARM_STANDARD_TYPE = #where.AlarmStandardType#]]>
+         </isNotNull>
+         <isNotNull property="where.MinorTypeId" prepend="AND">
+           <![CDATA[T1.MINOR_TYPE_ID = #where.MinorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T1.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+       <isNotNull property="OrderString" prepend=" ">
+         ORDER BY $OrderString$
+       </isNotNull>
+     </select>
+
+     <!--拷贝报警设置-->
+     <statement id="Copy@CrtAlarmStandardGrade" parameterClass="map" resultClass="int">
+       insert into CRT_ALARM_STANDARD_GRADE (OBJID, RECORD_USER_ID, RECORD_TIME, DELETE_FLAG, GUID, ALARM_STANDARD_ID,ALARM_ITEM_NO, ALARM_STEP, SET_MIN_VALUE, SET_MAX_VALUE, INCLUDE_MAX_VALUE  , INCLUDE_MIN_VALUE, SET_GRADE_REMAIN,SET_GRADE_VALUE)
+       select SEQ_CRT_ALARM_STANDARD_GRADE.nextval, #RecordUserId#, sysdate, 0, #Guid#, ALARM_STANDARD_ID,ALARM_ITEM_NO, ALARM_STEP, SET_MIN_VALUE, SET_MAX_VALUE, INCLUDE_MAX_VALUE  , INCLUDE_MIN_VALUE, SET_GRADE_REMAIN,SET_GRADE_VALUE
+       from CRT_ALARM_STANDARD_GRADE
+       where DELETE_FLAG = 0
+       and ALARM_STANDARD_ID = #AlarmStandardId#
+     </statement>
+  </statements>
+</sqlMap>

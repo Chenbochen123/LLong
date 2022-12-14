@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ll.com/WMS" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://ll.com/WMS" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ll.com/WMS">
+      <s:element name="doSynchronize">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="do_Sync" type="tns:ArrayOfLockBarcode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLockBarcode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LockBarcode" nillable="true" type="tns:LockBarcode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LockBarcode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="whId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="barcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="lockflag" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="lockid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="reason" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="locktime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sourcecode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="attribute1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="attribute2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="attribute3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="attribute4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="attribute5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="attribute6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="attribute7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="attribute8" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="attribute9" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="attribute10" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="doSynchronizeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="doSynchronizeResult" type="tns:ArrayOfLockBarcode_Resp" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLockBarcode_Resp">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LockBarcode_Resp" nillable="true" type="tns:LockBarcode_Resp" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LockBarcode_Resp">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="whId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="barcode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="processStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="processMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="doSynchronizeSoapIn">
+    <wsdl:part name="parameters" element="tns:doSynchronize" />
+  </wsdl:message>
+  <wsdl:message name="doSynchronizeSoapOut">
+    <wsdl:part name="parameters" element="tns:doSynchronizeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LockBarcodeSyncSoap">
+    <wsdl:operation name="doSynchronize">
+      <wsdl:input message="tns:doSynchronizeSoapIn" />
+      <wsdl:output message="tns:doSynchronizeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="LockBarcodeSyncHttpGet" />
+  <wsdl:portType name="LockBarcodeSyncHttpPost" />
+  <wsdl:binding name="LockBarcodeSyncSoap" type="tns:LockBarcodeSyncSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="doSynchronize">
+      <soap:operation soapAction="http://ll.com/WMS/doSynchronize" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LockBarcodeSyncSoap12" type="tns:LockBarcodeSyncSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="doSynchronize">
+      <soap12:operation soapAction="http://ll.com/WMS/doSynchronize" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LockBarcodeSyncHttpGet" type="tns:LockBarcodeSyncHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="LockBarcodeSyncHttpPost" type="tns:LockBarcodeSyncHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="LockBarcodeSync">
+    <wsdl:port name="LockBarcodeSyncSoap" binding="tns:LockBarcodeSyncSoap">
+      <soap:address location="http://192.168.126.48:8011/Services/Mes/LockBarcodeSync.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LockBarcodeSyncSoap12" binding="tns:LockBarcodeSyncSoap12">
+      <soap12:address location="http://192.168.126.48:8011/Services/Mes/LockBarcodeSync.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LockBarcodeSyncHttpGet" binding="tns:LockBarcodeSyncHttpGet">
+      <http:address location="http://192.168.126.48:8011/Services/Mes/LockBarcodeSync.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LockBarcodeSyncHttpPost" binding="tns:LockBarcodeSyncHttpPost">
+      <http:address location="http://192.168.126.48:8011/Services/Mes/LockBarcodeSync.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

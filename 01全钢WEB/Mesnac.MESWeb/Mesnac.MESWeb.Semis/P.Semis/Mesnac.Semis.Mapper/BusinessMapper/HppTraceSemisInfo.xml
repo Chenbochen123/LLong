@@ -1,0 +1,751 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HppTraceSemisInfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_TRACE_SEMIS_INFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.CardNo" prepend="AND">
+          <![CDATA[CARD_NO = #where.CardNo#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[EQUIP_NAME = #where.EquipName#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[MATERIAL_NAME = #where.MaterialName#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDate" prepend="AND">
+          <![CDATA[SHIFT_DATE = #where.ShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftName" prepend="AND">
+          <![CDATA[SHIFT_NAME = #where.ShiftName#]]>
+        </isNotNull>
+        <isNotNull property="where.ClassName" prepend="AND">
+          <![CDATA[CLASS_NAME = #where.ClassName#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[BEGIN_TIME = #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[END_TIME = #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserName" prepend="AND">
+          <![CDATA[RECORD_USER_NAME = #where.RecordUserName#]]>
+        </isNotNull>
+        <isNotNull property="where.Qty" prepend="AND">
+          <![CDATA[QTY = #where.Qty#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftQty" prepend="AND">
+          <![CDATA[LEFT_QTY = #where.LeftQty#]]>
+        </isNotNull>
+        <isNotNull property="where.WasteQty" prepend="AND">
+          <![CDATA[WASTE_QTY = #where.WasteQty#]]>
+        </isNotNull>
+        <isNotNull property="where.UnitName" prepend="AND">
+          <![CDATA[UNIT_NAME = #where.UnitName#]]>
+        </isNotNull>
+        <isNotNull property="where.ShelfNo" prepend="AND">
+          <![CDATA[SHELF_NO = #where.ShelfNo#]]>
+        </isNotNull>
+        <isNotNull property="where.GradeName" prepend="AND">
+          <![CDATA[GRADE_NAME = #where.GradeName#]]>
+        </isNotNull>
+        <isNotNull property="where.StateFlag" prepend="AND">
+          <![CDATA[STATE_FLAG = #where.StateFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckEquipName" prepend="AND">
+          <![CDATA[CHECK_EQUIP_NAME = #where.CheckEquipName#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckShiftName" prepend="AND">
+          <![CDATA[CHECK_SHIFT_NAME = #where.CheckShiftName#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckClassName" prepend="AND">
+          <![CDATA[CHECK_CLASS_NAME = #where.CheckClassName#]]>
+        </isNotNull>
+        <isNotNull property="where.DefectName1" prepend="AND">
+          <![CDATA[DEFECT_NAME1 = #where.DefectName1#]]>
+        </isNotNull>
+        <isNotNull property="where.DefectName2" prepend="AND">
+          <![CDATA[DEFECT_NAME2 = #where.DefectName2#]]>
+        </isNotNull>
+        <isNotNull property="where.DefectName3" prepend="AND">
+          <![CDATA[DEFECT_NAME3 = #where.DefectName3#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckUserName" prepend="AND">
+          <![CDATA[CHECK_USER_NAME = #where.CheckUserName#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckTime" prepend="AND">
+          <![CDATA[CHECK_TIME = #where.CheckTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckRemark" prepend="AND">
+          <![CDATA[CHECK_REMARK = #where.CheckRemark#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckAmount" prepend="AND">
+          <![CDATA[CHECK_AMOUNT = #where.CheckAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckpassUserName" prepend="AND">
+          <![CDATA[CHECKPASS_USER_NAME = #where.CheckpassUserName#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckpassTime" prepend="AND">
+          <![CDATA[CHECKPASS_TIME = #where.CheckpassTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Param1" prepend="AND">
+          <![CDATA[PARAM1 = #where.Param1#]]>
+        </isNotNull>
+        <isNotNull property="where.Param2" prepend="AND">
+          <![CDATA[PARAM2 = #where.Param2#]]>
+        </isNotNull>
+        <isNotNull property="where.Param3" prepend="AND">
+          <![CDATA[PARAM3 = #where.Param3#]]>
+        </isNotNull>
+        <isNotNull property="where.Param4" prepend="AND">
+          <![CDATA[PARAM4 = #where.Param4#]]>
+        </isNotNull>
+        <isNotNull property="where.Param5" prepend="AND">
+          <![CDATA[PARAM5 = #where.Param5#]]>
+        </isNotNull>
+        <isNotNull property="where.Param6" prepend="AND">
+          <![CDATA[PARAM6 = #where.Param6#]]>
+        </isNotNull>
+        <isNotNull property="where.Param7" prepend="AND">
+          <![CDATA[PARAM7 = #where.Param7#]]>
+        </isNotNull>
+        <isNotNull property="where.Param8" prepend="AND">
+          <![CDATA[PARAM8 = #where.Param8#]]>
+        </isNotNull>
+        <isNotNull property="where.Param9" prepend="AND">
+          <![CDATA[PARAM9 = #where.Param9#]]>
+        </isNotNull>
+        <isNotNull property="where.Param10" prepend="AND">
+          <![CDATA[PARAM10 = #where.Param10#]]>
+        </isNotNull>
+        <isNotNull property="where.Param11" prepend="AND">
+          <![CDATA[PARAM11 = #where.Param11#]]>
+        </isNotNull>
+        <isNotNull property="where.Param12" prepend="AND">
+          <![CDATA[PARAM12 = #where.Param12#]]>
+        </isNotNull>
+        <isNotNull property="where.Param13" prepend="AND">
+          <![CDATA[PARAM13 = #where.Param13#]]>
+        </isNotNull>
+        <isNotNull property="where.Param14" prepend="AND">
+          <![CDATA[PARAM14 = #where.Param14#]]>
+        </isNotNull>
+        <isNotNull property="where.Param15" prepend="AND">
+          <![CDATA[PARAM15 = #where.Param15#]]>
+        </isNotNull>
+        <isNotNull property="where.Param16" prepend="AND">
+          <![CDATA[PARAM16 = #where.Param16#]]>
+        </isNotNull>
+        <isNotNull property="where.Param17" prepend="AND">
+          <![CDATA[PARAM17 = #where.Param17#]]>
+        </isNotNull>
+        <isNotNull property="where.Param18" prepend="AND">
+          <![CDATA[PARAM18 = #where.Param18#]]>
+        </isNotNull>
+        <isNotNull property="where.Param19" prepend="AND">
+          <![CDATA[PARAM19 = #where.Param19#]]>
+        </isNotNull>
+        <isNotNull property="where.Param20" prepend="AND">
+          <![CDATA[PARAM20 = #where.Param20#]]>
+        </isNotNull>
+        <isNotNull property="where.Param21" prepend="AND">
+          <![CDATA[PARAM21 = #where.Param21#]]>
+        </isNotNull>
+        <isNotNull property="where.Param22" prepend="AND">
+          <![CDATA[PARAM22 = #where.Param22#]]>
+        </isNotNull>
+        <isNotNull property="where.Param23" prepend="AND">
+          <![CDATA[PARAM23 = #where.Param23#]]>
+        </isNotNull>
+        <isNotNull property="where.Param24" prepend="AND">
+          <![CDATA[PARAM24 = #where.Param24#]]>
+        </isNotNull>
+        <isNotNull property="where.Param25" prepend="AND">
+          <![CDATA[PARAM25 = #where.Param25#]]>
+        </isNotNull>
+        <isNotNull property="where.Param26" prepend="AND">
+          <![CDATA[PARAM26 = #where.Param26#]]>
+        </isNotNull>
+        <isNotNull property="where.Param27" prepend="AND">
+          <![CDATA[PARAM27 = #where.Param27#]]>
+        </isNotNull>
+        <isNotNull property="where.Param28" prepend="AND">
+          <![CDATA[PARAM28 = #where.Param28#]]>
+        </isNotNull>
+        <isNotNull property="where.Param29" prepend="AND">
+          <![CDATA[PARAM29 = #where.Param29#]]>
+        </isNotNull>
+        <isNotNull property="where.Param30" prepend="AND">
+          <![CDATA[PARAM30 = #where.Param30#]]>
+        </isNotNull>
+        <isNotNull property="where.Param31" prepend="AND">
+          <![CDATA[PARAM31 = #where.Param31#]]>
+        </isNotNull>
+        <isNotNull property="where.Param32" prepend="AND">
+          <![CDATA[PARAM32 = #where.Param32#]]>
+        </isNotNull>
+        <isNotNull property="where.Param33" prepend="AND">
+          <![CDATA[PARAM33 = #where.Param33#]]>
+        </isNotNull>
+        <isNotNull property="where.Param34" prepend="AND">
+          <![CDATA[PARAM34 = #where.Param34#]]>
+        </isNotNull>
+        <isNotNull property="where.Param35" prepend="AND">
+          <![CDATA[PARAM35 = #where.Param35#]]>
+        </isNotNull>
+        <isNotNull property="where.Param36" prepend="AND">
+          <![CDATA[PARAM36 = #where.Param36#]]>
+        </isNotNull>
+        <isNotNull property="where.Param37" prepend="AND">
+          <![CDATA[PARAM37 = #where.Param37#]]>
+        </isNotNull>
+        <isNotNull property="where.Param38" prepend="AND">
+          <![CDATA[PARAM38 = #where.Param38#]]>
+        </isNotNull>
+        <isNotNull property="where.Param39" prepend="AND">
+          <![CDATA[PARAM39 = #where.Param39#]]>
+        </isNotNull>
+        <isNotNull property="where.Param40" prepend="AND">
+          <![CDATA[PARAM40 = #where.Param40#]]>
+        </isNotNull>
+        <isNotNull property="where.Param41" prepend="AND">
+          <![CDATA[PARAM41 = #where.Param41#]]>
+        </isNotNull>
+        <isNotNull property="where.Param42" prepend="AND">
+          <![CDATA[PARAM42 = #where.Param42#]]>
+        </isNotNull>
+        <isNotNull property="where.Param43" prepend="AND">
+          <![CDATA[PARAM43 = #where.Param43#]]>
+        </isNotNull>
+        <isNotNull property="where.Param44" prepend="AND">
+          <![CDATA[PARAM44 = #where.Param44#]]>
+        </isNotNull>
+        <isNotNull property="where.Param45" prepend="AND">
+          <![CDATA[PARAM45 = #where.Param45#]]>
+        </isNotNull>
+        <isNotNull property="where.Param46" prepend="AND">
+          <![CDATA[PARAM46 = #where.Param46#]]>
+        </isNotNull>
+        <isNotNull property="where.Param47" prepend="AND">
+          <![CDATA[PARAM47 = #where.Param47#]]>
+        </isNotNull>
+        <isNotNull property="where.Param48" prepend="AND">
+          <![CDATA[PARAM48 = #where.Param48#]]>
+        </isNotNull>
+        <isNotNull property="where.Param49" prepend="AND">
+          <![CDATA[PARAM49 = #where.Param49#]]>
+        </isNotNull>
+        <isNotNull property="where.Param50" prepend="AND">
+          <![CDATA[PARAM50 = #where.Param50#]]>
+        </isNotNull>
+        <isNotNull property="where.Param51" prepend="AND">
+          <![CDATA[PARAM51 = #where.Param51#]]>
+        </isNotNull>
+        <isNotNull property="where.Param52" prepend="AND">
+          <![CDATA[PARAM52 = #where.Param52#]]>
+        </isNotNull>
+        <isNotNull property="where.Param53" prepend="AND">
+          <![CDATA[PARAM53 = #where.Param53#]]>
+        </isNotNull>
+        <isNotNull property="where.Param54" prepend="AND">
+          <![CDATA[PARAM54 = #where.Param54#]]>
+        </isNotNull>
+        <isNotNull property="where.Param55" prepend="AND">
+          <![CDATA[PARAM55 = #where.Param55#]]>
+        </isNotNull>
+        <isNotNull property="where.Param56" prepend="AND">
+          <![CDATA[PARAM56 = #where.Param56#]]>
+        </isNotNull>
+        <isNotNull property="where.Param57" prepend="AND">
+          <![CDATA[PARAM57 = #where.Param57#]]>
+        </isNotNull>
+        <isNotNull property="where.Param58" prepend="AND">
+          <![CDATA[PARAM58 = #where.Param58#]]>
+        </isNotNull>
+        <isNotNull property="where.Param59" prepend="AND">
+          <![CDATA[PARAM59 = #where.Param59#]]>
+        </isNotNull>
+        <isNotNull property="where.Param60" prepend="AND">
+          <![CDATA[PARAM60 = #where.Param60#]]>
+        </isNotNull>
+        <isNotNull property="where.Param61" prepend="AND">
+          <![CDATA[PARAM61 = #where.Param61#]]>
+        </isNotNull>
+        <isNotNull property="where.Param62" prepend="AND">
+          <![CDATA[PARAM62 = #where.Param62#]]>
+        </isNotNull>
+        <isNotNull property="where.Param63" prepend="AND">
+          <![CDATA[PARAM63 = #where.Param63#]]>
+        </isNotNull>
+        <isNotNull property="where.Param64" prepend="AND">
+          <![CDATA[PARAM64 = #where.Param64#]]>
+        </isNotNull>
+        <isNotNull property="where.Param65" prepend="AND">
+          <![CDATA[PARAM65 = #where.Param65#]]>
+        </isNotNull>
+        <isNotNull property="where.Param66" prepend="AND">
+          <![CDATA[PARAM66 = #where.Param66#]]>
+        </isNotNull>
+        <isNotNull property="where.Param67" prepend="AND">
+          <![CDATA[PARAM67 = #where.Param67#]]>
+        </isNotNull>
+        <isNotNull property="where.Param68" prepend="AND">
+          <![CDATA[PARAM68 = #where.Param68#]]>
+        </isNotNull>
+        <isNotNull property="where.Param69" prepend="AND">
+          <![CDATA[PARAM69 = #where.Param69#]]>
+        </isNotNull>
+        <isNotNull property="where.Param70" prepend="AND">
+          <![CDATA[PARAM70 = #where.Param70#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreName" prepend="AND">
+          <![CDATA[STORE_NAME = #where.StoreName#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceName" prepend="AND">
+          <![CDATA[STORE_PLACE_NAME = #where.StorePlaceName#]]>
+        </isNotNull>
+        <isNotNull property="where.InStockTime" prepend="AND">
+          <![CDATA[IN_STOCK_TIME = #where.InStockTime#]]>
+        </isNotNull>
+        <isNotNull property="where.InStockUserName" prepend="AND">
+          <![CDATA[IN_STOCK_USER_NAME = #where.InStockUserName#]]>
+        </isNotNull>
+        <isNotNull property="where.RfidCode" prepend="AND">
+          <![CDATA[RFID_CODE = #where.RfidCode#]]>
+        </isNotNull>
+        <isNotNull property="where.OutStockTime" prepend="AND">
+          <![CDATA[OUT_STOCK_TIME = #where.OutStockTime#]]>
+        </isNotNull>
+        <isNotNull property="where.OutStockUserName" prepend="AND">
+          <![CDATA[OUT_STOCK_USER_NAME = #where.OutStockUserName#]]>
+        </isNotNull>
+        <isNotNull property="where.OutStockTo" prepend="AND">
+          <![CDATA[OUT_STOCK_TO = #where.OutStockTo#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy7" prepend="AND">
+          <![CDATA[DUMMY7 = #where.Dummy7#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy8" prepend="AND">
+          <![CDATA[DUMMY8 = #where.Dummy8#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy9" prepend="AND">
+          <![CDATA[DUMMY9 = #where.Dummy9#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy10" prepend="AND">
+          <![CDATA[DUMMY10 = #where.Dummy10#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialMinorName" prepend="AND">
+          <![CDATA[MATERIAL_MINOR_NAME = #where.MaterialMinorName#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetSemisTraceProductInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T1.MATERIAL_NAME,T2.MINOR_TYPE_NAME,T3.SHIFT_NAME,T4.CLASS_NAME,T5.EQUIP_NAME,T6.USER_NAME,T7.UNIT_NAME FROM HPP_SEMIS_PRODUCTION T 
+      LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID = T.MATERIAL_ID
+      LEFT JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T2.OBJID = T1.MINOR_TYPE_ID
+      LEFT JOIN SSB_SHIFT T3 ON T3.OBJID = T.SHIFT_ID
+      LEFT JOIN SSB_CLASS T4 ON T4.OBJID = T.CLASS_ID
+      LEFT JOIN SBE_EQUIP T5 ON T5.OBJID = T.EQUIP_ID
+      LEFT JOIN SSB_USER T6 ON T6.OBJID = T.RECORD_USER_ID
+      LEFT JOIN SSB_UNIT T7 ON T7.OBJID = T.UNIT_ID
+      WHERE T.DELETE_FLAG=0
+       ]]>
+       <isNotNull property="carNo" prepend="AND">
+         <![CDATA[T.CARD_NO=#carNo#]]>
+       </isNotNull>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[T.RECORD_TIME DESC]]>
+       </dynamic>
+     </select>
+     <select id="GetSemisTraceQualityInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T1.USER_NAME,T2.SHIFT_NAME,T3.CLASS_NAME,T4.EQUIP_NAME,T5.DEFECT_NAME DEFECT_NAME1,
+      T6.DEFECT_NAME DEFECT_NAME2,T7.DEFECT_NAME DEFECT_NAME3,CASE T.GRADEID WHEN 0 THEN '合格' ELSE '不合格' END GRADE_NAME
+       FROM HQC_QCRECORD T
+      LEFT JOIN SSB_USER T1 ON T1.OBJID = T.RECORD_USER_ID
+      LEFT JOIN SSB_SHIFT T2 ON T2.OBJID = T.SHIFT_ID
+      LEFT JOIN SSB_CLASS T3 ON T3.OBJID = T.CLASS_ID
+      LEFT JOIN SBE_EQUIP T4 ON T4.OBJID  = T.EQUIP_ID
+      LEFT JOIN HQC_DEFECT T5 ON T5.OBJID = T.DEFECT_ID1
+      LEFT JOIN HQC_DEFECT T6 ON T6.OBJID = T.DEFECT_ID2
+      LEFT JOIN HQC_DEFECT T7 ON T7.OBJID = T.DEFECT_ID3
+      WHERE T.DELETE_FLAG=0 AND T.NEW_FLAG=1
+       ]]>
+       <isNotNull property="carNo" prepend="AND">
+         <![CDATA[T.CARD_NO=#carNo#]]>
+       </isNotNull>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[T.SEQ_INDEX DESC]]>
+       </dynamic>
+     </select>
+     <select id="GetUserName" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT USER_NAME FROM SSB_USER 
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="ObjId" prepend="AND">
+           <![CDATA[OBJID =#ObjId#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetSemisTraceInfoForFreeze" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select t.green_tyre_no BARCODE,t1.tyre_no,t2.material_full_name,t2.equip_name,t2.begin_time from bpm_trace_info t
+      left join cpp_curing_production t1 on t1.green_tyre_no = t.green_tyre_no
+      left join bpp_trace_molding_info t2 on t2.green_tyre_no = t.green_tyre_no
+       where t.card_no = #barcode#
+       ]]>
+     </select>
+     <select id="GetMoldingTraceForFreeze" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select tyre_no BARCODE,green_tyre_no,material_name,equip_name,begin_time from cpp_trace_curing_info where green_tyre_no =#barcode#
+       ]]>
+     </select>
+     <select id="GetCuringTraceForFreeze" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select tyre_no BARCODE,green_tyre_no,material_name,equip_name,begin_time from cpp_trace_curing_info where tyre_no =#barcode#
+       ]]>
+     </select>
+     <select id="GetSemisTabClickInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select distinct a.semis BARCODE,t2.material_full_name,t3.minor_type_name,t4.equip_name,t1.record_time,t1.left_qty from (select card_no semis,SEMIS_MINOR_TYPE_ID from hpp_trace_info t start with card_detail_no in ( $barcode$) connect by card_no = prior card_detail_no)a
+        inner join hpp_semis_production t1 on t1.card_no = a.semis
+        inner join sbm_material t2 on t2.objid = t1.material_id
+        inner join sbm_material_minor_type t3 on t3.objid = a.SEMIS_MINOR_TYPE_ID
+        inner join sbe_equip t4 on t4.objid = t1.equip_id
+        where t1.delete_flag=0
+       ]]>
+     </select>
+
+     <select id="GetMoldingTabClickInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+           select distinct t.green_tyre_no BARCODE,t1.tyre_no,t2.material_full_name,t2.equip_name,t2.begin_time from bpm_trace_info t
+      left join cpp_curing_production t1 on t1.green_tyre_no = t.green_tyre_no
+      left join bpp_trace_molding_info t2 on t2.green_tyre_no = t.green_tyre_no
+       where t.card_no in( $barcode$)
+       ]]>
+     </select>
+
+     <select id="GetCuringTabClickInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select tyre_no BARCODE,green_tyre_no,material_name,equip_name,begin_time from cpp_trace_curing_info where green_tyre_no in($barcode$)
+       ]]>
+     </select>
+
+     <update id="UpdateCuringMarkInfo" parameterClass="map">
+       <![CDATA[
+       update cpp_curing_production set mark_flag=2 where tyre_no in ($barcode$)
+       ]]>
+     </update>
+     <update id="UpdateMoldingMarkInfo" parameterClass="map">
+       <![CDATA[
+         update bpm_production set mark_flag=2 where green_tyre_no in ($barcode$)
+       ]]>
+     </update>
+      <update id="UpdateSemisMarkInfo" parameterClass="map">
+       <![CDATA[
+         update hpp_semis_production set mark_flag=2 where card_no in ($barcode$)
+       ]]>
+     </update>
+     <select id="GetFreezeReason" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select OBJID,REASON_NAME from sbm_freeze_reason where delete_flag=0 order by objid
+       ]]>
+     </select>
+     <update id="UpdateFreezeLog" parameterClass="map">
+       <![CDATA[ update sbm_mark_info set delete_flag=1 where barcode=#barcode#]]>
+     </update>
+     <insert id="InsertFreezeLog" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        insert into sbm_mark_info (ObjID, delete_flag,record_time,record_user_id,reason_id,barcode,mark_flag)
+       values (seq_sbm_mark_info.nextval, 0, sysdate, #userId#, #reasonId#, #barcode#, 2)
+       ]]>
+     </insert>
+     <procedure id="InsertFreezeLogProc" parameterClass="map" resultClass="Row">
+       PRO_HPP_FREEZE_RECORD
+       @{reasonId,column=reasonId}
+       @{userId,column=WorkerID}
+       @{barcode,column=barcodes}
+     </procedure>
+
+     <select id="SelectMarkLogByBarcode" parameterClass="map" resultClass="row">
+       <isNotEmpty property="barcode">
+         <isEqual property="barcodeLength" compareValue="21">
+           select t1.OBJID,t1.RECORD_TIME,t1.RECORD_USER_ID,t2.USER_NAME,t1.REMARK,t1.DELETE_FLAG,t1.BARCODE
+           ,null as MATERIAL_CODE,null as MATERIAL_NAME,null as EQUIP_NAME
+           ,t1.REASON_ID
+           ,case t1.MARK_FLAG when 0 then null
+           when 1 then (select REASON_NAME from SBM_MARK_REASON where OBJID=t1.REASON_ID)
+           when 2 then (select REASON_NAME from SBM_FREEZE_REASON where OBJID=t1.REASON_ID)
+           end as REASON_NAME
+           ,t1.MARK_FLAG
+           ,case t1.MARK_FLAG when 0 then '已解锁' when 1 then '已锁定' when 2 then '已冻结' else '' end as MARK_FLAG_STATUS
+           from SBM_MARK_INFO t1
+           left join SSB_USER t2 on t1.RECORD_USER_ID=t2.OBJID
+           where t1.BARCODE=#barcode#
+           <isNotEmpty property="delete_flag" prepend="and">
+             <![CDATA[t1.DELETE_FLAG = #delete_flag#]]>
+           </isNotEmpty>
+           order by t1.OBJID
+         </isEqual>
+         <isEqual property="barcodeLength" compareValue="18">
+           select t1.OBJID,t1.RECORD_TIME,t1.RECORD_USER_ID,t2.USER_NAME,t1.REMARK,t1.DELETE_FLAG,t1.BARCODE
+           ,null as MATERIAL_CODE,null as MATERIAL_NAME,null as EQUIP_NAME
+           ,t1.REASON_ID
+           ,case t1.MARK_FLAG when 0 then null
+           when 1 then (select REASON_NAME from SBM_MARK_REASON where OBJID=t1.REASON_ID)
+           when 2 then (select REASON_NAME from SBM_FREEZE_REASON where OBJID=t1.REASON_ID)
+           end as REASON_NAME
+           ,t1.MARK_FLAG
+           ,case t1.MARK_FLAG when 0 then '已解锁' when 1 then '已锁定' when 2 then '已冻结' else '' end as MARK_FLAG_STATUS
+           from SBM_MARK_INFO t1
+           left join SSB_USER t2 on t1.RECORD_USER_ID=t2.OBJID
+           where t1.BARCODE=#barcode#
+           <isNotEmpty property="delete_flag" prepend="and">
+             <![CDATA[t1.DELETE_FLAG = #delete_flag#]]>
+           </isNotEmpty>
+           order by t1.OBJID
+         </isEqual>
+         <isEqual property="barcodeLength" compareValue="17">
+           select t1.OBJID,t1.RECORD_TIME,t1.RECORD_USER_ID,t2.USER_NAME,t1.REMARK,t1.DELETE_FLAG,t1.BARCODE
+           ,t4.SAP_CODE AS MATERIAL_CODE,t4.MATERIAL_NAME,t5.EQUIP_NAME
+           ,t1.REASON_ID
+           ,case t1.MARK_FLAG when 0 then null
+           when 1 then (select REASON_NAME from SBM_MARK_REASON where OBJID=t1.REASON_ID)
+           when 2 then (select REASON_NAME from SBM_FREEZE_REASON where OBJID=t1.REASON_ID)
+           end as REASON_NAME
+           ,t1.MARK_FLAG
+           ,case t1.MARK_FLAG when 0 then '已解锁' when 1 then '已锁定' when 2 then '已冻结' else '' end as MARK_FLAG_STATUS
+           from SBM_MARK_INFO t1
+           left join SSB_USER t2 on t1.RECORD_USER_ID=t2.OBJID
+           left join hpp_semis_production t3 on t1.BARCODE=t3.CARD_NO
+           left join sbm_material t4 on t4.objid = t3.material_id
+           left join sbe_equip t5 on t5.objid = t3.equip_id
+           where t1.BARCODE=#barcode#
+           <isNotEmpty property="delete_flag" prepend="and">
+             <![CDATA[t1.DELETE_FLAG = #delete_flag#]]>
+           </isNotEmpty>
+           order by t1.OBJID
+         </isEqual>
+         <isEqual property="barcodeLength" compareValue="10">
+             select t1.OBJID,t1.RECORD_TIME,t1.RECORD_USER_ID,t2.USER_NAME,t1.REMARK,t1.DELETE_FLAG,t1.BARCODE
+             ,t4.SAP_CODE AS MATERIAL_CODE,t4.MATERIAL_NAME,t5.EQUIP_NAME
+             ,t1.REASON_ID
+             ,case t1.MARK_FLAG when 0 then null
+             when 1 then (select REASON_NAME from SBM_MARK_REASON where OBJID=t1.REASON_ID)
+             when 2 then (select REASON_NAME from SBM_FREEZE_REASON where OBJID=t1.REASON_ID)
+             end as REASON_NAME
+             ,t1.MARK_FLAG
+             ,case t1.MARK_FLAG when 0 then '已解锁' when 1 then '已锁定' when 2 then '已冻结' else '' end as MARK_FLAG_STATUS
+             from SBM_MARK_INFO t1
+             left join SSB_USER t2 on t1.RECORD_USER_ID=t2.OBJID
+             left join bpm_production t3 on t1.BARCODE=t3.GREEN_TYRE_NO
+             left join hpp_plan t6 on t3.plan_id=t6.objid
+             left join hpp_plan_detail t7 on t3.plan_detail_id=t7.objid
+             left join sbm_material t4 on t4.objid = t7.material_id
+             left join sbe_equip t5 on t5.objid = t6.equip_id
+             where t1.BARCODE=#barcode#
+             <isNotEmpty property="delete_flag" prepend="and">
+               <![CDATA[t1.DELETE_FLAG = #delete_flag#]]>
+             </isNotEmpty>
+             order by t1.OBJID
+         </isEqual>
+       </isNotEmpty>
+     </select>
+
+     <select id="SelectMarkLog" parameterClass="map" resultClass="row">
+       <isEqual property="barcodeType" compareValue="21">
+         select t1.OBJID,t1.RECORD_TIME,t1.RECORD_USER_ID,t2.USER_NAME,t1.REMARK,t1.DELETE_FLAG,t1.BARCODE
+         ,null as MATERIAL_CODE,null as MATERIAL_NAME,null as EQUIP_NAME
+         ,t1.REASON_ID
+         ,case t1.MARK_FLAG when 0 then null
+         when 1 then (select REASON_NAME from SBM_MARK_REASON where OBJID=t1.REASON_ID)
+         when 2 then (select REASON_NAME from SBM_FREEZE_REASON where OBJID=t1.REASON_ID)
+         end as REASON_NAME
+         ,t1.MARK_FLAG
+         ,case t1.MARK_FLAG when 0 then '已解锁' when 1 then '已锁定' when 2 then '已冻结' else '' end as MARK_FLAG_STATUS
+         from SBM_MARK_INFO t1
+         left join SSB_USER t2 on t1.RECORD_USER_ID=t2.OBJID
+         where LENGTH(t1.BARCODE)=21
+       </isEqual>
+       <isEqual property="barcodeType" compareValue="18">
+         select t1.OBJID,t1.RECORD_TIME,t1.RECORD_USER_ID,t2.USER_NAME,t1.REMARK,t1.DELETE_FLAG,t1.BARCODE
+         ,null as MATERIAL_CODE,null as MATERIAL_NAME,null as EQUIP_NAME
+         ,t1.REASON_ID
+         ,case t1.MARK_FLAG when 0 then null
+         when 1 then (select REASON_NAME from SBM_MARK_REASON where OBJID=t1.REASON_ID)
+         when 2 then (select REASON_NAME from SBM_FREEZE_REASON where OBJID=t1.REASON_ID)
+         end as REASON_NAME
+         ,t1.MARK_FLAG
+         ,case t1.MARK_FLAG when 0 then '已解锁' when 1 then '已锁定' when 2 then '已冻结' else '' end as MARK_FLAG_STATUS
+         from SBM_MARK_INFO t1
+         left join SSB_USER t2 on t1.RECORD_USER_ID=t2.OBJID
+         where LENGTH(t1.BARCODE)=18
+       </isEqual>
+       <isEqual property="barcodeType" compareValue="17">
+         select t1.OBJID,t1.RECORD_TIME,t1.RECORD_USER_ID,t2.USER_NAME,t1.REMARK,t1.DELETE_FLAG,t1.BARCODE
+         ,t4.SAP_CODE AS MATERIAL_CODE,t4.MATERIAL_NAME,t5.EQUIP_NAME
+         ,t1.REASON_ID
+         ,case t1.MARK_FLAG when 0 then null
+         when 1 then (select REASON_NAME from SBM_MARK_REASON where OBJID=t1.REASON_ID)
+         when 2 then (select REASON_NAME from SBM_FREEZE_REASON where OBJID=t1.REASON_ID)
+         end as REASON_NAME
+         ,t1.MARK_FLAG
+         ,case t1.MARK_FLAG when 0 then '已解锁' when 1 then '已锁定' when 2 then '已冻结' else '' end as MARK_FLAG_STATUS
+         from SBM_MARK_INFO t1
+         left join SSB_USER t2 on t1.RECORD_USER_ID=t2.OBJID
+         left join hpp_semis_production t3 on t1.BARCODE=t3.CARD_NO
+         left join sbm_material t4 on t4.objid = t3.material_id
+         left join sbe_equip t5 on t5.objid = t3.equip_id
+         where LENGTH(t1.BARCODE)=17
+       </isEqual>
+       <isEqual property="barcodeType" compareValue="10">
+         select t1.OBJID,t1.RECORD_TIME,t1.RECORD_USER_ID,t2.USER_NAME,t1.REMARK,t1.DELETE_FLAG,t1.BARCODE
+         ,t4.SAP_CODE AS MATERIAL_CODE,t4.MATERIAL_NAME,t5.EQUIP_NAME
+         ,t1.REASON_ID
+         ,case t1.MARK_FLAG when 0 then null
+         when 1 then (select REASON_NAME from SBM_MARK_REASON where OBJID=t1.REASON_ID)
+         when 2 then (select REASON_NAME from SBM_FREEZE_REASON where OBJID=t1.REASON_ID)
+         end as REASON_NAME
+         ,t1.MARK_FLAG
+         ,case t1.MARK_FLAG when 0 then '已解锁' when 1 then '已锁定' when 2 then '已冻结' else '' end as MARK_FLAG_STATUS
+         from SBM_MARK_INFO t1
+         left join SSB_USER t2 on t1.RECORD_USER_ID=t2.OBJID
+         left join bpm_production t3 on t1.BARCODE=t3.GREEN_TYRE_NO
+         left join hpp_plan t6 on t3.plan_id=t6.objid
+         left join hpp_plan_detail t7 on t3.plan_detail_id=t7.objid
+         left join sbm_material t4 on t4.objid = t7.material_id
+         left join sbe_equip t5 on t5.objid = t6.equip_id
+         where LENGTH(t1.BARCODE)=10 
+       </isEqual>
+       <dynamic prepend="and">
+         <isNotEmpty property="beginDate" prepend="and">
+           t1.RECORD_TIME >= #beginDate#
+         </isNotEmpty>
+         <isNotEmpty property="endDate" prepend="and">
+           <![CDATA[t1.RECORD_TIME <= #endDate#]]>
+         </isNotEmpty>
+         <isNotEmpty property="markFlag" prepend="and">
+           <![CDATA[t1.MARK_FLAG = #markFlag#]]>
+         </isNotEmpty>
+         <isNotEmpty property="delete_flag" prepend="and">
+           <![CDATA[t1.DELETE_FLAG = #delete_flag#]]>
+         </isNotEmpty>
+       </dynamic>
+       order by t1.BARCODE,t1.OBJID
+     </select>
+
+     <update id="UnfreezeTyreMarkInfo" parameterClass="map">
+       <![CDATA[
+       update cpp_curing_production set mark_flag=0 where tyre_no in ($barcode$)
+       ]]>
+     </update>
+     <update id="UnfreezeGreentyreMarkInfo" parameterClass="map">
+       <![CDATA[
+         update bpm_production set mark_flag=0 where green_tyre_no in ($barcode$)
+       ]]>
+     </update>
+     <update id="UnfreezeSemisMarkInfo" parameterClass="map">
+       <![CDATA[
+         update hpp_semis_production set mark_flag=0 where card_no in ($barcode$)
+       ]]>
+     </update>
+
+     <procedure id="InsertUnFreezeLogProc" parameterClass="map" resultClass="Row">
+       PRO_HPP_UNFREEZE_RECORD
+       @{barcode,column=barcodes}
+       @{userId,column=WorkerID}
+     </procedure>
+     <select id="GetSemisInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select t.card_no BARCODE,t1.Sap_Code MATERIALCODE,t1.material_full_name MATERIALNAME from hpp_semis_production t
+      left join sbm_material t1 on t1.objid = t.material_id
+      WHERE T.CARD_NO=#barcode#
+       ]]>
+     </select>
+     <select id="GetMoldingInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T.GREEN_TYRE_NO BARCODE,T2.Sap_Code MATERIALCODE,T2.MATERIAL_FULL_NAME MATERIALNAME FROM BPM_PRODUCTION T
+      LEFT JOIN BPP_PLAN_DETAIL T1 ON T1.OBJID = T.PLAN_DETAIL_ID
+      LEFT JOIN SBM_MATERIAL T2 ON T2.OBJID = T1.MATERIAL_ID
+      WHERE T.GREEN_TYRE_NO=#barcode#
+       ]]>
+     </select>
+
+
+
+
+     <select id="SelectBomRubberCost" parameterClass="map" resultClass="row">
+       <![CDATA[
+      with plantemp as(
+		    select t2.BOM_ID,t2.MATERIAL_ID,sum(t2.PLAN_AMOUNT) as PLAN_AMOUNT
+		    from CPP_CURING_PLAN t1
+		    inner join CPP_CURING_PLAN_DETAIL t2 on t1.OBJID=t2.PLAN_ID
+		    where t1.PLAN_DATE between TO_DATE(#month#,'yyyy-MM-dd') and ADD_MONTHS(TO_DATE(#month#,'yyyy-MM-dd'), 1)
+		    and t2.PLAN_STATE=2
+		    group by t2.BOM_ID,t2.MATERIAL_ID
+	    )
+	    select t2.MONTH,t2.MATERIAL_ID,t3.MATERIAL_CODE,t3.MATERIAL_NAME,t2.SAP_CODE,sum(t2.NUM*t1.PLAN_AMOUNT) as NUM,t2.UNIT
+	    from plantemp t1
+	    inner join SBM_BOM_RUBBER_COST t2 on t2.MONTH=TO_CHAR(TO_DATE(#month#,'yyyy-MM-dd'),'yyyyMM') and t2.BOM_ID=t1.BOM_ID
+	    left join SBM_MATERIAL t3 on t2.MATERIAL_ID=t3.OBJID
+	    group by t2.MONTH,t2.MATERIAL_ID,t2.SAP_CODE,t2.UNIT,t3.MATERIAL_CODE,t3.MATERIAL_NAME
+      ]]>
+     </select>
+  </statements>
+</sqlMap>

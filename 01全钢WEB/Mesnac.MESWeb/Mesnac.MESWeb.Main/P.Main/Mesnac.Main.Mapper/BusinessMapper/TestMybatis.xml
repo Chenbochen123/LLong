@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Main.Mapper.BusinessMapper.TestMybatis"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM TEST_MYBATIS ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.TNumber102" prepend="AND">
+          <![CDATA[T_NUMBER_10_2 = #where.TNumber102#]]>
+        </isNotNull>
+        <isNotNull property="where.TNumber" prepend="AND">
+          <![CDATA[T_NUMBER = #where.TNumber#]]>
+        </isNotNull>
+        <isNotNull property="where.TChar10" prepend="AND">
+          <![CDATA[T_CHAR_10 = #where.TChar10#]]>
+        </isNotNull>
+        <isNotNull property="where.TVarchar10" prepend="AND">
+          <![CDATA[T_VARCHAR_10 = #where.TVarchar10#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      select t.alarm_set from CRT_ALARM_STANDARD_SET t where t.objid=151
+    </select>
+  </statements>
+</sqlMap>

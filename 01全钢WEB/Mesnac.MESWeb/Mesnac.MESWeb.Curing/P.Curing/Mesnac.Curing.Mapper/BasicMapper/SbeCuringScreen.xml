@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.SbeCuringScreen"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SbeCuringScreen" type="Mesnac.Curing.Entity.BasicEntity.SbeCuringScreen, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SbeCuringScreen" class="SbeCuringScreen">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Class" column="CLASS"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="Low" column="LOW"/>
+    <result property="Mid" column="MID"/>
+    <result property="High" column="HIGH"/>
+    <result property="UseTime" column="USE_TIME"/>
+    <result property="Drmmy1" column="DRMMY1"/>
+    <result property="Drmmy2" column="DRMMY2"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SbeCuringScreen" class="SbeCuringScreen">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Class" column="Class"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="Low" column="Low"/>
+    <parameter property="Mid" column="Mid"/>
+    <parameter property="High" column="High"/>
+    <parameter property="UseTime" column="UseTime"/>
+    <parameter property="Drmmy1" column="Drmmy1"/>
+    <parameter property="Drmmy2" column="Drmmy2"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_CURING_SCREEN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Class" prepend="AND">
+          <![CDATA[CLASS = #where.Class#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.Low" prepend="AND">
+          <![CDATA[LOW = #where.Low#]]>
+        </isNotNull>
+        <isNotNull property="where.Mid" prepend="AND">
+          <![CDATA[MID = #where.Mid#]]>
+        </isNotNull>
+        <isNotNull property="where.High" prepend="AND">
+          <![CDATA[HIGH = #where.High#]]>
+        </isNotNull>
+        <isNotNull property="where.UseTime" prepend="AND">
+          <![CDATA[USE_TIME = #where.UseTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Drmmy1" prepend="AND">
+          <![CDATA[DRMMY1 = #where.Drmmy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Drmmy2" prepend="AND">
+          <![CDATA[DRMMY2 = #where.Drmmy2#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SBE_CURING_SCREEN]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="Class" prepend=",">CLASS</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="Low" prepend=",">LOW</isNotNull>
+        <isNotNull property="Mid" prepend=",">MID</isNotNull>
+        <isNotNull property="High" prepend=",">HIGH</isNotNull>
+        <isNotNull property="UseTime" prepend=",">USE_TIME</isNotNull>
+        <isNotNull property="Drmmy1" prepend=",">DRMMY1</isNotNull>
+        <isNotNull property="Drmmy2" prepend=",">DRMMY2</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SBE_CURING_SCREEN.NEXTVAL</isNull>
+        <isNotNull property="Class" prepend=",">#Class#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="Low" prepend=",">#Low#</isNotNull>
+        <isNotNull property="Mid" prepend=",">#Mid#</isNotNull>
+        <isNotNull property="High" prepend=",">#High#</isNotNull>
+        <isNotNull property="UseTime" prepend=",">#UseTime#</isNotNull>
+        <isNotNull property="Drmmy1" prepend=",">#Drmmy1#</isNotNull>
+        <isNotNull property="Drmmy2" prepend=",">#Drmmy2#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SBE_CURING_SCREEN
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Class"  prepend=",">
+          CLASS = #update.Class#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.Low"  prepend=",">
+          LOW = #update.Low#
+        </isNotNull>
+        <isNotNull  property="update.Mid"  prepend=",">
+          MID = #update.Mid#
+        </isNotNull>
+        <isNotNull  property="update.High"  prepend=",">
+          HIGH = #update.High#
+        </isNotNull>
+        <isNotNull  property="update.UseTime"  prepend=",">
+          USE_TIME = #update.UseTime#
+        </isNotNull>
+        <isNotNull  property="update.Drmmy1"  prepend=",">
+          DRMMY1 = #update.Drmmy1#
+        </isNotNull>
+        <isNotNull  property="update.Drmmy2"  prepend=",">
+          DRMMY2 = #update.Drmmy2#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SBE_CURING_SCREEN
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SbeCuringScreen">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SbeCuringScreen">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SBE_CURING_SCREEN
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SBE_CURING_SCREEN
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SbeCuringScreen" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SBE_CURING_SCREEN
+    </statement>
+  </statements>
+</sqlMap>

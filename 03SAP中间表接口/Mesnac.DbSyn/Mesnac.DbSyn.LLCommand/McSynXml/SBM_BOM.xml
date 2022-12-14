@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SynConfig>
+  <Tables>
+    <Table name="Table.Source">
+      <DbSourceName>MES</DbSourceName>
+      <TableName>SBM_BOM_DATA</TableName>
+    </Table>
+    <Table name="Table.Target">
+      <DbSourceName>MES</DbSourceName>
+      <TableName>SBM_BOM</TableName>
+      <Primarykey FieldName="OBJID"/>
+    </Table>
+  </Tables>
+  <SynDatas>
+    <SynData>
+      <SourceTable TableName="Table.Source">
+        <Command >
+          <FileName value="Mesnac.DbSyn.dll"/>
+          <ClassName value="Mesnac.DbSyn.TableSyn.Source"/>
+        </Command>
+        <BeginSyn>
+          <add key="sql" >
+            <![CDATA[
+          UPDATE SBM_BOM A
+             SET DELETE_FLAG =
+                 (SELECT B.DELETE_FLAG FROM SBM_BOM_DATA B WHERE A.OBJID = B.OBJID)
+           WHERE EXISTS (SELECT 1 FROM SBM_BOM_DATA C WHERE C.OBJID = A.OBJID)
+         ]]>
+          </add>
+        </BeginSyn>
+        <SelectData>
+          <add key="count" value="0"/>
+          <add key="sql">
+            <![CDATA[
+                              select t1.* from
+                                (select distinct material_id,material_parent_id,bom_version,bom_type from SBM_BOM_DATA
+                                 where delete_flag = 0) t1 
+                                left join 
+                                (select distinct material_id,material_parent_id,bom_version,bom_type from SBM_BOM
+                                 where delete_flag = 0) t2 
+                                on  t1.material_id=t2.material_id
+                                 and t1.material_parent_id=t2.material_parent_id
+                                 and t1.bom_version=t2.bom_version
+                                 and t1.bom_type=t2.bom_type
+                                 where t2.material_id is null
+                        ]]>
+          </add>
+        </SelectData>
+      </SourceTable>
+      <TargetTable TableName="Table.Target">
+        <Command >
+          <FileName value="Mesnac.DbSyn.LLCommand.dll"/>
+          <ClassName value="Mesnac.DbSyn.LLERP.SBM_BOM.Target"/>
+        </Command>
+      </TargetTable>
+      <SourceTargetFields>
+      </SourceTargetFields>
+    </SynData>
+  </SynDatas>
+</SynConfig>

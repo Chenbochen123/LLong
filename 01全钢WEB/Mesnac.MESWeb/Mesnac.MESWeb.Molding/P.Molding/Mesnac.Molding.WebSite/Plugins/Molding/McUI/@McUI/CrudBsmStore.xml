@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="STORE_NAME" Value="仓库名称"></Caption>
+    <Caption Name="STORE_CODE" Value="仓库代号"></Caption>
+    <Caption Name="STORE_TYPE" Value="仓库类型"></Caption>
+    <Caption Name="STORE_TYPE_CAPTION" Value="仓库类型"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+  </Captions>
+  <WebPage Title="成型胎胚仓库信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Molding/McUI/@McUI/CrudBsmStore.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="BSM_STORE">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_BSM_STORE"></SeqField>
+    </SeqFields>
+    <Uniques>
+      <Unique Fields="STORE_NAME"></Unique>
+    </Uniques>
+  </Crud>
+  
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="STORE_NAME"></ParamField>
+        <ParamField FieldName="STORE_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_TYPE" Type="ComboBox"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="STORE_NAME"></ParamField>
+        <ParamField FieldName="STORE_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_TYPE" Type="ComboBox"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="STORE_NAME" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_CODE" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="STORE_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="STORE_CODE" Width="100"></GridColumn>
+        <GridColumn ColumnName="STORE_TYPE_CAPTION" Width="100"></GridColumn>
+        <GridColumn ColumnName="REMARK" Width="100"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="160"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

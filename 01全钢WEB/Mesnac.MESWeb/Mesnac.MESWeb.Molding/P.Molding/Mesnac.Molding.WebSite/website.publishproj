@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+***********************************************************************************************
+website.publishproj
+
+警告: 请勿修改此文件，它将用于 Web 发布过程。
+
+版权所有 (C) Microsoft Corporation。保留所有权利。
+
+***********************************************************************************************
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.30319</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{432838a0-5743-4925-a68f-3ad1cb613c97}</ProjectGuid>
+    <SourceWebPhysicalPath>$(MSBuildThisFileDirectory)</SourceWebPhysicalPath>
+    <SourceWebVirtualPath>/Mesnac.Molding.WebSite</SourceWebVirtualPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SourceWebProject>http://localhost:13730</SourceWebProject>
+    <SourceWebMetabasePath>/IISExpress/7.5/LM/W3SVC/49/ROOT</SourceWebMetabasePath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- for VS2010 we need to use 10.5 but for VS2012+ we should use VisualStudioVersion -->
+    <WebPublishTargetsVersion Condition=" '$(WebPublishTargetsVersion)' =='' and '$(VisualStudioVersion)' == 10.0 ">10.5</WebPublishTargetsVersion>
+    <WebPublishTargetsVersion Condition=" '$(WebPublishTargetsVersion)'=='' ">$(VisualStudioVersion)</WebPublishTargetsVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(WebPublishTargetsVersion)</VSToolsPath>
+    <_WebPublishTargetsPath Condition=" '$(_WebPublishTargetsPath)'=='' ">$(VSToolsPath)</_WebPublishTargetsPath>
+    <AssemblyFileVersion Condition="'$(AssemblyFileVersion)' == ''">1.0.0.0</AssemblyFileVersion>
+    <AssemblyVersion Condition="'$(AssemblyVersion)' == ''">1.0.0.0</AssemblyVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AssemblyAttributes Include="AssemblyFileVersion">
+      <Value>$(AssemblyFileVersion)</Value>
+    </AssemblyAttributes>
+    <AssemblyAttributes Include="AssemblyVersion">
+      <Value>$(AssemblyVersion)</Value>
+    </AssemblyAttributes>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mesnac.Molding.Business\Mesnac.Molding.Business.csproj">
+      <Project>{A9CA6236-5311-4B62-A441-8EFA978BA2E9}</Project>
+      <Name>Mesnac.Molding.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Molding.Data\Mesnac.Molding.Data.csproj">
+      <Project>{88020D7A-9063-4AE4-AA91-364BCD04C71F}</Project>
+      <Name>Mesnac.Molding.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Molding.Entity\Mesnac.Molding.Entity.csproj">
+      <Project>{E62CD168-27B2-4670-B521-1E9F4C3944B8}</Project>
+      <Name>Mesnac.Molding.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Molding.Mapper\Mesnac.Molding.Mapper.csproj">
+      <Project>{0A0C6353-6971-41E8-AC92-61BE8A35D51A}</Project>
+      <Name>Mesnac.Molding.Mapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Molding.McUI\Mesnac.Molding.McUI.csproj">
+      <Project>{422D7329-31BB-4234-B269-11C6A25F977F}</Project>
+      <Name>Mesnac.Molding.McUI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(_WebPublishTargetsPath)\Web\Microsoft.WebSite.Publishing.targets" />
+</Project>

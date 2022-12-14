@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportVBbmMaterial" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT T1.*,
+      (CASE T1.DELETE_FLAG WHEN 0 THEN '正常' ELSE '废止' END) AS MATERIAL_STATE_NAME
+      FROM V_BBM_MATERIAL T1 
+               ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+          <![CDATA[T1.MATERIAL_NAME LIKE '%' || #where.MATERIAL_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_CODE" prepend="AND">
+          <![CDATA[T1.MATERIAL_CODE LIKE '%' || #where.MATERIAL_CODE# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.SAP_CODE" prepend="AND">
+          <![CDATA[T1.SAP_CODE LIKE '%' || #where.SAP_CODE# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.PDM_CODE" prepend="AND">
+          <![CDATA[T1.PDM_CODE LIKE '%' || #where.PDM_CODE# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+  
+  </statements>
+</sqlMap>

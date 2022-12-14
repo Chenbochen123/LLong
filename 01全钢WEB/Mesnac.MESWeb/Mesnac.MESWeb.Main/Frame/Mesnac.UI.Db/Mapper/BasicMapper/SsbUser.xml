@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BasicMapper.SsbUser"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SsbUser" type="Mesnac.FrameDb.Entity.BasicEntity.SsbUser, Mesnac.FrameDb.Mapper" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SsbUser" class="SsbUser">
+    <result property="ObjId" column="OBJID"/>
+    <result property="UserName" column="USER_NAME"/>
+    <result property="UserPwd" column="USER_PWD"/>
+    <result property="RealName" column="REAL_NAME"/>
+    <result property="Sex" column="SEX"/>
+    <result property="Telephone" column="TELEPHONE"/>
+    <result property="WorkBarcode" column="WORK_BARCODE"/>
+    <result property="DeptId" column="DEPT_ID"/>
+    <result property="WorkId" column="WORK_ID"/>
+    <result property="ShiftId" column="SHIFT_ID"/>
+    <result property="ClassId" column="CLASS_ID"/>
+    <result property="WorkshopId" column="WORKSHOP_ID"/>
+    <result property="HrCode" column="HR_CODE"/>
+    <result property="ErpCode" column="ERP_CODE"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="IsEmployee" column="IS_EMPLOYEE"/>
+    <result property="BakupFlag" column="BAKUP_FLAG"/>
+    <result property="BakupTime" column="BAKUP_TIME"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SsbUser" class="SsbUser">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="UserName" column="UserName"/>
+    <parameter property="UserPwd" column="UserPwd"/>
+    <parameter property="RealName" column="RealName"/>
+    <parameter property="Sex" column="Sex"/>
+    <parameter property="Telephone" column="Telephone"/>
+    <parameter property="WorkBarcode" column="WorkBarcode"/>
+    <parameter property="DeptId" column="DeptId"/>
+    <parameter property="WorkId" column="WorkId"/>
+    <parameter property="ShiftId" column="ShiftId"/>
+    <parameter property="ClassId" column="ClassId"/>
+    <parameter property="WorkshopId" column="WorkshopId"/>
+    <parameter property="HrCode" column="HrCode"/>
+    <parameter property="ErpCode" column="ErpCode"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="IsEmployee" column="IsEmployee"/>
+    <parameter property="BakupFlag" column="BakupFlag"/>
+    <parameter property="BakupTime" column="BakupTime"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SSB_USER ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.UserName" prepend="AND">
+          <![CDATA[USER_NAME = #where.UserName#]]>
+        </isNotNull>
+        <isNotNull property="where.UserPwd" prepend="AND">
+          <![CDATA[USER_PWD = #where.UserPwd#]]>
+        </isNotNull>
+        <isNotNull property="where.RealName" prepend="AND">
+          <![CDATA[REAL_NAME = #where.RealName#]]>
+        </isNotNull>
+        <isNotNull property="where.Sex" prepend="AND">
+          <![CDATA[SEX = #where.Sex#]]>
+        </isNotNull>
+        <isNotNull property="where.Telephone" prepend="AND">
+          <![CDATA[TELEPHONE = #where.Telephone#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkBarcode" prepend="AND">
+          <![CDATA[WORK_BARCODE = #where.WorkBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.DeptId" prepend="AND">
+          <![CDATA[DEPT_ID = #where.DeptId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkId" prepend="AND">
+          <![CDATA[WORK_ID = #where.WorkId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.ClassId" prepend="AND">
+          <![CDATA[CLASS_ID = #where.ClassId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.HrCode" prepend="AND">
+          <![CDATA[HR_CODE = #where.HrCode#]]>
+        </isNotNull>
+        <isNotNull property="where.ErpCode" prepend="AND">
+          <![CDATA[ERP_CODE = #where.ErpCode#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.IsEmployee" prepend="AND">
+          <![CDATA[IS_EMPLOYEE = #where.IsEmployee#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SSB_USER]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="UserName" prepend=",">USER_NAME</isNotNull>
+        <isNotNull property="UserPwd" prepend=",">USER_PWD</isNotNull>
+        <isNotNull property="RealName" prepend=",">REAL_NAME</isNotNull>
+        <isNotNull property="Sex" prepend=",">SEX</isNotNull>
+        <isNotNull property="Telephone" prepend=",">TELEPHONE</isNotNull>
+        <isNotNull property="WorkBarcode" prepend=",">WORK_BARCODE</isNotNull>
+        <isNotNull property="DeptId" prepend=",">DEPT_ID</isNotNull>
+        <isNotNull property="WorkId" prepend=",">WORK_ID</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">SHIFT_ID</isNotNull>
+        <isNotNull property="ClassId" prepend=",">CLASS_ID</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">WORKSHOP_ID</isNotNull>
+        <isNotNull property="HrCode" prepend=",">HR_CODE</isNotNull>
+        <isNotNull property="ErpCode" prepend=",">ERP_CODE</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="IsEmployee" prepend=",">IS_EMPLOYEE</isNotNull>
+        <isNotNull property="BakupFlag" prepend=",">BAKUP_FLAG</isNotNull>
+        <isNotNull property="BakupTime" prepend=",">BAKUP_TIME</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SSB_USER.NEXTVAL</isNull>
+        <isNotNull property="UserName" prepend=",">#UserName#</isNotNull>
+        <isNotNull property="UserPwd" prepend=",">#UserPwd#</isNotNull>
+        <isNotNull property="RealName" prepend=",">#RealName#</isNotNull>
+        <isNotNull property="Sex" prepend=",">#Sex#</isNotNull>
+        <isNotNull property="Telephone" prepend=",">#Telephone#</isNotNull>
+        <isNotNull property="WorkBarcode" prepend=",">#WorkBarcode#</isNotNull>
+        <isNotNull property="DeptId" prepend=",">#DeptId#</isNotNull>
+        <isNotNull property="WorkId" prepend=",">#WorkId#</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">#ShiftId#</isNotNull>
+        <isNotNull property="ClassId" prepend=",">#ClassId#</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">#WorkshopId#</isNotNull>
+        <isNotNull property="HrCode" prepend=",">#HrCode#</isNotNull>
+        <isNotNull property="ErpCode" prepend=",">#ErpCode#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="IsEmployee" prepend=",">#IsEmployee#</isNotNull>
+        <isNotNull property="BakupFlag" prepend=",">#BakupFlag#</isNotNull>
+        <isNotNull property="BakupTime" prepend=",">#BakupTime#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SSB_USER
+       <dynamic prepend="SET">
+        <isNotNull  property="update.UserName"  prepend=",">
+          USER_NAME = #update.UserName#
+        </isNotNull>
+        <isNotNull  property="update.UserPwd"  prepend=",">
+          USER_PWD = #update.UserPwd#
+        </isNotNull>
+        <isNotNull  property="update.RealName"  prepend=",">
+          REAL_NAME = #update.RealName#
+        </isNotNull>
+        <isNotNull  property="update.Sex"  prepend=",">
+          SEX = #update.Sex#
+        </isNotNull>
+        <isNotNull  property="update.Telephone"  prepend=",">
+          TELEPHONE = #update.Telephone#
+        </isNotNull>
+        <isNotNull  property="update.WorkBarcode"  prepend=",">
+          WORK_BARCODE = #update.WorkBarcode#
+        </isNotNull>
+        <isNotNull  property="update.DeptId"  prepend=",">
+          DEPT_ID = #update.DeptId#
+        </isNotNull>
+        <isNotNull  property="update.WorkId"  prepend=",">
+          WORK_ID = #update.WorkId#
+        </isNotNull>
+        <isNotNull  property="update.ShiftId"  prepend=",">
+          SHIFT_ID = #update.ShiftId#
+        </isNotNull>
+        <isNotNull  property="update.ClassId"  prepend=",">
+          CLASS_ID = #update.ClassId#
+        </isNotNull>
+        <isNotNull  property="update.WorkshopId"  prepend=",">
+          WORKSHOP_ID = #update.WorkshopId#
+        </isNotNull>
+        <isNotNull  property="update.HrCode"  prepend=",">
+          HR_CODE = #update.HrCode#
+        </isNotNull>
+        <isNotNull  property="update.ErpCode"  prepend=",">
+          ERP_CODE = #update.ErpCode#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.IsEmployee"  prepend=",">
+          IS_EMPLOYEE = #update.IsEmployee#
+        </isNotNull>
+        <isNotNull  property="update.BakupFlag"  prepend=",">
+          BAKUP_FLAG = #update.BakupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BakupTime"  prepend=",">
+          BAKUP_TIME = #update.BakupTime#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SSB_USER
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SsbUser">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SsbUser">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SSB_USER
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SSB_USER
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SsbUser" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SSB_USER
+    </statement>
+  </statements>
+</sqlMap>

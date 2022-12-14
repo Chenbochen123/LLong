@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HppStorePlace"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_STORE_PLACE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceName" prepend="AND">
+          <![CDATA[STORE_PLACE_NAME = #where.StorePlaceName#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceCode" prepend="AND">
+          <![CDATA[STORE_PLACE_CODE = #where.StorePlaceCode#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreId" prepend="AND">
+          <![CDATA[STORE_ID = #where.StoreId#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.StorageNumber" prepend="AND">
+          <![CDATA[STORAGE_NUMBER = #where.StorageNumber#]]>
+        </isNotNull>
+        <isNotNull property="where.SpecialPlace" prepend="AND">
+          <![CDATA[SPECIAL_PLACE = #where.SpecialPlace#]]>
+        </isNotNull>
+        <isNotNull property="where.PositionType" prepend="AND">
+          <![CDATA[POSITION_TYPE = #where.PositionType#]]>
+        </isNotNull>
+        <isNotNull property="where.IsFull" prepend="AND">
+          <![CDATA[IS_FULL = #where.IsFull#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY_5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY_6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy7" prepend="AND">
+          <![CDATA[DUMMY_7 = #where.Dummy7#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy8" prepend="AND">
+          <![CDATA[DUMMY_8 = #where.Dummy8#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy9" prepend="AND">
+          <![CDATA[DUMMY_9 = #where.Dummy9#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+     <select id="DownLoadStorePlace" parameterClass="map" resultClass="Row">
+       SELECT T2.* FROM HPP_STORE T
+       LEFT JOIN HPP_STORE_PLACE T2 ON T.OBJID=T2.STORE_ID
+       WHERE  T.STORE_HIGHER_LEVEL =  '0002001'
+     </select>
+
+
+     <!--获取物料信息-->
+     <select id="GeMaterial" parameterClass="map" resultClass="Row">
+       <![CDATA[
+   SELECT T.OBJID, T.SAP_CODE, T.MATERIAL_NAME,T4.MINOR_TYPE_NAME,T3.MAJOR_TYPE_NAME FROM SBM_MATERIAL T
+        LEFT JOIN SBM_MATERIAL_MAJOR_TYPE T3 ON T.MAJOR_TYPE_ID=T3.OBJID
+         LEFT JOIN SBM_MATERIAL_MINOR_TYPE T4 ON T.MINOR_TYPE_ID=T4.OBJID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.Objid" prepend="AND">
+           <![CDATA[T3.OBJID = #where.Objid#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.SapCode" prepend="AND">
+           <![CDATA[T.SAP_CODE like '%' || #where.SapCode# || '%']]>
+         </isNotNull>
+         <isNotNull property="where.MaterialName" prepend="AND">
+           <![CDATA[T.MATERIAL_NAME like '%'|| #where.MaterialName# || '%']]>
+         </isNotNull>
+         <isNotNull property="where.RowNum" prepend="AND">
+           <![CDATA[ROWNUM < #where.RowNum#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <!--获取半制品设备信息-->
+     <select id="GetEquip" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T.*,T.ROWID FROM  SBE_EQUIP T
+        LEFT JOIN SBE_EQUIP_MAJOR_TYPE T2 ON T.MAJOR_TYPE_ID=T2.OBJID
+        LEFT JOIN SBE_EQUIP_MINOR_TYPE T3 ON T.MINOR_TYPE_ID=T3.OBJID
+        WHERE T3.MAJOR_TYPE_ID IN(31,22,32,33,21,34,35,41)
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.Objid" prepend="AND">
+           <![CDATA[T.OBJID = #where.Objid#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipName" prepend="AND">
+           <![CDATA[T.EQUIP_NAME like '%'|| #where.EquipName# || '%']]>
+         </isNotNull>
+       </dynamic>
+       <isNotNull property="OrderString" prepend="">
+         ORDER BY $OrderString$
+       </isNotNull>
+     </select>
+
+     <!--获取半制品设备小类-->
+     <select id="GetEquipType" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         SELECT * FROM  SBE_EQUIP_MINOR_TYPE
+        WHERE MAJOR_TYPE_ID IN(31,22,32,33,21,34,35,41)
+       ]]>
+       <isNotNull property="OrderString" prepend="">
+         ORDER BY $OrderString$
+       </isNotNull>
+     </select>
+
+     <!--半制品库位信息中，显示的基础数据-->
+     <select id="GetPageDataByReader2" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         SELECT  T.OBJID,T.STORE_PLACE_NAME,T.STORE_PLACE_CODE,T.USED_FLAG,T.DELETE_FLAG,T.REMARK,T.MATERIAL_ID,T.STORAGE_NUMBER,T.SPECIAL_PLACE,
+       T.DUMMY_2,T.POSITION_TYPE, T.DUMMY_3, T3.STORE_NAME,T3.STORE_CODE,T4.MATERIAL_NAME,T5.USER_NAME,T6.MINOR_TYPE_NAME,T7.EQUIP_NAME FROM HPP_STORE_PLACE T
+       LEFT JOIN HPP_STORE T3 ON T3.OBJID=T.STORE_ID
+       LEFT JOIN SBM_MATERIAL T4 ON T.MATERIAL_ID=T4.OBJID  
+       LEFT JOIN SSB_USER T5 ON T.RECORD_USER_ID=T5.OBJID  
+       LEFT JOIN SBE_EQUIP_MINOR_TYPE T6 ON T.DUMMY_7=T6.OBJID
+       LEFT JOIN SBE_EQUIP T7 ON T.DUMMY_8=T7.OBJID  
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.Objid" prepend="AND">
+           <![CDATA[T.OBJID = #where.Objid#]]>
+         </isNotNull>
+         <isNotNull property="where.UsedFlag" prepend="AND">
+           <![CDATA[T.USED_FLAG = #where.UsedFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.StoreTypeId" prepend="AND">
+           <![CDATA[T3.STORE_TYPE_ID = #where.StoreTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.StoreCode" prepend="AND">
+           <![CDATA[T3.STORE_CODE = #where.StoreCode#]]>
+         </isNotNull>
+         <isNotNull property="where.SapCode" prepend="AND">
+           <![CDATA[T3.SAP_CODE = #where.SapCode#]]>
+         </isNotNull>
+         <isNotNull property="where.StoreName" prepend="AND">
+           <![CDATA[T3.STORE_NAME like '%' #where.StoreName# || '%']]>
+         </isNotNull>
+         <isNotNull property="where.StorePlaceName" prepend="AND">
+           <![CDATA[T.STORE_PLACE_NAME like '%' || #where.StorePlaceName# || '%']]>
+         </isNotNull>
+         <isNotNull property="where.StoreHigherLevel" prepend="AND">
+           <![CDATA[T3.STORE_HIGHER_LEVEL = #where.StoreHigherLevel#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <!--将这一库位下所有库位置为启用状态-->
+     <update id="UpdateUsedFlag" parameterClass="map" >
+       <![CDATA[ UPDATE HPP_STORE_PLACE T
+       SET　T.USED_FLAG=1
+        WHERE  T.STORE_CODE LIKE #StoreCode# || '%'
+       ]]>
+     </update>
+
+     
+     
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetStorePlaceInfo1" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT OBJID,STORE_PLACE_NAME FROM HPP_STORE_PLACE WHERE DELETE_FLAG=0
+       ]]>
+       <isNotNull property="StoreId" prepend="AND">
+         <![CDATA[STORE_ID=#StoreId#]]>
+       </isNotNull>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[STORE_PLACE_NAME ]]>
+       </dynamic>
+     </select>
+
+     <select id="SemisStorePlaceInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+              SELECT L.OBJID ,L1.EQUIP_NAME FROM HPP_STORE_PLACE  L  
+                 LEFT JOIN SBE_EQUIP L1 ON L1.OBJID = L.DUMMY_8 
+                 WHERE L.POSITION_TYPE=1 AND  L.DUMMY_7<>4101 ORDER BY OBJID
+         
+       ]]>
+     </select>
+     
+     <select id="SemisStorePlaceInfo1" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         SELECT K.OBJID ,K.STORE_PLACE_NAME FROM HPP_STORE_PLACE K WHERE K.POSITION_TYPE =0 AND K.DELETE_FLAG = 0 AND K.STORE_ID=#StoreId# ORDER BY STORE_PLACE_NAME
+         ]]>
+     </select>
+
+     <select id="GetStorePlaceInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT OBJID,STORE_PLACE_NAME FROM hpp_store_place WHERE DELETE_FLAG=0
+       ]]>
+       <isNotNull property="StoreId" prepend="AND">
+         <![CDATA[STORE_ID=#StoreId#]]>
+       </isNotNull>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[STORE_PLACE_NAME ]]>
+       </dynamic>
+     </select>
+
+     <select id="GetInStockDetailInfo" parameterClass="map" resultClass="row">
+       <![CDATA[
+  SELECT T1.*, T2.USER_NAME RECORD_USER_NAME ,T7.MATERIAL_PROD_CODE PROD_CODE 
+      , T3.STORE_PLACE_NAME 
+      ,T4.STORE_NAME
+      ,T5.STORE_PLACE_SUB_CODE,NVL(T8.MATERIAL_NAME,T10.MATERIAL_NAME) MATERIAL_NAME
+      FROM   HPP_IN_STOCK_DETAIL T1
+      LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+      LEFT JOIN HPP_STORE_PLACE T3 ON T1.STORE_PLACE_ID = T3.OBJID       
+      LEFT JOIN HPP_STORE T4 ON T3.STORE_ID = T4.OBJID 
+      LEFT JOIN HPP_STORE_PLACE_SUB T5 ON T1.SUB_STORE_PLACE_ID = T5.OBJID   
+      LEFT JOIN HPP_SEMIS_PRODUCTION T6 ON T6.CARD_NO = T1.CARD_NO AND T6.DELETE_FLAG = 0 
+      LEFT JOIN HPP_SEMIS_MATERIAL_CODE T7 ON T7.MATERIAL_ID = T6.MATERIAL_ID
+      LEFT JOIN SBM_MATERIAL T8 ON T8.OBJID = T6.Material_Id AND T8.DELETE_FLAG = 0
+      lefT JOIN HPP_RUBBER_PRODUCTION T9 ON T9.BARCODE = T1.CARD_NO AND T9.DELETE_FLAG = 0
+      LEFT JOIN SBM_MATERIAL T10 ON T10.sap_code = T9.sap_code AND T10.DELETE_FLAG = 0
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.StorePlaceID" prepend="AND">
+           <![CDATA[T3.OBJID = #where.StorePlaceID#]]>
+         </isNotNull>
+         <isNotNull property="where.StoreID" prepend="AND">
+           <![CDATA[T4.OBJID = #where.StoreID#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[T1.RECORD_TIME >= to_date(#where.BeginTime#,'yyyy/mm/dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[T1.RECORD_TIME <= to_date(#where.EndTime#,'yyyy/mm/dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.CardNo" prepend="AND">
+           <![CDATA[T1.CARD_NO = #where.CardNo#]]>
+         </isNotNull>
+         <isNotNull property="where.Shelf" prepend="AND">
+           <![CDATA[T1.SHELF_NO = #where.Shelf#]]>
+         </isNotNull>
+         <isNotNull property="where.Mater" prepend="AND">
+           <![CDATA[T8.MATERIAL_NAME like '%'|| #where.Mater# || '%']]>
+         </isNotNull>
+         <isNotNull property="where.DELETE_FLAG" prepend="AND">
+           <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+         </isNotNull>
+       </dynamic>
+       <isNull property="OrderString" prepend=" ">
+         ORDER BY T1.OBJID
+       </isNull>
+     </select>
+
+     <delete id="DelBpmMoldYl" parameterClass="map">
+       <![CDATA[
+             delete from bpm_moldyl where cardno = #semisBarcode#
+       ]]>
+     </delete>
+
+   </statements>
+</sqlMap>

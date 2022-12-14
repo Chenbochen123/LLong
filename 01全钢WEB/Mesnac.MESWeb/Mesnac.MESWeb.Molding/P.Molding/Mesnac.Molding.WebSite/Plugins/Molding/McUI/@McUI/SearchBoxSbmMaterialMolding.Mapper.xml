@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@SearchBoxSbmMaterialMolding" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+       SELECT * FROM SBM_MATERIAL T WHERE T.MAJOR_TYPE_ID=41
+            ]]>
+      <dynamic>
+        <isNotNull property="where.SAP_CODE" prepend="AND">
+          T.SAP_CODE like '%'||#where.SAP_CODE#||'%'
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+          T.MATERIAL_NAME like '%'||#where.MATERIAL_NAME#||'%'
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+  </statements>
+</sqlMap>

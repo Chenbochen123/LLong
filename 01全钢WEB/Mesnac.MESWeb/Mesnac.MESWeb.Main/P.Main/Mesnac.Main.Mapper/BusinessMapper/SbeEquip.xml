@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Main.Mapper.BusinessMapper.SbeEquip"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_EQUIP ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.MajorTypeId" prepend="AND">
+          <![CDATA[MAJOR_TYPE_ID = #where.MajorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.MinorTypeId" prepend="AND">
+          <![CDATA[MINOR_TYPE_ID = #where.MinorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[EQUIP_NAME = #where.EquipName#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipCode" prepend="AND">
+          <![CDATA[EQUIP_CODE = #where.EquipCode#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ProduceFactory" prepend="AND">
+          <![CDATA[PRODUCE_FACTORY = #where.ProduceFactory#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedDate" prepend="AND">
+          <![CDATA[USED_DATE = #where.UsedDate#]]>
+        </isNotNull>
+        <isNotNull property="where.IpAddress" prepend="AND">
+          <![CDATA[IP_ADDRESS = #where.IpAddress#]]>
+        </isNotNull>
+        <isNotNull property="where.RegisterCode" prepend="AND">
+          <![CDATA[REGISTER_CODE = #where.RegisterCode#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipUuid" prepend="AND">
+          <![CDATA[EQUIP_UUID = #where.EquipUuid#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+    <!--获取机台信息-->
+    <select id="GetEquipList" parameterClass="map" resultClass="Row">
+      SELECT OBJID, EQUIP_NAME, IP_ADDRESS,EQUIP_CODE,MINOR_TYPE_ID
+      FROM SBE_EQUIP
+      WHERE DELETE_FLAG = 0
+      ORDER BY OBJID
+    </select>
+
+    <!--获取机台信息-->
+    <select id="GetEquipListByIP" parameterClass="map" resultClass="Row">
+      select t3.* from cbm_group_control t1 left join CBM_GROUP_EQUIP_CONTACT t2 on t1.objid=t2.group_id
+      left join sbe_equip t3 on t2.equip_id=t3.objid
+      where T3.DELETE_FLAG = 0
+      <dynamic>
+        <isNotNull property="where.GROUPIP" prepend="AND">
+          <![CDATA[ T1.GROUP_IP=#where.GROUPIP#]]>
+        </isNotNull>
+        <isNotNull property="OrderString" prepend=" ">
+          ORDER BY $OrderString$
+        </isNotNull>
+      </dynamic>
+    </select>
+
+    <!--获取X光机台信息-->
+    <select id="GetXEquip" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t0.objid,t1.major_type_name,t2.minor_type_name,t0.equip_code,t0.equip_name,t0.ip_address,t3.Show_name,t0.remark
+      from sbe_equip t0,sbe_equip_major_type t1,sbe_equip_minor_type t2,sbe_equip_used_flag t3 
+      where t0.minor_type_id=6101 and t0.delete_flag=0 and t1.objid=t0.major_type_id and t2.objid=t0.minor_type_id and t3.objid=t0.used_flag
+      ]]>
+      <dynamic>
+        <isNotNull property="where.EQUIP_CODE" prepend="AND">
+          <![CDATA[ t0.equip_code like '%$where.EQUIP_CODE$%']]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_NAME" prepend="AND">
+          <![CDATA[ t0.equip_name like '%'||#where.EQUIP_NAME#||'%']]>
+        </isNotNull>
+        <isNotNull property="where.SHOW_NAME" prepend="AND">
+          <![CDATA[ t0.used_flag = #where.SHOW_NAME#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    
+    <!--更新X光机台信息-->
+    <update id="UpdateXEquip" parameterClass="map">
+      <![CDATA[ 
+          UPDATE SBE_EQUIP SET
+          EQUIP_CODE = #EquipCode#,
+          EQUIP_NAME = #EquipName#,
+          USED_FLAG = #ShowName#,
+          IP_ADDRESS=#IpAddress#,
+          REMARK=#Remark#
+          WHERE (OBJID = #ObjId#) 
+      ]]>
+    </update>
+    <!--获取动平衡机台信息-->
+    <select id="GetBEquip" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t0.objid,t1.major_type_name,t2.minor_type_name,t0.equip_code,t0.equip_name,t0.ip_address,t3.Show_name,t0.remark
+      from sbe_equip t0,sbe_equip_major_type t1,sbe_equip_minor_type t2,sbe_equip_used_flag t3 
+      where t0.minor_type_id=6102 and t0.delete_flag=0 and t1.objid=t0.major_type_id and t2.objid=t0.minor_type_id and t3.objid=t0.used_flag
+      ]]>
+      <dynamic>
+        <isNotNull property="where.EQUIP_CODE" prepend="AND">
+          <![CDATA[ t0.equip_code like '%$where.EQUIP_CODE$%']]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_NAME" prepend="AND">
+          <![CDATA[ t0.equip_name like '%'||#where.EQUIP_NAME#||'%']]>
+        </isNotNull>
+        <isNotNull property="where.SHOW_NAME" prepend="AND">
+          <![CDATA[ t0.used_flag = #where.SHOW_NAME#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+
+    <!--更新动平衡机台信息-->
+    <update id="UpdateBEquip" parameterClass="map">
+      <![CDATA[ 
+          UPDATE SBE_EQUIP SET
+          EQUIP_CODE = #EquipCode#,
+          EQUIP_NAME = #EquipName#,
+          USED_FLAG = #ShowName#,
+          IP_ADDRESS=#IpAddress#,
+          REMARK=#Remark#
+          WHERE (OBJID = #ObjId#) 
+      ]]>
+    </update>
+    <!--获取均匀性机台信息-->
+    <select id="GetUEquip" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t0.objid,t1.major_type_name,t2.minor_type_name,t0.equip_code,t0.equip_name,t0.ip_address,t3.Show_name,t0.remark
+      from sbe_equip t0,sbe_equip_major_type t1,sbe_equip_minor_type t2,sbe_equip_used_flag t3 
+      where t0.minor_type_id=6103 and t0.delete_flag=0 and t1.objid=t0.major_type_id and t2.objid=t0.minor_type_id and t3.objid=t0.used_flag
+      ]]>
+      <dynamic>
+        <isNotNull property="where.EQUIP_CODE" prepend="AND">
+          <![CDATA[ t0.equip_code like '%$where.EQUIP_CODE$%']]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_NAME" prepend="AND">
+          <![CDATA[ t0.equip_name like '%'||#where.EQUIP_NAME#||'%']]>
+        </isNotNull>
+        <isNotNull property="where.SHOW_NAME" prepend="AND">
+          <![CDATA[ t0.used_flag = #where.SHOW_NAME#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+
+    <!--更新均匀性机台信息-->
+    <update id="UpdateUEquip" parameterClass="map">
+      <![CDATA[ 
+          UPDATE SBE_EQUIP SET
+          EQUIP_CODE = #EquipCode#,
+          EQUIP_NAME = #EquipName#,
+          USED_FLAG = #ShowName#,
+          IP_ADDRESS=#IpAddress#,
+          REMARK=#Remark#
+          WHERE (OBJID = #ObjId#) 
+      ]]>
+    </update>
+
+    <select id="GetUserRoleInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+select  *  from  ssp_user_role a
+where role_id = 162 and user_id = #UserId#
+      ]]>
+    </select>
+    
+    
+  </statements>
+</sqlMap>

@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CppCuringFirsttyre"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CPP_CURING_FIRSTTYRE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipPosition" prepend="AND">
+          <![CDATA[EQUIP_POSITION = #where.EquipPosition#]]>
+        </isNotNull>
+        <isNotNull property="where.MouldNo" prepend="AND">
+          <![CDATA[MOULD_NO = #where.MouldNo#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[TYRE_NO = #where.TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNum" prepend="AND">
+          <![CDATA[TYRE_NUM = #where.TyreNum#]]>
+        </isNotNull>
+        <isNotNull property="where.MouldState" prepend="AND">
+          <![CDATA[MOULD_STATE = #where.MouldState#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetCppCuringFirsttyreList" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select A.*, B.EQUIP_NAME, C.SHOW_NAME,D.USER_NAME RECORD_USER_NAME
+        ,CASE to_char(A.MOULD_STATE) WHEN '0' THEN '未验证' WHEN '1' THEN '正在验证' WHEN '2' THEN '通过' ELSE '未通过' end as MOULDSTATE
+        from CPP_CURING_FIRSTTYRE A
+             left join SBE_EQUIP B on A.EQUIP_ID = B.OBJID
+		         left join CBE_EQUIP_POSITION C on A.EQUIP_POSITION = C.OBJID
+             left join SSB_USER D ON A.RECORD_USER_ID = D.OBJID
+       ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.ObjID" prepend="AND">
+           <![CDATA[A.OBJID = #where.ObjID#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipID" prepend="AND">
+           <![CDATA[A.EQUIP_ID = #where.EquipID#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipPosition" prepend="AND">
+           <![CDATA[A.EQUIP_POSITION = #where.EquipPosition#]]>
+         </isNotNull>
+         <isNotNull property="where.MouldNo" prepend="AND">
+           <![CDATA[A.MOULD_NO = #where.MouldNo#]]>
+         </isNotNull>
+         <isNotNull property="where.TyreNum" prepend="AND">
+           <![CDATA[A.TYRE_NUM > #where.TyreNum#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[A.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME >= to_date(#where.BeginTime#,'yyyy-mm-dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME <= to_date(#where.EndTime#,'yyyy-mm-dd hh24:mi:ss')]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+      <select id="GetCppCuringFirsttyreListMain" parameterClass="map" resultClass="Row">
+       <![CDATA[
+             select  A.EQUIP_ID,B.EQUIP_NAME,A.EQUIP_POSITION,C.SHOW_NAME,count(*) VAL_COUNT
+             from cpp_firsttyre_val A 
+             inner join cpp_firsttyre_detail T1 on A.objid= T1.VAL_ID
+             left join SBE_EQUIP B on A.EQUIP_ID = B.OBJID
+             left join CBE_EQUIP_POSITION C on A.EQUIP_POSITION = C.OBJID
+             left join SSB_USER D ON A.RECORD_USER_ID = D.OBJID
+       ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.ObjID" prepend="AND">
+           <![CDATA[A.OBJID = #where.ObjID#]]>
+         </isNotNull>
+         <isNotNull property="where.EQUIP_ID" prepend="AND">
+           <![CDATA[A.EQUIP_ID = #where.EQUIP_ID#]]>
+         </isNotNull>
+         
+         <isNotNull property="where.TyreNo" prepend="AND">
+           <![CDATA[T1.TYRE_NO = #where.TyreNo#]]>
+         </isNotNull>
+         <isNotNull property="where.GreenNo" prepend="AND">
+           <![CDATA[T1.GREEN_TYRE_NO = #where.GreenNo#]]>
+         </isNotNull>
+         
+         <isNotNull property="where.EquipPosition" prepend="AND">
+           <![CDATA[A.EQUIP_POSITION = #where.EquipPosition#]]>
+         </isNotNull>
+         <isNotNull property="where.MouldNo" prepend="AND">
+           <![CDATA[A.MOULD_NO = #where.MouldNo#]]>
+         </isNotNull>
+         <isNotNull property="where.TyreNum" prepend="AND">
+           <![CDATA[A.TYRE_NUM > #where.TyreNum#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[A.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME >= to_date(#where.BeginTime#,'yyyy-mm-dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME <= to_date(#where.EndTime#,'yyyy-mm-dd hh24:mi:ss')]]>
+         </isNotNull>
+       </dynamic>
+        <![CDATA[ 
+         group by A.EQUIP_ID,B.EQUIP_NAME,A.EQUIP_POSITION,C.SHOW_NAME
+             ORDER BY A.EQUIP_ID,A.EQUIP_POSITION
+      ]]>
+     </select>
+       
+     <select id="GetCppCuringFirsttyreListDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+             select T1.OBJID,T1.TYRE_NO,T1.GREEN_TYRE_NO,A.MOULD_STATE,A.TYRE_NUM,A.TYRE_PLAN_NUM,A.EQUIP_ID,A.EQUIP_POSITION,A.RECORD_USER_ID,A.RECORD_TIME,B.EQUIP_NAME, C.SHOW_NAME,D.USER_NAME RECORD_USER_NAME
+,CASE to_char(A.MOULD_STATE) WHEN '0' THEN '未验证' WHEN '1' THEN '正在验证' WHEN '2' THEN '通过' ELSE '未通过' end as MOULDSTATE ,MATERIAL_NAME
+             from cpp_firsttyre_val A 
+             inner join cpp_firsttyre_detail T1 on A.objid= T1.VAL_ID
+             left join SBE_EQUIP B on A.EQUIP_ID = B.OBJID
+             left join CBE_EQUIP_POSITION C on A.EQUIP_POSITION = C.OBJID
+             left join SSB_USER D ON A.RECORD_USER_ID = D.OBJID
+             left join cpp_curing_production e on t1.tyre_no=e.tyre_no
+             left join sbm_material f on e.material_id=f.objid
+       ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.ObjID" prepend="AND">
+           <![CDATA[A.OBJID = #where.ObjID#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipID" prepend="AND">
+           <![CDATA[A.EQUIP_ID = #where.EquipID#]]>
+         </isNotNull>
+         
+         <isNotNull property="where.TyreNo" prepend="AND">
+           <![CDATA[T1.TYRE_NO = #where.TyreNo#]]>
+         </isNotNull>
+         <isNotNull property="where.GreenNo" prepend="AND">
+           <![CDATA[T1.GREEN_TYRE_NO = #where.GreenNo#]]>
+         </isNotNull>
+           
+         <isNotNull property="where.EquipPosition" prepend="AND">
+           <![CDATA[A.EQUIP_POSITION = #where.EquipPosition#]]>
+         </isNotNull>
+         <isNotNull property="where.MouldNo" prepend="AND">
+           <![CDATA[A.MOULD_NO = #where.MouldNo#]]>
+         </isNotNull>
+         <isNotNull property="where.TyreNum" prepend="AND">
+           <![CDATA[A.TYRE_NUM > #where.TyreNum#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[A.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[A.RECORD_TIME <= #where.EndTime#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetCppCuringFirsttyreListMainNew" parameterClass="map" resultClass="Row">
+       <![CDATA[
+             select T1.OBJID,T1.TYRE_NO,T1.GREEN_TYRE_NO,A.MOULD_STATE,A.TYRE_NUM,A.TYRE_PLAN_NUM,A.EQUIP_ID,A.EQUIP_POSITION,A.RECORD_USER_ID,A.RECORD_TIME,B.EQUIP_NAME, C.SHOW_NAME,D.USER_NAME RECORD_USER_NAME
+                   ,CASE to_char(A.MOULD_STATE) WHEN '0' THEN '未验证' WHEN '1' THEN '正在验证' WHEN '2' THEN '通过' ELSE '未通过' end as MOULDSTATE ,MATERIAL_NAME
+                   ,g.no_reason,e.mold_code MOULD_NO,A.state_time
+             from cpp_firsttyre_val A 
+             inner join cpp_firsttyre_detail T1 on A.objid= T1.VAL_ID
+             left join SBE_EQUIP B on A.EQUIP_ID = B.OBJID
+             left join CBE_EQUIP_POSITION C on A.EQUIP_POSITION = C.OBJID
+             left join SSB_USER D ON A.RECORD_USER_ID = D.OBJID
+             left join cpp_curing_production e on t1.tyre_no=e.tyre_no
+             left join sbm_material f on e.material_id=f.objid
+             left join cbe_firstno_reason g on a.backup_flag = g.objid
+             where 1=1 AND A.MOULD_STATE in ( 2,3)
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.EQUIP_ID" prepend="AND">
+           <![CDATA[A.EQUIP_ID = #where.EQUIP_ID#]]>
+         </isNotNull>
+         <isNotNull property="where.TyreNo" prepend="AND">
+           <![CDATA[T1.TYRE_NO = #where.TyreNo#]]>
+         </isNotNull>
+         <isNotNull property="where.GreenNo" prepend="AND">
+           <![CDATA[T1.GREEN_TYRE_NO = #where.GreenNo#]]>
+         </isNotNull>
+         <isNotNull property="where.MouldState" prepend="AND">
+           <![CDATA[A.MOULD_STATE = #where.MouldState#]]>
+         </isNotNull>
+         <isNotNull property="where.MouldNo" prepend="AND">
+           <![CDATA[e.mold_code = #where.MouldNo#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[A.state_time >= to_date(#where.BeginTime#,'yyyy-mm-dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[A.state_time <= to_date(#where.EndTime#,'yyyy-mm-dd hh24:mi:ss')]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+            order by A.state_time desc
+      ]]>
+     </select>
+     
+  </statements>
+</sqlMap>

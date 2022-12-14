@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<ActionService>
+  <Design>
+    <Path path="设备管理/故障申报">
+      <Action action="786D9F680F1448A39C288BB4B888C1EB">
+        <Caption>故障申报_故障申报</Caption>
+        <Remark>故障申报</Remark>
+      </Action>
+      <Action action="30B018230ECA44D6803A66F637E29240">
+        <Caption>故障申报_故障确认</Caption>
+        <Remark>故障确认</Remark>
+      </Action>
+      <Action action="A49FAE9C2E304F9A9E0D042D251B6F2D">
+        <Caption>故障申报_维修完成</Caption>
+        <Remark>维修完成</Remark>
+      </Action>
+      <Action action="B2E9D6C6FFF64BEBAB2F9AC9B418D61D">
+        <Caption>故障申报_确认生产</Caption>
+        <Remark>确认生产</Remark>
+      </Action>
+      <Action action="DD96059C67A0431A81C4839E544827BB">
+          <Caption>故障申报_查询</Caption>
+          <Remark>查询</Remark>
+      </Action>
+    </Path>
+  </Design>
+
+  <DesignToRuntime>
+    <Design action="786D9F680F1448A39C288BB4B888C1EB">
+      <Runtime action="0FB024A06C1C4667893A1387BC4459F9"/>
+    </Design>
+    <Design action="30B018230ECA44D6803A66F637E29240">
+      <Runtime action="E2A3C74314D6437FBEB8DF8A75EE1B07"/>
+    </Design>
+    <Design action="A49FAE9C2E304F9A9E0D042D251B6F2D">
+      <Runtime action="9BD2B2865B6548C2995C1EF20BC0E30F"/>
+    </Design>
+    <Design action="B2E9D6C6FFF64BEBAB2F9AC9B418D61D">
+      <Runtime action="69C0201620224858BD54A1C4A6296E53"/>
+    </Design>
+    <Design action="DD96059C67A0431A81C4839E544827BB">
+      <Runtime action="BA5875769C594390A6A963FC047356D4"/>
+    </Design>
+  </DesignToRuntime>
+
+  <Runtime>
+    <Import assembly = "Data/Action/Sulf/Mesnac.Action.Sulf.dll">
+      <Action action="0FB024A06C1C4667893A1387BC4459F9" class="Mesnac.Action.Sulf.EquipManger.FaultReport"/>
+      <Action action="E2A3C74314D6437FBEB8DF8A75EE1B07" class="Mesnac.Action.Sulf.EquipManger.FaultConfirm"/>
+      <Action action="9BD2B2865B6548C2995C1EF20BC0E30F" class="Mesnac.Action.Sulf.EquipManger.FaultRepair"/>
+      <Action action="69C0201620224858BD54A1C4A6296E53" class="Mesnac.Action.Sulf.EquipManger.FaultFinish"/>
+      <Action action="BA5875769C594390A6A963FC047356D4" class="Mesnac.Action.Sulf.EquipManger.FaultSearch"/>
+    </Import>
+  </Runtime>
+</ActionService>

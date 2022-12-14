@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ActionService>
+  <Design>
+    <Path path="系统日志/系统日志">
+      <Action action="D1B800FC574E4229B1AD5CAC8CF0BB05">
+        <Caption>系统日志_窗体初始化</Caption>
+        <Remark>窗体初始化</Remark>
+      </Action>
+      <Action action="5DA88FC8756C4A39BE2A6CE5FF57F4F5">
+        <Caption>系统日志_日志查询</Caption>
+        <Remark>报警查询</Remark>
+      </Action>
+    </Path>
+  </Design>
+
+  <DesignToRuntime>
+    <Design action="D1B800FC574E4229B1AD5CAC8CF0BB05">
+      <Runtime action="3194A83FF3E445BFA2999906E931B304"/>
+    </Design>
+    <Design action="5DA88FC8756C4A39BE2A6CE5FF57F4F5">
+      <Runtime action="E1A706E0B8DE4E08A5267696F2E483D9"/>
+    </Design>
+  </DesignToRuntime>
+
+  <Runtime>
+    <Import assembly = "Data/Action/SulfGroup/Mesnac.Action.SulfGroup.dll">
+      <Action action="3194A83FF3E445BFA2999906E931B304" class="Mesnac.Action.SulfGroup.Config.OperateLogInit"/>
+      <Action action="E1A706E0B8DE4E08A5267696F2E483D9" class="Mesnac.Action.SulfGroup.Config.OperateLogSelect"/>
+    </Import>
+  </Runtime>
+</ActionService>

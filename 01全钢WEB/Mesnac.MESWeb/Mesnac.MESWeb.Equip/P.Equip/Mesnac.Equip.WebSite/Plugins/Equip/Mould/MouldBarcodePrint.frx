@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="03/26/2013 08:39:47" ReportInfo.Modified="11/22/2016 10:33:04" ReportInfo.CreatorVersion="1.9.9.0">
+  <ScriptText>
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Windows.Forms;
+    using System.Drawing;
+    using System.Data;
+    using FastReport;
+    using FastReport.Data;
+    using FastReport.Dialog;
+    using FastReport.Barcode;
+    using FastReport.Table;
+    using FastReport.Utils;
+
+    namespace FastReport
+    {
+    public class ReportScript
+    {
+    
+    
+    private void Mould_Card_ManualBuild(object sender, EventArgs e)
+    {
+      DataSourceBase rowData = Report.GetDataSource(&quot;MouldCard&quot;);
+      rowData.Init();
+       
+      while (rowData.HasMoreRows)
+      {
+        Cell12.Text = rowData.Report.GetColumnValue(&quot;MouldCard.BRAND_NAME&quot;).ToString();
+        Cell15.Text = rowData.Report.GetColumnValue(&quot;MouldCard.PLYRATING_NAME&quot;).ToString()+'\t'+rowData.Report.GetColumnValue(&quot;MouldCard.LOAD_INDEX_NAME&quot;).ToString();
+        Cell20.Text = rowData.Report.GetColumnValue(&quot;MouldCard.REMARK&quot;).ToString();
+        Cell25.Text = rowData.Report.GetColumnValue(&quot;MouldCard.USER_NAME&quot;).ToString()+'\t'+
+        Convert.ToDateTime(rowData.Report.GetColumnValue(&quot;MouldCard.RECORD_TIME&quot;)).ToString(&quot;yyyy-MM-dd&quot;);
+        Cell43.Text = rowData.Report.GetColumnValue(&quot;MouldCard.SIZE_NAME&quot;).ToString();
+        Cell45.Text = rowData.Report.GetColumnValue(&quot;MouldCard.PATTERN_NAME&quot;).ToString();
+        Cell17.Text = rowData.Report.GetColumnValue(&quot;MouldCard.PRODUCT&quot;).ToString();
+        //Cell20=rowData.Report.GetColumnValue(&quot;MouldCard.REMARK&quot;).ToString();
+        Cell22.Text = rowData.Report.GetColumnValue(&quot;MouldCard.DUMMY_2&quot;).ToString(); 
+        Barcode1.Text=   rowData.Report.GetColumnValue(&quot;MouldCard.DUMMY_1&quot;).ToString();
+        Mould_Card.PrintColumn(0);
+        Mould_Card.PrintRows();
+        Mould_Card.PrintColumn(1);
+        Mould_Card.PrintRows();
+        Mould_Card.PrintColumn(2);
+        Mould_Card.PrintRows();
+        Mould_Card.PrintColumn(3);
+        Mould_Card.PrintRows();       
+        rowData.Next();
+        Mould_Card.PageBreak();
+      }      
+    }
+    }
+    }
+  </ScriptText>
+  <Dictionary/>
+  <ReportPage Name="Page1" PaperWidth="120" PaperHeight="138" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" FirstPageSource="4" OtherPagesSource="4" Guides="28.35,416.19,79.91,66.15,191.2,178.28,266.26,89.36,188.11,103.41">
+    <ReportTitleBand Name="ReportTitle1" Width="453.6" Height="504" Guides="37.8,450.45,0,49.35,9.45,96.6,143.85,193.2,242.55,291.9,331.8,39.9,412.65,18.9,56.7,80.85">
+      <TableObject Name="Mould_Card" Left="28.35" Top="37.8" Width="387.84" Height="412.65" Anchor="Top" Border.Lines="All" ManualBuildEvent="Mould_Card_ManualBuild">
+        <TableColumn Name="Column1" Width="51.56"/>
+        <TableColumn Name="Column2" Width="111.29"/>
+        <TableColumn Name="Column3" Width="75.06"/>
+        <TableColumn Name="Column4" Width="149.93"/>
+        <TableRow Name="Row1" Height="49.35">
+          <TableCell Name="Cell1" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold">
+            <PictureObject Name="Picture1" Top="9.45" Width="37.8" Height="28.35" Border.Lines="All" Fill.Color="Black" Image="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"/>
+          </TableCell>
+          <TableCell Name="Cell2" Border.Lines="Right, Top, Bottom" Text="德州玲珑轮胎" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell4" Border.Lines="All" Text="模具标识卡" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell5" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row11" Height="47.25" AutoSize="true">
+          <TableCell Name="Cell46" Border.Lines="Left, Top, Bottom" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell47" Border.Lines="Top, Bottom" Text="编号:DZ/Q10-88" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell48" Font="宋体, 9pt"/>
+          <TableCell Name="Cell49" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row10" Height="47.25">
+          <TableCell Name="Cell42" Border.Lines="All" Text="规格：" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell43" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell44" Border.Lines="All" Text="花纹：" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell45" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row4" Height="49.35">
+          <TableCell Name="Cell11" Border.Lines="All" Text="商标：" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+          <TableCell Name="Cell12" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+          <TableCell Name="Cell14" Border.Lines="All" Text="层级 负荷：" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+          <TableCell Name="Cell15" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row5" Height="49.35">
+          <TableCell Name="Cell16" Border.Lines="All" Text="产地：" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+          <TableCell Name="Cell17" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+          <TableCell Name="Cell19" Border.Lines="All" Text="状态：" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+          <TableCell Name="Cell20" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row6" Height="49.35">
+          <TableCell Name="Cell21" Border.Lines="All" Text="编号：" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+          <TableCell Name="Cell22" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell24" Border.Lines="All" Text="拆模人/时间：" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+          <TableCell Name="Cell25" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row7" Height="39.9">
+          <TableCell Name="Cell26" Border.Lines="All" Text="状态标识：" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+          <TableCell Name="Cell27" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+          <TableCell Name="Cell28" Border.Lines="All" Text="（“绿”正常使用、“黄”暂停使用、“红”禁止使用）" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt" ColSpan="2"/>
+          <TableCell Name="Cell29" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row8" Height="80.85">
+          <TableCell Name="Cell30" Border.Lines="All" Text="模具条码:" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt"/>
+          <TableCell Name="Cell31" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 10pt" ColSpan="3">
+            <BarcodeObject Name="Barcode1" Left="9.45" Top="18.9" Width="98.75" Height="37.8" Barcode="Code128" Barcode.AutoEncode="true"/>
+          </TableCell>
+          <TableCell Name="Cell32" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell33" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+    </ReportTitleBand>
+  </ReportPage>
+</Report>

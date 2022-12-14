@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.SbmStandardweight"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SbmStandardweight" type="Mesnac.Semis.Entity.BasicEntity.SbmStandardweight, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SbmStandardweight" class="SbmStandardweight">
+    <result property="ObjId" column="OBJID"/>
+    <result property="MaterialName" column="MATERIAL_NAME"/>
+    <result property="MaterialCode" column="MATERIAL_CODE"/>
+    <result property="StandardWeight" column="STANDARD_WEIGHT"/>
+    <result property="Dummy1" column="DUMMY_1"/>
+    <result property="Dummy2" column="DUMMY_2"/>
+    <result property="Dummy3" column="DUMMY_3"/>
+    <result property="SapCode" column="SAP_CODE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SbmStandardweight" class="SbmStandardweight">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="MaterialName" column="MaterialName"/>
+    <parameter property="MaterialCode" column="MaterialCode"/>
+    <parameter property="StandardWeight" column="StandardWeight"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="SapCode" column="SapCode"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBM_STANDARDWEIGHT ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[MATERIAL_NAME = #where.MaterialName#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialCode" prepend="AND">
+          <![CDATA[MATERIAL_CODE = #where.MaterialCode#]]>
+        </isNotNull>
+        <isNotNull property="where.StandardWeight" prepend="AND">
+          <![CDATA[STANDARD_WEIGHT = #where.StandardWeight#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.SapCode" prepend="AND">
+          <![CDATA[SAP_CODE = #where.SapCode#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SBM_STANDARDWEIGHT]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="MaterialName" prepend=",">MATERIAL_NAME</isNotNull>
+        <isNotNull property="MaterialCode" prepend=",">MATERIAL_CODE</isNotNull>
+        <isNotNull property="StandardWeight" prepend=",">STANDARD_WEIGHT</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY_1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY_2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY_3</isNotNull>
+        <isNotNull property="SapCode" prepend=",">SAP_CODE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SBM_STANDARDWEIGHT.NEXTVAL</isNull>
+        <isNotNull property="MaterialName" prepend=",">#MaterialName#</isNotNull>
+        <isNotNull property="MaterialCode" prepend=",">#MaterialCode#</isNotNull>
+        <isNotNull property="StandardWeight" prepend=",">#StandardWeight#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="SapCode" prepend=",">#SapCode#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SBM_STANDARDWEIGHT
+       <dynamic prepend="SET">
+        <isNotNull  property="update.MaterialName"  prepend=",">
+          MATERIAL_NAME = #update.MaterialName#
+        </isNotNull>
+        <isNotNull  property="update.MaterialCode"  prepend=",">
+          MATERIAL_CODE = #update.MaterialCode#
+        </isNotNull>
+        <isNotNull  property="update.StandardWeight"  prepend=",">
+          STANDARD_WEIGHT = #update.StandardWeight#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY_1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY_2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY_3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.SapCode"  prepend=",">
+          SAP_CODE = #update.SapCode#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SBM_STANDARDWEIGHT
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SbmStandardweight">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SbmStandardweight">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SBM_STANDARDWEIGHT
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SBM_STANDARDWEIGHT
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SbmStandardweight" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SBM_STANDARDWEIGHT
+    </statement>
+  </statements>
+</sqlMap>

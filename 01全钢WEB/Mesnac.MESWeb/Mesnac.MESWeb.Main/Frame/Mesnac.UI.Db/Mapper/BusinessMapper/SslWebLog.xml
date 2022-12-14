@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.SslWebLog"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SSL_WEB_LOG ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.UserId" prepend="AND">
+          <![CDATA[USER_ID = #where.UserId#]]>
+        </isNotNull>
+        <isNotNull property="where.PageId" prepend="AND">
+          <![CDATA[PAGE_ID = #where.PageId#]]>
+        </isNotNull>
+        <isNotNull property="where.MethodId" prepend="AND">
+          <![CDATA[METHOD_ID = #where.MethodId#]]>
+        </isNotNull>
+        <isNotNull property="where.UserIp" prepend="AND">
+          <![CDATA[USER_IP = #where.UserIp#]]>
+        </isNotNull>
+        <isNotNull property="where.ShowName" prepend="AND">
+          <![CDATA[SHOW_NAME = #where.ShowName#]]>
+        </isNotNull>
+        <isNotNull property="where.MethodResult" prepend="AND">
+          <![CDATA[METHOD_RESULT = #where.MethodResult#]]>
+        </isNotNull>
+        <isNotNull property="where.PageRequest" prepend="AND">
+          <![CDATA[PAGE_REQUEST = #where.PageRequest#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

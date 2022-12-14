@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="EQUIPID" Value="机台"></Caption>
+    <Caption Name="LEFTORR" Value="左右模"></Caption>
+    <Caption Name="BEGIN_TIME" Value="开始时间"></Caption>
+    <Caption Name="END_TIME" Value="结束时间"></Caption>
+    <Caption Name="USE_DAY" Value="已使用天数"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="USER_NAME" Value="记录人"></Caption>
+  </Captions>
+  <WebPage Title="气孔疏通记录">
+  </WebPage>
+  <Crud TableName="SBE_CLEARSTOMATA">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <!--<DeleteFlag Value="DELETE_FLAG"></DeleteFlag>-->
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_SBE_CLEARSTOMATA"></SeqField>
+    </SeqFields>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="BEGIN_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="END_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EQUIPID" Type="ComboBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid>
+      <GridColumns>
+        <GridColumn ColumnName="BEGIN_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="END_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="EQUIPID"></GridColumn>
+        <GridColumn ColumnName="LEFTORR"></GridColumn>
+        <GridColumn ColumnName="USE_DAY"></GridColumn>
+        <GridColumn ColumnName="USER_NAME"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

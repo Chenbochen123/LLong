@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="BeginDate" Value="开始日期"></Caption>
+    <Caption Name="EndDate" Value="结束日期"></Caption>
+    <Caption Name="EquipName" Value="机台名称"></Caption>
+    <Caption Name="STORE_ID" Value="区号"></Caption>
+    <Caption Name="STORE_PLACE_ID" Value="架子编号"></Caption>
+    <Caption Name="SUB_STORE_PLACE_ID" Value="分区层号"></Caption>
+    <Caption Name="STORE_NAME" Value="区号"></Caption>
+    <Caption Name="STORE_PLACE_NAME" Value="架子编号"></Caption>
+    <Caption Name="SUB_STORE_PLACE_NAME" Value="分区层号"></Caption>
+    <Caption Name="SIZE_NAME" Value="规格"></Caption>
+    <Caption Name="CNTA" Value="总量"></Caption>
+    <Caption Name="CNTB" Value="库存总量"></Caption>
+    <Caption Name="CNTC" Value="投产总量"></Caption>
+    <Caption Name="PATTERN_NAME" Value="花纹"></Caption>
+    <Caption Name="MOULD_BARCODE" Value="模具编号"></Caption>
+    <Caption Name="MOULD_NAME" Value="模具名称"></Caption>
+    <Caption Name="SIZE_NAME" Value="规格"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="操作人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+  </Captions>
+  <WebPage Title="模具汇总台账">
+  </WebPage>
+  <Crud TableName="CIM_MOULD_INFO">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_CIM_MOULD_INFO"></SeqField>
+    </SeqFields>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="SIZE_NAME"  IsShow="true"></ParamField>
+        <ParamField FieldName="PATTERN_NAME"  IsShow="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="SIZE_NAME" ></GridColumn>
+        <GridColumn ColumnName="PATTERN_NAME"></GridColumn>
+        <GridColumn ColumnName="CNTA"></GridColumn>
+        <GridColumn ColumnName="CNTB"></GridColumn>
+        <GridColumn ColumnName="CNTC"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.HppKoumould"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HppKoumould" type="Mesnac.Semis.Entity.BasicEntity.HppKoumould, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HppKoumould" class="HppKoumould">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Rfid" column="RFID"/>
+    <result property="KouMould" column="KOU_MOULD"/>
+    <result property="RecordUserid" column="RECORD_USERID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HppKoumould" class="HppKoumould">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Rfid" column="Rfid"/>
+    <parameter property="KouMould" column="KouMould"/>
+    <parameter property="RecordUserid" column="RecordUserid"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_KOUMOULD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Rfid" prepend="AND">
+          <![CDATA[RFID = #where.Rfid#]]>
+        </isNotNull>
+        <isNotNull property="where.KouMould" prepend="AND">
+          <![CDATA[KOU_MOULD = #where.KouMould#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserid" prepend="AND">
+          <![CDATA[RECORD_USERID = #where.RecordUserid#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HPP_KOUMOULD]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="Rfid" prepend=",">RFID</isNotNull>
+        <isNotNull property="KouMould" prepend=",">KOU_MOULD</isNotNull>
+        <isNotNull property="RecordUserid" prepend=",">RECORD_USERID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_HPP_KOUMOULD.NEXTVAL</isNull>
+        <isNotNull property="Rfid" prepend=",">#Rfid#</isNotNull>
+        <isNotNull property="KouMould" prepend=",">#KouMould#</isNotNull>
+        <isNotNull property="RecordUserid" prepend=",">#RecordUserid#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HPP_KOUMOULD
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Rfid"  prepend=",">
+          RFID = #update.Rfid#
+        </isNotNull>
+        <isNotNull  property="update.KouMould"  prepend=",">
+          KOU_MOULD = #update.KouMould#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserid"  prepend=",">
+          RECORD_USERID = #update.RecordUserid#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HPP_KOUMOULD
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HppKoumould">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HppKoumould">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM HPP_KOUMOULD
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HPP_KOUMOULD
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HppKoumould" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HPP_KOUMOULD
+    </statement>
+  </statements>
+</sqlMap>

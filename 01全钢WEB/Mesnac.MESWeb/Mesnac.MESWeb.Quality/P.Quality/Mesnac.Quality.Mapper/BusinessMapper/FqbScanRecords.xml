@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BusinessMapper.FqbScanRecords"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM FQB_SCAN_RECORDS ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[TYRE_NO = #where.TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkShopId" prepend="AND">
+          <![CDATA[WORK_SHOP_ID = #where.WorkShopId#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupFlag" prepend="AND">
+          <![CDATA[BAUP_FLAG = #where.BaupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupTime" prepend="AND">
+          <![CDATA[BAUP_TIME = #where.BaupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipCode" prepend="AND">
+          <![CDATA[EQUIP_CODE = #where.EquipCode#]]>
+        </isNotNull>
+      <isNotNull property="where.GreenTyreNo" prepend="AND">
+        <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+      </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetBScanInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T0.TYRE_NO,T0.GREEN_TYRE_NO,T2.Material_Name,T3.EQUIP_NAME,T0.RECORD_TIME FROM FQB_SCAN_RECORDS T0 
+       LEFT JOIN CPP_CURING_PRODUCTION T1 ON T1.TYRE_NO=T0.TYRE_NO AND T1.DELETE_FLAG=0
+       LEFT JOIN V_CBM_MATERIALINFO T2 ON T2.OBJID=T1.MATERIAL_ID
+       LEFT JOIN SBE_EQUIP T3 ON T3.OBJID= T0.EQUIP_CODE
+       WHERE T0.DELETE_FLAG=0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[T0.RECORD_TIME > #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[T0.RECORD_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.Material_Name" prepend="AND">
+           <![CDATA[T2.MATERIAL_NAME like '%'||#where.Material_Name#||'%']]>
+         </isNotNull>
+         <isNotNull property="where.TyreNo" prepend="AND">
+           <![CDATA[T0.TYRE_NO = #where.TyreNo#]]>
+         </isNotNull>
+         <isNotNull property="where.GreenTyreNo" prepend="AND">
+           <![CDATA[T0.GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+         </isNotNull>
+         <isNotNull property="where.Equip" prepend="AND">
+           <![CDATA[T0.EQUIP_CODE = #where.Equip#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[T0.RECORD_TIME DESC]]>
+       </dynamic>
+     </select>
+     <select id="GetTyreNobyGreenTyreNo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT TYRE_NO FROM CPP_CURING_PRODUCTION 
+       WHERE DELETE_FLAG=0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="GreenTyreNo" prepend="AND">
+           <![CDATA[GREEN_TYRE_NO = #GreenTyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetGreenTyreNoByTyreNo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT GREEN_TYRE_NO FROM CPP_CURING_PRODUCTION
+       WHERE DELETE_FLAG = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="TyreNo" prepend="AND">
+           <![CDATA[TYRE_NO = #TyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+
+     <select id="GetDPHSortPortByTyreNoNew" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        SELECT B.MATERIAL_ID,F.GRADENAME
+         FROM CPP_CURING_PRODUCTION B
+         LEFT JOIN SPP_TYRE_STATE E ON B.TYRE_NO = E.TYRE_NO AND E.DELETE_FLAG = 0
+         LEFT JOIN FQG_GRADE_INFO F ON E.FINAL_CHECK_GRADE = F.FINAL_GRADE_CODE AND F.WORK_PROCESS_ID = 599
+         WHERE B.TYRE_NO = #TyreNo#
+      ]]>
+       <!--<![CDATA[ 
+          SELECT B.MATERIAL_ID MaterialID ,D.MATERIAL_CODE MaterialCode 
+         ,F.GRADENAME TyreState ,replace(C.EQUIP_NAME,'DPH','') SortPort
+         ,T1.DEGRADE_ID CURING_GRADE_ID,T2.GRADEID FCHECK_GRADE_ID
+         FROM CPP_CURING_PRODUCTION B
+         LEFT JOIN FQB_STANDARD_DETAIL A ON B.MATERIAL_ID = A.MATERIAL_ID and a.Bcheck_Flag = 1
+         LEFT JOIN SBE_EQUIP C ON A.EQUIP_ID = C.OBJID 
+         LEFT JOIN SBM_MATERIAL D ON B.MATERIAL_ID = D.OBJID
+         LEFT JOIN SPP_TYRE_STATE E ON B.TYRE_NO = E.TYRE_NO AND E.DELETE_FLAG = 0
+         LEFT JOIN FQG_GRADE_INFO F ON E.FINAL_CHECK_GRADE = F.FINAL_GRADE_CODE AND F.WORK_PROCESS_ID = 599
+         LEFT JOIN CPP_CURING_DEGRADE T1 ON T1.TYRE_NO = B.TYRE_NO 
+         LEFT JOIN FQF_FCHECK_INFO T2 ON T2.TYREID = B.GREEN_TYRE_NO AND T2.NEW_FLAG =1 AND T2.DELETE_FLAG = 0
+         WHERE B.TYRE_NO = #TyreNo#
+      ]]>-->
+     </select>
+
+     <select id="GetMaterialAndXGrade" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+select  gradeid,materialid,nvl(c.is_again,0) is_again from  fqx_xcheck_info a
+left join cpp_curing_production b on b.tyre_no = a.tyrdid and b.delete_flag = 0
+left join fqb_quality_standard c on b.material_id = c.material_id
+ where TYRDID = #TyreNo# and a.delete_flag = 0
+      ]]>
+     </select>
+     <select id="GetBredoceRequest" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+select a.tyre_no Barcode,c.sap_code SpecCode,c.material_code SpecName,a.grade,a.week yearweek,
+a.return_flag returnflag,a.test_flag testflag,nvl(d.is_jun,0) uniformityflag,case when nvl(e.objid,0) = 0 then '0' else '1' end uniformitytest,
+case when mark_flag = 1 then 'L' else 'A' end lockflag,'0' getdown
+ from wms_upload_record a
+left join cpp_curing_production b on a.tyre_no = b.tyre_no and b.delete_flag = 0
+left join sbm_material c on c.objid = b.material_id
+left join fqb_quality_standard d on d.material_id = c.objid and d.delete_flag = 0
+left join sbe_uniformity e on e.tyreno = a.tyre_no
+where a.delete_flag = 0 and a.tyre_no = #barcode#
+      ]]>
+     </select>
+     <select id="GetERPRequest" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+select y.cppsap erpggdm,y.modsap pdmmat,f.parm_value tpHeight,d.parm_value tpInnerDiameter,e.parm_value tpOuterDiameter,c.parm_value tpweight from (
+Select  CPPsap,modsap  from  (select  x.*,row_number()over(partition by cppsap order by lastmodify_date desc) rowqc from 
+(select distinct x.sap_code cppsap,x2.sap_code modsap,x1.lastmodify_date from sbm_material x
+inner join sbm_bom_data x1 on x1.material_parent_id = x.objid and  x.major_type_id = 51 and x.delete_flag = 0 
+and x1.delete_flag = 0 
+inner join sbm_material x2 on x2.objid = x1.material_id
+where x.major_type_id = 51 and x.delete_flag = 0 )x  ) where rowqc = 1 ) y
+left join (Select  *  from  (select  x.*,row_number()over(partition by sap_code order by objid desc) rowqc from 
+(select a.objid,b.sap_code,weight,PAR33000079,PAR33000080,PAR33000081 from bpt_molding_tech a,sbm_material b where a.delete_flag = 0 and a.material_id = b.objid)x  ) where rowqc = 1) y1 on y.modsap = y1.sap_code
+left join bpt_molding_tech_parm_data c on c.objid = y1.weight 
+left join bpt_molding_tech_parm_data d on d.objid = y1.PAR33000079 
+left join bpt_molding_tech_parm_data e on e.objid = y1.PAR33000080
+left join bpt_molding_tech_parm_data f on f.objid = y1.PAR33000081
+      ]]>
+     </select>
+
+
+     <!--改判信息保存-->
+     <procedure id="SaveXcheckChangeGradeInfo" parameterClass="map" resultClass="Row">
+       PRO_FQF_SAVE_XCHANGEGRADEINFO
+       @{GreenTyreNo,column=GreenTyreNo}
+       @{GradeID,column=GradeID}
+       @{myResult,column=myResult,direction=Output,dbType=RefCursor}
+     </procedure>
+     
+  </statements>
+</sqlMap>

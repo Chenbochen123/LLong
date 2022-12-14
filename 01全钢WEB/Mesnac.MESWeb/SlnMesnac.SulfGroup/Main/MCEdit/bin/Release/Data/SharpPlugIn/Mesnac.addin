@@ -1,0 +1,506 @@
+﻿<AddIn name        = "软控信息化装备平台"
+       author      = "郑立兵"
+       copyright   = "版权所有2013 软控股份有限公司"
+       url         = "http://www.mesnac.com"
+       description = "软控信息化装备平台"
+       addInManagerHidden = "true">
+
+    <Manifest>
+        <Identity name = "MCEdit"/>
+    </Manifest>
+
+    <Runtime>
+        <!--<Import assembly="../Mesnac.Gui.dll"/>-->
+        <Import assembly="../../Mesnac.Gui.Edit.dll">
+            <ConditionEvaluator name="MCEditProjectState" class="Mesnac.Gui.Edit.ViewContent.MCEditProjectStateConditionEvaluator"/>
+            <ConditionEvaluator name="MCEditEditState" class="Mesnac.Gui.Edit.ViewContent.MCEditEditStateConditionEvaluator"/>
+            <ConditionEvaluator name="MCEditDesignerExistsState" class="Mesnac.Gui.Edit.ViewContent.MCEditDesignerExistsStateConditionEvaluator"/>
+            <ConditionEvaluator name="MCEditUndoState" class="Mesnac.Gui.Edit.ViewContent.MCEditUndoStateConditionEvaluator"/>
+            <ConditionEvaluator name="MCEditRedoState" class="Mesnac.Gui.Edit.ViewContent.MCEditRedoStateConditionEvaluator"/>
+            <ConditionEvaluator name="MCEditLayoutEmpty" class="Mesnac.Gui.Edit.ViewContent.MCEditLayoutEmptyConditionEvaluator"/>
+            <ConditionEvaluator name="MCEditLayoutOnlyOne" class="Mesnac.Gui.Edit.ViewContent.MCEditLayoutOnlyOneConditionEvaluator"/>
+            <ConditionEvaluator name="MCEditLayoutSelectOne" class="Mesnac.Gui.Edit.ViewContent.MCEditLayoutSelectOneConditionEvaluator"/>
+        </Import>
+    </Runtime>
+    <!--系统面板 开始-->
+    <Path name = "/Mesnac/Workbench/Pads">
+
+        <Pad id       = "pad_Solution"
+         category = "Tools"
+         title    = "${res:Mesnac_MainMenu_mnuSolution}"
+             dockState = "DockRight"
+         icon     = "Icons_16x16_Solution"
+         class    = "Mesnac.Gui.Edit.Pad.ProjectWindow"/>
+
+        <Pad id       = "pad_Event"
+         category = "Tools"
+         title    = "${res:Mesnac_MainMenu_mnuEvent}"
+             dockState = "DockRight"
+         icon     = "Icons_16x16_Event"
+         class    = "Mesnac.Gui.Edit.Pad.EventWindow"/>
+
+        <Pad id       = "pad_Property"
+         category = "Tools"
+         title    = "${res:Mesnac_MainMenu_mnuProperty}"
+             dockState = "DockRight"
+         icon     = "Icons_16x16_Property"
+         class    = "Mesnac.Gui.Edit.Pad.PropertyWindow"/>
+
+        <Pad id       = "pad_ToolBox"
+         category = "Tools"
+         title    = "${res:Mesnac_MainMenu_mnuToolBox}"
+             dockState = "DockLeft"
+         icon     = "Icons_16x16_ToolBox"
+         class    = "Mesnac.Gui.Edit.Pad.ToolBoxWindow"/>
+
+        <Pad id       = "pad_Action"
+         category = "Tools"
+         title    = "${res:Mesnac_MainMenu_mnuAction}"
+             dockState = "DockLeft"
+         icon     = "Icons_16x16_Action"
+         class    = "Mesnac.Gui.Edit.Pad.ActionWindow"/>
+
+    </Path>
+    <!--系统面板 结束-->
+    <!-- Main Menu -->
+    <!--系统主菜单 开始-->
+    <Path name = "/Mesnac/Workbench/MainMenu">
+        <!--文件 开始-->
+        <MenuItem id = "mnuFile" label = "${res:Mesnac_MainMenu_mnuFile}" type="Menu">
+            <MenuItem id = "mnuNew"
+                            label       = "${res:Mesnac_MainMenu_mnuNew}"
+                            icon        = "Icons_16x16_New"
+                            shortcut    = "Control|N"
+                            class       = "Mesnac.Gui.Edit.ViewContent.NewProjectCommand"/>
+
+            <MenuItem id = "mnuOpen"
+                            label       = "${res:Mesnac_MainMenu_mnuOpen}"
+                            icon        = "Icons_16x16_Open"
+                            shortcut    = "Control|O"
+                            class       = "Mesnac.Gui.Edit.ViewContent.OpenProjectCommand"/>
+
+            <Condition name="MCEditProjectState" action="Disable">
+                <MenuItem id = "mnuSave"
+                                label       = "${res:Mesnac_MainMenu_mnuSave}"
+                                icon        = "Icons_16x16_Save"
+                                shortcut    = "Control|S"
+                                class       = "Mesnac.Gui.Edit.ViewContent.SaveProjectCommand"/>
+                <MenuItem id = "mnuClose"
+                                label       = "${res:Mesnac_MainMenu_mnuClose}"
+                                icon        = "Icons_16x16_Close"
+                                shortcut    = "Control|N"
+                                class       = "Mesnac.Gui.Edit.ViewContent.CloseProjectCommand"/>
+            </Condition>
+            <MenuItem id = "mnuFileSeparator" type = "Separator"  />
+            <MenuItem id = "mnuExit"
+                            label       = "${res:Mesnac_MainMenu_mnuExit}"
+                            shortcut    = "Alt|F4"
+                            class       = "Mesnac.Gui.Edit.ViewContent.ExitCommand"/>
+        </MenuItem>
+        <!--文件 结束-->
+        <!--编辑 开始-->
+
+        <MenuItem id = "mnuEdit" label = "${res:Mesnac_MainMenu_mnuEdit}" type="Menu">
+            <Condition name="MCEditEditState" action="Disable">
+                <Condition name="MCEditUndoState" action="Disable">
+                    <MenuItem id = "mnuUndo"
+                                    label       = "${res:Mesnac_MainMenu_mnuUndo}"
+                                    icon        = "Icons_16x16_Undo"
+                                    shortcut    = "Control|Z"
+                                    class       = "Mesnac.Gui.Edit.ViewContent.UndoCommand"/>
+                </Condition>
+                <Condition name="MCEditRedoState" action="Disable">
+                    <MenuItem id = "mnuRedo"
+                                    label       = "${res:Mesnac_MainMenu_mnuRedo}"
+                                    icon        = "Icons_16x16_Redo"
+                                    shortcut    = "Control|Y"
+                                    class       = "Mesnac.Gui.Edit.ViewContent.RedoCommand"/>
+                </Condition>
+                <MenuItem id = "mnuEditSeparator" type = "Separator"  />
+                <MenuItem id = "mnuCut"
+                                label       = "${res:Mesnac_MainMenu_mnuCut}"
+                                icon        = "Icons_16x16_Cut"
+                                shortcut    = "Control|X"
+                                class       = "Mesnac.Gui.Edit.ViewContent.CutCommand"/>
+                <MenuItem id = "mnuCopy"
+                                label       = "${res:Mesnac_MainMenu_mnuCopy}"
+                                icon        = "Icons_16x16_Copy"
+                                shortcut    = "Control|C"
+                                class       = "Mesnac.Gui.Edit.ViewContent.CopyCommand"/>
+                <MenuItem id = "mnuPaste"
+                                label       = "${res:Mesnac_MainMenu_mnuPaste}"
+                                icon        = "Icons_16x16_Paste"
+                                shortcut    = "Control|V"
+                                class       = "Mesnac.Gui.Edit.ViewContent.PasteCommand"/>
+                <!--<MenuItem id = "mnuDelete"
+                                label       = "${res:Mesnac_MainMenu_mnuDelete}"
+                                shortcut    = "Delete"
+                                class       = "Mesnac.Gui.Edit.ViewContent.DeleteCommand"/>-->
+                <MenuItem id = "mnuSelectAll"
+                                label       = "${res:Mesnac_MainMenu_mnuSelectAll}"
+                                shortcut    = "Control|A"
+                                class       = "Mesnac.Gui.Edit.ViewContent.SelectAllCommand"/>
+            </Condition>
+        </MenuItem>
+
+        <!--编辑 结束-->
+        <!--视图 开始-->
+        <MenuItem id = "mnuView" label = "${res:Mesnac_MainMenu_mnuView}" type="Menu">
+            <MenuItem id="mnuReport"
+                              label="${res:Mesnac_MainMenu_ReportDesigner}"
+                              icon        = ""
+                              class       = "Mesnac.Gui.Edit.ViewContent.ReportDesigner"/>
+            <MenuItem id = "mnuViewCodeSeparator" type = "Separator"  />
+            <MenuItem id = "mnuSolution"
+                            label       = "${res:Mesnac_MainMenu_mnuSolution}"
+                            icon        = "Icons_16x16_Solution"
+                            class       = "Mesnac.Gui.Edit.ViewContent.SolutionWindowCommand"/>
+            <MenuItem id = "mnuToolBox"
+                            label       = "${res:Mesnac_MainMenu_mnuToolBox}"
+                            icon        = "Icons_16x16_ToolBox"
+                            class       = "Mesnac.Gui.Edit.ViewContent.ToolBoxWindowCommand"/>
+            <MenuItem id = "mnuProperty"
+                            label       = "${res:Mesnac_MainMenu_mnuProperty}"
+                            icon        = "Icons_16x16_Property"
+                            class       = "Mesnac.Gui.Edit.ViewContent.PropertyWindowCommand"/>
+            <MenuItem id = "mnuAction"
+                            label       = "${res:Mesnac_MainMenu_mnuAction}"
+                            icon        = "Icons_16x16_Action"
+                            class       = "Mesnac.Gui.Edit.ViewContent.ActionWindowCommand"/>
+            <MenuItem id = "mnuEvent"
+                            label       = "${res:Mesnac_MainMenu_mnuEvent}"
+                            icon        = "Icons_16x16_Event"
+                            class       = "Mesnac.Gui.Edit.ViewContent.EventWindowCommand"/>
+            <MenuItem id = "mnuViewSeparator" type = "Separator"  />
+            <MenuItem id = "mnuFullScreen"
+                            label       = "${res:Mesnac_MainMenu_mnuFullScreen}"
+                            icon        = "Icons.16x16.FullScreen"
+                            shortcut    = "F11"
+                            class       = "Mesnac.Gui.Edit.ViewContent.ToggleFullscreenCommand"/>
+        </MenuItem>
+        <!--视图 结束-->
+        <!--布局 开始-->
+
+        <MenuItem id = "mnuLayout" label = "${res:Mesnac_MainMenu_mnuLayout}" type="Menu">
+            <Condition name="MCEditLayoutEmpty" action="Disable">
+                <Condition name="MCEditLayoutOnlyOne" action="Disable">
+                    <Condition name="MCEditLayoutSelectOne" action="Disable">
+                        <MenuItem id = "mnuAlignToGrid"
+                                        label       = "${res:Mesnac_MainMenu_mnuAlignToGrid}"
+                                        icon        = "Icons_16x16_AlignToGrid"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.AlignToGridCommand"/>
+                        <MenuItem id = "mnuAlignLeft"
+                                        label       = "${res:Mesnac_MainMenu_mnuAlignLeft}"
+                                        icon        = "Icons_16x16_AlignLeft"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.AlignLeftCommand"/>
+                        <MenuItem id = "mnuAlignHorizontalCenters"
+                                        label       = "${res:Mesnac_MainMenu_mnuAlignHorizontalCenters}"
+                                        icon        = "Icons_16x16_AlignHorizontalCenters"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.AlignHorizontalCentersCommand"/>
+                        <MenuItem id = "mnuAlignRight"
+                                        label       = "${res:Mesnac_MainMenu_mnuAlignRight}"
+                                        icon        = "Icons_16x16_AlignRight"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.AlignRightCommand"/>
+                        <MenuItem id = "mnuAlignTop"
+                                        label       = "${res:Mesnac_MainMenu_mnuAlignTop}"
+                                        icon        = "Icons_16x16_AlignTop"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.AlignTopCommand"/>
+                        <MenuItem id = "mnuAlignVerticalCenters"
+                                        label       = "${res:Mesnac_MainMenu_mnuAlignVerticalCenters}"
+                                        icon        = "Icons_16x16_AlignVerticalCenters"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.AlignVerticalCentersCommand"/>
+                        <MenuItem id = "mnuAlignBottom"
+                                        label       = "${res:Mesnac_MainMenu_mnuAlignBottom}"
+                                        icon        = "Icons_16x16_AlignBottom"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.AlignBottomCommand"/>
+                        <MenuItem id = "mnuLayoutSeparator1" type = "Separator"  />
+                        <MenuItem id = "mnuSizeToControlWidth"
+                                        label       = "${res:Mesnac_MainMenu_mnuSizeToControlWidth}"
+                                        icon        = "Icons_16x16_SizeToControlWidth"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.SizeToControlWidthCommand"/>
+                        <MenuItem id = "mnuSizeToControlHeight"
+                                        label       = "${res:Mesnac_MainMenu_mnuSizeToControlHeight}"
+                                        icon        = "Icons_16x16_SizeToControlHeight"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.SizeToControlHeightCommand"/>
+                        <MenuItem id = "mnuSizeToControl"
+                                        label       = "${res:Mesnac_MainMenu_mnuSizeToControl}"
+                                        icon        = "Icons_16x16_SizeToControl"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.SizeToControlCommand"/>
+                        <MenuItem id = "mnuSizeToGrid"
+                                        label       = "${res:Mesnac_MainMenu_mnuSizeToGrid}"
+                                        icon        = "Icons_16x16_SizeToGrid"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.SizeToGridCommand"/>
+                        <MenuItem id = "mnuLayoutSeparator2" type = "Separator"  />
+                        <MenuItem id = "mnuHorizSpaceMakeEqual"
+                                        label       = "${res:Mesnac_MainMenu_mnuHorizSpaceMakeEqual}"
+                                        icon        = "Icons_16x16_HorizSpaceMakeEqual"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.HorizSpaceMakeEqualCommand"/>
+                        <MenuItem id = "mnuHorizSpaceIncrease"
+                                        label       = "${res:Mesnac_MainMenu_mnuHorizSpaceIncrease}"
+                                        icon        = "Icons_16x16_HorizSpaceIncrease"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.HorizSpaceIncreaseCommand"/>
+                        <MenuItem id = "mnuHorizSpaceDecrease"
+                                        label       = "${res:Mesnac_MainMenu_mnuHorizSpaceDecrease}"
+                                        icon        = "Icons_16x16_HorizSpaceDecrease"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.HorizSpaceDecreaseCommand"/>
+                        <MenuItem id = "mnuHorizSpaceConcatenate"
+                                        label       = "${res:Mesnac_MainMenu_mnuHorizSpaceConcatenate}"
+                                        icon        = "Icons_16x16_HorizSpaceConcatenate"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.HorizSpaceConcatenateCommand"/>
+                        <MenuItem id = "mnuLayoutSeparator3" type = "Separator"  />
+                        <MenuItem id = "mnuVertSpaceMakeEqual"
+                                        label       = "${res:Mesnac_MainMenu_mnuVertSpaceMakeEqual}"
+                                        icon        = "Icons_16x16_VertSpaceMakeEqual"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.VertSpaceMakeEqualCommand"/>
+                        <MenuItem id = "mnuVertSpaceIncrease"
+                                        label       = "${res:Mesnac_MainMenu_mnuVertSpaceIncrease}"
+                                        icon        = "Icons_16x16_VertSpaceIncrease"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.VertSpaceIncreaseCommand"/>
+                        <MenuItem id = "mnuVertSpaceDecrease"
+                                        label       = "${res:Mesnac_MainMenu_mnuVertSpaceDecrease}"
+                                        icon        = "Icons_16x16_VertSpaceDecrease"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.VertSpaceDecreaseCommand"/>
+                        <MenuItem id = "mnuVertSpaceConcatenate"
+                                        label       = "${res:Mesnac_MainMenu_mnuVertSpaceConcatenate}"
+                                        icon        = "Icons_16x16_VertSpaceConcatenate"
+                                        class       = "Mesnac.Gui.Edit.ViewContent.VertSpaceConcatenateCommand"/>
+                    </Condition>
+                </Condition>
+                <MenuItem id = "mnuLayoutSeparator4" type = "Separator"  />
+                <MenuItem id = "mnuCenterHorizontally"
+                                label       = "${res:Mesnac_MainMenu_mnuCenterHorizontally}"
+                                icon        = "Icons_16x16_CenterHorizontally"
+                                class       = "Mesnac.Gui.Edit.ViewContent.CenterHorizontallyCommand"/>
+                <MenuItem id = "mnuCenterVertically"
+                                label       = "${res:Mesnac_MainMenu_mnuCenterVertically}"
+                                icon        = "Icons_16x16_CenterVertically"
+                                class       = "Mesnac.Gui.Edit.ViewContent.CenterVerticallyCommand"/>
+                <MenuItem id = "mnuLayoutSeparator5" type = "Separator"  />
+                <Condition name="MCEditLayoutEmpty" action="Disable">
+                    <!--<MenuItem id = "mnuBringForward"
+                                    label       = "${res:Mesnac_MainMenu_mnuBringForward}"
+                                    class       = "Mesnac.Gui.Edit.ViewContent.BringForwardCommand"/>
+                    <MenuItem id = "mnuSendBackward"
+                                    label       = "${res:Mesnac_MainMenu_mnuSendBackward}"
+                                    class       = "Mesnac.Gui.Edit.ViewContent.SendBackwardCommand"/>-->
+                    <MenuItem id = "mnuBringToFront"
+                                    label       = "${res:Mesnac_MainMenu_mnuBringToFront}"
+                                    icon        = "Icons_16x16_BringToFront"
+                                    class       = "Mesnac.Gui.Edit.ViewContent.BringToFrontCommand"/>
+                    <MenuItem id = "mnuSendToBack"
+                                    label       = "${res:Mesnac_MainMenu_mnuSendToBack}"
+                                    icon        = "Icons_16x16_SendToBack"
+                                    class       = "Mesnac.Gui.Edit.ViewContent.SendToBackCommand"/>
+                </Condition>
+            </Condition>
+        </MenuItem>
+        <!--布局 结束-->
+        <!--仿真 开始-->
+        <MenuItem id = "mnuSimulation" label = "${res:Mesnac_MainMenu_mnuSimulation}" type="Menu">
+            <Condition name="MCEditDesignerExistsState" action="Disable">
+                <MenuItem id = "mnuRun"
+                                label         = "${res:Mesnac_MainMenu_mnuRun}"
+                                icon        = "Icons_16x16_Run"
+                                shortcut    ="F5"
+                                class       = "Mesnac.Gui.Edit.ViewContent.RunCommand"/>
+            </Condition>
+        </MenuItem>
+        <!--仿真 结束-->
+        <!--帮助 开始-->
+        <MenuItem id = "mnuHelp" label = "${res:Mesnac_MainMenu_mnuHelp}" type="Menu">
+            <MenuItem id = "mnuTest"
+                              label         = "${res:Mesnac_MainMenu_mnuTest}"
+                              icon        = "Icons_16x16_Help"
+                              class       = "Mesnac.Gui.Edit.ViewContent.TestCommand"/>
+        </MenuItem>
+        <!--帮助 结束-->
+    </Path>
+    <!--系统主菜单 结束-->
+    <Path name = "/Workspace/Icons">
+        <Icon id         = "ResourceFileIcon"
+          extensions = ".resources;.resx"
+          resource   = "Icons.16x16.ResourceFileIcon" />
+    </Path>
+
+    <!--工具栏 开始-->
+    <Path name = "/Mesnac/Workbench/Toolbar">
+        <!--文件 开始-->
+        <ToolbarItem id = "tsNew"
+                        icon    = "Icons_16x16_New"
+                        tooltip = "${res:Mesnac_MainMenu_mnuNew}"
+                        class   = "Mesnac.Gui.Edit.ViewContent.NewProjectCommand"/>
+        <ToolbarItem id = "tsOpen"
+                        icon    = "Icons_16x16_Open"
+                        tooltip = "${res:Mesnac_MainMenu_mnuOpen}"
+                        class   = "Mesnac.Gui.Edit.ViewContent.OpenProjectCommand"/>
+        <Condition name="MCEditProjectState" action="Disable">
+            <ToolbarItem id = "tsSave"
+                            icon    = "Icons_16x16_Save"
+                            tooltip = "${res:Mesnac_MainMenu_mnuSave}"
+                            class   = "Mesnac.Gui.Edit.ViewContent.SaveProjectCommand"/>
+            <ToolbarItem id = "tsClose"
+                            icon    = "Icons_16x16_Close"
+                            tooltip = "${res:Mesnac_MainMenu_mnuClose}"
+                            class   = "Mesnac.Gui.Edit.ViewContent.CloseProjectCommand"/>
+        </Condition>
+        <ToolbarItem id = "tsFileSeparator" type = "Separator"/>
+        <!--编辑 开始-->
+        <Condition name="MCEditEditState" action="Disable">
+            <ToolbarItem id = "tsCut"
+                            icon    = "Icons_16x16_Cut"
+                            tooltip = "${res:Mesnac_MainMenu_mnuCut}"
+                            class   = "Mesnac.Gui.Edit.ViewContent.CutCommand"/>
+            <ToolbarItem id = "tsCopy"
+                            icon    = "Icons_16x16_Copy"
+                            tooltip = "${res:Mesnac_MainMenu_mnuCopy}"
+                            class   = "Mesnac.Gui.Edit.ViewContent.CopyCommand"/>
+            <ToolbarItem id = "tsPaste" 
+                            icon    = "Icons_16x16_Paste"
+                            tooltip = "${res:Mesnac_MainMenu_mnuPaste}"
+                            class   = "Mesnac.Gui.Edit.ViewContent.PasteCommand"/>
+            <Condition name="MCEditUndoState" action="Disable">
+                <ToolbarItem id = "tsUndo"
+                                icon    = "Icons_16x16_Undo"
+                                tooltip = "${res:Mesnac_MainMenu_mnuUndo}"
+                                class   = "Mesnac.Gui.Edit.ViewContent.UndoCommand"/>
+            </Condition>
+            <Condition name="MCEditRedoState" action="Disable">
+                <ToolbarItem id = "tsRedo"
+                                icon    = "Icons_16x16_Redo"
+                                tooltip = "${res:Mesnac_MainMenu_mnuRedo}"
+                                class   = "Mesnac.Gui.Edit.ViewContent.RedoCommand"/>
+            </Condition>
+        </Condition>
+        <ToolbarItem id = "tsEditSeparator" type = "Separator"/>
+        <!--布局 开始-->
+        <Condition name="MCEditLayoutEmpty" action="Disable">
+            <Condition name="MCEditLayoutOnlyOne" action="Disable">
+                <Condition name="MCEditLayoutSelectOne" action="Disable">
+                    <ToolbarItem id = "tsAlignLeft"
+                                    icon    = "Icons_16x16_AlignLeft"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuAlignLeft}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.AlignLeftCommand"/>
+                    <ToolbarItem id = "tsAlignHorizontalCenters"
+                                    icon    = "Icons_16x16_AlignHorizontalCenters"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuAlignHorizontalCenters}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.AlignHorizontalCentersCommand"/>
+                    <ToolbarItem id = "tsAlignRight"
+                                    icon    = "Icons_16x16_AlignRight"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuAlignRight}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.AlignRightCommand"/>
+                    <ToolbarItem id = "tsAlignTop"
+                                    icon    = "Icons_16x16_AlignTop"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuAlignTop}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.AlignTopCommand"/>
+                    <ToolbarItem id = "tsAlignVerticalCenters"
+                                    icon    = "Icons_16x16_AlignVerticalCenters"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuAlignVerticalCenters}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.AlignVerticalCentersCommand"/>
+                    <ToolbarItem id = "tsAlignBottom"
+                                    icon    = "Icons_16x16_AlignBottom"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuAlignBottom}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.AlignBottomCommand"/>
+                    <ToolbarItem id = "tsSizeToControlWidth"
+                                    icon    = "Icons_16x16_SizeToControlWidth"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuSizeToControlWidth}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.SizeToControlWidthCommand"/>
+                    <ToolbarItem id = "tsSizeToControlHeight"
+                                    icon    = "Icons_16x16_SizeToControlHeight"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuSizeToControlHeight}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.SizeToControlHeightCommand"/>
+                    <ToolbarItem id = "tsSizeToControl"
+                                    icon    = "Icons_16x16_SizeToControl"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuSizeToControl}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.SizeToControlCommand"/>
+                    <ToolbarItem id = "tsSizeToGrid"
+                                    icon    = "Icons_16x16_SizeToGrid"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuSizeToGrid}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.SizeToGridCommand"/>
+                    <ToolbarItem id = "tsHorizSpaceMakeEqual"
+                                    icon    = "Icons_16x16_HorizSpaceMakeEqual"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuHorizSpaceMakeEqual}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.HorizSpaceMakeEqualCommand"/>
+                    <ToolbarItem id = "tsHorizSpaceIncrease"
+                                    icon    = "Icons_16x16_HorizSpaceIncrease"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuHorizSpaceIncrease}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.HorizSpaceIncreaseCommand"/>
+                    <ToolbarItem id = "tsHorizSpaceDecrease"
+                                    icon    = "Icons_16x16_HorizSpaceDecrease"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuHorizSpaceDecrease}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.HorizSpaceDecreaseCommand"/>
+                    <ToolbarItem id = "tsHorizSpaceConcatenate"
+                                    icon    = "Icons_16x16_HorizSpaceConcatenate"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuHorizSpaceConcatenate}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.HorizSpaceConcatenateCommand"/>
+                    <ToolbarItem id = "tsVertSpaceMakeEqual"
+                                    icon    = "Icons_16x16_VertSpaceMakeEqual"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuVertSpaceMakeEqual}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.VertSpaceMakeEqualCommand"/>
+                    <ToolbarItem id = "tsVertSpaceIncrease"
+                                    icon    = "Icons_16x16_VertSpaceIncrease"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuVertSpaceIncrease}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.VertSpaceIncreaseCommand"/>
+                    <ToolbarItem id = "tsVertSpaceDecrease"
+                                    icon    = "Icons_16x16_VertSpaceDecrease"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuVertSpaceDecrease}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.VertSpaceDecreaseCommand"/>
+                    <ToolbarItem id = "tsVertSpaceConcatenate"
+                                    icon    = "Icons_16x16_VertSpaceConcatenate"
+                                    tooltip = "${res:Mesnac_MainMenu_mnuVertSpaceConcatenate}"
+                                    class   = "Mesnac.Gui.Edit.ViewContent.VertSpaceConcatenateCommand"/>
+                </Condition>
+                <ToolbarItem id = "tsBringToFront"
+                                icon    = "Icons_16x16_BringToFront"
+                                tooltip = "${res:Mesnac_MainMenu_mnuBringToFront}"
+                                class   = "Mesnac.Gui.Edit.ViewContent.BringToFrontCommand"/>
+                <ToolbarItem id = "tsSendToBack"
+                                icon    = "Icons_16x16_SendToBack"
+                                tooltip = "${res:Mesnac_MainMenu_mnuSendToBack}"
+                                class   = "Mesnac.Gui.Edit.ViewContent.SendToBackCommand"/>
+            </Condition>
+            <ToolbarItem id = "tsCenterHorizontally"
+                            icon    = "Icons_16x16_CenterHorizontally"
+                            tooltip = "${res:Mesnac_MainMenu_mnuCenterHorizontally}"
+                            class   = "Mesnac.Gui.Edit.ViewContent.CenterHorizontallyCommand"/>
+            <ToolbarItem id = "tsCenterVertically"
+                            icon    = "Icons_16x16_CenterVertically"
+                            tooltip = "${res:Mesnac_MainMenu_mnuCenterVertically}"
+                            class   = "Mesnac.Gui.Edit.ViewContent.CenterVerticallyCommand"/>
+        </Condition>
+        <ToolbarItem id = "tsLayoutSeparator" type = "Separator"/>
+        <!--视图 开始-->
+        <ToolbarItem id = "tsSolution"
+                        icon    = "Icons_16x16_Solution"
+                        tooltip = "${res:Mesnac_MainMenu_mnuSolution}"
+                        class   = "Mesnac.Gui.Edit.ViewContent.SolutionWindowCommand"/>
+        <ToolbarItem id = "tsToolBox"
+                        icon    = "Icons_16x16_ToolBox"
+                        tooltip = "${res:Mesnac_MainMenu_mnuToolBox}"
+                        class   = "Mesnac.Gui.Edit.ViewContent.ToolBoxWindowCommand"/>
+        <ToolbarItem id = "tsProperty"
+                        icon    = "Icons_16x16_Property"
+                        tooltip = "${res:Mesnac_MainMenu_mnuProperty}"
+                        class   = "Mesnac.Gui.Edit.ViewContent.PropertyWindowCommand"/>
+        <ToolbarItem id = "tsAction"
+                        icon    = "Icons_16x16_Action"
+                        tooltip = "${res:Mesnac_MainMenu_mnuAction}"
+                        class   = "Mesnac.Gui.Edit.ViewContent.ActionWindowCommand"/>
+        <ToolbarItem id = "tsEvent"
+                        icon    = "Icons_16x16_Event"
+                        tooltip = "${res:Mesnac_MainMenu_mnuEvent}"
+                        class   = "Mesnac.Gui.Edit.ViewContent.EventWindowCommand"/>
+        <ToolbarItem id = "tsFullScreen"
+                        icon    = "Icons.16x16.FullScreen"
+                        tooltip = "${res:Mesnac_MainMenu_mnuFullScreen}"
+                        class   = "Mesnac.Gui.Edit.ViewContent.ToggleFullscreenCommand"/>
+        <ToolbarItem id = "tsViewSeparator" type = "Separator"/>
+        <!--仿真 开始-->
+        <Condition name="MCEditDesignerExistsState" action="Disable">
+            <ToolbarItem id = "tsRun"
+                            icon    = "Icons_16x16_Run"
+                            tooltip = "${res:Mesnac_MainMenu_mnuRun}"
+                            class   = "Mesnac.Gui.Edit.ViewContent.RunCommand"/>
+        </Condition>
+    </Path>
+    <!--工具栏 结束-->
+</AddIn>

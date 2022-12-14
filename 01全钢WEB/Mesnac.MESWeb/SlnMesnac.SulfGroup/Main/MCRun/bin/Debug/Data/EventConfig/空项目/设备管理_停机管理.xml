@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ActionService>
+    <Design>
+        <Path path="设备管理/停机管理">
+            <Action action="7F4D73DB2BB24B9C9948DA50C802327C">
+                <Caption>停机日志初始化</Caption>
+                <Remark>停机日志初始化</Remark>
+            </Action>
+            <Action action="FD5619C86B044B7F997922BBDFE39E7F">
+              <Caption>停机日志查询</Caption>
+              <Remark>停机日志查询</Remark>
+            </Action>
+            <Action action="C2518A0C7A8547788631CF61D7643740">
+              <Caption>停机原因下载</Caption>
+              <Remark>停机原因下载</Remark>
+            </Action>
+        </Path>
+    </Design>
+
+    <DesignToRuntime>
+        <Design action="7F4D73DB2BB24B9C9948DA50C802327C">
+            <Runtime action="CC167C6DB00642FBA68C84B86A292FD0"/>
+        </Design>
+        <Design action="FD5619C86B044B7F997922BBDFE39E7F">
+          <Runtime action="984D2F3B964248DC870E4E42721713A6"/>
+        </Design>
+        <Design action="C2518A0C7A8547788631CF61D7643740">
+          <Runtime action="2DF11879460643B1A02517F26E1A3692"/>
+        </Design>
+    </DesignToRuntime>
+    
+    <Runtime>
+        <Import assembly = "Data/Action/SulfGroup/Mesnac.Action.SulfGroup.dll">
+            <Action action="CC167C6DB00642FBA68C84B86A292FD0" class="Mesnac.Action.SulfGroup.Stop.StopRecordInit"/>
+            <Action action="984D2F3B964248DC870E4E42721713A6" class="Mesnac.Action.SulfGroup.Stop.StopRecordSearch"/>
+            <Action action="2DF11879460643B1A02517F26E1A3692" class="Mesnac.Action.SulfGroup.SysBasicInfo.StopInfoDown"/>
+        </Import>
+    </Runtime>
+</ActionService>

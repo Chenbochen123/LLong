@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.BsmToolingLoadMain"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BSM_TOOLING_LOAD_MAIN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.ToolingId" prepend="AND">
+          <![CDATA[TOOLING_ID = #where.ToolingId#]]>
+        </isNotNull>
+        <isNotNull property="where.ToolingBarcode" prepend="AND">
+          <![CDATA[TOOLING_BARCODE = #where.ToolingBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.LoadAmount" prepend="AND">
+          <![CDATA[LOAD_AMOUNT = #where.LoadAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateUserId" prepend="AND">
+          <![CDATA[UPDATE_USER_ID = #where.UpdateUserId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetToolingLoadInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T2.MATERIAL_NAME,T1.GREEN_TYRE_NO FROM BSM_TOOLING_LOAD_MAIN T0
+       LEFT JOIN BSM_TOOLING_LOAD_DETAIL T1 ON T1.MAIN_ID = T0.OBJID AND T1.DELETE_FLAG = 0
+       LEFT JOIN V_BBM_MATERIALINFO T2 ON T2.OBJID = T0.MATERIAL_ID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[T0.DELETE_FLAG=#DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="ToolingCarNo" prepend="AND">
+           <![CDATA[T0.TOOLING_BARCODE=#ToolingCarNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetToolingBarcodeInfoByCar" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T1.GREEN_TYRE_NO, T.* FROM BSM_TOOLING_LOAD_MAIN T
+       LEFT JOIN BSM_TOOLING_LOAD_DETAIL T1 ON T1.MAIN_ID = T.OBJID
+       WHERE T.TOOLING_BARCODE = #ToolingBarcode#
+       ]]>
+     </select>
+     <delete id="DeleteBsmToolingLoadMain" parameterClass="map" >
+       <![CDATA[DELETE BSM_TOOLING_LOAD_MAIN T WHERE T.TOOLING_ID=#toolingId#]]>
+     </delete>
+  </statements>
+</sqlMap>

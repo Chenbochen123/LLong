@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HptSemisTechWidthFhx"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPT_SEMIS_TECH_WIDTH_FHX ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.SapCode" prepend="AND">
+          <![CDATA[SAP_CODE = #where.SapCode#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[MATERIAL_NAME = #where.MaterialName#]]>
+        </isNotNull>
+        <isNotNull property="where.ProfilelType" prepend="AND">
+          <![CDATA[PROFILEL_TYPE = #where.ProfilelType#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[BARCODE = #where.Barcode#]]>
+        </isNotNull>
+        <isNotNull property="where.SdWidthTol" prepend="AND">
+          <![CDATA[SD_WIDTH_TOL = #where.SdWidthTol#]]>
+        </isNotNull>
+        <isNotNull property="where.SdAreaSymTol" prepend="AND">
+          <![CDATA[SD_AREA_SYM_TOL = #where.SdAreaSymTol#]]>
+        </isNotNull>
+        <isNotNull property="where.SdAreaTol" prepend="AND">
+          <![CDATA[SD_AREA_TOL = #where.SdAreaTol#]]>
+        </isNotNull>
+        <isNotNull property="where.SdShoulderWidth" prepend="AND">
+          <![CDATA[SD_SHOULDER_WIDTH = #where.SdShoulderWidth#]]>
+        </isNotNull>
+        <isNotNull property="where.SdShoulderWidthTol" prepend="AND">
+          <![CDATA[SD_SHOULDER_WIDTH_TOL = #where.SdShoulderWidthTol#]]>
+        </isNotNull>
+        <isNotNull property="where.KeyPoints" prepend="AND">
+          <![CDATA[KEY_POINTS = #where.KeyPoints#]]>
+        </isNotNull>
+        <isNotNull property="where.MeasurePoints" prepend="AND">
+          <![CDATA[MEASURE_POINTS = #where.MeasurePoints#]]>
+        </isNotNull>
+        <isNotNull property="where.TotalArea" prepend="AND">
+          <![CDATA[TOTAL_AREA = #where.TotalArea#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftArea" prepend="AND">
+          <![CDATA[LEFT_AREA = #where.LeftArea#]]>
+        </isNotNull>
+        <isNotNull property="where.RightArea" prepend="AND">
+          <![CDATA[RIGHT_AREA = #where.RightArea#]]>
+        </isNotNull>
+        <isNotNull property="where.TotalWidth" prepend="AND">
+          <![CDATA[TOTAL_WIDTH = #where.TotalWidth#]]>
+        </isNotNull>
+        <isNotNull property="where.ShoulderWidth" prepend="AND">
+          <![CDATA[SHOULDER_WIDTH = #where.ShoulderWidth#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftShoulderThick" prepend="AND">
+          <![CDATA[LEFT_SHOULDER_THICK = #where.LeftShoulderThick#]]>
+        </isNotNull>
+        <isNotNull property="where.RightShoulderThick" prepend="AND">
+          <![CDATA[RIGHT_SHOULDER_THICK = #where.RightShoulderThick#]]>
+        </isNotNull>
+        <isNotNull property="where.Param11" prepend="AND">
+          <![CDATA[PARAM11 = #where.Param11#]]>
+        </isNotNull>
+        <isNotNull property="where.Param12" prepend="AND">
+          <![CDATA[PARAM12 = #where.Param12#]]>
+        </isNotNull>
+        <isNotNull property="where.Param13" prepend="AND">
+          <![CDATA[PARAM13 = #where.Param13#]]>
+        </isNotNull>
+        <isNotNull property="where.Param14" prepend="AND">
+          <![CDATA[PARAM14 = #where.Param14#]]>
+        </isNotNull>
+        <isNotNull property="where.Param15" prepend="AND">
+          <![CDATA[PARAM15 = #where.Param15#]]>
+        </isNotNull>
+        <isNotNull property="where.Param21" prepend="AND">
+          <![CDATA[PARAM21 = #where.Param21#]]>
+        </isNotNull>
+        <isNotNull property="where.Param22" prepend="AND">
+          <![CDATA[PARAM22 = #where.Param22#]]>
+        </isNotNull>
+        <isNotNull property="where.Param23" prepend="AND">
+          <![CDATA[PARAM23 = #where.Param23#]]>
+        </isNotNull>
+        <isNotNull property="where.Param24" prepend="AND">
+          <![CDATA[PARAM24 = #where.Param24#]]>
+        </isNotNull>
+        <isNotNull property="where.Param25" prepend="AND">
+          <![CDATA[PARAM25 = #where.Param25#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

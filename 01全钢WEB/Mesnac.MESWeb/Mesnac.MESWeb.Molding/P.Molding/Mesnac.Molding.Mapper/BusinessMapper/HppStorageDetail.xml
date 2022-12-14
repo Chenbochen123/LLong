@@ -1,0 +1,627 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.HppStorageDetail"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_STORAGE_DETAIL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.CardNo" prepend="AND">
+          <![CDATA[CARD_NO = #where.CardNo#]]>
+        </isNotNull>
+        <isNotNull property="where.ShelfNo" prepend="AND">
+          <![CDATA[SHELF_NO = #where.ShelfNo#]]>
+        </isNotNull>
+        <isNotNull property="where.GradeCode" prepend="AND">
+          <![CDATA[GRADE_CODE = #where.GradeCode#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateUserId" prepend="AND">
+          <![CDATA[UPDATE_USER_ID = #where.UpdateUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceId" prepend="AND">
+          <![CDATA[STORE_PLACE_ID = #where.StorePlaceId#]]>
+        </isNotNull>
+        <isNotNull property="where.SubStorePlaceId" prepend="AND">
+          <![CDATA[SUB_STORE_PLACE_ID = #where.SubStorePlaceId#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy7" prepend="AND">
+          <![CDATA[DUMMY7 = #where.Dummy7#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy8" prepend="AND">
+          <![CDATA[DUMMY8 = #where.Dummy8#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetMoldingEdgeStorageInfoByCardNo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      select * from ( SELECT T.CARD_NO BARCODE,T2.EQUIP_ID,T2.MATERIAL_ID,T3.MATERIAL_NAME,T3.SAP_CODE,T3.MATERIAL_CODE,T3.MINOR_TYPE_ID MATERIAL_TYPE_ID,
+       T4.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T6.USER_NAME OPER_NAME,T5.EQUIP_NAME,T2.QTY SET_QUANTITY,T2.LEFT_QTY LEFT_QUANTITY,T2.END_TIME PRODUCE_TIME,
+       T2.END_TIME VALID_DATE,'-1' as State,T1.DUMMY_8 currentEquip,T7.MIN_TIME,T7.VALID_TIME,T2.DUMMY2,T2.MARK_FLAG,case t2.MARK_FLAG when 1 then t13.reason_name when 2 then t14.reason_name else null end reason_name 
+        ,nvl(t2.dummy8,'1') USED_FLAG 
+        ,T2.DUMMY9 YC_TIME,T2.dummy5 lrFlag,t2.batch  
+        FROM HPP_STORAGE_DETAIL T
+      LEFT JOIN HPP_STORE_PLACE T1 ON T1.OBJID = T.STORE_PLACE_ID
+      LEFT JOIN HPP_SEMIS_PRODUCTION T2 ON T2.CARD_NO = T.CARD_NO
+      LEFT JOIN SBM_MATERIAL T3 ON T3.OBJID = T2.MATERIAL_ID
+      LEFT JOIN SBM_MATERIAL_MINOR_TYPE T4 ON T4.OBJID = T3.MINOR_TYPE_ID
+      LEFT JOIN SBE_EQUIP T5 ON T5.OBJID = T2.EQUIP_ID
+      LEFT JOIN SSB_USER T6 ON T6.OBJID = T2.RECORD_USER_ID
+      LEFT JOIN SBM_MATERIAL_INFO T7 ON T7.MATERIAL_ID = T2.MATERIAL_ID
+           LEFT JOIN sbm_mark_info t12 on t12.barcode = t2.card_no and t12.delete_flag=0  and t2.mark_flag = t12.mark_flag
+        LEFT JOIN sbm_mark_reason t13 on t13.objid = t12.reason_id
+        left join sbm_freeze_reason t14 on t14.objid = t12.reason_id
+      WHERE T.DELETE_FLAG=0 
+       ]]>
+       <isNotNull property="equipId" prepend="AND">
+         <![CDATA[T1.DUMMY_8=#equipId#]]>
+       </isNotNull>
+       <isNotNull property="cardNo" prepend="AND">
+         <![CDATA[T.CARD_NO=#cardNo#]]>
+       </isNotNull>
+       <isNotNull property="usedFlag" prepend="AND">
+         <![CDATA[T.USED_FLAG<>#usedFlag#]]>
+       </isNotNull>
+       <![CDATA[ order by t12.record_time desc) where rownum<=1]]>
+     </select>
+     <select id="GetMoldingEdgeStorageInfoByRFIDNo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+     select * from ( select T.CARD_NO BARCODE,T2.EQUIP_ID,T2.MATERIAL_ID,T3.MATERIAL_NAME,T3.SAP_CODE,T3.MATERIAL_CODE,T3.MINOR_TYPE_ID MATERIAL_TYPE_ID,
+      T4.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T6.USER_NAME OPER_NAME,T5.EQUIP_NAME,T2.QTY SET_QUANTITY,T2.LEFT_QTY LEFT_QUANTITY,
+      T2.END_TIME PRODUCE_TIME,
+      T2.END_TIME VALID_DATE,'-1' as State,T1.DUMMY_8 currentEquip,T7.MIN_TIME,T7.VALID_TIME,T2.DUMMY2,T2.MARK_FLAG,case t2.MARK_FLAG when 1 then t13.reason_name when 2 then t14.reason_name else null end reason_name 
+      ,nvl(t2.dummy8,'1') USED_FLAG 
+      ,T2.DUMMY9 YC_TIME,T2.dummy5 lrFlag,t2.batch 
+      from HSM_TOOLING THT
+      LEFT JOIN HSM_TOOLING_LOAD TTL ON TTL.TOOLING_ID = THT.OBJID
+      left join HPP_STORAGE_DETAIL t on t.card_no=ttl.card_no
+      LEFT JOIN HPP_STORE_PLACE T1 ON T1.OBJID = T.STORE_PLACE_ID
+      LEFT JOIN HPP_SEMIS_PRODUCTION T2 ON T2.CARD_NO = t.CARD_NO
+      LEFT JOIN SBM_MATERIAL T3 ON T3.OBJID = T2.MATERIAL_ID
+      LEFT JOIN SBM_MATERIAL_MINOR_TYPE T4 ON T4.OBJID = T3.MINOR_TYPE_ID
+      LEFT JOIN SBE_EQUIP T5 ON T5.OBJID = T2.EQUIP_ID
+      LEFT JOIN SSB_USER T6 ON T6.OBJID = T2.RECORD_USER_ID
+      LEFT JOIN SBM_MATERIAL_INFO T7 ON T7.MATERIAL_ID = T2.MATERIAL_ID
+             LEFT JOIN sbm_mark_info t12 on t12.barcode = t2.card_no and t12.delete_flag=0  and t2.mark_flag = t12.mark_flag
+        LEFT JOIN sbm_mark_reason t13 on t13.objid = t12.reason_id
+        left join sbm_freeze_reason t14 on t14.objid = t12.reason_id
+      WHERE T.DELETE_FLAG=0
+       ]]>
+       <isNotNull property="equipId" prepend="AND">
+         <![CDATA[T1.DUMMY_8=#equipId#]]>
+       </isNotNull>
+       <isNotNull property="RFIDNo" prepend="AND">
+         <![CDATA[THT.TOOLING_RFID_BARCODE=#RFIDNo#]]>
+       </isNotNull>
+       <isNotNull property="usedFlag" prepend="AND">
+         <![CDATA[T.USED_FLAG<>#usedFlag#]]>
+       </isNotNull>
+       <![CDATA[ order by t12.record_time desc) where rownum<=1]]>
+     </select>
+     <select id="GetQualityInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select gradeid,state_flag from HQC_QCRECORD t
+       where new_flag=1 and delete_flag=0
+       ]]>
+       <isNotNull property="CardNo" prepend="AND">
+         <![CDATA[T.Card_No=#CardNo#]]>
+       </isNotNull>
+     </select>
+     <select id="GetMoldingEdgeStorageInfoByCardNoRubber" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      select * from (  SELECT T.CARD_NO BARCODE,T2.Dummy_1 EQUIP_ID,t3.objid MATERIAL_ID,T3.MATERIAL_NAME,T3.SAP_CODE,T3.MATERIAL_CODE,T3.MINOR_TYPE_ID MATERIAL_TYPE_ID,
+       T4.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,'' OPER_NAME,T5.EQUIP_NAME,T2.QTY SET_QUANTITY,T2.LEFT_QTY LEFT_QUANTITY,T2.PRODUCE_TIME,
+       T2.PRODUCE_TIME VALID_DATE,'-1' as State,T1.DUMMY_8 currentEquip,T7.MIN_TIME,T7.VALID_TIME,T2.DUMMY_2 DUMMY2,T2.MARK_FLAG,case t2.MARK_FLAG when 1 then t13.reason_name when 2 then t14.reason_name else null end reason_name 
+       ,nvl(t2.dummy_5,'1') USED_FLAG 
+       ,T2.DUMMY_6 YC_TIME,'' lrFlag
+       FROM HPP_STORAGE_DETAIL T
+      LEFT JOIN HPP_STORE_PLACE T1 ON T1.OBJID = T.STORE_PLACE_ID
+      LEFT JOIN hpp_rubber_production T2 ON T2.barcode = T.CARD_NO
+      LEFT JOIN SBM_MATERIAL T3 ON T3.Sap_Code = T2.Sap_Code
+      LEFT JOIN SBM_MATERIAL_MINOR_TYPE T4 ON T4.OBJID = T3.MINOR_TYPE_ID
+      LEFT JOIN SBE_EQUIP T5 ON T5.OBJID = T2.Dummy_1
+      LEFT JOIN SBM_MATERIAL_INFO T7 ON T7.MATERIAL_ID = t3.objid
+      LEFT JOIN sbm_mark_info t12 on t12.barcode = t2.barcode and t12.delete_flag=0  and t2.mark_flag = t12.mark_flag
+      LEFT JOIN sbm_mark_reason t13 on t13.objid = t12.reason_id
+      left join sbm_freeze_reason t14 on t14.objid = t12.reason_id
+      WHERE T.DELETE_FLAG=0 
+       ]]>
+       <isNotNull property="equipId" prepend="AND">
+         <![CDATA[T1.DUMMY_8=#equipId#]]>
+       </isNotNull>
+       <isNotNull property="cardNo" prepend="AND">
+         <![CDATA[T.CARD_NO=#cardNo#]]>
+       </isNotNull>
+       <isNotNull property="usedFlag" prepend="AND">
+         <![CDATA[T.USED_FLAG<>#usedFlag#]]>
+       </isNotNull>
+       <![CDATA[ order by t12.record_time desc) where rownum<=1]]>
+     </select>
+     <select id="GetMoldingEdgeStorageInfoByRFIDNoRubber" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      select * from (select T.CARD_NO BARCODE,T2.Dummy_1 EQUIP_ID,t3.objid MATERIAL_ID,T3.MATERIAL_NAME,T3.SAP_CODE,T3.MATERIAL_CODE,T3.MINOR_TYPE_ID MATERIAL_TYPE_ID,
+      T4.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,'' OPER_NAME,T5.EQUIP_NAME,T2.QTY SET_QUANTITY,T2.LEFT_QTY LEFT_QUANTITY,
+      T2.PRODUCE_TIME,
+      T2.PRODUCE_TIME VALID_DATE,'-1' as State,T1.DUMMY_8 currentEquip,T7.MIN_TIME,T7.VALID_TIME,T2.Dummy_2 DUMMY2,T2.MARK_FLAG,case t2.MARK_FLAG when 1 then t13.reason_name when 2 then t14.reason_name else null end reason_name 
+      ,nvl(t2.dummy_5,'1') USED_FLAG  
+      ,T2.DUMMY_6 YC_TIME,'' lrFlag
+      from HSM_TOOLING THT
+      LEFT JOIN HSM_TOOLING_LOAD TTL ON TTL.TOOLING_ID = THT.OBJID
+      left join HPP_STORAGE_DETAIL t on t.card_no=ttl.card_no
+      LEFT JOIN HPP_STORE_PLACE T1 ON T1.OBJID = T.STORE_PLACE_ID
+      LEFT JOIN hpp_rubber_production T2 ON T2.Barcode = t.CARD_NO
+      LEFT JOIN SBM_MATERIAL T3 ON T3.Sap_Code = T2.Sap_Code
+      LEFT JOIN SBM_MATERIAL_MINOR_TYPE T4 ON T4.OBJID = T3.MINOR_TYPE_ID
+      LEFT JOIN SBE_EQUIP T5 ON T5.OBJID = T2.Dummy_1
+      LEFT JOIN SBM_MATERIAL_INFO T7 ON T7.MATERIAL_ID = t3.objid
+      LEFT JOIN sbm_mark_info t12 on t12.barcode = t2.Barcode and t12.delete_flag=0  and t2.mark_flag = t12.mark_flag
+      LEFT JOIN sbm_mark_reason t13 on t13.objid = t12.reason_id
+      left join sbm_freeze_reason t14 on t14.objid = t12.reason_id
+      WHERE T.DELETE_FLAG=0
+       ]]>
+       <isNotNull property="equipId" prepend="AND">
+         <![CDATA[T1.DUMMY_8=#equipId#]]>
+       </isNotNull>
+       <isNotNull property="RFIDNo" prepend="AND">
+         <![CDATA[THT.TOOLING_RFID_BARCODE=#RFIDNo#]]>
+       </isNotNull>
+       <isNotNull property="usedFlag" prepend="AND">
+         <![CDATA[T.USED_FLAG<>#usedFlag#]]>
+       </isNotNull>
+       <![CDATA[ order by t12.record_time desc) where rownum<=1]]>
+     </select>
+     <insert id="InsertSubmitStorage" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       insert into HPP_STORAGE_DETAIL(objid,Record_User_Id,DELETE_FLAG,SEQ_INDEX,CARD_NO,
+       SHELF_NO,GRADE_CODE,Dummy1,dummy2,Store_Place_Id)
+       values(seq_hpp_storage_detail.nextval,#UserId#,0,1,#Barcode#,#ShelfNo#,0,3,#MaterialId#,(select objid from HPP_STORE_PLACE where dummy_8=#EquipId# and rownum=1 and delete_flag=0))
+       ]]>
+     </insert>
+     <select id="GetBarcodeExists" parameterClass="map" resultClass="Row"> 
+       <![CDATA[
+       SELECT T4.TOOLING_RFID_BARCODE SHELF_NO,T.CARD_NO,T1.MATERIAL_NAME,T.QTY,T2.RECORD_TIME,T.MATERIAL_ID,t.LEFT_QTY 
+       ,case when sysdate > (T.END_TIME + T5.VALID_TIME/24) then 1 else 0 end CQFlag
+       ,case when sysdate < (T.END_TIME + T5.MIN_TIME/24) then 1 else 0 end TFFlag
+       ,nvl(t.dummy2,0) dummy2
+       FROM HPP_SEMIS_PRODUCTION T
+       INNER JOIN SBM_MATERIAL T1 ON T1.OBJID = T.MATERIAL_ID
+       INNER JOIN HPP_STORAGE_DETAIL T2 ON T2.CARD_NO = T.CARD_NO
+       INNER JOIN HSM_TOOLING_LOAD T3 ON T3.CARD_NO = T.CARD_NO
+       INNER JOIN HSM_TOOLING T4 ON T3.TOOLING_ID = T4.OBJID
+       INNER JOIN SBM_MATERIAL_INFO T5 ON T5.MATERIAL_ID = T.MATERIAL_ID
+       WHERE T.DELETE_FLAG=0
+       ]]>
+       <isNotNull property="Barcode" prepend="AND">
+         <![CDATA[T.CARD_NO=#Barcode#]]>
+       </isNotNull>
+     </select>
+     <update id="UpdateGetMaterPlanQty" parameterClass="map">
+       <![CDATA[
+       update bpp_Get_mater_plan set real_qty = real_qty+#Qty#
+       where equip_id=#EquipId# and material_id=#MaterialId# and shift_id=#ShiftId# and shift_date=#ShiftDate# and dummy_1=#PlanDetailId#
+       ]]>
+     </update>
+     <select id="GetSemisStorage" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT * FROM (
+      SELECT T.CARD_NO,T2.MATERIAL_NAME,T4.STORE_NAME,T3.STORE_PLACE_NAME||'  '||t6.store_place_sub_name as STORE_PLACE_NAME,T5.LEFT_QTY WEIGHT,T5.End_Time RECORD_TIME
+      FROM HPP_STORAGE_DETAIL T
+      LEFT JOIN HPP_STORE_PLACE T1 ON T1.OBJID = T.STORE_PLACE_ID
+      LEFT JOIN SBM_MATERIAL T2 ON T2.OBJID = T.DUMMY2
+      left join SBM_MATERIAL_INFO t22 on t22.MATERIAL_ID = t2.objid and t22.delete_flag = 0
+      LEFT JOIN HPP_STORE_PLACE T3 ON T3.OBJID = T.STORE_PLACE_ID
+      LEFT JOIN HPP_STORE T4 ON T4.OBJID = T3.STORE_ID
+      LEFT JOIN HPP_SEMIS_PRODUCTION T5 ON T5.CARD_NO = T.CARD_NO AND T5.DELETE_FLAG=0
+      LEFT JOIN HPP_STORE_PLACE_SUB T6 ON T6.OBJID = T.SUB_STORE_PLACE_ID
+      WHERE t.delete_flag = 0 and  t4.store_higher_level = '0001005' AND T1.DUMMY_7 <>4101   and t5.left_qty >0
+       and not exists (select * from hpp_badrecord x where x.barcode = t.card_no and t.store_place_id = 723 and x.finalqr_userid is null)
+       and not exists (select * from hpp_moldalarm y where y.carno = t.card_no and y.state <> 3) 
+       and  (T5.END_TIME + T22.VALID_TIME/24)>=sysdate 
+         ]]>
+       <isNotNull property="MaterialId" prepend="AND">
+         <![CDATA[
+         T.DUMMY2=#MaterialId#
+         ]]>
+       </isNotNull>
+       
+     <![CDATA[
+      ORDER BY T5.End_Time
+      ) WHERE ROWNUM<6
+     ]]>
+     </select>
+     <select id="GetMaterProductInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T1.SHELF_NO,T.STORE_PLACE_ID,T.SUB_STORE_PLACE_ID,T1.MATERIAL_ID,T1.QTY FROM HPP_STORAGE_DETAIL T
+        LEFT JOIN HPP_SEMIS_PRODUCTION T1 ON T1.CARD_NO = T.CARD_NO
+        LEFT JOIN HPP_STORE_PLACE T2 ON T2.OBJID = T.STORE_PLACE_ID
+        left join hpp_store t3 on t2.store_id = t3.objid 
+        WHERE T.DELETE_FLAG=0 AND nvl(T2.DUMMY_7,0) <>4101 and t3.STORE_HIGHER_LEVEL = '0001005'
+       ]]>
+       <isNotNull property="Barcode" prepend="AND">
+         <![CDATA[T.CARD_NO = #Barcode# ]]>
+       </isNotNull>
+     </select>
+     <select id="GetStorePlaceInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select objid from hpp_store_place where delete_flag=0
+       ]]>
+       <isNotNull property="EquipId" prepend="AND">
+         <![CDATA[dummy_8=#EquipId#]]>
+       </isNotNull>
+     </select>
+     <select id="GetFIFOTime" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT CONFIG_VALUE FROM SSB_CONFIG WHERE CONFIG_KEY='MoldingSemisFIFOTime'
+       ]]>
+     </select>
+     <select id="GetMoldingControlSet" parameterClass="map" resultClass="Row">
+       <![CDATA[select config_key,config_value from ssb_config where config_key in('MolidngSemisControlMater','MolidngSemisControlQty','isVerityTime','isTFTime')]]>
+     </select>
+
+
+     <select id="GetSemisStorageEquip" parameterClass="map" resultClass="Row">
+       <![CDATA[
+            SELECT N2.MATERIAL_ID DUMMY2 , N3.MATERIAL_NAME ,N3.SAP_CODE ,COUNT(1) TOTAL_COUNT,SUM(N2.Left_Qty) AS QTY, N5.UNIT_NAME,n2.UNIT_ID,
+            sum(case when ((to_date(to_char(N2.END_TIME+N7.valid_time/24,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')<sysdate and nvl(n2.DUMMY2,0) <> 1)) then 1
+            when (to_date(to_char(N2.END_TIME+N7.valid_time/24,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')>sysdate 
+            and to_date(to_char(N2.END_TIME+N7.valid_time/24,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')-sysdate<=$txtHour$/24) then 1 else 0 end) yjnum
+                   FROM HPP_STORAGE_DETAIL N1
+                   INNER JOIN   HPP_SEMIS_PRODUCTION N2 ON N2.CARD_NO =N1.CARD_NO
+                   LEFT JOIN    SSB_UNIT N5 ON N5.OBJID = N2.UNIT_ID
+                   LEFT JOIN   SBM_MATERIAL N3 ON N3.OBJID = N2.MATERIAL_ID
+                   INNER JOIN   HPP_STORE_PLACE N4 ON N4.OBJID = N1.STORE_PLACE_ID 
+                   inner join hpp_store n6 on n4.store_id = n6.objid and n6.store_higher_level = '0002001'
+                   inner join sbm_material_info n7 on n3.objid = n7.material_id and n7.delete_flag = 0
+                   inner join hsm_tooling_load n8 on n8.card_no = n2.card_no and n8.delete_flag = 0
+                   WHERE n2.left_qty > 0 and N2.LEFT_QTY > = N2.QTY/10
+                   and (n2.end_time + n7.valid_time/24 +3) > sysdate
+     ]]>
+       <dynamic prepend="AND">
+
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[N1.DELETE_FLAG = #DeleteFlag#]]>
+         </isNotNull>
+
+         <isNotNull property="MaterialName" prepend="AND">
+           <![CDATA[N3.MATERIAL_NAME like '%' || #MaterialName# || '%']]>
+         </isNotNull>
+
+         <isNotNull property="CardNO" prepend="AND">
+           <![CDATA[N1.CARD_NO = #CardNO#]]>
+         </isNotNull>
+
+         <isNotNull property="StoreID" prepend="AND">
+           <![CDATA[N4.STORE_ID = #StoreID#]]>
+         </isNotNull>
+
+         <isNotNull property="StorePlaceID" prepend="AND">
+           <![CDATA[N1.STORE_PLACE_ID = #StorePlaceID#]]>
+         </isNotNull>
+
+         <isNotNull property="ShelfNo" prepend="AND">
+           <![CDATA[N1.SHELF_NO = #ShelfNo#]]>
+         </isNotNull>
+
+         <isNotNull property="ShelfNo" prepend="AND">
+           <![CDATA[N1.SHELF_NO = #ShelfNo#]]>
+         </isNotNull>
+
+       </dynamic>
+       <dynamic prepend="GROUP BY">
+         <![CDATA[N2.Material_Id ,N3.MATERIAL_NAME ,N3.SAP_CODE,N5.UNIT_NAME,n2.UNIT_ID]]>
+       </dynamic>
+     </select>
+
+     <!--根据库位-->
+     <select id="GetSemisStorage1" parameterClass="map" resultClass="Row">
+       <![CDATA[
+            SELECT N1.STORE_PLACE_ID,N4.STORE_PLACE_NAME , N2.MATERIAL_ID DUMMY2 , N3.MATERIAL_NAME ,N3.SAP_CODE, COUNT(1) TOTAL_COUNT ,SUM(N2.Left_Qty) AS QTY, N5.UNIT_NAME,n2.UNIT_ID,
+            sum(case when ((to_date(to_char(N2.END_TIME+N7.valid_time/24,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')<sysdate and nvl(n2.DUMMY2,0) <> 1)) then 1
+            when (to_date(to_char(N2.END_TIME+N7.valid_time/24,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')>sysdate 
+            and to_date(to_char(N2.END_TIME+N7.valid_time/24,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')-sysdate<=$txtHour$/24) then 1 else 0 end) yjnum
+               FROM HPP_STORAGE_DETAIL N1
+               INNER JOIN  HPP_SEMIS_PRODUCTION N2 ON N2.CARD_NO =N1.CARD_NO
+                LEFT JOIN    SSB_UNIT N5 ON N5.OBJID = n2.UNIT_ID
+               INNER JOIN HPP_STORE_PLACE N4 ON N4.OBJID = N1.STORE_PLACE_ID
+               LEFT JOIN   SBM_MATERIAL N3 ON N3.OBJID = N2.MATERIAL_ID 
+               inner join HPP_STORE n6 on n4.store_id = n6.objid and n6.store_higher_level = '0002001'
+               inner join sbm_material_info n7 on n3.objid = n7.material_id and n7.delete_flag = 0
+               inner join hsm_tooling_load n8 on n8.card_no = n2.card_no and n8.delete_flag = 0
+               WHERE n2.left_qty > 0  and N2.LEFT_QTY > = N2.QTY/10
+               and (n2.end_time + n7.valid_time/24 +3) > sysdate
+       ]]>
+       <dynamic prepend="AND">
+
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[N1.DELETE_FLAG = #DeleteFlag#]]>
+         </isNotNull>
+
+         <isNotNull property="MaterialName" prepend="AND">
+           <![CDATA[N3.MATERIAL_NAME like '%' || #MaterialName# || '%']]>
+         </isNotNull>
+
+         <isNotNull property="StoreID" prepend="AND">
+           <![CDATA[N4.STORE_ID = #StoreID#]]>
+         </isNotNull>
+         <isNotNull property="StorePlaceID" prepend="AND">
+           <![CDATA[N1.STORE_PLACE_ID = #StorePlaceID#]]>
+         </isNotNull>
+         <isNotNull property="CardNO" prepend="AND">
+           <![CDATA[N1.CARD_NO = #CardNO#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="GROUP BY">
+         <![CDATA[N1.STORE_PLACE_ID, N4.STORE_PLACE_NAME ,  N2.MATERIAL_ID   , N3.MATERIAL_NAME,N3.SAP_CODE, N5.UNIT_NAME,n2.UNIT_ID]]>
+       </dynamic>
+     </select>
+     <!--根据库位-->
+
+     <!--明细-->
+     <select id="GetSemisStorageDetail1" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT  M2.CARD_NO , M3.MATERIAL_NAME ,M3.SAP_CODE,M5.STORE_NAME ,M4.STORE_PLACE_NAME ,M8.STORE_PLACE_SUB_NAME,M1.SHELF_NO ,M2.RECORD_TIME DATA_TIME,M6.SHIFT_NAME,M1.RECORD_TIME INTO_TIME,M7.USER_NAME
+            , to_date(to_char(M2.END_TIME+M9.valid_time/24,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss') as YA_TIME ,M2.DUMMY2  as FXBZ,M2.LEFT_QTY QTY       
+             FROM   HPP_STORAGE_DETAIL M1 
+             LEFT JOIN  HPP_SEMIS_PRODUCTION M2 ON M2.CARD_NO = M1.CARD_NO    and M2.delete_flag=0
+             LEFT JOIN  SBM_MATERIAL_INFO M9 ON M9.MATERIAL_ID=M2.MATERIAL_ID and M9.delete_flag=0
+             LEFT JOIN  SBM_MATERIAL M3       ON M3.OBJID=M2.MATERIAL_ID      and M3.delete_flag=0
+             inner JOIN  HPP_STORE_PLACE M4    ON M4.OBJID = M1.STORE_PLACE_ID and M4.delete_flag=0
+             inner JOIN  HPP_STORE M5          ON M5.OBJID = M4.STORE_ID       and M5.delete_flag=0 and m5.store_higher_level = '0002001'
+             LEFT JOIN  SSB_SHIFT M6          ON M6.OBJID = M2.SHIFT_ID       and M6.delete_flag=0
+             LEFT JOIN  SSB_USER M7           ON M7.OBJID = M1.RECORD_USER_ID and M7.delete_flag=0
+             LEFT JOIN HPP_STORE_PLACE_SUB M8 ON M1.SUB_STORE_PLACE_ID = M8.OBJID and M8.delete_flag=0 
+             inner join hsm_tooling_load M10 on m10.card_no = m1.card_no and m10.delete_flag = 0
+             WHERE M2.LEFT_QTY >0 and M2.LEFT_QTY > = M2.QTY/10
+             and (m2.end_time + m9.valid_time/24 +3 ) >sysdate
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[M1.DELETE_FLAG = #DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="MaterialId" prepend="AND">
+           <![CDATA[M2.MATERIAL_ID = #MaterialId#]]>
+         </isNotNull>
+         <isNotNull property="cardNo" prepend="AND">
+           <![CDATA[M2.CARD_NO = #cardNo#]]>
+         </isNotNull>
+         <isNotNull property="StoreID" prepend="AND">
+           <![CDATA[M4.STORE_ID = #StoreID#]]>
+         </isNotNull>
+         <isNotNull property="StorePlaceId" prepend="AND">
+           <![CDATA[ M1.STORE_PLACE_ID = #StorePlaceId#]]>
+         </isNotNull>
+         <isNotNull property="ShelfNo" prepend="AND">
+           <![CDATA[M1.SHELF_NO = #ShelfNo#]]>
+         </isNotNull>
+         <isNotNull property="UnitId" prepend="AND">
+           <![CDATA[M2.UNIT_ID = #UnitId#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <!--明细-->
+     
+     <delete id="DeleteStorageDetail" parameterClass="map">
+       <![CDATA[
+          DELETE FROM HPP_STORAGE_DETAIL WHERE STORE_PLACE_ID=#StorePlaceId# AND DUMMY2=#DUMMY2#
+        ]]>
+     </delete>
+
+     <select id="GetStoreInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+           SELECT DISTINCT(B1.OBJID),B1.STORE_NAME FROM HPP_STORE B1
+             LEFT JOIN  HPP_STORE_PLACE B2 ON B2.STORE_ID = B1.OBJID  
+             WHERE 1=1
+             and b1.store_higher_level in ('0002001')
+             and b1.delete_flag=0   
+             ORDER BY  B1.STORE_NAME ASC
+       ]]>
+
+     </select>
+
+     <select id="GetStorePlaceInfo1" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT OBJID,STORE_PLACE_NAME FROM HPP_STORE_PLACE WHERE DELETE_FLAG=0
+       ]]>
+       <isNotNull property="StoreId" prepend="AND">
+         <![CDATA[STORE_ID=#StoreId#]]>
+       </isNotNull>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[STORE_PLACE_NAME ]]>
+       </dynamic>
+     </select>
+
+     <select id="GetMoldStoreDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+ select M1.CARD_NO BARCODE,M4.SAP_CODE,M4.OBJID MATERIAL_ID,M4.MATERIAL_CODE,M4.MATERIAL_NAME,M4.MINOR_TYPE_ID MATERIAL_TYPE_ID,
+M5.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,M2.Qty SET_QUANTITY,M2.LEFT_QTY LEFT_QUANTITY,M2.RECORD_TIME PRODUCE_TIME,M9.VALID_TIME VALID_TIME,
+M9.MIN_TIME,M6.EQUIP_NAME
+ from HPP_STORAGE_DETAIL M1
+             LEFT JOIN  HPP_SEMIS_PRODUCTION M2 ON M2.CARD_NO = M1.CARD_NO    and M2.delete_flag=0
+             LEFT JOIN HPP_STORE_PLACE M3 ON M3.OBJID = M1.STORE_PLACE_ID
+             LEFT JOIN SBM_MATERIAL M4 ON M4.OBJID = M1.DUMMY2
+             LEFT JOIN SBM_MATERIAL_MINOR_TYPE M5 ON M4.MINOR_TYPE_ID = M5.OBJID
+             LEFT JOIN SBE_EQUIP M6 ON M6.OBJID = M3.DUMMY_8 
+             LEFT JOIN  SBM_MATERIAL_INFO M9 ON M9.MATERIAL_ID=M2.MATERIAL_ID and M9.delete_flag=0
+             where NVL(M2.DUMMY8,0)<>'30' AND NVL(M2.DUMMY8,0)<>'31' AND M3.DUMMY_8= #equipId#
+    ]]>
+     </select>
+     
+        <select id="GetThreeGradeInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+
+select * from (select 'X光' name, GRADEID,RECORD_TIME from fqx_xcheck_info WHERE TYRDID = #TyreNo# order by RECORD_TIME desc) where rownum <2
+UNION ALL
+select * from (select '动平衡' name,UFRANK,RECORD_TIME from fqb_balance_info WHERE TYRE_ID = #TyreNo# order by RECORD_TIME desc) where rownum <2
+UNION ALL
+select * from (select '均匀性' name,UFMTOTALRANK,CHECKTIME from sbe_uniformity WHERE TYRENO = #TyreNo#  order by CHECKTIME desc) where rownum <2
+union all
+select '配套类型' name,pt_type_id,null from fqf_ptstandard_detail where material_id = (select b.material_id from cpp_curing_production a left join cpp_curing_plan_detail b on a.plan_detail_id = b.objid where a.tyre_no = #TyreNo#)
+union all
+select '是否过动' name,is_dong,null from fqb_quality_standard where material_id = (select b.material_id from cpp_curing_production a left join cpp_curing_plan_detail b on a.plan_detail_id = b.objid where a.tyre_no = #TyreNo#)
+    ]]>
+     </select>
+
+     <select id="GetBWeightUnlockReason" parameterClass="map" resultClass="Row">
+       <![CDATA[
+ select  unlock_reason  from  bpm_weight_unlock
+    ]]>
+     </select>
+
+     <select id="GetStopRecordInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select objid,equip_id,mater_id,stop_type,record_time from sbe_stoprecord where equip_id = #equipid#  and unlock_type is null
+    ]]>
+     </select>
+
+
+     <select id="GetMoldEquipIsStop" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select  nvl(state,'正常') state,nvl(test_num,0) test_num,nvl(real_num,0) real_num from bpm_workequip where equip_name =  #equipName# and new_flag = 1
+    ]]>
+     </select>
+
+     <update id="UpdateMoldEquipRealNum" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       update bpm_workequip set real_num = nvl(real_num,0) + 1 where equip_name = #equipName# and new_flag = 1 
+    ]]>
+     </update>
+
+     <select id="GetPlanDetailStopInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select  c.equip_name,d.sap_code  from  bpp_plan_detail a
+left join bpp_plan b on a.plan_id = b.objid and b.delete_flag = 0
+left join sbe_equip c on c.objid = b.equip_id and c.delete_flag = 0
+left join sbm_material d on d.objid = a.material_id and d.delete_flag = 0
+where a.objid = #planDetailId# and a.delete_flag = 0
+    ]]>
+     </select>
+
+     <select id="GetMaterIsStop" parameterClass="map" resultClass="Row">
+       <![CDATA[select  *  from  bpm_stopmater  where bpm_sap = #Sapcode# and state = '正用' 
+    ]]>
+     </select>
+     <select id="GetMaterIsStop22" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select * from bpm_workequip where sap_code = #Sapcode# and equip_name = #equipName# and new_flag = 1
+    ]]>
+     </select>
+
+     <update id="UpdateBpmWorkequip" parameterClass="map" resultClass="Row">
+       <![CDATA[
+update bpm_workequip set new_flag = 0 where equip_name = #equipName#
+    ]]>
+     </update>
+     <insert id="InsertBpmWorkequip" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       insert into bpm_workequip(objid,equip_name,sap_code,new_flag,state)
+values(seq_bpm_workequip.nextval,#equipName#,#Sapcode#,1,'停机')
+    ]]>
+     </insert>
+     <insert id="InsertBpmWorkequip2" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       insert into bpm_workequip(objid,equip_name,sap_code,new_flag)
+values(seq_bpm_workequip.nextval,#equipName#,#Sapcode#,1)
+    ]]>
+     </insert>
+
+     <select id="Getequipstateinfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select  state  from  bpm_workequip where new_flag = 1 and equip_name = #equipName# and sap_code = #Sapcode#
+    ]]>
+     </select>
+     <update id="UpdateHppMoldAlarm" parameterClass="map">
+       <![CDATA[
+        update hpp_moldAlarm set state = 3 where carno = #barcode#
+       ]]>
+     </update>
+
+     <select id="GetMoldingIsQZ" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select a.card_no,case when sysdate >= (END_TIME + VALID_TIME/24 + MOLDQZ) THEN 2 WHEN sysdate >= (END_TIME + VALID_TIME/24 + MOLDYJ) THEN 1 ELSE 0 END FLAG from (
+      SELECT * FROM (SELECT T.CARD_NO,T5.End_Time,T22.VALID_TIME,t7.config_value moldyj,t8.config_value moldqz
+      FROM HPP_STORAGE_DETAIL T
+      left join SBM_MATERIAL_INFO t22 on t22.MATERIAL_ID = T.DUMMY2 and t22.delete_flag = 0
+      LEFT JOIN HPP_STORE_PLACE T3 ON T3.OBJID = T.STORE_PLACE_ID
+      LEFT JOIN HPP_STORE T4 ON T4.OBJID = T3.STORE_ID
+      LEFT JOIN HPP_SEMIS_PRODUCTION T5 ON T5.CARD_NO = T.CARD_NO AND T5.DELETE_FLAG=0
+      left join ssb_config t7 on t7.objid = 63
+      left join ssb_config t8 on t8.objid = 66
+      WHERE  t.delete_flag = 0 and t4.store_higher_level = '0001005' AND T3.DUMMY_7 <>4101  and t5.left_qty >0
+       and not exists (select * from hpp_badrecord x where x.barcode = t.card_no and t.store_place_id = 723 and x.finalqr_userid is null)
+       and not exists (select * from hpp_moldalarm y where y.carno = t.card_no and y.state <> 3) 
+      and  T.DUMMY2= #materialId#
+      ORDER BY T5.End_Time) WHERE ROWNUM = 1 ) a
+       ]]>
+     </select>
+     
+     
+   </statements>
+</sqlMap>

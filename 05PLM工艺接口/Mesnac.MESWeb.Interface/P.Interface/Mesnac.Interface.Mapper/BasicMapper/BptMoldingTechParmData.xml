@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Interface.Mapper.BasicMapper.BptMoldingTechParmData"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="BptMoldingTechParmData" type="Mesnac.Interface.Entity.BasicEntity.BptMoldingTechParmData, Mesnac.Interface.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_BptMoldingTechParmData" class="BptMoldingTechParmData">
+    <result property="ObjId" column="OBJID"/>
+    <result property="PdmCode" column="PDM_CODE"/>
+    <result property="ParmGroupId" column="PARM_GROUP_ID"/>
+    <result property="ParmTypeId" column="PARM_TYPE_ID"/>
+    <result property="ParmInfoId" column="PARM_INFO_ID"/>
+    <result property="ParmValue" column="PARM_VALUE"/>
+    <result property="ParmValueMax" column="PARM_VALUE_MAX"/>
+    <result property="ParmValueMin" column="PARM_VALUE_MIN"/>
+    <result property="PdmVersion" column="PDM_VERSION"/>
+    <result property="Lastmodifier" column="LASTMODIFIER"/>
+    <result property="LastmodifyDate" column="LASTMODIFY_DATE"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="ParmCombine" column="PARM_COMBINE"/>
+    <result property="ProcessRoute" column="PROCESS_ROUTE"/>
+    <result property="ProcessVersion" column="PROCESS_VERSION"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_BptMoldingTechParmData" class="BptMoldingTechParmData">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="PdmCode" column="PdmCode"/>
+    <parameter property="ParmGroupId" column="ParmGroupId"/>
+    <parameter property="ParmTypeId" column="ParmTypeId"/>
+    <parameter property="ParmInfoId" column="ParmInfoId"/>
+    <parameter property="ParmValue" column="ParmValue"/>
+    <parameter property="ParmValueMax" column="ParmValueMax"/>
+    <parameter property="ParmValueMin" column="ParmValueMin"/>
+    <parameter property="PdmVersion" column="PdmVersion"/>
+    <parameter property="Lastmodifier" column="Lastmodifier"/>
+    <parameter property="LastmodifyDate" column="LastmodifyDate"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="ParmCombine" column="ParmCombine"/>
+    <parameter property="ProcessRoute" column="ProcessRoute"/>
+    <parameter property="ProcessVersion" column="ProcessVersion"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BPT_MOLDING_TECH_PARM_DATA ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.PdmCode" prepend="AND">
+          <![CDATA[PDM_CODE = #where.PdmCode#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmGroupId" prepend="AND">
+          <![CDATA[PARM_GROUP_ID = #where.ParmGroupId#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmTypeId" prepend="AND">
+          <![CDATA[PARM_TYPE_ID = #where.ParmTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmInfoId" prepend="AND">
+          <![CDATA[PARM_INFO_ID = #where.ParmInfoId#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmValue" prepend="AND">
+          <![CDATA[PARM_VALUE = #where.ParmValue#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmValueMax" prepend="AND">
+          <![CDATA[PARM_VALUE_MAX = #where.ParmValueMax#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmValueMin" prepend="AND">
+          <![CDATA[PARM_VALUE_MIN = #where.ParmValueMin#]]>
+        </isNotNull>
+        <isNotNull property="where.PdmVersion" prepend="AND">
+          <![CDATA[PDM_VERSION = #where.PdmVersion#]]>
+        </isNotNull>
+        <isNotNull property="where.Lastmodifier" prepend="AND">
+          <![CDATA[LASTMODIFIER = #where.Lastmodifier#]]>
+        </isNotNull>
+        <isNotNull property="where.LastmodifyDate" prepend="AND">
+          <![CDATA[LASTMODIFY_DATE = #where.LastmodifyDate#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmCombine" prepend="AND">
+          <![CDATA[PARM_COMBINE = #where.ParmCombine#]]>
+        </isNotNull>
+        <isNotNull property="where.ProcessRoute" prepend="AND">
+          <![CDATA[PROCESS_ROUTE = #where.ProcessRoute#]]>
+        </isNotNull>
+        <isNotNull property="where.ProcessVersion" prepend="AND">
+          <![CDATA[PROCESS_VERSION = #where.ProcessVersion#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO BPT_MOLDING_TECH_PARM_DATA]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="PdmCode" prepend=",">PDM_CODE</isNotNull>
+        <isNotNull property="ParmGroupId" prepend=",">PARM_GROUP_ID</isNotNull>
+        <isNotNull property="ParmTypeId" prepend=",">PARM_TYPE_ID</isNotNull>
+        <isNotNull property="ParmInfoId" prepend=",">PARM_INFO_ID</isNotNull>
+        <isNotNull property="ParmValue" prepend=",">PARM_VALUE</isNotNull>
+        <isNotNull property="ParmValueMax" prepend=",">PARM_VALUE_MAX</isNotNull>
+        <isNotNull property="ParmValueMin" prepend=",">PARM_VALUE_MIN</isNotNull>
+        <isNotNull property="PdmVersion" prepend=",">PDM_VERSION</isNotNull>
+        <isNotNull property="Lastmodifier" prepend=",">LASTMODIFIER</isNotNull>
+        <isNotNull property="LastmodifyDate" prepend=",">LASTMODIFY_DATE</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="ParmCombine" prepend=",">PARM_COMBINE</isNotNull>
+        <isNotNull property="ProcessRoute" prepend=",">PROCESS_ROUTE</isNotNull>
+        <isNotNull property="ProcessVersion" prepend=",">PROCESS_VERSION</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_BPT_MOLDING_TECH_PARM_DATA.NEXTVAL</isNull>
+        <isNotNull property="PdmCode" prepend=",">#PdmCode#</isNotNull>
+        <isNotNull property="ParmGroupId" prepend=",">#ParmGroupId#</isNotNull>
+        <isNotNull property="ParmTypeId" prepend=",">#ParmTypeId#</isNotNull>
+        <isNotNull property="ParmInfoId" prepend=",">#ParmInfoId#</isNotNull>
+        <isNotNull property="ParmValue" prepend=",">#ParmValue#</isNotNull>
+        <isNotNull property="ParmValueMax" prepend=",">#ParmValueMax#</isNotNull>
+        <isNotNull property="ParmValueMin" prepend=",">#ParmValueMin#</isNotNull>
+        <isNotNull property="PdmVersion" prepend=",">#PdmVersion#</isNotNull>
+        <isNotNull property="Lastmodifier" prepend=",">#Lastmodifier#</isNotNull>
+        <isNotNull property="LastmodifyDate" prepend=",">#LastmodifyDate#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="ParmCombine" prepend=",">#ParmCombine#</isNotNull>
+        <isNotNull property="ProcessRoute" prepend=",">#ProcessRoute#</isNotNull>
+        <isNotNull property="ProcessVersion" prepend=",">#ProcessVersion#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE BPT_MOLDING_TECH_PARM_DATA
+       <dynamic prepend="SET">
+        <isNotNull  property="update.PdmCode"  prepend=",">
+          PDM_CODE = #update.PdmCode#
+        </isNotNull>
+        <isNotNull  property="update.ParmGroupId"  prepend=",">
+          PARM_GROUP_ID = #update.ParmGroupId#
+        </isNotNull>
+        <isNotNull  property="update.ParmTypeId"  prepend=",">
+          PARM_TYPE_ID = #update.ParmTypeId#
+        </isNotNull>
+        <isNotNull  property="update.ParmInfoId"  prepend=",">
+          PARM_INFO_ID = #update.ParmInfoId#
+        </isNotNull>
+        <isNotNull  property="update.ParmValue"  prepend=",">
+          PARM_VALUE = #update.ParmValue#
+        </isNotNull>
+        <isNotNull  property="update.ParmValueMax"  prepend=",">
+          PARM_VALUE_MAX = #update.ParmValueMax#
+        </isNotNull>
+        <isNotNull  property="update.ParmValueMin"  prepend=",">
+          PARM_VALUE_MIN = #update.ParmValueMin#
+        </isNotNull>
+        <isNotNull  property="update.PdmVersion"  prepend=",">
+          PDM_VERSION = #update.PdmVersion#
+        </isNotNull>
+        <isNotNull  property="update.Lastmodifier"  prepend=",">
+          LASTMODIFIER = #update.Lastmodifier#
+        </isNotNull>
+        <isNotNull  property="update.LastmodifyDate"  prepend=",">
+          LASTMODIFY_DATE = #update.LastmodifyDate#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.ParmCombine"  prepend=",">
+          PARM_COMBINE = #update.ParmCombine#
+        </isNotNull>
+        <isNotNull  property="update.ProcessRoute"  prepend=",">
+          PROCESS_ROUTE = #update.ProcessRoute#
+        </isNotNull>
+        <isNotNull  property="update.ProcessVersion"  prepend=",">
+          PROCESS_VERSION = #update.ProcessVersion#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM BPT_MOLDING_TECH_PARM_DATA
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_BptMoldingTechParmData">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_BptMoldingTechParmData">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM BPT_MOLDING_TECH_PARM_DATA
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM BPT_MOLDING_TECH_PARM_DATA
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_BptMoldingTechParmData" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE BPT_MOLDING_TECH_PARM_DATA
+    </statement>
+  </statements>
+</sqlMap>

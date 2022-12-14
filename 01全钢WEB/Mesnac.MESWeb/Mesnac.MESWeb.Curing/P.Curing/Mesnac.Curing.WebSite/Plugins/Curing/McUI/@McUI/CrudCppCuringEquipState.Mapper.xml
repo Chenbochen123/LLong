@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudCppCuringEquipState" parameterClass="map" resultClass="row">
+      <![CDATA[
+        select t1.objid,t1.equip_id, t2.equip_code,t3.material_id,t4.material_name,t5.TECH_NAME,case when t1.equip_position=1 then '左模' else '右模' end as equip_position  
+        from CPP_CURING_EQUIP_STATE t1 
+        left join sbe_equip t2 on t1.equip_id=t2.objid 
+        left join sbm_bom t3 on t1.bom_id=t3.objid
+        left join v_bbm_materialinfo t4 on t3.material_id=t4.objid
+        left join V_CPT_CURING_TECH t5 on t1.tech_id=t5.objid
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EQUIP_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNull property="OrderString" prepend=" ">
+        order by equip_code
+      </isNull>
+    </select>
+    <select id="Select+Update@CrudCimMouldChangeinfo" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM CIM_MOULD_CHANGEINFO ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <select id="Select@CrudCimMouldChangeinfo@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*, T2.USER_NAME RECORD_USER_NAME 
+        , T3.EQUIP_NAME, T4.SHOW_NAME EQUIP_POSITION_CAPTION, T5.MATERIAL_NAME, T6.MATERIAL_NAME LAST_MATERIAL_NAME 
+        FROM CIM_MOULD_CHANGEINFO T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        LEFT JOIN SBE_EQUIP T3 ON T1.EQUIP_ID = T3.OBJID 
+        LEFT JOIN CBE_EQUIP_POSITION T4 ON T1.EQUIP_POSITION = T4.OBJID 
+        LEFT JOIN SBM_MATERIAL T5 ON T1.MATERIAL_ID = T5.OBJID 
+        LEFT JOIN SBM_MATERIAL T6 ON T1.LAST_MATERIAL_ID = T6.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T1.OBJID = #where.OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询物料信息，ID值固定为GetComboBoxData@Select@CrudCimMouldChangeinfo@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCimMouldChangeinfo@MaterialId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey,MATERIAL_NAME ssValue FROM V_CBM_MATERIAL WHERE DELETE_FLAG = '0' ORDER BY MATERIAL_NAME
+     ]]>
+    </select>
+
+    <!--查询物料信息，ID值固定为GetComboBoxData@Select@CrudCimMouldChangeinfo@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCimMouldChangeinfo@LastMaterialId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey,MATERIAL_NAME ssValue FROM V_CBM_MATERIAL WHERE DELETE_FLAG = '0' ORDER BY MATERIAL_NAME
+     ]]>
+    </select>
+
+    <!--查询左右模信息，ID值固定为GetComboBoxData@Select@CrudCimMouldChangeinfo@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCimMouldChangeinfo@EquipPosition" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey,SHOW_NAME ssValue FROM CBE_EQUIP_POSITION WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

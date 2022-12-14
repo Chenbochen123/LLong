@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.BsmToolingCar"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BSM_TOOLING_CAR ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.ToolingBarcode" prepend="AND">
+          <![CDATA[TOOLING_BARCODE = #where.ToolingBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.ToolingType" prepend="AND">
+          <![CDATA[TOOLING_TYPE = #where.ToolingType#]]>
+        </isNotNull>
+        <isNotNull property="where.MaxLoadAmount" prepend="AND">
+          <![CDATA[MAX_LOAD_AMOUNT = #where.MaxLoadAmount#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--SPP_TOOLING_STATE_MAIN  WHERE T.DELETE_FLAG=0 and T1.DELETE_FLAG=0-->
+    <select id="GetToolingCarInfo" parameterClass="map" resultClass="Row" >
+      <![CDATA[
+       SELECT T.OBJID TOOLING_ID,T.TOOLING_BARCODE,T1.LOAD_AMOUNT COUNT FROM BSM_TOOLING_CAR T
+      LEFT JOIN  BSM_TOOLING_LOAD_MAIN T1 ON T1.TOOLING_ID = T.OBJID
+      WHERE T.DELETE_FLAG=0 and T1.DELETE_FLAG=0
+      ]]>
+      <isNotNull property="where.ToolingBarcode" prepend="AND">
+        <![CDATA[T.TOOLING_BARCODE like  '%'||#where.ToolingBarcode# ||'%']]>
+      </isNotNull>
+      <![CDATA[
+      ORDER BY T1.LOAD_AMOUNT
+      ]]>
+    </select>
+    <!--T.DELETE_FLAG=0 AND T1.DELETE_FLAG=0 AND-->
+    <select id="GetToolingLoadInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       SELECT T1.GREEN_TYRE_NO,T2.MATERIAL_FULL_NAME,T5.EQUIP_NAME,T6.USER_NAME,t3.end_time record_time FROM BSM_TOOLING_LOAD_MAIN T 
+      LEFT JOIN BSM_TOOLING_LOAD_DETAIL T1 ON T.OBJID = T1.MAIN_ID
+      LEFT JOIN SBM_MATERIAL T2 ON T2.OBJID = T.MATERIAL_ID
+      LEFT JOIN BPM_PRODUCTION T3 ON T3.GREEN_TYRE_NO = T1.GREEN_TYRE_NO
+      LEFT JOIN BPP_PLAN T4 ON T4.OBJID = T3.PLAN_ID 
+      LEFT JOIN SBE_EQUIP T5 ON T5.OBJID = T4.EQUIP_ID
+      LEFT JOIN SSB_USER T6 ON T6.OBJID = T1.RECORD_USER_ID
+      WHERE T.DELETE_FLAG=0 AND T1.DELETE_FLAG=0 AND T.TOOLING_ID=#where.ToolingId#
+       ]]>
+    </select>
+    <select id="GetToolingCarMaxLoadAmount" parameterClass="map" resultClass="Row">
+      <![CDATA[ select objid,tooling_barcode,max_load_amount from bsm_tooling_car where delete_flag=0
+      ]]>
+    </select>
+
+
+    <delete id="DeleteBsmToolingLoadDetail" parameterClass="map" >
+      <![CDATA[DELETE BSM_TOOLING_LOAD_DETAIL T WHERE T.MAIN_ID=#MainId#]]>
+    </delete>
+
+
+    <select id="GetCsmStorageInfo1" parameterClass="map" resultClass="Row">
+      <![CDATA[
+           select n1.MATERIAL_NAME, n.GREEN_TYRE_NO  from CSM_STORAGE_DETAIL n
+inner  join (
+select * from (
+select a.* from CSM_STORAGE_TOOLING a 
+where a.tooling_barcode = #ToolingCarNo# and a.delete_flag = 0
+order by objid desc) where  rownum = 1) m on n.storage_tooling_id = m.objid and n.delete_flag = 0
+left join SBM_MATERIAL n1 on n1.objid = m.MATERIAL_ID
+       ]]>
+    </select>
+
+    <select id="GetMaterialNameInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       select material_full_name from sbm_material 
+       where delete_flag=0 
+       ]]>
+      <isNotNull property="materialId" prepend="AND">
+        <![CDATA[objid = #materialId#]]>
+      </isNotNull>
+    </select>
+  </statements>
+</sqlMap>

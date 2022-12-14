@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Storage.Mapper.BusinessMapper.SppTyreState"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SPP_TYRE_STATE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[TYRE_NO = #where.TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.XFirstCheckTime" prepend="AND">
+          <![CDATA[X_FIRST_CHECK_TIME = #where.XFirstCheckTime#]]>
+        </isNotNull>
+        <isNotNull property="where.XFirstCheckGrade" prepend="AND">
+          <![CDATA[X_FIRST_CHECK_GRADE = #where.XFirstCheckGrade#]]>
+        </isNotNull>
+        <isNotNull property="where.XCheckTime" prepend="AND">
+          <![CDATA[X_CHECK_TIME = #where.XCheckTime#]]>
+        </isNotNull>
+        <isNotNull property="where.XCheckGrade" prepend="AND">
+          <![CDATA[X_CHECK_GRADE = #where.XCheckGrade#]]>
+        </isNotNull>
+        <isNotNull property="where.FinalCheckGrade" prepend="AND">
+          <![CDATA[FINAL_CHECK_GRADE = #where.FinalCheckGrade#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreState" prepend="AND">
+          <![CDATA[TYRE_STATE = #where.TyreState#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <!--更新记录（调拨）-->
+     <update id="UpdateTyreNoStateTransfer" parameterClass="map">
+       UPDATE SPP_TYRE_STATE T
+       SET T.TYRE_STATE='699'
+       WHERE EXISTS( SELECT  T3.TYRE_NO,T3.GREEN_TYRE_NO FROM PSM_TRANSFER_BILL T2
+       LEFT JOIN  PSM_TRANSFER_DETAIL T3 ON T3.BILL_ID= T2.OBJID
+       WHERE T3.TYRE_NO=T.TYRE_NO AND T2.OBJID= #BillId#)
+     </update>
+     <!--更新记录（出库）-->
+     <update id="UpdateTyreNoStateOut" parameterClass="map">
+       UPDATE SPP_TYRE_STATE T
+       SET T.TYRE_STATE='699'
+       WHERE EXISTS( SELECT  T3.TYRE_NO,T3.GREEN_TYRE_NO FROM PSM_OUT_STOCK_BILL T2
+       LEFT JOIN  PSM_OUT_STOCK_DETAIL T3 ON T3.BILL_ID= T2.OBJID
+       WHERE T3.TYRE_NO=T.TYRE_NO AND T2.OBJID= #BillId#)
+     </update>
+     <!--更新记录（按规格入库）将轮胎状态更新为库存中-->
+     <update id="UpdateTyreNoStateIn" parameterClass="map">
+       UPDATE SPP_TYRE_STATE T
+       SET T.TYRE_STATE='699'
+       WHERE EXISTS( SELECT T2.TYRE_NO,T2.GREEN_TYRE_NO FROM PSM_IN_LOAD_DETAIL T2
+       WHERE T2.TYRE_NO=T.TYRE_NO AND T2.BILL_ID= #BILLID# AND T2.SUMMARY_ID=#SUMMARYID#)
+     </update>
+     
+  </statements>
+</sqlMap>

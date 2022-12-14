@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="STORE_PLACE_ID" Value="胚胎库位"></Caption>
+    <Caption Name="STORE_PLACE" Value="胚胎库位"></Caption>
+    <Caption Name="EQUIP_ID" Value="设备信息"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="物料信息"></Caption>
+    <Caption Name="DUMMY1" Value="状态"></Caption>
+    <Caption Name="STATE" Value="状态"></Caption>
+    <Caption Name="EQUIP_NAME" Value="设备名称"></Caption>
+    <Caption Name="MAX_AMOUNT" Value="最多胎胚车数量"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="UPDATE_USER_NAME" Value="更改人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+    <Caption Name="SearchType" Value="查询类型"></Caption>
+    
+  </Captions>
+  <WebPage Title="成型库位维护">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Molding/McUI/@McUI/CrudBsmEquipPlace.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="BSM_EQUIP_PLACE">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_BSM_EQUIP_PLACE"></SeqField>
+    </SeqFields>
+    <Uniques>
+      <Unique Fields="EQUIP_ID,STORE_PLACE_ID"></Unique>
+    </Uniques>
+  </Crud>
+  
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="EQUIP_ID" Type="ComboBox" ></ParamField>
+        <ParamField FieldName="STORE_PLACE_ID" Type="ComboBox" Nullable="true" ></ParamField>
+        <ParamField FieldName="DUMMY1" Type="ComboBox"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+
+  <Update UserField="UPDATE_ID" TimeField="UPDATE_TIME">
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="EQUIP_ID" Type="ComboBox" ></ParamField>
+        <ParamField FieldName="STORE_PLACE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="DUMMY1" Type="ComboBox"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="EQUIP_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_PLACE_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="DUMMY1" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="RECORD_USER_NAME" ></ParamField>
+        <ParamField FieldName="UPDATE_USER_NAME" ></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid >
+      <GridColumns>
+        <GridColumn ColumnName="EQUIP_NAME" Width="160" Caption="设备名称"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE" Width="80" Caption="库位名称"></GridColumn>
+        <GridColumn ColumnName="STATE" Width="80" Caption="是否绑定"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME" Width="80" Caption="记录人"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="160" Caption="添加时间"></GridColumn>
+        <GridColumn ColumnName="UPDATE_USER_NAME" Width="80" Caption="更改人"></GridColumn>
+        <GridColumn ColumnName="UPDATE_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="160" Caption="更改时间"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

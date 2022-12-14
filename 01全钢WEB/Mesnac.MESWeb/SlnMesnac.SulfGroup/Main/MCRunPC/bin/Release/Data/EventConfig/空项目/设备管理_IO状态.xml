@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ActionService>
+    <Design>
+        <Path path="设备管理/IO状态">
+            <Action action="ASD70A6B0BF94364872744212ETSPQB1">
+                <Caption>IO状态初始化</Caption>
+                <Remark>IO状态初始化</Remark>
+            </Action>
+            <Action action="F5C4AACD20FF4199B6AD215575EDB001">
+                <Caption>IO1_滚轮条左移</Caption>
+                <Remark>滚轮条左移</Remark>
+            </Action>
+            <Action action="AAFC2B80DF9D4589B61EF49098803002">
+                <Caption>IO1_滚轮条右移</Caption>
+                <Remark>滚轮条右移</Remark>
+            </Action>
+            <Action action="D9F842CD88C948D48E77FCEFD1977003">
+                <Caption>IO1_滚动条开始</Caption>
+                <Remark>滚动条开始</Remark>
+            </Action>
+            <Action action="ABEBA01572B24B3B8176D5F90715E004">
+                <Caption>IO1_滚动条结束</Caption>
+                <Remark>滚动条结束</Remark>
+            </Action>
+        </Path>
+    </Design>
+
+    <DesignToRuntime>
+        <Design action="ASD70A6B0BF94364872744212ETSPQB1">
+            <Runtime action="ASD520D72BB44E52913E44F2F6YUIWM6"/>
+        </Design>
+
+        <Design action="F5C4AACD20FF4199B6AD215575EDB001">
+            <Runtime action="2037CED5BCD141EBBC6A52045AB8B001" parameters="panel3"/>
+        </Design>
+        <Design action="AAFC2B80DF9D4589B61EF49098803002">
+            <Runtime action="1FB97752E9E045ECA82EF7482A3F5002" parameters="panel3"/>
+        </Design>
+        <Design action="D9F842CD88C948D48E77FCEFD1977003">
+            <Runtime action="506BC9F143264B57A17EC3320A3D3003" parameters="panel3"/>
+        </Design>
+        <Design action="ABEBA01572B24B3B8176D5F90715E004">
+            <Runtime action="C6F38AE52F974A9DBA9C07BB8B51C004" parameters="panel3"/>
+        </Design>
+    </DesignToRuntime>
+    
+    <Runtime>
+        <Import assembly = "Data/Action/Sulf/Mesnac.Action.Sulf.dll">
+            <Action action="ASD520D72BB44E52913E44F2F6YUIWM6" class="Mesnac.Action.Sulf.EquipManger.EquipIO"/>
+            <Action action="2037CED5BCD141EBBC6A52045AB8B001" class="Mesnac.Action.Sulf.Alarm.ScrollLeft"/>
+            <Action action="1FB97752E9E045ECA82EF7482A3F5002" class="Mesnac.Action.Sulf.Alarm.ScrollRight"/>
+            <Action action="506BC9F143264B57A17EC3320A3D3003" class="Mesnac.Action.Sulf.Alarm.ScrollBegin"/>
+            <Action action="C6F38AE52F974A9DBA9C07BB8B51C004" class="Mesnac.Action.Sulf.Alarm.ScrollEnd"/>
+        </Import>
+    </Runtime>
+</ActionService>

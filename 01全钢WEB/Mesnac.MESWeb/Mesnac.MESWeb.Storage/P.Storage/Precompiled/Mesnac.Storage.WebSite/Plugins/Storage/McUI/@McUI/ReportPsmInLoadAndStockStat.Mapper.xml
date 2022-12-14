@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportPsmInLoadAndStockStat" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T2.MATERIAL_NAME, T1.*
+        , T3.SHIFT_NAME IN_SHIFT_NAME, T4.CLASS_NAME IN_CLASS_NAME
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '合格品' WHEN 2 THEN '二级品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' ELSE '' END CHECK_GRADE_NAME 
+        FROM (
+          SELECT T1.IN_DATE, T1.IN_CLASS_ID, T1.IN_SHIFT_ID, T1.MATERIAL_ID, T1.CHECK_GRADE_CODE, SUM(T1.IN_AMOUNT) IN_AMOUNT
+          FROM (
+           SELECT T2.IN_DATE, T2.IN_CLASS_ID, T2.IN_SHIFT_ID, T1.IN_AMOUNT, T1.MATERIAL_ID, T1.CHECK_GRADE_CODE
+            FROM PSM_IN_STOCK_SUMMARY T1
+            JOIN PSM_IN_STOCK_BILL T2 ON T1.BILL_ID = T2.OBJID
+            join psb_store_place t3 on t3.objid=t1.store_place_id
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG# AND T2.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+           UNION ALL
+           
+            SELECT T1.RETURN_DATE, T1.RETURN_CLASS_ID, T1.RETURN_SHIFT_ID, 0 - T2.RETURN_AMOUNT, T2.MATERIAL_ID, T2.CHECK_GRADE_CODE
+            FROM PSM_RETURN_STOCK_BILL T1
+            JOIN PSM_RETURN_STOCK_SUMMARY T2 ON T1.OBJID = T2.BILL_ID
+            WHERE T1.DELETE_FLAG = 0 AND T2.DELETE_FLAG = 0
+        ) T1
+          GROUP BY T1.IN_DATE, T1.IN_CLASS_ID, T1.IN_SHIFT_ID, T1.MATERIAL_ID, T1.CHECK_GRADE_CODE
+        ) T1
+        LEFT JOIN SBM_MATERIAL T2 ON T1.MATERIAL_ID = T2.OBJID
+        LEFT JOIN SSB_SHIFT T3 ON T1.IN_SHIFT_ID = T3.OBJID
+        LEFT JOIN SSB_CLASS T4 ON T1.IN_CLASS_ID = T4.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+      
+        <isNotNull property="where.BeginDate" prepend="AND">
+          <![CDATA[T1.IN_DATE >= #where.BeginDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EndDate" prepend="AND">
+          <![CDATA[T1.IN_DATE <= #where.EndDate#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME <= #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.IN_CLASS_ID" prepend="AND">
+          <![CDATA[T1.IN_CLASS_ID = #where.IN_CLASS_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.IN_SHIFT_ID" prepend="AND">
+          <![CDATA[T1.IN_SHIFT_ID = #where.IN_SHIFT_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckGradeCode" prepend="AND">
+          <![CDATA[T1.CHECK_GRADE_CODE = #where.CheckGradeCode#]]>
+        </isNotNull>
+         <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[T2.MATERIAL_NAME LIKE '%' || #where.MaterialName# || '%']]>
+        </isNotNull>
+      </dynamic>
+        <isNotNull property="OrderString" prepend=" ">
+          ORDER BY $OrderString$
+        </isNotNull>
+        <isNull property="OrderString" prepend=" ">
+          ORDER BY T1.IN_DATE, T1.IN_SHIFT_ID, T1.IN_CLASS_ID, T2.MATERIAL_NAME
+        </isNull>     
+    </select>
+    <select id="Select+Update@ReportPsmInLoadAndStockStat" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM PSM_IN_LOAD_SUMMARY ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <select id="Select@ReportPsmInLoadAndStockStat@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+         SELECT T1.*
+        , T2.MATERIAL_NAME, T3.SHIFT_NAME IN_SHIFT_NAME, T4.CLASS_NAME IN_CLASS_NAME
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '合格品' WHEN 2 THEN '二级品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' ELSE '' END CHECK_GRADE_NAME 
+        FROM (
+          SELECT T1.IN_DATE, T1.IN_CLASS_ID, T1.IN_SHIFT_ID, T1.MATERIAL_ID, T1.CHECK_GRADE_CODE, SUM(T1.IN_AMOUNT) IN_AMOUNT
+          FROM (
+           SELECT T2.IN_DATE, T2.IN_CLASS_ID, T2.IN_SHIFT_ID, T1.IN_AMOUNT, T1.MATERIAL_ID, T1.CHECK_GRADE_CODE
+            FROM PSM_IN_STOCK_SUMMARY T1
+            JOIN PSM_IN_STOCK_BILL T2 ON T1.BILL_ID = T2.OBJID
+            JOIN PSB_STORE_PLACE T3 ON T3.OBJID=T1.STORE_PLACE_ID
+            WHERE T1.DELETE_FLAG = 0 AND T2.DELETE_FLAG = 0
+            AND T2.IN_DATE = #where.IN_DATE#
+            AND T2.IN_CLASS_ID = #where.IN_CLASS_ID#
+            AND T2.IN_SHIFT_ID = #where.IN_SHIFT_ID#
+            AND T1.MATERIAL_ID = #where.MATERIAL_ID#
+            AND T1.CHECK_GRADE_CODE = #where.CHECK_GRADE_CODE#
+            
+            UNION ALL
+            
+             SELECT T1.RETURN_DATE, T1.RETURN_CLASS_ID, T1.RETURN_SHIFT_ID, 0 - T2.RETURN_AMOUNT, T2.MATERIAL_ID, T2.CHECK_GRADE_CODE
+            FROM PSM_RETURN_STOCK_BILL T1
+            JOIN PSM_RETURN_STOCK_SUMMARY T2 ON T1.OBJID = T2.BILL_ID
+            WHERE T1.DELETE_FLAG = 0 AND T2.DELETE_FLAG = 0
+            AND T1.RETURN_DATE = #where.RETURN_DATE#
+            AND T1.RETURN_CLASS_ID = #where.RETURN_CLASS_ID#
+            AND T1.RETURN_SHIFT_ID = #where.RETURN_SHIFT_ID#
+            AND T2.MATERIAL_ID = #where.MATERIAL_ID#
+            AND T2.CHECK_GRADE_CODE = #where.CHECK_GRADE_CODE#
+          ) T1
+          GROUP BY T1.IN_DATE, T1.IN_CLASS_ID, T1.IN_SHIFT_ID, T1.MATERIAL_ID, T1.CHECK_GRADE_CODE
+        ) T1
+        LEFT JOIN SBM_MATERIAL T2 ON T1.MATERIAL_ID = T2.OBJID
+        LEFT JOIN SSB_SHIFT T3 ON T1.IN_SHIFT_ID = T3.OBJID
+        LEFT JOIN SSB_CLASS T4 ON T1.IN_CLASS_ID = T4.OBJID
+      ]]>
+    </select>
+
+
+    <select id="Select@ReportPsmInLoadAndStockStat@DetailGrid" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '合格品' WHEN 2 THEN '二级品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' ELSE '' END CHECK_GRADE_NAME 
+        , T2.MATERIAL_NAME, T3.SHIFT_NAME IN_SHIFT_NAME, T4.CLASS_NAME IN_CLASS_NAME
+        , T5.USER_NAME RECORD_USER_NAME
+        FROM (
+         SELECT '装车扫描' BILL_TYPE
+         ,T2.IN_DATE, T2.IN_CLASS_ID, T2.IN_SHIFT_ID, T1.IN_AMOUNT, T1.MATERIAL_ID, T1.CHECK_GRADE_CODE
+         , T1.RECORD_TIME, T1.RECORD_USER_ID
+            FROM PSM_IN_STOCK_SUMMARY T1
+            JOIN PSM_IN_STOCK_BILL T2 ON T1.BILL_ID = T2.OBJID
+            JOIN PSB_STORE_PLACE T3 ON T3.OBJID=T1.STORE_PLACE_ID
+            WHERE T1.DELETE_FLAG = 0 AND T2.DELETE_FLAG = 0                    
+            AND T2.IN_DATE = #where.IN_DATE#
+            AND T2.IN_CLASS_ID = #where.IN_CLASS_ID#
+            AND T2.IN_SHIFT_ID = #where.IN_SHIFT_ID#
+            AND T1.MATERIAL_ID = #where.MATERIAL_ID#
+            AND T1.CHECK_GRADE_CODE = #where.CHECK_GRADE_CODE#
+            
+            UNION ALL
+
+            SELECT '退库扫描' BILL_TYPE
+            , T1.RETURN_DATE, T1.RETURN_CLASS_ID, T1.RETURN_SHIFT_ID, 0 - T2.RETURN_AMOUNT, T2.MATERIAL_ID, T2.CHECK_GRADE_CODE
+            , T2.RECORD_TIME, T2.RECORD_USER_ID
+            FROM PSM_RETURN_STOCK_BILL T1
+            JOIN PSM_RETURN_STOCK_SUMMARY T2 ON T1.OBJID = T2.BILL_ID
+            WHERE T1.DELETE_FLAG = 0 AND T2.DELETE_FLAG = 0
+             AND T1.RETURN_DATE = #where.RETURN_DATE#
+            AND T1.RETURN_CLASS_ID = #where.IN_CLASS_ID#
+            AND T1.RETURN_SHIFT_ID = #where.IN_SHIFT_ID#
+            AND T2.MATERIAL_ID = #where.MATERIAL_ID#
+            AND T2.CHECK_GRADE_CODE = #where.CHECK_GRADE_CODE#
+          ) T1
+        LEFT JOIN SBM_MATERIAL T2 ON T1.MATERIAL_ID = T2.OBJID
+        LEFT JOIN SSB_SHIFT T3 ON T1.IN_SHIFT_ID = T3.OBJID
+        LEFT JOIN SSB_CLASS T4 ON T1.IN_CLASS_ID = T4.OBJID
+        LEFT JOIN SSB_USER T5 ON T1.RECORD_USER_ID = T5.OBJID
+      ]]>
+      <![CDATA[
+        ORDER BY T1.BILL_TYPE, T1.RECORD_TIME, T5.USER_NAME 
+      ]]>
+    </select>
+
+    <!--查询类型信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadAndStockStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInLoadAndStockStat@SearchType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT '1' sskey, '按接班日期' ssValue FROM dual
+      UNION
+      SELECT '2' sskey, '按创建时间' ssValue FROM dual
+     ]]>
+    </select>
+
+    <!--查询汇总状态信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadAndStockStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInLoadAndStockStat@SummaryState" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT 0 sskey, '未确认' ssValue FROM dual
+      UNION
+      SELECT 1 sskey, '已确认' ssValue FROM dual
+     ]]>
+    </select>
+
+    <!--查询班组信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadAndStockStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInLoadAndStockStat@IN_CLASS_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey, CLASS_NAME ssValue FROM SSB_CLASS WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+    <!--查询班次信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadAndStockStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInLoadAndStockStat@IN_SHIFT_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey, SHIFT_NAME ssValue FROM SSB_SHIFT WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询仓库类型信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadAndStockStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInLoadAndStockStat@StoreTypeId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey,STORE_TYPE_NAME ssValue FROM PSB_STORE_TYPE WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询品级信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadAndStockStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInLoadAndStockStat@CheckGradeCode" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+        SELECT 1 sskey, '合格品' ssValue FROM dual
+        union 
+        SELECT 2 sskey, '次品' ssValue FROM dual
+        union 
+        SELECT 3 sskey, '废品' ssValue FROM dual
+        union 
+        SELECT 4 sskey, '特废品' ssValue FROM dual
+        union 
+        SELECT 9 sskey, '试验胎' ssValue FROM dual
+        union 
+        SELECT 0 sskey, '无品级' ssValue FROM dual
+
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

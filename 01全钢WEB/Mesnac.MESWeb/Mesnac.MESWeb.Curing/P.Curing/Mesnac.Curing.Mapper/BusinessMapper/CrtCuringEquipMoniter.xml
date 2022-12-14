@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CrtCuringEquipMoniter"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_CURING_EQUIP_MONITER ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipState" prepend="AND">
+          <![CDATA[EQUIP_STATE = #where.EquipState#]]>
+        </isNotNull>
+        <isNotNull property="where.CurrentStep" prepend="AND">
+          <![CDATA[CURRENT_STEP = #where.CurrentStep#]]>
+        </isNotNull>
+        <isNotNull property="where.AllStep" prepend="AND">
+          <![CDATA[ALL_STEP = #where.AllStep#]]>
+        </isNotNull>
+        <isNotNull property="where.StopTime" prepend="AND">
+          <![CDATA[STOP_TIME = #where.StopTime#]]>
+        </isNotNull>
+        <isNotNull property="where.StepTime" prepend="AND">
+          <![CDATA[STEP_TIME = #where.StepTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringLeftTime" prepend="AND">
+          <![CDATA[CURING_LEFT_TIME = #where.CuringLeftTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime" prepend="AND">
+          <![CDATA[CURING_TIME = #where.CuringTime#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftBladderCount" prepend="AND">
+          <![CDATA[LEFT_BLADDER_COUNT = #where.LeftBladderCount#]]>
+        </isNotNull>
+        <isNotNull property="where.RightBladderCount" prepend="AND">
+          <![CDATA[RIGHT_BLADDER_COUNT = #where.RightBladderCount#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftMaterialId" prepend="AND">
+          <![CDATA[LEFT_MATERIAL_ID = #where.LeftMaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.RightMaterialId" prepend="AND">
+          <![CDATA[RIGHT_MATERIAL_ID = #where.RightMaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftTyreNo" prepend="AND">
+          <![CDATA[LEFT_TYRE_NO = #where.LeftTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.RightTyreNo" prepend="AND">
+          <![CDATA[RIGHT_TYRE_NO = #where.RightTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftGreenTyreNo" prepend="AND">
+          <![CDATA[LEFT_GREEN_TYRE_NO = #where.LeftGreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.RightGreenTyreNo" prepend="AND">
+          <![CDATA[RIGHT_GREEN_TYRE_NO = #where.RightGreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftMouldCode" prepend="AND">
+          <![CDATA[LEFT_MOULD_CODE = #where.LeftMouldCode#]]>
+        </isNotNull>
+        <isNotNull property="where.RightMouldCode" prepend="AND">
+          <![CDATA[RIGHT_MOULD_CODE = #where.RightMouldCode#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftMouldCount" prepend="AND">
+          <![CDATA[LEFT_MOULD_COUNT = #where.LeftMouldCount#]]>
+        </isNotNull>
+        <isNotNull property="where.RightMouldCount" prepend="AND">
+          <![CDATA[RIGHT_MOULD_COUNT = #where.RightMouldCount#]]>
+        </isNotNull>
+        <isNotNull property="where.ValveState" prepend="AND">
+          <![CDATA[VALVE_STATE = #where.ValveState#]]>
+        </isNotNull>
+        <isNotNull property="where.AlarmState" prepend="AND">
+          <![CDATA[ALARM_STATE = #where.AlarmState#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+    <select id="Select@CrtCuringEquipMoniter" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        select t1.*, t2.objid id, t2.minor_type_id, t2.equip_name, case t1.equip_state when 0 then '停机' else '硫化中' end equip_state_caption, t3.image_directory, t3.image_file_name
+        , t4.material_name left_material_name, t5.material_name right_material_name
+        , t6.minor_type_name 
+        from sbe_equip t2
+        left join crt_curing_equip_moniter t1 on t1.equip_id = t2.objid
+        left join cbe_equip_state t3 on t1.equip_state = t3.objid
+        left join sbm_material t4 on t1.left_material_id = t4.objid
+        left join sbm_material t5 on t1.right_material_id = t5.objid
+        left join sbe_equip_minor_type t6 on t2.minor_type_id = t6.objid
+        join cbh_config_helper t7 on t2.major_type_id = t7.config_value and t7.config_name = 'CuringEquipMajorTypeId'
+      ]]>
+      <dynamic prepend="where">
+        <isNotNull property="where.DeleteFlag" prepend="and">
+          <![CDATA[t2.delete_flag = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipState" prepend="and">
+          <![CDATA[t1.equip_state = #where.EquipState#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="and">
+          <![CDATA[t2.objid = #where.EquipId#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+        order by substr(t2.equip_name, 1, 1), cast(substr(t2.equip_name, 2) as integer)
+      ]]>
+    </select>
+
+    <select id="SelectEquipGroup@CrtCuringEquipMoniter" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        select substr(equip_name, 1, 1) group_name
+        from sbe_equip t1
+        join cbh_config_helper t2 on t1.major_type_id = t2.config_value and t2.config_name = 'CuringEquipMajorTypeId'
+        where t1.delete_flag = 0
+        group by substr(equip_name, 1, 1)
+        order by substr(equip_name, 1, 1)
+      ]]>
+    </select>
+
+  </statements>
+</sqlMap>

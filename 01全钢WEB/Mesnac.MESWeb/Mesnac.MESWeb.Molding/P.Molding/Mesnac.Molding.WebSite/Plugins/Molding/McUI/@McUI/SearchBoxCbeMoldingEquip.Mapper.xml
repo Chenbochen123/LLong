@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@SearchBoxCbeMoldingEquip" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+       select t1.*, t2.MAJOR_TYPE_NAME, t3.MINOR_TYPE_NAME 
+       from SBE_EQUIP t1 
+       left join SBE_EQUIP_MAJOR_TYPE t2 on t1.MAJOR_TYPE_ID = t2.OBJID
+       left join SBE_EQUIP_MINOR_TYPE t3 on t1.MINOR_TYPE_ID = t3.OBJID
+       where t1.DELETE_FLAG = 0 
+      ]]>
+      <dynamic>
+        <isNotNull property="where.MAJOR_TYPE_ID" prepend="AND">
+          <![CDATA[t1.MAJOR_TYPE_ID = #where.MAJOR_TYPE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.MINOR_TYPE_ID" prepend="AND">
+          <![CDATA[t1.MINOR_TYPE_ID = #where.MINOR_TYPE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_NAME" prepend="AND">
+          <![CDATA[t1.EQUIP_NAME like '%' || #where.EQUIP_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_CODE" prepend="AND">
+          <![CDATA[t1.EQUIP_CODE like '%' || #where.EQUIP_CODE# || '%']]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend="">
+        order by $OrderString$
+      </isNotNull>
+    </select>
+
+    <!--查询设备大类信息，ID值固定为GetComboBoxData@Select@SearchBoxCbeMoldingEquip@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@SearchBoxCbeMoldingEquip@MAJOR_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey,t1.MAJOR_TYPE_NAME ssValue from SBE_EQUIP_MAJOR_TYPE t1  where t1.DELETE_FLAG = '0' and t1.objid=41
+     ]]>
+      <![CDATA[ 
+      order by t1.OBJID
+     ]]>
+    </select>
+
+    <!--查询设备细类信息，ID值固定为GetComboBoxData@Select@SearchBoxCbeMoldingEquip@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@SearchBoxCbeMoldingEquip@MINOR_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey,t1.MINOR_TYPE_NAME ssValue from SBE_EQUIP_MINOR_TYPE t1  where t1.DELETE_FLAG = '0' and t1.major_type_id=41
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+  </statements>
+</sqlMap>

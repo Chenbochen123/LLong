@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HsmTooling"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HSM_TOOLING ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.ToolingBarcode" prepend="AND">
+          <![CDATA[TOOLING_BARCODE = #where.ToolingBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.ToolingRfidBarcode" prepend="AND">
+          <![CDATA[TOOLING_RFID_BARCODE = #where.ToolingRfidBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.ToolingType" prepend="AND">
+          <![CDATA[TOOLING_TYPE = #where.ToolingType#]]>
+        </isNotNull>
+        <isNotNull property="where.IsUsed" prepend="AND">
+          <![CDATA[IS_USED = #where.IsUsed#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetSemisToolingInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T.OBJID TOOLING_ID,T.TOOLING_RFID_BARCODE,T.TOOLING_BARCODE,T1.TOOLING_TYPE_NAME FROM HSM_TOOLING T
+        LEFT JOIN HSM_TOOLING_TYPE T1 ON T1.OBJID = T.TOOLING_TYPE
+        WHERE T.DELETE_FLAG=0 
+       ]]>
+     </select>
+
+     <select id="GetDefectInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+     SELECT T.OBJID,T.DEFECT_POS,T.DEFECT_NAME,T.REMARK FROM HQC_DEFECT  T
+        LEFT JOIN SBM_MATERIAL_MINOR_TYPE T1 ON T.DEFECT_POS=T1.OBJID where T.DELETE_FLAG=0
+      ]]>
+     </select>
+     
+     <select id="SelectCrudHsmTooling" parameterClass="map" resultClass="Row">
+       <![CDATA[
+           SELECT T.OBJID,T.CARD_NO,T1.TOOLING_RFID_BARCODE ,T2.TOOLING_TYPE_NAME,T2.TOOLING_TYPE,T1.IS_USED RECORD_USER_NAME,
+                T3.USER_NAME,T1.RECORD_TIME,T1.REMARK,T1.DELETE_FLAG  FROM 
+                HSM_TOOLING_LOAD T 
+                LEFT JOIN   HSM_TOOLING T1 ON T1.OBJID = T.TOOLING_ID
+                LEFT JOIN   HSM_TOOLING_TYPE T2 ON T2.TOOLING_TYPE=T1.TOOLING_TYPE
+                LEFT JOIN SSB_USER T3 ON T3.OBJID = T1.RECORD_USER_ID
+      ]]>
+       <dynamic  prepend="WHERE">
+         <isNotNull property="where.CardNo" prepend="AND">
+           <![CDATA[T.CARD_NO = #where.CardNo#]]>
+         </isNotNull>
+         <isNotNull property="where.ToolingRfidBarcode" prepend="AND">
+           <![CDATA[T1.TOOLING_RFID_BARCODE = #where.ToolingRfidBarcode#]]>
+         </isNotNull>
+         <isNotNull property="where.ToolingType" prepend="AND">
+           <![CDATA[T2.OBJID = #where.ToolingType#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T1.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetHsmToolingUpdateInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[   
+                  SELECT T.CARD_NO,T.TOOLING_RFID_BARCODE,T.TOOLING_TYPE,T1.TOOLING_TYPE_NAME,T2.USER_NAME,T.RECORD_TIME,T.DUMMY3,T.DUMMY4
+                  FROM HSM_TOOLING_UPDATE T
+                  LEFT JOIN HSM_TOOLING_TYPE T1 ON T1.TOOLING_TYPE =T.TOOLING_TYPE
+                  LEFT JOIN SSB_USER T2 ON T2.OBJID = T.RECORD_USER_ID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.CARD_NO" prepend="AND">
+           <![CDATA[T.CARD_NO = #where.CARD_NO#]]>
+         </isNotNull>
+         <isNotNull property="where.TOOLING_RFID_BARCODE" prepend="AND">
+           <![CDATA[T.TOOLING_RFID_BARCODE = #where.TOOLING_RFID_BARCODE#]]>
+         </isNotNull>
+        <isNotNull property="where.BeginDate" prepend="AND">
+          <![CDATA[T.RECORD_TIME >= #where.BeginDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EndDate" prepend="AND">
+          <![CDATA[T.RECORD_TIME <= #where.EndDate#]]>
+        </isNotNull>
+       </dynamic>
+     </select>
+     
+     <select id="GetSbeHbeEquipControl" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select * from Sbe_hbe_Equip_control where equipid=#equipid#
+      ]]>
+     </select>
+     
+  </statements>
+</sqlMap>

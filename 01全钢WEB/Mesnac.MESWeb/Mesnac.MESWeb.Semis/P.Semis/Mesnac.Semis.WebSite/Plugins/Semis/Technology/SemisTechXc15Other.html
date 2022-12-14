@@ -1,0 +1,325 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="./asset/css/echartsHome.css" rel="stylesheet">
+    <script src="./asset/js/echarts.js"></script>
+    <script>
+        var xdata0 = [];
+        if (parent && parent.xdata0 && parent.xdata0.length > 0) {
+            for (var i = 0; i < parent.xdata0.length; i++) {
+                xdata0.push(parent.xdata0[i]);
+            }
+        }
+        //var ydata1 = [];
+        //if (parent && parent.ydata1 && parent.ydata1.length > 0) {
+        //    for (var i = 0; i < parent.ydata1.length; i++) {
+        //        ydata1.push(parent.ydata1[i]);
+        //    }
+        //}
+
+        //var ydata2 = [];
+        //if (parent && parent.ydata2 && parent.ydata2.length > 0) {
+        //    for (var i = 0; i < parent.ydata2.length; i++) {
+        //        ydata2.push(parent.ydata2[i]);
+        //    }
+        //}
+        var ydata3 = [];
+        if (parent && parent.ydata3 && parent.ydata3.length > 0) {
+            for (var i = 0; i < parent.ydata3.length; i++) {
+                ydata3.push(parent.ydata3[i]);
+            }
+        }
+        var ydata4 = [];
+        if (parent && parent.ydata4 && parent.ydata4.length > 0) {
+            for (var i = 0; i < parent.ydata4.length; i++) {
+                ydata4.push(parent.ydata4[i]);
+            }
+        }
+        var ydata5 = [];
+        if (parent && parent.ydata5 && parent.ydata5.length > 0) {
+            for (var i = 0; i < parent.ydata5.length; i++) {
+                ydata5.push(parent.ydata5[i]);
+            }
+        }
+        var ydata6 = [];
+        if (parent && parent.ydata6 && parent.ydata6.length > 0) {
+            for (var i = 0; i < parent.ydata6.length; i++) {
+                ydata6.push(parent.ydata6[i]);
+            }
+        }
+        var ydata7 = [];
+        if (parent && parent.ydata7 && parent.ydata7.length > 0) {
+            for (var i = 0; i < parent.ydata7.length; i++) {
+                ydata7.push(parent.ydata7[i]);
+            }
+        }
+        var ydata8 = [];
+        if (parent && parent.ydata8 && parent.ydata8.length > 0) {
+            for (var i = 0; i < parent.ydata8.length; i++) {
+                ydata8.push(parent.ydata8[i]);
+            }
+        }
+        var ydata9 = [];
+        if (parent && parent.ydata9 && parent.ydata9.length > 0) {
+            for (var i = 0; i < parent.ydata9.length; i++) {
+                ydata9.push(parent.ydata9[i]);
+            }
+        }
+        var ydata10 = [];
+        if (parent && parent.ydata10 && parent.ydata10.length > 0) {
+            for (var i = 0; i < parent.ydata10.length; i++) {
+                ydata10.push(parent.ydata10[i]);
+            }
+        }
+        var ydata11 = [];
+        if (parent && parent.ydata11 && parent.ydata11.length > 0) {
+            for (var i = 0; i < parent.ydata11.length; i++) {
+                ydata11.push(parent.ydata11[i]);
+            }
+        }
+        var ydata12 = [];
+        if (parent && parent.ydata12 && parent.ydata12.length > 0) {
+            for (var i = 0; i < parent.ydata12.length; i++) {
+                ydata12.push(parent.ydata12[i]);
+            }
+        }
+        var ydata13 = [];
+        if (parent && parent.ydata13 && parent.ydata13.length > 0) {
+            for (var i = 0; i < parent.ydata13.length; i++) {
+                ydata13.push(parent.ydata13[i]);
+            }
+        }
+        var ydata14 = [];
+        if (parent && parent.ydata14 && parent.ydata14.length > 0) {
+            for (var i = 0; i < parent.ydata14.length; i++) {
+                ydata14.push(parent.ydata14[i]);
+            }
+        }
+        var ydata15 = [];
+        if (parent && parent.ydata15 && parent.ydata15.length > 0) {
+            for (var i = 0; i < parent.ydata15.length; i++) {
+                ydata15.push(parent.ydata15[i]);
+            }
+        }
+        var ydata16 = [];
+        if (parent && parent.ydata16 && parent.ydata16.length > 0) {
+            for (var i = 0; i < parent.ydata16.length; i++) {
+                ydata16.push(parent.ydata16[i]);
+            }
+        }
+        var ydata17 = [];
+        if (parent && parent.ydata17 && parent.ydata17.length > 0) {
+            for (var i = 0; i < parent.ydata17.length; i++) {
+                ydata17.push(parent.ydata17[i]);
+            }
+        }
+        var ydata18 = [];
+        if (parent && parent.ydata18 && parent.ydata18.length > 0) {
+            for (var i = 0; i < parent.ydata18.length; i++) {
+                ydata18.push(parent.ydata18[i]);
+            }
+        }
+        var ydata19 = [];
+        if (parent && parent.ydata19 && parent.ydata19.length > 0) {
+            for (var i = 0; i < parent.ydata19.length; i++) {
+                ydata19.push(parent.ydata19[i]);
+            }
+        }
+        var ydata20 = [];
+        if (parent && parent.ydata20 && parent.ydata20.length > 0) {
+            for (var i = 0; i < parent.ydata20.length; i++) {
+                ydata20.push(parent.ydata20[i]);
+            }
+        }
+
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    animation: false
+                },
+                formatter: function (datas) {
+                    var res = datas[0].name + '<br/>', val;
+                    for (var i = 0, length = datas.length; i < length; i++) {
+                        val = (datas[i].value);
+                        res += datas[i].seriesName + '：' + val + '<br/>';
+                    }
+                    return res;
+                }
+
+            },
+            legend: {
+                data: ['分裁前总宽标准值', '分裁后操作侧宽度测量值', '分裁后驱动侧宽度测量值', '宽度预警公差', '宽度报警公差', '操作侧测量值', '驱动侧测量值', '开缝预警公差',
+                    '开缝报警公差', '角度标准值', '角度预警公差', '角度报警公差', '拼接量标准值', '拼接量预警公差', '漏缝', '角度测量值', 'TOGGLE']
+            },
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                feature: {
+                    mark: { show: false },
+                    dataZoom: { show: true },
+                    dataView: { show: false },
+                    magicType: { show: false, type: ['line', 'bar', 'stack', 'tiled'] },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            calculable: true,
+            dataZoom: {
+                show: true,
+                realtime: true,
+                start: 0,
+                end: 100
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: xdata0
+                }
+            ],
+            yAxis: [
+                {
+                    name: '数值',
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '规格',
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: 0,
+                    data: ydata20
+                },
+                {
+                    name: '分裁前总宽标准值',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata3
+                },
+                {
+                    name: '分裁后操作侧宽度测量值',
+                    type: 'line',   
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata4
+                },
+                {
+                    name: '分裁后驱动侧宽度测量值',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata5
+                },
+                {
+                    name: '宽度预警公差',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata6
+                },
+                {
+                    name: '宽度报警公差',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata7
+                },
+                {
+                    name: '操作侧测量值',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata8
+                },
+                {
+                    name: '驱动侧测量值',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata9
+                },
+                {
+                    name: '开缝预警公差',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata10
+                },
+                {
+                    name: '开缝报警公差',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata11
+                },
+                {
+                    name: '角度标准值',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata12
+                },
+                {
+                    name: '角度预警公差',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata13
+                },
+                {
+                    name: '角度报警公差',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata14
+                },
+                {
+                    name: '拼接量标准值',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata15
+                },
+                {
+                    name: '拼接量预警公差',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata16
+                },
+                {
+                    name: '漏缝',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata17
+                },
+                {
+                    name: '角度测量值',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata18
+                },
+                {
+                    name: 'TOGGLE',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    symbol: 'none',
+                    data: ydata19
+                }
+            ]
+        };
+    </script>
+</head>
+<body>
+    <div id="main" class="main"></div>
+    <script src="./asset/js/jquery.min.js"></script>
+    <script src="./asset/js/echartsExample.js"></script>
+</body>
+</html>

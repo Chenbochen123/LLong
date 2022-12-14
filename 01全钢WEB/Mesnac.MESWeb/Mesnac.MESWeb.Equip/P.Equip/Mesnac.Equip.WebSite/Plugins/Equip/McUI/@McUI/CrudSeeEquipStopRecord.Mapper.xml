@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudSeeEquipStopRecord" parameterClass="map" resultClass="row">
+      <![CDATA[
+        select t1.*,t2.equip_code,t3.equip_stop_type_name,t4.equip_stop_reason_name,round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60) as RoundSecend from SEE_EQUIP_STOP_RECORD t1 left join sbe_equip t2 on t1.equip_id=t2.objid
+        left join sbe_equip_stop_type t3 on t1.stop_type_id=t3.objid
+        left join sbe_equip_stop_reason t4 on t1.stop_reason_id=t4.objid
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EQUIP_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[t1.STOP_BEGIN_TIME >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[t1.STOP_BEGIN_TIME < #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+        <isNotNull property="where.STOPTYPID" prepend="AND">
+          <![CDATA[T1.STOP_TYPE_ID = #where.STOPTYPID#]]>
+        </isNotNull>
+        <isNotNull property="where.STOPREASONID" prepend="AND">
+          <![CDATA[T1.STOP_REASON_ID = #where.STOPREASONID#]]>
+        </isNotNull>
+        <isNotNull property="where.Times" prepend="AND">
+          <![CDATA[round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60) >= #where.Times#]]>
+        </isNotNull>
+      </dynamic>
+      <isNull property="OrderString" prepend=" ">
+        order by equip_code,STOP_BEGIN_TIME
+      </isNull>
+    </select>
+    <!--查询物料信息，ID值固定为GetComboBoxData@Select@CrudCimMouldChangeinfo@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSeeEquipStopRecord@STOPREASONID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select null sskey,N'全部' ssValue from dual
+      union all
+      select * from (SELECT OBJID sskey,equip_stop_reason_name ssValue FROM sbe_equip_stop_reason WHERE DELETE_FLAG = '0' ORDER BY equip_stop_reason_name) a
+     ]]>
+    </select>
+
+    <!--查询物料信息，ID值固定为GetComboBoxData@Select@CrudCimMouldChangeinfo@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSeeEquipStopRecord@STOPTYPID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select null sskey,N'全部' ssValue from dual
+      union all
+      select * from (SELECT OBJID sskey,equip_stop_type_name ssValue FROM sbe_equip_stop_type WHERE DELETE_FLAG = '0' ORDER BY equip_stop_type_name) a
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

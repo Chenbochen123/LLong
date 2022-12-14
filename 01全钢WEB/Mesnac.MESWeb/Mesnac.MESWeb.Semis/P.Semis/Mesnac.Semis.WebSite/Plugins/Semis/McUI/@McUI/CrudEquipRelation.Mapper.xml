@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  
+  <statements>
+    <select id="Select@CrudEquipRelation" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT T.*,T4.USER_NAME RECORD_NAME
+      FROM EQUIP_RELATION T
+      LEFT JOIN SSB_USER T4 ON T4.OBJID = T.RECORD_USER_ID
+       ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.MES_EQUIPID" prepend="AND">
+          <![CDATA[T.MES_EQUIPID = #where.MES_EQUIPID# ]]>
+        </isNotNull>
+        <isNotNull property="where.MES_EQUIPNAME" prepend="AND">
+          <![CDATA[T.MES_EQUIPNAME = #where.MES_EQUIPNAME# ]]>
+        </isNotNull>
+        <isNotNull property="where.PLM_EQUIPCODE" prepend="AND">
+          <![CDATA[T.PLM_EQUIPCODE = #where.PLM_EQUIPCODE#]]>
+        </isNotNull>
+        <isNotNull property="where.PLN_EQUIPNAME" prepend="AND">
+          <![CDATA[T.PLN_EQUIPNAME = #where.PLN_EQUIPNAME#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T.OBJID
+      </isNull>
+    </select>
+    <select id="Select+Update@CrudEquipRelation" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM EQUIP_RELATION ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+
+    <select id="GetComboBoxData@Select@CrudEquipRelation@MES_EQUIPID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT T.OBJID sskey,T.EQUIP_NAME ssValue FROM SBE_EQUIP T WHERE  T.MAJOR_TYPE_ID > 20 AND T.MAJOR_TYPE_ID <40 ORDER BY T.EQUIP_NAME
+     ]]>
+    </select>
+
+
+    <select id="GetComboBoxData@Select@CrudEquipRelation@MES_EQUIPNAME" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+        SELECT T.EQUIP_NAME sskey,T.EQUIP_NAME ssValue FROM SBE_EQUIP T WHERE  T.MAJOR_TYPE_ID > 20 AND T.MAJOR_TYPE_ID <40 ORDER BY T.EQUIP_NAME
+     ]]>
+    </select>
+
+    <select id="GetComboBoxData@Select@CrudEquipRelation@PLM_EQUIPCODE" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT DISTINCT T.EQUIPMENTCODE sskey,T.EQUIPMENTNAME ssValue FROM PLM_DEVICE_MAIN T WHERE T.EQUIPMENTCODE IS NOT NULL ORDER BY T.EQUIPMENTNAME
+     ]]>
+    </select>
+  
+    <select id="GetComboBoxData@Select@CrudEquipRelation@PLN_EQUIPNAME" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+        SELECT DISTINCT T.EQUIPMENTNAME sskey,T.EQUIPMENTNAME ssValue FROM PLM_DEVICE_MAIN T WHERE T.EQUIPMENTCODE IS NOT NULL ORDER BY T.EQUIPMENTNAME
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<ActionService>
+  <Design>
+    <Path path="报警管理/报警标准">
+      <Action action="ACGYUABB8B1B4AFB9141247A61LBYO72">
+        <Caption>报警标准_窗体初始化</Caption>
+        <Remark>窗体初始化</Remark>
+      </Action>
+      <Action action="526F73ED91A94F98B76C85321CC8996A">
+        <Caption>报警标准_编辑保存</Caption>
+        <Remark>编辑保存</Remark>
+      </Action>
+      <Action action="F5C4AACD20FF4199B6AD215575EDBD08">
+          <Caption>报警标准_滚轮条左移</Caption>
+          <Remark>滚轮条左移</Remark>
+      </Action>
+      <Action action="AAFC2B80DF9D4589B61EF49098803471">
+          <Caption>报警标准_滚轮条右移</Caption>
+          <Remark>滚轮条右移</Remark>
+      </Action>
+      <Action action="D9F842CD88C948D48E77FCEFD197720A">
+          <Caption>报警标准_滚动条开始</Caption>
+          <Remark>滚动条开始</Remark>
+      </Action>
+      <Action action="ABEBA01572B24B3B8176D5F90715EAF4">
+          <Caption>报警标准_滚动条结束</Caption>
+          <Remark>滚动条结束</Remark>
+      </Action>
+      <Action action="ABEBA01572B24B3B8176D5F907156666">
+        <Caption>报警标准_报警下载</Caption>
+        <Remark>报警下载</Remark>
+      </Action>
+    </Path>
+  </Design>
+
+  <DesignToRuntime>
+    <Design action="ACGYUABB8B1B4AFB9141247A61LBYO72">
+      <Runtime action="BSD520D72BB44E52913E44F2F6JSLN56"/>
+    </Design>
+    <Design action="526F73ED91A94F98B76C85321CC8996A">
+      <Runtime action="1CBA2A506CE24B678CE7B7C70D26C65C"/>
+    </Design>
+      <Design action="F5C4AACD20FF4199B6AD215575EDBD08">
+          <Runtime action="2037CED5BCD141EBBC6A52045AB8BF75" parameters="panel2"/>
+      </Design>
+      <Design action="AAFC2B80DF9D4589B61EF49098803471">
+          <Runtime action="1FB97752E9E045ECA82EF7482A3F5E82" parameters="panel2"/>
+      </Design>
+      <Design action="D9F842CD88C948D48E77FCEFD197720A">
+          <Runtime action="506BC9F143264B57A17EC3320A3D3D3A" parameters="panel2"/>
+      </Design>
+      <Design action="ABEBA01572B24B3B8176D5F90715EAF4">
+          <Runtime action="C6F38AE52F974A9DBA9C07BB8B51C31B" parameters="panel2"/>
+      </Design>
+      <Design action="ABEBA01572B24B3B8176D5F907156666">
+        <Runtime action="C6F38AE52F974A9DBA9C07BB8B566666"/>
+        <Runtime action="BSD520D72BB44E52913E44F2F6JSLN56"/>
+      </Design>
+  </DesignToRuntime>
+
+  <Runtime>
+    <Import assembly = "Data/Action/SulfGroup/Mesnac.Action.SulfGroup.dll">
+      <Action action="BSD520D72BB44E52913E44F2F6JSLN56" class="Mesnac.Action.SulfGroup.Alarm.CuringAlarmTechInit"/>
+      <Action action="1CBA2A506CE24B678CE7B7C70D26C65C" class="Mesnac.Action.SulfGroup.Alarm.CuringAlarmTechEdit"/>
+      <Action action="2037CED5BCD141EBBC6A52045AB8BF75" class="Mesnac.Action.SulfGroup.Alarm.ScrollLeft"/>
+      <Action action="1FB97752E9E045ECA82EF7482A3F5E82" class="Mesnac.Action.SulfGroup.Alarm.ScrollRight"/>
+      <Action action="506BC9F143264B57A17EC3320A3D3D3A" class="Mesnac.Action.SulfGroup.Alarm.ScrollBegin"/>
+      <Action action="C6F38AE52F974A9DBA9C07BB8B51C31B" class="Mesnac.Action.SulfGroup.Alarm.ScrollEnd"/>
+      <Action action="C6F38AE52F974A9DBA9C07BB8B566666" class="Mesnac.Action.SulfGroup.SysBasicInfo.BaseAlarmInfo"/>
+    </Import>
+  </Runtime>
+</ActionService>

@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CppCuringPlanDetail"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CPP_CURING_PLAN_DETAIL ]]>
+    </sql>
+     <!--查询条件-->
+     <sql id="includeWhere">
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.BomId" prepend="AND">
+           <![CDATA[BOM_ID = #where.BomId#]]>
+         </isNotNull>
+         <isNotNull property="where.TechId" prepend="AND">
+           <![CDATA[TECH_ID = #where.TechId#]]>
+         </isNotNull>
+         <isNotNull property="where.MonthPlanId" prepend="AND">
+           <![CDATA[MONTH_PLAN_ID = #where.MonthPlanId#]]>
+         </isNotNull>
+         <isNotNull property="where.ObjId" prepend="AND">
+           <![CDATA[OBJID = #where.ObjId#]]>
+         </isNotNull>
+         <isNotNull property="where.RecordUserId" prepend="AND">
+           <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+         </isNotNull>
+         <isNotNull property="where.RecordTime" prepend="AND">
+           <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+         </isNotNull>
+         <isNotNull property="where.BackupFlag" prepend="AND">
+           <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.BackupTime" prepend="AND">
+           <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.PlanId" prepend="AND">
+           <![CDATA[PLAN_ID = #where.PlanId#]]>
+         </isNotNull>
+         <isNotNull property="where.Priority" prepend="AND">
+           <![CDATA[PRIORITY = #where.Priority#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipPosition" prepend="AND">
+           <![CDATA[EQUIP_POSITION = #where.EquipPosition#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialId" prepend="AND">
+           <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+         </isNotNull>
+         <isNotNull property="where.PlanState" prepend="AND">
+           <![CDATA[PLAN_STATE = #where.PlanState#]]>
+         </isNotNull>
+         <isNotNull property="where.PlanAmount" prepend="AND">
+           <![CDATA[PLAN_AMOUNT = #where.PlanAmount#]]>
+         </isNotNull>
+         <isNotNull property="where.RealAmount" prepend="AND">
+           <![CDATA[REAL_AMOUNT = #where.RealAmount#]]>
+         </isNotNull>
+         <isNotNull property="where.PlanType" prepend="AND">
+           <![CDATA[PLAN_TYPE = #where.PlanType#]]>
+         </isNotNull>
+         <isNotNull property="where.SeqIndex" prepend="AND">
+           <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+         </isNotNull>
+         <isNotNull property="where.Remark" prepend="AND">
+           <![CDATA[REMARK = #where.Remark#]]>
+         </isNotNull>
+       </dynamic>
+     </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     
+     <!--查询实例说明-->
+     <select id="GetProductionPlanDetail" parameterClass="map" resultClass="Row">
+       SELECT DISTINCT T1.OBJID, T3.MATERIAL_FULL_NAME
+       FROM CPP_CURING_PLAN_DETAIL T1
+       INNER JOIN CPP_CURING_PLAN T2 ON T1.PLAN_ID=T2.OBJID
+       INNER JOIN SBM_MATERIAL T3 ON T1.MATERIAL_ID=T3.OBJID
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.ShiftDate" prepend="AND">
+           <![CDATA[T2.PLAN_DATE = #where.ShiftDate#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftId" prepend="AND">
+           <![CDATA[T2.SHIFT_ID = #where.ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[T2.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipPosition" prepend="AND">
+           <![CDATA[T1.EQUIP_POSITION = #where.EquipPosition#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetCuringTechChangeInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        SELECT NVL(B.DELETE_FLAG,1) CHANGE_FLAG,B.MATERIAL_ID TECH_MATERIAL_ID,B.PARM_TYPE ,b.pdm_version, A.* 
+        FROM CPP_CURING_PLAN_DETAIL A
+        LEFT JOIN CPT_CURING_TECH B ON A.TECH_ID=B.OBJID
+        WHERE A.OBJID = #planDetailID#
+        ORDER BY A.OBJID DESC
+       ]]>
+     </select>
+
+     <select id="GetNewCuringTechID" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        select * from (
+        SELECT  * FROM CPT_CURING_TECH T WHERE T.MATERIAL_ID = #techMaterialID#
+        AND T.PARM_TYPE = #parmType#
+        AND T.DELETE_FLAG = 0 
+        order by objid desc )  where rownum = 1
+       ]]>
+     </select>
+
+     <select id="GetCuringPlanInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select * from Cpp_Curing_Plan 
+        WHERE EQUIP_ID = #EquipID#
+        AND PLAN_DATE >= to_date(#PlanDate#,'yyyy/mm/dd')
+       ]]>
+     </select>
+   </statements>
+</sqlMap>

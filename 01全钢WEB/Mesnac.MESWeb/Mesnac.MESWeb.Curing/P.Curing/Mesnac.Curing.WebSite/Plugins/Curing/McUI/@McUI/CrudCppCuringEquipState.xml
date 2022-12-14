@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="equip_id" Value="机台名称"></Caption>
+    <Caption Name="equip_code" Value="机台名称"></Caption>
+    <Caption Name="equip_position" Value="左右模"></Caption>
+    <Caption Name="material_id" Value="BOM规格ID"></Caption>
+    <Caption Name="material_name" Value="BOM规格"></Caption>
+    <Caption Name="TECH_NAME" Value="工艺名称"></Caption>
+  </Captions>
+  <WebPage Title="当前规格查询">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Curing/McUI/@McUI/CrudCppCuringEquipState.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="CPP_CURING_EQUIP_STATE">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_CPP_CURING_EQUIP_STATE"></SeqField>
+    </SeqFields>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="equip_id" Type="SearchBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid>
+      <GridColumns>
+        <GridColumn ColumnName="EQUIP_CODE"></GridColumn>
+        <GridColumn ColumnName="EQUIP_POSITION"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME"></GridColumn>
+        <GridColumn ColumnName="TECH_NAME"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

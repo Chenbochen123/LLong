@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportPsmDailyStockStat" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT MATERIAL_NAME, SUM_MATER.MATERIAL_ID, SUM_MATER.STORE_ID, IN_AMOUNT, OUT_AMOUNT
+        , STORE_NAME
+        FROM (
+            SELECT DISTINCT MATERIAL_ID, STORE_ID
+            FROM (
+                SELECT B.MATERIAL_ID, B.LOAD_AMOUNT, B.STORE_ID
+                FROM PSM_IN_LOAD_BILL A
+                JOIN PSM_IN_LOAD_SUMMARY B ON A.OBJID = B.BILL_ID
+                WHERE A.DELETE_FLAG = 0
+                AND B.DELETE_FLAG = 0
+                AND B.LOAD_AMOUNT > 0
+                AND A.LOAD_DATE = #where.StatDate#
+
+                UNION ALL
+
+                SELECT D.MATERIAL_ID, D.IN_AMOUNT, D.STORE_ID
+                FROM PSM_IN_STOCK_BILL C
+                JOIN PSM_IN_STOCK_SUMMARY D ON C.OBJID = D.BILL_ID
+                WHERE C.DELETE_FLAG = 0
+                AND D.DELETE_FLAG = 0
+                AND D.IN_AMOUNT > 0
+                AND C.BILL_TYPE = 2
+                AND C.IN_DATE = #where.StatDate#
+
+                UNION ALL
+
+                SELECT F.MATERIAL_ID, F.RETURN_AMOUNT, F.STORE_ID
+                FROM PSM_RETURN_STOCK_BILL E
+                JOIN PSM_RETURN_STOCK_SUMMARY F ON E.OBJID = F.BILL_ID
+                WHERE E.DELETE_FLAG = 0
+                AND F.DELETE_FLAG = 0
+                AND F.RETURN_AMOUNT > 0
+                AND E.RETURN_DATE = #where.StatDate#
+
+                UNION ALL
+
+                SELECT H.MATERIAL_ID, H.OUT_AMOUNT, H.STORE_ID
+                FROM PSM_OUT_STOCK_BILL G
+                JOIN PSM_OUT_STOCK_SUMMARY H ON G.OBJID = H.BILL_ID
+                WHERE G.DELETE_FLAG = 0
+                AND H.DELETE_FLAG = 0
+                AND H.OUT_AMOUNT > 0
+                AND TO_DATE(TO_CHAR(H.AFFIRM_TIME, 'YYYY-MM-DD'), 'YYYY-MM-DD') = #where.StatDate#
+
+                UNION ALL
+
+                SELECT J.MATERIAL_ID, J.TRANSFER_AMOUNT, J.STORE_ID
+                FROM PSM_TRANSFER_BILL I
+                JOIN PSM_TRANSFER_SUMMARY J ON I.OBJID = J.BILL_ID
+                WHERE I.DELETE_FLAG = 0
+                AND J.DELETE_FLAG = 0
+                AND J.TRANSFER_AMOUNT > 0
+                AND TO_DATE(TO_CHAR(J.AFFIRM_TIME, 'YYYY-MM-DD'), 'YYYY-MM-DD') = #where.StatDate#
+            ) T0
+        ) SUM_MATER
+        LEFT JOIN 
+        (
+            SELECT MATERIAL_ID, STORE_ID, SUM(IN_AMOUNT) IN_AMOUNT
+            FROM (
+                SELECT B.MATERIAL_ID, B.STORE_ID, B.LOAD_AMOUNT IN_AMOUNT
+                FROM PSM_IN_LOAD_BILL A
+                JOIN PSM_IN_LOAD_SUMMARY B ON A.OBJID = B.BILL_ID
+                WHERE A.DELETE_FLAG = 0
+                AND B.DELETE_FLAG = 0
+                AND B.LOAD_AMOUNT > 0
+                AND A.LOAD_DATE = #where.StatDate#
+        
+                UNION ALL
+        
+                SELECT D.MATERIAL_ID, D.STORE_ID, D.IN_AMOUNT IN_AMOUNT
+                FROM PSM_IN_STOCK_BILL C
+                JOIN PSM_IN_STOCK_SUMMARY D ON C.OBJID = D.BILL_ID
+                WHERE C.DELETE_FLAG = 0
+                AND D.DELETE_FLAG = 0
+                AND D.IN_AMOUNT > 0
+                AND C.BILL_TYPE = 2
+                AND C.IN_DATE = #where.StatDate#
+        
+                UNION ALL
+        
+                SELECT F.MATERIAL_ID, F.STORE_ID, 0 - F.RETURN_AMOUNT IN_AMOUNT
+                FROM PSM_RETURN_STOCK_BILL E
+                JOIN PSM_RETURN_STOCK_SUMMARY F ON E.OBJID = F.BILL_ID
+                WHERE E.DELETE_FLAG = 0
+                AND F.DELETE_FLAG = 0
+                AND F.RETURN_AMOUNT > 0
+                AND E.BILL_TYPE = 2
+                AND E.RETURN_DATE = #where.StatDate#
+            ) PSM_IN
+            GROUP BY MATERIAL_ID, STORE_ID
+        ) SUM_IN ON SUM_MATER.MATERIAL_ID = SUM_IN.MATERIAL_ID AND SUM_MATER.STORE_ID = SUM_IN.STORE_ID
+        LEFT JOIN 
+        (
+            SELECT MATERIAL_ID, STORE_ID, SUM(OUT_AMOUNT) OUT_AMOUNT
+            FROM (
+                SELECT H.MATERIAL_ID, H.OUT_AMOUNT, H.STORE_ID
+                FROM PSM_OUT_STOCK_BILL G
+                JOIN PSM_OUT_STOCK_SUMMARY H ON G.OBJID = H.BILL_ID
+                WHERE G.DELETE_FLAG = 0
+                AND H.DELETE_FLAG = 0
+                AND H.OUT_AMOUNT > 0
+                AND TO_DATE(TO_CHAR(H.AFFIRM_TIME, 'YYYY-MM-DD'), 'YYYY-MM-DD') = #where.StatDate#
+        
+                UNION ALL
+        
+                SELECT J.MATERIAL_ID, J.TRANSFER_AMOUNT, J.STORE_ID
+                FROM PSM_TRANSFER_BILL I
+                JOIN PSM_TRANSFER_SUMMARY J ON I.OBJID = J.BILL_ID
+                WHERE I.DELETE_FLAG = 0
+                AND J.DELETE_FLAG = 0
+                AND J.TRANSFER_AMOUNT > 0
+                AND TO_DATE(TO_CHAR(J.AFFIRM_TIME, 'YYYY-MM-DD'), 'YYYY-MM-DD') = #where.StatDate#
+            ) PSM_OUT
+            GROUP BY MATERIAL_ID, STORE_ID
+        ) SUM_OUT ON SUM_MATER.MATERIAL_ID = SUM_OUT.MATERIAL_ID AND SUM_MATER.STORE_ID = SUM_OUT.STORE_ID
+        LEFT JOIN SBM_MATERIAL SBM_MATER ON SUM_MATER.MATERIAL_ID = SBM_MATER.OBJID
+        LEFT JOIN PSB_STORE ON SUM_MATER.STORE_ID = PSB_STORE.OBJID      ]]>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY MATERIAL_NAME, STORE_NAME
+      </isNull>
+    </select>
+    <select id="Select+Update@ReportPsmDailyStockStat" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM PSM_STORAGE_SUMMARY ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+  </statements>
+</sqlMap>

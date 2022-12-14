@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudBpmMoldingProduction" parameterClass="map" resultClass="row">
+      <![CDATA[
+      select t.objid,t.record_user_id,t.record_time,t.backup_flag,t.backup_time
+,t.delete_flag,t.factory_id,t.green_tyre_no,t.plan_id,t.plan_detail_id
+,t.shift_master_id,t.shift_detail_id,t.begin_time,t.end_time,t.is_first
+,t.seq_index,t.remark,t.bl_flag,t.plan_id_origin,t.plan_detail_id_origin
+,t.mater_change_flag,t.mater_change_time,t.shift_master_id_origin,t.month_flag
+,T.TOOLING_BARCODE
+        , T.RECORD_USER_NAME, T.PLAN_DATE, T.PLAN_SHIFT_NAME 
+        , T.PLAN_EQUIP_NAME, T.MATERIAL_NAME, T.MATERIAL_FULL_NAME , T.SHIFT_DATE 
+        , T.SHIFT_NAME, T.CLASS_NAME, T.EQUIP_NAME
+        , T.IS_FIRST_CAPTION 
+        , T.old_material_name
+        , MAX(DECODE(T.WORK_NAME,'成型主机',T.USER_NAME,NULL)) EMP1
+        , MAX(DECODE(T.WORK_NAME,'成型副机',T.USER_NAME,NULL)) EMP2
+        , MAX(DECODE(T.WORK_NAME,'成型帮车',T.USER_NAME,NULL)) EMP3
+        , NVL(T.grade_name,'合格') grade_name,T.HUAWEN,T.NEW_BARCODE
+from (
+
+        SELECT T1.* ,T14.TOOLING_BARCODE
+        , T2.USER_NAME RECORD_USER_NAME, T3.PLAN_DATE, T4.SHIFT_NAME PLAN_SHIFT_NAME 
+        , T5.EQUIP_NAME PLAN_EQUIP_NAME, T7.MATERIAL_NAME, T7.MATERIAL_FULL_NAME , T8.SHIFT_DATE 
+        , T9.SHIFT_NAME, T10.CLASS_NAME, T11.EQUIP_NAME
+        , CASE WHEN T1.IS_FIRST = 1 THEN '是' WHEN T1.IS_FIRST = 0 THEN '否' ELSE '' END IS_FIRST_CAPTION 
+        , T16.MATERIAL_NAME old_material_name
+        , T19.WORK_NAME,T18.USER_NAME,t21.grade_name,substr(T99.MATERIAL_NAME,11,99) HUAWEN,T77.NEW_BARCODE
+        FROM BPM_PRODUCTION T1 
+        LEFT JOIN  BSM_TOOLING_LOAD_DETAIL T13 ON T1.GREEN_TYRE_NO=T13.GREEN_TYRE_NO
+        LEFT JOIN BSM_TOOLING_LOAD_MAIN T14 ON T13.MAIN_ID=T14.OBJID
+        LEFT JOIN SSB_USER T2 ON  T2.OBJID=  T1.RECORD_USER_ID
+        LEFT JOIN BPP_PLAN T3 ON T1.PLAN_ID = T3.OBJID 
+        LEFT JOIN SSB_SHIFT T4 ON T3.SHIFT_ID = T4.OBJID 
+        LEFT JOIN SBE_EQUIP T5 ON T3.EQUIP_ID = T5.OBJID 
+        LEFT JOIN BPP_PLAN_DETAIL T6 ON T1.PLAN_DETAIL_ID = T6.OBJID
+        LEFT JOIN SBM_MATERIAL T7 ON T6.MATERIAL_ID = T7.OBJID
+        LEFT JOIN BPM_SHIFT_MASTER T8 ON T1.SHIFT_MASTER_ID = T8.OBJID 
+        LEFT JOIN SSB_SHIFT T9 ON T8.SHIFT_ID = T9.OBJID 
+        LEFT JOIN SSB_CLASS T10 ON T8.CLASS_ID = T10.OBJID 
+        LEFT JOIN SBE_EQUIP T11 ON T8.EQUIP_ID = T11.OBJID 
+        LEFT JOIN BPP_PLAN_DETAIL T15 ON T1.PLAN_DETAIL_ID_ORIGIN = T15.OBJID
+        LEFT JOIN SBM_MATERIAL T16 ON T15.MATERIAL_ID = T16.OBJID
+        LEFT JOIN bpm_shift_detail t17 on t17.master_id = t8.objid
+        LEFT JOIN SSB_USER T18 ON T18.OBJID = T17.WORKER_ID1
+        LEFT JOIN SSB_WORK T19 ON T19.OBJID = T17.WORKER_ID8
+        left join bqc_qcrecord t20 on t20.tyreid = t1.green_tyre_no and t20.new_flag = 1 and t20.delete_flag = 0
+        left join bqc_grade t21 on t21.objid = t20.gradeid 
+        LEFT JOIN CPP_CURING_PRODUCTION T88 ON T88.GREEN_TYRE_NO = T1.GREEN_TYRE_NO
+        LEFT JOIN SBM_MATERIAL T99 ON T99.OBJID = T88.MATERIAL_ID
+        LEFT JOIN (SELECT * FROM(
+SELECT EQUIP_ID,NEW_BARCODE,RECORD_TIME,row_number() OVER(PARTITION BY EQUIP_ID ORDER BY T100.RECORD_TIME desc) as row_flg    FROM sbe_moulddrum_record T100
+) WHERE row_flg = 1) T77 ON T77.EQUIP_ID=T3.EQUIP_ID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.GREEN_TYRE_NO" prepend="AND">
+          <![CDATA[T1.GREEN_TYRE_NO = #where.GREEN_TYRE_NO#]]>
+        </isNotNull>
+        <isNull property="where.GREEN_TYRE_NO" prepend="">
+          <isNotNull property="where.OBJID" prepend="AND">
+            <![CDATA[T1.OBJID = #where.OBJID#]]>
+          </isNotNull>
+          <isNotNull property="where.BEGIN_TIME" prepend="AND">
+            <![CDATA[T1.BEGIN_TIME >= #where.BEGIN_TIME#]]>
+          </isNotNull>
+          <isNotNull property="where.END_TIME" prepend="AND">
+            <![CDATA[T1.BEGIN_TIME < #where.END_TIME#]]>
+          </isNotNull>
+          <isNotNull property="where.BEGIN_DATE" prepend="AND">
+            <![CDATA[T8.SHIFT_DATE >= #where.BEGIN_DATE#]]>
+          </isNotNull>
+          <isNotNull property="where.END_DATE" prepend="AND">
+            <![CDATA[T8.SHIFT_DATE <= #where.END_DATE#]]>
+          </isNotNull>
+          <isNotNull property="where.SHIFT_ID" prepend="AND">
+            <![CDATA[T8.SHIFT_ID = #where.SHIFT_ID#]]>
+          </isNotNull>
+          <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+            <![CDATA[T7.MATERIAL_NAME LIKE '%' || #where.MATERIAL_NAME# || '%' ]]>
+          </isNotNull>
+          <isNotNull property="where.MATERIAL_FULL_NAME" prepend="AND">
+            <![CDATA[T7.MATERIAL_FULL_NAME LIKE '%' || #where.MATERIAL_FULL_NAME#|| '%']]>
+          </isNotNull>
+          <isNotNull property="where.EQUIP_NAME" prepend="AND">
+            <![CDATA[T5.OBJID= #where.EQUIP_NAME#  ]]>
+          </isNotNull>
+          <isNotNull property="where.WORKER_NAME" prepend="AND">
+            <![CDATA[T11.USER_NAME LIKE '%' || #where.WORKDER_NAME# || '%' ]]>
+          </isNotNull>
+          <isNotNull property="where.TOOLING_BARCODE" prepend="AND">
+            <![CDATA[T14.TOOLING_BARCODE = #where.TOOLING_BARCODE#]]>
+          </isNotNull>
+          <isNotNull property="where.DELETE_FLAG" prepend="AND">
+            <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+          </isNotNull>
+          <isNotNull property="where.REMARK" prepend="AND">
+            <![CDATA[T1.REMARK LIKE '%' || #where.REMARK# || '%']]>
+          </isNotNull>
+          <isNotNull property="where.OLD_MATERIAL_NAME" prepend="AND">
+            <![CDATA[T16.MATERIAL_NAME LIKE '%' || #where.OLD_MATERIAL_NAME# || '%']]>
+          </isNotNull>
+        </isNull>
+      </dynamic>
+      <![CDATA[
+      ) T
+      GROUP BY T.objid,T.record_user_id,T.record_time,T.backup_flag,T.backup_time,T.delete_flag
+              ,T.factory_id,T.green_tyre_no,T.plan_id,T.plan_detail_id
+              ,T.shift_master_id,T.shift_detail_id,T.begin_time,T.end_time,T.is_first
+              ,T.seq_index,T.remark,T.bl_flag,T.plan_id_origin,T.plan_detail_id_origin
+              ,T.mater_change_flag,T.mater_change_time,T.shift_master_id_origin,T.month_flag
+              ,T.TOOLING_BARCODE
+        , T.RECORD_USER_NAME, T.PLAN_DATE, T.PLAN_SHIFT_NAME 
+        , T.PLAN_EQUIP_NAME, T.MATERIAL_NAME, T.MATERIAL_FULL_NAME , T.SHIFT_DATE 
+        , T.SHIFT_NAME, T.CLASS_NAME, T.EQUIP_NAME
+        , T.IS_FIRST_CAPTION ,T.HUAWEN,T.NEW_BARCODE
+        , T.old_material_name, NVL(T.grade_name,'合格')
+        order by t.objid
+      ]]>
+      <!--<isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>-->
+    </select>
+    <select id="Select+Update@CrudBpmMoldingProduction" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.* 
+        , T2.USER_NAME RECORD_USER_NAME, T3.PLAN_DATE, T3.SHIFT_ID PLAN_SHIFT_ID 
+        , T3.EQUIP_ID, T6.MATERIAL_ID, T8.SHIFT_DATE, T8.SHIFT_ID, T8.CLASS_ID 
+        , T4.SHIFT_NAME PLAN_SHIFT_NAME, T5.EQUIP_NAME PLAN_EQUIP_NAME, T7.MATERIAL_NAME
+        , T9.SHIFT_NAME, T10.CLASS_NAME, T11.EQUIP_NAME
+        , TO_CHAR(T3.PLAN_DATE, 'YYYY-MM-DD') || ',' || T4.SHIFT_NAME || ',' || T5.EQUIP_NAME || ',' || T7.MATERIAL_NAME AS PLAN_DETAIL_NAME 
+        , TO_CHAR(T8.SHIFT_DATE, 'YYYY-MM-DD') || ',' || T9.SHIFT_NAME || ',' || T11.EQUIP_NAME || ',' || T10.CLASS_NAME AS SHIFT_MASTER_NAME 
+        FROM BPM_PRODUCTION T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+        LEFT JOIN BPP_PLAN T3 ON T1.PLAN_ID = T3.OBJID 
+        LEFT JOIN SSB_SHIFT T4 ON T3.SHIFT_ID = T4.OBJID 
+        LEFT JOIN SBE_EQUIP T5 ON T3.EQUIP_ID = T5.OBJID 
+        LEFT JOIN BPP_PLAN_DETAIL T6 ON T1.PLAN_DETAIL_ID = T6.OBJID
+        LEFT JOIN SBM_MATERIAL T7 ON T6.MATERIAL_ID = T7.OBJID
+        LEFT JOIN BPM_SHIFT_MASTER T8 ON T1.SHIFT_MASTER_ID = T8.OBJID 
+        LEFT JOIN SSB_SHIFT T9 ON T8.SHIFT_ID = T9.OBJID 
+        LEFT JOIN SSB_CLASS T10 ON T8.CLASS_ID = T10.OBJID 
+        LEFT JOIN SBE_EQUIP T11 ON T8.EQUIP_ID = T11.OBJID
+      
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[T1.OBJID = #OBJID#]]>
+      </dynamic>
+    </select>
+
+    <!--查询类型信息，ID值固定为GetComboBoxData@Select@CrudBpmMoldingProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBpmMoldingProduction@SearchType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select 1 sskey, '按接班日期' ssValue from dual union select 2 sskey, '按生产时间' ssValue from dual
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by sskey
+      </isNull>
+    </select>
+
+    <!--查询左右模信息，ID值固定为GetComboBoxData@Select@CrudBpmMoldingProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBpmMoldingProduction@EQUIP_POSITION" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,SHOW_NAME ssValue from CBE_EQUIP_POSITION where DELETE_FLAG = '0'
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by OBJID
+      </isNull>
+    </select>
+
+    <!--查询接班班次信息，ID值固定为GetComboBoxData@Select@CrudBpmMoldingProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBpmMoldingProduction@SHIFT_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.SHIFT_NAME ssValue from SSB_SHIFT t1 where t1.DELETE_FLAG = 0
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询接班班组信息，ID值固定为GetComboBoxData@Select@CrudBpmMoldingProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBpmMoldingProduction@CLASS_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.CLASS_NAME ssValue from SSB_CLASS t1 where t1.DELETE_FLAG = 0
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询计划班次信息，ID值固定为GetComboBoxData@Select@CrudBpmMoldingProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBpmMoldingProduction@PLAN_SHIFT_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.SHIFT_NAME ssValue from SSB_SHIFT t1 where t1.DELETE_FLAG = 0
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询计划机台信息，ID值固定为GetComboBoxData@Select@CrudBpmMoldingProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBpmMoldingProduction@EQUIP_NAME" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey, EQUIP_NAME ssValue from sbe_equip where major_type_id = 41 and delete_flag = 0  order by objid
+     ]]>
+    </select>
+    
+
+    <!--查询硫化机台信息，ID值固定为GetComboBoxData@Select@CrudBpmMoldingProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBpmMoldingProduction@EQUIP_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.EQUIP_NAME ssValue from SBE_EQUIP t1 where t1.MAJOR_TYPE_ID = 41 and t1.DELETE_FLAG = 0
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.EQUIP_CODE
+      </isNull>
+    </select>
+
+    <!--查询物料信息，ID值固定为GetComboBoxData@Select@CrudBpmMoldingProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBpmMoldingProduction@MATERIAL_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.MATERIAL_NAME ssValue from SBM_MATERIAL t1 where t1.MAJOR_TYPE_ID = 41 and t1.DELETE_FLAG = 0
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.MATERIAL_NAME
+      </isNull>
+    </select>
+
+    <!--查询人员信息，ID值固定为GetComboBoxData@Select@CrudBpmMoldingProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBpmMoldingProduction@WORKER_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.USER_NAME ssValue from SSB_USER t1 where t1.DELETE_FLAG = 0
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by USER_NAME
+      </isNull>
+    </select>
+  </statements>
+</sqlMap>

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HsmToolingLoad"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HSM_TOOLING_LOAD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.ToolingId" prepend="AND">
+          <![CDATA[TOOLING_ID = #where.ToolingId#]]>
+        </isNotNull>
+        <isNotNull property="where.CardNo" prepend="AND">
+          <![CDATA[CARD_NO = #where.CardNo#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+     
+     
+     
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetMaterialInfoByCardNo" parameterClass="map" resultClass="Row">
+       <![CDATA[    
+       SELECT T.MATERIAL_ID,'0' AS TOOLING_ID,T1.MINOR_TYPE_ID FROM HPP_SEMIS_PRODUCTION T 
+       LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID = T.MATERIAL_ID
+       where t.delete_flag=0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="cardNo" prepend="AND">
+           <![CDATA[T.CARD_NO=#cardNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetMaterialInfoByCardNo1" parameterClass="map" resultClass="Row">
+       <![CDATA[    
+       SELECT T1.OBJID AS MATERIAL_ID,'0' AS TOOLING_ID,T1.MINOR_TYPE_ID FROM HPP_Rubber_PRODUCTION T 
+       LEFT JOIN SBM_MATERIAL T1 ON T1.SAP_CODE = T.SAP_CODE
+       where t.delete_flag=0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="cardNo" prepend="AND">
+           <![CDATA[T.BARCODE=#cardNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetMinorTypeIDByMaterialID" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T.OBJID,T.MINOR_TYPE_ID  
+       FROM SBM_MATERIAL T
+       WHERE T.DELETE_FLAG=0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="OBJID" prepend="AND">
+           <![CDATA[T.OBJID=#OBJID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+     <select id="GetSemisMaterialViaRFID" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T2.CARD_NO BARCODE,T2.EQUIP_ID,T2.MATERIAL_ID,T3.MATERIAL_NAME,T3.SAP_CODE,T3.MATERIAL_CODE,T3.MINOR_TYPE_ID MATERIAL_TYPE_ID,
+       T4.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T6.USER_NAME OPER_NAME,T5.EQUIP_NAME,T2.QTY SET_QUANTITY,T2.LEFT_QTY LEFT_QUANTITY,T2.END_TIME PRODUCE_TIME,
+       T2.END_TIME VALID_DATE FROM HSM_TOOLING T 
+        INNER JOIN HSM_TOOLING_LOAD T1 ON T1.TOOLING_ID =T.OBJID
+        INNER JOIN HPP_SEMIS_PRODUCTION T2 ON T2.CARD_NO = T1.CARD_NO
+        INNER JOIN SBM_MATERIAL T3 ON T3.OBJID  =T2.MATERIAL_ID
+        INNER JOIN SBM_MATERIAL_MINOR_TYPE T4 ON T4.OBJID = T3.MINOR_TYPE_ID
+        INNER JOIN SBE_EQUIP T5 ON T5.OBJID = T2.EQUIP_ID
+        INNER JOIN SSB_USER T6 ON T6.OBJID = T2.RECORD_USER_ID
+        WHERE T.DELETE_FLAG=0 
+       ]]>
+       <isNotNull property="RFIDNo" prepend="AND">
+         <![CDATA[T.TOOLING_RFID_BARCODE=#RFIDNo#]]>
+       </isNotNull>
+     </select>
+
+      <select id="GetSemisInfo" parameterClass="map" resultClass="Row">
+        <![CDATA[
+        SELECT T2.TOOLING_RFID_BARCODE,T.* FROM HSM_TOOLING_LOAD T
+        LEFT JOIN HSM_TOOLING T2 ON T.TOOLING_ID=T2.OBJID
+        WHERE 1=1 
+        ]]>
+        <isNotNull property="CarNo" prepend="AND">
+          <![CDATA[T2.TOOLING_RFID_BARCODE=#CarNo#]]>
+        </isNotNull>
+      </select>
+     <update id="UpdateToolingLoadInfo">
+       <![CDATA[
+         update hsm_tooling_load t set t.tooling_id = 
+         (select objid from hsm_tooling t1 where t1.tooling_rfid_barcode =#ToolingRfidBarcode# and t1.tooling_type=#ToolingType#)
+         ,t.remark =#Remark# where t.card_no = #CardNo#
+       ]]>
+     </update>
+     <select id="GetCarNoInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[  select t.card_no from hsm_tooling_load t where t.tooling_id=#ToolingBarcode# ]]>
+     </select>
+   </statements>
+</sqlMap>

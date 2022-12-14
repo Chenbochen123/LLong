@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SynConfig>
+    <Tables>
+        <Table name="Table.Source">
+            <DbSourceName>PDM200</DbSourceName>
+            <TableName>PDMMESASSEM</TableName>
+        </Table>
+        <Table name="Table.Target">
+           <DbSourceName>MES</DbSourceName>
+            <TableName>SBM_SEMIS_BOM_DATA</TableName>
+            <Primarykey FieldName="OBJID"/>
+            <SeqFields>
+                <SeqField FieldName="OBJID" SeqName="SEQ_SBM_SEMIS_BOM_DATA"/>
+            </SeqFields>
+        </Table>
+    </Tables>
+    <SynDatas>
+        <SynData>
+            <SourceTable TableName="Table.Source">
+                <Command >
+                    <FileName value="Mesnac.DbSyn.dll"/>
+                    <ClassName value="Mesnac.DbSyn.TableSyn.Source"/>
+                </Command>
+                <BeginSyn>
+                    <add key="sql" value=""/>
+                </BeginSyn>
+                <SelectData>
+                    <add key="count" value="0"/>
+                    <add key="where">
+                        <![CDATA[PD002<>0 AND S_Factory='8002']]>
+                    </add>
+                </SelectData>
+                <FinishRowSyn>
+                    <add key="update" value="PD002=0"/>
+                    <add key="where" value="INDX"/>
+                </FinishRowSyn>
+            </SourceTable>
+            <TargetTable TableName="Table.Target">
+                <Command >
+                    <FileName value="Mesnac.DbSyn.LLCommand.dll"/>
+                    <ClassName value="Mesnac.DbSyn.LLERP.PDMMESASSEM.Target"/>
+                </Command>
+                <ExcuteRowSyn>
+                    <add key="where" value="PDM_CODE"/>
+                </ExcuteRowSyn>
+            </TargetTable>
+            <SourceTargetFields>
+                <SourceTargetField SourceFieldName="INDX" TargetFieldName="PDM_CODE"/>
+                <SourceTargetField SourceFieldName="MD005" TargetFieldName="GROUP_UNIT_NUM"/>
+                <SourceTargetField SourceFieldName="MD006" TargetFieldName="GROUP_NUM"/>
+                <SourceTargetField SourceFieldName="FLAG" TargetFieldName="FLAG"/>
+                <SourceTargetField SourceFieldName="MD012" TargetFieldName="DROP_FLAG"/>
+            </SourceTargetFields>
+        </SynData>
+    </SynDatas>
+</SynConfig>

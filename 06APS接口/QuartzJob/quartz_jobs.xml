@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 				version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+
+  <schedule>
+
+    <job>
+      <name>job</name>
+      <group>jobGroup</group>
+      <description>MES-APS施工表数据同步</description>
+      <job-type>QuartzJob.ApsJob, QuartzJob</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+      <!--<job-data-map>
+        <entry>
+          <key>key0</key>
+          <value>value0</value>
+        </entry>
+        <entry>
+          <key>key1</key>
+          <value>value1</value>
+        </entry>
+        <entry>
+          <key>key2</key>
+          <value>value2</value>
+        </entry>
+      </job-data-map>-->
+    </job>
+    <trigger>
+      <cron>
+
+        <name>trigger</name>
+
+        <group>tripperGroup</group>
+
+        <job-name>job</job-name>
+
+        <job-group>jobGroup</job-group>
+
+        <cron-expression>0 0 0/1 * * ?</cron-expression>
+        <!--代表每八小时执行一次。
+        前三位代表：秒 分 时。-->
+
+
+        <!--<cron-expression>10 01 14 * * ?</cron-expression>
+        --><!--"30 10 1 * * ?" 每天1点10分30秒触发任务-->
+
+      </cron>
+    </trigger>
+
+
+    <job>
+      <name>job2</name>
+      <group>jobGroup2</group>
+      <description>MES-APS模具表数据同步</description>
+      <job-type>QuartzJob.ApsMouldJob, QuartzJob</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+
+        <name>trigger2</name>
+
+        <group>tripperGroup2</group>
+
+        <job-name>job2</job-name>
+
+        <job-group>jobGroup2</job-group>
+
+        <cron-expression>0 0 0/7 * * ?</cron-expression>
+
+      </cron>
+    </trigger>
+
+    <job>
+      <name>job3</name>
+      <group>jobGroup3</group>
+      <description>CPP-BPP关系表数据同步</description>
+      <job-type>QuartzJob.ApsCBJob, QuartzJob</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+
+        <name>trigger3</name>
+
+        <group>tripperGroup3</group>
+
+        <job-name>job3</job-name>
+
+        <job-group>jobGroup3</job-group>
+
+        <cron-expression>58 17 11 * * ?</cron-expression>
+        <!--"30 10 1 * * ?" 每天1点10分30秒触发任务-->
+
+      </cron>
+    </trigger>
+
+
+
+    <job>
+      <name>job4</name>
+      <group>jobGroup4</group>
+      <description>MES获取月计划</description>
+      <job-type>QuartzJob.ApsMonthPlan, QuartzJob</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+
+        <name>trigger4</name>
+
+        <group>tripperGroup4</group>
+
+        <job-name>job4</job-name>
+
+        <job-group>jobGroup4</job-group>
+
+        <cron-expression>00 00 16 * * ?</cron-expression>
+       
+        <!--"30 10 1 * * ?" 每天1点10分30秒触发任务-->
+
+      </cron>
+    </trigger>
+
+    <job>
+      <name>job5</name>
+      <group>jobGroup5</group>
+      <description>MES上传日产量</description>
+      <job-type>QuartzJob.DayAmount, QuartzJob</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+
+        <name>trigger5</name>
+
+        <group>tripperGroup5</group>
+
+        <job-name>job5</job-name>
+
+        <job-group>jobGroup5</job-group>
+
+        <cron-expression>00 00 17 * * ?</cron-expression>
+
+        <!--"30 10 1 * * ?" 每天1点10分30秒触发任务-->
+
+      </cron>
+    </trigger>
+
+
+  </schedule>
+</job-scheduling-data>

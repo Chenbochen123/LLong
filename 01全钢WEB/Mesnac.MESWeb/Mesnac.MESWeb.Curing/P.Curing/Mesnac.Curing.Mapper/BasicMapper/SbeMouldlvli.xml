@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.SbeMouldlvli"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SbeMouldlvli" type="Mesnac.Curing.Entity.BasicEntity.SbeMouldlvli, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SbeMouldlvli" class="SbeMouldlvli">
+    <result property="ObjId" column="OBJID"/>
+    <result property="MouldCode" column="MOULD_CODE"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="SubStoreplace" column="SUB_STOREPLACE"/>
+    <result property="OutTime" column="OUT_TIME"/>
+    <result property="OutUser" column="OUT_USER"/>
+    <result property="OutFlag" column="OUT_FLAG"/>
+    <result property="InTime" column="IN_TIME"/>
+    <result property="InUser" column="IN_USER"/>
+    <result property="UseNum" column="USE_NUM"/>
+    <result property="TotalNum" column="TOTAL_NUM"/>
+    <result property="TotalDay" column="TOTAL_DAY"/>
+    <result property="IsOld" column="IS_OLD"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SbeMouldlvli" class="SbeMouldlvli">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="MouldCode" column="MouldCode"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="SubStoreplace" column="SubStoreplace"/>
+    <parameter property="OutTime" column="OutTime"/>
+    <parameter property="OutUser" column="OutUser"/>
+    <parameter property="OutFlag" column="OutFlag"/>
+    <parameter property="InTime" column="InTime"/>
+    <parameter property="InUser" column="InUser"/>
+    <parameter property="UseNum" column="UseNum"/>
+    <parameter property="TotalNum" column="TotalNum"/>
+    <parameter property="TotalDay" column="TotalDay"/>
+    <parameter property="IsOld" column="IsOld"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_MOULDLVLI ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.MouldCode" prepend="AND">
+          <![CDATA[MOULD_CODE = #where.MouldCode#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.SubStoreplace" prepend="AND">
+          <![CDATA[SUB_STOREPLACE = #where.SubStoreplace#]]>
+        </isNotNull>
+        <isNotNull property="where.OutTime" prepend="AND">
+          <![CDATA[OUT_TIME = #where.OutTime#]]>
+        </isNotNull>
+        <isNotNull property="where.OutUser" prepend="AND">
+          <![CDATA[OUT_USER = #where.OutUser#]]>
+        </isNotNull>
+        <isNotNull property="where.OutFlag" prepend="AND">
+          <![CDATA[OUT_FLAG = #where.OutFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.InTime" prepend="AND">
+          <![CDATA[IN_TIME = #where.InTime#]]>
+        </isNotNull>
+        <isNotNull property="where.InUser" prepend="AND">
+          <![CDATA[IN_USER = #where.InUser#]]>
+        </isNotNull>
+        <isNotNull property="where.UseNum" prepend="AND">
+          <![CDATA[USE_NUM = #where.UseNum#]]>
+        </isNotNull>
+        <isNotNull property="where.TotalNum" prepend="AND">
+          <![CDATA[TOTAL_NUM = #where.TotalNum#]]>
+        </isNotNull>
+        <isNotNull property="where.TotalDay" prepend="AND">
+          <![CDATA[TOTAL_DAY = #where.TotalDay#]]>
+        </isNotNull>
+        <isNotNull property="where.IsOld" prepend="AND">
+          <![CDATA[IS_OLD = #where.IsOld#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SBE_MOULDLVLI]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="MouldCode" prepend=",">MOULD_CODE</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="SubStoreplace" prepend=",">SUB_STOREPLACE</isNotNull>
+        <isNotNull property="OutTime" prepend=",">OUT_TIME</isNotNull>
+        <isNotNull property="OutUser" prepend=",">OUT_USER</isNotNull>
+        <isNotNull property="OutFlag" prepend=",">OUT_FLAG</isNotNull>
+        <isNotNull property="InTime" prepend=",">IN_TIME</isNotNull>
+        <isNotNull property="InUser" prepend=",">IN_USER</isNotNull>
+        <isNotNull property="UseNum" prepend=",">USE_NUM</isNotNull>
+        <isNotNull property="TotalNum" prepend=",">TOTAL_NUM</isNotNull>
+        <isNotNull property="TotalDay" prepend=",">TOTAL_DAY</isNotNull>
+        <isNotNull property="IsOld" prepend=",">IS_OLD</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SBE_MOULDLVLI.NEXTVAL</isNull>
+        <isNotNull property="MouldCode" prepend=",">#MouldCode#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="SubStoreplace" prepend=",">#SubStoreplace#</isNotNull>
+        <isNotNull property="OutTime" prepend=",">#OutTime#</isNotNull>
+        <isNotNull property="OutUser" prepend=",">#OutUser#</isNotNull>
+        <isNotNull property="OutFlag" prepend=",">#OutFlag#</isNotNull>
+        <isNotNull property="InTime" prepend=",">#InTime#</isNotNull>
+        <isNotNull property="InUser" prepend=",">#InUser#</isNotNull>
+        <isNotNull property="UseNum" prepend=",">#UseNum#</isNotNull>
+        <isNotNull property="TotalNum" prepend=",">#TotalNum#</isNotNull>
+        <isNotNull property="TotalDay" prepend=",">#TotalDay#</isNotNull>
+        <isNotNull property="IsOld" prepend=",">#IsOld#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SBE_MOULDLVLI
+       <dynamic prepend="SET">
+        <isNotNull  property="update.MouldCode"  prepend=",">
+          MOULD_CODE = #update.MouldCode#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.SubStoreplace"  prepend=",">
+          SUB_STOREPLACE = #update.SubStoreplace#
+        </isNotNull>
+        <isNotNull  property="update.OutTime"  prepend=",">
+          OUT_TIME = #update.OutTime#
+        </isNotNull>
+        <isNotNull  property="update.OutUser"  prepend=",">
+          OUT_USER = #update.OutUser#
+        </isNotNull>
+        <isNotNull  property="update.OutFlag"  prepend=",">
+          OUT_FLAG = #update.OutFlag#
+        </isNotNull>
+        <isNotNull  property="update.InTime"  prepend=",">
+          IN_TIME = #update.InTime#
+        </isNotNull>
+        <isNotNull  property="update.InUser"  prepend=",">
+          IN_USER = #update.InUser#
+        </isNotNull>
+        <isNotNull  property="update.UseNum"  prepend=",">
+          USE_NUM = #update.UseNum#
+        </isNotNull>
+        <isNotNull  property="update.TotalNum"  prepend=",">
+          TOTAL_NUM = #update.TotalNum#
+        </isNotNull>
+        <isNotNull  property="update.TotalDay"  prepend=",">
+          TOTAL_DAY = #update.TotalDay#
+        </isNotNull>
+        <isNotNull  property="update.IsOld"  prepend=",">
+          IS_OLD = #update.IsOld#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SBE_MOULDLVLI
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SbeMouldlvli">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SbeMouldlvli">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SBE_MOULDLVLI
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SBE_MOULDLVLI
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SbeMouldlvli" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SBE_MOULDLVLI
+    </statement>
+  </statements>
+</sqlMap>

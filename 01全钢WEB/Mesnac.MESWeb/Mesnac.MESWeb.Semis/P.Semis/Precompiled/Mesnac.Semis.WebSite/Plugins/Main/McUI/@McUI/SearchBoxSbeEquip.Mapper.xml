@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@SearchBoxSbeEquip" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+       SELECT T1.*, T2.MAJOR_TYPE_NAME, T3.MINOR_TYPE_NAME 
+       FROM SBE_EQUIP T1 
+       LEFT JOIN SBE_EQUIP_MAJOR_TYPE T2 ON T1.MAJOR_TYPE_ID = T2.OBJID
+       LEFT JOIN SBE_EQUIP_MINOR_TYPE T3 ON T1.MINOR_TYPE_ID = T3.OBJID
+       WHERE T1.DELETE_FLAG= 0 
+      ]]>
+      <dynamic>
+        <isNotNull property="where.MAJOR_TYPE_ID" prepend="AND">
+          <![CDATA[T1.MAJOR_TYPE_ID = #where.MAJOR_TYPE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.MINOR_TYPE_ID" prepend="AND">
+          <![CDATA[T1.MINOR_TYPE_ID = #where.MINOR_TYPE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_NAME" prepend="AND">
+          <![CDATA[T1.EQUIP_NAME LIKE '%' || #where.EQUIP_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_CODE" prepend="AND">
+          <![CDATA[T1.EQUIP_CODE LIKE '%' || #where.EQUIP_CODE# || '%']]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+
+    <!--查询设备大类信息，ID值固定为GetComboBoxData@Select@SearchBoxSbeEquip@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@SearchBoxSbeEquip@MAJOR_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,MAJOR_TYPE_NAME ssValue from SBE_EQUIP_MAJOR_TYPE where DELETE_FLAG = '0'
+     ]]>
+    </select>
+    
+    <!--查询设备细类信息，ID值固定为GetComboBoxData@Select@SearchBoxSbeEquip@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@SearchBoxSbeEquip@MINOR_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,MINOR_TYPE_NAME ssValue from SBE_EQUIP_MINOR_TYPE where DELETE_FLAG = '0'
+     ]]>
+    </select>
+
+  </statements>
+</sqlMap>

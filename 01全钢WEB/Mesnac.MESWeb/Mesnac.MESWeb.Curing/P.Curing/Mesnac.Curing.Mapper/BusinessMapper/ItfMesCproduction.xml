@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.ItfMesCproduction"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM ITF_MES_CPRODUCTION ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDate" prepend="AND">
+          <![CDATA[SHIFT_DATE = #where.ShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.SapQty" prepend="AND">
+          <![CDATA[SAP_QTY = #where.SapQty#]]>
+        </isNotNull>
+        <isNotNull property="where.SapRejectQty" prepend="AND">
+          <![CDATA[SAP_REJECT_QTY = #where.SapRejectQty#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.MesQty" prepend="AND">
+          <![CDATA[MES_QTY = #where.MesQty#]]>
+        </isNotNull>
+        <isNotNull property="where.MesRejectQty" prepend="AND">
+          <![CDATA[MES_REJECT_QTY = #where.MesRejectQty#]]>
+        </isNotNull>
+        <isNotNull property="where.BomId" prepend="AND">
+          <![CDATA[BOM_ID = #where.BomId#]]>
+        </isNotNull>
+        <isNotNull property="where.BomVer" prepend="AND">
+          <![CDATA[BOM_VER = #where.BomVer#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <!--       select t.material_id,count(*) qty, t1.shift_date,t1.shift_id,0 reject_qty,t2.bom_id from cpp_curing_production t
+         left join cpp_curing_shift_master t1 on t1.objid = t.shift_master_id
+         left join cpp_curing_plan_detail t2 on t2.objid = t.plan_detail_id
+         where t.delete_flag=0-->
+     <select id="GetProductInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+          select n.material_id,count(distinct n.tyre_no) qty, n1.shift_date,n1.shift_id,0 reject_qty,n4.bom_id
+          ,n4.bom_factroy || n4.bom_version  bom_ver
+           from cpp_curing_production n
+           left join cpp_curing_shift_master n1 on n1.objid = n.shift_master_id and n1.delete_flag=0
+           left join bpm_production n2 on n2.green_tyre_no=n.green_tyre_no and n2.delete_flag=0
+           left join bpp_plan_detail n3 on n3.objid = n2.plan_detail_id and n3.delete_flag=0
+           left join (
+SELECT distinct T1.PLAN_DATE,T1.SHIFT_ID,T2.MATERIAL_ID,T2.BOM_ID,t4.bom_factroy,t4.bom_version,t1.equip_id
+          FROM CPP_CURING_PLAN T1
+          INNER JOIN CPP_CURING_PLAN_DETAIL T2 ON T1.OBJID=T2.PLAN_ID
+          INNER JOIN V_SBM_BOM T4 ON T2.BOM_ID=T4.OBJID
+           where  t1.PLAN_DATE = #ShiftDate#  and t2.plan_state = 2) n4 on n4.shift_id = #ShiftID# and n4.material_id = n.material_id and n4.equip_id = n.equip_id
+           where n.delete_flag=0 and nvl(n.bl_flag,0) <> 1
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="ShiftID" prepend="AND">
+           <![CDATA[n1.shift_id = #ShiftID#]]>
+         </isNotNull>
+         <isNotNull property="ShiftDate" prepend="AND">
+           <![CDATA[n1.shift_date = #ShiftDate#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="GROUP BY">
+         <![CDATA[n.material_id,n1.shift_Date,n1.shift_id,n4.bom_factroy || n4.bom_version,n4.bom_id]]>
+       </dynamic>
+     </select>
+     <select id="GetUploadProductInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+     select  case t.success_flag when 0 then '新建' when 1 then '上传中' when 2 then '上传成功' when 3 then '上传失败' end success_flag,
+     t.objid, t1.shift_date,t.post_date,t.doc_date,t2.shift_name,t3.material_name,t1.material_id,
+      t1.mes_qty,t1.sap_qty,t.qty,t1.mes_reject_qty,t1.sap_reject_qty,t.reject_qty,T3.SAP_CODE,case t.state_flag when 0 then '系统生成' when 1 then '手动创建' when 2 then '修改' when 3 then '上传后更新' end state_flag,
+       t.objid||'|'||to_char(t1.shift_date,'yyyy-mm-dd')||'|'||t.post_date||'|'||t.doc_date||'|'||t1.shift_id||'|'||t3.material_short||
+      '|'||t1.material_id||'|'||t.qty||'|'||t.reject_qty||'|'||nvl(nvl(nullif(t1.bom_ver,'0'), (t4.BOM_FACTROY||t4.BOM_VERSION)),'0')||'|'||t.success_flag||'|'||t.remark as productinfo,nvl(nullif(t1.bom_ver,'0'), (t4.BOM_FACTROY||t4.BOM_VERSION)) as proversion,
+      t.return_msg,t.remark from itf_mes_cproduction_detail t
+      left join itf_mes_cproduction t1 on t.cproduction_id = t1.objid and t1.delete_flag=0 
+      left join ssb_shift t2 on t2.objid = t1.shift_id
+      left join sbm_material t3 on t3.objid = t1.material_id
+      left join v_sbm_bom t4 on t4.OBJID = t1.bom_id
+      where t.delete_flag=0 and t.PRUDUCTTYPE='01'
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.ShiftDate" prepend="AND">
+           <![CDATA[T1.SHIFT_DATE = #where.ShiftDate#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftID" prepend="AND">
+           <![CDATA[T1.SHIFT_ID = #where.ShiftID#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[success_flag,T3.MATERIAL_NAME]]>
+       </dynamic>
+     </select>
+     <select id="GetMoldingBom" parameterClass="map" resultClass="Row">
+       <![CDATA[
+           SELECT t.OBJID ,t.BOM_FACTROY||t.BOM_VERSION V
+            FROM V_SBM_BOM T
+            WHERE t.DELETE_FLAG = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="MaterialID" prepend="AND">
+           <![CDATA[T.MATERIAL_PARENT_ID = #MaterialID#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[T.LASTMODIFY_DATE DESC]]>
+       </dynamic>
+     </select>
+     <select id="GetUpdateMoldingBom" parameterClass="map" resultClass="Row">
+       <![CDATA[
+           select rownum OBJID ,a.production_ver V from sbm_material_productionver a
+           left join sbm_material b on b.sap_code = a.sap_code
+           where a.delete_flag = 0 and b.delete_flag = 0
+           and nvl(a.m_ksp,'m_ksp') = 'm_ksp' and nvl(a.mat_status,'mat_status') = 'mat_status'
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="MaterialID" prepend="AND">
+           <![CDATA[b.objid = #MaterialID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetWritrProductInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      select t2.material_id,count(*) qty,t1.shift_date,t1.shift_id,0 reject_qty,t5.objid bom_id
+      ,t5.bom_factroy || t5.bom_version  bom_ver
+      from cpp_curing_production t 
+      left join cpp_curing_shift_master t1 on t1.objid = t.shift_master_id_origin 
+      left join cpp_curing_plan_detail t2 on t2.objid = t.plan_detail_id_origin 
+      left join bpm_production t3 on t3.green_tyre_no=t.green_tyre_no and t3.delete_flag=0
+      left join bpp_plan_detail t4 on t4.objid = t3.plan_detail_id and t4.delete_flag=0
+      left join sbm_bom t5 on t5.material_id = t4.material_id and t5.delete_flag=0 and t2.material_id = t5.material_parent_id
+      where 1 = 1  and t.delete_flag = 0
+      and t.mater_change_flag = 1 and nvl(t.month_flag,0) = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="ShiftID" prepend="AND">
+           <![CDATA[t1.shift_id = #ShiftID#]]>
+         </isNotNull>
+         <isNotNull property="ShiftDate" prepend="AND">
+           <![CDATA[t1.shift_date = #ShiftDate#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="GROUP BY">
+         <![CDATA[t2.material_id,t1.shift_Date,t1.shift_id,t5.objid,t5.bom_factroy || t5.bom_version]]>
+       </dynamic>
+     </select>
+     <select id="GetSapProductInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select t1.objid,CASE t1.success_flag WHEN 0 THEN '新建' WHEN 1 THEN '上传中' WHEN 2 THEN '上传成功' WHEN 3 THEN '上传失败'end success_flag,
+       t1.doc_date,t1.post_date,t.shift_date,t2.shift_name,t3.sap_code,t3.material_name,
+       t.mes_qty,t.mes_reject_qty,t1.qty,t1.reject_qty,
+       t1.objid||'|'||to_char(t.shift_date,'yyyy-mm-dd')||'|'||t1.post_date||'|'||t1.doc_date||'|'||t.shift_id||'|'||t3.material_short||
+      '|'||t.material_id||'|'||t1.qty||'|'||t1.reject_qty||'|'||nvl((t4.BOM_FACTROY||t4.BOM_VERSION),'0')||'|'||t1.success_flag||'|'||t1.remark as productinfo,t4.BOM_FACTROY||t4.BOM_VERSION as proversion,t1.remark,t1.return_msg
+       from itf_mes_cproduction t
+      inner join itf_mes_cproduction_detail t1 on t1.cproduction_id = t.objid and t1.pruducttype='02' AND T1.DELETE_FLAG=0
+      inner join ssb_shift t2 on t2.objid = t.shift_id
+      inner join sbm_material t3 on t3.objid = t.material_id
+      inner join v_sbm_bom t4 on t4.objid =t.bom_id
+       where t.delete_flag=0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.ShiftDate" prepend="AND">
+           <![CDATA[t.shift_date = #where.ShiftDate#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftID" prepend="AND">
+           <![CDATA[t.shift_id = #where.ShiftID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetCProductInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+     select  case t.success_flag when 0 then '新建' when 1 then '上传中' when 2 then '上传成功' when 3 then '上传失败' end success_flag,
+     t.objid, t1.shift_date,t.post_date,t.doc_date,t2.shift_name,t3.material_name,t1.material_id,
+      t1.mes_qty,t1.sap_qty,t.qty,t1.mes_reject_qty,t1.sap_reject_qty,t.reject_qty,T3.SAP_CODE,case t.state_flag when 0 then '系统生成' when 1 then '手动创建' when 2 then '修改' when 3 then '上传后更新' end state_flag,
+       t.objid||'|'||to_char(t1.shift_date,'yyyy-mm-dd')||'|'||t.post_date||'|'||t.doc_date||'|'||t1.shift_id||'|'||t3.material_short||
+      '|'||t1.material_id||'|'||t.qty||'|'||t.reject_qty||'|'||nvl((t4.BOM_FACTROY||t4.BOM_VERSION),'0')||'|'||t.success_flag||'|'||t.remark as productinfo,t4.BOM_FACTROY||t4.BOM_VERSION as proversion,
+      t.return_msg,t.remark from itf_mes_cproduction_detail t
+      left join itf_mes_cproduction t1 on t.cproduction_id = t1.objid and t1.delete_flag=0 
+      left join ssb_shift t2 on t2.objid = t1.shift_id
+      left join sbm_material t3 on t3.objid = t1.material_id
+      left join v_sbm_bom t4 on t4.OBJID = t1.bom_id
+      where t.delete_flag=0 and t.PRUDUCTTYPE='01'
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.ShiftDate" prepend="AND">
+           <![CDATA[T1.SHIFT_DATE = #where.ShiftDate#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftID" prepend="AND">
+           <![CDATA[T1.SHIFT_ID = #where.ShiftID#]]>
+         </isNotNull>
+         <isNotNull property="where.SAPMaterial" prepend="AND">
+           <![CDATA[T3.SAP_CODE = #where.SAPMaterial#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[success_flag,T3.MATERIAL_NAME]]>
+       </dynamic>
+     </select>
+     <select id="GetMaterChangeInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T2.MATERIAL_ID,T3.MATERIAL_NAME,T3.SAP_CODE, COUNT(*) QTY,T1.SHIFT_DATE
+      ,T1.SHIFT_ID,T4.SHIFT_NAME,T5.BOM_FACTROY || T5.BOM_VERSION BOM_VER
+      from cpp_curing_production t 
+      left join cpp_curing_shift_master t1 on t1.objid = t.shift_master_id and t1.delete_flag =0
+      left join cpp_curing_plan_detail t2 on t2.objid = t.plan_detail_id and t2.delete_flag =0
+      left join sbm_material t3 on t2.material_id = t3.objid and t3.delete_flag = 0
+      left join ssb_shift t4 on t1.shift_id = t4.objid 
+      left join sbm_bom t5 on t2.bom_id = t5.objid and t5.delete_flag = 0
+      where 1 = 1 and t.mater_change_flag = 1 and t.month_flag = 1 and t.delete_flag = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.ShiftID" prepend="AND">
+           <![CDATA[t1.shift_id = #where.ShiftID#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftDate" prepend="AND">
+           <![CDATA[t1.shift_date = #where.ShiftDate#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="GROUP BY">
+         <![CDATA[t2.material_id,t3.material_name,t3.sap_code,t1.shift_Date,t1.shift_id,t4.shift_name,T5.BOM_FACTROY || T5.BOM_VERSION]]>
+       </dynamic>
+     </select>
+     
+  </statements>
+</sqlMap>

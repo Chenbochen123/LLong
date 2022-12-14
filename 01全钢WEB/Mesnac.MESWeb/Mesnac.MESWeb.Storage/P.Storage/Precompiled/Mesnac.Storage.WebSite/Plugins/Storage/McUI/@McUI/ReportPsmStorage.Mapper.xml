@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportPsmStorage" parameterClass="map" resultClass="row">
+      <![CDATA[
+          SELECT T4.STORE_NAME, T1.STORE_ID, T1.STORE_PLACE_ID, T2.MATERIAL_ID, T2.CHECK_GRADE_CODE
+          , T5.STORE_PLACE_NAME, T6.MATERIAL_NAME
+          , T1.STOCK_AMOUNT, T2.SUMMARY_AMOUNT
+          , CASE T2.CHECK_GRADE_CODE
+            WHEN 1 THEN '合格品'
+            WHEN 2 THEN '次品'
+            WHEN 3 THEN '废品'
+            WHEN 4 THEN '特废品'
+            WHEN 9 THEN '试验胎'
+            ELSE '无品级' END CHECK_GRADE_NAME
+          FROM PSM_STORAGE_MAIN T1
+          LEFT JOIN PSM_STORAGE_SUMMARY T2 ON T1.OBJID = T2.MAIN_ID
+          --LEFT JOIN PSM_STORAGE_DETAIL T3 ON T2.OBJID = T3.SUMMARY_ID
+          JOIN PSB_STORE T4 ON T1.STORE_ID = T4.OBJID
+          JOIN PSB_STORE_PLACE T5 ON T1.STORE_PLACE_ID = T5.OBJID
+          LEFT JOIN SBM_MATERIAL T6 ON T2.MATERIAL_ID = T6.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG# AND T2.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreId" prepend="AND">
+          <![CDATA[T1.STORE_ID = #where.StoreId#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceName" prepend="AND">
+          <![CDATA[T5.STORE_PLACE_NAME LIKE '%' || #where.StorePlaceName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[T6.MATERIAL_NAME LIKE '%' || #where.MaterialName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.CheckGradeCode" prepend="AND">
+          <![CDATA[T2.CHECK_GRADE_CODE = #where.CheckGradeCode#]]>
+        </isNotNull>
+        <isNotNull property="where.VirtualStorePlace" prepend="AND">
+          <![CDATA[((1 = #where.VirtualStorePlace# AND SUBSTR2(T5.STORE_PLACE_NAME, 2, 2) <> '库位') OR 2 = #where.VirtualStorePlace#)]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T4.STORE_NAME, T5.STORE_PLACE_NAME, T6.MATERIAL_NAME, T2.CHECK_GRADE_CODE
+      </isNull>
+    </select>
+    <select id="Select+Update@ReportPsmStorage" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM PSM_STORAGE_SUMMARY ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <select id="Select@ReportPsmStorage@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+          SELECT T1.STORE_ID, T1.STORE_PLACE_ID, T2.MATERIAL_ID, T2.CHECK_GRADE_CODE
+          , T4.STORE_NAME, T5.STORE_PLACE_NAME, T6.MATERIAL_NAME
+          , T1.STOCK_AMOUNT, T2.SUMMARY_AMOUNT
+          , CASE T2.CHECK_GRADE_CODE
+            WHEN 1 THEN '合格品'
+            WHEN 2 THEN '次品'
+            WHEN 3 THEN '废品'
+            WHEN 4 THEN '特废品'
+            WHEN 9 THEN '试验胎'
+            ELSE '无品级' END CHECK_GRADE_NAME
+          FROM PSM_STORAGE_MAIN T1
+          LEFT JOIN PSM_STORAGE_SUMMARY T2 ON T1.OBJID = T2.MAIN_ID
+          --LEFT JOIN PSM_STORAGE_DETAIL T3 ON T2.OBJID = T3.SUMMARY_ID
+          JOIN PSB_STORE T4 ON T1.STORE_ID = T4.OBJID
+          JOIN PSB_STORE_PLACE T5 ON T1.STORE_PLACE_ID = T5.OBJID
+          LEFT JOIN SBM_MATERIAL T6 ON T2.MATERIAL_ID = T6.OBJID
+          WHERE T1.DELETE_FLAG = 0 AND T2.DELETE_FLAG = 0
+          AND T1.STORE_ID = #where.STORE_ID#
+          AND T1.STORE_PLACE_ID = #where.STORE_PLACE_ID#
+          AND T2.MATERIAL_ID = #where.MATERIAL_ID#
+          AND T2.CHECK_GRADE_CODE = #where.CHECK_GRADE_CODE#
+      ]]>
+    </select>
+
+
+    <select id="Select@ReportPsmStorage@DetailGrid" parameterClass="map" resultClass="row">
+      <![CDATA[
+          SELECT T1.*
+          , CASE WHEN IN_OR_OUT = 1 THEN '入' WHEN IN_OR_OUT = -1 THEN '出' ELSE '' END IN_OR_OUT_CAPTION
+          , T4.STORE_NAME, T5.STORE_PLACE_NAME, T6.MATERIAL_NAME
+          , CASE T1.CHECK_GRADE_CODE
+            WHEN 1 THEN '合格品'
+            WHEN 2 THEN '次品'
+            WHEN 3 THEN '废品'
+            WHEN 4 THEN '特废品'
+            WHEN 9 THEN '试验胎'
+            ELSE '无品级' END CHECK_GRADE_NAME
+          FROM PSM_STORAGE_TRACE T1
+          JOIN PSB_STORE T4 ON T1.STORE_ID = T4.OBJID
+          JOIN PSB_STORE_PLACE T5 ON T1.STORE_PLACE_ID = T5.OBJID
+          LEFT JOIN SBM_MATERIAL T6 ON T1.MATERIAL_ID = T6.OBJID
+          WHERE T1.DELETE_FLAG = 0
+          AND T1.STORE_ID = #where.STORE_ID#
+          AND T1.STORE_PLACE_ID = #where.STORE_PLACE_ID#
+          AND T1.MATERIAL_ID = #where.MATERIAL_ID#
+          AND T1.CHECK_GRADE_CODE = #where.CHECK_GRADE_CODE#
+      ]]>
+      <![CDATA[
+        ORDER BY T1.UPDATE_TIME DESC
+      ]]>
+    </select>
+
+
+    <!--查询仓库类型信息，ID值固定为GetComboBoxData@Select@ReportPsmStorage@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmStorage@StoreId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey,STORE_NAME ssValue FROM PSB_STORE WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询品级信息，ID值固定为GetComboBoxData@Select@ReportPsmStorage@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmStorage@CheckGradeCode" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+        SELECT 1 sskey, '合格品' ssValue FROM dual
+        union 
+        SELECT 2 sskey, '次品' ssValue FROM dual
+        union 
+        SELECT 3 sskey, '废品' ssValue FROM dual
+        union 
+        SELECT 4 sskey, '特废品' ssValue FROM dual
+        --union 
+        --SELECT 9 sskey, '试验胎' ssValue FROM dual
+        --union 
+        --SELECT 0 sskey, '无品级' ssValue FROM dual
+
+     ]]>
+    </select>
+    
+    <!--查询品级信息，ID值固定为GetComboBoxData@Select@ReportPsmStorage@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmStorage@VirtualStorePlace" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+        SELECT 1 sskey, '隐藏' ssValue FROM dual
+        union 
+        SELECT 2 sskey, '显示' ssValue FROM dual
+
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

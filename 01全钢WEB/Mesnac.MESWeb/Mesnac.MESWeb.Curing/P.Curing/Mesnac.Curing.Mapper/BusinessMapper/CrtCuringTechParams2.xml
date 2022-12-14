@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CrtCuringTechParams2"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_CURING_TECH_PARAMS2 ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.InnerTempSetWinter" prepend="AND">
+          <![CDATA[INNER_TEMP_SET_WINTER = #where.InnerTempSetWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerTempHighWinter" prepend="AND">
+          <![CDATA[INNER_TEMP_HIGH_WINTER = #where.InnerTempHighWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerTempLowWinter" prepend="AND">
+          <![CDATA[INNER_TEMP_LOW_WINTER = #where.InnerTempLowWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerPressSetWinter" prepend="AND">
+          <![CDATA[INNER_PRESS_SET_WINTER = #where.InnerPressSetWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerPressHighWinter" prepend="AND">
+          <![CDATA[INNER_PRESS_HIGH_WINTER = #where.InnerPressHighWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerPressLowWinter" prepend="AND">
+          <![CDATA[INNER_PRESS_LOW_WINTER = #where.InnerPressLowWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.AllCuringTimeWinter" prepend="AND">
+          <![CDATA[ALL_CURING_TIME_WINTER = #where.AllCuringTimeWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.HotRingSetSummer" prepend="AND">
+          <![CDATA[HOT_RING_SET_SUMMER = #where.HotRingSetSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempSetSummer" prepend="AND">
+          <![CDATA[MODEL_TEMP_SET_SUMMER = #where.ModelTempSetSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempHighSummer" prepend="AND">
+          <![CDATA[MODEL_TEMP_HIGH_SUMMER = #where.ModelTempHighSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempLowSummer" prepend="AND">
+          <![CDATA[MODEL_TEMP_LOW_SUMMER = #where.ModelTempLowSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempSetSummer" prepend="AND">
+          <![CDATA[PLATE_TEMP_SET_SUMMER = #where.PlateTempSetSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempHighSummer" prepend="AND">
+          <![CDATA[PLATE_TEMP_HIGH_SUMMER = #where.PlateTempHighSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempLowSummer" prepend="AND">
+          <![CDATA[PLATE_TEMP_LOW_SUMMER = #where.PlateTempLowSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerTempSetSummer" prepend="AND">
+          <![CDATA[INNER_TEMP_SET_SUMMER = #where.InnerTempSetSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerTempHighSummer" prepend="AND">
+          <![CDATA[INNER_TEMP_HIGH_SUMMER = #where.InnerTempHighSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerTempLowSummer" prepend="AND">
+          <![CDATA[INNER_TEMP_LOW_SUMMER = #where.InnerTempLowSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerPressSetSummer" prepend="AND">
+          <![CDATA[INNER_PRESS_SET_SUMMER = #where.InnerPressSetSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerPressHighSummer" prepend="AND">
+          <![CDATA[INNER_PRESS_HIGH_SUMMER = #where.InnerPressHighSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerPressLowSummer" prepend="AND">
+          <![CDATA[INNER_PRESS_LOW_SUMMER = #where.InnerPressLowSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.AllCuringTimeSummer" prepend="AND">
+          <![CDATA[ALL_CURING_TIME_SUMMER = #where.AllCuringTimeSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.ClampingPress" prepend="AND">
+          <![CDATA[CLAMPING_PRESS = #where.ClampingPress#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingHeightId" prepend="AND">
+          <![CDATA[SHAPING_HEIGHT_ID = #where.ShapingHeightId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingHeight" prepend="AND">
+          <![CDATA[SHAPING_HEIGHT = #where.ShapingHeight#]]>
+        </isNotNull>
+        <isNotNull property="where.LoaderHeight" prepend="AND">
+          <![CDATA[LOADER_HEIGHT = #where.LoaderHeight#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingPressId" prepend="AND">
+          <![CDATA[SHAPING_PRESS_ID = #where.ShapingPressId#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedAmountRange1" prepend="AND">
+          <![CDATA[USED_AMOUNT_RANGE_1 = #where.UsedAmountRange1#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress1" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_1 = #where.FirstShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress1" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_1 = #where.SecondShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.ThirdShapingPress1" prepend="AND">
+          <![CDATA[THIRD_SHAPING_PRESS_1 = #where.ThirdShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedAmountRange2" prepend="AND">
+          <![CDATA[USED_AMOUNT_RANGE_2 = #where.UsedAmountRange2#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress2" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_2 = #where.FirstShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress2" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_2 = #where.SecondShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.ThirdShapingPress2" prepend="AND">
+          <![CDATA[THIRD_SHAPING_PRESS_2 = #where.ThirdShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedAmountRange3" prepend="AND">
+          <![CDATA[USED_AMOUNT_RANGE_3 = #where.UsedAmountRange3#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress3" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_3 = #where.FirstShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress3" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_3 = #where.SecondShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.ThirdShapingPress3" prepend="AND">
+          <![CDATA[THIRD_SHAPING_PRESS_3 = #where.ThirdShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingTimeId" prepend="AND">
+          <![CDATA[SHAPING_TIME_ID = #where.ShapingTimeId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingTime" prepend="AND">
+          <![CDATA[SHAPING_TIME = #where.ShapingTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingPositionId" prepend="AND">
+          <![CDATA[SHAPING_POSITION_ID = #where.ShapingPositionId#]]>
+        </isNotNull>
+        <isNotNull property="where.TopPosition" prepend="AND">
+          <![CDATA[TOP_POSITION = #where.TopPosition#]]>
+        </isNotNull>
+        <isNotNull property="where.BottomPosition" prepend="AND">
+          <![CDATA[BOTTOM_POSITION = #where.BottomPosition#]]>
+        </isNotNull>
+        <isNotNull property="where.ChuckWidthId" prepend="AND">
+          <![CDATA[CHUCK_WIDTH_ID = #where.ChuckWidthId#]]>
+        </isNotNull>
+        <isNotNull property="where.ChuckWidth" prepend="AND">
+          <![CDATA[CHUCK_WIDTH = #where.ChuckWidth#]]>
+        </isNotNull>
+        <isNotNull property="where.AeratePress" prepend="AND">
+          <![CDATA[AERATE_PRESS = #where.AeratePress#]]>
+        </isNotNull>
+        <isNotNull property="where.Reserve1" prepend="AND">
+          <![CDATA[RESERVE_1 = #where.Reserve1#]]>
+        </isNotNull>
+        <isNotNull property="where.Reserve2" prepend="AND">
+          <![CDATA[RESERVE_2 = #where.Reserve2#]]>
+        </isNotNull>
+        <isNotNull property="where.Reserve3" prepend="AND">
+          <![CDATA[RESERVE_3 = #where.Reserve3#]]>
+        </isNotNull>
+        <isNotNull property="where.EnvironmentalFlag" prepend="AND">
+          <![CDATA[ENVIRONMENTAL_FLAG = #where.EnvironmentalFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Guid" prepend="AND">
+          <![CDATA[GUID = #where.Guid#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderTensileHeightId" prepend="AND">
+          <![CDATA[BLADDER_TENSILE_HEIGHT_ID = #where.BladderTensileHeightId#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderTensileHeight" prepend="AND">
+          <![CDATA[BLADDER_TENSILE_HEIGHT = #where.BladderTensileHeight#]]>
+        </isNotNull>
+        <isNotNull property="where.TopLimitAmount" prepend="AND">
+          <![CDATA[TOP_LIMIT_AMOUNT = #where.TopLimitAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.HotRingSetWinter" prepend="AND">
+          <![CDATA[HOT_RING_SET_WINTER = #where.HotRingSetWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempSetWinter" prepend="AND">
+          <![CDATA[MODEL_TEMP_SET_WINTER = #where.ModelTempSetWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempHighWinter" prepend="AND">
+          <![CDATA[MODEL_TEMP_HIGH_WINTER = #where.ModelTempHighWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempLowWinter" prepend="AND">
+          <![CDATA[MODEL_TEMP_LOW_WINTER = #where.ModelTempLowWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempSetWinter" prepend="AND">
+          <![CDATA[PLATE_TEMP_SET_WINTER = #where.PlateTempSetWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempHighWinter" prepend="AND">
+          <![CDATA[PLATE_TEMP_HIGH_WINTER = #where.PlateTempHighWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempLowWinter" prepend="AND">
+          <![CDATA[PLATE_TEMP_LOW_WINTER = #where.PlateTempLowWinter#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

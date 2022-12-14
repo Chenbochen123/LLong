@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BasicMapper.ItfSapProductionHead"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="ItfSapProductionHead" type="Mesnac.Molding.Entity.BasicEntity.ItfSapProductionHead, Mesnac.Molding.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_ItfSapProductionHead" class="ItfSapProductionHead">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Busid" column="BUSID"/>
+    <result property="Bustyp" column="BUSTYP"/>
+    <result property="Tldid" column="TLDID"/>
+    <result property="Tlgnam" column="TLGNAM"/>
+    <result property="Dtsend" column="DTSEND"/>
+    <result property="Sender" column="SENDER"/>
+    <result property="Reciever" column="RECIEVER"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="RecordDate" column="RECORD_DATE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_ItfSapProductionHead" class="ItfSapProductionHead">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Busid" column="Busid"/>
+    <parameter property="Bustyp" column="Bustyp"/>
+    <parameter property="Tldid" column="Tldid"/>
+    <parameter property="Tlgnam" column="Tlgnam"/>
+    <parameter property="Dtsend" column="Dtsend"/>
+    <parameter property="Sender" column="Sender"/>
+    <parameter property="Reciever" column="Reciever"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="RecordDate" column="RecordDate"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM ITF_SAP_PRODUCTION_HEAD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Busid" prepend="AND">
+          <![CDATA[BUSID = #where.Busid#]]>
+        </isNotNull>
+        <isNotNull property="where.Bustyp" prepend="AND">
+          <![CDATA[BUSTYP = #where.Bustyp#]]>
+        </isNotNull>
+        <isNotNull property="where.Tldid" prepend="AND">
+          <![CDATA[TLDID = #where.Tldid#]]>
+        </isNotNull>
+        <isNotNull property="where.Tlgnam" prepend="AND">
+          <![CDATA[TLGNAM = #where.Tlgnam#]]>
+        </isNotNull>
+        <isNotNull property="where.Dtsend" prepend="AND">
+          <![CDATA[DTSEND = #where.Dtsend#]]>
+        </isNotNull>
+        <isNotNull property="where.Sender" prepend="AND">
+          <![CDATA[SENDER = #where.Sender#]]>
+        </isNotNull>
+        <isNotNull property="where.Reciever" prepend="AND">
+          <![CDATA[RECIEVER = #where.Reciever#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordDate" prepend="AND">
+          <![CDATA[RECORD_DATE = #where.RecordDate#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO ITF_SAP_PRODUCTION_HEAD]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="Busid" prepend=",">BUSID</isNotNull>
+        <isNotNull property="Bustyp" prepend=",">BUSTYP</isNotNull>
+        <isNotNull property="Tldid" prepend=",">TLDID</isNotNull>
+        <isNotNull property="Tlgnam" prepend=",">TLGNAM</isNotNull>
+        <isNotNull property="Dtsend" prepend=",">DTSEND</isNotNull>
+        <isNotNull property="Sender" prepend=",">SENDER</isNotNull>
+        <isNotNull property="Reciever" prepend=",">RECIEVER</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="RecordDate" prepend=",">RECORD_DATE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_ITF_SAP_PRODUCTION_HEAD.NEXTVAL</isNull>
+        <isNotNull property="Busid" prepend=",">#Busid#</isNotNull>
+        <isNotNull property="Bustyp" prepend=",">#Bustyp#</isNotNull>
+        <isNotNull property="Tldid" prepend=",">#Tldid#</isNotNull>
+        <isNotNull property="Tlgnam" prepend=",">#Tlgnam#</isNotNull>
+        <isNotNull property="Dtsend" prepend=",">#Dtsend#</isNotNull>
+        <isNotNull property="Sender" prepend=",">#Sender#</isNotNull>
+        <isNotNull property="Reciever" prepend=",">#Reciever#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="RecordDate" prepend=",">#RecordDate#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE ITF_SAP_PRODUCTION_HEAD
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Busid"  prepend=",">
+          BUSID = #update.Busid#
+        </isNotNull>
+        <isNotNull  property="update.Bustyp"  prepend=",">
+          BUSTYP = #update.Bustyp#
+        </isNotNull>
+        <isNotNull  property="update.Tldid"  prepend=",">
+          TLDID = #update.Tldid#
+        </isNotNull>
+        <isNotNull  property="update.Tlgnam"  prepend=",">
+          TLGNAM = #update.Tlgnam#
+        </isNotNull>
+        <isNotNull  property="update.Dtsend"  prepend=",">
+          DTSEND = #update.Dtsend#
+        </isNotNull>
+        <isNotNull  property="update.Sender"  prepend=",">
+          SENDER = #update.Sender#
+        </isNotNull>
+        <isNotNull  property="update.Reciever"  prepend=",">
+          RECIEVER = #update.Reciever#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.RecordDate"  prepend=",">
+          RECORD_DATE = #update.RecordDate#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM ITF_SAP_PRODUCTION_HEAD
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_ItfSapProductionHead">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_ItfSapProductionHead">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM ITF_SAP_PRODUCTION_HEAD
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM ITF_SAP_PRODUCTION_HEAD
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_ItfSapProductionHead" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE ITF_SAP_PRODUCTION_HEAD
+    </statement>
+  </statements>
+</sqlMap>

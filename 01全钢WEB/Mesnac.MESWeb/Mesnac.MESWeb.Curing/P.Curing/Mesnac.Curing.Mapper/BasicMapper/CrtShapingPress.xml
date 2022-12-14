@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CrtShapingPress"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CrtShapingPress" type="Mesnac.Curing.Entity.BasicEntity.CrtShapingPress, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CrtShapingPress" class="CrtShapingPress">
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="ShapingPressCode" column="SHAPING_PRESS_CODE"/>
+    <result property="UsedAmountRange1" column="USED_AMOUNT_RANGE_1"/>
+    <result property="FirstShapingPress1" column="FIRST_SHAPING_PRESS_1"/>
+    <result property="SecondShapingPress1" column="SECOND_SHAPING_PRESS_1"/>
+    <result property="ThirdShapingPress1" column="THIRD_SHAPING_PRESS_1"/>
+    <result property="UsedAmountRange2" column="USED_AMOUNT_RANGE_2"/>
+    <result property="FirstShapingPress2" column="FIRST_SHAPING_PRESS_2"/>
+    <result property="SecondShapingPress2" column="SECOND_SHAPING_PRESS_2"/>
+    <result property="ThirdShapingPress2" column="THIRD_SHAPING_PRESS_2"/>
+    <result property="UsedAmountRange3" column="USED_AMOUNT_RANGE_3"/>
+    <result property="FirstShapingPress3" column="FIRST_SHAPING_PRESS_3"/>
+    <result property="SecondShapingPress3" column="SECOND_SHAPING_PRESS_3"/>
+    <result property="ThirdShapingPress3" column="THIRD_SHAPING_PRESS_3"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="AuditFlag" column="AUDIT_FLAG"/>
+    <result property="UsedFlag" column="USED_FLAG"/>
+    <result property="ModifyTime" column="MODIFY_TIME"/>
+    <result property="ModifyUserId" column="MODIFY_USER_ID"/>
+    <result property="AuditTime" column="AUDIT_TIME"/>
+    <result property="AuditUserId" column="AUDIT_USER_ID"/>
+    <result property="ObjId" column="OBJID"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CrtShapingPress" class="CrtShapingPress">
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="ShapingPressCode" column="ShapingPressCode"/>
+    <parameter property="UsedAmountRange1" column="UsedAmountRange1"/>
+    <parameter property="FirstShapingPress1" column="FirstShapingPress1"/>
+    <parameter property="SecondShapingPress1" column="SecondShapingPress1"/>
+    <parameter property="ThirdShapingPress1" column="ThirdShapingPress1"/>
+    <parameter property="UsedAmountRange2" column="UsedAmountRange2"/>
+    <parameter property="FirstShapingPress2" column="FirstShapingPress2"/>
+    <parameter property="SecondShapingPress2" column="SecondShapingPress2"/>
+    <parameter property="ThirdShapingPress2" column="ThirdShapingPress2"/>
+    <parameter property="UsedAmountRange3" column="UsedAmountRange3"/>
+    <parameter property="FirstShapingPress3" column="FirstShapingPress3"/>
+    <parameter property="SecondShapingPress3" column="SecondShapingPress3"/>
+    <parameter property="ThirdShapingPress3" column="ThirdShapingPress3"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="AuditFlag" column="AuditFlag"/>
+    <parameter property="UsedFlag" column="UsedFlag"/>
+    <parameter property="ModifyTime" column="ModifyTime"/>
+    <parameter property="ModifyUserId" column="ModifyUserId"/>
+    <parameter property="AuditTime" column="AuditTime"/>
+    <parameter property="AuditUserId" column="AuditUserId"/>
+    <parameter property="ObjId" column="ObjId"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_SHAPING_PRESS ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingPressCode" prepend="AND">
+          <![CDATA[SHAPING_PRESS_CODE = #where.ShapingPressCode#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedAmountRange1" prepend="AND">
+          <![CDATA[USED_AMOUNT_RANGE_1 = #where.UsedAmountRange1#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress1" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_1 = #where.FirstShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress1" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_1 = #where.SecondShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.ThirdShapingPress1" prepend="AND">
+          <![CDATA[THIRD_SHAPING_PRESS_1 = #where.ThirdShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedAmountRange2" prepend="AND">
+          <![CDATA[USED_AMOUNT_RANGE_2 = #where.UsedAmountRange2#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress2" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_2 = #where.FirstShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress2" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_2 = #where.SecondShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.ThirdShapingPress2" prepend="AND">
+          <![CDATA[THIRD_SHAPING_PRESS_2 = #where.ThirdShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedAmountRange3" prepend="AND">
+          <![CDATA[USED_AMOUNT_RANGE_3 = #where.UsedAmountRange3#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress3" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_3 = #where.FirstShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress3" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_3 = #where.SecondShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.ThirdShapingPress3" prepend="AND">
+          <![CDATA[THIRD_SHAPING_PRESS_3 = #where.ThirdShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditFlag" prepend="AND">
+          <![CDATA[AUDIT_FLAG = #where.AuditFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ModifyTime" prepend="AND">
+          <![CDATA[MODIFY_TIME = #where.ModifyTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ModifyUserId" prepend="AND">
+          <![CDATA[MODIFY_USER_ID = #where.ModifyUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditTime" prepend="AND">
+          <![CDATA[AUDIT_TIME = #where.AuditTime#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditUserId" prepend="AND">
+          <![CDATA[AUDIT_USER_ID = #where.AuditUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CRT_SHAPING_PRESS]]>
+       <dynamic prepend="(">
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="ShapingPressCode" prepend=",">SHAPING_PRESS_CODE</isNotNull>
+        <isNotNull property="UsedAmountRange1" prepend=",">USED_AMOUNT_RANGE_1</isNotNull>
+        <isNotNull property="FirstShapingPress1" prepend=",">FIRST_SHAPING_PRESS_1</isNotNull>
+        <isNotNull property="SecondShapingPress1" prepend=",">SECOND_SHAPING_PRESS_1</isNotNull>
+        <isNotNull property="ThirdShapingPress1" prepend=",">THIRD_SHAPING_PRESS_1</isNotNull>
+        <isNotNull property="UsedAmountRange2" prepend=",">USED_AMOUNT_RANGE_2</isNotNull>
+        <isNotNull property="FirstShapingPress2" prepend=",">FIRST_SHAPING_PRESS_2</isNotNull>
+        <isNotNull property="SecondShapingPress2" prepend=",">SECOND_SHAPING_PRESS_2</isNotNull>
+        <isNotNull property="ThirdShapingPress2" prepend=",">THIRD_SHAPING_PRESS_2</isNotNull>
+        <isNotNull property="UsedAmountRange3" prepend=",">USED_AMOUNT_RANGE_3</isNotNull>
+        <isNotNull property="FirstShapingPress3" prepend=",">FIRST_SHAPING_PRESS_3</isNotNull>
+        <isNotNull property="SecondShapingPress3" prepend=",">SECOND_SHAPING_PRESS_3</isNotNull>
+        <isNotNull property="ThirdShapingPress3" prepend=",">THIRD_SHAPING_PRESS_3</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="AuditFlag" prepend=",">AUDIT_FLAG</isNotNull>
+        <isNotNull property="UsedFlag" prepend=",">USED_FLAG</isNotNull>
+        <isNotNull property="ModifyTime" prepend=",">MODIFY_TIME</isNotNull>
+        <isNotNull property="ModifyUserId" prepend=",">MODIFY_USER_ID</isNotNull>
+        <isNotNull property="AuditTime" prepend=",">AUDIT_TIME</isNotNull>
+        <isNotNull property="AuditUserId" prepend=",">AUDIT_USER_ID</isNotNull>
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="ShapingPressCode" prepend=",">#ShapingPressCode#</isNotNull>
+        <isNotNull property="UsedAmountRange1" prepend=",">#UsedAmountRange1#</isNotNull>
+        <isNotNull property="FirstShapingPress1" prepend=",">#FirstShapingPress1#</isNotNull>
+        <isNotNull property="SecondShapingPress1" prepend=",">#SecondShapingPress1#</isNotNull>
+        <isNotNull property="ThirdShapingPress1" prepend=",">#ThirdShapingPress1#</isNotNull>
+        <isNotNull property="UsedAmountRange2" prepend=",">#UsedAmountRange2#</isNotNull>
+        <isNotNull property="FirstShapingPress2" prepend=",">#FirstShapingPress2#</isNotNull>
+        <isNotNull property="SecondShapingPress2" prepend=",">#SecondShapingPress2#</isNotNull>
+        <isNotNull property="ThirdShapingPress2" prepend=",">#ThirdShapingPress2#</isNotNull>
+        <isNotNull property="UsedAmountRange3" prepend=",">#UsedAmountRange3#</isNotNull>
+        <isNotNull property="FirstShapingPress3" prepend=",">#FirstShapingPress3#</isNotNull>
+        <isNotNull property="SecondShapingPress3" prepend=",">#SecondShapingPress3#</isNotNull>
+        <isNotNull property="ThirdShapingPress3" prepend=",">#ThirdShapingPress3#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="AuditFlag" prepend=",">#AuditFlag#</isNotNull>
+        <isNotNull property="UsedFlag" prepend=",">#UsedFlag#</isNotNull>
+        <isNotNull property="ModifyTime" prepend=",">#ModifyTime#</isNotNull>
+        <isNotNull property="ModifyUserId" prepend=",">#ModifyUserId#</isNotNull>
+        <isNotNull property="AuditTime" prepend=",">#AuditTime#</isNotNull>
+        <isNotNull property="AuditUserId" prepend=",">#AuditUserId#</isNotNull>
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CRT_SHAPING_PRESS
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.ShapingPressCode"  prepend=",">
+          SHAPING_PRESS_CODE = #update.ShapingPressCode#
+        </isNotNull>
+        <isNotNull  property="update.UsedAmountRange1"  prepend=",">
+          USED_AMOUNT_RANGE_1 = #update.UsedAmountRange1#
+        </isNotNull>
+        <isNotNull  property="update.FirstShapingPress1"  prepend=",">
+          FIRST_SHAPING_PRESS_1 = #update.FirstShapingPress1#
+        </isNotNull>
+        <isNotNull  property="update.SecondShapingPress1"  prepend=",">
+          SECOND_SHAPING_PRESS_1 = #update.SecondShapingPress1#
+        </isNotNull>
+        <isNotNull  property="update.ThirdShapingPress1"  prepend=",">
+          THIRD_SHAPING_PRESS_1 = #update.ThirdShapingPress1#
+        </isNotNull>
+        <isNotNull  property="update.UsedAmountRange2"  prepend=",">
+          USED_AMOUNT_RANGE_2 = #update.UsedAmountRange2#
+        </isNotNull>
+        <isNotNull  property="update.FirstShapingPress2"  prepend=",">
+          FIRST_SHAPING_PRESS_2 = #update.FirstShapingPress2#
+        </isNotNull>
+        <isNotNull  property="update.SecondShapingPress2"  prepend=",">
+          SECOND_SHAPING_PRESS_2 = #update.SecondShapingPress2#
+        </isNotNull>
+        <isNotNull  property="update.ThirdShapingPress2"  prepend=",">
+          THIRD_SHAPING_PRESS_2 = #update.ThirdShapingPress2#
+        </isNotNull>
+        <isNotNull  property="update.UsedAmountRange3"  prepend=",">
+          USED_AMOUNT_RANGE_3 = #update.UsedAmountRange3#
+        </isNotNull>
+        <isNotNull  property="update.FirstShapingPress3"  prepend=",">
+          FIRST_SHAPING_PRESS_3 = #update.FirstShapingPress3#
+        </isNotNull>
+        <isNotNull  property="update.SecondShapingPress3"  prepend=",">
+          SECOND_SHAPING_PRESS_3 = #update.SecondShapingPress3#
+        </isNotNull>
+        <isNotNull  property="update.ThirdShapingPress3"  prepend=",">
+          THIRD_SHAPING_PRESS_3 = #update.ThirdShapingPress3#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.AuditFlag"  prepend=",">
+          AUDIT_FLAG = #update.AuditFlag#
+        </isNotNull>
+        <isNotNull  property="update.UsedFlag"  prepend=",">
+          USED_FLAG = #update.UsedFlag#
+        </isNotNull>
+        <isNotNull  property="update.ModifyTime"  prepend=",">
+          MODIFY_TIME = #update.ModifyTime#
+        </isNotNull>
+        <isNotNull  property="update.ModifyUserId"  prepend=",">
+          MODIFY_USER_ID = #update.ModifyUserId#
+        </isNotNull>
+        <isNotNull  property="update.AuditTime"  prepend=",">
+          AUDIT_TIME = #update.AuditTime#
+        </isNotNull>
+        <isNotNull  property="update.AuditUserId"  prepend=",">
+          AUDIT_USER_ID = #update.AuditUserId#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CRT_SHAPING_PRESS
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CrtShapingPress">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CrtShapingPress">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CRT_SHAPING_PRESS
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CRT_SHAPING_PRESS
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CrtShapingPress" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CRT_SHAPING_PRESS
+    </statement>
+  </statements>
+</sqlMap>

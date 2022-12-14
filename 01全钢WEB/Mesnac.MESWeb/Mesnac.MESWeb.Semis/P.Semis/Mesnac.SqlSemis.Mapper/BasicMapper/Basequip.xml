@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.SqlSemis.Mapper.BasicMapper.Basequip"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="Basequip" type="Mesnac.SqlSemis.Entity.BasicEntity.Basequip, Mesnac.SqlSemis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_Basequip" class="Basequip">
+    <result property="ObjId" column="ObjID"/>
+    <result property="Equipcode" column="EquipCode"/>
+    <result property="Equiptype" column="EquipType"/>
+    <result property="Equipname" column="EquipName"/>
+    <result property="Equipip" column="EquipIP"/>
+    <result property="Equipgroup" column="EquipGroup"/>
+    <result property="Workshopcode" column="WorkShopCode"/>
+    <result property="Subfac" column="SubFac"/>
+    <result property="Mixequiptype" column="MixEquipType"/>
+    <result property="Isonemix" column="IsOneMix"/>
+    <result property="Ledip" column="LEDIP"/>
+    <result property="Areacode" column="AreaCode"/>
+    <result property="Isfinalmixing" column="IsFinalMixing"/>
+    <result property="Isproenvironment" column="IsProEnvironment"/>
+    <result property="Mixtype" column="MixType"/>
+    <result property="Remark" column="Remark"/>
+    <result property="Deleteflag" column="DeleteFlag"/>
+    <result property="Equipverify" column="EquipVerify"/>
+    <result property="Stockno" column="StockNO"/>
+    <result property="Stockkw" column="StockKW"/>
+    <result property="Repairuser" column="RepairUser"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_Basequip" class="Basequip">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Equipcode" column="Equipcode"/>
+    <parameter property="Equiptype" column="Equiptype"/>
+    <parameter property="Equipname" column="Equipname"/>
+    <parameter property="Equipip" column="Equipip"/>
+    <parameter property="Equipgroup" column="Equipgroup"/>
+    <parameter property="Workshopcode" column="Workshopcode"/>
+    <parameter property="Subfac" column="Subfac"/>
+    <parameter property="Mixequiptype" column="Mixequiptype"/>
+    <parameter property="Isonemix" column="Isonemix"/>
+    <parameter property="Ledip" column="Ledip"/>
+    <parameter property="Areacode" column="Areacode"/>
+    <parameter property="Isfinalmixing" column="Isfinalmixing"/>
+    <parameter property="Isproenvironment" column="Isproenvironment"/>
+    <parameter property="Mixtype" column="Mixtype"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="Deleteflag" column="Deleteflag"/>
+    <parameter property="Equipverify" column="Equipverify"/>
+    <parameter property="Stockno" column="Stockno"/>
+    <parameter property="Stockkw" column="Stockkw"/>
+    <parameter property="Repairuser" column="Repairuser"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BasEquip ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[ObjID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipcode" prepend="AND">
+          <![CDATA[EquipCode = #where.Equipcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Equiptype" prepend="AND">
+          <![CDATA[EquipType = #where.Equiptype#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipname" prepend="AND">
+          <![CDATA[EquipName = #where.Equipname#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipip" prepend="AND">
+          <![CDATA[EquipIP = #where.Equipip#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipgroup" prepend="AND">
+          <![CDATA[EquipGroup = #where.Equipgroup#]]>
+        </isNotNull>
+        <isNotNull property="where.Workshopcode" prepend="AND">
+          <![CDATA[WorkShopCode = #where.Workshopcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Subfac" prepend="AND">
+          <![CDATA[SubFac = #where.Subfac#]]>
+        </isNotNull>
+        <isNotNull property="where.Mixequiptype" prepend="AND">
+          <![CDATA[MixEquipType = #where.Mixequiptype#]]>
+        </isNotNull>
+        <isNotNull property="where.Isonemix" prepend="AND">
+          <![CDATA[IsOneMix = #where.Isonemix#]]>
+        </isNotNull>
+        <isNotNull property="where.Ledip" prepend="AND">
+          <![CDATA[LEDIP = #where.Ledip#]]>
+        </isNotNull>
+        <isNotNull property="where.Areacode" prepend="AND">
+          <![CDATA[AreaCode = #where.Areacode#]]>
+        </isNotNull>
+        <isNotNull property="where.Isfinalmixing" prepend="AND">
+          <![CDATA[IsFinalMixing = #where.Isfinalmixing#]]>
+        </isNotNull>
+        <isNotNull property="where.Isproenvironment" prepend="AND">
+          <![CDATA[IsProEnvironment = #where.Isproenvironment#]]>
+        </isNotNull>
+        <isNotNull property="where.Mixtype" prepend="AND">
+          <![CDATA[MixType = #where.Mixtype#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[Remark = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Deleteflag" prepend="AND">
+          <![CDATA[DeleteFlag = #where.Deleteflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipverify" prepend="AND">
+          <![CDATA[EquipVerify = #where.Equipverify#]]>
+        </isNotNull>
+        <isNotNull property="where.Stockno" prepend="AND">
+          <![CDATA[StockNO = #where.Stockno#]]>
+        </isNotNull>
+        <isNotNull property="where.Stockkw" prepend="AND">
+          <![CDATA[StockKW = #where.Stockkw#]]>
+        </isNotNull>
+        <isNotNull property="where.Repairuser" prepend="AND">
+          <![CDATA[RepairUser = #where.Repairuser#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO BasEquip]]>
+       <dynamic prepend="(ObjID,">
+        <isNotNull property="Equiptype" prepend=",">EquipType</isNotNull>
+        <isNotNull property="Equipname" prepend=",">EquipName</isNotNull>
+        <isNotNull property="Equipip" prepend=",">EquipIP</isNotNull>
+        <isNotNull property="Equipgroup" prepend=",">EquipGroup</isNotNull>
+        <isNotNull property="Workshopcode" prepend=",">WorkShopCode</isNotNull>
+        <isNotNull property="Subfac" prepend=",">SubFac</isNotNull>
+        <isNotNull property="Mixequiptype" prepend=",">MixEquipType</isNotNull>
+        <isNotNull property="Isonemix" prepend=",">IsOneMix</isNotNull>
+        <isNotNull property="Ledip" prepend=",">LEDIP</isNotNull>
+        <isNotNull property="Areacode" prepend=",">AreaCode</isNotNull>
+        <isNotNull property="Isfinalmixing" prepend=",">IsFinalMixing</isNotNull>
+        <isNotNull property="Isproenvironment" prepend=",">IsProEnvironment</isNotNull>
+        <isNotNull property="Mixtype" prepend=",">MixType</isNotNull>
+        <isNotNull property="Remark" prepend=",">Remark</isNotNull>
+        <isNotNull property="Deleteflag" prepend=",">DeleteFlag</isNotNull>
+        <isNotNull property="Equipverify" prepend=",">EquipVerify</isNotNull>
+        <isNotNull property="Stockno" prepend=",">StockNO</isNotNull>
+        <isNotNull property="Stockkw" prepend=",">StockKW</isNotNull>
+        <isNotNull property="Repairuser" prepend=",">RepairUser</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_BasEquip.NEXTVAL</isNull>
+        <isNotNull property="Equiptype" prepend=",">#Equiptype#</isNotNull>
+        <isNotNull property="Equipname" prepend=",">#Equipname#</isNotNull>
+        <isNotNull property="Equipip" prepend=",">#Equipip#</isNotNull>
+        <isNotNull property="Equipgroup" prepend=",">#Equipgroup#</isNotNull>
+        <isNotNull property="Workshopcode" prepend=",">#Workshopcode#</isNotNull>
+        <isNotNull property="Subfac" prepend=",">#Subfac#</isNotNull>
+        <isNotNull property="Mixequiptype" prepend=",">#Mixequiptype#</isNotNull>
+        <isNotNull property="Isonemix" prepend=",">#Isonemix#</isNotNull>
+        <isNotNull property="Ledip" prepend=",">#Ledip#</isNotNull>
+        <isNotNull property="Areacode" prepend=",">#Areacode#</isNotNull>
+        <isNotNull property="Isfinalmixing" prepend=",">#Isfinalmixing#</isNotNull>
+        <isNotNull property="Isproenvironment" prepend=",">#Isproenvironment#</isNotNull>
+        <isNotNull property="Mixtype" prepend=",">#Mixtype#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="Deleteflag" prepend=",">#Deleteflag#</isNotNull>
+        <isNotNull property="Equipverify" prepend=",">#Equipverify#</isNotNull>
+        <isNotNull property="Stockno" prepend=",">#Stockno#</isNotNull>
+        <isNotNull property="Stockkw" prepend=",">#Stockkw#</isNotNull>
+        <isNotNull property="Repairuser" prepend=",">#Repairuser#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE BasEquip
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Equiptype"  prepend=",">
+          EquipType = #update.Equiptype#
+        </isNotNull>
+        <isNotNull  property="update.Equipname"  prepend=",">
+          EquipName = #update.Equipname#
+        </isNotNull>
+        <isNotNull  property="update.Equipip"  prepend=",">
+          EquipIP = #update.Equipip#
+        </isNotNull>
+        <isNotNull  property="update.Equipgroup"  prepend=",">
+          EquipGroup = #update.Equipgroup#
+        </isNotNull>
+        <isNotNull  property="update.Workshopcode"  prepend=",">
+          WorkShopCode = #update.Workshopcode#
+        </isNotNull>
+        <isNotNull  property="update.Subfac"  prepend=",">
+          SubFac = #update.Subfac#
+        </isNotNull>
+        <isNotNull  property="update.Mixequiptype"  prepend=",">
+          MixEquipType = #update.Mixequiptype#
+        </isNotNull>
+        <isNotNull  property="update.Isonemix"  prepend=",">
+          IsOneMix = #update.Isonemix#
+        </isNotNull>
+        <isNotNull  property="update.Ledip"  prepend=",">
+          LEDIP = #update.Ledip#
+        </isNotNull>
+        <isNotNull  property="update.Areacode"  prepend=",">
+          AreaCode = #update.Areacode#
+        </isNotNull>
+        <isNotNull  property="update.Isfinalmixing"  prepend=",">
+          IsFinalMixing = #update.Isfinalmixing#
+        </isNotNull>
+        <isNotNull  property="update.Isproenvironment"  prepend=",">
+          IsProEnvironment = #update.Isproenvironment#
+        </isNotNull>
+        <isNotNull  property="update.Mixtype"  prepend=",">
+          MixType = #update.Mixtype#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          Remark = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.Deleteflag"  prepend=",">
+          DeleteFlag = #update.Deleteflag#
+        </isNotNull>
+        <isNotNull  property="update.Equipverify"  prepend=",">
+          EquipVerify = #update.Equipverify#
+        </isNotNull>
+        <isNotNull  property="update.Stockno"  prepend=",">
+          StockNO = #update.Stockno#
+        </isNotNull>
+        <isNotNull  property="update.Stockkw"  prepend=",">
+          StockKW = #update.Stockkw#
+        </isNotNull>
+        <isNotNull  property="update.Repairuser"  prepend=",">
+          RepairUser = #update.Repairuser#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM BasEquip
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_Basequip">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_Basequip">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM BasEquip
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM BasEquip
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_Basequip" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE BasEquip
+    </statement>
+  </statements>
+</sqlMap>

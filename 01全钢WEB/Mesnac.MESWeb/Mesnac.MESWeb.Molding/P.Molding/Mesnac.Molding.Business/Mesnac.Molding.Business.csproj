@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A9CA6236-5311-4B62-A441-8EFA978BA2E9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Molding.Business</RootNamespace>
+    <AssemblyName>Mesnac.Molding.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\@packages\MyBatis\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\@packages\MyBatis\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.DbAccess">
+      <HintPath>..\..\@packages\Frame\Mesnac.DbAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.Common">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.DataMapper">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\MoldingCommonManager.cs" />
+    <Compile Include="Common\StorePlace.cs" />
+    <Compile Include="Implements\BbeEquipControlManager.cs" />
+    <Compile Include="Implements\BpmCorrectInfoManager.cs" />
+    <Compile Include="Implements\BpmEquipCurrentMaterialManager.cs" />
+    <Compile Include="Implements\BpmMoldingBarcodeManager.cs" />
+    <Compile Include="Implements\BpmProductionManager.cs" />
+    <Compile Include="Implements\BpmShiftDetailManager.cs" />
+    <Compile Include="Implements\BpmShiftMasterManager.cs" />
+    <Compile Include="Implements\BpmTraceInfoManager.cs" />
+    <Compile Include="Implements\BpmWeightInfoManager.cs" />
+    <Compile Include="Implements\BppGetMaterPlanManager.cs" />
+    <Compile Include="Implements\BppPlanDetailManager.cs" />
+    <Compile Include="Implements\BppPlanManager.cs" />
+    <Compile Include="Implements\BppPlanStateManager.cs" />
+    <Compile Include="Implements\BppPlanTypeManager.cs" />
+    <Compile Include="Implements\BppScanLogManager.cs" />
+    <Compile Include="Implements\BppToolingPlanImplementManager.cs" />
+    <Compile Include="Implements\BppToolingPlanManager.cs" />
+    <Compile Include="Implements\BppTraceMoldingInfoManager.cs" />
+    <Compile Include="Implements\BptMoldingTechDataManager.cs" />
+    <Compile Include="Implements\BptMoldingTechManager.cs" />
+    <Compile Include="Implements\BqcDefectManager.cs" />
+    <Compile Include="Implements\BqcDegradeInfoManager.cs" />
+    <Compile Include="Implements\BqcGradeManager.cs" />
+    <Compile Include="Implements\BqcQcrecordManager.cs" />
+    <Compile Include="Implements\BqcRepairManager.cs" />
+    <Compile Include="Implements\BqcShiftDetailManager.cs" />
+    <Compile Include="Implements\BqcShiftMasterManager.cs" />
+    <Compile Include="Implements\BslWebserviceLogManager.cs" />
+    <Compile Include="Implements\BsmEquipPlaceManager.cs" />
+    <Compile Include="Implements\BsmInventoryBillManager.cs" />
+    <Compile Include="Implements\BsmInventoryDetailManager.cs" />
+    <Compile Include="Implements\BsmMoldingFirstInspectManager.cs" />
+    <Compile Include="Implements\BsmReturnStoreDetailManager.cs" />
+    <Compile Include="Implements\BsmReturnStoreToolingManager.cs" />
+    <Compile Include="Implements\BsmReturnWsDetailManager.cs" />
+    <Compile Include="Implements\BsmReturnWsToolingManager.cs" />
+    <Compile Include="Implements\BsmScanLogManager.cs" />
+    <Compile Include="Implements\BsmStockInDetailManager.cs" />
+    <Compile Include="Implements\BsmStockInToolingManager.cs" />
+    <Compile Include="Implements\BsmStockOutDetailManager.cs" />
+    <Compile Include="Implements\BsmStockOutToolingManager.cs" />
+    <Compile Include="Implements\BsmStorageDetailManager.cs" />
+    <Compile Include="Implements\BsmStorageMainManager.cs" />
+    <Compile Include="Implements\BsmStorageToolingManager.cs" />
+    <Compile Include="Implements\BsmStoreManager.cs" />
+    <Compile Include="Implements\BsmStorePlaceManager.cs" />
+    <Compile Include="Implements\BsmToolingCarManager.cs" />
+    <Compile Include="Implements\BsmToolingLoadDetailManager.cs" />
+    <Compile Include="Implements\BsmToolingLoadMainManager.cs" />
+    <Compile Include="Implements\BsmToolingScanLogManager.cs" />
+    <Compile Include="Implements\BsmToolingUnloadRecordManager.cs" />
+    <Compile Include="Implements\CsmReturnStoreDetailManager.cs" />
+    <Compile Include="Implements\CsmReturnStoreToolingManager.cs" />
+    <Compile Include="Implements\CsmReturnWsDetailManager.cs" />
+    <Compile Include="Implements\CsmReturnWsToolingManager.cs" />
+    <Compile Include="Implements\CsmStockInDetailManager.cs" />
+    <Compile Include="Implements\CsmStockInToolingManager.cs" />
+    <Compile Include="Implements\CsmStockOutDetailManager.cs" />
+    <Compile Include="Implements\CsmStockOutToolingManager.cs" />
+    <Compile Include="Implements\CsmStorageDetailManager.cs" />
+    <Compile Include="Implements\CsmStorageMainManager.cs" />
+    <Compile Include="Implements\CsmStorageToolingManager.cs" />
+    <Compile Include="Implements\CsmStoreManager.cs" />
+    <Compile Include="Implements\CsmStorePlaceManager.cs" />
+    <Compile Include="Implements\HppInStockDetailManager.cs" />
+    <Compile Include="Implements\HppOutStockDetailManager.cs" />
+    <Compile Include="Implements\HppPlanDetailManager.cs" />
+    <Compile Include="Implements\HppPlanManager.cs" />
+    <Compile Include="Implements\HppSemisProductionManager.cs" />
+    <Compile Include="Implements\HppStorageDetailManager.cs" />
+    <Compile Include="Implements\HsmToolingLoadManager.cs" />
+    <Compile Include="Implements\HsmToolingManager.cs" />
+    <Compile Include="Implements\HsmToolingTypeManager.cs" />
+    <Compile Include="Implements\ItfMesMblpDetailManager.cs" />
+    <Compile Include="Implements\ItfMesMblpManager.cs" />
+    <Compile Include="Implements\ItfMesMproductionDetailManager.cs" />
+    <Compile Include="Implements\ItfMesMproductionManager.cs" />
+    <Compile Include="Implements\ItfSapProductionHeadManager.cs" />
+    <Compile Include="Implements\ItfSapProductionRecordsManager.cs" />
+    <Compile Include="Implements\SbeControlRecordManager.cs" />
+    <Compile Include="Implements\SbeEquipInspectionPlanManager.cs" />
+    <Compile Include="Implements\SbeEquipManager.cs" />
+    <Compile Include="Implements\SbeEquipRepairPlanManager.cs" />
+    <Compile Include="Implements\SbeInventoryRecordManager.cs" />
+    <Compile Include="Implements\SbeMoulddrumManager.cs" />
+    <Compile Include="Implements\SbeMoulddrumRecordManager.cs" />
+    <Compile Include="Implements\SbeSmsequipalarmManager.cs" />
+    <Compile Include="Implements\SbeStoprecordManager.cs" />
+    <Compile Include="Implements\SbeWeightunlockManager.cs" />
+    <Compile Include="Implements\SbmBomManager.cs" />
+    <Compile Include="Implements\SbmMaterialInfoManager.cs" />
+    <Compile Include="Implements\SbmMaterialManager.cs" />
+    <Compile Include="Implements\SbmMaterialMinorTypeManager.cs" />
+    <Compile Include="Implements\SeeEquipStopRecordManager.cs" />
+    <Compile Include="Implements\SppOldMaterialnameManager.cs" />
+    <Compile Include="Implements\SppToolingStateDetailManager.cs" />
+    <Compile Include="Implements\SppToolingStateMainManager.cs" />
+    <Compile Include="Implements\SppTyreStateManager.cs" />
+    <Compile Include="Implements\SsbClassManager.cs" />
+    <Compile Include="Implements\SsbConfigManager.cs" />
+    <Compile Include="Implements\SsbDeptManager.cs" />
+    <Compile Include="Implements\SsbShiftManager.cs" />
+    <Compile Include="Implements\SsbUserManager.cs" />
+    <Compile Include="Implements\VBbmMaterialManager.cs" />
+    <Compile Include="Implements\VBptMoldingTechManager.cs" />
+    <Compile Include="Interface\IBbeEquipControlManager.cs" />
+    <Compile Include="Interface\IBpmCorrectInfoManager.cs" />
+    <Compile Include="Interface\IBpmEquipCurrentMaterialManager.cs" />
+    <Compile Include="Interface\IBpmMoldingBarcodeManager.cs" />
+    <Compile Include="Interface\IBpmProductionManager.cs" />
+    <Compile Include="Interface\IBpmShiftDetailManager.cs" />
+    <Compile Include="Interface\IBpmShiftMasterManager.cs" />
+    <Compile Include="Interface\IBpmTraceInfoManager.cs" />
+    <Compile Include="Interface\IBpmWeightInfoManager.cs" />
+    <Compile Include="Interface\IBppGetMaterPlanManager.cs" />
+    <Compile Include="Interface\IBppPlanDetailManager.cs" />
+    <Compile Include="Interface\IBppPlanManager.cs" />
+    <Compile Include="Interface\IBppPlanStateManager.cs" />
+    <Compile Include="Interface\IBppPlanTypeManager.cs" />
+    <Compile Include="Interface\IBppScanLogManager.cs" />
+    <Compile Include="Interface\IBppToolingPlanImplementManager.cs" />
+    <Compile Include="Interface\IBppToolingPlanManager.cs" />
+    <Compile Include="Interface\IBppTraceMoldingInfoManager.cs" />
+    <Compile Include="Interface\IBptMoldingTechDataManager.cs" />
+    <Compile Include="Interface\IBptMoldingTechManager.cs" />
+    <Compile Include="Interface\IBqcDefectManager.cs" />
+    <Compile Include="Interface\IBqcDegradeInfoManager.cs" />
+    <Compile Include="Interface\IBqcGradeManager.cs" />
+    <Compile Include="Interface\IBqcQcrecordManager.cs" />
+    <Compile Include="Interface\IBqcRepairManager.cs" />
+    <Compile Include="Interface\IBqcShiftDetailManager.cs" />
+    <Compile Include="Interface\IBqcShiftMasterManager.cs" />
+    <Compile Include="Interface\IBslWebserviceLogManager.cs" />
+    <Compile Include="Interface\IBsmEquipPlaceManager.cs" />
+    <Compile Include="Interface\IBsmInventoryBillManager.cs" />
+    <Compile Include="Interface\IBsmInventoryDetailManager.cs" />
+    <Compile Include="Interface\IBsmMoldingFirstInspectManager.cs" />
+    <Compile Include="Interface\IBsmReturnStoreDetailManager.cs" />
+    <Compile Include="Interface\IBsmReturnStoreToolingManager.cs" />
+    <Compile Include="Interface\IBsmReturnWsDetailManager.cs" />
+    <Compile Include="Interface\IBsmReturnWsToolingManager.cs" />
+    <Compile Include="Interface\IBsmScanLogManager.cs" />
+    <Compile Include="Interface\IBsmStockInDetailManager.cs" />
+    <Compile Include="Interface\IBsmStockInToolingManager.cs" />
+    <Compile Include="Interface\IBsmStockOutDetailManager.cs" />
+    <Compile Include="Interface\IBsmStockOutToolingManager.cs" />
+    <Compile Include="Interface\IBsmStorageDetailManager.cs" />
+    <Compile Include="Interface\IBsmStorageMainManager.cs" />
+    <Compile Include="Interface\IBsmStorageToolingManager.cs" />
+    <Compile Include="Interface\IBsmStoreManager.cs" />
+    <Compile Include="Interface\IBsmStorePlaceManager.cs" />
+    <Compile Include="Interface\IBsmToolingCarManager.cs" />
+    <Compile Include="Interface\IBsmToolingLoadDetailManager.cs" />
+    <Compile Include="Interface\IBsmToolingLoadMainManager.cs" />
+    <Compile Include="Interface\IBsmToolingScanLogManager.cs" />
+    <Compile Include="Interface\IBsmToolingUnloadRecordManager.cs" />
+    <Compile Include="Interface\ICsmReturnStoreDetailManager.cs" />
+    <Compile Include="Interface\ICsmReturnStoreToolingManager.cs" />
+    <Compile Include="Interface\ICsmReturnWsDetailManager.cs" />
+    <Compile Include="Interface\ICsmReturnWsToolingManager.cs" />
+    <Compile Include="Interface\ICsmStockInDetailManager.cs" />
+    <Compile Include="Interface\ICsmStockInToolingManager.cs" />
+    <Compile Include="Interface\ICsmStockOutDetailManager.cs" />
+    <Compile Include="Interface\ICsmStockOutToolingManager.cs" />
+    <Compile Include="Interface\ICsmStorageDetailManager.cs" />
+    <Compile Include="Interface\ICsmStorageMainManager.cs" />
+    <Compile Include="Interface\ICsmStorageToolingManager.cs" />
+    <Compile Include="Interface\ICsmStoreManager.cs" />
+    <Compile Include="Interface\ICsmStorePlaceManager.cs" />
+    <Compile Include="Interface\IHppInStockDetailManager.cs" />
+    <Compile Include="Interface\IHppOutStockDetailManager.cs" />
+    <Compile Include="Interface\IHppPlanDetailManager.cs" />
+    <Compile Include="Interface\IHppPlanManager.cs" />
+    <Compile Include="Interface\IHppSemisProductionManager.cs" />
+    <Compile Include="Interface\IHppStorageDetailManager.cs" />
+    <Compile Include="Interface\IHsmToolingLoadManager.cs" />
+    <Compile Include="Interface\IHsmToolingManager.cs" />
+    <Compile Include="Interface\IHsmToolingTypeManager.cs" />
+    <Compile Include="Interface\IItfMesMblpDetailManager.cs" />
+    <Compile Include="Interface\IItfMesMblpManager.cs" />
+    <Compile Include="Interface\IItfMesMproductionDetailManager.cs" />
+    <Compile Include="Interface\IItfMesMproductionManager.cs" />
+    <Compile Include="Interface\IItfSapProductionHeadManager.cs" />
+    <Compile Include="Interface\IItfSapProductionRecordsManager.cs" />
+    <Compile Include="Interface\ISbeControlRecordManager.cs" />
+    <Compile Include="Interface\ISbeEquipInspectionPlanManager.cs" />
+    <Compile Include="Interface\ISbeEquipManager.cs" />
+    <Compile Include="Interface\ISbeEquipRepairPlanManager.cs" />
+    <Compile Include="Interface\ISbeInventoryRecordManager.cs" />
+    <Compile Include="Interface\ISbeMoulddrumManager.cs" />
+    <Compile Include="Interface\ISbeMoulddrumRecordManager.cs" />
+    <Compile Include="Interface\ISbeSmsequipalarmManager.cs" />
+    <Compile Include="Interface\ISbeStoprecordManager.cs" />
+    <Compile Include="Interface\ISbeWeightunlockManager.cs" />
+    <Compile Include="Interface\ISbmBomManager.cs" />
+    <Compile Include="Interface\ISbmMaterialInfoManager.cs" />
+    <Compile Include="Interface\ISbmMaterialManager.cs" />
+    <Compile Include="Interface\ISbmMaterialMinorTypeManager.cs" />
+    <Compile Include="Interface\ISeeEquipStopRecordManager.cs" />
+    <Compile Include="Interface\ISppOldMaterialnameManager.cs" />
+    <Compile Include="Interface\ISppToolingStateDetailManager.cs" />
+    <Compile Include="Interface\ISppToolingStateMainManager.cs" />
+    <Compile Include="Interface\ISppTyreStateManager.cs" />
+    <Compile Include="Interface\ISsbClassManager.cs" />
+    <Compile Include="Interface\ISsbConfigManager.cs" />
+    <Compile Include="Interface\ISsbDeptManager.cs" />
+    <Compile Include="Interface\ISsbShiftManager.cs" />
+    <Compile Include="Interface\ISsbUserManager.cs" />
+    <Compile Include="Interface\IVBbmMaterialManager.cs" />
+    <Compile Include="Interface\IVBptMoldingTechManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SapInterface\SapInterfaceManager.cs" />
+    <Compile Include="SapInterface\SI_DZMES_outService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Frame\Mesnac.DbAccess\Mesnac.DbAccess.csproj">
+      <Project>{60b919c5-c601-4999-a531-439042d59746}</Project>
+      <Name>Mesnac.DbAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Molding.Data\Mesnac.Molding.Data.csproj">
+      <Project>{88020D7A-9063-4AE4-AA91-364BCD04C71F}</Project>
+      <Name>Mesnac.Molding.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Molding.Entity\Mesnac.Molding.Entity.csproj">
+      <Project>{E62CD168-27B2-4670-B521-1E9F4C3944B8}</Project>
+      <Name>Mesnac.Molding.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

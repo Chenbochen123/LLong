@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@SearchBoxHppShiftMaster" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+       select t1.*, t2.SHIFT_NAME, t3.CLASS_NAME,t4.equip_name
+       , to_char(t1.SHIFT_DATE, 'yyyy-mm-dd') || ':' || t4.equip_name||':'|| t2.SHIFT_NAME || ':' || t3.CLASS_NAME SHIFT_MASTER_NAME 
+       from HPP_SHIFT_MASTER t1 
+       left join SSB_SHIFT t2 on t1.SHIFT_ID = t2.OBJID 
+       left join SSB_CLASS t3 on t1.CLASS_ID = t3.OBJID 
+       left join sbe_equip t4 on t4.objid = t1.equip_id
+       where t1.DELETE_FLAG = 0 
+      ]]>
+      <dynamic>
+        <isNotNull property="where.BEGIN_DATE" prepend="AND">
+          <![CDATA[t1.SHIFT_DATE >= #where.BEGIN_DATE#]]>
+        </isNotNull>
+        <isNotNull property="where.END_DATE" prepend="AND">
+          <![CDATA[t1.SHIFT_DATE <= #where.END_DATE#]]>
+        </isNotNull>
+        <isNotNull property="where.SHIFT_ID" prepend="AND">
+          <![CDATA[t1.SHIFT_ID = #where.SHIFT_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.CLASS_ID" prepend="AND">
+          <![CDATA[t1.CLASS_ID = #where.CLASS_ID#]]>
+        </isNotNull>
+       
+      </dynamic>
+      <isNotNull property="OrderString" prepend="">
+        order by $OrderString$
+      </isNotNull>
+    </select>
+
+    <!--查询班次信息，ID值固定为GetComboBoxData@Select@SearchBoxHppShiftMaster@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@SearchBoxHppShiftMaster@SHIFT_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,SHIFT_NAME ssValue from SSB_SHIFT where DELETE_FLAG = '0'
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        order by $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by OBJID
+      </isNull>
+    </select>
+
+    <!--查询班组信息，ID值固定为GetComboBoxData@Select@SearchBoxHppShiftMaster@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@SearchBoxHppShiftMaster@CLASS_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,CLASS_NAME ssValue from SSB_CLASS where DELETE_FLAG = '0'
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        order by $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by OBJID
+      </isNull>
+    </select>
+
+  </statements>
+</sqlMap>

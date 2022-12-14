@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.HppPlan"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_PLAN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDate" prepend="AND">
+          <![CDATA[PLAN_DATE = #where.PlanDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanState" prepend="AND">
+          <![CDATA[PLAN_STATE = #where.PlanState#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanType" prepend="AND">
+          <![CDATA[PLAN_TYPE = #where.PlanType#]]>
+        </isNotNull>
+        <isNotNull property="where.ProcedureId" prepend="AND">
+          <![CDATA[PROCEDURE_ID = #where.ProcedureId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetSplitPlanInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T3.MATERIAL_ID,T4.MATERIAL_NAME,SUM(T3.GROUP_NUM*T3.GROUP_UNIT_NUM*T1.PLAN_AMOUNT) QTY FROM BPP_PLAN T
+        LEFT JOIN BPP_PLAN_DETAIL T1 ON T1.PLAN_ID = T.OBJID
+        LEFT JOIN BPT_MOLDING_TECH T2 ON T2.OBJID = T1.TECH_ID
+        LEFT JOIN SBM_BOM_DATA T3 ON T3.MATERIAL_PARENT_ID = T1.MATERIAL_ID AND T1.BOM_ID = T3.BOM_VERSION AND T3.GREENTYRE_VERSION = T2.PDM_VERSION
+        LEFT JOIN SBM_MATERIAL T4 ON T4.OBJID = T3.MATERIAL_ID
+        WHERE T3.DELETE_FLAG=0  ]]>
+       <isNotNull property="EquipId" prepend="AND">
+         <![CDATA[ T.EQUIP_ID=#EquipId#]]>
+       </isNotNull>
+       <isNotNull property="ShiftId" prepend="AND">
+         <![CDATA[ T.SHIFT_ID=#ShiftId#]]>
+       </isNotNull>
+       <isNotNull property="ShiftDate" prepend="AND">
+         <![CDATA[ T.PLAN_DATE=#ShiftDate#]]>
+       </isNotNull>
+       <isNotNull property="PlanDetailId" prepend="AND">
+         <![CDATA[ T1.OBJID=#PlanDetailId#]]>
+       </isNotNull>
+       <dynamic prepend="GROUP BY">
+         <![CDATA[T3.MATERIAL_ID,T4.MATERIAL_NAME]]>
+       </dynamic>
+     </select>
+     <select id="GetSplitPlanInfo1" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T3.MATERIAL_ID,T4.MATERIAL_NAME,SUM(T3.GROUP_NUM*T3.GROUP_UNIT_NUM*T1.PLAN_AMOUNT) QTY FROM BPP_PLAN T
+        LEFT JOIN BPP_PLAN_DETAIL T1 ON T1.PLAN_ID = T.OBJID
+        LEFT JOIN BPT_MOLDING_TECH T2 ON T2.OBJID = T1.TECH_ID
+        LEFT JOIN SBM_BOM_DATA T3 ON T3.MATERIAL_PARENT_ID = T1.MATERIAL_ID AND T1.BOM_ID = T3.BOM_VERSION
+        LEFT JOIN SBM_MATERIAL T4 ON T4.OBJID = T3.MATERIAL_ID
+        WHERE T3.DELETE_FLAG=0  ]]>
+       <isNotNull property="EquipId" prepend="AND">
+         <![CDATA[ T.EQUIP_ID=#EquipId#]]>
+       </isNotNull>
+       <isNotNull property="ShiftId" prepend="AND">
+         <![CDATA[ T.SHIFT_ID=#ShiftId#]]>
+       </isNotNull>
+       <isNotNull property="ShiftDate" prepend="AND">
+         <![CDATA[ T.PLAN_DATE=#ShiftDate#]]>
+       </isNotNull>
+       <isNotNull property="PlanDetailId" prepend="AND">
+         <![CDATA[ T1.OBJID=#PlanDetailId#]]>
+       </isNotNull>
+       <dynamic prepend="GROUP BY">
+         <![CDATA[T3.MATERIAL_ID,T4.MATERIAL_NAME]]>
+       </dynamic>
+     </select>
+  </statements>
+</sqlMap>

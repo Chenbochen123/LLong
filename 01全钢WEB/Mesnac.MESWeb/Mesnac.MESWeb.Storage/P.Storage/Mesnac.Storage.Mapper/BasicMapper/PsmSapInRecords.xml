@@ -1,0 +1,639 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Storage.Mapper.BasicMapper.PsmSapInRecords"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="PsmSapInRecords" type="Mesnac.Storage.Entity.BasicEntity.PsmSapInRecords, Mesnac.Storage.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_PsmSapInRecords" class="PsmSapInRecords">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Docdate" column="DOCDATE"/>
+    <result property="Postdate" column="POSTDATE"/>
+    <result property="Headtxt" column="HEADTXT"/>
+    <result property="Refdoc" column="REFDOC"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="Movtype" column="MOVTYPE"/>
+    <result property="Materialcode" column="MATERIALCODE"/>
+    <result property="Plantfrom" column="PLANTFROM"/>
+    <result property="Storageloc" column="STORAGELOC"/>
+    <result property="Batch" column="BATCH"/>
+    <result property="Barcode" column="BARCODE"/>
+    <result property="Specialind" column="SPECIALIND"/>
+    <result property="Qty" column="QTY"/>
+    <result property="Unit" column="UNIT"/>
+    <result property="Po" column="PO"/>
+    <result property="Poitem" column="POITEM"/>
+    <result property="Movind" column="MOVIND"/>
+    <result property="Dn" column="DN"/>
+    <result property="Dnitem" column="DNITEM"/>
+    <result property="Recmat" column="RECMAT"/>
+    <result property="Recplant" column="RECPLANT"/>
+    <result property="Recstoloc" column="RECSTOLOC"/>
+    <result property="Recbatch" column="RECBATCH"/>
+    <result property="Costcenter" column="COSTCENTER"/>
+    <result property="Internalord" column="INTERNALORD"/>
+    <result property="Movreason" column="MOVREASON"/>
+    <result property="Itemtxt" column="ITEMTXT"/>
+    <result property="Reciever" column="RECIEVER"/>
+    <result property="Stocktyp" column="STOCKTYP"/>
+    <result property="Completeflag" column="COMPLETEFLAG"/>
+    <result property="Reservation" column="RESERVATION"/>
+    <result property="Reservitem" column="RESERVITEM"/>
+    <result property="Vendor" column="VENDOR"/>
+    <result property="Customer" column="CUSTOMER"/>
+    <result property="Refdocyear" column="REFDOCYEAR"/>
+    <result property="Refdoc1" column="REFDOC1"/>
+    <result property="Refdocitem" column="REFDOCITEM"/>
+    <result property="Dummy5" column="DUMMY5"/>
+    <result property="Dummy6" column="DUMMY6"/>
+    <result property="Dummy7" column="DUMMY7"/>
+    <result property="Dummy8" column="DUMMY8"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="ShiftDate" column="SHIFT_DATE"/>
+    <result property="ShiftId" column="SHIFT_ID"/>
+    <result property="DetailId" column="DETAIL_ID"/>
+    <result property="HeadId" column="HEAD_ID"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_PsmSapInRecords" class="PsmSapInRecords">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Docdate" column="Docdate"/>
+    <parameter property="Postdate" column="Postdate"/>
+    <parameter property="Headtxt" column="Headtxt"/>
+    <parameter property="Refdoc" column="Refdoc"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="Movtype" column="Movtype"/>
+    <parameter property="Materialcode" column="Materialcode"/>
+    <parameter property="Plantfrom" column="Plantfrom"/>
+    <parameter property="Storageloc" column="Storageloc"/>
+    <parameter property="Batch" column="Batch"/>
+    <parameter property="Barcode" column="Barcode"/>
+    <parameter property="Specialind" column="Specialind"/>
+    <parameter property="Qty" column="Qty"/>
+    <parameter property="Unit" column="Unit"/>
+    <parameter property="Po" column="Po"/>
+    <parameter property="Poitem" column="Poitem"/>
+    <parameter property="Movind" column="Movind"/>
+    <parameter property="Dn" column="Dn"/>
+    <parameter property="Dnitem" column="Dnitem"/>
+    <parameter property="Recmat" column="Recmat"/>
+    <parameter property="Recplant" column="Recplant"/>
+    <parameter property="Recstoloc" column="Recstoloc"/>
+    <parameter property="Recbatch" column="Recbatch"/>
+    <parameter property="Costcenter" column="Costcenter"/>
+    <parameter property="Internalord" column="Internalord"/>
+    <parameter property="Movreason" column="Movreason"/>
+    <parameter property="Itemtxt" column="Itemtxt"/>
+    <parameter property="Reciever" column="Reciever"/>
+    <parameter property="Stocktyp" column="Stocktyp"/>
+    <parameter property="Completeflag" column="Completeflag"/>
+    <parameter property="Reservation" column="Reservation"/>
+    <parameter property="Reservitem" column="Reservitem"/>
+    <parameter property="Vendor" column="Vendor"/>
+    <parameter property="Customer" column="Customer"/>
+    <parameter property="Refdocyear" column="Refdocyear"/>
+    <parameter property="Refdoc1" column="Refdoc1"/>
+    <parameter property="Refdocitem" column="Refdocitem"/>
+    <parameter property="Dummy5" column="Dummy5"/>
+    <parameter property="Dummy6" column="Dummy6"/>
+    <parameter property="Dummy7" column="Dummy7"/>
+    <parameter property="Dummy8" column="Dummy8"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="ShiftDate" column="ShiftDate"/>
+    <parameter property="ShiftId" column="ShiftId"/>
+    <parameter property="DetailId" column="DetailId"/>
+    <parameter property="HeadId" column="HeadId"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSM_SAP_IN_RECORDS ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Docdate" prepend="AND">
+          <![CDATA[DOCDATE = #where.Docdate#]]>
+        </isNotNull>
+        <isNotNull property="where.Postdate" prepend="AND">
+          <![CDATA[POSTDATE = #where.Postdate#]]>
+        </isNotNull>
+        <isNotNull property="where.Headtxt" prepend="AND">
+          <![CDATA[HEADTXT = #where.Headtxt#]]>
+        </isNotNull>
+        <isNotNull property="where.Refdoc" prepend="AND">
+          <![CDATA[REFDOC = #where.Refdoc#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Movtype" prepend="AND">
+          <![CDATA[MOVTYPE = #where.Movtype#]]>
+        </isNotNull>
+        <isNotNull property="where.Materialcode" prepend="AND">
+          <![CDATA[MATERIALCODE = #where.Materialcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Plantfrom" prepend="AND">
+          <![CDATA[PLANTFROM = #where.Plantfrom#]]>
+        </isNotNull>
+        <isNotNull property="where.Storageloc" prepend="AND">
+          <![CDATA[STORAGELOC = #where.Storageloc#]]>
+        </isNotNull>
+        <isNotNull property="where.Batch" prepend="AND">
+          <![CDATA[BATCH = #where.Batch#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[BARCODE = #where.Barcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Specialind" prepend="AND">
+          <![CDATA[SPECIALIND = #where.Specialind#]]>
+        </isNotNull>
+        <isNotNull property="where.Qty" prepend="AND">
+          <![CDATA[QTY = #where.Qty#]]>
+        </isNotNull>
+        <isNotNull property="where.Unit" prepend="AND">
+          <![CDATA[UNIT = #where.Unit#]]>
+        </isNotNull>
+        <isNotNull property="where.Po" prepend="AND">
+          <![CDATA[PO = #where.Po#]]>
+        </isNotNull>
+        <isNotNull property="where.Poitem" prepend="AND">
+          <![CDATA[POITEM = #where.Poitem#]]>
+        </isNotNull>
+        <isNotNull property="where.Movind" prepend="AND">
+          <![CDATA[MOVIND = #where.Movind#]]>
+        </isNotNull>
+        <isNotNull property="where.Dn" prepend="AND">
+          <![CDATA[DN = #where.Dn#]]>
+        </isNotNull>
+        <isNotNull property="where.Dnitem" prepend="AND">
+          <![CDATA[DNITEM = #where.Dnitem#]]>
+        </isNotNull>
+        <isNotNull property="where.Recmat" prepend="AND">
+          <![CDATA[RECMAT = #where.Recmat#]]>
+        </isNotNull>
+        <isNotNull property="where.Recplant" prepend="AND">
+          <![CDATA[RECPLANT = #where.Recplant#]]>
+        </isNotNull>
+        <isNotNull property="where.Recstoloc" prepend="AND">
+          <![CDATA[RECSTOLOC = #where.Recstoloc#]]>
+        </isNotNull>
+        <isNotNull property="where.Recbatch" prepend="AND">
+          <![CDATA[RECBATCH = #where.Recbatch#]]>
+        </isNotNull>
+        <isNotNull property="where.Costcenter" prepend="AND">
+          <![CDATA[COSTCENTER = #where.Costcenter#]]>
+        </isNotNull>
+        <isNotNull property="where.Internalord" prepend="AND">
+          <![CDATA[INTERNALORD = #where.Internalord#]]>
+        </isNotNull>
+        <isNotNull property="where.Movreason" prepend="AND">
+          <![CDATA[MOVREASON = #where.Movreason#]]>
+        </isNotNull>
+        <isNotNull property="where.Itemtxt" prepend="AND">
+          <![CDATA[ITEMTXT = #where.Itemtxt#]]>
+        </isNotNull>
+        <isNotNull property="where.Reciever" prepend="AND">
+          <![CDATA[RECIEVER = #where.Reciever#]]>
+        </isNotNull>
+        <isNotNull property="where.Stocktyp" prepend="AND">
+          <![CDATA[STOCKTYP = #where.Stocktyp#]]>
+        </isNotNull>
+        <isNotNull property="where.Completeflag" prepend="AND">
+          <![CDATA[COMPLETEFLAG = #where.Completeflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Reservation" prepend="AND">
+          <![CDATA[RESERVATION = #where.Reservation#]]>
+        </isNotNull>
+        <isNotNull property="where.Reservitem" prepend="AND">
+          <![CDATA[RESERVITEM = #where.Reservitem#]]>
+        </isNotNull>
+        <isNotNull property="where.Vendor" prepend="AND">
+          <![CDATA[VENDOR = #where.Vendor#]]>
+        </isNotNull>
+        <isNotNull property="where.Customer" prepend="AND">
+          <![CDATA[CUSTOMER = #where.Customer#]]>
+        </isNotNull>
+        <isNotNull property="where.Refdocyear" prepend="AND">
+          <![CDATA[REFDOCYEAR = #where.Refdocyear#]]>
+        </isNotNull>
+        <isNotNull property="where.Refdoc1" prepend="AND">
+          <![CDATA[REFDOC1 = #where.Refdoc1#]]>
+        </isNotNull>
+        <isNotNull property="where.Refdocitem" prepend="AND">
+          <![CDATA[REFDOCITEM = #where.Refdocitem#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy7" prepend="AND">
+          <![CDATA[DUMMY7 = #where.Dummy7#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy8" prepend="AND">
+          <![CDATA[DUMMY8 = #where.Dummy8#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDate" prepend="AND">
+          <![CDATA[SHIFT_DATE = #where.ShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.DetailId" prepend="AND">
+          <![CDATA[DETAIL_ID = #where.DetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.HeadId" prepend="AND">
+          <![CDATA[HEAD_ID = #where.HeadId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO PSM_SAP_IN_RECORDS]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="Docdate" prepend=",">DOCDATE</isNotNull>
+        <isNotNull property="Postdate" prepend=",">POSTDATE</isNotNull>
+        <isNotNull property="Headtxt" prepend=",">HEADTXT</isNotNull>
+        <isNotNull property="Refdoc" prepend=",">REFDOC</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="Movtype" prepend=",">MOVTYPE</isNotNull>
+        <isNotNull property="Materialcode" prepend=",">MATERIALCODE</isNotNull>
+        <isNotNull property="Plantfrom" prepend=",">PLANTFROM</isNotNull>
+        <isNotNull property="Storageloc" prepend=",">STORAGELOC</isNotNull>
+        <isNotNull property="Batch" prepend=",">BATCH</isNotNull>
+        <isNotNull property="Barcode" prepend=",">BARCODE</isNotNull>
+        <isNotNull property="Specialind" prepend=",">SPECIALIND</isNotNull>
+        <isNotNull property="Qty" prepend=",">QTY</isNotNull>
+        <isNotNull property="Unit" prepend=",">UNIT</isNotNull>
+        <isNotNull property="Po" prepend=",">PO</isNotNull>
+        <isNotNull property="Poitem" prepend=",">POITEM</isNotNull>
+        <isNotNull property="Movind" prepend=",">MOVIND</isNotNull>
+        <isNotNull property="Dn" prepend=",">DN</isNotNull>
+        <isNotNull property="Dnitem" prepend=",">DNITEM</isNotNull>
+        <isNotNull property="Recmat" prepend=",">RECMAT</isNotNull>
+        <isNotNull property="Recplant" prepend=",">RECPLANT</isNotNull>
+        <isNotNull property="Recstoloc" prepend=",">RECSTOLOC</isNotNull>
+        <isNotNull property="Recbatch" prepend=",">RECBATCH</isNotNull>
+        <isNotNull property="Costcenter" prepend=",">COSTCENTER</isNotNull>
+        <isNotNull property="Internalord" prepend=",">INTERNALORD</isNotNull>
+        <isNotNull property="Movreason" prepend=",">MOVREASON</isNotNull>
+        <isNotNull property="Itemtxt" prepend=",">ITEMTXT</isNotNull>
+        <isNotNull property="Reciever" prepend=",">RECIEVER</isNotNull>
+        <isNotNull property="Stocktyp" prepend=",">STOCKTYP</isNotNull>
+        <isNotNull property="Completeflag" prepend=",">COMPLETEFLAG</isNotNull>
+        <isNotNull property="Reservation" prepend=",">RESERVATION</isNotNull>
+        <isNotNull property="Reservitem" prepend=",">RESERVITEM</isNotNull>
+        <isNotNull property="Vendor" prepend=",">VENDOR</isNotNull>
+        <isNotNull property="Customer" prepend=",">CUSTOMER</isNotNull>
+        <isNotNull property="Refdocyear" prepend=",">REFDOCYEAR</isNotNull>
+        <isNotNull property="Refdoc1" prepend=",">REFDOC1</isNotNull>
+        <isNotNull property="Refdocitem" prepend=",">REFDOCITEM</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">DUMMY5</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">DUMMY6</isNotNull>
+        <isNotNull property="Dummy7" prepend=",">DUMMY7</isNotNull>
+        <isNotNull property="Dummy8" prepend=",">DUMMY8</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="ShiftDate" prepend=",">SHIFT_DATE</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">SHIFT_ID</isNotNull>
+        <isNotNull property="DetailId" prepend=",">DETAIL_ID</isNotNull>
+        <isNotNull property="HeadId" prepend=",">HEAD_ID</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_PSM_SAP_IN_RECORDS.NEXTVAL</isNull>
+        <isNotNull property="Docdate" prepend=",">#Docdate#</isNotNull>
+        <isNotNull property="Postdate" prepend=",">#Postdate#</isNotNull>
+        <isNotNull property="Headtxt" prepend=",">#Headtxt#</isNotNull>
+        <isNotNull property="Refdoc" prepend=",">#Refdoc#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="Movtype" prepend=",">#Movtype#</isNotNull>
+        <isNotNull property="Materialcode" prepend=",">#Materialcode#</isNotNull>
+        <isNotNull property="Plantfrom" prepend=",">#Plantfrom#</isNotNull>
+        <isNotNull property="Storageloc" prepend=",">#Storageloc#</isNotNull>
+        <isNotNull property="Batch" prepend=",">#Batch#</isNotNull>
+        <isNotNull property="Barcode" prepend=",">#Barcode#</isNotNull>
+        <isNotNull property="Specialind" prepend=",">#Specialind#</isNotNull>
+        <isNotNull property="Qty" prepend=",">#Qty#</isNotNull>
+        <isNotNull property="Unit" prepend=",">#Unit#</isNotNull>
+        <isNotNull property="Po" prepend=",">#Po#</isNotNull>
+        <isNotNull property="Poitem" prepend=",">#Poitem#</isNotNull>
+        <isNotNull property="Movind" prepend=",">#Movind#</isNotNull>
+        <isNotNull property="Dn" prepend=",">#Dn#</isNotNull>
+        <isNotNull property="Dnitem" prepend=",">#Dnitem#</isNotNull>
+        <isNotNull property="Recmat" prepend=",">#Recmat#</isNotNull>
+        <isNotNull property="Recplant" prepend=",">#Recplant#</isNotNull>
+        <isNotNull property="Recstoloc" prepend=",">#Recstoloc#</isNotNull>
+        <isNotNull property="Recbatch" prepend=",">#Recbatch#</isNotNull>
+        <isNotNull property="Costcenter" prepend=",">#Costcenter#</isNotNull>
+        <isNotNull property="Internalord" prepend=",">#Internalord#</isNotNull>
+        <isNotNull property="Movreason" prepend=",">#Movreason#</isNotNull>
+        <isNotNull property="Itemtxt" prepend=",">#Itemtxt#</isNotNull>
+        <isNotNull property="Reciever" prepend=",">#Reciever#</isNotNull>
+        <isNotNull property="Stocktyp" prepend=",">#Stocktyp#</isNotNull>
+        <isNotNull property="Completeflag" prepend=",">#Completeflag#</isNotNull>
+        <isNotNull property="Reservation" prepend=",">#Reservation#</isNotNull>
+        <isNotNull property="Reservitem" prepend=",">#Reservitem#</isNotNull>
+        <isNotNull property="Vendor" prepend=",">#Vendor#</isNotNull>
+        <isNotNull property="Customer" prepend=",">#Customer#</isNotNull>
+        <isNotNull property="Refdocyear" prepend=",">#Refdocyear#</isNotNull>
+        <isNotNull property="Refdoc1" prepend=",">#Refdoc1#</isNotNull>
+        <isNotNull property="Refdocitem" prepend=",">#Refdocitem#</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">#Dummy5#</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">#Dummy6#</isNotNull>
+        <isNotNull property="Dummy7" prepend=",">#Dummy7#</isNotNull>
+        <isNotNull property="Dummy8" prepend=",">#Dummy8#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="ShiftDate" prepend=",">#ShiftDate#</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">#ShiftId#</isNotNull>
+        <isNotNull property="DetailId" prepend=",">#DetailId#</isNotNull>
+        <isNotNull property="HeadId" prepend=",">#HeadId#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE PSM_SAP_IN_RECORDS
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Docdate"  prepend=",">
+          DOCDATE = #update.Docdate#
+        </isNotNull>
+        <isNotNull  property="update.Postdate"  prepend=",">
+          POSTDATE = #update.Postdate#
+        </isNotNull>
+        <isNotNull  property="update.Headtxt"  prepend=",">
+          HEADTXT = #update.Headtxt#
+        </isNotNull>
+        <isNotNull  property="update.Refdoc"  prepend=",">
+          REFDOC = #update.Refdoc#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.Movtype"  prepend=",">
+          MOVTYPE = #update.Movtype#
+        </isNotNull>
+        <isNotNull  property="update.Materialcode"  prepend=",">
+          MATERIALCODE = #update.Materialcode#
+        </isNotNull>
+        <isNotNull  property="update.Plantfrom"  prepend=",">
+          PLANTFROM = #update.Plantfrom#
+        </isNotNull>
+        <isNotNull  property="update.Storageloc"  prepend=",">
+          STORAGELOC = #update.Storageloc#
+        </isNotNull>
+        <isNotNull  property="update.Batch"  prepend=",">
+          BATCH = #update.Batch#
+        </isNotNull>
+        <isNotNull  property="update.Barcode"  prepend=",">
+          BARCODE = #update.Barcode#
+        </isNotNull>
+        <isNotNull  property="update.Specialind"  prepend=",">
+          SPECIALIND = #update.Specialind#
+        </isNotNull>
+        <isNotNull  property="update.Qty"  prepend=",">
+          QTY = #update.Qty#
+        </isNotNull>
+        <isNotNull  property="update.Unit"  prepend=",">
+          UNIT = #update.Unit#
+        </isNotNull>
+        <isNotNull  property="update.Po"  prepend=",">
+          PO = #update.Po#
+        </isNotNull>
+        <isNotNull  property="update.Poitem"  prepend=",">
+          POITEM = #update.Poitem#
+        </isNotNull>
+        <isNotNull  property="update.Movind"  prepend=",">
+          MOVIND = #update.Movind#
+        </isNotNull>
+        <isNotNull  property="update.Dn"  prepend=",">
+          DN = #update.Dn#
+        </isNotNull>
+        <isNotNull  property="update.Dnitem"  prepend=",">
+          DNITEM = #update.Dnitem#
+        </isNotNull>
+        <isNotNull  property="update.Recmat"  prepend=",">
+          RECMAT = #update.Recmat#
+        </isNotNull>
+        <isNotNull  property="update.Recplant"  prepend=",">
+          RECPLANT = #update.Recplant#
+        </isNotNull>
+        <isNotNull  property="update.Recstoloc"  prepend=",">
+          RECSTOLOC = #update.Recstoloc#
+        </isNotNull>
+        <isNotNull  property="update.Recbatch"  prepend=",">
+          RECBATCH = #update.Recbatch#
+        </isNotNull>
+        <isNotNull  property="update.Costcenter"  prepend=",">
+          COSTCENTER = #update.Costcenter#
+        </isNotNull>
+        <isNotNull  property="update.Internalord"  prepend=",">
+          INTERNALORD = #update.Internalord#
+        </isNotNull>
+        <isNotNull  property="update.Movreason"  prepend=",">
+          MOVREASON = #update.Movreason#
+        </isNotNull>
+        <isNotNull  property="update.Itemtxt"  prepend=",">
+          ITEMTXT = #update.Itemtxt#
+        </isNotNull>
+        <isNotNull  property="update.Reciever"  prepend=",">
+          RECIEVER = #update.Reciever#
+        </isNotNull>
+        <isNotNull  property="update.Stocktyp"  prepend=",">
+          STOCKTYP = #update.Stocktyp#
+        </isNotNull>
+        <isNotNull  property="update.Completeflag"  prepend=",">
+          COMPLETEFLAG = #update.Completeflag#
+        </isNotNull>
+        <isNotNull  property="update.Reservation"  prepend=",">
+          RESERVATION = #update.Reservation#
+        </isNotNull>
+        <isNotNull  property="update.Reservitem"  prepend=",">
+          RESERVITEM = #update.Reservitem#
+        </isNotNull>
+        <isNotNull  property="update.Vendor"  prepend=",">
+          VENDOR = #update.Vendor#
+        </isNotNull>
+        <isNotNull  property="update.Customer"  prepend=",">
+          CUSTOMER = #update.Customer#
+        </isNotNull>
+        <isNotNull  property="update.Refdocyear"  prepend=",">
+          REFDOCYEAR = #update.Refdocyear#
+        </isNotNull>
+        <isNotNull  property="update.Refdoc1"  prepend=",">
+          REFDOC1 = #update.Refdoc1#
+        </isNotNull>
+        <isNotNull  property="update.Refdocitem"  prepend=",">
+          REFDOCITEM = #update.Refdocitem#
+        </isNotNull>
+        <isNotNull  property="update.Dummy5"  prepend=",">
+          DUMMY5 = #update.Dummy5#
+        </isNotNull>
+        <isNotNull  property="update.Dummy6"  prepend=",">
+          DUMMY6 = #update.Dummy6#
+        </isNotNull>
+        <isNotNull  property="update.Dummy7"  prepend=",">
+          DUMMY7 = #update.Dummy7#
+        </isNotNull>
+        <isNotNull  property="update.Dummy8"  prepend=",">
+          DUMMY8 = #update.Dummy8#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.ShiftDate"  prepend=",">
+          SHIFT_DATE = #update.ShiftDate#
+        </isNotNull>
+        <isNotNull  property="update.ShiftId"  prepend=",">
+          SHIFT_ID = #update.ShiftId#
+        </isNotNull>
+        <isNotNull  property="update.DetailId"  prepend=",">
+          DETAIL_ID = #update.DetailId#
+        </isNotNull>
+        <isNotNull  property="update.HeadId"  prepend=",">
+          HEAD_ID = #update.HeadId#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM PSM_SAP_IN_RECORDS
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_PsmSapInRecords">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_PsmSapInRecords">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM PSM_SAP_IN_RECORDS
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM PSM_SAP_IN_RECORDS
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_PsmSapInRecords" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE PSM_SAP_IN_RECORDS
+    </statement>
+  </statements>
+</sqlMap>

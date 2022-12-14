@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.HptSemisTechDetail"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HptSemisTechDetail" type="Mesnac.Semis.Entity.BasicEntity.HptSemisTechDetail, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HptSemisTechDetail" class="HptSemisTechDetail">
+    <result property="ObjId" column="OBJID"/>
+    <result property="TechMasterId" column="TECH_MASTER_ID"/>
+    <result property="TechItemId" column="TECH_ITEM_ID"/>
+    <result property="TechItemValue" column="TECH_ITEM_VALUE"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HptSemisTechDetail" class="HptSemisTechDetail">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="TechMasterId" column="TechMasterId"/>
+    <parameter property="TechItemId" column="TechItemId"/>
+    <parameter property="TechItemValue" column="TechItemValue"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPT_SEMIS_TECH_DETAIL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.TechMasterId" prepend="AND">
+          <![CDATA[TECH_MASTER_ID = #where.TechMasterId#]]>
+        </isNotNull>
+        <isNotNull property="where.TechItemId" prepend="AND">
+          <![CDATA[TECH_ITEM_ID = #where.TechItemId#]]>
+        </isNotNull>
+        <isNotNull property="where.TechItemValue" prepend="AND">
+          <![CDATA[TECH_ITEM_VALUE = #where.TechItemValue#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HPT_SEMIS_TECH_DETAIL]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="TechMasterId" prepend=",">TECH_MASTER_ID</isNotNull>
+        <isNotNull property="TechItemId" prepend=",">TECH_ITEM_ID</isNotNull>
+        <isNotNull property="TechItemValue" prepend=",">TECH_ITEM_VALUE</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_HPT_SEMIS_TECH_DETAIL.NEXTVAL</isNull>
+        <isNotNull property="TechMasterId" prepend=",">#TechMasterId#</isNotNull>
+        <isNotNull property="TechItemId" prepend=",">#TechItemId#</isNotNull>
+        <isNotNull property="TechItemValue" prepend=",">#TechItemValue#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HPT_SEMIS_TECH_DETAIL
+       <dynamic prepend="SET">
+        <isNotNull  property="update.TechMasterId"  prepend=",">
+          TECH_MASTER_ID = #update.TechMasterId#
+        </isNotNull>
+        <isNotNull  property="update.TechItemId"  prepend=",">
+          TECH_ITEM_ID = #update.TechItemId#
+        </isNotNull>
+        <isNotNull  property="update.TechItemValue"  prepend=",">
+          TECH_ITEM_VALUE = #update.TechItemValue#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HPT_SEMIS_TECH_DETAIL
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HptSemisTechDetail">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HptSemisTechDetail">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM HPT_SEMIS_TECH_DETAIL
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HPT_SEMIS_TECH_DETAIL
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HptSemisTechDetail" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HPT_SEMIS_TECH_DETAIL
+    </statement>
+  </statements>
+</sqlMap>

@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CrtCuringTechParams1"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_CURING_TECH_PARAMS1 ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Guid" prepend="AND">
+          <![CDATA[GUID = #where.Guid#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTechTimeIdWinter" prepend="AND">
+          <![CDATA[CURING_TECH_TIME_ID_WINTER = #where.CuringTechTimeIdWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTechTimeIdWinter2" prepend="AND">
+          <![CDATA[CURING_TECH_TIME_ID_WINTER2 = #where.CuringTechTimeIdWinter2#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderTensileHeightHigh" prepend="AND">
+          <![CDATA[BLADDER_TENSILE_HEIGHT_HIGH = #where.BladderTensileHeightHigh#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderTensileHeightLow" prepend="AND">
+          <![CDATA[BLADDER_TENSILE_HEIGHT_LOW = #where.BladderTensileHeightLow#]]>
+        </isNotNull>
+        <isNotNull property="where.CopperTensileHeightHigh" prepend="AND">
+          <![CDATA[COPPER_TENSILE_HEIGHT_HIGH = #where.CopperTensileHeightHigh#]]>
+        </isNotNull>
+        <isNotNull property="where.CopperTensileHeightLow" prepend="AND">
+          <![CDATA[COPPER_TENSILE_HEIGHT_LOW = #where.CopperTensileHeightLow#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingHeightHigh" prepend="AND">
+          <![CDATA[FIRST_SHAPING_HEIGHT_HIGH = #where.FirstShapingHeightHigh#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingHeightLow" prepend="AND">
+          <![CDATA[FIRST_SHAPING_HEIGHT_LOW = #where.FirstShapingHeightLow#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingHeightHigh" prepend="AND">
+          <![CDATA[SECOND_SHAPING_HEIGHT_HIGH = #where.SecondShapingHeightHigh#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingHeightLow" prepend="AND">
+          <![CDATA[SECOND_SHAPING_HEIGHT_LOW = #where.SecondShapingHeightLow#]]>
+        </isNotNull>
+        <isNotNull property="where.CooperShapingHeightHigh" prepend="AND">
+          <![CDATA[COOPER_SHAPING_HEIGHT_HIGH = #where.CooperShapingHeightHigh#]]>
+        </isNotNull>
+        <isNotNull property="where.CooperShapingHeightLow" prepend="AND">
+          <![CDATA[COOPER_SHAPING_HEIGHT_LOW = #where.CooperShapingHeightLow#]]>
+        </isNotNull>
+        <isNotNull property="where.ClampingPressHigh" prepend="AND">
+          <![CDATA[CLAMPING_PRESS_HIGH = #where.ClampingPressHigh#]]>
+        </isNotNull>
+        <isNotNull property="where.ClampingPressLow" prepend="AND">
+          <![CDATA[CLAMPING_PRESS_LOW = #where.ClampingPressLow#]]>
+        </isNotNull>
+        <isNotNull property="where.ManipulatorOpenHigh" prepend="AND">
+          <![CDATA[MANIPULATOR_OPEN_HIGH = #where.ManipulatorOpenHigh#]]>
+        </isNotNull>
+        <isNotNull property="where.ManipulatorOpenLow" prepend="AND">
+          <![CDATA[MANIPULATOR_OPEN_LOW = #where.ManipulatorOpenLow#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPressHigh" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_HIGH = #where.FirstShapingPressHigh#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPressLow" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_LOW = #where.FirstShapingPressLow#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPressHigh" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_HIGH = #where.SecondShapingPressHigh#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPressLow" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_LOW = #where.SecondShapingPressLow#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

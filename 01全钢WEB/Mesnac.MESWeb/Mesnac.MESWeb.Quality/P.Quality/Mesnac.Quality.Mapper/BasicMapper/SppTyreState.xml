@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BasicMapper.SppTyreState"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SppTyreState" type="Mesnac.Quality.Entity.BasicEntity.SppTyreState, Mesnac.Quality.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SppTyreState" class="SppTyreState">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="TyreNo" column="TYRE_NO"/>
+    <result property="XFirstCheckTime" column="X_FIRST_CHECK_TIME"/>
+    <result property="XFirstCheckGrade" column="X_FIRST_CHECK_GRADE"/>
+    <result property="XCheckTime" column="X_CHECK_TIME"/>
+    <result property="XCheckGrade" column="X_CHECK_GRADE"/>
+    <result property="FinalCheckGrade" column="FINAL_CHECK_GRADE"/>
+    <result property="GreenTyreNo" column="GREEN_TYRE_NO"/>
+    <result property="TyreState" column="TYRE_STATE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SppTyreState" class="SppTyreState">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="TyreNo" column="TyreNo"/>
+    <parameter property="XFirstCheckTime" column="XFirstCheckTime"/>
+    <parameter property="XFirstCheckGrade" column="XFirstCheckGrade"/>
+    <parameter property="XCheckTime" column="XCheckTime"/>
+    <parameter property="XCheckGrade" column="XCheckGrade"/>
+    <parameter property="FinalCheckGrade" column="FinalCheckGrade"/>
+    <parameter property="GreenTyreNo" column="GreenTyreNo"/>
+    <parameter property="TyreState" column="TyreState"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SPP_TYRE_STATE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[TYRE_NO = #where.TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.XFirstCheckTime" prepend="AND">
+          <![CDATA[X_FIRST_CHECK_TIME = #where.XFirstCheckTime#]]>
+        </isNotNull>
+        <isNotNull property="where.XFirstCheckGrade" prepend="AND">
+          <![CDATA[X_FIRST_CHECK_GRADE = #where.XFirstCheckGrade#]]>
+        </isNotNull>
+        <isNotNull property="where.XCheckTime" prepend="AND">
+          <![CDATA[X_CHECK_TIME = #where.XCheckTime#]]>
+        </isNotNull>
+        <isNotNull property="where.XCheckGrade" prepend="AND">
+          <![CDATA[X_CHECK_GRADE = #where.XCheckGrade#]]>
+        </isNotNull>
+        <isNotNull property="where.FinalCheckGrade" prepend="AND">
+          <![CDATA[FINAL_CHECK_GRADE = #where.FinalCheckGrade#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreState" prepend="AND">
+          <![CDATA[TYRE_STATE = #where.TyreState#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SPP_TYRE_STATE]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="TyreNo" prepend=",">TYRE_NO</isNotNull>
+        <isNotNull property="XFirstCheckTime" prepend=",">X_FIRST_CHECK_TIME</isNotNull>
+        <isNotNull property="XFirstCheckGrade" prepend=",">X_FIRST_CHECK_GRADE</isNotNull>
+        <isNotNull property="XCheckTime" prepend=",">X_CHECK_TIME</isNotNull>
+        <isNotNull property="XCheckGrade" prepend=",">X_CHECK_GRADE</isNotNull>
+        <isNotNull property="FinalCheckGrade" prepend=",">FINAL_CHECK_GRADE</isNotNull>
+        <isNotNull property="GreenTyreNo" prepend=",">GREEN_TYRE_NO</isNotNull>
+        <isNotNull property="TyreState" prepend=",">TYRE_STATE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SPP_TYRE_STATE.NEXTVAL</isNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="TyreNo" prepend=",">#TyreNo#</isNotNull>
+        <isNotNull property="XFirstCheckTime" prepend=",">#XFirstCheckTime#</isNotNull>
+        <isNotNull property="XFirstCheckGrade" prepend=",">#XFirstCheckGrade#</isNotNull>
+        <isNotNull property="XCheckTime" prepend=",">#XCheckTime#</isNotNull>
+        <isNotNull property="XCheckGrade" prepend=",">#XCheckGrade#</isNotNull>
+        <isNotNull property="FinalCheckGrade" prepend=",">#FinalCheckGrade#</isNotNull>
+        <isNotNull property="GreenTyreNo" prepend=",">#GreenTyreNo#</isNotNull>
+        <isNotNull property="TyreState" prepend=",">#TyreState#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SPP_TYRE_STATE
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.TyreNo"  prepend=",">
+          TYRE_NO = #update.TyreNo#
+        </isNotNull>
+        <isNotNull  property="update.XFirstCheckTime"  prepend=",">
+          X_FIRST_CHECK_TIME = #update.XFirstCheckTime#
+        </isNotNull>
+        <isNotNull  property="update.XFirstCheckGrade"  prepend=",">
+          X_FIRST_CHECK_GRADE = #update.XFirstCheckGrade#
+        </isNotNull>
+        <isNotNull  property="update.XCheckTime"  prepend=",">
+          X_CHECK_TIME = #update.XCheckTime#
+        </isNotNull>
+        <isNotNull  property="update.XCheckGrade"  prepend=",">
+          X_CHECK_GRADE = #update.XCheckGrade#
+        </isNotNull>
+        <isNotNull  property="update.FinalCheckGrade"  prepend=",">
+          FINAL_CHECK_GRADE = #update.FinalCheckGrade#
+        </isNotNull>
+        <isNotNull  property="update.GreenTyreNo"  prepend=",">
+          GREEN_TYRE_NO = #update.GreenTyreNo#
+        </isNotNull>
+        <isNotNull  property="update.TyreState"  prepend=",">
+          TYRE_STATE = #update.TyreState#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SPP_TYRE_STATE
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SppTyreState">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SppTyreState">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SPP_TYRE_STATE
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SPP_TYRE_STATE
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SppTyreState" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SPP_TYRE_STATE
+    </statement>
+  </statements>
+</sqlMap>

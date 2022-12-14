@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="BEGIN_DATE" Value="开始日期"></Caption>
+    <Caption Name="END_DATE" Value="结束日期"></Caption>
+    <Caption Name="PLAN_DATE" Value="计划日期"></Caption>
+    <Caption Name="SHIFT_ID" Value="计划班次"></Caption>
+    <Caption Name="SHIFT_NAME" Value="计划班次"></Caption>
+    <Caption Name="EQUIP_ID" Value="计划机台"></Caption>
+    <Caption Name="EQUIP_NAME" Value="计划机台"></Caption>
+    <Caption Name="MATERIAL_ID" Value="物料名称"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="物料名称"></Caption>
+    <Caption Name="PLAN_STATE" Value="计划状态"></Caption>
+    <Caption Name="PLAN_STATE_CAPTION" Value="计划状态"></Caption>
+    <Caption Name="PLAN_TYPE" Value="计划类型"></Caption>
+    <Caption Name="PLAN_TYPE_CAPTION" Value="计划类型"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+  </Captions>
+  <WebPage Title="成型计划信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Molding/McUI/@McUI/SearchBoxBppMoldingPlanDetail.js" />
+    </JavaScripts>
+  </WebPage>
+  <Select>
+    <ParamPanel ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="BEGIN_DATE" Type="DateBox"></ParamField>
+        <ParamField FieldName="END_DATE" Type="DateBox"></ParamField>
+        <ParamField FieldName="SHIFT_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_NAME" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="PLAN_STATE" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="PLAN_TYPE" Type="ComboBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="PLAN_ID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="PLAN_DETAIL_ID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="PLAN_DETAIL_NAME" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="PLAN_DATE" ColumnType="Date" ColumnFormt="yyyy-MM-dd"></GridColumn>
+        <GridColumn ColumnName="SHIFT_ID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="SHIFT_NAME"></GridColumn>
+        <GridColumn ColumnName="EQUIP_ID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="EQUIP_NAME"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_ID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME"></GridColumn>
+        <GridColumn ColumnName="PLAN_STATE" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="PLAN_STATE_CAPTION"></GridColumn>
+        <GridColumn ColumnName="PLAN_TYPE" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="PLAN_TYPE_CAPTION"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

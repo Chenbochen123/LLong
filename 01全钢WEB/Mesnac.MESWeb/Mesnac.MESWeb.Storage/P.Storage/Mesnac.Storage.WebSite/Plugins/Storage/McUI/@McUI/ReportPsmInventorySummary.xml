@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="BeginDate" Value="开始日期"></Caption>
+    <Caption Name="EndDate" Value="结束日期"></Caption>
+    <Caption Name="SummaryState" Value="状态"></Caption>
+    <Caption Name="StoreId" Value="仓库"></Caption>
+    <Caption Name="StorePlaceCode" Value="库位"></Caption>
+    <Caption Name="MaterialName" Value="物料"></Caption>
+    <Caption Name="RecordUserName" Value="创建人"></Caption>
+    <Caption Name="BreakevenType" Value="盈亏类型"></Caption>
+    <Caption Name="INVENTORY_DATE" Value="盘点日期"></Caption>
+    <Caption Name="INVENTORY_TIME" Value="盘点时间"></Caption>
+    <Caption Name="STORE_NAME" Value="仓库"></Caption>
+    <Caption Name="STORE_PLACE_NAME" Value="库位"></Caption>
+    <Caption Name="STORE_PLACE_CODE" Value="库位"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="物料规格"></Caption>
+    <Caption Name="BREAKEVEN_TYPE_CAPTION" Value="盈亏类型"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="创建人"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_TIME" Value="创建时间"></Caption>
+    <Caption Name="UPDATE_TIME" Value="更新时间"></Caption>
+    <Caption Name="UPDATE_USER_NAME" Value="更新人"></Caption>
+    <Caption Name="CHECK_GRADE_NAME" Value="品级"></Caption>
+    <Caption Name="SUMMARY_STATE_CAPTION" Value="状态"></Caption>
+    <Caption Name="AFFIRM_USER_NAME" Value="确认人"></Caption>
+    <Caption Name="AFFIRM_TIME" Value="确认时间"></Caption>
+    <Caption Name="BOOK_AMOUNT" Value="帐面数量"></Caption>
+    <Caption Name="INVENTORY_AMOUNT" Value="实盘数量"></Caption>
+    <Caption Name="BREAKEVEN_AMOUNT" Value="盈亏数量"></Caption>
+  </Captions>
+  <WebPage Title="成品盘点单">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Storage/McUI/@McUI/ReportPsmInventorySummary.js?" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="PSM_INVENTORY_SUMMARY">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="BeginDate" Type="DateBox"></ParamField>
+        <ParamField FieldName="EndDate" Type="DateBox"></ParamField>
+        <ParamField FieldName="SummaryState" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="StoreId" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="StorePlaceCode" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MaterialName" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="BILL_CODE" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="INVENTORY_DATE" ColumnType="Date" ColumnFormt="yyyy-MM-dd" Width="80"></GridColumn>
+        <GridColumn ColumnName="INVENTORY_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="150"></GridColumn>
+        <GridColumn ColumnName="STORE_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE_CODE" Width="80"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="300"></GridColumn>
+        <GridColumn ColumnName="CHECK_GRADE_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="BREAKEVEN_TYPE_CAPTION" Width="60"></GridColumn>
+        <GridColumn ColumnName="BOOK_AMOUNT" Width="60"></GridColumn>
+        <GridColumn ColumnName="INVENTORY_AMOUNT" Width="60"></GridColumn>
+        <GridColumn ColumnName="BREAKEVEN_AMOUNT" Width="60"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="SUMMARY_STATE_CAPTION" Width="60"></GridColumn>
+        <GridColumn ColumnName="AFFIRM_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="AFFIRM_USER_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="UPDATE_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="UPDATE_USER_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="REMARK" IsShow="false" Width="180"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+    <MainDetail>
+      <ParamFields>
+        <ParamField FieldName="INVENTORY_DATE" Type="DateBox"></ParamField>
+        <ParamField FieldName="INVENTORY_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="STORE_NAME"></ParamField>
+        <ParamField FieldName="STORE_PLACE_CODE"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="CHECK_GRADE_NAME"></ParamField>
+        <ParamField FieldName="BREAKEVEN_TYPE_CAPTION"></ParamField>
+        <ParamField FieldName="BOOK_AMOUNT"></ParamField>
+        <ParamField FieldName="INVENTORY_AMOUNT"></ParamField>
+        <ParamField FieldName="BREAKEVEN_AMOUNT"></ParamField>
+        <ParamField FieldName="RECORD_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="RECORD_USER_NAME"></ParamField>
+        <ParamField FieldName="SUMMARY_STATE_CAPTION"></ParamField>
+        <ParamField FieldName="AFFIRM_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="AFFIRM_USER_NAME"></ParamField>
+        <ParamField FieldName="UPDATE_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="UPDATE_USER_NAME"></ParamField>
+        <ParamField FieldName="REMARK" IsShow="false"></ParamField>
+      </ParamFields>
+    </MainDetail>
+  </Select>
+</UiConfig>

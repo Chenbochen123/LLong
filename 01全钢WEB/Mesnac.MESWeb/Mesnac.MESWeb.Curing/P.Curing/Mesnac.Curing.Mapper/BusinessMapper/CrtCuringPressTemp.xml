@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CrtCuringPressTemp"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_CURING_PRESS_TEMP ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.OperId" prepend="AND">
+          <![CDATA[OPER_ID = #where.OperId#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftPlateTemp" prepend="AND">
+          <![CDATA[LEFT_PLATE_TEMP = #where.LeftPlateTemp#]]>
+        </isNotNull>
+        <isNotNull property="where.RightPlateTemp" prepend="AND">
+          <![CDATA[RIGHT_PLATE_TEMP = #where.RightPlateTemp#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftModelTemp" prepend="AND">
+          <![CDATA[LEFT_MODEL_TEMP = #where.LeftModelTemp#]]>
+        </isNotNull>
+        <isNotNull property="where.RightModelTemp" prepend="AND">
+          <![CDATA[RIGHT_MODEL_TEMP = #where.RightModelTemp#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftInnerTemp" prepend="AND">
+          <![CDATA[LEFT_INNER_TEMP = #where.LeftInnerTemp#]]>
+        </isNotNull>
+        <isNotNull property="where.RightInnerTemp" prepend="AND">
+          <![CDATA[RIGHT_INNER_TEMP = #where.RightInnerTemp#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftInnerPress" prepend="AND">
+          <![CDATA[LEFT_INNER_PRESS = #where.LeftInnerPress#]]>
+        </isNotNull>
+        <isNotNull property="where.RightInnerPress" prepend="AND">
+          <![CDATA[RIGHT_INNER_PRESS = #where.RightInnerPress#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftAlarmNo" prepend="AND">
+          <![CDATA[LEFT_ALARM_NO = #where.LeftAlarmNo#]]>
+        </isNotNull>
+        <isNotNull property="where.RightAlarmNo" prepend="AND">
+          <![CDATA[RIGHT_ALARM_NO = #where.RightAlarmNo#]]>
+        </isNotNull>
+        <isNotNull property="where.TpAdd1" prepend="AND">
+          <![CDATA[TP_ADD_1 = #where.TpAdd1#]]>
+        </isNotNull>
+        <isNotNull property="where.TpAdd2" prepend="AND">
+          <![CDATA[TP_ADD_2 = #where.TpAdd2#]]>
+        </isNotNull>
+        <isNotNull property="where.TpAdd3" prepend="AND">
+          <![CDATA[TP_ADD_3 = #where.TpAdd3#]]>
+        </isNotNull>
+        <isNotNull property="where.TpAdd4" prepend="AND">
+          <![CDATA[TP_ADD_4 = #where.TpAdd4#]]>
+        </isNotNull>
+        <isNotNull property="where.SaveInterval" prepend="AND">
+          <![CDATA[SAVE_INTERVAL = #where.SaveInterval#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftTyreNo" prepend="AND">
+          <![CDATA[LEFT_TYRE_NO = #where.LeftTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.RightTyreNo" prepend="AND">
+          <![CDATA[RIGHT_TYRE_NO = #where.RightTyreNo#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+    <!--查询-->
+    <select id="Select@CrtCuringPressTemp" parameterClass="map" resultClass="row">
+      <![CDATA[
+       SELECT DISTINCT T1.RECORD_TIME, T3.EQUIP_NAME, T1.OPER_ID, T1.LEFT_PLATE_TEMP, T1.RIGHT_PLATE_TEMP
+       , T1.LEFT_MODEL_TEMP, T1.RIGHT_MODEL_TEMP, T1.LEFT_INNER_TEMP, T1.RIGHT_INNER_TEMP
+       , T1.LEFT_INNER_PRESS, T1.RIGHT_INNER_PRESS, T1.LEFT_ALARM_NO, T1.RIGHT_ALARM_NO
+       , T1.TP_ADD_1, T1.TP_ADD_2, T1.TP_ADD_3, T1.TP_ADD_4, T1.SAVE_INTERVAL, T1.LEFT_TYRE_NO, T1.RIGHT_TYRE_NO ,T1.CURRENTSTEP
+       , TO_CHAR(T1.RECORD_TIME, 'HH24:MI:SS') SHOW_TIME,T1.CLOSEMOULD_PRESS LCLOSEMOULD_PRESS,T1.CLOSEMOULD_PRESS RCLOSEMOULD_PRESS
+       ,CASE WHEN T1.LEFT_MOLDSTATE = '1' THEN '开模' ELSE '合模' END LEFT_MOLDSTATE,CASE WHEN T1.RIGHT_MOLDSTATE = '1' THEN '开模' ELSE '合模' END RIGHT_MOLDSTATE
+       FROM CRT_CURING_PRESS_TEMP T1 
+       LEFT JOIN SBE_EQUIP T3 ON T3.OBJID = T1.EQUIP_ID
+       ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME>=to_date(#where.BeginTime#,'yyyy-MM-dd hh24:mi:ss') ]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME<=to_date(#where.EndTime#,'yyyy-MM-dd hh24:mi:ss')]]> 
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.RECORD_TIME
+      </isNull>
+    </select>
+    
+    <select id="Select@CrtCuringPressTempold" parameterClass="map" resultClass="row">
+      <![CDATA[
+       SELECT DISTINCT T1.RECORD_TIME, T3.EQUIP_NAME, T1.OPER_ID, T1.LEFT_PLATE_TEMP, T1.RIGHT_PLATE_TEMP
+       , T1.LEFT_MODEL_TEMP, T1.RIGHT_MODEL_TEMP, T1.LEFT_INNER_TEMP, T1.RIGHT_INNER_TEMP
+       , T1.LEFT_INNER_PRESS, T1.RIGHT_INNER_PRESS, T1.LEFT_ALARM_NO, T1.RIGHT_ALARM_NO
+       , T1.TP_ADD_1, T1.TP_ADD_2, T1.TP_ADD_3, T1.TP_ADD_4, T1.SAVE_INTERVAL, T1.LEFT_TYRE_NO, T1.RIGHT_TYRE_NO,'0' CURRENTSTEP,'0' LCLOSEMOULD_PRESS,'0' RCLOSEMOULD_PRESS
+       , TO_CHAR(T1.RECORD_TIME, 'HH24:MI:SS') SHOW_TIME,'' LEFT_MOLDSTATE,'' RIGHT_MOLDSTATE
+       FROM CRT_CURING_PRESS_TEMP T1 
+       LEFT JOIN SBE_EQUIP T3 ON T3.OBJID = T1.EQUIP_ID
+       ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME>=to_date(#where.BeginTime#,'yyyy-MM-dd hh24:mi:ss') ]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME<=to_date(#where.EndTime#,'yyyy-MM-dd hh24:mi:ss')]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.RECORD_TIME
+      </isNull>
+    </select>
+
+    <select id="Select@CrtCuringPressTempHis" parameterClass="map" resultClass="row">
+      <![CDATA[
+       SELECT DISTINCT T1.RECORD_TIME, T3.EQUIP_NAME, T1.OPER_ID, T1.LEFT_PLATE_TEMP, T1.RIGHT_PLATE_TEMP
+       , T1.LEFT_MODEL_TEMP, T1.RIGHT_MODEL_TEMP, T1.LEFT_INNER_TEMP, T1.RIGHT_INNER_TEMP
+       , T1.LEFT_INNER_PRESS, T1.RIGHT_INNER_PRESS, T1.LEFT_ALARM_NO, T1.RIGHT_ALARM_NO
+       , T1.TP_ADD_1, T1.TP_ADD_2, T1.TP_ADD_3, T1.TP_ADD_4, T1.SAVE_INTERVAL, T1.LEFT_TYRE_NO, T1.RIGHT_TYRE_NO,T1.CURRENTSTEP
+       , TO_CHAR(T1.RECORD_TIME, 'HH24:MI:SS') SHOW_TIME,T1.CLOSEMOULD_PRESS LCLOSEMOULD_PRESS,T1.CLOSEMOULD_PRESS RCLOSEMOULD_PRESS
+       ,CASE WHEN T1.LEFT_MOLDSTATE = '1' THEN '开模' ELSE '合模' END LEFT_MOLDSTATE,CASE WHEN T1.RIGHT_MOLDSTATE = '1' THEN '开模' ELSE '合模' END RIGHT_MOLDSTATE
+       FROM $TableName$ T1 
+       LEFT JOIN SBE_EQUIP T3 ON T3.OBJID = T1.EQUIP_ID
+       ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME >= to_date(#where.BeginTime#,'yyyy-MM-dd hh24:mi:ss')]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME <= to_date(#where.EndTime#,'yyyy-MM-dd hh24:mi:ss')]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.RECORD_TIME
+      </isNull>
+    </select>
+
+    <select id="Select@CrtCuringPressTempHisold" parameterClass="map" resultClass="row">
+      <![CDATA[
+       SELECT DISTINCT T1.RECORD_TIME, T3.EQUIP_NAME, T1.OPER_ID, T1.LEFT_PLATE_TEMP, T1.RIGHT_PLATE_TEMP
+       , T1.LEFT_MODEL_TEMP, T1.RIGHT_MODEL_TEMP, T1.LEFT_INNER_TEMP, T1.RIGHT_INNER_TEMP
+       , T1.LEFT_INNER_PRESS, T1.RIGHT_INNER_PRESS, T1.LEFT_ALARM_NO, T1.RIGHT_ALARM_NO
+       , T1.TP_ADD_1, T1.TP_ADD_2, T1.TP_ADD_3, T1.TP_ADD_4, T1.SAVE_INTERVAL, T1.LEFT_TYRE_NO, T1.RIGHT_TYRE_NO,'0' CURRENTSTEP,'0' LCLOSEMOULD_PRESS,'0' RCLOSEMOULD_PRESS
+       , TO_CHAR(T1.RECORD_TIME, 'HH24:MI:SS') SHOW_TIME,'' LEFT_MOLDSTATE,'' RIGHT_MOLDSTATE
+       FROM $TableName$ T1 
+       LEFT JOIN SBE_EQUIP T3 ON T3.OBJID = T1.EQUIP_ID
+       ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME >= to_date(#where.BeginTime#,'yyyy-MM-dd hh24:mi:ss')]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME <= to_date(#where.EndTime#,'yyyy-MM-dd hh24:mi:ss')]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.RECORD_TIME
+      </isNull>
+    </select>
+    
+<select id="GetMaxRecordTime" parameterClass="map" resultClass="Row">
+  <![CDATA[
+  select record_time from crt_curing_press_temp 
+  where record_time >sysdate-0.5/24 and rownum=1 
+   ]]>
+  <dynamic prepend="AND">
+    <isNotNull property="EquipId" prepend="AND">
+      <![CDATA[equip_id=#EquipId#]]>
+    </isNotNull>
+  </dynamic>
+  <![CDATA[
+  order by record_time desc
+  ]]>
+</select>
+
+    <select id="GetCrtCuringStepTime" parameterClass="map" resultClass="Row">
+  SELECT T.* FROM CRT_CURING_STEPTIME T WHERE T.RECORD_TIME >= SYSDATE - INTERVAL '5' MINUTE AND T.EQUIP_ID = #EquipID#
+    </select>
+  
+<insert id="InsertStepTime" parameterClass="map" resultClass="Row">
+      <![CDATA[
+INSERT INTO CRT_CURING_STEPTIME(OBJID,LEFT_TYRE_NO,EQUIP_ID,XYJS,KMBS,XTZBRS,SXHTS,XTZBS,XTZBSC,ZTSZR,ZTSJ,JNHX,TPDX,ZTSBHK,ZTSZC,HMBS,JHML,KHMSUMTIME,RIGHT_TYRE_NO)
+VALUES (SEQ_CRT_CURING_STEPTIME.NEXTVAL,#TyreIDl#,#EquipID#,#XYJS#,#KMBS#,#XTZBRS#,#SXHTS#,#XTZBS#,#XTZBSC#,#ZTSZR#,#ZTSJ#,#JNHX#,#TPDX#,#ZTSBHK#,#ZTSZC#,#HMBS#,#JHML#,#KHMSUMTIME#,#TyreIDr#)
+       ]]>
+    </insert>
+
+  </statements>
+</sqlMap>

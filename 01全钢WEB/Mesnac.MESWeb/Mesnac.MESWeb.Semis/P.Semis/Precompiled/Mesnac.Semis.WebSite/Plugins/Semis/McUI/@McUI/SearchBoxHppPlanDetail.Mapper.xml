@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@SearchBoxHppPlanDetail" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+       select t2.*, t1.PLAN_DATE, t1.SHIFT_ID, t1.EQUIP_ID, t3.SHIFT_NAME, t4.EQUIP_NAME
+       ,  t6.MATERIAL_NAME, t7.SHOW_NAME PLAN_STATE_CAPTION
+       , t8.SHOW_NAME PLAN_TYPE_CAPTION 
+       , to_char(t1.PLAN_DATE, 'yyyy-mm-dd') || ',' || t3.SHIFT_NAME || ',' || t4.EQUIP_NAME || ',' || t6.MATERIAL_NAME PLAN_DETAIL_NAME 
+       from HPP_PLAN t1 
+       join HPP_PLAN_DETAIL t2 on t1.OBJID = t2.Plan_Id 
+       left join SSB_SHIFT t3 on t1.SHIFT_ID = t3.OBJID 
+       left join SBE_EQUIP t4 on t1.EQUIP_ID = t4.OBJID 
+       left join SBM_MATERIAL t6 on t2.MATERIAL_ID = t6.OBJID 
+       left join HPP_PLAN_STATE t7 on t2.PLAN_STATE = t7.OBJID 
+       left join HPP_PLAN_TYPE t8 on t2.PLAN_TYPE = t8.OBJID 
+       where t1.DELETE_FLAG = 0 and t2.DELETE_FLAG = 0
+      ]]>
+      <dynamic>
+        <isNotNull property="where.BEGIN_DATE" prepend="AND">
+          <![CDATA[t1.PLAN_DATE >= #where.BEGIN_DATE#]]>
+        </isNotNull>
+        <isNotNull property="where.END_DATE" prepend="AND">
+          <![CDATA[t1.PLAN_DATE <= #where.END_DATE#]]>
+        </isNotNull>
+        <isNotNull property="where.SHIFT_ID" prepend="AND">
+          <![CDATA[t1.SHIFT_ID = #where.SHIFT_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[t1.EQUIP_ID = #where.EQUIP_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_ID" prepend="AND">
+          <![CDATA[t2.MATERIAL_ID = #where.MATERIAL_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.PLAN_STATE" prepend="AND">
+          <![CDATA[t2.PLAN_STATE = #where.PLAN_STATE#]]>
+        </isNotNull>
+        <isNotNull property="where.PLAN_TYPE" prepend="AND">
+          <![CDATA[t2.PLAN_TYPE = #where.PLAN_TYPE#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend="">
+        order by $OrderString$
+      </isNotNull>
+    </select>
+
+    <!--查询班次信息，ID值固定为GetComboBoxData@Select@SearchBoxHppPlanDetail@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@SearchBoxHppPlanDetail@SHIFT_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,SHIFT_NAME ssValue from SSB_SHIFT where DELETE_FLAG = '0'
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        order by $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by OBJID
+      </isNull>
+    </select>
+
+    <!--查询计划状态信息，ID值固定为GetComboBoxData@Select@SearchBoxHppPlanDetail@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@SearchBoxHppPlanDetail@PLAN_STATE" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,SHOW_NAME ssValue from HPP_PLAN_STATE where DELETE_FLAG = '0'
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        order by $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by OBJID
+      </isNull>
+    </select>
+
+    <!--查询计划状态信息，ID值固定为GetComboBoxData@Select@SearchBoxHppPlanDetail@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@SearchBoxHppPlanDetail@PLAN_TYPE" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,SHOW_NAME ssValue from HPP_PLAN_TYPE where DELETE_FLAG = '0'
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        order by $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by OBJID
+      </isNull>
+    </select>
+
+  </statements>
+</sqlMap>

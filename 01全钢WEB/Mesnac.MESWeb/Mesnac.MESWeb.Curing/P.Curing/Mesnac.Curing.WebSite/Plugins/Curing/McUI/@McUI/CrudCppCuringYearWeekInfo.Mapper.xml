@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudCppCuringYearWeekInfo" parameterClass="map" resultClass="row">
+      <![CDATA[
+ SELECT X.*,X1.TYRE_NO,x2.material_name,X4.user_name CPP_USER,x5.end_time,case when x1.TYRE_NO is null then null else x.CPP_TIME end CPP_TIMENEW FROM (
+        SELECT B.EQUIP_CODE EQUIP_NAME, CASE A.LRFLAG WHEN 1 THEN '左模' ELSE '右模' END LRFLAG,A.YEARWEEK,A.RECORDTIME RECORD_TIME,C.USER_NAME RECORD_USER_NAME,A.CONFIRMTIME CONFIRM_TIME ,D.USER_NAME CONFIRM_USER_NAME
+         ,CASE A.STATEFLAG WHEN 0 THEN '新设置' WHEN 1 THEN '通过' WHEN 2 THEN '不通过' WHEN 3 THEN '未确认已扫描一条' WHEN 4 THEN '不通过已扫描一条' END FLAG,MIN(E.BEGIN_TIME) CPP_TIME,B.OBJID EQUIPID
+        FROM CIM_YEAR_WEEK_INFO A
+        LEFT JOIN SBE_EQUIP B ON A.EQUIPID = B.OBJID AND B.DELETE_FLAG = 0
+        LEFT JOIN SSB_USER C ON A.RECORDUSERID = C.OBJID
+        LEFT JOIN SSB_USER D ON A.CONFIRMUSERID = D.OBJID
+        LEFT JOIN CPP_CURING_PRODUCTION E ON E.EQUIP_ID = B.OBJID AND E.YEAR_WEEK = A.YEARWEEK  and e.begin_time > sysdate -15
+        
+        GROUP BY B.EQUIP_CODE,A.LRFLAG,A.YEARWEEK,A.RECORDTIME,C.USER_NAME,A.CONFIRMTIME,D.USER_NAME,A.STATEFLAG,B.OBJID
+        ORDER BY B.EQUIP_CODE,A.LRFLAG) X
+        LEFT JOIN (select OBJID,TYRE_NO,BEGIN_TIME,EQUIP_ID,material_id,SHIFT_MASTER_ID,case when equip_position = 1 then '左模' else '右模' end LRFlag from CPP_CURING_PRODUCTION) X1 
+        ON X1.BEGIN_TIME > X.CPP_TIME - (2/24/60/60) and X1.BEGIN_TIME < X.CPP_TIME + (2/24/60/60) AND X1.LRFlag = X.LRFLAG AND X1.EQUIP_ID = X.EQUIPID and X1.BEGIN_TIME > sysdate - 15
+        left join sbm_material x2 on x2.objid = x1.material_id
+        LEFT JOIN CPP_CURING_SHIFT_MASTER X3 ON X3.OBJID = X1.SHIFT_MASTER_ID
+        left join ssb_user X4 on X4.objid = X3.WORKER_ID
+        left join CPP_CURING_PRODUCTION x5 on x5.tyre_no = x1.TYRE_NO and x5.delete_flag = 0         
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[X.EQUIPID = #where.EQUIP_ID#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+        order by X.EQUIP_NAME,X.LRFLAG
+      ]]>
+    </select>
+    
+  </statements>
+</sqlMap>

@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportPsmInventorySummary" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT CASE T1.BREAKEVEN_TYPE WHEN 1 THEN '盘盈' WHEN -1 THEN '盘亏' ELSE '' END BREAKEVEN_TYPE_CAPTION
+        , T1.*
+        , T1.INVENTORY_AMOUNT - T1.BOOK_AMOUNT BREAKEVEN_AMOUNT
+        , CASE T1.SUMMARY_STATE WHEN 0 THEN '新建' WHEN 1 THEN '已确认' ELSE '' END SUMMARY_STATE_CAPTION
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '合格' WHEN 2 THEN '二级品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' ELSE '' END CHECK_GRADE_NAME
+        , T2.USER_NAME RECORD_USER_NAME
+        , T3.INVENTORY_DATE, T3.INVENTORY_TIME, T3.BILL_CODE, T3.BILL_STATE
+        , T4.STORE_NAME, T4.STORE_CODE
+        , T5.STORE_PLACE_NAME, T5.STORE_PLACE_CODE
+        , T6.MATERIAL_NAME, T6.MATERIAL_CODE
+        , T7.USER_NAME UPDATE_USER_NAME
+        , T8.USER_NAME AFFIRM_USER_NAME
+        FROM PSM_INVENTORY_SUMMARY T1
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        LEFT JOIN PSM_INVENTORY_BILL T3 ON T1.BILL_ID = T3.OBJID
+        LEFT JOIN PSB_STORE T4 ON T1.STORE_ID = T4.OBJID
+        LEFT JOIN PSB_STORE_PLACE T5 ON T1.STORE_PLACE_ID = T5.OBJID
+        LEFT JOIN SBM_MATERIAL T6 ON T1.MATERIAL_ID = T6.OBJID
+        LEFT JOIN SSB_USER T7 ON T1.UPDATE_USER_ID = T7.OBJID
+        LEFT JOIN SSB_USER T8 ON T1.AFFIRM_USER_ID = T8.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginDate" prepend="AND">
+          <![CDATA[T3.INVENTORY_DATE >= #where.BeginDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EndDate" prepend="AND">
+          <![CDATA[T3.INVENTORY_DATE <= #where.EndDate#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreId" prepend="AND">
+          <![CDATA[T1.STORE_ID = #where.StoreId#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceName" prepend="AND">
+          <![CDATA[T5.STORE_PLACE_NAME LIKE '%' || #where.StorePlaceName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceCode" prepend="AND">
+          <![CDATA[T5.STORE_PLACE_CODE LIKE '%' || #where.StorePlaceCode# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[T6.MATERIAL_NAME LIKE '%' || #where.MaterialName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.SummaryState" prepend="AND">
+          <![CDATA[T1.SUMMARY_STATE = #where.SummaryState#]]>
+        </isNotNull>
+        <isNotNull property="where.BillState" prepend="AND">
+          <![CDATA[T3.BILL_STATE = #where.BillState#]]>
+        </isNotNull>
+        <isNotNull property="where.BreakevenType" prepend="AND">
+          <![CDATA[T1.BREAKEVEN_TYPE = #where.BreakevenType#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserName" prepend="AND">
+          <![CDATA[T2.USER_NAME like '%' || #where.RecordUserName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.BillCode" prepend="AND">
+          <![CDATA[T3.BILL_CODE = #where.BillCode#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.RECORD_TIME DESC
+      </isNull>
+    </select>
+    <select id="Select+Update@ReportPsmInventorySummary" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM PSM_INVENORY_BILL ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <select id="Select@ReportPsmInventorySummary@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT CASE T1.BREAKEVEN_TYPE WHEN 1 THEN '盘盈' WHEN -1 THEN '盘亏' ELSE '' END BREAKEVEN_TYPE_CAPTION
+        , T1.*
+        , T1.INVENTORY_AMOUNT - T1.BOOK_AMOUNT BREAKEVEN_AMOUNT
+        , CASE T1.SUMMARY_STATE WHEN 0 THEN '新建' WHEN 1 THEN '已确认' ELSE '' END SUMMARY_STATE_CAPTION
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '合格' WHEN 2 THEN '二级品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' ELSE '' END CHECK_GRADE_NAME
+        , T2.USER_NAME RECORD_USER_NAME
+        , T3.INVENTORY_DATE, T3.INVENTORY_TIME, T3.BILL_CODE, T3.BILL_STATE
+        , T4.STORE_NAME, T4.STORE_CODE
+        , T5.STORE_PLACE_NAME, T5.STORE_PLACE_CODE
+        , T6.MATERIAL_NAME, T6.MATERIAL_CODE
+        , T7.USER_NAME UPDATE_USER_NAME
+        , T8.USER_NAME AFFIRM_USER_NAME
+        FROM PSM_INVENTORY_SUMMARY T1
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        LEFT JOIN PSM_INVENTORY_BILL T3 ON T1.BILL_ID = T3.OBJID
+        LEFT JOIN PSB_STORE T4 ON T1.STORE_ID = T4.OBJID
+        LEFT JOIN PSB_STORE_PLACE T5 ON T1.STORE_PLACE_ID = T5.OBJID
+        LEFT JOIN SBM_MATERIAL T6 ON T1.MATERIAL_ID = T6.OBJID
+        LEFT JOIN SSB_USER T7 ON T1.UPDATE_USER_ID = T7.OBJID
+        LEFT JOIN SSB_USER T8 ON T1.AFFIRM_USER_ID = T8.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T1.OBJID = #where.OBJID#)]]>
+      </dynamic>
+    </select>
+
+
+    <!--查询类型信息，ID值固定为GetComboBoxData@Select@ReportPsmInventorySummary@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInventorySummary@BreakevenType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT 1 sskey, '盘盈' ssValue FROM dual
+      UNION
+      SELECT -1 sskey, '盘亏' ssValue FROM dual
+     ]]>
+    </select>
+
+    <!--查询单据状态信息，ID值固定为GetComboBoxData@Select@ReportPsmInventorySummary@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInventorySummary@SummaryState" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT 0 sskey, '新建' ssValue FROM dual
+      UNION
+      SELECT 1 sskey, '已确认' ssValue FROM dual
+     ]]>
+    </select>
+
+    <!--查询班组信息，ID值固定为GetComboBoxData@Select@ReportPsmInventorySummary@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInventorySummary@StoreId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey, STORE_NAME ssValue FROM PSB_STORE WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.InterfaceBG.Mapper.BasicMapper.PlmDeviceParameMain"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="PlmDeviceParameMain" type="Mesnac.InterfaceBG.Entity.BasicEntity.PlmDeviceParameMain, Mesnac.InterfaceBG.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_PlmDeviceParameMain" class="PlmDeviceParameMain">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Equipmentcode" column="EQUIPMENTCODE"/>
+    <result property="Equipmentname" column="EQUIPMENTNAME"/>
+    <result property="Equipmenttypecode" column="EQUIPMENTTYPECODE"/>
+    <result property="Equipmenttypename" column="EQUIPMENTTYPENAME"/>
+    <result property="Parmname" column="PARMNAME"/>
+    <result property="ParmnameEn" column="PARMNAME_EN"/>
+    <result property="Parmtypecode" column="PARMTYPECODE"/>
+    <result property="Parmtypename" column="PARMTYPENAME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="Recorddate" column="RECORDDATE"/>
+    <result property="Valuemax" column="VALUEMAX"/>
+    <result property="Valuemin" column="VALUEMIN"/>
+    <result property="Valuemaxsign" column="VALUEMAXSIGN"/>
+    <result property="Valueminsign" column="VALUEMINSIGN"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="Dummy5" column="DUMMY5"/>
+    <result property="Dummy6" column="DUMMY6"/>
+    <result property="Dummy7" column="DUMMY7"/>
+    <result property="Dummy8" column="DUMMY8"/>
+    <result property="Dummy9" column="DUMMY9"/>
+    <result property="Dummy10" column="DUMMY10"/>
+    <result property="BackopFlag" column="BACKOP_FLAG"/>
+    <result property="BackopTime" column="BACKOP_TIME"/>
+    <result property="Factory" column="FACTORY"/>
+    <result property="Parmcode" column="PARMCODE"/>
+    <result property="Value" column="VALUE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_PlmDeviceParameMain" class="PlmDeviceParameMain">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Equipmentcode" column="Equipmentcode"/>
+    <parameter property="Equipmentname" column="Equipmentname"/>
+    <parameter property="Equipmenttypecode" column="Equipmenttypecode"/>
+    <parameter property="Equipmenttypename" column="Equipmenttypename"/>
+    <parameter property="Parmname" column="Parmname"/>
+    <parameter property="ParmnameEn" column="ParmnameEn"/>
+    <parameter property="Parmtypecode" column="Parmtypecode"/>
+    <parameter property="Parmtypename" column="Parmtypename"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="Recorddate" column="Recorddate"/>
+    <parameter property="Valuemax" column="Valuemax"/>
+    <parameter property="Valuemin" column="Valuemin"/>
+    <parameter property="Valuemaxsign" column="Valuemaxsign"/>
+    <parameter property="Valueminsign" column="Valueminsign"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="Dummy5" column="Dummy5"/>
+    <parameter property="Dummy6" column="Dummy6"/>
+    <parameter property="Dummy7" column="Dummy7"/>
+    <parameter property="Dummy8" column="Dummy8"/>
+    <parameter property="Dummy9" column="Dummy9"/>
+    <parameter property="Dummy10" column="Dummy10"/>
+    <parameter property="BackopFlag" column="BackopFlag"/>
+    <parameter property="BackopTime" column="BackopTime"/>
+    <parameter property="Factory" column="Factory"/>
+    <parameter property="Parmcode" column="Parmcode"/>
+    <parameter property="Value" column="Value"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PLM_DEVICE_PARAME_MAIN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipmentcode" prepend="AND">
+          <![CDATA[EQUIPMENTCODE = #where.Equipmentcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipmentname" prepend="AND">
+          <![CDATA[EQUIPMENTNAME = #where.Equipmentname#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipmenttypecode" prepend="AND">
+          <![CDATA[EQUIPMENTTYPECODE = #where.Equipmenttypecode#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipmenttypename" prepend="AND">
+          <![CDATA[EQUIPMENTTYPENAME = #where.Equipmenttypename#]]>
+        </isNotNull>
+        <isNotNull property="where.Parmname" prepend="AND">
+          <![CDATA[PARMNAME = #where.Parmname#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmnameEn" prepend="AND">
+          <![CDATA[PARMNAME_EN = #where.ParmnameEn#]]>
+        </isNotNull>
+        <isNotNull property="where.Parmtypecode" prepend="AND">
+          <![CDATA[PARMTYPECODE = #where.Parmtypecode#]]>
+        </isNotNull>
+        <isNotNull property="where.Parmtypename" prepend="AND">
+          <![CDATA[PARMTYPENAME = #where.Parmtypename#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Recorddate" prepend="AND">
+          <![CDATA[RECORDDATE = #where.Recorddate#]]>
+        </isNotNull>
+        <isNotNull property="where.Valuemax" prepend="AND">
+          <![CDATA[VALUEMAX = #where.Valuemax#]]>
+        </isNotNull>
+        <isNotNull property="where.Valuemin" prepend="AND">
+          <![CDATA[VALUEMIN = #where.Valuemin#]]>
+        </isNotNull>
+        <isNotNull property="where.Valuemaxsign" prepend="AND">
+          <![CDATA[VALUEMAXSIGN = #where.Valuemaxsign#]]>
+        </isNotNull>
+        <isNotNull property="where.Valueminsign" prepend="AND">
+          <![CDATA[VALUEMINSIGN = #where.Valueminsign#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy7" prepend="AND">
+          <![CDATA[DUMMY7 = #where.Dummy7#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy8" prepend="AND">
+          <![CDATA[DUMMY8 = #where.Dummy8#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy9" prepend="AND">
+          <![CDATA[DUMMY9 = #where.Dummy9#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy10" prepend="AND">
+          <![CDATA[DUMMY10 = #where.Dummy10#]]>
+        </isNotNull>
+        <isNotNull property="where.BackopFlag" prepend="AND">
+          <![CDATA[BACKOP_FLAG = #where.BackopFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackopTime" prepend="AND">
+          <![CDATA[BACKOP_TIME = #where.BackopTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Factory" prepend="AND">
+          <![CDATA[FACTORY = #where.Factory#]]>
+        </isNotNull>
+        <isNotNull property="where.Parmcode" prepend="AND">
+          <![CDATA[PARMCODE = #where.Parmcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Value" prepend="AND">
+          <![CDATA[VALUE = #where.Value#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE ( = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO PLM_DEVICE_PARAME_MAIN]]>
+       <dynamic prepend="(">
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="Equipmentcode" prepend=",">EQUIPMENTCODE</isNotNull>
+        <isNotNull property="Equipmentname" prepend=",">EQUIPMENTNAME</isNotNull>
+        <isNotNull property="Equipmenttypecode" prepend=",">EQUIPMENTTYPECODE</isNotNull>
+        <isNotNull property="Equipmenttypename" prepend=",">EQUIPMENTTYPENAME</isNotNull>
+        <isNotNull property="Parmname" prepend=",">PARMNAME</isNotNull>
+        <isNotNull property="ParmnameEn" prepend=",">PARMNAME_EN</isNotNull>
+        <isNotNull property="Parmtypecode" prepend=",">PARMTYPECODE</isNotNull>
+        <isNotNull property="Parmtypename" prepend=",">PARMTYPENAME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="Recorddate" prepend=",">RECORDDATE</isNotNull>
+        <isNotNull property="Valuemax" prepend=",">VALUEMAX</isNotNull>
+        <isNotNull property="Valuemin" prepend=",">VALUEMIN</isNotNull>
+        <isNotNull property="Valuemaxsign" prepend=",">VALUEMAXSIGN</isNotNull>
+        <isNotNull property="Valueminsign" prepend=",">VALUEMINSIGN</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">DUMMY5</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">DUMMY6</isNotNull>
+        <isNotNull property="Dummy7" prepend=",">DUMMY7</isNotNull>
+        <isNotNull property="Dummy8" prepend=",">DUMMY8</isNotNull>
+        <isNotNull property="Dummy9" prepend=",">DUMMY9</isNotNull>
+        <isNotNull property="Dummy10" prepend=",">DUMMY10</isNotNull>
+        <isNotNull property="BackopFlag" prepend=",">BACKOP_FLAG</isNotNull>
+        <isNotNull property="BackopTime" prepend=",">BACKOP_TIME</isNotNull>
+        <isNotNull property="Factory" prepend=",">FACTORY</isNotNull>
+        <isNotNull property="Parmcode" prepend=",">PARMCODE</isNotNull>
+        <isNotNull property="Value" prepend=",">VALUE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="Equipmentcode" prepend=",">#Equipmentcode#</isNotNull>
+        <isNotNull property="Equipmentname" prepend=",">#Equipmentname#</isNotNull>
+        <isNotNull property="Equipmenttypecode" prepend=",">#Equipmenttypecode#</isNotNull>
+        <isNotNull property="Equipmenttypename" prepend=",">#Equipmenttypename#</isNotNull>
+        <isNotNull property="Parmname" prepend=",">#Parmname#</isNotNull>
+        <isNotNull property="ParmnameEn" prepend=",">#ParmnameEn#</isNotNull>
+        <isNotNull property="Parmtypecode" prepend=",">#Parmtypecode#</isNotNull>
+        <isNotNull property="Parmtypename" prepend=",">#Parmtypename#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="Recorddate" prepend=",">#Recorddate#</isNotNull>
+        <isNotNull property="Valuemax" prepend=",">#Valuemax#</isNotNull>
+        <isNotNull property="Valuemin" prepend=",">#Valuemin#</isNotNull>
+        <isNotNull property="Valuemaxsign" prepend=",">#Valuemaxsign#</isNotNull>
+        <isNotNull property="Valueminsign" prepend=",">#Valueminsign#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">#Dummy5#</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">#Dummy6#</isNotNull>
+        <isNotNull property="Dummy7" prepend=",">#Dummy7#</isNotNull>
+        <isNotNull property="Dummy8" prepend=",">#Dummy8#</isNotNull>
+        <isNotNull property="Dummy9" prepend=",">#Dummy9#</isNotNull>
+        <isNotNull property="Dummy10" prepend=",">#Dummy10#</isNotNull>
+        <isNotNull property="BackopFlag" prepend=",">#BackopFlag#</isNotNull>
+        <isNotNull property="BackopTime" prepend=",">#BackopTime#</isNotNull>
+        <isNotNull property="Factory" prepend=",">#Factory#</isNotNull>
+        <isNotNull property="Parmcode" prepend=",">#Parmcode#</isNotNull>
+        <isNotNull property="Value" prepend=",">#Value#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE PLM_DEVICE_PARAME_MAIN
+       <dynamic prepend="SET">
+        <isNotNull  property="update.ObjId"  prepend=",">
+          OBJID = #update.ObjId#
+        </isNotNull>
+        <isNotNull  property="update.Equipmentcode"  prepend=",">
+          EQUIPMENTCODE = #update.Equipmentcode#
+        </isNotNull>
+        <isNotNull  property="update.Equipmentname"  prepend=",">
+          EQUIPMENTNAME = #update.Equipmentname#
+        </isNotNull>
+        <isNotNull  property="update.Equipmenttypecode"  prepend=",">
+          EQUIPMENTTYPECODE = #update.Equipmenttypecode#
+        </isNotNull>
+        <isNotNull  property="update.Equipmenttypename"  prepend=",">
+          EQUIPMENTTYPENAME = #update.Equipmenttypename#
+        </isNotNull>
+        <isNotNull  property="update.Parmname"  prepend=",">
+          PARMNAME = #update.Parmname#
+        </isNotNull>
+        <isNotNull  property="update.ParmnameEn"  prepend=",">
+          PARMNAME_EN = #update.ParmnameEn#
+        </isNotNull>
+        <isNotNull  property="update.Parmtypecode"  prepend=",">
+          PARMTYPECODE = #update.Parmtypecode#
+        </isNotNull>
+        <isNotNull  property="update.Parmtypename"  prepend=",">
+          PARMTYPENAME = #update.Parmtypename#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.Recorddate"  prepend=",">
+          RECORDDATE = #update.Recorddate#
+        </isNotNull>
+        <isNotNull  property="update.Valuemax"  prepend=",">
+          VALUEMAX = #update.Valuemax#
+        </isNotNull>
+        <isNotNull  property="update.Valuemin"  prepend=",">
+          VALUEMIN = #update.Valuemin#
+        </isNotNull>
+        <isNotNull  property="update.Valuemaxsign"  prepend=",">
+          VALUEMAXSIGN = #update.Valuemaxsign#
+        </isNotNull>
+        <isNotNull  property="update.Valueminsign"  prepend=",">
+          VALUEMINSIGN = #update.Valueminsign#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.Dummy5"  prepend=",">
+          DUMMY5 = #update.Dummy5#
+        </isNotNull>
+        <isNotNull  property="update.Dummy6"  prepend=",">
+          DUMMY6 = #update.Dummy6#
+        </isNotNull>
+        <isNotNull  property="update.Dummy7"  prepend=",">
+          DUMMY7 = #update.Dummy7#
+        </isNotNull>
+        <isNotNull  property="update.Dummy8"  prepend=",">
+          DUMMY8 = #update.Dummy8#
+        </isNotNull>
+        <isNotNull  property="update.Dummy9"  prepend=",">
+          DUMMY9 = #update.Dummy9#
+        </isNotNull>
+        <isNotNull  property="update.Dummy10"  prepend=",">
+          DUMMY10 = #update.Dummy10#
+        </isNotNull>
+        <isNotNull  property="update.BackopFlag"  prepend=",">
+          BACKOP_FLAG = #update.BackopFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackopTime"  prepend=",">
+          BACKOP_TIME = #update.BackopTime#
+        </isNotNull>
+        <isNotNull  property="update.Factory"  prepend=",">
+          FACTORY = #update.Factory#
+        </isNotNull>
+        <isNotNull  property="update.Parmcode"  prepend=",">
+          PARMCODE = #update.Parmcode#
+        </isNotNull>
+        <isNotNull  property="update.Value"  prepend=",">
+          VALUE = #update.Value#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM PLM_DEVICE_PARAME_MAIN
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_PlmDeviceParameMain">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_PlmDeviceParameMain">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max()
+      </isNotPropertyAvailable>
+      FROM PLM_DEVICE_PARAME_MAIN
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM PLM_DEVICE_PARAME_MAIN
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_PlmDeviceParameMain" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE PLM_DEVICE_PARAME_MAIN
+    </statement>
+  </statements>
+</sqlMap>

@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.HppGetmatertosap"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HppGetmatertosap" type="Mesnac.Semis.Entity.BasicEntity.HppGetmatertosap, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HppGetmatertosap" class="HppGetmatertosap">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Busid" column="BUSID"/>
+    <result property="Bustyp" column="BUSTYP"/>
+    <result property="Tldid" column="TLDID"/>
+    <result property="Dtsend" column="DTSEND"/>
+    <result property="Sender" column="SENDER"/>
+    <result property="Docdate" column="DOCDATE"/>
+    <result property="Postdate" column="POSTDATE"/>
+    <result property="Movtype" column="MOVTYPE"/>
+    <result property="Materialcode" column="MATERIALCODE"/>
+    <result property="Plantfrom" column="PLANTFROM"/>
+    <result property="Storageloc" column="STORAGELOC"/>
+    <result property="Qty" column="QTY"/>
+    <result property="Unit" column="UNIT"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="Dummy5" column="DUMMY5"/>
+    <result property="Processcode" column="PROCESSCODE"/>
+    <result property="Tlgnam" column="TLGNAM"/>
+    <result property="Mstyp" column="MSTYP"/>
+    <result property="Errdes" column="ERRDES"/>
+    <result property="Sapid" column="SAPID"/>
+    <result property="Docty" column="DOCTY"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HppGetmatertosap" class="HppGetmatertosap">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Busid" column="Busid"/>
+    <parameter property="Bustyp" column="Bustyp"/>
+    <parameter property="Tldid" column="Tldid"/>
+    <parameter property="Dtsend" column="Dtsend"/>
+    <parameter property="Sender" column="Sender"/>
+    <parameter property="Docdate" column="Docdate"/>
+    <parameter property="Postdate" column="Postdate"/>
+    <parameter property="Movtype" column="Movtype"/>
+    <parameter property="Materialcode" column="Materialcode"/>
+    <parameter property="Plantfrom" column="Plantfrom"/>
+    <parameter property="Storageloc" column="Storageloc"/>
+    <parameter property="Qty" column="Qty"/>
+    <parameter property="Unit" column="Unit"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="Dummy5" column="Dummy5"/>
+    <parameter property="Processcode" column="Processcode"/>
+    <parameter property="Tlgnam" column="Tlgnam"/>
+    <parameter property="Mstyp" column="Mstyp"/>
+    <parameter property="Errdes" column="Errdes"/>
+    <parameter property="Sapid" column="Sapid"/>
+    <parameter property="Docty" column="Docty"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_GETMATERTOSAP ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Busid" prepend="AND">
+          <![CDATA[BUSID = #where.Busid#]]>
+        </isNotNull>
+        <isNotNull property="where.Bustyp" prepend="AND">
+          <![CDATA[BUSTYP = #where.Bustyp#]]>
+        </isNotNull>
+        <isNotNull property="where.Tldid" prepend="AND">
+          <![CDATA[TLDID = #where.Tldid#]]>
+        </isNotNull>
+        <isNotNull property="where.Dtsend" prepend="AND">
+          <![CDATA[DTSEND = #where.Dtsend#]]>
+        </isNotNull>
+        <isNotNull property="where.Sender" prepend="AND">
+          <![CDATA[SENDER = #where.Sender#]]>
+        </isNotNull>
+        <isNotNull property="where.Docdate" prepend="AND">
+          <![CDATA[DOCDATE = #where.Docdate#]]>
+        </isNotNull>
+        <isNotNull property="where.Postdate" prepend="AND">
+          <![CDATA[POSTDATE = #where.Postdate#]]>
+        </isNotNull>
+        <isNotNull property="where.Movtype" prepend="AND">
+          <![CDATA[MOVTYPE = #where.Movtype#]]>
+        </isNotNull>
+        <isNotNull property="where.Materialcode" prepend="AND">
+          <![CDATA[MATERIALCODE = #where.Materialcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Plantfrom" prepend="AND">
+          <![CDATA[PLANTFROM = #where.Plantfrom#]]>
+        </isNotNull>
+        <isNotNull property="where.Storageloc" prepend="AND">
+          <![CDATA[STORAGELOC = #where.Storageloc#]]>
+        </isNotNull>
+        <isNotNull property="where.Qty" prepend="AND">
+          <![CDATA[QTY = #where.Qty#]]>
+        </isNotNull>
+        <isNotNull property="where.Unit" prepend="AND">
+          <![CDATA[UNIT = #where.Unit#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Processcode" prepend="AND">
+          <![CDATA[PROCESSCODE = #where.Processcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Tlgnam" prepend="AND">
+          <![CDATA[TLGNAM = #where.Tlgnam#]]>
+        </isNotNull>
+        <isNotNull property="where.Mstyp" prepend="AND">
+          <![CDATA[MSTYP = #where.Mstyp#]]>
+        </isNotNull>
+        <isNotNull property="where.Errdes" prepend="AND">
+          <![CDATA[ERRDES = #where.Errdes#]]>
+        </isNotNull>
+        <isNotNull property="where.Sapid" prepend="AND">
+          <![CDATA[SAPID = #where.Sapid#]]>
+        </isNotNull>
+        <isNotNull property="where.Docty" prepend="AND">
+          <![CDATA[DOCTY = #where.Docty#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HPP_GETMATERTOSAP]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="Busid" prepend=",">BUSID</isNotNull>
+        <isNotNull property="Bustyp" prepend=",">BUSTYP</isNotNull>
+        <isNotNull property="Tldid" prepend=",">TLDID</isNotNull>
+        <isNotNull property="Dtsend" prepend=",">DTSEND</isNotNull>
+        <isNotNull property="Sender" prepend=",">SENDER</isNotNull>
+        <isNotNull property="Docdate" prepend=",">DOCDATE</isNotNull>
+        <isNotNull property="Postdate" prepend=",">POSTDATE</isNotNull>
+        <isNotNull property="Movtype" prepend=",">MOVTYPE</isNotNull>
+        <isNotNull property="Materialcode" prepend=",">MATERIALCODE</isNotNull>
+        <isNotNull property="Plantfrom" prepend=",">PLANTFROM</isNotNull>
+        <isNotNull property="Storageloc" prepend=",">STORAGELOC</isNotNull>
+        <isNotNull property="Qty" prepend=",">QTY</isNotNull>
+        <isNotNull property="Unit" prepend=",">UNIT</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">DUMMY5</isNotNull>
+        <isNotNull property="Processcode" prepend=",">PROCESSCODE</isNotNull>
+        <isNotNull property="Tlgnam" prepend=",">TLGNAM</isNotNull>
+        <isNotNull property="Mstyp" prepend=",">MSTYP</isNotNull>
+        <isNotNull property="Errdes" prepend=",">ERRDES</isNotNull>
+        <isNotNull property="Sapid" prepend=",">SAPID</isNotNull>
+        <isNotNull property="Docty" prepend=",">DOCTY</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_HPP_GETMATERTOSAP.NEXTVAL</isNull>
+        <isNotNull property="Busid" prepend=",">#Busid#</isNotNull>
+        <isNotNull property="Bustyp" prepend=",">#Bustyp#</isNotNull>
+        <isNotNull property="Tldid" prepend=",">#Tldid#</isNotNull>
+        <isNotNull property="Dtsend" prepend=",">#Dtsend#</isNotNull>
+        <isNotNull property="Sender" prepend=",">#Sender#</isNotNull>
+        <isNotNull property="Docdate" prepend=",">#Docdate#</isNotNull>
+        <isNotNull property="Postdate" prepend=",">#Postdate#</isNotNull>
+        <isNotNull property="Movtype" prepend=",">#Movtype#</isNotNull>
+        <isNotNull property="Materialcode" prepend=",">#Materialcode#</isNotNull>
+        <isNotNull property="Plantfrom" prepend=",">#Plantfrom#</isNotNull>
+        <isNotNull property="Storageloc" prepend=",">#Storageloc#</isNotNull>
+        <isNotNull property="Qty" prepend=",">#Qty#</isNotNull>
+        <isNotNull property="Unit" prepend=",">#Unit#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">#Dummy5#</isNotNull>
+        <isNotNull property="Processcode" prepend=",">#Processcode#</isNotNull>
+        <isNotNull property="Tlgnam" prepend=",">#Tlgnam#</isNotNull>
+        <isNotNull property="Mstyp" prepend=",">#Mstyp#</isNotNull>
+        <isNotNull property="Errdes" prepend=",">#Errdes#</isNotNull>
+        <isNotNull property="Sapid" prepend=",">#Sapid#</isNotNull>
+        <isNotNull property="Docty" prepend=",">#Docty#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HPP_GETMATERTOSAP
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Busid"  prepend=",">
+          BUSID = #update.Busid#
+        </isNotNull>
+        <isNotNull  property="update.Bustyp"  prepend=",">
+          BUSTYP = #update.Bustyp#
+        </isNotNull>
+        <isNotNull  property="update.Tldid"  prepend=",">
+          TLDID = #update.Tldid#
+        </isNotNull>
+        <isNotNull  property="update.Dtsend"  prepend=",">
+          DTSEND = #update.Dtsend#
+        </isNotNull>
+        <isNotNull  property="update.Sender"  prepend=",">
+          SENDER = #update.Sender#
+        </isNotNull>
+        <isNotNull  property="update.Docdate"  prepend=",">
+          DOCDATE = #update.Docdate#
+        </isNotNull>
+        <isNotNull  property="update.Postdate"  prepend=",">
+          POSTDATE = #update.Postdate#
+        </isNotNull>
+        <isNotNull  property="update.Movtype"  prepend=",">
+          MOVTYPE = #update.Movtype#
+        </isNotNull>
+        <isNotNull  property="update.Materialcode"  prepend=",">
+          MATERIALCODE = #update.Materialcode#
+        </isNotNull>
+        <isNotNull  property="update.Plantfrom"  prepend=",">
+          PLANTFROM = #update.Plantfrom#
+        </isNotNull>
+        <isNotNull  property="update.Storageloc"  prepend=",">
+          STORAGELOC = #update.Storageloc#
+        </isNotNull>
+        <isNotNull  property="update.Qty"  prepend=",">
+          QTY = #update.Qty#
+        </isNotNull>
+        <isNotNull  property="update.Unit"  prepend=",">
+          UNIT = #update.Unit#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.Dummy5"  prepend=",">
+          DUMMY5 = #update.Dummy5#
+        </isNotNull>
+        <isNotNull  property="update.Processcode"  prepend=",">
+          PROCESSCODE = #update.Processcode#
+        </isNotNull>
+        <isNotNull  property="update.Tlgnam"  prepend=",">
+          TLGNAM = #update.Tlgnam#
+        </isNotNull>
+        <isNotNull  property="update.Mstyp"  prepend=",">
+          MSTYP = #update.Mstyp#
+        </isNotNull>
+        <isNotNull  property="update.Errdes"  prepend=",">
+          ERRDES = #update.Errdes#
+        </isNotNull>
+        <isNotNull  property="update.Sapid"  prepend=",">
+          SAPID = #update.Sapid#
+        </isNotNull>
+        <isNotNull  property="update.Docty"  prepend=",">
+          DOCTY = #update.Docty#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HPP_GETMATERTOSAP
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HppGetmatertosap">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HppGetmatertosap">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM HPP_GETMATERTOSAP
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HPP_GETMATERTOSAP
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HppGetmatertosap" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HPP_GETMATERTOSAP
+    </statement>
+  </statements>
+</sqlMap>

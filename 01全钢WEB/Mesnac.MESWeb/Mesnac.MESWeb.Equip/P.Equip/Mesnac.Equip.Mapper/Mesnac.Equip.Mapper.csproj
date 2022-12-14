@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{898FF5D7-28C5-450B-96DD-A0B6506F6D23}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Equip.Mapper</RootNamespace>
+    <AssemblyName>Mesnac.Equip.Mapper</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SebEquipStore.xml" />
+    <EmbeddedResource Include="BasicMapper\SebEquipUnit.xml" />
+    <EmbeddedResource Include="BasicMapper\SebStore.xml" />
+    <EmbeddedResource Include="BasicMapper\SebUnit.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BusinessMapper\SebStore.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SbeEquipMoniter.xml" />
+    <EmbeddedResource Include="BusinessMapper\SbeEquipMoniter.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SbmSparePartInStock.xml" />
+    <EmbeddedResource Include="BasicMapper\SbmSparePartOutStock.xml" />
+    <EmbeddedResource Include="BasicMapper\SbmSparePartStorage.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BusinessMapper\SbmSparePartInStock.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BusinessMapper\SbmSparePartOutStock.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SesSpareparts.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SesSparepartsMajorType.xml" />
+    <EmbeddedResource Include="BasicMapper\SesSparepartsMinorType.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SbeEquipStopReason.xml" />
+    <EmbeddedResource Include="BasicMapper\SbeEquipStopType.xml" />
+    <EmbeddedResource Include="BasicMapper\SeeEquipStopRecord.xml" />
+    <EmbeddedResource Include="BasicMapper\SesStopFault.xml" />
+    <EmbeddedResource Include="BusinessMapper\SbeEquipStopReason.xml" />
+    <EmbeddedResource Include="BusinessMapper\SbeEquipStopType.xml" />
+    <EmbeddedResource Include="BusinessMapper\SeeEquipStopRecord.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SbeEquipRepairPlan.xml" />
+    <EmbeddedResource Include="BusinessMapper\SbeEquipRepairPlan.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SbeEquip.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BusinessMapper\SbeEquip.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SbmEquipRepairRecord.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SebStorePlace.xml" />
+    <EmbeddedResource Include="BasicMapper\SebSubStorePlace.xml" />
+    <EmbeddedResource Include="BusinessMapper\SebSubStorePlace.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\CimMouldInfo.xml" />
+    <EmbeddedResource Include="BusinessMapper\CimMouldInfo.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\CimMouldInput.xml" />
+    <EmbeddedResource Include="BasicMapper\CimMouldOutput.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\CimMouldStorage.xml" />
+    <EmbeddedResource Include="BusinessMapper\CimMouldStorage.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SbmMaterial.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\CimMouldScanLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\CimMouldCard.xml" />
+    <EmbeddedResource Include="BusinessMapper\CimMouldCard.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\CbmBrand.xml" />
+    <EmbeddedResource Include="BasicMapper\CbmLoadIndex.xml" />
+    <EmbeddedResource Include="BasicMapper\CbmPattern.xml" />
+    <EmbeddedResource Include="BasicMapper\CbmPlyrating.xml" />
+    <EmbeddedResource Include="BasicMapper\CbmSize.xml" />
+    <EmbeddedResource Include="BasicMapper\CbmSpeedLevel.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\CimMouldInventoryDetail.xml" />
+    <EmbeddedResource Include="BasicMapper\CimMouldInventoryMain.xml" />
+    <EmbeddedResource Include="BusinessMapper\CimMouldInventoryDetail.xml" />
+    <EmbeddedResource Include="BusinessMapper\CimMouldInventoryMain.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\CimMouldEquip.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SbeEquipInspectionPlan.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\SbeClearmould.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BasicMapper\MouldErrornumber.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

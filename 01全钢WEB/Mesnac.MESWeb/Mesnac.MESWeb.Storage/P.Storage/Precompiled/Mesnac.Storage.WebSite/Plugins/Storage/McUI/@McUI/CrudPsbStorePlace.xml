@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="STORE_ID" Value="仓库"></Caption>
+    <Caption Name="STORE_NAME" Value="仓库类型"></Caption>
+    <Caption Name="STORE_PLACE_NAME" Value="库位名称"></Caption>
+    <Caption Name="STORE_PLACE_CODE" Value="库位代号"></Caption>
+    <Caption Name="SAP_CODE" Value="SAP代号"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+  </Captions>
+  <WebPage Title="库位信息">
+  </WebPage>
+  <Crud TableName="PSB_STORE_PLACE">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_PSB_STORE_PLACE"></SeqField>
+    </SeqFields>
+    <Uniques>
+      <Unique Fields="STORE_PLACE_NAME,SAP_CODE"></Unique>
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="STORE_PLACE_NAME"></ParamField>
+        <ParamField FieldName="STORE_PLACE_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="SAP_CODE" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="STORE_PLACE_NAME"></ParamField>
+        <ParamField FieldName="STORE_PLACE_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="SAP_CODE" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="STORE_PLACE_NAME" Nullable="true"></ParamField>
+        <ParamField FieldName="SAP_CODE" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_ID" Type="ComboBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE_NAME"></GridColumn>
+        <GridColumn ColumnName="SAP_CODE"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE_CODE"></GridColumn>
+        <GridColumn ColumnName="STORE_NAME"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

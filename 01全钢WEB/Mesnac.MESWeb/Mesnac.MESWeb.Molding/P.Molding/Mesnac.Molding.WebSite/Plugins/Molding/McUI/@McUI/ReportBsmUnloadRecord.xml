@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="BeginTime" Value="开始时间"></Caption>
+    <Caption Name="EndTime" Value="结束时间"></Caption>
+    <Caption Name="RECORD_USER_ID" Value="解绑人"></Caption>
+    <Caption Name="USER_NAME" Value="解绑人"></Caption>
+    <Caption Name="RECORD_TIME" Value="解绑时间"></Caption>
+    <Caption Name="GREEN_TYRE_NO" Value="成型号"></Caption>
+    <Caption Name="TOOLING_BARCODE" Value="胎胚车号"></Caption>
+  </Captions>
+  <WebPage Title="胎胚解绑信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Molding/McUI/@McUI/ReportBsmUnloadRecord.js?" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="BSM_TOOLING_UNLOAD_RECORD">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="BeginTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EndTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="GREEN_TYRE_NO" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="TOOLING_BARCODE" Type="TextBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="FALSE"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="GREEN_TYRE_NO"></GridColumn>
+        <GridColumn ColumnName="TOOLING_BARCODE"></GridColumn>
+        <GridColumn ColumnName="USER_NAME"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+    <MainDetail>
+      <ParamFields>
+        <ParamField FieldName="GREEN_TYRE_NO"></ParamField>
+        <ParamField FieldName="TOOLING_BARCODE"></ParamField>
+        <ParamField FieldName="USER_NAME"></ParamField>
+        <ParamField FieldName="RECORD_TIME" Type="DateTimeBox"></ParamField>
+      </ParamFields>
+    </MainDetail>
+  </Select>
+</UiConfig>

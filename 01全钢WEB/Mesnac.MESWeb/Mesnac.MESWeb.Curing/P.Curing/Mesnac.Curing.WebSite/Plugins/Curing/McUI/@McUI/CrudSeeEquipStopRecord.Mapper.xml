@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudSeeEquipStopRecord" parameterClass="map" resultClass="row">
+      <![CDATA[
+          select distinct T1.*,t2.equip_code,t3.equip_stop_type_name,t4.equip_stop_reason_name,round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60 * 60) as RoundSecend,t66.user_name,t66.material_name from SEE_EQUIP_STOP_RECORD t1 left join sbe_equip t2 on t1.equip_id=t2.objid
+        left join sbe_equip_stop_type t3 on t1.stop_type_id=t3.objid
+        left join sbe_equip_stop_reason t4 on t1.stop_reason_id=t4.objid
+         left join (
+select b.equip_id,b.end_time,c.user_name,b.shift_id,d.material_name from cpp_curing_production b
+left join ssb_user c on c.objid = b.worker_id
+left join sbm_material d on d.objid = b.material_id) t66 on t1.equip_id = t66.equip_id and t66.end_time+1/24/60 > t1.stop_begin_time and t66.end_time+1/24/60 < t1.stop_end_time
+ and t66.end_time>= #where.BeginTime# and t66.end_time< #where.EndTime#
+ 
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EQUIP_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[t1.STOP_BEGIN_TIME >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[t1.STOP_BEGIN_TIME < #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+        <isNotNull property="where.STOPTYPID" prepend="AND">
+          <![CDATA[T1.STOP_TYPE_ID = #where.STOPTYPID#]]>
+        </isNotNull>
+        <isNotNull property="where.STOPREASONID" prepend="AND">
+          <![CDATA[T1.STOP_REASON_ID = #where.STOPREASONID#]]>
+        </isNotNull>
+         <isNotNull property="where.SHIFT" prepend="AND">
+          <![CDATA[T66.shift_id= #where.SHIFT#]]>
+        </isNotNull>
+        <isNotNull property="where.Times" prepend="AND">
+          <![CDATA[round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60) >= #where.Times#]]>
+        </isNotNull>
+      </dynamic>
+      <isNull property="OrderString" prepend=" ">
+        order by equip_code,STOP_BEGIN_TIME
+      </isNull>
+    </select>
+    <!--查询物料信息，ID值固定为GetComboBoxData@Select@CrudCimMouldChangeinfo@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSeeEquipStopRecord@STOPREASONID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select * from (SELECT OBJID sskey,equip_stop_reason_name ssValue FROM sbe_equip_stop_reason WHERE DELETE_FLAG = '0' and equip_major_type_id = 51 ORDER BY equip_stop_reason_name) a
+     ]]>
+    </select>
+
+    <!--查询物料信息，ID值固定为GetComboBoxData@Select@CrudCimMouldChangeinfo@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSeeEquipStopRecord@STOPTYPID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select * from (SELECT OBJID sskey,equip_stop_type_name ssValue FROM sbe_equip_stop_type WHERE DELETE_FLAG = '0' and equip_major_type_id = 51 ORDER BY equip_stop_type_name) a
+     ]]>
+    </select>
+  
+      <!--查询班次信息，ID值固定为GetComboBoxData@Select@CrudCimMouldChangeinfo@字段，id值不允许重复-->
+      <select id="GetComboBoxData@Select@CrudSeeEquipStopRecord@SHIFT" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+        select OBJID sskey ,SHIFT_NAME ssValue from ssb_shift
+     ]]>
+    </select>
+  
+  </statements>
+</sqlMap>

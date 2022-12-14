@@ -1,0 +1,106 @@
+﻿<AddIn name        = "软控信息化装备平台"
+       author      = "郑立兵"
+       copyright   = ""
+       url         = "http://www.mesnac.com"
+       description = "软控信息化装备平台"
+       addInManagerHidden = "true">
+
+    <Manifest>
+        <Identity name = "MCRun"/>
+    </Manifest>
+
+    <Runtime>
+        <Import assembly="../../Mesnac.Gui.dll"/>
+        <Import assembly="../../Mesnac.Gui.Run.dll">
+            <ConditionEvaluator name="MCRunSuper" class="Mesnac.Gui.Run.ViewContent.MCRunSuperConditionEvaluator"/>
+        </Import>
+    </Runtime>
+
+    <!--Pad Config-->
+    <Path name = "/Mesnac/Workbench/Pads">
+        <Pad id       = "System_Function_Tree"
+             category = "Tools"
+             title    = "${res:Mesnac_SystemFunctionTree}"
+             dockState = "DockLeft"
+             icon     = "PadIcons.FileBrowser"
+             shortcut = "Control|Alt|F"
+             isVisible = "false"
+             class    = "Mesnac.Gui.Run.Pad.FrmSysFunction"/>
+
+    </Path>
+    <!-- Main Menu -->
+    <Path name = "/Mesnac/Workbench/MainMenu">
+        <MenuItem id = "File" label = "${res:Mesnac_MainMenu_File}" type="Menu">
+            <Condition name="MCRunSuper" action="Disable">
+                <MenuItem id = "RefreshPlugIn"
+                                label         = "${res:Mesnac_MainMenu_RefreshPlugIn}"
+                                icon        = "Icons_16X16_Refresh"
+                                class       = "Mesnac.Gui.Run.ViewContent.RefreshPlugInCommand"/>
+                <MenuItem id = "SysConfig"
+                                label         = "${res:Mesnac_MainMenu_SysConfig}"
+                                icon        ="Icons_16X16_Wrench"
+                                class       = "Mesnac.Gui.Run.ViewContent.SysConfigCommand"/>
+            </Condition>
+            <MenuItem id = "FullScreen"
+                            label         = "${res:Mesnac_MainMenu_FullScreen}"
+                            icon        = "Icons.16x16.FullScreen"
+                            class       = "Mesnac.Gui.Run.ViewContent.ToggleFullscreenCommand" />
+            <MenuItem id = "mnuFileSeparator" type = "Separator"  />
+            <MenuItem id = "Exit"
+                            label         = "${res:Mesnac_MainMenu_Exit}"
+                            icon        ="Icons_16X16_Exit"
+                            class       = "Mesnac.Gui.Run.ViewContent.ExitCommand"/>
+        </MenuItem>
+        <MenuItem id = "Help" label = "${res:Mesnac_MainMenu_Help}" type="Menu">
+            <MenuItem id = "About"
+                            label         = "${res:Mesnac_MainMenu_About}"
+                            icon        ="Icons_16X16_About"
+                            class       = "Mesnac.Gui.Run.ViewContent.TestCommand"/>
+        </MenuItem>
+    </Path>
+    <!--
+	<Path name = "/SharpDevelop/Workbench/DisplayBindings">
+		<DisplayBinding id               = "Browser"
+		                supportedformats = "Web Pages"
+		                class            = "SDUserInterface.GUI.ViewContent.BrowserDisplayBinding"/>
+        <DisplayBinding id    = "Text"
+		                insertafter = "Browser"
+		                supportedformats = "Text Files,Source Files"
+		                class = "SDUserInterface.GUI.ViewContent.TextViewDisplayBinding" />
+	</Path>
+    <Path name = "/SharpDevelop/Workbench/DisplayBindings">
+        <DisplayBinding id    = "Image"
+		                insertbefore = "Text"
+		                supportedformats = "图片"
+		                class = "SDUserInterface.GUI.ViewContent.ImageDisplayBinding" />
+    </Path>
+    -->
+    <Path name = "/Workspace/Icons">
+        <Icon id         = "ResourceFileIcon"
+              extensions = ".resources;.resx"
+              resource   = "Icons.16x16.ResourceFileIcon" />
+    </Path>
+
+    <!--工具栏-->
+    <Path name = "/Mesnac/Workbench/Toolbar">
+        <Condition name="MCRunSuper" action="Disable">
+            <ToolbarItem id      = "RefreshPlugIn"
+                             icon        = "Icons_16X16_Refresh"
+                             tooltip = "${res:Mesnac_MainMenu_RefreshPlugIn}"
+                             class   = "Mesnac.Gui.Run.ViewContent.RefreshPlugInCommand"/>
+            <ToolbarItem id      = "SysConfig"
+                             icon        = "Icons_16X16_Wrench"
+                             tooltip = "${res:Mesnac_MainMenu_SysConfig}"
+                             class   = "Mesnac.Gui.Run.ViewContent.SysConfigCommand"/>
+        </Condition>
+        <ToolbarItem id      = "FullScreen"
+                         icon        = "Icons.16x16.FullScreen"
+                         tooltip = "${res:Mesnac_MainMenu_FullScreen}"
+                         class   = "Mesnac.Gui.Run.ViewContent.ToggleFullscreenCommand"/>
+        <ToolbarItem id = "tsFileSeparator" type = "Separator"/>
+        <ToolbarItem id      = "Exit"
+                         icon        = "Icons_16X16_Exit"
+                         tooltip = "${res:Mesnac_MainMenu_Exit}"
+                         class   = "Mesnac.Gui.Run.ViewContent.ExitCommand"/>
+    </Path>
+</AddIn>

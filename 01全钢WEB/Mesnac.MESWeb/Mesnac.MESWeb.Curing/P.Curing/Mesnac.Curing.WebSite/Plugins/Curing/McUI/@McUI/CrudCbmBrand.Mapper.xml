@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudCbmBrand" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT T1.*, T2.USER_NAME RECORD_USER_NAME FROM CBM_BRAND T1 LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BRAND_NAME" prepend="AND">
+          <![CDATA[T1.BRAND_NAME LIKE '%' || #where.BRAND_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.OTHER_NAME" prepend="AND">
+          <![CDATA[T1.OTHER_NAME LIKE '%' || #where.OTHER_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    <select id="Select+Update@CrudCbmBrand" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM CBM_BRAND ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

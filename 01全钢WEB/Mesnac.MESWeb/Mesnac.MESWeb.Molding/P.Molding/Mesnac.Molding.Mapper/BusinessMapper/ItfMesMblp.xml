@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.ItfMesMblp"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM ITF_MES_MBLP ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDate" prepend="AND">
+          <![CDATA[SHIFT_DATE = #where.ShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.SapQty" prepend="AND">
+          <![CDATA[SAP_QTY = #where.SapQty#]]>
+        </isNotNull>
+        <isNotNull property="where.SapRejectQty" prepend="AND">
+          <![CDATA[SAP_REJECT_QTY = #where.SapRejectQty#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.MesQty" prepend="AND">
+          <![CDATA[MES_QTY = #where.MesQty#]]>
+        </isNotNull>
+        <isNotNull property="where.MesRejectQty" prepend="AND">
+          <![CDATA[MES_REJECT_QTY = #where.MesRejectQty#]]>
+        </isNotNull>
+        <isNotNull property="where.BomId" prepend="AND">
+          <![CDATA[BOM_ID = #where.BomId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetProductInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      select t2.material_id,count(*) qty,t1.shift_date,t1.shift_id,0 reject_qty,t2.bom_id from bpm_production t 
+      left join bpm_shift_master t1 on t1.objid = t.shift_master_id
+      left join bpp_plan_detail t2 on t2.objid = t.plan_detail_id
+      where 1 = 1 and nvl(t.bl_flag,0) = 1 and t.delete_flag = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="ShiftID" prepend="AND">
+           <![CDATA[t1.shift_id = #ShiftID#]]>
+         </isNotNull>
+         <isNotNull property="ShiftDate" prepend="AND">
+           <![CDATA[t1.shift_date = #ShiftDate#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="GROUP BY">
+         <![CDATA[t2.material_id,t1.shift_Date,t1.shift_id,t2.bom_id]]>
+       </dynamic>
+     </select>
+
+     <select id="GetUploadProductInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      select case t.success_flag when 0 then '新建' when 1 then '上传中' when 2 then '上传成功' when 3 then '上传失败' end success_flag,
+      t.objid, t1.shift_date,t.post_date,t.doc_date,t2.shift_name,t3.material_code,t1.material_id,
+      t1.mes_qty,t1.sap_qty,t.qty,t1.mes_reject_qty,t1.sap_reject_qty,t.reject_qty,T3.SAP_CODE,case t.state_flag when 0 then '系统生成' when 1 then '手动创建' when 2 then '修改' when 3 then '上传后更新' end state_flag,
+       t.objid||'|'||to_char(t1.shift_date,'yyyy-mm-dd')||'|'||t.post_date||'|'||t.doc_date||'|'||t1.shift_id||'|'||t3.material_short||
+      '|'||t1.material_id||'|'||t.qty||'|'||t.reject_qty||'|'||nvl(('D2'||t1.BOM_ID),'0')||'|'||t.success_flag||'|'||t.remark as productinfo,'D2'||t1.BOM_ID as proversion,
+      t.return_msg,t.remark from itf_mes_mblp_Detail t
+      left join itf_mes_mblp t1 on t1.objid = t.mproduction_id and t1.delete_flag=0 
+      left join ssb_shift t2 on t2.objid = t1.shift_id
+      left join sbm_material t3 on t3.objid = t1.material_id
+      where t.delete_flag=0 and t.pruducttype='01'
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.ShiftDate" prepend="AND">
+           <![CDATA[T1.SHIFT_DATE = #where.ShiftDate#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftID" prepend="AND">
+           <![CDATA[T1.SHIFT_ID = #where.ShiftID#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[success_flag,T3.MATERIAL_CODE]]>
+       </dynamic>
+     </select>
+  </statements>
+</sqlMap>

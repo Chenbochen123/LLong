@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CimMouldChangeinfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CimMouldChangeinfo" type="Mesnac.Curing.Entity.BasicEntity.CimMouldChangeinfo, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CimMouldChangeinfo" class="CimMouldChangeinfo">
+    <result property="ChangeMoldState" column="CHANGE_MOLD_STATE"/>
+    <result property="ObjId" column="OBJID"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="EquipPosition" column="EQUIP_POSITION"/>
+    <result property="MouldNo" column="MOULD_NO"/>
+    <result property="LastMouldNo" column="LAST_MOULD_NO"/>
+    <result property="ChangeMoldPlanid" column="CHANGE_MOLD_PLANID"/>
+    <result property="ChangeTime" column="CHANGE_TIME"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CimMouldChangeinfo" class="CimMouldChangeinfo">
+    <parameter property="ChangeMoldState" column="ChangeMoldState"/>
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="EquipPosition" column="EquipPosition"/>
+    <parameter property="MouldNo" column="MouldNo"/>
+    <parameter property="LastMouldNo" column="LastMouldNo"/>
+    <parameter property="ChangeMoldPlanid" column="ChangeMoldPlanid"/>
+    <parameter property="ChangeTime" column="ChangeTime"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CIM_MOULD_CHANGEINFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ChangeMoldState" prepend="AND">
+          <![CDATA[CHANGE_MOLD_STATE = #where.ChangeMoldState#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipPosition" prepend="AND">
+          <![CDATA[EQUIP_POSITION = #where.EquipPosition#]]>
+        </isNotNull>
+        <isNotNull property="where.MouldNo" prepend="AND">
+          <![CDATA[MOULD_NO = #where.MouldNo#]]>
+        </isNotNull>
+        <isNotNull property="where.LastMouldNo" prepend="AND">
+          <![CDATA[LAST_MOULD_NO = #where.LastMouldNo#]]>
+        </isNotNull>
+        <isNotNull property="where.ChangeMoldPlanid" prepend="AND">
+          <![CDATA[CHANGE_MOLD_PLANID = #where.ChangeMoldPlanid#]]>
+        </isNotNull>
+        <isNotNull property="where.ChangeTime" prepend="AND">
+          <![CDATA[CHANGE_TIME = #where.ChangeTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CIM_MOULD_CHANGEINFO]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="ChangeMoldState" prepend=",">CHANGE_MOLD_STATE</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="EquipPosition" prepend=",">EQUIP_POSITION</isNotNull>
+        <isNotNull property="MouldNo" prepend=",">MOULD_NO</isNotNull>
+        <isNotNull property="LastMouldNo" prepend=",">LAST_MOULD_NO</isNotNull>
+        <isNotNull property="ChangeMoldPlanid" prepend=",">CHANGE_MOLD_PLANID</isNotNull>
+        <isNotNull property="ChangeTime" prepend=",">CHANGE_TIME</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_CIM_MOULD_CHANGEINFO.NEXTVAL</isNull>
+        <isNotNull property="ChangeMoldState" prepend=",">#ChangeMoldState#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="EquipPosition" prepend=",">#EquipPosition#</isNotNull>
+        <isNotNull property="MouldNo" prepend=",">#MouldNo#</isNotNull>
+        <isNotNull property="LastMouldNo" prepend=",">#LastMouldNo#</isNotNull>
+        <isNotNull property="ChangeMoldPlanid" prepend=",">#ChangeMoldPlanid#</isNotNull>
+        <isNotNull property="ChangeTime" prepend=",">#ChangeTime#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CIM_MOULD_CHANGEINFO
+       <dynamic prepend="SET">
+        <isNotNull  property="update.ChangeMoldState"  prepend=",">
+          CHANGE_MOLD_STATE = #update.ChangeMoldState#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.EquipPosition"  prepend=",">
+          EQUIP_POSITION = #update.EquipPosition#
+        </isNotNull>
+        <isNotNull  property="update.MouldNo"  prepend=",">
+          MOULD_NO = #update.MouldNo#
+        </isNotNull>
+        <isNotNull  property="update.LastMouldNo"  prepend=",">
+          LAST_MOULD_NO = #update.LastMouldNo#
+        </isNotNull>
+        <isNotNull  property="update.ChangeMoldPlanid"  prepend=",">
+          CHANGE_MOLD_PLANID = #update.ChangeMoldPlanid#
+        </isNotNull>
+        <isNotNull  property="update.ChangeTime"  prepend=",">
+          CHANGE_TIME = #update.ChangeTime#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CIM_MOULD_CHANGEINFO
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CimMouldChangeinfo">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CimMouldChangeinfo">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CIM_MOULD_CHANGEINFO
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CIM_MOULD_CHANGEINFO
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CimMouldChangeinfo" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CIM_MOULD_CHANGEINFO
+    </statement>
+  </statements>
+</sqlMap>

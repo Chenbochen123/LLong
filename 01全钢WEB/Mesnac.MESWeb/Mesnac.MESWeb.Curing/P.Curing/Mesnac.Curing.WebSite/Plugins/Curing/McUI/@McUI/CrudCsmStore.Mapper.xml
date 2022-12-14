@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudCsmStore" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.* 
+        , CASE T1.STORE_TYPE WHEN 99 THEN '虚拟' WHEN 1 THEN '正常' ELSE '' END STORE_TYPE_CAPTION
+        , T2.USER_NAME RECORD_USER_NAME
+        FROM CSM_STORE T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.STORE_NAME" prepend="AND">
+          <![CDATA[T1.STORE_NAME LIKE '%' || #where.STORE_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.STORE_CODE" prepend="AND">
+          <![CDATA[T1.STORE_CODE LIKE '%' || #where.STORE_CODE# || '%' ]]>
+        </isNotNull>
+        <isNotNull property="where.STORE_TYPE" prepend="AND">
+          <![CDATA[T1.STORE_TYPE = #where.STORE_TYPE#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.OBJID
+      </isNull>
+    </select>
+    <select id="Select+Update@CrudCsmStore" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.* 
+        FROM CSM_STORE T1 
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[T1.OBJID = #OBJID#]]>
+      </dynamic>
+    </select>
+
+    <!--查询仓库类型信息，ID值固定为GetComboBoxData@Select@CrudCsmStore@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCsmStore@STORE_TYPE" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select 1 sskey, '正常' ssValue from dual
+      --union
+      --select 99 sskey, '虚拟' ssValue from dual
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by sskey
+      </isNull>
+    </select>
+  </statements>
+</sqlMap>

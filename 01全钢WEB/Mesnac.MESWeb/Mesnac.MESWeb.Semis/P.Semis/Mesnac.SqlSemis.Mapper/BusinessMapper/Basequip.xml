@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.SqlSemis.Mapper.BusinessMapper.Basequip"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BasEquip ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[ObjID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipcode" prepend="AND">
+          <![CDATA[EquipCode = #where.Equipcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Equiptype" prepend="AND">
+          <![CDATA[EquipType = #where.Equiptype#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipname" prepend="AND">
+          <![CDATA[EquipName = #where.Equipname#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipip" prepend="AND">
+          <![CDATA[EquipIP = #where.Equipip#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipgroup" prepend="AND">
+          <![CDATA[EquipGroup = #where.Equipgroup#]]>
+        </isNotNull>
+        <isNotNull property="where.Workshopcode" prepend="AND">
+          <![CDATA[WorkShopCode = #where.Workshopcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Subfac" prepend="AND">
+          <![CDATA[SubFac = #where.Subfac#]]>
+        </isNotNull>
+        <isNotNull property="where.Mixequiptype" prepend="AND">
+          <![CDATA[MixEquipType = #where.Mixequiptype#]]>
+        </isNotNull>
+        <isNotNull property="where.Isonemix" prepend="AND">
+          <![CDATA[IsOneMix = #where.Isonemix#]]>
+        </isNotNull>
+        <isNotNull property="where.Ledip" prepend="AND">
+          <![CDATA[LEDIP = #where.Ledip#]]>
+        </isNotNull>
+        <isNotNull property="where.Areacode" prepend="AND">
+          <![CDATA[AreaCode = #where.Areacode#]]>
+        </isNotNull>
+        <isNotNull property="where.Isfinalmixing" prepend="AND">
+          <![CDATA[IsFinalMixing = #where.Isfinalmixing#]]>
+        </isNotNull>
+        <isNotNull property="where.Isproenvironment" prepend="AND">
+          <![CDATA[IsProEnvironment = #where.Isproenvironment#]]>
+        </isNotNull>
+        <isNotNull property="where.Mixtype" prepend="AND">
+          <![CDATA[MixType = #where.Mixtype#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[Remark = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Deleteflag" prepend="AND">
+          <![CDATA[DeleteFlag = #where.Deleteflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipverify" prepend="AND">
+          <![CDATA[EquipVerify = #where.Equipverify#]]>
+        </isNotNull>
+        <isNotNull property="where.Stockno" prepend="AND">
+          <![CDATA[StockNO = #where.Stockno#]]>
+        </isNotNull>
+        <isNotNull property="where.Stockkw" prepend="AND">
+          <![CDATA[StockKW = #where.Stockkw#]]>
+        </isNotNull>
+        <isNotNull property="where.Repairuser" prepend="AND">
+          <![CDATA[RepairUser = #where.Repairuser#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

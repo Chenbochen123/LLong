@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Main.Mapper.BusinessMapper.SsbDept"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SSB_DEPT ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeptName" prepend="AND">
+          <![CDATA[DEPT_NAME = #where.DeptName#]]>
+        </isNotNull>
+        <isNotNull property="where.DeptLevel" prepend="AND">
+          <![CDATA[DEPT_LEVEL = #where.DeptLevel#]]>
+        </isNotNull>
+        <isNotNull property="where.ParentId" prepend="AND">
+          <![CDATA[PARENT_ID = #where.ParentId#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.ErpCode" prepend="AND">
+          <![CDATA[ERP_CODE = #where.ErpCode#]]>
+        </isNotNull>
+        <isNotNull property="where.HrCode" prepend="AND">
+          <![CDATA[HR_CODE = #where.HrCode#]]>
+        </isNotNull>
+        <isNotNull property="where.DisplayId" prepend="AND">
+          <![CDATA[DISPLAY_ID = #where.DisplayId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <!--获取所有部门信息信息-->
+     <select id="GetAllDeptInfoListOrder" parameterClass="map" resultClass="Row">
+       SELECT     t1.OBJID ,t1.DEPT_NAME ,t1.DEPT_LEVEL ,t2.DEPT_NAME AS PARENT_ID ,
+       t1.REMARK ,t1.ERP_CODE ,t1.HR_CODE ,t1.DISPLAY_ID ,t1.DELETE_FLAG ,
+       t1.BAKUP_FLAG ,t1.BAKUP_TIME
+       FROM	      SSB_DEPT t1
+       LEFT JOIN  SSB_DEPT t2 ON t1.PARENT_ID = t2.OBJID
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.ObjId" prepend="AND">
+           t1.OBJID = #where.ObjId#
+         </isNotNull>
+         <isNotNull property="where.DeptName" prepend="AND">
+           t1.DEPT_NAME like '%'||#where.DeptName#||'%'
+         </isNotNull>
+         <isNotNull property="where.ParentId" prepend="AND">
+           t1.PARENT_ID like '%'||#where.ParentId#||'%'
+         </isNotNull>
+         <isNotNull property="where.ErpCode" prepend="AND">
+           t1.ERP_CODE like '%'||#where.ErpCode#||'%'
+         </isNotNull>
+         <isNotNull property="ParamMap.Remark" prepend="AND">
+           t1.REMARK like '%'||#where.Remark#||'%'
+         </isNotNull>
+         <isNotNull property="ParamMap.DeleteFlag" prepend="AND">
+           t1.DELETE_FLAG = #where.DeleteFlag#
+         </isNotNull>
+       </dynamic>
+       <include refid="includeOrderString"/>
+     </select>
+     
+     <!--获取子部门信息-->
+     <select id="GetSubDeptInfo" parameterClass="map" resultClass="Row">
+       SELECT     t1.OBJID ,t1.DEPT_NAME ,t1.DEPT_LEVEL ,t2.DEPT_NAME AS PARENT_ID ,
+       t1.REMARK ,t1.ERP_CODE ,t1.HR_CODE ,t1.DISPLAY_ID ,t1.DELETE_FLAG ,
+       t1.BAKUP_FLAG ,t1.BAKUP_TIME
+       FROM	      SSB_DEPT t1
+       LEFT JOIN  SSB_DEPT t2 ON t1.PARENT_ID = t2.OBJID
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.ObjId" prepend="AND">
+           t1.OBJID = #where.ObjId#
+         </isNotNull>
+         <isNotNull property="where.DeptName" prepend="AND">
+           t1.DEPT_NAME like '%'||#where.DeptName#||'%'
+         </isNotNull>
+         <isNotNull property="where.ParentId" prepend="AND">
+           t1.PARENT_ID like '%'||#where.ParentId#||'%'
+         </isNotNull>
+         <isNotNull property="where.ErpCode" prepend="AND">
+           t1.ERP_CODE like '%'||#where.ErpCode#||'%'
+         </isNotNull>
+         <isNotNull property="ParamMap.Remark" prepend="AND">
+           t1.REMARK like '%'||#where.Remark#||'%'
+         </isNotNull>
+         <isNotNull property="ParamMap.DeleteFlag" prepend="AND">
+           t1.DELETE_FLAG = #where.DeleteFlag#
+         </isNotNull>
+       </dynamic>
+       <include refid="includeOrderString"/>
+     </select>
+   
+     
+   </statements>
+</sqlMap>

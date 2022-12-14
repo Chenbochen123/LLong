@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CppCuringWaitTyre"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CPP_CURING_WAIT_TYRE ]]>
+    </sql>
+     <!--查询条件-->
+     <sql id="includeWhere">
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.ObjId" prepend="AND">
+           <![CDATA[OBJID = #where.ObjId#]]>
+         </isNotNull>
+         <isNotNull property="where.TyreNo" prepend="AND">
+           <![CDATA[TYRE_NO = #where.TyreNo#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipPosition" prepend="AND">
+           <![CDATA[EQUIP_POSITION = #where.EquipPosition#]]>
+         </isNotNull>
+         <isNotNull property="where.PlanDate" prepend="AND">
+           <![CDATA[PLAN_DATE = #where.PlanDate#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftId" prepend="AND">
+           <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialId" prepend="AND">
+           <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+         </isNotNull>
+         <isNotNull property="where.RecordDate" prepend="AND">
+           <![CDATA[RECORD_DATE = #where.RecordDate#]]>
+         </isNotNull>
+         <isNotNull property="where.RecordUser" prepend="AND">
+           <![CDATA[RECORD_USER = #where.RecordUser#]]>
+         </isNotNull>
+       </dynamic>
+     </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetWaitTyreInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select TA.TYRE_NO 轮胎条码, TB.MATERIAL_NAME 规格名称, TC.SHIFT_NAME 班次, TA.EQUIP_ID
+           , TD.EQUIP_NAME 机台,  0 EQUIP_POSITION, '左右' 左右模, to_char(TA.RECORD_DATE ,'yyyy-mm-dd hh24:mi:ss') 扫描时间, TF.USER_NAME 扫描人员
+        from Cpp_Curing_Wait_Tyre TA
+             left join SBM_MATERIAL TB on TA.MATERIAL_ID = TB.OBJID 
+             left join SSB_SHIFT TC on TA.SHIFT_ID = TC.OBJID      
+             left join SBE_EQUIP TD on TA.EQUIP_ID = TD.OBJID
+             left join SSB_USER TF on TA.RECORD_USER = TF.OBJID
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[TA.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.TyreNo" prepend="AND">
+           <![CDATA[TA.TYRE_NO = #where.TyreNo#]]>
+         </isNotNull>
+         <isNotNull property="where.GreenTyreNo" prepend="AND">
+           <![CDATA[TA.GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetWaitTyreDetailFromCK3" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select '待硫化' as 状态, TA.Plan_Date as 生产日期, TA.TYRE_NO as 轮胎条码, '' as 胎胚条码, TD.MATERIAL_NAME as 规格名称
+               , TC.SHIFT_NAME as 班次, TA.EQUIP_ID, TE.EQUIP_NAME as 机台,  TA.EQUIP_POSITION, TG.SHOW_NAME AS 左右模
+               , TF.USER_NAME as 生产人员, TA.RECORD_DATE as 生产时间 
+        from CPP_CURING_WAIT_TYRE TA
+             left  join SSB_SHIFT TC on TA.SHIFT_ID = TC.OBJID
+             left  join SBM_MATERIAL TD on TA.MATERIAL_ID = TD.OBJID
+             left  join SBE_EQUIP TE on TA.EQUIP_ID = TE.OBJID
+             left  join SSB_USER TF on TA.RECORD_USER = TF.OBJID
+             left  join CBE_EQUIP_POSITION TG on TA.EQUIP_POSITION = TG.OBJID
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.PlanDate" prepend="AND">
+           <![CDATA[TA.PLAN_DATE = #where.PlanDate#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftID" prepend="AND">
+           <![CDATA[TA.SHIFT_ID = #where.ShiftID#]]>
+         </isNotNull>
+         <isNotNull property="where.RecordUserID" prepend="AND">
+           <![CDATA[TA.RECORD_USER = #where.RecordUser#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipID" prepend="AND">
+           <![CDATA[TA.EQUIP_ID = #where.EquipID#]]>
+         </isNotNull>
+         <isNotNull property="where.TyreNo" prepend="AND">
+           <![CDATA[TA.TYRE_NO = #where.TyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+     <select id="GetCuringWaitTyreInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select TYRE_NO from CPP_CURING_WAIT_TYRE
+       ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[Equip_Id = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipPosition" prepend="AND">
+           <![CDATA[Equip_Position = #where.EquipPosition#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <delete id="DeleteWaitTyreFirstL" parameterClass="map" >
+       <![CDATA[
+      delete from cpp_curing_wait_tyre  where objid in (
+      select * from (
+      select objid from cpp_curing_wait_tyre where EQUIP_ID = #EquipId# and EQUIP_POSITION = 1
+      order by RECORD_DATE ) where rownum =1)
+      ]]>
+     </delete>
+     <delete id="DeleteWaitTyreFirstR" parameterClass="map" >
+       <![CDATA[
+      delete from cpp_curing_wait_tyre  where objid in (
+      select * from (
+      select objid from cpp_curing_wait_tyre where EQUIP_ID = #EquipId# and EQUIP_POSITION = 2
+      order by RECORD_DATE ) where rownum =1)
+      ]]>
+     </delete>
+  </statements>
+</sqlMap>

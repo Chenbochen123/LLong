@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Interface.Mapper.BusinessMapper.BptMoldingTech"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BPT_MOLDING_TECH ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.PdmVersion" prepend="AND">
+          <![CDATA[PDM_VERSION = #where.PdmVersion#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmType" prepend="AND">
+          <![CDATA[PARM_TYPE = #where.ParmType#]]>
+        </isNotNull>
+        <isNotNull property="where.Lastmodifier" prepend="AND">
+          <![CDATA[LASTMODIFIER = #where.Lastmodifier#]]>
+        </isNotNull>
+        <isNotNull property="where.LastmodifyDate" prepend="AND">
+          <![CDATA[LASTMODIFY_DATE = #where.LastmodifyDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EffectDate" prepend="AND">
+          <![CDATA[EFFECT_DATE = #where.EffectDate#]]>
+        </isNotNull>
+        <isNotNull property="where.LoseEffectDate" prepend="AND">
+          <![CDATA[LOSE_EFFECT_DATE = #where.LoseEffectDate#]]>
+        </isNotNull>
+        <isNotNull property="where.TechType" prepend="AND">
+          <![CDATA[TECH_TYPE = #where.TechType#]]>
+        </isNotNull>
+        <isNotNull property="where.IsNewRow" prepend="AND">
+          <![CDATA[IS_NEW_ROW = #where.IsNewRow#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000001" prepend="AND">
+          <![CDATA[PAR32000001 = #where.Par32000001#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000002" prepend="AND">
+          <![CDATA[PAR32000002 = #where.Par32000002#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000003" prepend="AND">
+          <![CDATA[PAR32000003 = #where.Par32000003#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000004" prepend="AND">
+          <![CDATA[PAR32000004 = #where.Par32000004#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000005" prepend="AND">
+          <![CDATA[PAR32000005 = #where.Par32000005#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000006" prepend="AND">
+          <![CDATA[PAR32000006 = #where.Par32000006#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000007" prepend="AND">
+          <![CDATA[PAR32000007 = #where.Par32000007#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000008" prepend="AND">
+          <![CDATA[PAR32000008 = #where.Par32000008#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000009" prepend="AND">
+          <![CDATA[PAR32000009 = #where.Par32000009#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000010" prepend="AND">
+          <![CDATA[PAR32000010 = #where.Par32000010#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000011" prepend="AND">
+          <![CDATA[PAR32000011 = #where.Par32000011#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000012" prepend="AND">
+          <![CDATA[PAR32000012 = #where.Par32000012#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000013" prepend="AND">
+          <![CDATA[PAR32000013 = #where.Par32000013#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000014" prepend="AND">
+          <![CDATA[PAR32000014 = #where.Par32000014#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000015" prepend="AND">
+          <![CDATA[PAR32000015 = #where.Par32000015#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000016" prepend="AND">
+          <![CDATA[PAR32000016 = #where.Par32000016#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000017" prepend="AND">
+          <![CDATA[PAR32000017 = #where.Par32000017#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000018" prepend="AND">
+          <![CDATA[PAR32000018 = #where.Par32000018#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000019" prepend="AND">
+          <![CDATA[PAR32000019 = #where.Par32000019#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000020" prepend="AND">
+          <![CDATA[PAR32000020 = #where.Par32000020#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000021" prepend="AND">
+          <![CDATA[PAR32000021 = #where.Par32000021#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000022" prepend="AND">
+          <![CDATA[PAR32000022 = #where.Par32000022#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000023" prepend="AND">
+          <![CDATA[PAR32000023 = #where.Par32000023#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000024" prepend="AND">
+          <![CDATA[PAR32000024 = #where.Par32000024#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000025" prepend="AND">
+          <![CDATA[PAR32000025 = #where.Par32000025#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001010" prepend="AND">
+          <![CDATA[PAR32001010 = #where.Par32001010#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001009" prepend="AND">
+          <![CDATA[PAR32001009 = #where.Par32001009#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001008" prepend="AND">
+          <![CDATA[PAR32001008 = #where.Par32001008#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001007" prepend="AND">
+          <![CDATA[PAR32001007 = #where.Par32001007#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001006" prepend="AND">
+          <![CDATA[PAR32001006 = #where.Par32001006#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001005" prepend="AND">
+          <![CDATA[PAR32001005 = #where.Par32001005#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001004" prepend="AND">
+          <![CDATA[PAR32001004 = #where.Par32001004#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001003" prepend="AND">
+          <![CDATA[PAR32001003 = #where.Par32001003#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001002" prepend="AND">
+          <![CDATA[PAR32001002 = #where.Par32001002#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001001" prepend="AND">
+          <![CDATA[PAR32001001 = #where.Par32001001#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000026" prepend="AND">
+          <![CDATA[PAR32000026 = #where.Par32000026#]]>
+        </isNotNull>
+        <isNotNull property="where.ProcessRoute" prepend="AND">
+          <![CDATA[PROCESS_ROUTE = #where.ProcessRoute#]]>
+        </isNotNull>
+        <isNotNull property="where.Version" prepend="AND">
+          <![CDATA[VERSION = #where.Version#]]>
+        </isNotNull>
+        <isNotNull property="where.Historyedition" prepend="AND">
+          <![CDATA[HISTORYEDITION = #where.Historyedition#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetBptObjid" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select max(objid) from BPT_MOLDING_TECH
+       ]]>
+     </select>
+
+     <!--查询子表objid-->
+     <select id="GetPlmMoldingObjid" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select max(objid) from plm_moding_main
+       ]]>
+     </select>
+
+     <!--查询sap号-->
+     <select id="GetMaterialIdBySapCode" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT OBJID FROM SBM_MATERIAL WHERE DELETE_FLAG=0
+       ]]>
+       <isNotNull property="SapCode" prepend="AND">
+         <![CDATA[SAP_CODE=#SapCode#]]>
+       </isNotNull>
+     </select>
+
+     <!--查询子表数据-->
+     <select id="GetBptDate" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select t1.objid,t2.parm_name from bpt_molding_tech_parm_data t1
+         left join bpt_molding_tech_parm_info t2 on t1.parm_info_id=t2.objid where t1.DELETE_FLAG=0
+       ]]>
+       <isNotNull property="PROCESS_ROUTE" prepend="AND">
+         <![CDATA[PROCESS_ROUTE=#PROCESS_ROUTE#]]>
+       </isNotNull>
+       <isNotNull property="PROCESS_VERSION" prepend="AND">
+         <![CDATA[PROCESS_VERSION=#PROCESS_VERSION#]]>
+       </isNotNull>
+     </select>
+
+
+     <!--查询主表数据-->
+     <select id="GetBptMainDate" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select  * from BPT_MOLDING_TECH  where delete_flag=0
+       ]]>
+       <isNotNull property="PROCESS_ROUTE" prepend="AND">
+         <![CDATA[PROCESS_ROUTE=#PROCESS_ROUTE#]]>
+       </isNotNull>
+       <isNotNull property="PDM_VERSION" prepend="AND">
+         <![CDATA[PDM_VERSION=#PDM_VERSION#]]>
+       </isNotNull>
+     </select>
+
+   </statements>
+</sqlMap>

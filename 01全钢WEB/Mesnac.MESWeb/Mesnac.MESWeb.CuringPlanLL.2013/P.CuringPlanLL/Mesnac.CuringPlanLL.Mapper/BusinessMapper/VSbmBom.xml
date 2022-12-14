@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.CuringPlanLL.Mapper.BusinessMapper.VSbmBom"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM V_SBM_BOM ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BomName" prepend="AND">
+          <![CDATA[BOM_NAME = #where.BomName#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.LastmodifyDate" prepend="AND">
+          <![CDATA[LASTMODIFY_DATE = #where.LastmodifyDate#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.UnitId" prepend="AND">
+          <![CDATA[UNIT_ID = #where.UnitId#]]>
+        </isNotNull>
+        <isNotNull property="where.GroupNum" prepend="AND">
+          <![CDATA[GROUP_NUM = #where.GroupNum#]]>
+        </isNotNull>
+        <isNotNull property="where.GreentyreVersion" prepend="AND">
+          <![CDATA[GREENTYRE_VERSION = #where.GreentyreVersion#]]>
+        </isNotNull>
+        <isNotNull property="where.BomType" prepend="AND">
+          <![CDATA[BOM_TYPE = #where.BomType#]]>
+        </isNotNull>
+        <isNotNull property="where.BomFactroy" prepend="AND">
+          <![CDATA[BOM_FACTROY = #where.BomFactroy#]]>
+        </isNotNull>
+        <isNotNull property="where.BomVersion" prepend="AND">
+          <![CDATA[BOM_VERSION = #where.BomVersion#]]>
+        </isNotNull>
+        <isNotNull property="where.GroupUnitNum" prepend="AND">
+          <![CDATA[GROUP_UNIT_NUM = #where.GroupUnitNum#]]>
+        </isNotNull>
+        <isNotNull property="where.EffectDate" prepend="AND">
+          <![CDATA[EFFECT_DATE = #where.EffectDate#]]>
+        </isNotNull>
+        <isNotNull property="where.LoseEffectDate" prepend="AND">
+          <![CDATA[LOSE_EFFECT_DATE = #where.LoseEffectDate#]]>
+        </isNotNull>
+        <isNotNull property="where.PdmCode" prepend="AND">
+          <![CDATA[PDM_CODE = #where.PdmCode#]]>
+        </isNotNull>
+        <isNotNull property="where.DropFlag" prepend="AND">
+          <![CDATA[DROP_FLAG = #where.DropFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.GreentyreMaterialId" prepend="AND">
+          <![CDATA[GREENTYRE_MATERIAL_ID = #where.GreentyreMaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialParentId" prepend="AND">
+          <![CDATA[MATERIAL_PARENT_ID = #where.MaterialParentId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+    <select id="SelectReportLLBom" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+SELECT T.BOM_VERSION || '@' || T2.SAP_CODE || '@' || T1.SAP_CODE || '@' ||
+       TO_CHAR(T.LASTMODIFY_DATE, 'YYYYMMDD') || '@' || T10.TYPE_NAME AS BOM_NAME,
+       T.BOM_VERSION,
+       T2.SAP_CODE as LTSAP_CODE,
+       T1.SAP_CODE as TPSAP_CODE,
+       T10.TYPE_NAME,
+       T.OBJID,
+       T.LASTMODIFY_DATE,
+       T.MATERIAL_ID,
+       T.UNIT_ID,
+       T.GROUP_NUM,
+       T.GREENTYRE_VERSION,
+       T.BOM_TYPE,
+       T.BOM_FACTROY,
+       T.GROUP_UNIT_NUM,
+       T.EFFECT_DATE,
+       T.LOSE_EFFECT_DATE,
+       T.PDM_CODE,
+       T.DROP_FLAG,
+       T.GREENTYRE_MATERIAL_ID,
+       T.MATERIAL_PARENT_ID,
+       T.RECORD_USER_ID,
+       T.RECORD_TIME,
+       T.BACKUP_FLAG,
+       T.BACKUP_TIME,
+       T.DELETE_FLAG,
+       T1.MATERIAL_CODE MATERIAL_NAME
+  FROM SBM_BOM T
+ INNER JOIN SBM_MATERIAL T1
+    ON T.MATERIAL_ID = T1.OBJID
+ INNER JOIN SBM_MATERIAL T2
+    ON T.MATERIAL_PARENT_ID = T2.OBJID
+ INNER JOIN SBM_BOM_TYPE T10
+    ON T.BOM_TYPE = T10.OBJID
+            ]]>
+      <dynamic>
+        <isNotNull property="where.LTSAP_CODE" prepend="AND">
+          <![CDATA[T2.SAP_CODE  = #where.LTSAP_CODE#]]>
+        </isNotNull>
+        <isNotNull property="where.TPSAP_CODE" prepend="AND">
+          <![CDATA[T1.SAP_CODE  = #where.TPSAP_CODE#]]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_PARENT_ID" prepend="AND">
+          <![CDATA[T.MATERIAL_PARENT_ID  = #where.MATERIAL_PARENT_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.SAP_CODE" prepend="AND">
+          <![CDATA[T2.SAP_CODE  = #where.SAP_CODE#]]>
+        </isNotNull>
+      </dynamic>
+      order by t1.material_name
+    </select>
+
+    <!--节点邦定-->
+    <!--<select id="SelectRootBom" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+
+          select distinct t1.objid,
+                          t1.material_name,
+                          t1.sap_code,
+                          t1.sap_full_code,
+                          t1.material_full_name,
+                          t1.material_code,
+                          1 as GROUP_UNIT_NUM,
+                          '条' as UNIT_NAME,
+                          t1.RECORD_TIME,
+                          t1.DELETE_FLAG,
+                          T3.MINOR_TYPE_NAME || T2.MAJOR_TYPE_NAME AS TYPENAME
+            from SBM_MATERIAL t1
+           inner JOIN sbm_material_major_type T2
+              ON T1.MAJOR_TYPE_ID = T2.OBJID
+           inner JOIN sbm_material_minor_type T3
+              ON T1.MINOR_TYPE_ID = T3.OBJID
+        where 1=1 ]]>
+      <isNotNull property="where.MAJOR_TYPE_ID" prepend="AND">
+        <![CDATA[t1.MAJOR_TYPE_ID  = #where.MAJOR_TYPE_ID#]]>
+      </isNotNull>
+      <isNotNull property="where.MINOR_TYPE_ID" prepend="AND">
+        <![CDATA[t1.MINOR_TYPE_ID  = #where.MINOR_TYPE_ID#]]>
+      </isNotNull>
+      <isNotNull property="where.SAP_CODE" prepend="AND">
+        <![CDATA[t1.SAP_CODE  = #where.SAP_CODE#]]>
+      </isNotNull>
+      <isNotNull property="where.DELETE_FLAG" prepend="AND">
+        <![CDATA[t1.DELETE_FLAG  = #where.DELETE_FLAG#]]>
+      </isNotNull>
+      order by material_name
+    </select>-->
+    <select id="SelectRootBom" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+
+          select distinct t2.objid,
+                          t2.material_name,
+                          t2.sap_code,
+                          t2.sap_full_code,
+                          t2.material_full_name,
+                          t2.material_code,
+                          1 as GROUP_UNIT_NUM,
+                          '条' as UNIT_NAME,
+                          t1.RECORD_TIME,
+                          t1.DELETE_FLAG,
+                          T4.MINOR_TYPE_NAME || T3.MAJOR_TYPE_NAME AS TYPENAME
+                          ,T1.GREENTYRE_MATERIAL_ID,t1.BOM_TYPE,t5.TYPE_NAME,t1.BOM_VERSION
+                          ,T2.MAJOR_TYPE_ID,T2.PDM_CODE, T1.GREENTYRE_VERSION,T1.SUB_ITEM_REVISION,T1.EXPIRED_DATE
+            from SBM_BOM_DATA t1
+            INNER JOIN SBM_MATERIAL T2 ON T2.OBJID = T1.MATERIAL_PARENT_ID
+           inner JOIN sbm_material_major_type T3
+              ON T2.MAJOR_TYPE_ID = T3.OBJID
+           inner JOIN sbm_material_minor_type T4
+              ON T2.MINOR_TYPE_ID = T4.OBJID
+           inner join SBM_BOM_TYPE t5 
+              on t5.objid = t1.bom_type
+        where 1=1 ]]>
+      <isNotNull property="where.MAJOR_TYPE_ID" prepend="AND">
+        <![CDATA[t2.MAJOR_TYPE_ID  = #where.MAJOR_TYPE_ID#]]>
+      </isNotNull>
+      <isNotNull property="where.MINOR_TYPE_ID" prepend="AND">
+        <![CDATA[t2.MINOR_TYPE_ID  = #where.MINOR_TYPE_ID#]]>
+      </isNotNull>
+      <isNotNull property="where.sapname2" prepend="AND">
+        <![CDATA[t2.SAP_CODE  in(select sap_code from sbm_material where objid in(
+        select distinct material_parent_id from SBM_BOM_DATA where material_id = #where.sapname2#))]]>
+      </isNotNull>
+      <isNotNull property="where.pdmcode2" prepend="AND">
+        <![CDATA[t2.PDM_CODE  in(select PDM_CODE from sbm_material where objid in(
+        select distinct material_parent_id from SBM_BOM_DATA where material_id = #where.pdmcode2#))]]>
+      </isNotNull>
+      <isNotNull property="where.SAP_CODE" prepend="AND">
+        <![CDATA[t2.SAP_CODE  = #where.SAP_CODE#]]>
+      </isNotNull>
+      <isNotNull property="where.PDM_CODE" prepend="AND">
+        <![CDATA[t2.PDM_CODE  = #where.PDM_CODE#]]>
+      </isNotNull>
+      <isNotNull property="where.DELETE_FLAG" prepend="AND">
+        <![CDATA[t1.DELETE_FLAG  = #where.DELETE_FLAG#]]>
+      </isNotNull>
+      order by t1.delete_flag, t1.record_time desc, material_name
+    </select>
+    <select id="SelectRootBomNoCpp" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+   select distinct t2.objid,
+                          t2.material_name,
+                          t2.sap_code,
+                          t2.sap_full_code,
+                          t2.material_full_name,
+                          t2.material_code,
+                          1 as GROUP_UNIT_NUM,
+                          '条' as UNIT_NAME,
+                          t1.RECORD_TIME,
+                          t1.DELETE_FLAG,
+                          T4.MINOR_TYPE_NAME || T3.MAJOR_TYPE_NAME AS TYPENAME
+                          ,T1.GREENTYRE_MATERIAL_ID,t1.BOM_TYPE,t5.TYPE_NAME,t1.BOM_VERSION
+                          ,T2.MAJOR_TYPE_ID,T2.PDM_CODE, T1.GREENTYRE_VERSION,T1.GREENTYRE_VERSION SUB_ITEM_REVISION,T1.EXPIRED_DATE
+            from SBM_BOM_DATA t1
+            INNER JOIN SBM_MATERIAL T2 ON T2.OBJID = T1.MATERIAL_PARENT_ID
+           inner JOIN sbm_material_major_type T3
+              ON T2.MAJOR_TYPE_ID = T3.OBJID
+           inner JOIN sbm_material_minor_type T4
+              ON T2.MINOR_TYPE_ID = T4.OBJID
+           inner join SBM_BOM_TYPE t5 
+              on t5.objid = t1.bom_type
+        where 1=1 ]]>
+      <isNotNull property="where.MAJOR_TYPE_ID" prepend="AND">
+        <![CDATA[t2.MAJOR_TYPE_ID  = #where.MAJOR_TYPE_ID#]]>
+      </isNotNull>
+      <isNotNull property="where.MINOR_TYPE_ID" prepend="AND">
+        <![CDATA[t2.MINOR_TYPE_ID  = #where.MINOR_TYPE_ID#]]>
+      </isNotNull>
+      <isNotNull property="where.sapname2" prepend="AND">
+        <![CDATA[t2.SAP_CODE  in(select sap_code from sbm_material where objid in(
+        select distinct material_parent_id from SBM_BOM_DATA where material_id = #where.sapname2#))]]>
+      </isNotNull>
+      <isNotNull property="where.pdmcode2" prepend="AND">
+        <![CDATA[t2.PDM_CODE  in(select PDM_CODE from sbm_material where objid in(
+        select distinct material_parent_id from SBM_BOM_DATA where material_id = #where.pdmcode2#))]]>
+      </isNotNull>
+      <isNotNull property="where.SAP_CODE" prepend="AND">
+        <![CDATA[t2.SAP_CODE  = #where.SAP_CODE#]]>
+      </isNotNull>
+      <isNotNull property="where.PDM_CODE" prepend="AND">
+        <![CDATA[t2.PDM_CODE  = #where.PDM_CODE#]]>
+      </isNotNull>
+      <isNotNull property="where.DELETE_FLAG" prepend="AND">
+        <![CDATA[t1.DELETE_FLAG  = #where.DELETE_FLAG#]]>
+      </isNotNull>
+      order by t1.delete_flag, t1.record_time desc, material_name
+    </select>
+    
+  <!--子节点邦定-->
+ <select id="SelectChildRootBom" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+
+        select t2.objid,
+               t2.material_name,
+               t2.sap_code,
+               t2.sap_full_code,
+               t2.material_full_name,
+               t2.material_code,
+               t1.RECORD_TIME,
+               t1.DELETE_FLAG,
+               T1.GREENTYRE_VERSION,
+               T1.BOM_VERSION,
+               T1.BOM_FACTROY,
+               T1.GROUP_UNIT_NUM,
+               T3.UNIT_NAME,
+               T10.TYPE_NAME,
+               T5.MINOR_TYPE_NAME || T4.MAJOR_TYPE_NAME AS TYPENAME
+               ,T1.GREENTYRE_MATERIAL_ID
+               ,T1.BOM_TYPE
+               ,T2.MAJOR_TYPE_ID,
+               T2.PDM_CODE,T1.SUB_ITEM_REVISION,T1.EXPIRED_DATE
+          from SBM_BOM_DATA t1
+         inner join SBM_MATERIAL t2
+            on t1.material_id = t2.objid
+          LEFT JOIN SSB_UNIT T3
+            ON T1.UNIT_ID = T3.OBJID
+         inner JOIN sbm_material_major_type T4
+            ON T2.MAJOR_TYPE_ID = T4.OBJID
+         inner JOIN sbm_material_minor_type T5
+            ON T2.MINOR_TYPE_ID = T5.OBJID
+         INNER JOIN SBM_BOM_TYPE T10
+            ON T1.BOM_TYPE = T10.OBJID
+        where 1=1]]>
+      <isNotNull property="where.OBJID" prepend="AND">
+        <![CDATA[t1.MATERIAL_PARENT_ID  = #where.OBJID#]]>
+      </isNotNull>
+   <isNotNull property="where.GREENTYRE_MATERIAL_ID" prepend="AND">
+     <![CDATA[t1.GREENTYRE_MATERIAL_ID  = #where.GREENTYRE_MATERIAL_ID#]]>
+   </isNotNull>
+   <isNotNull property="where.BOM_TYPE" prepend="AND">
+     <![CDATA[t1.bom_type  = #where.BOM_TYPE#]]>
+   </isNotNull>
+   <isNotNull property="where.BOM_VERSION" prepend="AND">
+     <![CDATA[t1.bom_version  = #where.BOM_VERSION#]]>
+   </isNotNull>
+   <isNotNull property="where.DELETEFLAG" prepend="AND">
+     <![CDATA[t1.DELETE_FLAG  = #where.DELETEFLAG#]]>
+   </isNotNull>
+   <isNotNull property="where.Sub_Version" prepend="AND">
+     <![CDATA[t1.GREENTYRE_VERSION  = #where.Sub_Version#]]>
+   </isNotNull>
+      order by t1.greentyre_version,t1.delete_flag,t1.record_time desc, t2.material_name
+    </select>
+
+    <select id="SelectAllMaterialid" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+       select sap_code from sbm_material where objid in(
+        select distinct material_parent_id from SBM_BOM_DATA where material_id = #where.OBJID#)
+    ]]>
+    </select>
+
+    
+  </statements>
+</sqlMap>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="等级编号"></Caption>
+    <Caption Name="GRADENAME" Value="等级名称"></Caption>
+    <Caption Name="WORK_PROCESS_ID" Value="工序"></Caption>
+    <Caption Name="PROCEDURE_NAME" Value="工序"></Caption>
+    <Caption Name="FACTORY_NAME" Value="工厂"></Caption>
+    <Caption Name="FACTORY_ID" Value="工厂"></Caption>
+    <Caption Name="WORKSHOP_ID" Value="车间"></Caption>
+    <Caption Name="WORKSHOP_NAME" Value="车间"></Caption>
+    <Caption Name="RECORD_USERID" Value="记录人"></Caption>
+    <Caption Name="USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+  </Captions>
+  <WebPage Title="质检等级管理">
+  </WebPage>
+ <!-- <Crud TableName="FQG_GRADE_INFO">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_FQG_GRADE_INFO"></SeqField>
+    </SeqFields>
+    <Uniques>
+      <Unique Fields="GRADENAME"></Unique>
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USERID" TimeField="RECORD_TIME">
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="GRADENAME"></ParamField>
+        <ParamField FieldName="WORK_PROCESS_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="FACTORY_ID"     Type="ComboBox"></ParamField>
+        <ParamField FieldName="WORKSHOP_ID"     Type="ComboBox"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update>
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="GRADENAME"></ParamField>
+        <ParamField FieldName="WORK_PROCESS_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="FACTORY_ID"     Type="ComboBox"></ParamField>
+        <ParamField FieldName="WORKSHOP_ID"     Type="ComboBox"></ParamField>
+        <ParamField FieldName="RECORD_USERID" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>-->
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="GRADENAME"></ParamField>
+        <ParamField FieldName="WORK_PROCESS_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="FACTORY_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="WORKSHOP_ID" Type="ComboBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="T1.OBJID">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" Width="60"></GridColumn>
+        <GridColumn ColumnName="GRADENAME" Width="80"></GridColumn>
+        <GridColumn ColumnName="PROCEDURE_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="FACTORY_NAME" Width="120"></GridColumn>
+        <GridColumn ColumnName="WORKSHOP_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="USER_NAME" Width="80"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" Width="150"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

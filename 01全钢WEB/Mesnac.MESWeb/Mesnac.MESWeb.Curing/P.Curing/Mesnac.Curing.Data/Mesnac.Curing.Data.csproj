@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8AE43542-4214-4F4E-B37B-0C74ED147E6E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Curing.Data</RootNamespace>
+    <AssemblyName>Mesnac.Curing.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\@packages\MyBatis\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\@packages\MyBatis\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="LogAgent">
+      <HintPath>..\..\@packages\LogAgent\LogAgent.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.DbAccess">
+      <HintPath>..\..\@packages\Frame\Mesnac.DbAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.Common">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.DataMapper">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Frame\Mesnac.DbAccess\Mesnac.DbAccess.csproj">
+      <Project>{60b919c5-c601-4999-a531-439042d59746}</Project>
+      <Name>Mesnac.DbAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Curing.Entity\Mesnac.Curing.Entity.csproj">
+      <Project>{2D7A3673-D5A4-4834-8B0C-E3B6802D608F}</Project>
+      <Name>Mesnac.Curing.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implements\BpmProductionService.cs" />
+    <Compile Include="Implements\BppScanLogService.cs" />
+    <Compile Include="Implements\BqcQcrecordService.cs" />
+    <Compile Include="Implements\BsmStockInDetailService.cs" />
+    <Compile Include="Implements\BsmStockOutDetailService.cs" />
+    <Compile Include="Implements\BsmStockOutToolingService.cs" />
+    <Compile Include="Implements\BsmStorageDetailService.cs" />
+    <Compile Include="Implements\BsmStorageMainService.cs" />
+    <Compile Include="Implements\BsmStorageToolingService.cs" />
+    <Compile Include="Implements\BsmStorePlaceService.cs" />
+    <Compile Include="Implements\BsmStoreService.cs" />
+    <Compile Include="Implements\BsmToolingCarService.cs" />
+    <Compile Include="Implements\BsmToolingScanLogService.cs" />
+    <Compile Include="Implements\CbeBladderBuyTypeService.cs" />
+    <Compile Include="Implements\CbeBladderChangeService.cs" />
+    <Compile Include="Implements\CbeBladderFactoryService.cs" />
+    <Compile Include="Implements\CbeBladderSpecService.cs" />
+    <Compile Include="Implements\CbeBladderTypeNewService.cs" />
+    <Compile Include="Implements\CbeBladderTypeService.cs" />
+    <Compile Include="Implements\CbeBlReasonService.cs" />
+    <Compile Include="Implements\CbeCuringBladderInService.cs" />
+    <Compile Include="Implements\CbeEquipPositionService.cs" />
+    <Compile Include="Implements\CbhConfigHelperService.cs" />
+    <Compile Include="Implements\CbmBrandService.cs" />
+    <Compile Include="Implements\CbmEquipGroupService.cs" />
+    <Compile Include="Implements\CbmGroupControlService.cs" />
+    <Compile Include="Implements\CbmGroupEquipContactService.cs" />
+    <Compile Include="Implements\CbmMaterialService.cs" />
+    <Compile Include="Implements\CbmPatternService.cs" />
+    <Compile Include="Implements\CbmPlyratingService.cs" />
+    <Compile Include="Implements\CbmSizeService.cs" />
+    <Compile Include="Implements\CimCapsuleReplaceRecordService.cs" />
+    <Compile Include="Implements\CimMouldChangeinfoService.cs" />
+    <Compile Include="Implements\CimMouldInfoService.cs" />
+    <Compile Include="Implements\CimMouldWashRecordService.cs" />
+    <Compile Include="Implements\CppAppendProductionService.cs" />
+    <Compile Include="Implements\CppBadScanLogService.cs" />
+    <Compile Include="Implements\CppCuringBarcodeService.cs" />
+    <Compile Include="Implements\CppCuringBladderPlanService.cs" />
+    <Compile Include="Implements\CppCuringDegradeService.cs" />
+    <Compile Include="Implements\CppCuringEquipCheckService.cs" />
+    <Compile Include="Implements\CppCuringEquipStateService.cs" />
+    <Compile Include="Implements\CppCuringFirsttyreService.cs" />
+    <Compile Include="Implements\CppCuringMouldPlanService.cs" />
+    <Compile Include="Implements\CppCuringOperLogService.cs" />
+    <Compile Include="Implements\CppCuringPlanDetailService.cs" />
+    <Compile Include="Implements\CppCuringPlanService.cs" />
+    <Compile Include="Implements\CppCuringPlanStateService.cs" />
+    <Compile Include="Implements\CppCuringProductionLogService.cs" />
+    <Compile Include="Implements\CppCuringProductionService.cs" />
+    <Compile Include="Implements\CppCuringScanRecordService.cs" />
+    <Compile Include="Implements\CppCuringShiftDetailService.cs" />
+    <Compile Include="Implements\CppCuringShiftMasterService.cs" />
+    <Compile Include="Implements\CppCuringWaitTyreService.cs" />
+    <Compile Include="Implements\CppEquipCommandService.cs" />
+    <Compile Include="Implements\CppEquipTyrenoService.cs" />
+    <Compile Include="Implements\CppFcheckControlStopService.cs" />
+    <Compile Include="Implements\CppFirsttyreDetailService.cs" />
+    <Compile Include="Implements\CppFirsttyreEquipService.cs" />
+    <Compile Include="Implements\CppFirsttyreValService.cs" />
+    <Compile Include="Implements\CppMaterChangeUnlockRecordService.cs" />
+    <Compile Include="Implements\CppTraceCuringInfoService.cs" />
+    <Compile Include="Implements\CqcQcrecordService.cs" />
+    <Compile Include="Implements\CrtAlarmAuditSelectService.cs" />
+    <Compile Include="Implements\CrtAlarmAuditStateService.cs" />
+    <Compile Include="Implements\CrtAlarmAuditUserService.cs" />
+    <Compile Include="Implements\CrtAlarmSendStateService.cs" />
+    <Compile Include="Implements\CrtAlarmStandardGradeService.cs" />
+    <Compile Include="Implements\CrtAlarmStandardItemService.cs" />
+    <Compile Include="Implements\CrtAlarmStandardService.cs" />
+    <Compile Include="Implements\CrtAlarmStandardSetService.cs" />
+    <Compile Include="Implements\CrtAlarmStandardStateService.cs" />
+    <Compile Include="Implements\CrtAlarmStandardTypeService.cs" />
+    <Compile Include="Implements\CrtAlarmSubmitStateService.cs" />
+    <Compile Include="Implements\CrtCuringAlarmRecordService.cs" />
+    <Compile Include="Implements\CrtCuringEquipMoniterService.cs" />
+    <Compile Include="Implements\CrtCuringPressTempService.cs" />
+    <Compile Include="Implements\CrtCuringTechnologyService.cs" />
+    <Compile Include="Implements\CrtCuringTechParams1Service.cs" />
+    <Compile Include="Implements\CrtCuringTechParams2Service.cs" />
+    <Compile Include="Implements\CrtCuringTechStepService.cs" />
+    <Compile Include="Implements\CrtCuringTechValveService.cs" />
+    <Compile Include="Implements\CrtMaterialRelationBCService.cs" />
+    <Compile Include="Implements\CrtTechAuditSelectService.cs" />
+    <Compile Include="Implements\CsmStockInDetailService.cs" />
+    <Compile Include="Implements\CsmStockInToolingService.cs" />
+    <Compile Include="Implements\CsmStorageDetailService.cs" />
+    <Compile Include="Implements\CsmStorageMainService.cs" />
+    <Compile Include="Implements\CsmStorageToolingService.cs" />
+    <Compile Include="Implements\CsmStorePlaceService.cs" />
+    <Compile Include="Implements\CsmStoreService.cs" />
+    <Compile Include="Implements\CsmTransferDetailService.cs" />
+    <Compile Include="Implements\CsmUserEquipsService.cs" />
+    <Compile Include="Implements\FqdDefectInfoService.cs" />
+    <Compile Include="Implements\FqdDegradeReasonsService.cs" />
+    <Compile Include="Implements\FqgGradeInfoService.cs" />
+    <Compile Include="Implements\GetmaterNumService.cs" />
+    <Compile Include="Implements\GetmaterTimeService.cs" />
+    <Compile Include="Implements\ItfMesCblpDetailService.cs" />
+    <Compile Include="Implements\ItfMesCblpService.cs" />
+    <Compile Include="Implements\ItfMesCproductionDetailService.cs" />
+    <Compile Include="Implements\ItfMesCproductionService.cs" />
+    <Compile Include="Implements\ItfSapProductionHeadService.cs" />
+    <Compile Include="Implements\ItfSapProductionRecordsService.cs" />
+    <Compile Include="Implements\MouldErrornumberService.cs" />
+    <Compile Include="Implements\SbeClearmouldService.cs" />
+    <Compile Include="Implements\SbeClearstomataService.cs" />
+    <Compile Include="Implements\SbeControlRecordService.cs" />
+    <Compile Include="Implements\SbeCuringEquipUnlockService.cs" />
+    <Compile Include="Implements\SbeCuringScreenService.cs" />
+    <Compile Include="Implements\SbeEquipStopReasonService.cs" />
+    <Compile Include="Implements\SbeEquipStopTypeService.cs" />
+    <Compile Include="Implements\SbeMouldlvliclearService.cs" />
+    <Compile Include="Implements\SbeMouldlvliService.cs" />
+    <Compile Include="Implements\SbmLockReasonService.cs" />
+    <Compile Include="Implements\SbmLockRecordService.cs" />
+    <Compile Include="Implements\SeeEquipStopRecordService.cs" />
+    <Compile Include="Implements\SppOldMaterialnameService.cs" />
+    <Compile Include="Implements\SppToolingStateDetailService.cs" />
+    <Compile Include="Implements\SppToolingStateMainService.cs" />
+    <Compile Include="Implements\SppTyreStateService.cs" />
+    <Compile Include="Implements\VCbmMaterialService.cs" />
+    <Compile Include="Implements\WmsUploadRecordService.cs" />
+    <Compile Include="Interface\IBpmProductionService.cs" />
+    <Compile Include="Interface\IBppScanLogService.cs" />
+    <Compile Include="Interface\IBqcQcrecordService.cs" />
+    <Compile Include="Interface\IBsmStockInDetailService.cs" />
+    <Compile Include="Interface\IBsmStockOutDetailService.cs" />
+    <Compile Include="Interface\IBsmStockOutToolingService.cs" />
+    <Compile Include="Interface\IBsmStorageDetailService.cs" />
+    <Compile Include="Interface\IBsmStorageMainService.cs" />
+    <Compile Include="Interface\IBsmStorageToolingService.cs" />
+    <Compile Include="Interface\IBsmStorePlaceService.cs" />
+    <Compile Include="Interface\IBsmStoreService.cs" />
+    <Compile Include="Interface\IBsmToolingCarService.cs" />
+    <Compile Include="Interface\IBsmToolingScanLogService.cs" />
+    <Compile Include="Interface\ICbeBladderBuyTypeService.cs" />
+    <Compile Include="Interface\ICbeBladderChangeService.cs" />
+    <Compile Include="Interface\ICbeBladderFactoryService.cs" />
+    <Compile Include="Interface\ICbeBladderSpecService.cs" />
+    <Compile Include="Interface\ICbeBladderTypeNewService.cs" />
+    <Compile Include="Interface\ICbeBladderTypeService.cs" />
+    <Compile Include="Interface\ICbeBlReasonService.cs" />
+    <Compile Include="Interface\ICbeCuringBladderInService.cs" />
+    <Compile Include="Interface\ICbeEquipPositionService.cs" />
+    <Compile Include="Interface\ICbhConfigHelperService.cs" />
+    <Compile Include="Interface\ICbmBrandService.cs" />
+    <Compile Include="Interface\ICbmEquipGroupService.cs" />
+    <Compile Include="Interface\ICbmGroupControlService.cs" />
+    <Compile Include="Interface\ICbmGroupEquipContactService.cs" />
+    <Compile Include="Interface\ICbmMaterialService.cs" />
+    <Compile Include="Interface\ICbmPatternService.cs" />
+    <Compile Include="Interface\ICbmPlyratingService.cs" />
+    <Compile Include="Interface\ICbmSizeService.cs" />
+    <Compile Include="Interface\ICimCapsuleReplaceRecordService.cs" />
+    <Compile Include="Interface\ICimMouldChangeinfoService.cs" />
+    <Compile Include="Interface\ICimMouldInfoService.cs" />
+    <Compile Include="Interface\ICimMouldWashRecordService.cs" />
+    <Compile Include="Interface\ICppAppendProductionService.cs" />
+    <Compile Include="Interface\ICppBadScanLogService.cs" />
+    <Compile Include="Interface\ICppCuringBarcodeService.cs" />
+    <Compile Include="Interface\ICppCuringBladderPlanService.cs" />
+    <Compile Include="Interface\ICppCuringDegradeService.cs" />
+    <Compile Include="Interface\ICppCuringEquipCheckService.cs" />
+    <Compile Include="Interface\ICppCuringEquipStateService.cs" />
+    <Compile Include="Interface\ICppCuringFirsttyreService.cs" />
+    <Compile Include="Interface\ICppCuringMouldPlanService.cs" />
+    <Compile Include="Interface\ICppCuringOperLogService.cs" />
+    <Compile Include="Interface\ICppCuringPlanDetailService.cs" />
+    <Compile Include="Interface\ICppCuringPlanService.cs" />
+    <Compile Include="Interface\ICppCuringPlanStateService.cs" />
+    <Compile Include="Interface\ICppCuringProductionLogService.cs" />
+    <Compile Include="Interface\ICppCuringProductionService.cs" />
+    <Compile Include="Interface\ICppCuringScanRecordService.cs" />
+    <Compile Include="Interface\ICppCuringShiftDetailService.cs" />
+    <Compile Include="Interface\ICppCuringShiftMasterService.cs" />
+    <Compile Include="Interface\ICppCuringWaitTyreService.cs" />
+    <Compile Include="Interface\ICppEquipCommandService.cs" />
+    <Compile Include="Interface\ICppEquipTyrenoService.cs" />
+    <Compile Include="Interface\ICppFcheckControlStopService.cs" />
+    <Compile Include="Interface\ICppFirsttyreDetailService.cs" />
+    <Compile Include="Interface\ICppFirsttyreEquipService.cs" />
+    <Compile Include="Interface\ICppFirsttyreValService.cs" />
+    <Compile Include="Interface\ICppMaterChangeUnlockRecordService.cs" />
+    <Compile Include="Interface\ICppTraceCuringInfoService.cs" />
+    <Compile Include="Interface\ICqcQcrecordService.cs" />
+    <Compile Include="Interface\ICrtAlarmAuditSelectService.cs" />
+    <Compile Include="Interface\ICrtAlarmAuditStateService.cs" />
+    <Compile Include="Interface\ICrtAlarmAuditUserService.cs" />
+    <Compile Include="Interface\ICrtAlarmSendStateService.cs" />
+    <Compile Include="Interface\ICrtAlarmStandardGradeService.cs" />
+    <Compile Include="Interface\ICrtAlarmStandardItemService.cs" />
+    <Compile Include="Interface\ICrtAlarmStandardService.cs" />
+    <Compile Include="Interface\ICrtAlarmStandardSetService.cs" />
+    <Compile Include="Interface\ICrtAlarmStandardStateService.cs" />
+    <Compile Include="Interface\ICrtAlarmStandardTypeService.cs" />
+    <Compile Include="Interface\ICrtAlarmSubmitStateService.cs" />
+    <Compile Include="Interface\ICrtCuringAlarmRecordService.cs" />
+    <Compile Include="Interface\ICrtCuringEquipMoniterService.cs" />
+    <Compile Include="Interface\ICrtCuringPressTempService.cs" />
+    <Compile Include="Interface\ICrtCuringTechnologyService.cs" />
+    <Compile Include="Interface\ICrtCuringTechParams1Service.cs" />
+    <Compile Include="Interface\ICrtCuringTechParams2Service.cs" />
+    <Compile Include="Interface\ICrtCuringTechStepService.cs" />
+    <Compile Include="Interface\ICrtCuringTechValveService.cs" />
+    <Compile Include="Interface\ICrtMaterialRelationBCService.cs" />
+    <Compile Include="Interface\ICrtTechAuditSelectService.cs" />
+    <Compile Include="Interface\ICsmStockInDetailService.cs" />
+    <Compile Include="Interface\ICsmStockInToolingService.cs" />
+    <Compile Include="Interface\ICsmStorageDetailService.cs" />
+    <Compile Include="Interface\ICsmStorageMainService.cs" />
+    <Compile Include="Interface\ICsmStorageToolingService.cs" />
+    <Compile Include="Interface\ICsmStorePlaceService.cs" />
+    <Compile Include="Interface\ICsmStoreService.cs" />
+    <Compile Include="Interface\ICsmTransferDetailService.cs" />
+    <Compile Include="Interface\ICsmUserEquipsService.cs" />
+    <Compile Include="Interface\IFqdDefectInfoService.cs" />
+    <Compile Include="Interface\IFqdDegradeReasonsService.cs" />
+    <Compile Include="Interface\IFqgGradeInfoService.cs" />
+    <Compile Include="Interface\IGetmaterNumService.cs" />
+    <Compile Include="Interface\IGetmaterTimeService.cs" />
+    <Compile Include="Interface\IItfMesCblpDetailService.cs" />
+    <Compile Include="Interface\IItfMesCblpService.cs" />
+    <Compile Include="Interface\IItfMesCproductionDetailService.cs" />
+    <Compile Include="Interface\IItfMesCproductionService.cs" />
+    <Compile Include="Interface\IItfSapProductionHeadService.cs" />
+    <Compile Include="Interface\IItfSapProductionRecordsService.cs" />
+    <Compile Include="Interface\IMouldErrornumberService.cs" />
+    <Compile Include="Interface\ISbeClearmouldService.cs" />
+    <Compile Include="Interface\ISbeClearstomataService.cs" />
+    <Compile Include="Interface\ISbeControlRecordService.cs" />
+    <Compile Include="Interface\ISbeCuringEquipUnlockService.cs" />
+    <Compile Include="Interface\ISbeCuringScreenService.cs" />
+    <Compile Include="Interface\ISbeEquipStopReasonService.cs" />
+    <Compile Include="Interface\ISbeEquipStopTypeService.cs" />
+    <Compile Include="Interface\ISbeMouldlvliclearService.cs" />
+    <Compile Include="Interface\ISbeMouldlvliService.cs" />
+    <Compile Include="Interface\ISbmLockReasonService.cs" />
+    <Compile Include="Interface\ISbmLockRecordService.cs" />
+    <Compile Include="Interface\ISeeEquipStopRecordService.cs" />
+    <Compile Include="Interface\ISppOldMaterialnameService.cs" />
+    <Compile Include="Interface\ISppToolingStateDetailService.cs" />
+    <Compile Include="Interface\ISppToolingStateMainService.cs" />
+    <Compile Include="Interface\ISppTyreStateService.cs" />
+    <Compile Include="Interface\IVCbmMaterialService.cs" />
+    <Compile Include="Interface\IWmsUploadRecordService.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

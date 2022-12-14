@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BusinessMapper.FqxRadiusInfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM FQX_RADIUS_INFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.Radius" prepend="AND">
+          <![CDATA[RADIUS = #where.Radius#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ReocrdUserId" prepend="AND">
+          <![CDATA[REOCRD_USER_ID = #where.ReocrdUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      <isNotNull property="where.TyreHeight" prepend="AND">
+        <![CDATA[TYRE_HEIGHT = #where.TyreHeight#]]>
+      </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <insert id="InitMaterial" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+      insert into FQX_RADIUS_INFO (objid,material_id)   
+      select objid,objid from v_cbm_materialinfo t1
+      where not EXISTS (select 1 from  FQX_RADIUS_INFO t0 where t0.MATERIAL_ID=t1.ObjId)
+      ]]>
+     </insert>
+     <update id="UpdateByObjId" parameterClass="map">
+       <![CDATA[   
+          UPDATE FQX_RADIUS_INFO SET
+          RADIUS = #Radius#,
+          tyre_height=#TyreHeight#
+          WHERE (OBJID = #ObjId#) 
+      ]]>
+     </update>
+     <select id="RefleshData" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+      select t0.objid,t1.material_name,t1.material_code,t0.RADIUS,t0.tyre_height
+      from FQX_RADIUS_INFO t0,v_cbm_materialinfo t1
+      where t0.material_id=t1.ObjId
+      ]]>
+       <dynamic>
+         <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+           <![CDATA[ t1.material_name like '%$where.MATERIAL_NAME$%']]>
+         </isNotNull>
+         <isNotNull property="where.MATERIAL_CODE" prepend="AND">
+           <![CDATA[ t1.material_code like '%'||#where.MATERIAL_CODE#||'%']]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[order by t1.material_code]]>
+     </select>
+  </statements>
+</sqlMap>

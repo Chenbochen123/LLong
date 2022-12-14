@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudSsbProblemRecord" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT T1.*
+      , CASE T1.PROBLEM_STATE 
+        WHEN 0 THEN '新建' 
+        WHEN 11 THEN '待解决' 
+        WHEN 21 THEN '解决中' 
+        WHEN 31 THEN '已解决' 
+        WHEN 41 THEN '勿须解决' 
+        WHEN 51 THEN '重新打开' 
+        WHEN 99 THEN '已关闭' 
+        ELSE '' END PROBLEM_STATE_SHOW
+      , T2.USER_NAME RECORD_USER_NAME 
+      FROM SSB_PROBLEM_RECORD T1 
+      LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.STORE_NAME" prepend="AND">
+          <![CDATA[T1.STORE_NAME LIKE '%' || #where.STORE_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.STORE_CODE" prepend="AND">
+          <![CDATA[T1.STORE_CODE = #where.STORE_CODE#]]>
+        </isNotNull>
+        <isNotNull property="where.STORE_TYPE_ID" prepend="AND">
+          <![CDATA[T1.STORE_TYPE_ID = #where.STORE_TYPE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.OBJID
+      </isNull>
+    </select>
+    <select id="Select+Update@CrudSsbProblemRecord" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM SSB_PROBLEM_RECORD ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询仓库类型信息，ID值固定为GetComboBoxData@Select@CrudPsbStore@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSsbProblemRecord@PROBLEM_STATE" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select 0 sskey, '新建' ssValue from dual
+      union
+      select 11 sskey, '待解决' ssValue from dual
+      union
+      select 21 sskey, '解决中' ssValue from dual
+      union
+      select 31 sskey, '已解决' ssValue from dual
+      union
+      select 41 sskey, '勿须解决' ssValue from dual
+      union
+      select 51 sskey, '重新打开' ssValue from dual
+      union
+      select 99 sskey, '已关闭' ssValue from dual
+     ]]>
+    </select>
+
+  </statements>
+</sqlMap>

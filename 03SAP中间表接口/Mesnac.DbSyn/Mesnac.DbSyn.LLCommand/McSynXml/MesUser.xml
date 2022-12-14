@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SynConfig>
+  <Tables>
+    <Table name="Table.Source">
+      <DbSourceName>MES</DbSourceName>
+      <TableName>SSB_USER</TableName>
+    </Table>
+    <Table name="Table.Target">
+      <DbSourceName>MENS</DbSourceName>
+      <TableName>BasUser</TableName>
+    </Table>
+  </Tables>
+  <SynDatas>
+    <SynData>
+      <SourceTable TableName="Table.Source">
+        <Command >
+          <FileName value="Mesnac.DbSyn.dll"/>
+          <ClassName value="Mesnac.DbSyn.TableSyn.Source"/>
+        </Command>
+        <BeginSyn>
+          <add key="sql" value=""/>
+        </BeginSyn>
+        <SelectData>
+          <add key="count" value="0"/>
+          <add key="where">
+            <![CDATA[TOMENS<>0]]>
+          </add>
+        </SelectData>
+        <FinishRowSyn>
+          <add key="update" value="TOMENS=0"/>
+          <add key="where" value="OBJID"/>
+        </FinishRowSyn>
+      </SourceTable>
+      <TargetTable TableName="Table.Target">
+        <Command >
+          <FileName value="Mesnac.DbSyn.dll"/>
+          <ClassName value="Mesnac.DbSyn.TableSyn.Target"/>
+        </Command>
+        <ExcuteRowSyn>
+          <add key="where" value="OBJID"/>
+        </ExcuteRowSyn>
+      </TargetTable>
+      <SourceTargetFields>
+        <SourceTargetField SourceFieldName="OBJID"  TargetFieldName="ObjID"/>
+        <SourceTargetField SourceFieldName="USER_NAME" TargetFieldName="UserName"/>
+        <SourceTargetField SourceValue="49FB2CD20C20CE75AE588A" TargetFieldName="UserPWD"/>
+        <SourceTargetField SourceFieldName="REAL_NAME" TargetFieldName="RealName"/>
+        <SourceTargetField SourceFieldName="SEX" TargetFieldName="Sex"/>
+        <SourceTargetField SourceFieldName="TELEPHONE" TargetFieldName="Telephone"/>
+        <SourceTargetField SourceFieldName="WORK_BARCODE" TargetFieldName="WorkBarcode"/>
+        <SourceTargetField SourceFieldName="DEPT_ID" TargetFieldName="DeptCode"/>
+        <SourceTargetField SourceFieldName="WORK_ID" TargetFieldName="WorkID"/>
+        <SourceTargetField SourceFieldName="SHIFT_ID" TargetFieldName="ShiftID"/>
+        <SourceTargetField SourceFieldName="WORKSHOP_ID" TargetFieldName="WorkShopID"/>
+        <SourceTargetField SourceFieldName="WORK_BARCODE" TargetFieldName="HRCode"/>
+        <SourceTargetField SourceFieldName="ERP_CODE" TargetFieldName="ERPCode"/>
+        <SourceTargetField SourceFieldName="DELETE_FLAG" TargetFieldName="DeleteFlag"/>
+        <SourceTargetField SourceFieldName="REMARK" TargetFieldName="Remark"/>
+        <SourceTargetField SourceFieldName="IS_EMPLOYEE" TargetFieldName="IsEmployee"/>
+      </SourceTargetFields>
+    </SynData>
+  </SynDatas>
+</SynConfig>

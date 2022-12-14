@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CimMouldWashRecord"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CIM_MOULD_WASH_RECORD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipid" prepend="AND">
+          <![CDATA[EQUIPID = #where.Equipid#]]>
+        </isNotNull>
+        <isNotNull property="where.Lrflag" prepend="AND">
+          <![CDATA[LRFLAG = #where.Lrflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Currentcount" prepend="AND">
+          <![CDATA[CURRENTCOUNT = #where.Currentcount#]]>
+        </isNotNull>
+        <isNotNull property="where.Begintime" prepend="AND">
+          <![CDATA[BEGINTIME = #where.Begintime#]]>
+        </isNotNull>
+        <isNotNull property="where.Mouldid" prepend="AND">
+          <![CDATA[MOULDID = #where.Mouldid#]]>
+        </isNotNull>
+        <isNotNull property="where.Endtime" prepend="AND">
+          <![CDATA[ENDTIME = #where.Endtime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

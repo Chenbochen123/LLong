@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+
+    <select id="Select@ReportCppCuringProductionTimesStat" parameterClass="map" resultClass="row">
+      <![CDATA[
+        select * 
+        from (
+            -- 开机数
+            select -2 seq_index, cast('开机数' as nvarchar2(50)) show_name
+            , sum(case when t1.hour_num= '08' then cal_num else 0 end) "08"
+            , sum(case when t1.hour_num= '09' then cal_num else 0 end) "09"
+            , sum(case when t1.hour_num= '10' then cal_num else 0 end) "10"
+            , sum(case when t1.hour_num= '11' then cal_num else 0 end) "11"
+            , sum(case when t1.hour_num= '12' then cal_num else 0 end) "12"
+            , sum(case when t1.hour_num= '13' then cal_num else 0 end) "13"
+            , sum(case when t1.hour_num= '14' then cal_num else 0 end) "14"
+            , sum(case when t1.hour_num= '15' then cal_num else 0 end) "15"
+            , sum(case when t1.hour_num= '16' then cal_num else 0 end) "16"
+            , sum(case when t1.hour_num= '17' then cal_num else 0 end) "17"
+            , sum(case when t1.hour_num= '18' then cal_num else 0 end) "18"
+            , sum(case when t1.hour_num= '19' then cal_num else 0 end) "19"
+            , sum(case when t1.hour_num= '20' then cal_num else 0 end) "20"
+            , sum(case when t1.hour_num= '21' then cal_num else 0 end) "21"
+            , sum(case when t1.hour_num= '22' then cal_num else 0 end) "22"
+            , sum(case when t1.hour_num= '23' then cal_num else 0 end) "23"
+            , sum(case when t1.hour_num= '00' then cal_num else 0 end) "00"
+            , sum(case when t1.hour_num= '01' then cal_num else 0 end) "01"
+            , sum(case when t1.hour_num= '02' then cal_num else 0 end) "02"
+            , sum(case when t1.hour_num= '03' then cal_num else 0 end) "03"
+            , sum(case when t1.hour_num= '04' then cal_num else 0 end) "04"
+            , sum(case when t1.hour_num= '05' then cal_num else 0 end) "05"
+            , sum(case when t1.hour_num= '06' then cal_num else 0 end) "06"
+            , sum(case when t1.hour_num= '07' then cal_num else 0 end) "07"
+            from (
+                select t1.hour_num, count(*) cal_num
+                from (
+                    select distinct t1.equip_id, to_char(t1.begin_time, 'hh24') hour_num
+                    from cpp_curing_production t1
+                    where t1.begin_time >= #where.BeginTime# and t1.begin_time < #where.EndTime#
+                    order by to_char(t1.begin_time, 'hh24')
+                ) t1
+                group by t1.hour_num
+            ) t1
+            union
+            -- 时产数
+            select -1 seq_index, cast('时产' as nvarchar2(50)) show_name
+            , sum(case when t1.hour_num= '08' then cal_num else 0 end) "08"
+            , sum(case when t1.hour_num= '09' then cal_num else 0 end) "09"
+            , sum(case when t1.hour_num= '10' then cal_num else 0 end) "10"
+            , sum(case when t1.hour_num= '11' then cal_num else 0 end) "11"
+            , sum(case when t1.hour_num= '12' then cal_num else 0 end) "12"
+            , sum(case when t1.hour_num= '13' then cal_num else 0 end) "13"
+            , sum(case when t1.hour_num= '14' then cal_num else 0 end) "14"
+            , sum(case when t1.hour_num= '15' then cal_num else 0 end) "15"
+            , sum(case when t1.hour_num= '16' then cal_num else 0 end) "16"
+            , sum(case when t1.hour_num= '17' then cal_num else 0 end) "17"
+            , sum(case when t1.hour_num= '18' then cal_num else 0 end) "18"
+            , sum(case when t1.hour_num= '19' then cal_num else 0 end) "19"
+            , sum(case when t1.hour_num= '20' then cal_num else 0 end) "20"
+            , sum(case when t1.hour_num= '21' then cal_num else 0 end) "21"
+            , sum(case when t1.hour_num= '22' then cal_num else 0 end) "22"
+            , sum(case when t1.hour_num= '23' then cal_num else 0 end) "23"
+            , sum(case when t1.hour_num= '00' then cal_num else 0 end) "00"
+            , sum(case when t1.hour_num= '01' then cal_num else 0 end) "01"
+            , sum(case when t1.hour_num= '02' then cal_num else 0 end) "02"
+            , sum(case when t1.hour_num= '03' then cal_num else 0 end) "03"
+            , sum(case when t1.hour_num= '04' then cal_num else 0 end) "04"
+            , sum(case when t1.hour_num= '05' then cal_num else 0 end) "05"
+            , sum(case when t1.hour_num= '06' then cal_num else 0 end) "06"
+            , sum(case when t1.hour_num= '07' then cal_num else 0 end) "07"
+            from (
+                select t1.hour_num, count(*) cal_num
+                from (
+                    select t1.tyre_no, to_char(t1.begin_time, 'hh24') hour_num
+                    from cpp_curing_production t1
+                    where t1.begin_time >= #where.BeginTime# and t1.begin_time < #where.EndTime#
+                    order by to_char(t1.begin_time, 'hh24')
+                ) t1
+                group by t1.hour_num
+            ) t1
+            union
+            -- 停机数 
+            select t1.stop_reason_id seq_index, cast(t1.stop_reason_name as nvarchar2(50)) show_name
+            , sum(case when t1.hour_num= '08' then cal_num else 0 end) "08"
+            , sum(case when t1.hour_num= '09' then cal_num else 0 end) "09"
+            , sum(case when t1.hour_num= '10' then cal_num else 0 end) "10"
+            , sum(case when t1.hour_num= '11' then cal_num else 0 end) "11"
+            , sum(case when t1.hour_num= '12' then cal_num else 0 end) "12"
+            , sum(case when t1.hour_num= '13' then cal_num else 0 end) "13"
+            , sum(case when t1.hour_num= '14' then cal_num else 0 end) "14"
+            , sum(case when t1.hour_num= '15' then cal_num else 0 end) "15"
+            , sum(case when t1.hour_num= '16' then cal_num else 0 end) "16"
+            , sum(case when t1.hour_num= '17' then cal_num else 0 end) "17"
+            , sum(case when t1.hour_num= '18' then cal_num else 0 end) "18"
+            , sum(case when t1.hour_num= '19' then cal_num else 0 end) "19"
+            , sum(case when t1.hour_num= '20' then cal_num else 0 end) "20"
+            , sum(case when t1.hour_num= '21' then cal_num else 0 end) "21"
+            , sum(case when t1.hour_num= '22' then cal_num else 0 end) "22"
+            , sum(case when t1.hour_num= '23' then cal_num else 0 end) "23"
+            , sum(case when t1.hour_num= '00' then cal_num else 0 end) "00"
+            , sum(case when t1.hour_num= '01' then cal_num else 0 end) "01"
+            , sum(case when t1.hour_num= '02' then cal_num else 0 end) "02"
+            , sum(case when t1.hour_num= '03' then cal_num else 0 end) "03"
+            , sum(case when t1.hour_num= '04' then cal_num else 0 end) "04"
+            , sum(case when t1.hour_num= '05' then cal_num else 0 end) "05"
+            , sum(case when t1.hour_num= '06' then cal_num else 0 end) "06"
+            , sum(case when t1.hour_num= '07' then cal_num else 0 end) "07"
+            from (
+                select t1.stop_reason_id, t1.stop_reason_name, t1.hour_num, count(*) cal_num
+                from (
+                    select distinct to_char(t1.begin_time, 'hh24') hour_num, t2.equip_id
+                    , nvl(t2.stop_reason_id, 999) stop_reason_id, nvl(t3.equip_stop_reason_name, '其他') stop_reason_name
+                    from (
+                        select #where.ProduceDate# + interval '8' hour begin_time, #where.ProduceDate# + interval '9' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '9' hour begin_time, #where.ProduceDate# + interval '10' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '10' hour begin_time, #where.ProduceDate# + interval '11' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '11' hour begin_time, #where.ProduceDate# + interval '12' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '12' hour begin_time, #where.ProduceDate# + interval '13' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '13' hour begin_time, #where.ProduceDate# + interval '14' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '14' hour begin_time, #where.ProduceDate# + interval '15' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '15' hour begin_time, #where.ProduceDate# + interval '16' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '16' hour begin_time, #where.ProduceDate# + interval '17' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '17' hour begin_time, #where.ProduceDate# + interval '18' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '18' hour begin_time, #where.ProduceDate# + interval '19' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '19' hour begin_time, #where.ProduceDate# + interval '20' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '20' hour begin_time, #where.ProduceDate# + interval '21' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '21' hour begin_time, #where.ProduceDate# + interval '22' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '22' hour begin_time, #where.ProduceDate# + interval '23' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '23' hour begin_time, #where.ProduceDate# + interval '24' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '1' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '1' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '2' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '2' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '3' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '3' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '4' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '4' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '5' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '5' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '6' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '6' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '7' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '7' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '8' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '8' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '9' hour end_time from dual
+                    ) t1
+                    join see_equip_stop_record t2 on t2.stop_begin_time < t1.begin_time and t2.stop_end_time >= t1.begin_time
+                    or stop_begin_time <= t1.end_time and stop_end_time >  t1.end_time
+                    or stop_begin_time >= t1.begin_time and stop_end_time <= t1.end_time
+                    left join sbe_equip_stop_reason t3 on t2.stop_reason_id = t3.objid
+                    where t2.stop_begin_time >= #where.BeginTime# - 3 and t2.stop_end_time < #where.EndTime# + 3
+                ) t1
+                group by t1.stop_reason_id, t1.stop_reason_name, t1.hour_num
+            ) t1
+            group by t1.stop_reason_id, t1.stop_reason_name
+        ) t1
+      ]]>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        order by t1.seq_index
+      </isNull>
+    </select>
+
+    <!--组合-->
+    <select id="Select@ReportCppCuringProductionTimesStat1" parameterClass="map" resultClass="row">
+      <![CDATA[
+        select * 
+        from (
+      ]]>
+      <![CDATA[
+            -- 开机数
+            select -2 seq_index, cast('开机数' as nvarchar2(50)) show_name
+            , sum(case when t1.hour_num= '08' then cal_num else 0 end) "08"
+            , sum(case when t1.hour_num= '09' then cal_num else 0 end) "09"
+            , sum(case when t1.hour_num= '10' then cal_num else 0 end) "10"
+            , sum(case when t1.hour_num= '11' then cal_num else 0 end) "11"
+            , sum(case when t1.hour_num= '12' then cal_num else 0 end) "12"
+            , sum(case when t1.hour_num= '13' then cal_num else 0 end) "13"
+            , sum(case when t1.hour_num= '14' then cal_num else 0 end) "14"
+            , sum(case when t1.hour_num= '15' then cal_num else 0 end) "15"
+            , sum(case when t1.hour_num= '16' then cal_num else 0 end) "16"
+            , sum(case when t1.hour_num= '17' then cal_num else 0 end) "17"
+            , sum(case when t1.hour_num= '18' then cal_num else 0 end) "18"
+            , sum(case when t1.hour_num= '19' then cal_num else 0 end) "19"
+            , sum(case when t1.hour_num= '20' then cal_num else 0 end) "20"
+            , sum(case when t1.hour_num= '21' then cal_num else 0 end) "21"
+            , sum(case when t1.hour_num= '22' then cal_num else 0 end) "22"
+            , sum(case when t1.hour_num= '23' then cal_num else 0 end) "23"
+            , sum(case when t1.hour_num= '00' then cal_num else 0 end) "00"
+            , sum(case when t1.hour_num= '01' then cal_num else 0 end) "01"
+            , sum(case when t1.hour_num= '02' then cal_num else 0 end) "02"
+            , sum(case when t1.hour_num= '03' then cal_num else 0 end) "03"
+            , sum(case when t1.hour_num= '04' then cal_num else 0 end) "04"
+            , sum(case when t1.hour_num= '05' then cal_num else 0 end) "05"
+            , sum(case when t1.hour_num= '06' then cal_num else 0 end) "06"
+            , sum(case when t1.hour_num= '07' then cal_num else 0 end) "07"
+            from (
+                select t1.hour_num, count(*) cal_num
+                from (
+                    select distinct t1.equip_id, to_char(t1.begin_time, 'hh24') hour_num
+                    from cpp_curing_production t1
+        ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[t1.begin_time >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[t1.begin_time < #where.EndTime#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+                    order by to_char(t1.begin_time, 'hh24')
+                ) t1
+                group by t1.hour_num
+            ) t1
+      ]]>
+      <![CDATA[
+
+            union
+
+      ]]>
+      <![CDATA[
+            -- 时产数
+            select -1 seq_index, cast('时产' as nvarchar2(50)) show_name
+            , sum(case when t1.hour_num= '08' then cal_num else 0 end) "08"
+            , sum(case when t1.hour_num= '09' then cal_num else 0 end) "09"
+            , sum(case when t1.hour_num= '10' then cal_num else 0 end) "10"
+            , sum(case when t1.hour_num= '11' then cal_num else 0 end) "11"
+            , sum(case when t1.hour_num= '12' then cal_num else 0 end) "12"
+            , sum(case when t1.hour_num= '13' then cal_num else 0 end) "13"
+            , sum(case when t1.hour_num= '14' then cal_num else 0 end) "14"
+            , sum(case when t1.hour_num= '15' then cal_num else 0 end) "15"
+            , sum(case when t1.hour_num= '16' then cal_num else 0 end) "16"
+            , sum(case when t1.hour_num= '17' then cal_num else 0 end) "17"
+            , sum(case when t1.hour_num= '18' then cal_num else 0 end) "18"
+            , sum(case when t1.hour_num= '19' then cal_num else 0 end) "19"
+            , sum(case when t1.hour_num= '20' then cal_num else 0 end) "20"
+            , sum(case when t1.hour_num= '21' then cal_num else 0 end) "21"
+            , sum(case when t1.hour_num= '22' then cal_num else 0 end) "22"
+            , sum(case when t1.hour_num= '23' then cal_num else 0 end) "23"
+            , sum(case when t1.hour_num= '00' then cal_num else 0 end) "00"
+            , sum(case when t1.hour_num= '01' then cal_num else 0 end) "01"
+            , sum(case when t1.hour_num= '02' then cal_num else 0 end) "02"
+            , sum(case when t1.hour_num= '03' then cal_num else 0 end) "03"
+            , sum(case when t1.hour_num= '04' then cal_num else 0 end) "04"
+            , sum(case when t1.hour_num= '05' then cal_num else 0 end) "05"
+            , sum(case when t1.hour_num= '06' then cal_num else 0 end) "06"
+            , sum(case when t1.hour_num= '07' then cal_num else 0 end) "07"
+            from (
+                select t1.hour_num, count(*) cal_num
+                from (
+                    select t1.tyre_no, to_char(t1.begin_time, 'hh24') hour_num
+                    from cpp_curing_production t1
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[t1.begin_time >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[t1.begin_time < #where.EndTime#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+                    order by to_char(t1.begin_time, 'hh24')
+                ) t1
+                group by t1.hour_num
+            ) t1
+      ]]>
+      <![CDATA[
+            <!--union
+
+            -- 停机数 
+            select t1.stop_reason_id seq_index, cast(t1.stop_reason_name as nvarchar2(50)) show_name
+            , sum(case when t1.hour_num= '08' then cal_num else 0 end) "08"
+            , sum(case when t1.hour_num= '09' then cal_num else 0 end) "09"
+            , sum(case when t1.hour_num= '10' then cal_num else 0 end) "10"
+            , sum(case when t1.hour_num= '11' then cal_num else 0 end) "11"
+            , sum(case when t1.hour_num= '12' then cal_num else 0 end) "12"
+            , sum(case when t1.hour_num= '13' then cal_num else 0 end) "13"
+            , sum(case when t1.hour_num= '14' then cal_num else 0 end) "14"
+            , sum(case when t1.hour_num= '15' then cal_num else 0 end) "15"
+            , sum(case when t1.hour_num= '16' then cal_num else 0 end) "16"
+            , sum(case when t1.hour_num= '17' then cal_num else 0 end) "17"
+            , sum(case when t1.hour_num= '18' then cal_num else 0 end) "18"
+            , sum(case when t1.hour_num= '19' then cal_num else 0 end) "19"
+            , sum(case when t1.hour_num= '20' then cal_num else 0 end) "20"
+            , sum(case when t1.hour_num= '21' then cal_num else 0 end) "21"
+            , sum(case when t1.hour_num= '22' then cal_num else 0 end) "22"
+            , sum(case when t1.hour_num= '23' then cal_num else 0 end) "23"
+            , sum(case when t1.hour_num= '00' then cal_num else 0 end) "00"
+            , sum(case when t1.hour_num= '01' then cal_num else 0 end) "01"
+            , sum(case when t1.hour_num= '02' then cal_num else 0 end) "02"
+            , sum(case when t1.hour_num= '03' then cal_num else 0 end) "03"
+            , sum(case when t1.hour_num= '04' then cal_num else 0 end) "04"
+            , sum(case when t1.hour_num= '05' then cal_num else 0 end) "05"
+            , sum(case when t1.hour_num= '06' then cal_num else 0 end) "06"
+            , sum(case when t1.hour_num= '07' then cal_num else 0 end) "07"
+            from (
+                select t1.stop_reason_id, t1.stop_reason_name, t1.hour_num, count(*) cal_num
+                from (
+                    select distinct to_char(t1.begin_time, 'hh24') hour_num, t2.equip_id
+                    , nvl(t2.stop_reason_id, 999) stop_reason_id, nvl(t3.equip_stop_reason_name, '其他') stop_reason_name
+                    from (
+                        select #where.ProduceDate# + interval '8' hour begin_time, #where.ProduceDate# + interval '9' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '9' hour begin_time, #where.ProduceDate# + interval '10' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '10' hour begin_time, #where.ProduceDate# + interval '11' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '11' hour begin_time, #where.ProduceDate# + interval '12' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '12' hour begin_time, #where.ProduceDate# + interval '13' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '13' hour begin_time, #where.ProduceDate# + interval '14' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '14' hour begin_time, #where.ProduceDate# + interval '15' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '15' hour begin_time, #where.ProduceDate# + interval '16' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '16' hour begin_time, #where.ProduceDate# + interval '17' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '17' hour begin_time, #where.ProduceDate# + interval '18' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '18' hour begin_time, #where.ProduceDate# + interval '19' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '19' hour begin_time, #where.ProduceDate# + interval '20' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '20' hour begin_time, #where.ProduceDate# + interval '21' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '21' hour begin_time, #where.ProduceDate# + interval '22' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '22' hour begin_time, #where.ProduceDate# + interval '23' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '23' hour begin_time, #where.ProduceDate# + interval '24' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '1' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '1' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '2' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '2' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '3' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '3' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '4' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '4' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '5' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '5' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '6' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '6' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '7' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '7' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '8' hour end_time from dual
+                        union
+                        select #where.ProduceDate# + interval '24' hour + interval '8' hour begin_time, #where.ProduceDate# + interval '24' hour + interval '9' hour end_time from dual
+                    ) t1
+                    join see_equip_stop_record t2 on t2.stop_begin_time < t1.begin_time and t2.stop_end_time >= t1.begin_time
+                    or stop_begin_time <= t1.end_time and stop_end_time >  t1.end_time
+                    or stop_begin_time >= t1.begin_time and stop_end_time <= t1.end_time
+                    left join sbe_equip_stop_reason t3 on t2.stop_reason_id = t3.objid
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[t2.stop_begin_time >= #where.BeginTime - 3#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[t2.stop_end_time < #where.EndTime + 3#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+                ) t1
+                group by t1.stop_reason_id, t1.stop_reason_name, t1.hour_num
+            ) t1
+            group by t1.stop_reason_id, t1.stop_reason_name
+      ]]>
+      <![CDATA[
+        ) t1
+      ]]>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        order by t1.seq_index
+      </isNull>
+    </select>
+
+    <select id="Select+Update@ReportCppCuringProductionTimesStat" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM CPP_CURING_PRODUCTION ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+
+    <!--查询班次信息，ID值固定为GetComboBoxData@Select@ReportCppCuringProductionTimesStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportCppCuringProductionTimesStat@ShiftTime" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT 0 sskey, '全部' ssValue FROM DUAL
+      UNION
+      SELECT 1 sskey, '白班(8:00-16:00)' ssValue FROM DUAL
+      UNION
+      SELECT 2 sskey, '夜班(16:00-8:00)' ssValue FROM DUAL
+     ]]>
+    </select>
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CrtGreenTireParams"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CrtGreenTireParams" type="Mesnac.Curing.Entity.BasicEntity.CrtGreenTireParams, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CrtGreenTireParams" class="CrtGreenTireParams">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="MaterialId" column="MATERIAL_ID"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="GreenTireMaterialName" column="GREEN_TIRE_MATERIAL_NAME"/>
+    <result property="SummerCuringTime" column="SUMMER_CURING_TIME"/>
+    <result property="WinterCuringTime" column="WINTER_CURING_TIME"/>
+    <result property="SummerOrWinter" column="SUMMER_OR_WINTER"/>
+    <result property="BladderTypeId" column="BLADDER_TYPE_ID"/>
+    <result property="ClampingPress" column="CLAMPING_PRESS"/>
+    <result property="ShapingHeightId" column="SHAPING_HEIGHT_ID"/>
+    <result property="ShapingPressId" column="SHAPING_PRESS_ID"/>
+    <result property="ShapingTimeId" column="SHAPING_TIME_ID"/>
+    <result property="ShapingPositionId" column="SHAPING_POSITION_ID"/>
+    <result property="ChuckWidthId" column="CHUCK_WIDTH_ID"/>
+    <result property="Reserve1" column="RESERVE_1"/>
+    <result property="Reserve2" column="RESERVE_2"/>
+    <result property="Reserve3" column="RESERVE_3"/>
+    <result property="SizeMarkLine" column="SIZE_MARK_LINE"/>
+    <result property="EnvironmentalFlag" column="ENVIRONMENTAL_FLAG"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="AuditFlag" column="AUDIT_FLAG"/>
+    <result property="UsedFlag" column="USED_FLAG"/>
+    <result property="ModifyTime" column="MODIFY_TIME"/>
+    <result property="ModifyUserId" column="MODIFY_USER_ID"/>
+    <result property="AuditTime" column="AUDIT_TIME"/>
+    <result property="AuditUserId" column="AUDIT_USER_ID"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CrtGreenTireParams" class="CrtGreenTireParams">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="MaterialId" column="MaterialId"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="GreenTireMaterialName" column="GreenTireMaterialName"/>
+    <parameter property="SummerCuringTime" column="SummerCuringTime"/>
+    <parameter property="WinterCuringTime" column="WinterCuringTime"/>
+    <parameter property="SummerOrWinter" column="SummerOrWinter"/>
+    <parameter property="BladderTypeId" column="BladderTypeId"/>
+    <parameter property="ClampingPress" column="ClampingPress"/>
+    <parameter property="ShapingHeightId" column="ShapingHeightId"/>
+    <parameter property="ShapingPressId" column="ShapingPressId"/>
+    <parameter property="ShapingTimeId" column="ShapingTimeId"/>
+    <parameter property="ShapingPositionId" column="ShapingPositionId"/>
+    <parameter property="ChuckWidthId" column="ChuckWidthId"/>
+    <parameter property="Reserve1" column="Reserve1"/>
+    <parameter property="Reserve2" column="Reserve2"/>
+    <parameter property="Reserve3" column="Reserve3"/>
+    <parameter property="SizeMarkLine" column="SizeMarkLine"/>
+    <parameter property="EnvironmentalFlag" column="EnvironmentalFlag"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="AuditFlag" column="AuditFlag"/>
+    <parameter property="UsedFlag" column="UsedFlag"/>
+    <parameter property="ModifyTime" column="ModifyTime"/>
+    <parameter property="ModifyUserId" column="ModifyUserId"/>
+    <parameter property="AuditTime" column="AuditTime"/>
+    <parameter property="AuditUserId" column="AuditUserId"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_GREEN_TIRE_PARAMS ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTireMaterialName" prepend="AND">
+          <![CDATA[GREEN_TIRE_MATERIAL_NAME = #where.GreenTireMaterialName#]]>
+        </isNotNull>
+        <isNotNull property="where.SummerCuringTime" prepend="AND">
+          <![CDATA[SUMMER_CURING_TIME = #where.SummerCuringTime#]]>
+        </isNotNull>
+        <isNotNull property="where.WinterCuringTime" prepend="AND">
+          <![CDATA[WINTER_CURING_TIME = #where.WinterCuringTime#]]>
+        </isNotNull>
+        <isNotNull property="where.SummerOrWinter" prepend="AND">
+          <![CDATA[SUMMER_OR_WINTER = #where.SummerOrWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderTypeId" prepend="AND">
+          <![CDATA[BLADDER_TYPE_ID = #where.BladderTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.ClampingPress" prepend="AND">
+          <![CDATA[CLAMPING_PRESS = #where.ClampingPress#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingHeightId" prepend="AND">
+          <![CDATA[SHAPING_HEIGHT_ID = #where.ShapingHeightId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingPressId" prepend="AND">
+          <![CDATA[SHAPING_PRESS_ID = #where.ShapingPressId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingTimeId" prepend="AND">
+          <![CDATA[SHAPING_TIME_ID = #where.ShapingTimeId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingPositionId" prepend="AND">
+          <![CDATA[SHAPING_POSITION_ID = #where.ShapingPositionId#]]>
+        </isNotNull>
+        <isNotNull property="where.ChuckWidthId" prepend="AND">
+          <![CDATA[CHUCK_WIDTH_ID = #where.ChuckWidthId#]]>
+        </isNotNull>
+        <isNotNull property="where.Reserve1" prepend="AND">
+          <![CDATA[RESERVE_1 = #where.Reserve1#]]>
+        </isNotNull>
+        <isNotNull property="where.Reserve2" prepend="AND">
+          <![CDATA[RESERVE_2 = #where.Reserve2#]]>
+        </isNotNull>
+        <isNotNull property="where.Reserve3" prepend="AND">
+          <![CDATA[RESERVE_3 = #where.Reserve3#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeMarkLine" prepend="AND">
+          <![CDATA[SIZE_MARK_LINE = #where.SizeMarkLine#]]>
+        </isNotNull>
+        <isNotNull property="where.EnvironmentalFlag" prepend="AND">
+          <![CDATA[ENVIRONMENTAL_FLAG = #where.EnvironmentalFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditFlag" prepend="AND">
+          <![CDATA[AUDIT_FLAG = #where.AuditFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ModifyTime" prepend="AND">
+          <![CDATA[MODIFY_TIME = #where.ModifyTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ModifyUserId" prepend="AND">
+          <![CDATA[MODIFY_USER_ID = #where.ModifyUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditTime" prepend="AND">
+          <![CDATA[AUDIT_TIME = #where.AuditTime#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditUserId" prepend="AND">
+          <![CDATA[AUDIT_USER_ID = #where.AuditUserId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CRT_GREEN_TIRE_PARAMS]]>
+       <dynamic prepend="(">
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">MATERIAL_ID</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="GreenTireMaterialName" prepend=",">GREEN_TIRE_MATERIAL_NAME</isNotNull>
+        <isNotNull property="SummerCuringTime" prepend=",">SUMMER_CURING_TIME</isNotNull>
+        <isNotNull property="WinterCuringTime" prepend=",">WINTER_CURING_TIME</isNotNull>
+        <isNotNull property="SummerOrWinter" prepend=",">SUMMER_OR_WINTER</isNotNull>
+        <isNotNull property="BladderTypeId" prepend=",">BLADDER_TYPE_ID</isNotNull>
+        <isNotNull property="ClampingPress" prepend=",">CLAMPING_PRESS</isNotNull>
+        <isNotNull property="ShapingHeightId" prepend=",">SHAPING_HEIGHT_ID</isNotNull>
+        <isNotNull property="ShapingPressId" prepend=",">SHAPING_PRESS_ID</isNotNull>
+        <isNotNull property="ShapingTimeId" prepend=",">SHAPING_TIME_ID</isNotNull>
+        <isNotNull property="ShapingPositionId" prepend=",">SHAPING_POSITION_ID</isNotNull>
+        <isNotNull property="ChuckWidthId" prepend=",">CHUCK_WIDTH_ID</isNotNull>
+        <isNotNull property="Reserve1" prepend=",">RESERVE_1</isNotNull>
+        <isNotNull property="Reserve2" prepend=",">RESERVE_2</isNotNull>
+        <isNotNull property="Reserve3" prepend=",">RESERVE_3</isNotNull>
+        <isNotNull property="SizeMarkLine" prepend=",">SIZE_MARK_LINE</isNotNull>
+        <isNotNull property="EnvironmentalFlag" prepend=",">ENVIRONMENTAL_FLAG</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="AuditFlag" prepend=",">AUDIT_FLAG</isNotNull>
+        <isNotNull property="UsedFlag" prepend=",">USED_FLAG</isNotNull>
+        <isNotNull property="ModifyTime" prepend=",">MODIFY_TIME</isNotNull>
+        <isNotNull property="ModifyUserId" prepend=",">MODIFY_USER_ID</isNotNull>
+        <isNotNull property="AuditTime" prepend=",">AUDIT_TIME</isNotNull>
+        <isNotNull property="AuditUserId" prepend=",">AUDIT_USER_ID</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">#MaterialId#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="GreenTireMaterialName" prepend=",">#GreenTireMaterialName#</isNotNull>
+        <isNotNull property="SummerCuringTime" prepend=",">#SummerCuringTime#</isNotNull>
+        <isNotNull property="WinterCuringTime" prepend=",">#WinterCuringTime#</isNotNull>
+        <isNotNull property="SummerOrWinter" prepend=",">#SummerOrWinter#</isNotNull>
+        <isNotNull property="BladderTypeId" prepend=",">#BladderTypeId#</isNotNull>
+        <isNotNull property="ClampingPress" prepend=",">#ClampingPress#</isNotNull>
+        <isNotNull property="ShapingHeightId" prepend=",">#ShapingHeightId#</isNotNull>
+        <isNotNull property="ShapingPressId" prepend=",">#ShapingPressId#</isNotNull>
+        <isNotNull property="ShapingTimeId" prepend=",">#ShapingTimeId#</isNotNull>
+        <isNotNull property="ShapingPositionId" prepend=",">#ShapingPositionId#</isNotNull>
+        <isNotNull property="ChuckWidthId" prepend=",">#ChuckWidthId#</isNotNull>
+        <isNotNull property="Reserve1" prepend=",">#Reserve1#</isNotNull>
+        <isNotNull property="Reserve2" prepend=",">#Reserve2#</isNotNull>
+        <isNotNull property="Reserve3" prepend=",">#Reserve3#</isNotNull>
+        <isNotNull property="SizeMarkLine" prepend=",">#SizeMarkLine#</isNotNull>
+        <isNotNull property="EnvironmentalFlag" prepend=",">#EnvironmentalFlag#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="AuditFlag" prepend=",">#AuditFlag#</isNotNull>
+        <isNotNull property="UsedFlag" prepend=",">#UsedFlag#</isNotNull>
+        <isNotNull property="ModifyTime" prepend=",">#ModifyTime#</isNotNull>
+        <isNotNull property="ModifyUserId" prepend=",">#ModifyUserId#</isNotNull>
+        <isNotNull property="AuditTime" prepend=",">#AuditTime#</isNotNull>
+        <isNotNull property="AuditUserId" prepend=",">#AuditUserId#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CRT_GREEN_TIRE_PARAMS
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.MaterialId"  prepend=",">
+          MATERIAL_ID = #update.MaterialId#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.GreenTireMaterialName"  prepend=",">
+          GREEN_TIRE_MATERIAL_NAME = #update.GreenTireMaterialName#
+        </isNotNull>
+        <isNotNull  property="update.SummerCuringTime"  prepend=",">
+          SUMMER_CURING_TIME = #update.SummerCuringTime#
+        </isNotNull>
+        <isNotNull  property="update.WinterCuringTime"  prepend=",">
+          WINTER_CURING_TIME = #update.WinterCuringTime#
+        </isNotNull>
+        <isNotNull  property="update.SummerOrWinter"  prepend=",">
+          SUMMER_OR_WINTER = #update.SummerOrWinter#
+        </isNotNull>
+        <isNotNull  property="update.BladderTypeId"  prepend=",">
+          BLADDER_TYPE_ID = #update.BladderTypeId#
+        </isNotNull>
+        <isNotNull  property="update.ClampingPress"  prepend=",">
+          CLAMPING_PRESS = #update.ClampingPress#
+        </isNotNull>
+        <isNotNull  property="update.ShapingHeightId"  prepend=",">
+          SHAPING_HEIGHT_ID = #update.ShapingHeightId#
+        </isNotNull>
+        <isNotNull  property="update.ShapingPressId"  prepend=",">
+          SHAPING_PRESS_ID = #update.ShapingPressId#
+        </isNotNull>
+        <isNotNull  property="update.ShapingTimeId"  prepend=",">
+          SHAPING_TIME_ID = #update.ShapingTimeId#
+        </isNotNull>
+        <isNotNull  property="update.ShapingPositionId"  prepend=",">
+          SHAPING_POSITION_ID = #update.ShapingPositionId#
+        </isNotNull>
+        <isNotNull  property="update.ChuckWidthId"  prepend=",">
+          CHUCK_WIDTH_ID = #update.ChuckWidthId#
+        </isNotNull>
+        <isNotNull  property="update.Reserve1"  prepend=",">
+          RESERVE_1 = #update.Reserve1#
+        </isNotNull>
+        <isNotNull  property="update.Reserve2"  prepend=",">
+          RESERVE_2 = #update.Reserve2#
+        </isNotNull>
+        <isNotNull  property="update.Reserve3"  prepend=",">
+          RESERVE_3 = #update.Reserve3#
+        </isNotNull>
+        <isNotNull  property="update.SizeMarkLine"  prepend=",">
+          SIZE_MARK_LINE = #update.SizeMarkLine#
+        </isNotNull>
+        <isNotNull  property="update.EnvironmentalFlag"  prepend=",">
+          ENVIRONMENTAL_FLAG = #update.EnvironmentalFlag#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.AuditFlag"  prepend=",">
+          AUDIT_FLAG = #update.AuditFlag#
+        </isNotNull>
+        <isNotNull  property="update.UsedFlag"  prepend=",">
+          USED_FLAG = #update.UsedFlag#
+        </isNotNull>
+        <isNotNull  property="update.ModifyTime"  prepend=",">
+          MODIFY_TIME = #update.ModifyTime#
+        </isNotNull>
+        <isNotNull  property="update.ModifyUserId"  prepend=",">
+          MODIFY_USER_ID = #update.ModifyUserId#
+        </isNotNull>
+        <isNotNull  property="update.AuditTime"  prepend=",">
+          AUDIT_TIME = #update.AuditTime#
+        </isNotNull>
+        <isNotNull  property="update.AuditUserId"  prepend=",">
+          AUDIT_USER_ID = #update.AuditUserId#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CRT_GREEN_TIRE_PARAMS
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CrtGreenTireParams">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CrtGreenTireParams">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CRT_GREEN_TIRE_PARAMS
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CRT_GREEN_TIRE_PARAMS
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CrtGreenTireParams" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CRT_GREEN_TIRE_PARAMS
+    </statement>
+  </statements>
+</sqlMap>

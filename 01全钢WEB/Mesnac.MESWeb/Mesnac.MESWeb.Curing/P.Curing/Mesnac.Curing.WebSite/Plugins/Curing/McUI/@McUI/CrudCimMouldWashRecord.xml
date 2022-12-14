@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="BeginTimeS" Value="开始时间"></Caption>
+    <Caption Name="EndTimeS" Value="结束时间"></Caption>
+    <Caption Name="BEGINTIME" Value="开始洗模时间"></Caption>
+    <Caption Name="ENDTIME" Value="结束洗模时间"></Caption>
+    <Caption Name="EQUIP_ID" Value="机台名称"></Caption>
+    <Caption Name="EquipName" Value="机台名称"></Caption>
+    <Caption Name="EQUIP_NAME" Value="机台名称"></Caption>
+    <Caption Name="EquipPosition" Value="左右模"></Caption>
+    <Caption Name="SHOW_NAME" Value="左右模"></Caption>
+    <Caption Name="USER_NAME" Value="操作人"></Caption>
+    <Caption Name="CHECK_USER" Value="验证人"></Caption>
+    <Caption Name="CHECK_TIME" Value="验证时间"></Caption>
+    <Caption Name="RESULT" Value="验证结果"></Caption>
+  </Captions>
+  <WebPage Title="硫化洗模信息">
+  </WebPage>
+  <Crud TableName="CIM_MOULD_WASH_RECORD">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <!--<DeleteFlag Value="DELETE_FLAG"></DeleteFlag>-->
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_CIM_MOULD_WASH_RECORD"></SeqField>
+    </SeqFields>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="BeginTimeS" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EndTimeS" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EquipName" Nullable="true"></ParamField>
+        <ParamField FieldName="EquipPosition" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_ID" Type="SearchBox" Nullable="true" IsShow="false"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid>
+      <GridColumns>
+        <GridColumn ColumnName="BEGINTIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="ENDTIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="EQUIP_NAME"></GridColumn>
+        <GridColumn ColumnName="SHOW_NAME"></GridColumn>
+        <GridColumn ColumnName="USER_NAME"></GridColumn>
+        <GridColumn ColumnName="CHECK_USER"></GridColumn>
+        <GridColumn ColumnName="CHECK_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="RESULT"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

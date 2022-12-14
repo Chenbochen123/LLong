@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Equip.Mapper.BasicMapper.SbeEquipRepairPlan"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SbeEquipRepairPlan" type="Mesnac.Equip.Entity.BasicEntity.SbeEquipRepairPlan, Mesnac.Equip.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SbeEquipRepairPlan" class="SbeEquipRepairPlan">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="PlanRepaircontent" column="PLAN_REPAIRCONTENT"/>
+    <result property="RepairDate" column="REPAIR_DATE"/>
+    <result property="RepairTime" column="REPAIR_TIME"/>
+    <result property="ResponseUser" column="RESPONSE_USER"/>
+    <result property="NeedStoptime" column="NEED_STOPTIME"/>
+    <result property="PlanStopdate" column="PLAN_STOPDATE"/>
+    <result property="FinishCondition" column="FINISH_CONDITION"/>
+    <result property="FinishDate" column="FINISH_DATE"/>
+    <result property="FinishUser" column="FINISH_USER"/>
+    <result property="Verification" column="VERIFICATION"/>
+    <result property="ConfirmUser" column="CONFIRM_USER"/>
+    <result property="ConfirmDate" column="CONFIRM_DATE"/>
+    <result property="PlanTypeId" column="PLAN_TYPE_ID"/>
+    <result property="PlanStopTime" column="PLAN_STOPTIME"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="BillNo" column="BILL_NO"/>
+    <result property="BillDate" column="BILL_DATE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SbeEquipRepairPlan" class="SbeEquipRepairPlan">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="PlanRepaircontent" column="PlanRepaircontent"/>
+    <parameter property="RepairDate" column="RepairDate"/>
+    <parameter property="RepairTime" column="RepairTime"/>
+    <parameter property="ResponseUser" column="ResponseUser"/>
+    <parameter property="NeedStoptime" column="NeedStoptime"/>
+    <parameter property="PlanStopdate" column="PlanStopdate"/>
+    <parameter property="FinishCondition" column="FinishCondition"/>
+    <parameter property="FinishDate" column="FinishDate"/>
+    <parameter property="FinishUser" column="FinishUser"/>
+    <parameter property="Verification" column="Verification"/>
+    <parameter property="ConfirmUser" column="ConfirmUser"/>
+    <parameter property="ConfirmDate" column="ConfirmDate"/>
+    <parameter property="PlanTypeId" column="PlanTypeId"/>
+    <parameter property="PlanStopTime" column="PlanStopTime"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="BillNo" column="BillNo"/>
+    <parameter property="BillDate" column="BillDate"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_EQUIP_REPAIR_PLAN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanRepaircontent" prepend="AND">
+          <![CDATA[PLAN_REPAIRCONTENT = #where.PlanRepaircontent#]]>
+        </isNotNull>
+        <isNotNull property="where.RepairDate" prepend="AND">
+          <![CDATA[REPAIR_DATE = #where.RepairDate#]]>
+        </isNotNull>
+        <isNotNull property="where.RepairTime" prepend="AND">
+          <![CDATA[REPAIR_TIME = #where.RepairTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ResponseUser" prepend="AND">
+          <![CDATA[RESPONSE_USER = #where.ResponseUser#]]>
+        </isNotNull>
+        <isNotNull property="where.NeedStoptime" prepend="AND">
+          <![CDATA[NEED_STOPTIME = #where.NeedStoptime#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanStopdate" prepend="AND">
+          <![CDATA[PLAN_STOPDATE = #where.PlanStopdate#]]>
+        </isNotNull>
+        <isNotNull property="where.FinishCondition" prepend="AND">
+          <![CDATA[FINISH_CONDITION = #where.FinishCondition#]]>
+        </isNotNull>
+        <isNotNull property="where.FinishDate" prepend="AND">
+          <![CDATA[FINISH_DATE = #where.FinishDate#]]>
+        </isNotNull>
+        <isNotNull property="where.FinishUser" prepend="AND">
+          <![CDATA[FINISH_USER = #where.FinishUser#]]>
+        </isNotNull>
+        <isNotNull property="where.Verification" prepend="AND">
+          <![CDATA[VERIFICATION = #where.Verification#]]>
+        </isNotNull>
+        <isNotNull property="where.ConfirmUser" prepend="AND">
+          <![CDATA[CONFIRM_USER = #where.ConfirmUser#]]>
+        </isNotNull>
+        <isNotNull property="where.ConfirmDate" prepend="AND">
+          <![CDATA[CONFIRM_DATE = #where.ConfirmDate#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanTypeId" prepend="AND">
+          <![CDATA[PLAN_TYPE_ID = #where.PlanTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanStopTime" prepend="AND">
+          <![CDATA[PLAN_STOPTIME = #where.PlanStopTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BillNo" prepend="AND">
+          <![CDATA[BILL_NO = #where.BillNo#]]>
+        </isNotNull>
+        <isNotNull property="where.BillDate" prepend="AND">
+          <![CDATA[BILL_DATE = #where.BillDate#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SBE_EQUIP_REPAIR_PLAN]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="PlanRepaircontent" prepend=",">PLAN_REPAIRCONTENT</isNotNull>
+        <isNotNull property="RepairDate" prepend=",">REPAIR_DATE</isNotNull>
+        <isNotNull property="RepairTime" prepend=",">REPAIR_TIME</isNotNull>
+        <isNotNull property="ResponseUser" prepend=",">RESPONSE_USER</isNotNull>
+        <isNotNull property="NeedStoptime" prepend=",">NEED_STOPTIME</isNotNull>
+        <isNotNull property="PlanStopdate" prepend=",">PLAN_STOPDATE</isNotNull>
+        <isNotNull property="FinishCondition" prepend=",">FINISH_CONDITION</isNotNull>
+        <isNotNull property="FinishDate" prepend=",">FINISH_DATE</isNotNull>
+        <isNotNull property="FinishUser" prepend=",">FINISH_USER</isNotNull>
+        <isNotNull property="Verification" prepend=",">VERIFICATION</isNotNull>
+        <isNotNull property="ConfirmUser" prepend=",">CONFIRM_USER</isNotNull>
+        <isNotNull property="ConfirmDate" prepend=",">CONFIRM_DATE</isNotNull>
+        <isNotNull property="PlanTypeId" prepend=",">PLAN_TYPE_ID</isNotNull>
+        <isNotNull property="PlanStopTime" prepend=",">PLAN_STOPTIME</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="BillNo" prepend=",">BILL_NO</isNotNull>
+        <isNotNull property="BillDate" prepend=",">BILL_DATE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SBE_EQUIP_REPAIR_PLAN.NEXTVAL</isNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="PlanRepaircontent" prepend=",">#PlanRepaircontent#</isNotNull>
+        <isNotNull property="RepairDate" prepend=",">#RepairDate#</isNotNull>
+        <isNotNull property="RepairTime" prepend=",">#RepairTime#</isNotNull>
+        <isNotNull property="ResponseUser" prepend=",">#ResponseUser#</isNotNull>
+        <isNotNull property="NeedStoptime" prepend=",">#NeedStoptime#</isNotNull>
+        <isNotNull property="PlanStopdate" prepend=",">#PlanStopdate#</isNotNull>
+        <isNotNull property="FinishCondition" prepend=",">#FinishCondition#</isNotNull>
+        <isNotNull property="FinishDate" prepend=",">#FinishDate#</isNotNull>
+        <isNotNull property="FinishUser" prepend=",">#FinishUser#</isNotNull>
+        <isNotNull property="Verification" prepend=",">#Verification#</isNotNull>
+        <isNotNull property="ConfirmUser" prepend=",">#ConfirmUser#</isNotNull>
+        <isNotNull property="ConfirmDate" prepend=",">#ConfirmDate#</isNotNull>
+        <isNotNull property="PlanTypeId" prepend=",">#PlanTypeId#</isNotNull>
+        <isNotNull property="PlanStopTime" prepend=",">#PlanStopTime#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="BillNo" prepend=",">#BillNo#</isNotNull>
+        <isNotNull property="BillDate" prepend=",">#BillDate#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SBE_EQUIP_REPAIR_PLAN
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.PlanRepaircontent"  prepend=",">
+          PLAN_REPAIRCONTENT = #update.PlanRepaircontent#
+        </isNotNull>
+        <isNotNull  property="update.RepairDate"  prepend=",">
+          REPAIR_DATE = #update.RepairDate#
+        </isNotNull>
+        <isNotNull  property="update.RepairTime"  prepend=",">
+          REPAIR_TIME = #update.RepairTime#
+        </isNotNull>
+        <isNotNull  property="update.ResponseUser"  prepend=",">
+          RESPONSE_USER = #update.ResponseUser#
+        </isNotNull>
+        <isNotNull  property="update.NeedStoptime"  prepend=",">
+          NEED_STOPTIME = #update.NeedStoptime#
+        </isNotNull>
+        <isNotNull  property="update.PlanStopdate"  prepend=",">
+          PLAN_STOPDATE = #update.PlanStopdate#
+        </isNotNull>
+        <isNotNull  property="update.FinishCondition"  prepend=",">
+          FINISH_CONDITION = #update.FinishCondition#
+        </isNotNull>
+        <isNotNull  property="update.FinishDate"  prepend=",">
+          FINISH_DATE = #update.FinishDate#
+        </isNotNull>
+        <isNotNull  property="update.FinishUser"  prepend=",">
+          FINISH_USER = #update.FinishUser#
+        </isNotNull>
+        <isNotNull  property="update.Verification"  prepend=",">
+          VERIFICATION = #update.Verification#
+        </isNotNull>
+        <isNotNull  property="update.ConfirmUser"  prepend=",">
+          CONFIRM_USER = #update.ConfirmUser#
+        </isNotNull>
+        <isNotNull  property="update.ConfirmDate"  prepend=",">
+          CONFIRM_DATE = #update.ConfirmDate#
+        </isNotNull>
+        <isNotNull  property="update.PlanTypeId"  prepend=",">
+          PLAN_TYPE_ID = #update.PlanTypeId#
+        </isNotNull>
+        <isNotNull  property="update.PlanStopTime"  prepend=",">
+          PLAN_STOPTIME = #update.PlanStopTime#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.BillNo"  prepend=",">
+          BILL_NO = #update.BillNo#
+        </isNotNull>
+        <isNotNull  property="update.BillDate"  prepend=",">
+          BILL_DATE = #update.BillDate#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SBE_EQUIP_REPAIR_PLAN
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SbeEquipRepairPlan">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SbeEquipRepairPlan">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SBE_EQUIP_REPAIR_PLAN
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SBE_EQUIP_REPAIR_PLAN
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SbeEquipRepairPlan" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SBE_EQUIP_REPAIR_PLAN
+    </statement>
+  </statements>
+</sqlMap>

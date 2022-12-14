@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CppCuringEquipState"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CPP_CURING_EQUIP_STATE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.EquipPosition" prepend="AND">
+          <![CDATA[EQUIP_POSITION = #where.EquipPosition#]]>
+        </isNotNull>
+        <isNotNull property="where.MouldId" prepend="AND">
+          <![CDATA[MOULD_ID = #where.MouldId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.BomId" prepend="AND">
+          <![CDATA[BOM_ID = #where.BomId#]]>
+        </isNotNull>
+        <isNotNull property="where.TechId" prepend="AND">
+          <![CDATA[TECH_ID = #where.TechId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <!--查询-->
+     <select id="GetMaterialName" parameterClass="map" resultClass="row">
+       <![CDATA[
+        select t3.material_name from cpp_curing_equip_state t1
+          left join sbm_bom t2 on t1.Bom_id=t2.objid
+          left join sbm_material t3 on t2.material_id=t3.objid 
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t1.equip_id = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipPosition" prepend="AND">
+           <![CDATA[t1.equip_position = #where.EquipPosition#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <!--查询-->
+     <select id="GetEquipStateInfo" parameterClass="map" resultClass="row">
+       <![CDATA[
+      select te.equip_code,t1.equip_position,t1.Bom_id,t2.BOM_VERSION,t3.Material_Name as green_material,t4.Material_Name as tyre_material,t5.pdm_version
+        from cpp_curing_equip_state t1
+        inner join sbe_equip te on t1.equip_id=te.objid
+        left join v_sbm_bom  t2 on t1.Bom_id=t2.objid
+        left join v_bbm_material t3 on t2.material_id=t3.objid 
+        left join v_cbm_material t4 on t2.MATERIAL_PARENT_ID=t4.objid 
+        left join cpt_curing_tech_data t5 on t1.tech_id=t5.objid
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t1.equip_id = #where.EquipId#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+  </statements>
+</sqlMap>

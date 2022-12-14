@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Equip.Mapper.BasicMapper.SbeEquip"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SbeEquip" type="Mesnac.Equip.Entity.BasicEntity.SbeEquip, Mesnac.Equip.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SbeEquip" class="SbeEquip">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="MajorTypeId" column="MAJOR_TYPE_ID"/>
+    <result property="MinorTypeId" column="MINOR_TYPE_ID"/>
+    <result property="EquipName" column="EQUIP_NAME"/>
+    <result property="EquipCode" column="EQUIP_CODE"/>
+    <result property="UsedFlag" column="USED_FLAG"/>
+    <result property="ProduceFactory" column="PRODUCE_FACTORY"/>
+    <result property="UsedDate" column="USED_DATE"/>
+    <result property="IpAddress" column="IP_ADDRESS"/>
+    <result property="EquipUuid" column="EQUIP_UUID"/>
+    <result property="RegisterCode" column="REGISTER_CODE"/>
+    <result property="Remark" column="REMARK"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SbeEquip" class="SbeEquip">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="MajorTypeId" column="MajorTypeId"/>
+    <parameter property="MinorTypeId" column="MinorTypeId"/>
+    <parameter property="EquipName" column="EquipName"/>
+    <parameter property="EquipCode" column="EquipCode"/>
+    <parameter property="UsedFlag" column="UsedFlag"/>
+    <parameter property="ProduceFactory" column="ProduceFactory"/>
+    <parameter property="UsedDate" column="UsedDate"/>
+    <parameter property="IpAddress" column="IpAddress"/>
+    <parameter property="EquipUuid" column="EquipUuid"/>
+    <parameter property="RegisterCode" column="RegisterCode"/>
+    <parameter property="Remark" column="Remark"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_EQUIP ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.MajorTypeId" prepend="AND">
+          <![CDATA[MAJOR_TYPE_ID = #where.MajorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.MinorTypeId" prepend="AND">
+          <![CDATA[MINOR_TYPE_ID = #where.MinorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[EQUIP_NAME = #where.EquipName#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipCode" prepend="AND">
+          <![CDATA[EQUIP_CODE = #where.EquipCode#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ProduceFactory" prepend="AND">
+          <![CDATA[PRODUCE_FACTORY = #where.ProduceFactory#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedDate" prepend="AND">
+          <![CDATA[USED_DATE = #where.UsedDate#]]>
+        </isNotNull>
+        <isNotNull property="where.IpAddress" prepend="AND">
+          <![CDATA[IP_ADDRESS = #where.IpAddress#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipUuid" prepend="AND">
+          <![CDATA[EQUIP_UUID = #where.EquipUuid#]]>
+        </isNotNull>
+        <isNotNull property="where.RegisterCode" prepend="AND">
+          <![CDATA[REGISTER_CODE = #where.RegisterCode#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SBE_EQUIP]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="MajorTypeId" prepend=",">MAJOR_TYPE_ID</isNotNull>
+        <isNotNull property="MinorTypeId" prepend=",">MINOR_TYPE_ID</isNotNull>
+        <isNotNull property="EquipName" prepend=",">EQUIP_NAME</isNotNull>
+        <isNotNull property="EquipCode" prepend=",">EQUIP_CODE</isNotNull>
+        <isNotNull property="UsedFlag" prepend=",">USED_FLAG</isNotNull>
+        <isNotNull property="ProduceFactory" prepend=",">PRODUCE_FACTORY</isNotNull>
+        <isNotNull property="UsedDate" prepend=",">USED_DATE</isNotNull>
+        <isNotNull property="IpAddress" prepend=",">IP_ADDRESS</isNotNull>
+        <isNotNull property="EquipUuid" prepend=",">EQUIP_UUID</isNotNull>
+        <isNotNull property="RegisterCode" prepend=",">REGISTER_CODE</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SBE_EQUIP.NEXTVAL</isNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="MajorTypeId" prepend=",">#MajorTypeId#</isNotNull>
+        <isNotNull property="MinorTypeId" prepend=",">#MinorTypeId#</isNotNull>
+        <isNotNull property="EquipName" prepend=",">#EquipName#</isNotNull>
+        <isNotNull property="EquipCode" prepend=",">#EquipCode#</isNotNull>
+        <isNotNull property="UsedFlag" prepend=",">#UsedFlag#</isNotNull>
+        <isNotNull property="ProduceFactory" prepend=",">#ProduceFactory#</isNotNull>
+        <isNotNull property="UsedDate" prepend=",">#UsedDate#</isNotNull>
+        <isNotNull property="IpAddress" prepend=",">#IpAddress#</isNotNull>
+        <isNotNull property="EquipUuid" prepend=",">#EquipUuid#</isNotNull>
+        <isNotNull property="RegisterCode" prepend=",">#RegisterCode#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SBE_EQUIP
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.MajorTypeId"  prepend=",">
+          MAJOR_TYPE_ID = #update.MajorTypeId#
+        </isNotNull>
+        <isNotNull  property="update.MinorTypeId"  prepend=",">
+          MINOR_TYPE_ID = #update.MinorTypeId#
+        </isNotNull>
+        <isNotNull  property="update.EquipName"  prepend=",">
+          EQUIP_NAME = #update.EquipName#
+        </isNotNull>
+        <isNotNull  property="update.EquipCode"  prepend=",">
+          EQUIP_CODE = #update.EquipCode#
+        </isNotNull>
+        <isNotNull  property="update.UsedFlag"  prepend=",">
+          USED_FLAG = #update.UsedFlag#
+        </isNotNull>
+        <isNotNull  property="update.ProduceFactory"  prepend=",">
+          PRODUCE_FACTORY = #update.ProduceFactory#
+        </isNotNull>
+        <isNotNull  property="update.UsedDate"  prepend=",">
+          USED_DATE = #update.UsedDate#
+        </isNotNull>
+        <isNotNull  property="update.IpAddress"  prepend=",">
+          IP_ADDRESS = #update.IpAddress#
+        </isNotNull>
+        <isNotNull  property="update.EquipUuid"  prepend=",">
+          EQUIP_UUID = #update.EquipUuid#
+        </isNotNull>
+        <isNotNull  property="update.RegisterCode"  prepend=",">
+          REGISTER_CODE = #update.RegisterCode#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SBE_EQUIP
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SbeEquip">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SbeEquip">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SBE_EQUIP
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SBE_EQUIP
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SbeEquip" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SBE_EQUIP
+    </statement>
+  </statements>
+</sqlMap>

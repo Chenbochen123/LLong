@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.InterfaceBG.Mapper.BasicMapper.PlmDeviceMain"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="PlmDeviceMain" type="Mesnac.Interface.Entity.BasicEntity.PlmDeviceMain, Mesnac.Interface.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_PlmDeviceMain" class="PlmDeviceMain">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Equipmentcode" column="EQUIPMENTCODE"/>
+    <result property="Equipmentname" column="EQUIPMENTNAME"/>
+    <result property="Equipmenttypecode" column="EQUIPMENTTYPECODE"/>
+    <result property="Equipmenttypename" column="EQUIPMENTTYPENAME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="Recorddate" column="RECORDDATE"/>
+    <result property="Factory" column="FACTORY"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="Dummy5" column="DUMMY5"/>
+    <result property="BackopFlag" column="BACKOP_FLAG"/>
+    <result property="BackopTime" column="BACKOP_TIME"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_PlmDeviceMain" class="PlmDeviceMain">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Equipmentcode" column="Equipmentcode"/>
+    <parameter property="Equipmentname" column="Equipmentname"/>
+    <parameter property="Equipmenttypecode" column="Equipmenttypecode"/>
+    <parameter property="Equipmenttypename" column="Equipmenttypename"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="Recorddate" column="Recorddate"/>
+    <parameter property="Factory" column="Factory"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="Dummy5" column="Dummy5"/>
+    <parameter property="BackopFlag" column="BackopFlag"/>
+    <parameter property="BackopTime" column="BackopTime"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PLM_DEVICE_MAIN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipmentcode" prepend="AND">
+          <![CDATA[EQUIPMENTCODE = #where.Equipmentcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipmentname" prepend="AND">
+          <![CDATA[EQUIPMENTNAME = #where.Equipmentname#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipmenttypecode" prepend="AND">
+          <![CDATA[EQUIPMENTTYPECODE = #where.Equipmenttypecode#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipmenttypename" prepend="AND">
+          <![CDATA[EQUIPMENTTYPENAME = #where.Equipmenttypename#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Recorddate" prepend="AND">
+          <![CDATA[RECORDDATE = #where.Recorddate#]]>
+        </isNotNull>
+        <isNotNull property="where.Factory" prepend="AND">
+          <![CDATA[FACTORY = #where.Factory#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.BackopFlag" prepend="AND">
+          <![CDATA[BACKOP_FLAG = #where.BackopFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackopTime" prepend="AND">
+          <![CDATA[BACKOP_TIME = #where.BackopTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE ( = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO PLM_DEVICE_MAIN]]>
+       <dynamic prepend="(">
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="Equipmentcode" prepend=",">EQUIPMENTCODE</isNotNull>
+        <isNotNull property="Equipmentname" prepend=",">EQUIPMENTNAME</isNotNull>
+        <isNotNull property="Equipmenttypecode" prepend=",">EQUIPMENTTYPECODE</isNotNull>
+        <isNotNull property="Equipmenttypename" prepend=",">EQUIPMENTTYPENAME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="Recorddate" prepend=",">RECORDDATE</isNotNull>
+        <isNotNull property="Factory" prepend=",">FACTORY</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">DUMMY5</isNotNull>
+        <isNotNull property="BackopFlag" prepend=",">BACKOP_FLAG</isNotNull>
+        <isNotNull property="BackopTime" prepend=",">BACKOP_TIME</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="Equipmentcode" prepend=",">#Equipmentcode#</isNotNull>
+        <isNotNull property="Equipmentname" prepend=",">#Equipmentname#</isNotNull>
+        <isNotNull property="Equipmenttypecode" prepend=",">#Equipmenttypecode#</isNotNull>
+        <isNotNull property="Equipmenttypename" prepend=",">#Equipmenttypename#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="Recorddate" prepend=",">#Recorddate#</isNotNull>
+        <isNotNull property="Factory" prepend=",">#Factory#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">#Dummy5#</isNotNull>
+        <isNotNull property="BackopFlag" prepend=",">#BackopFlag#</isNotNull>
+        <isNotNull property="BackopTime" prepend=",">#BackopTime#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE PLM_DEVICE_MAIN
+       <dynamic prepend="SET">
+        <isNotNull  property="update.ObjId"  prepend=",">
+          OBJID = #update.ObjId#
+        </isNotNull>
+        <isNotNull  property="update.Equipmentcode"  prepend=",">
+          EQUIPMENTCODE = #update.Equipmentcode#
+        </isNotNull>
+        <isNotNull  property="update.Equipmentname"  prepend=",">
+          EQUIPMENTNAME = #update.Equipmentname#
+        </isNotNull>
+        <isNotNull  property="update.Equipmenttypecode"  prepend=",">
+          EQUIPMENTTYPECODE = #update.Equipmenttypecode#
+        </isNotNull>
+        <isNotNull  property="update.Equipmenttypename"  prepend=",">
+          EQUIPMENTTYPENAME = #update.Equipmenttypename#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.Recorddate"  prepend=",">
+          RECORDDATE = #update.Recorddate#
+        </isNotNull>
+        <isNotNull  property="update.Factory"  prepend=",">
+          FACTORY = #update.Factory#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.Dummy5"  prepend=",">
+          DUMMY5 = #update.Dummy5#
+        </isNotNull>
+        <isNotNull  property="update.BackopFlag"  prepend=",">
+          BACKOP_FLAG = #update.BackopFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackopTime"  prepend=",">
+          BACKOP_TIME = #update.BackopTime#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM PLM_DEVICE_MAIN
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_PlmDeviceMain">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_PlmDeviceMain">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max()
+      </isNotPropertyAvailable>
+      FROM PLM_DEVICE_MAIN
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM PLM_DEVICE_MAIN
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_PlmDeviceMain" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE PLM_DEVICE_MAIN
+    </statement>
+  </statements>
+</sqlMap>

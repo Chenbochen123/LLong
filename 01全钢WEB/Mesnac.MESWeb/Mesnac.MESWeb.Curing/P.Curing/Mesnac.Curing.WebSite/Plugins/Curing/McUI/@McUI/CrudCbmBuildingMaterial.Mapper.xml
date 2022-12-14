@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudCbmBuildingMaterial" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT T1.*, T2.USER_NAME RECORD_USER_NAME 
+      FROM SBM_MATERIAL T1 LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+      JOIN CBH_CONFIG_HELPER T3 ON T3.CONFIG_NAME = 'BuildingMaterialMajorTypeId' AND T1.MAJOR_TYPE_ID = T3.CONFIG_VALUE
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+          <![CDATA[T1.MATERIAL_NAME LIKE '%' || #where.MATERIAL_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_CODE" prepend="AND">
+          <![CDATA[T1.MATERIAL_CODE = #where.MATERIAL_CODE#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.MATERIAL_NAME
+      </isNull>
+    </select>
+    <select id="Select+Update@CrudCbmBuildingMaterial" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM SBM_MATERIAL ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

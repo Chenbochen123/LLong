@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <statements>
+        <select id="Select@SearchSemisMonthPlan" parameterClass="map" resultClass="row">
+            <![CDATA[ 
+             SELECT  T1.*,T2.MATERIAL_NAME,t3.minor_type_name,t2.sap_code FROM HPP_PLAN_MONTH T1
+            INNER JOIN SBM_MATERIAL T2 ON T1.MATERIAL_ID=T2.OBJID
+            left join sbm_material_minor_type t3 on t2.minor_type_id=t3.objid
+            ]]>
+            <dynamic prepend="WHERE">
+                <isNotNull property="where.PlanMonth" prepend="AND">
+                    <![CDATA[t1.PLAN_MONTH = #where.PlanMonth#]]>
+                </isNotNull>
+                <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+                  <![CDATA[t2.MATERIAL_NAME LIKE '%' || #where.MATERIAL_NAME# || '%']]>
+                </isNotNull>
+                <isNotNull property="where.SAP_CODE" prepend="AND">
+                <![CDATA[t2.SAP_CODE LIKE '%' || #where.SAP_CODE# || '%']]>
+                </isNotNull>
+                <isNotNull property="where.MINOR_TYPE_NAME" prepend="AND">
+                T3.MINOR_TYPE_NAME like '%'||#where.MINOR_TYPE_NAME#||'%'
+                </isNotNull>
+            </dynamic>
+          ORDER BY T1.PLAN_MONTH desc ,T2.SAP_CODE 
+        </select>
+    </statements>
+</sqlMap>

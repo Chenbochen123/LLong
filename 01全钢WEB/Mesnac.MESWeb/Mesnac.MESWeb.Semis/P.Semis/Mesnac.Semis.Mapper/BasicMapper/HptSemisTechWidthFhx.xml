@@ -1,0 +1,469 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.HptSemisTechWidthFhx"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HptSemisTechWidthFhx" type="Mesnac.Semis.Entity.BasicEntity.HptSemisTechWidthFhx, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HptSemisTechWidthFhx" class="HptSemisTechWidthFhx">
+    <result property="ObjId" column="OBJID"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="PlanId" column="PLAN_ID"/>
+    <result property="PlanDetailId" column="PLAN_DETAIL_ID"/>
+    <result property="SapCode" column="SAP_CODE"/>
+    <result property="MaterialName" column="MATERIAL_NAME"/>
+    <result property="ProfilelType" column="PROFILEL_TYPE"/>
+    <result property="Barcode" column="BARCODE"/>
+    <result property="SdWidthTol" column="SD_WIDTH_TOL"/>
+    <result property="SdAreaSymTol" column="SD_AREA_SYM_TOL"/>
+    <result property="SdAreaTol" column="SD_AREA_TOL"/>
+    <result property="SdShoulderWidth" column="SD_SHOULDER_WIDTH"/>
+    <result property="SdShoulderWidthTol" column="SD_SHOULDER_WIDTH_TOL"/>
+    <result property="KeyPoints" column="KEY_POINTS"/>
+    <result property="MeasurePoints" column="MEASURE_POINTS"/>
+    <result property="TotalArea" column="TOTAL_AREA"/>
+    <result property="LeftArea" column="LEFT_AREA"/>
+    <result property="RightArea" column="RIGHT_AREA"/>
+    <result property="TotalWidth" column="TOTAL_WIDTH"/>
+    <result property="ShoulderWidth" column="SHOULDER_WIDTH"/>
+    <result property="LeftShoulderThick" column="LEFT_SHOULDER_THICK"/>
+    <result property="RightShoulderThick" column="RIGHT_SHOULDER_THICK"/>
+    <result property="Param11" column="PARAM11"/>
+    <result property="Param12" column="PARAM12"/>
+    <result property="Param13" column="PARAM13"/>
+    <result property="Param14" column="PARAM14"/>
+    <result property="Param15" column="PARAM15"/>
+    <result property="Param21" column="PARAM21"/>
+    <result property="Param22" column="PARAM22"/>
+    <result property="Param23" column="PARAM23"/>
+    <result property="Param24" column="PARAM24"/>
+    <result property="Param25" column="PARAM25"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HptSemisTechWidthFhx" class="HptSemisTechWidthFhx">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="PlanId" column="PlanId"/>
+    <parameter property="PlanDetailId" column="PlanDetailId"/>
+    <parameter property="SapCode" column="SapCode"/>
+    <parameter property="MaterialName" column="MaterialName"/>
+    <parameter property="ProfilelType" column="ProfilelType"/>
+    <parameter property="Barcode" column="Barcode"/>
+    <parameter property="SdWidthTol" column="SdWidthTol"/>
+    <parameter property="SdAreaSymTol" column="SdAreaSymTol"/>
+    <parameter property="SdAreaTol" column="SdAreaTol"/>
+    <parameter property="SdShoulderWidth" column="SdShoulderWidth"/>
+    <parameter property="SdShoulderWidthTol" column="SdShoulderWidthTol"/>
+    <parameter property="KeyPoints" column="KeyPoints"/>
+    <parameter property="MeasurePoints" column="MeasurePoints"/>
+    <parameter property="TotalArea" column="TotalArea"/>
+    <parameter property="LeftArea" column="LeftArea"/>
+    <parameter property="RightArea" column="RightArea"/>
+    <parameter property="TotalWidth" column="TotalWidth"/>
+    <parameter property="ShoulderWidth" column="ShoulderWidth"/>
+    <parameter property="LeftShoulderThick" column="LeftShoulderThick"/>
+    <parameter property="RightShoulderThick" column="RightShoulderThick"/>
+    <parameter property="Param11" column="Param11"/>
+    <parameter property="Param12" column="Param12"/>
+    <parameter property="Param13" column="Param13"/>
+    <parameter property="Param14" column="Param14"/>
+    <parameter property="Param15" column="Param15"/>
+    <parameter property="Param21" column="Param21"/>
+    <parameter property="Param22" column="Param22"/>
+    <parameter property="Param23" column="Param23"/>
+    <parameter property="Param24" column="Param24"/>
+    <parameter property="Param25" column="Param25"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPT_SEMIS_TECH_WIDTH_FHX ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.SapCode" prepend="AND">
+          <![CDATA[SAP_CODE = #where.SapCode#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[MATERIAL_NAME = #where.MaterialName#]]>
+        </isNotNull>
+        <isNotNull property="where.ProfilelType" prepend="AND">
+          <![CDATA[PROFILEL_TYPE = #where.ProfilelType#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[BARCODE = #where.Barcode#]]>
+        </isNotNull>
+        <isNotNull property="where.SdWidthTol" prepend="AND">
+          <![CDATA[SD_WIDTH_TOL = #where.SdWidthTol#]]>
+        </isNotNull>
+        <isNotNull property="where.SdAreaSymTol" prepend="AND">
+          <![CDATA[SD_AREA_SYM_TOL = #where.SdAreaSymTol#]]>
+        </isNotNull>
+        <isNotNull property="where.SdAreaTol" prepend="AND">
+          <![CDATA[SD_AREA_TOL = #where.SdAreaTol#]]>
+        </isNotNull>
+        <isNotNull property="where.SdShoulderWidth" prepend="AND">
+          <![CDATA[SD_SHOULDER_WIDTH = #where.SdShoulderWidth#]]>
+        </isNotNull>
+        <isNotNull property="where.SdShoulderWidthTol" prepend="AND">
+          <![CDATA[SD_SHOULDER_WIDTH_TOL = #where.SdShoulderWidthTol#]]>
+        </isNotNull>
+        <isNotNull property="where.KeyPoints" prepend="AND">
+          <![CDATA[KEY_POINTS = #where.KeyPoints#]]>
+        </isNotNull>
+        <isNotNull property="where.MeasurePoints" prepend="AND">
+          <![CDATA[MEASURE_POINTS = #where.MeasurePoints#]]>
+        </isNotNull>
+        <isNotNull property="where.TotalArea" prepend="AND">
+          <![CDATA[TOTAL_AREA = #where.TotalArea#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftArea" prepend="AND">
+          <![CDATA[LEFT_AREA = #where.LeftArea#]]>
+        </isNotNull>
+        <isNotNull property="where.RightArea" prepend="AND">
+          <![CDATA[RIGHT_AREA = #where.RightArea#]]>
+        </isNotNull>
+        <isNotNull property="where.TotalWidth" prepend="AND">
+          <![CDATA[TOTAL_WIDTH = #where.TotalWidth#]]>
+        </isNotNull>
+        <isNotNull property="where.ShoulderWidth" prepend="AND">
+          <![CDATA[SHOULDER_WIDTH = #where.ShoulderWidth#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftShoulderThick" prepend="AND">
+          <![CDATA[LEFT_SHOULDER_THICK = #where.LeftShoulderThick#]]>
+        </isNotNull>
+        <isNotNull property="where.RightShoulderThick" prepend="AND">
+          <![CDATA[RIGHT_SHOULDER_THICK = #where.RightShoulderThick#]]>
+        </isNotNull>
+        <isNotNull property="where.Param11" prepend="AND">
+          <![CDATA[PARAM11 = #where.Param11#]]>
+        </isNotNull>
+        <isNotNull property="where.Param12" prepend="AND">
+          <![CDATA[PARAM12 = #where.Param12#]]>
+        </isNotNull>
+        <isNotNull property="where.Param13" prepend="AND">
+          <![CDATA[PARAM13 = #where.Param13#]]>
+        </isNotNull>
+        <isNotNull property="where.Param14" prepend="AND">
+          <![CDATA[PARAM14 = #where.Param14#]]>
+        </isNotNull>
+        <isNotNull property="where.Param15" prepend="AND">
+          <![CDATA[PARAM15 = #where.Param15#]]>
+        </isNotNull>
+        <isNotNull property="where.Param21" prepend="AND">
+          <![CDATA[PARAM21 = #where.Param21#]]>
+        </isNotNull>
+        <isNotNull property="where.Param22" prepend="AND">
+          <![CDATA[PARAM22 = #where.Param22#]]>
+        </isNotNull>
+        <isNotNull property="where.Param23" prepend="AND">
+          <![CDATA[PARAM23 = #where.Param23#]]>
+        </isNotNull>
+        <isNotNull property="where.Param24" prepend="AND">
+          <![CDATA[PARAM24 = #where.Param24#]]>
+        </isNotNull>
+        <isNotNull property="where.Param25" prepend="AND">
+          <![CDATA[PARAM25 = #where.Param25#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HPT_SEMIS_TECH_WIDTH_FHX]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="PlanId" prepend=",">PLAN_ID</isNotNull>
+        <isNotNull property="PlanDetailId" prepend=",">PLAN_DETAIL_ID</isNotNull>
+        <isNotNull property="SapCode" prepend=",">SAP_CODE</isNotNull>
+        <isNotNull property="MaterialName" prepend=",">MATERIAL_NAME</isNotNull>
+        <isNotNull property="ProfilelType" prepend=",">PROFILEL_TYPE</isNotNull>
+        <isNotNull property="Barcode" prepend=",">BARCODE</isNotNull>
+        <isNotNull property="SdWidthTol" prepend=",">SD_WIDTH_TOL</isNotNull>
+        <isNotNull property="SdAreaSymTol" prepend=",">SD_AREA_SYM_TOL</isNotNull>
+        <isNotNull property="SdAreaTol" prepend=",">SD_AREA_TOL</isNotNull>
+        <isNotNull property="SdShoulderWidth" prepend=",">SD_SHOULDER_WIDTH</isNotNull>
+        <isNotNull property="SdShoulderWidthTol" prepend=",">SD_SHOULDER_WIDTH_TOL</isNotNull>
+        <isNotNull property="KeyPoints" prepend=",">KEY_POINTS</isNotNull>
+        <isNotNull property="MeasurePoints" prepend=",">MEASURE_POINTS</isNotNull>
+        <isNotNull property="TotalArea" prepend=",">TOTAL_AREA</isNotNull>
+        <isNotNull property="LeftArea" prepend=",">LEFT_AREA</isNotNull>
+        <isNotNull property="RightArea" prepend=",">RIGHT_AREA</isNotNull>
+        <isNotNull property="TotalWidth" prepend=",">TOTAL_WIDTH</isNotNull>
+        <isNotNull property="ShoulderWidth" prepend=",">SHOULDER_WIDTH</isNotNull>
+        <isNotNull property="LeftShoulderThick" prepend=",">LEFT_SHOULDER_THICK</isNotNull>
+        <isNotNull property="RightShoulderThick" prepend=",">RIGHT_SHOULDER_THICK</isNotNull>
+        <isNotNull property="Param11" prepend=",">PARAM11</isNotNull>
+        <isNotNull property="Param12" prepend=",">PARAM12</isNotNull>
+        <isNotNull property="Param13" prepend=",">PARAM13</isNotNull>
+        <isNotNull property="Param14" prepend=",">PARAM14</isNotNull>
+        <isNotNull property="Param15" prepend=",">PARAM15</isNotNull>
+        <isNotNull property="Param21" prepend=",">PARAM21</isNotNull>
+        <isNotNull property="Param22" prepend=",">PARAM22</isNotNull>
+        <isNotNull property="Param23" prepend=",">PARAM23</isNotNull>
+        <isNotNull property="Param24" prepend=",">PARAM24</isNotNull>
+        <isNotNull property="Param25" prepend=",">PARAM25</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_HPT_SEMIS_TECH_WIDTH_FHX.NEXTVAL</isNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="PlanId" prepend=",">#PlanId#</isNotNull>
+        <isNotNull property="PlanDetailId" prepend=",">#PlanDetailId#</isNotNull>
+        <isNotNull property="SapCode" prepend=",">#SapCode#</isNotNull>
+        <isNotNull property="MaterialName" prepend=",">#MaterialName#</isNotNull>
+        <isNotNull property="ProfilelType" prepend=",">#ProfilelType#</isNotNull>
+        <isNotNull property="Barcode" prepend=",">#Barcode#</isNotNull>
+        <isNotNull property="SdWidthTol" prepend=",">#SdWidthTol#</isNotNull>
+        <isNotNull property="SdAreaSymTol" prepend=",">#SdAreaSymTol#</isNotNull>
+        <isNotNull property="SdAreaTol" prepend=",">#SdAreaTol#</isNotNull>
+        <isNotNull property="SdShoulderWidth" prepend=",">#SdShoulderWidth#</isNotNull>
+        <isNotNull property="SdShoulderWidthTol" prepend=",">#SdShoulderWidthTol#</isNotNull>
+        <isNotNull property="KeyPoints" prepend=",">#KeyPoints#</isNotNull>
+        <isNotNull property="MeasurePoints" prepend=",">#MeasurePoints#</isNotNull>
+        <isNotNull property="TotalArea" prepend=",">#TotalArea#</isNotNull>
+        <isNotNull property="LeftArea" prepend=",">#LeftArea#</isNotNull>
+        <isNotNull property="RightArea" prepend=",">#RightArea#</isNotNull>
+        <isNotNull property="TotalWidth" prepend=",">#TotalWidth#</isNotNull>
+        <isNotNull property="ShoulderWidth" prepend=",">#ShoulderWidth#</isNotNull>
+        <isNotNull property="LeftShoulderThick" prepend=",">#LeftShoulderThick#</isNotNull>
+        <isNotNull property="RightShoulderThick" prepend=",">#RightShoulderThick#</isNotNull>
+        <isNotNull property="Param11" prepend=",">#Param11#</isNotNull>
+        <isNotNull property="Param12" prepend=",">#Param12#</isNotNull>
+        <isNotNull property="Param13" prepend=",">#Param13#</isNotNull>
+        <isNotNull property="Param14" prepend=",">#Param14#</isNotNull>
+        <isNotNull property="Param15" prepend=",">#Param15#</isNotNull>
+        <isNotNull property="Param21" prepend=",">#Param21#</isNotNull>
+        <isNotNull property="Param22" prepend=",">#Param22#</isNotNull>
+        <isNotNull property="Param23" prepend=",">#Param23#</isNotNull>
+        <isNotNull property="Param24" prepend=",">#Param24#</isNotNull>
+        <isNotNull property="Param25" prepend=",">#Param25#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HPT_SEMIS_TECH_WIDTH_FHX
+       <dynamic prepend="SET">
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.PlanId"  prepend=",">
+          PLAN_ID = #update.PlanId#
+        </isNotNull>
+        <isNotNull  property="update.PlanDetailId"  prepend=",">
+          PLAN_DETAIL_ID = #update.PlanDetailId#
+        </isNotNull>
+        <isNotNull  property="update.SapCode"  prepend=",">
+          SAP_CODE = #update.SapCode#
+        </isNotNull>
+        <isNotNull  property="update.MaterialName"  prepend=",">
+          MATERIAL_NAME = #update.MaterialName#
+        </isNotNull>
+        <isNotNull  property="update.ProfilelType"  prepend=",">
+          PROFILEL_TYPE = #update.ProfilelType#
+        </isNotNull>
+        <isNotNull  property="update.Barcode"  prepend=",">
+          BARCODE = #update.Barcode#
+        </isNotNull>
+        <isNotNull  property="update.SdWidthTol"  prepend=",">
+          SD_WIDTH_TOL = #update.SdWidthTol#
+        </isNotNull>
+        <isNotNull  property="update.SdAreaSymTol"  prepend=",">
+          SD_AREA_SYM_TOL = #update.SdAreaSymTol#
+        </isNotNull>
+        <isNotNull  property="update.SdAreaTol"  prepend=",">
+          SD_AREA_TOL = #update.SdAreaTol#
+        </isNotNull>
+        <isNotNull  property="update.SdShoulderWidth"  prepend=",">
+          SD_SHOULDER_WIDTH = #update.SdShoulderWidth#
+        </isNotNull>
+        <isNotNull  property="update.SdShoulderWidthTol"  prepend=",">
+          SD_SHOULDER_WIDTH_TOL = #update.SdShoulderWidthTol#
+        </isNotNull>
+        <isNotNull  property="update.KeyPoints"  prepend=",">
+          KEY_POINTS = #update.KeyPoints#
+        </isNotNull>
+        <isNotNull  property="update.MeasurePoints"  prepend=",">
+          MEASURE_POINTS = #update.MeasurePoints#
+        </isNotNull>
+        <isNotNull  property="update.TotalArea"  prepend=",">
+          TOTAL_AREA = #update.TotalArea#
+        </isNotNull>
+        <isNotNull  property="update.LeftArea"  prepend=",">
+          LEFT_AREA = #update.LeftArea#
+        </isNotNull>
+        <isNotNull  property="update.RightArea"  prepend=",">
+          RIGHT_AREA = #update.RightArea#
+        </isNotNull>
+        <isNotNull  property="update.TotalWidth"  prepend=",">
+          TOTAL_WIDTH = #update.TotalWidth#
+        </isNotNull>
+        <isNotNull  property="update.ShoulderWidth"  prepend=",">
+          SHOULDER_WIDTH = #update.ShoulderWidth#
+        </isNotNull>
+        <isNotNull  property="update.LeftShoulderThick"  prepend=",">
+          LEFT_SHOULDER_THICK = #update.LeftShoulderThick#
+        </isNotNull>
+        <isNotNull  property="update.RightShoulderThick"  prepend=",">
+          RIGHT_SHOULDER_THICK = #update.RightShoulderThick#
+        </isNotNull>
+        <isNotNull  property="update.Param11"  prepend=",">
+          PARAM11 = #update.Param11#
+        </isNotNull>
+        <isNotNull  property="update.Param12"  prepend=",">
+          PARAM12 = #update.Param12#
+        </isNotNull>
+        <isNotNull  property="update.Param13"  prepend=",">
+          PARAM13 = #update.Param13#
+        </isNotNull>
+        <isNotNull  property="update.Param14"  prepend=",">
+          PARAM14 = #update.Param14#
+        </isNotNull>
+        <isNotNull  property="update.Param15"  prepend=",">
+          PARAM15 = #update.Param15#
+        </isNotNull>
+        <isNotNull  property="update.Param21"  prepend=",">
+          PARAM21 = #update.Param21#
+        </isNotNull>
+        <isNotNull  property="update.Param22"  prepend=",">
+          PARAM22 = #update.Param22#
+        </isNotNull>
+        <isNotNull  property="update.Param23"  prepend=",">
+          PARAM23 = #update.Param23#
+        </isNotNull>
+        <isNotNull  property="update.Param24"  prepend=",">
+          PARAM24 = #update.Param24#
+        </isNotNull>
+        <isNotNull  property="update.Param25"  prepend=",">
+          PARAM25 = #update.Param25#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HPT_SEMIS_TECH_WIDTH_FHX
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HptSemisTechWidthFhx">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HptSemisTechWidthFhx">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM HPT_SEMIS_TECH_WIDTH_FHX
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HPT_SEMIS_TECH_WIDTH_FHX
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HptSemisTechWidthFhx" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HPT_SEMIS_TECH_WIDTH_FHX
+    </statement>
+  </statements>
+</sqlMap>

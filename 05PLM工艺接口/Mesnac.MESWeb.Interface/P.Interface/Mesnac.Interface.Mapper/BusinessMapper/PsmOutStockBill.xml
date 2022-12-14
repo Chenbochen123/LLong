@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Interface.Mapper.BusinessMapper.PsmOutStockBill"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSM_OUT_STOCK_BILL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.SNNo" prepend="AND">
+          <![CDATA[S_N_NO = #where.SNNo#]]>
+        </isNotNull>
+        <isNotNull property="where.SRFlag" prepend="AND">
+          <![CDATA[S_R_FLAG = #where.SRFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.DocDate" prepend="AND">
+          <![CDATA[DOC_DATE = #where.DocDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomerId" prepend="AND">
+          <![CDATA[CUSTOMER_ID = #where.CustomerId#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.BillCode" prepend="AND">
+          <![CDATA[BILL_CODE = #where.BillCode#]]>
+        </isNotNull>
+        <isNotNull property="where.OutDate" prepend="AND">
+          <![CDATA[OUT_DATE = #where.OutDate#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateUserId" prepend="AND">
+          <![CDATA[UPDATE_USER_ID = #where.UpdateUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmTime" prepend="AND">
+          <![CDATA[AFFIRM_TIME = #where.AffirmTime#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmUserId" prepend="AND">
+          <![CDATA[AFFIRM_USER_ID = #where.AffirmUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.BillState" prepend="AND">
+          <![CDATA[BILL_STATE = #where.BillState#]]>
+        </isNotNull>
+        <isNotNull property="where.InterfaceUpdateTime" prepend="AND">
+          <![CDATA[INTERFACE_UPDATE_TIME = #where.InterfaceUpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomerObjid" prepend="AND">
+          <![CDATA[CUSTOMER_OBJID = #where.CustomerObjid#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+    <select id="getCrmDate" parameterClass="map" resultClass="row">
+      <![CDATA[
+select a.tyre_no , nvl(e.s_n_no,g.reser_no) as s_n_no,c.material_code
+        ,nvl(h.customer_id,g.stor_loc_to) as customer_id ,h.custome_name,c.sap_code,substr(c.material_name,0,9) as material_name,a.end_time
+        ,nvl(d.record_time,f.record_time) as record_time
+        ,case nvl(e1.check_grade_code,g1.check_grade_code) WHEN 1 THEN '合格品' 
+WHEN 2 THEN '次品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' 
+  WHEN 9 THEN '试验胎' ELSE '无品级' END CHECK_GRADE_NAME,g.remark as remark1, e.remark as remark2
+        from cpp_curing_production a 
+        left join cpp_curing_plan_detail b on a.plan_detail_id = b.objid
+        left join SBM_MATERIAL c on b.material_id = c.objid
+        left join PSM_OUT_STOCK_DETAIL d on a.tyre_no = d.tyre_no
+        left join PSM_OUT_STOCK_BILL e on d.bill_id = e.objid
+        left join PSM_OUT_STOCK_MAIN e1 on d.main_id = e1.objid and e1.bill_id = e.objid
+        left join psm_transfer_detail f on a.tyre_no = f.tyre_no
+        left join psm_transfer_bill g on f.bill_id = g.objid
+        left join psm_transfer_main g1 on d.main_id = g1.objid and g1.bill_id = g.objid
+        left join PSB_CUSTOMER h on e.customer_objid = h.objid
+        where 1=1       
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="TYRE_NO" prepend="AND">
+          <![CDATA[ a.tyre_no = #TYRE_NO#]]>
+        </isNotNull>
+        <isNotNull property="GREEN_TYRE_NO" prepend="AND">
+          <![CDATA[a.green_tyre_no = #GREEN_TYRE_NO#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+
+  </statements>
+</sqlMap>

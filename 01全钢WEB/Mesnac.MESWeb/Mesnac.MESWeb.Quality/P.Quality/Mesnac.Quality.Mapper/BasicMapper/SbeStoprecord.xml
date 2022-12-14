@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BasicMapper.SbeStoprecord"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SbeStoprecord" type="Mesnac.Quality.Entity.BasicEntity.SbeStoprecord, Mesnac.Quality.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SbeStoprecord" class="SbeStoprecord">
+    <result property="ObjId" column="OBJID"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="MaterId" column="MATER_ID"/>
+    <result property="StopType" column="STOP_TYPE"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="UnlockType" column="UNLOCK_TYPE"/>
+    <result property="UnlockTime" column="UNLOCK_TIME"/>
+    <result property="UnlockUserid" column="UNLOCK_USERID"/>
+    <result property="Barcode" column="BARCODE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SbeStoprecord" class="SbeStoprecord">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="MaterId" column="MaterId"/>
+    <parameter property="StopType" column="StopType"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="UnlockType" column="UnlockType"/>
+    <parameter property="UnlockTime" column="UnlockTime"/>
+    <parameter property="UnlockUserid" column="UnlockUserid"/>
+    <parameter property="Barcode" column="Barcode"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_STOPRECORD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterId" prepend="AND">
+          <![CDATA[MATER_ID = #where.MaterId#]]>
+        </isNotNull>
+        <isNotNull property="where.StopType" prepend="AND">
+          <![CDATA[STOP_TYPE = #where.StopType#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UnlockType" prepend="AND">
+          <![CDATA[UNLOCK_TYPE = #where.UnlockType#]]>
+        </isNotNull>
+        <isNotNull property="where.UnlockTime" prepend="AND">
+          <![CDATA[UNLOCK_TIME = #where.UnlockTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UnlockUserid" prepend="AND">
+          <![CDATA[UNLOCK_USERID = #where.UnlockUserid#]]>
+        </isNotNull>
+      <isNotNull property="where.Barcode" prepend="AND">
+        <![CDATA[BARCODE = #where.Barcode#]]>
+      </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SBE_STOPRECORD]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="MaterId" prepend=",">MATER_ID</isNotNull>
+        <isNotNull property="StopType" prepend=",">STOP_TYPE</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="UnlockType" prepend=",">UNLOCK_TYPE</isNotNull>
+        <isNotNull property="UnlockTime" prepend=",">UNLOCK_TIME</isNotNull>
+        <isNotNull property="UnlockUserid" prepend=",">UNLOCK_USERID</isNotNull>
+         <isNotNull property="Barcode" prepend=",">BARCODE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SBE_STOPRECORD.NEXTVAL</isNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="MaterId" prepend=",">#MaterId#</isNotNull>
+        <isNotNull property="StopType" prepend=",">#StopType#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="UnlockType" prepend=",">#UnlockType#</isNotNull>
+        <isNotNull property="UnlockTime" prepend=",">#UnlockTime#</isNotNull>
+        <isNotNull property="UnlockUserid" prepend=",">#UnlockUserid#</isNotNull>
+         <isNotNull property="Barcode" prepend=",">#Barcode#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SBE_STOPRECORD
+       <dynamic prepend="SET">
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.MaterId"  prepend=",">
+          MATER_ID = #update.MaterId#
+        </isNotNull>
+        <isNotNull  property="update.StopType"  prepend=",">
+          STOP_TYPE = #update.StopType#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.UnlockType"  prepend=",">
+          UNLOCK_TYPE = #update.UnlockType#
+        </isNotNull>
+        <isNotNull  property="update.UnlockTime"  prepend=",">
+          UNLOCK_TIME = #update.UnlockTime#
+        </isNotNull>
+        <isNotNull  property="update.UnlockUserid"  prepend=",">
+          UNLOCK_USERID = #update.UnlockUserid#
+        </isNotNull>
+         <isNotNull  property="update.Barcode"  prepend=",">
+           BARCODE = #update.Barcode#
+         </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SBE_STOPRECORD
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SbeStoprecord">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SbeStoprecord">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SBE_STOPRECORD
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SBE_STOPRECORD
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SbeStoprecord" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SBE_STOPRECORD
+    </statement>
+  </statements>
+</sqlMap>

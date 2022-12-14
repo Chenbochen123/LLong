@@ -1,0 +1,605 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.BppPlan"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BPP_PLAN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDate" prepend="AND">
+          <![CDATA[PLAN_DATE = #where.PlanDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanState" prepend="AND">
+          <![CDATA[PLAN_STATE = #where.PlanState#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanType" prepend="AND">
+          <![CDATA[PLAN_TYPE = #where.PlanType#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+    <!--查询实例说明-->
+    <select id="getPlan" parameterClass="map" resultClass="Row">
+      SELECT T1.OBJID,T1.PLAN_DATE,T2.PLAN_STATE,T1.EQUIP_ID,T1.SHIFT_ID,T2.MATERIAL_ID,T2.BOM_ID,T2.TECH_ID,
+      T8.MATERIAL_FULL_NAME,T8.SAP_CODE AS MATERIAL_SAP_CODE,
+      T2.MONTH_PLAN_ID,t2.PLAN_AMOUNT,
+      T6.SHOW_NAME AS PLAN_STATE_NAME,T7.EQUIP_NAME,
+      'D2'||TT.BOM_VERSION AS BOM_NAME,T3.TECH_NAME,NULL AS PLAN_MONTH,T4.real_name,t1.record_time
+      FROM BPP_PLAN T1
+      left join ssb_user T4 on T1.Record_User_Id=T4.objid
+      INNER JOIN BPP_PLAN_DETAIL T2 ON T1.OBJID=T2.PLAN_ID
+      LEFT JOIN V_BPT_MOLDING_TECH T3 ON T2.TECH_ID = T3.OBJID
+      LEFT JOIN
+      (
+      SELECT T.MATERIAL_PARENT_ID,T.BOM_VERSION FROM V_SBM_BOM T
+      WHERE T.DELETE_FLAG=0
+      GROUP BY T.MATERIAL_PARENT_ID,T.BOM_VERSION
+      )TT ON TT.MATERIAL_PARENT_ID = T2.MATERIAL_ID AND TT.BOM_VERSION = T2.BOM_ID
+      INNER JOIN BPP_PLAN_STATE T6 ON T2.PLAN_STATE=T6.OBJID
+      INNER JOIN SBE_EQUIP T7 ON T1.EQUIP_ID=T7.OBJID
+      INNER JOIN SBM_MATERIAL T8 ON T2.MATERIAL_ID= T8.OBJID
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.PlanDate" prepend="AND">
+          <![CDATA[t1.PLAN_DATE = #where.PlanDate#]]>
+        </isNotNull>
+      </dynamic>
+      order by t1.EQUIP_ID
+    </select>
+
+    <!--查询实例说明-->
+    <select id="GetSBE_EQUIP" parameterClass="map" resultClass="Row">
+      SELECT t.* FROM SBE_EQUIP T WHERE T.MAJOR_TYPE_ID=41 and t.DELETE_FLAG=0
+      <dynamic>
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[t.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[t.EQUIP_NAME = #where.EquipName#]]>
+        </isNotNull>
+      </dynamic>
+      order by t.EQUIP_CODE
+    </select>
+
+    <!--更新记录 下发计划-->
+    <update id="updatePlanState" parameterClass="map">
+      update BPP_PLAN set PLAN_STATE=1,record_user_id=#recorduserID#,record_time=sysdate
+      where 1=1 and PLAN_STATE = 0
+      <dynamic>
+        <isNotEmpty property="plandate" prepend="AND">
+          PLAN_DATE=#plandate#
+        </isNotEmpty>
+        <isNotEmpty property="equipId" prepend="AND">
+          EQUIP_ID=#equipId#
+        </isNotEmpty>
+      </dynamic>
+    </update>
+
+    <!--更新记录 下发计划明细-->
+    <update id="updatePlanDetailState" parameterClass="map">
+      update BPP_PLAN_DETAIL set PLAN_STATE=1
+      where 1 = 1 and PLAN_STATE = 0 and PLAN_ID in (
+      select t.OBJID from BPP_PLAN t
+      where 1=1
+      <dynamic>
+        <isNotNull property="plandate" prepend="AND">
+          t.PLAN_DATE=#plandate#
+        </isNotNull>
+        <isNotEmpty property="equipId" prepend="AND">
+          t.EQUIP_ID=#equipId#
+        </isNotEmpty>
+        )
+        <isNotEmpty property="materialId" prepend="AND">
+          MATERIAL_ID=#materialId#
+        </isNotEmpty>
+        <isNotEmpty property="bomId" prepend="AND">
+          BOM_ID=#bomId#
+        </isNotEmpty>
+        <isNotEmpty property="techId" prepend="AND">
+          TECH_ID=#techId#
+        </isNotEmpty>
+      </dynamic>
+    </update>
+
+    <!--更新记录 反审核计划-->
+    <update id="resetPlanState" parameterClass="map">
+      update BPP_PLAN set PLAN_STATE=0
+      where 1=1 and PLAN_STATE = 1 and OBJID not in (
+      select t.OBJID
+      from BPP_PLAN t
+      join BPP_PLAN_DETAIL d on t.OBJID = d.PLAN_ID
+      where 1=1 and d.PLAN_STATE > 0
+      <dynamic>
+        <isNotEmpty property="plandate" prepend="AND">
+          PLAN_DATE=#plandate#
+        </isNotEmpty>
+        <isNotEmpty property="equipId" prepend="AND">
+          EQUIP_ID=#equipId#
+        </isNotEmpty>
+      </dynamic>
+      )
+      <dynamic>
+        <isNotEmpty property="plandate" prepend="AND">
+          PLAN_DATE=#plandate#
+        </isNotEmpty>
+        <isNotEmpty property="equipId" prepend="AND">
+          EQUIP_ID=#equipId#
+        </isNotEmpty>
+      </dynamic>
+    </update>
+
+    <!--更新记录 反审核明细-->
+    <update id="resetPlanDetailState" parameterClass="map">
+      update BPP_PLAN_DETAIL set PLAN_STATE=0
+      where 1 = 1 and PLAN_STATE = 1 and PLAN_ID in (
+      select t.OBJID from BPP_PLAN t
+      where 1=1
+      <dynamic>
+        <isNotNull property="plandate" prepend="AND">
+          t.PLAN_DATE=#plandate#
+        </isNotNull>
+        <isNotEmpty property="equipId" prepend="AND">
+          t.EQUIP_ID=#equipId#
+        </isNotEmpty>
+        )
+        <isNotEmpty property="materialId" prepend="AND">
+          MATERIAL_ID=#materialId#
+        </isNotEmpty>
+        <isNotEmpty property="bomId" prepend="AND">
+          BOM_ID=#bomId#
+        </isNotEmpty>
+        <isNotEmpty property="techId" prepend="AND">
+          TECH_ID=#techId#
+        </isNotEmpty>
+      </dynamic>
+    </update>
+
+    <!--更新记录 删除计划-->
+    <delete id="deletePlanState" parameterClass="map">
+      DELETE FROM BPP_PLAN T
+      where T.PLAN_STATE=0 AND NOT EXISTS
+      (SELECT 1 FROM BPP_PLAN_DETAIL T1 WHERE T1.PLAN_ID = T.OBJID)
+      <dynamic>
+        <isNotEmpty property="plandate" prepend="AND">
+          T.PLAN_DATE=#plandate#
+        </isNotEmpty>
+        <isNotEmpty property="equipId" prepend="AND">
+          T.EQUIP_ID=#equipId#
+        </isNotEmpty>
+      </dynamic>
+    </delete>
+
+    <!--更新记录 删除计划明细-->
+    <delete id="deletePlanDetailState" parameterClass="map">
+      DELETE FROM BPP_PLAN_DETAIL
+      where  PLAN_STATE=0 AND PLAN_ID in (
+      select t.OBJID from BPP_PLAN t
+      where 1=1
+      <dynamic>
+        <isNotNull property="plandate" prepend="AND">
+          t.PLAN_DATE=#plandate#
+        </isNotNull>
+        <isNotEmpty property="equipId" prepend="AND">
+          t.EQUIP_ID=#equipId#
+        </isNotEmpty>
+        )
+        <isNotEmpty property="materialId" prepend="AND">
+          MATERIAL_ID=#materialId#
+        </isNotEmpty>
+        <isNotEmpty property="bomId" prepend="AND">
+          BOM_ID=#bomId#
+        </isNotEmpty>
+        <isNotEmpty property="techId" prepend="AND">
+          TECH_ID=#techId#
+        </isNotEmpty>
+      </dynamic>
+    </delete>
+
+    <!--获取成型生产计划监控信息-->
+    <select id="GetPageData@BppMoldingPlanMonitorByReader" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+                        select nvl(t1.EQUIP_NAME, '') EQUIP_NAME
+                     , t1.PLAN_DATE
+                     , t1.EQUIP_ID
+                     , t1.MATERIAL_ID
+                     , t1.MATERIAL_ID_1
+                     , t1.MATERIAL_ID_2
+                     , t1.MATERIAL_ID_3
+                     , t1.MATERIAL_NAME_1
+                     , t1.PLAN_AMOUNT_1
+                     , t1.REAL_AMOUNT_1
+                     , round(case when t1.PLAN_AMOUNT_1 = 0 then 0 else t1.REAL_AMOUNT_1 * 100 / t1.PLAN_AMOUNT_1 end,
+                             2)               COMPLETE_RATE_1
+                     , t1.MATERIAL_NAME_2
+                     , t1.PLAN_AMOUNT_2
+                     , t1.REAL_AMOUNT_2
+                     , round(case when t1.PLAN_AMOUNT_2 = 0 then 0 else t1.REAL_AMOUNT_2 * 100 / t1.PLAN_AMOUNT_2 end,
+                             2)               COMPLETE_RATE_2
+                     , t1.MATERIAL_NAME_3
+                     , t1.PLAN_AMOUNT_3
+                     , t1.REAL_AMOUNT_3
+                     , round(case when t1.PLAN_AMOUNT_3 = 0 then 0 else t1.REAL_AMOUNT_3 * 100 / t1.PLAN_AMOUNT_3 end,
+                             2)               COMPLETE_RATE_3
+
+                     , t1.MATERIAL_NAME
+                     , t1.RUN_STATUS_1
+                     , RUN_STATUS_2
+                     , RUN_STATUS_3
+                from (
+                         select t1.PLAN_DATE
+                              , t1.EQUIP_ID
+                              , t2.MATERIAL_ID
+                              , t3.EQUIP_NAME
+                              , t5.MATERIAL_NAME
+                              , min(case when t1.SHIFT_ID = 1 then t2.MATERIAL_ID else null end)                 MATERIAL_ID_1
+                              , min(case when t1.SHIFT_ID = 2 then t2.MATERIAL_ID else null end)                 MATERIAL_ID_2
+                              , min(case when t1.SHIFT_ID = 3 then t2.MATERIAL_ID else null end)                 MATERIAL_ID_3
+                              , min(case when t1.SHIFT_ID = 1 then t5.MATERIAL_NAME else null end)               MATERIAL_NAME_1
+                              , min(case when t1.SHIFT_ID = 2 then t5.MATERIAL_NAME else null end)               MATERIAL_NAME_2
+                              , min(case when t1.SHIFT_ID = 3 then t5.MATERIAL_NAME else null end)               MATERIAL_NAME_3
+                              , sum(case when t1.SHIFT_ID = 1 then t2.PLAN_AMOUNT else 0 end)                    PLAN_AMOUNT_1
+                              , sum(case when t1.SHIFT_ID = 2 then t2.PLAN_AMOUNT else 0 end)                    PLAN_AMOUNT_2
+                              , sum(case when t1.SHIFT_ID = 3 then t2.PLAN_AMOUNT else 0 end)                    PLAN_AMOUNT_3
+                              , sum(case when t1.SHIFT_ID = 1 then t2.REAL_AMOUNT else 0 end)                    REAL_AMOUNT_1
+                              , sum(case when t1.SHIFT_ID = 2 then t2.REAL_AMOUNT else 0 end)                    REAL_AMOUNT_2
+                              , sum(case when t1.SHIFT_ID = 3 then t2.REAL_AMOUNT else 0 end)                    REAL_AMOUNT_3
+                              , max(case when t1.SHIFT_ID = 1 then DECODE(nvl(t4.OBJID, 0), 0, 0, 1) else 0 end) RUN_STATUS_1
+                              , max(case when t1.SHIFT_ID = 2 then DECODE(nvl(t4.OBJID, 0), 0, 0, 1) else 0 end) RUN_STATUS_2
+                              , max(case when t1.SHIFT_ID = 3 then DECODE(nvl(t4.OBJID, 0), 0, 0, 1) else 0 end) RUN_STATUS_3
+                         from BPP_PLAN t1
+                                  join BPP_PLAN_DETAIL t2 on t1.OBJID = t2.PLAN_ID
+                                  left join SBE_EQUIP t3 on t1.EQUIP_ID = t3.OBJID
+                                  left join SBM_MATERIAL t5 on t2.MATERIAL_ID = t5.OBJID
+                                  left join (select *
+                                             from (select a.*,
+                                                          row_number() over (partition by a.PLAN_ID order by END_TIME desc) as rn
+                                                   from BPM_PRODUCTION a
+                                                   where END_TIME > sysdate - 1 / 24)
+                                             where rn = 1) t4
+                                            on t1.OBJID = t4.PLAN_ID and t2.OBJID = t4.PLAN_DETAIL_ID
+                         where t1.DELETE_FLAG = 0
+                           and t2.DELETE_FLAG = 0
+                           and t1.PLAN_STATE > 0
+                           and t2.PLAN_STATE > 0
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="where.PlanDate" prepend="AND">
+          <![CDATA[t1.PLAN_DATE = #where.PlanDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[t1.EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[t3.EQUIP_NAME like '%' || #where.EquipName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[t5.MATERIAL_NAME like '%' || #where.MaterialName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MaterialCode" prepend="AND">
+          <![CDATA[t5.MATERIAL_CODE like '%' || #where.MaterialCode# || '%']]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[ 
+         GROUP BY t1.PLAN_DATE, t1.EQUIP_ID, t2.MATERIAL_ID
+          , t3.EQUIP_NAME, t5.MATERIAL_NAME, t5.MATERIAL_CODE
+        ) t1
+      ]]>
+      <![CDATA[
+        order by t1.PLAN_DATE, t1.EQUIP_NAME, t1.MATERIAL_NAME
+      ]]>
+    </select>
+
+    
+    <!--Webservice方法 下载成型机台-->
+    <select id="wsDownloadMoldingEquipInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+        select lpad(t1.OBJID, 7, '0') AS EQUIP_ID, t1.EQUIP_NAME, t1.EQUIP_CODE
+        from SBE_EQUIP t1
+        where 1 = 1 and t1.DELETE_FLAG = 0 and t1.MAJOR_TYPE_ID = 41
+      ]]>
+      <dynamic>
+        <isNotNull property="ObjId" prepend="AND">
+          <![CDATA[t1.OBJID = #ObjId#]]>
+        </isNotNull>
+        <isNotNull property="EquipName" prepend="AND">
+          <![CDATA[t1.EQUIP_NAME like '%' || #EquipName# || '%']]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+        order by t1.EQUIP_CODE, t1.EQUIP_NAME, t1.DELETE_FLAG
+      ]]>
+    </select>
+    <select id="GetMPlanDetail" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      select t.material_id,t1.shift_id,t.bom_id,sum(t.plan_amount) qty,t2.material_code,t.tech_id from bpp_plan_detail t 
+      left join bpp_plan t1 on t1.objid = t.plan_id
+      left join sbm_material t2 on t2.objid = t.material_id
+      where t1.delete_flag = 0 
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="planDate" prepend="AND">
+          <![CDATA[t1.plan_date = #planDate#]]>
+        </isNotNull>
+        <isNotNull property="shiftID" prepend="AND">
+          <![CDATA[t1.shift_id = #shiftID#]]>
+        </isNotNull>
+      </dynamic>
+      <dynamic prepend="GROUP BY">
+        <![CDATA[t.material_id,t1.shift_id,t.bom_id,t2.material_code,t.tech_id]]>
+      </dynamic>
+    </select>
+    <select id="GetSemiPlanInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      select te.equip_id,tb.objid bom_id,tm.plan_month_id,tmc.material_code,te.equip_major_type_id from
+      (select t2.objid equip_id,t.objid material_id,t1.equip_major_type_id from sbm_material t 
+      left join hpp_material_equip t1 on t1.material_minor_type_id = t.minor_type_id
+      left join sbe_equip t2 on t2.minor_type_id = t1.equip_minor_type_id and t2.delete_flag=0
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property ="materialID" prepend="AND">
+          <![CDATA[t.objid = #materialID#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+       )te
+        left join 
+      (select max(t.objid) objid,t.material_parent_id from sbm_bom_data t  
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property ="materialID" prepend="AND">
+          <![CDATA[t.material_parent_id =#materialID#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+      and t.delete_flag=0 
+        ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="greenTyreVersion" prepend="AND">
+          <![CDATA[t.greentyre_version=#greenTyreVersion#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[ group by t.material_parent_id)tb
+      on tb.material_parent_id = te.material_id
+      left join 
+      (
+      select t.objid plan_month_id,t.material_id from hpp_plan_month t 
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="planMonth" prepend="AND"> 
+          <![CDATA[t.plan_month =#planMonth#]]>
+        </isNotNull>
+        <isNotNull property="materialID" prepend="AND">
+          <![CDATA[t.material_id =#materialID#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+        and t.delete_flag=0)tm on tm.material_id = te.material_id
+      left join 
+      (
+      select t1.material_code, t.material_id from sbm_bom_data t
+      left join sbm_material t1 on t1.objid = t.material_parent_id
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="materialID" prepend="AND">
+          <![CDATA[t.material_id=#materialID#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[and t.delete_flag=0 and rownum=1)tmc on tmc.material_id = te.material_id]]>
+    </select>
+    <select id="GetSemisFromBom" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      SELECT t.*,t1.material_code,t2.major_type_id,t4.type_name FROM SBM_BOM_DATA T 
+      left join sbm_material t1 on t1.objid = t.greentyre_material_id
+      left join sbm_material t2 on t2.objid = t.material_id 
+      left join sbm_material_major_type t3 on t3.objid = t2.major_type_id
+      left join sbm_bom_type t4 on t4.objid = t.bom_type and t4.delete_flag=0
+      WHERE T.DELETE_FLAG =0 AND T3.OBJID=31
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="pMaterialId" prepend="AND">
+          <![CDATA[T.MATERIAL_PARENT_ID = #pMaterialId#]]>
+        </isNotNull>
+        <isNotNull property="bomId" prepend="AND">
+          <![CDATA[T.BOM_VERSION = #bomId#]]>
+        </isNotNull>
+        <isNotNull property="greenTyreId" prepend="AND">
+          <![CDATA[T.GREENTYRE_MATERIAL_ID = #greenTyreId#]]>
+        </isNotNull>
+        <isNotNull property="greenTyreVersion" prepend="AND">
+          <![CDATA[T.greentyre_version = #greenTyreVersion#]]>
+        </isNotNull>
+        <isNotNull property="bomType" prepend="AND">
+          <![CDATA[T4.type_name = #bomType#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <select id="GetSemisFromBom1" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      select distinct t2.minor_type_name,t.* from (
+
+with cte (MATERIAL_ID,UNIT_ID,GROUP_NUM,GREENTYRE_VERSION,BOM_TYPE,BOM_FACTROY,BOM_VERSION,MATERIAL_PARENT_ID,DELETE_FLAG,GROUP_UNIT_NUM,BOMQty,BOMchar,LEVELX) as
+(
+    select bomhead.MATERIAL_ID,bomhead.UNIT_ID,bomhead.GROUP_NUM,bomhead.GREENTYRE_VERSION,bomhead.BOM_TYPE,bomhead.BOM_FACTROY,
+           bomhead.BOM_VERSION,bomhead.MATERIAL_PARENT_ID,bomhead.DELETE_FLAG,bomhead.GROUP_UNIT_NUM,
+
+           CAST(CAST(bomhead.GROUP_NUM AS number(20,8)) AS number(20,8)) AS BOMQty,
+           to_char(bomhead.GROUP_NUM) AS BOMchar,
+           1 AS levelx
+    from SBM_BOM_DATA bomhead
+    ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="pMaterialId" prepend="AND">
+          <![CDATA[bomhead.material_id = #pMaterialId# ]]>
+        </isNotNull>
+        <!--<isNotNull property="greenTyreVersion" prepend="AND">
+          <![CDATA[bomhead.greentyre_version=#greenTyreVersion# ]]>
+        </isNotNull>-->
+      </dynamic>
+      <![CDATA[
+     and bomhead.delete_flag=0 
+         and rownum=1
+ 
+    union all
+    
+    select bomd.MATERIAL_ID,bomd.UNIT_ID,bomd.GROUP_NUM,bomd.GREENTYRE_VERSION,bomd.BOM_TYPE,bomd.BOM_FACTROY,
+           bomd.BOM_VERSION,bomd.MATERIAL_PARENT_ID,bomd.DELETE_FLAG,bomd.GROUP_UNIT_NUM,
+           CAST(CAST(cte.BOMQty AS number(20,8))*CAST(bomd.GROUP_NUM AS number(20,8)) AS number(20,8)) AS BOMQty,
+           cte.BOMchar||' * '||to_char(bomd.GROUP_NUM) AS BOMchar,
+           levelx+1 AS levelx
+    from cte,(select MATERIAL_ID,UNIT_ID,GROUP_NUM,GREENTYRE_VERSION,BOM_TYPE,BOM_FACTROY,
+           BOM_VERSION,MATERIAL_PARENT_ID,DELETE_FLAG,GROUP_UNIT_NUM from sbm_bom_data where delete_flag=0 
+           group by MATERIAL_ID,UNIT_ID,GROUP_NUM,GREENTYRE_VERSION,BOM_TYPE,BOM_FACTROY,
+           BOM_VERSION,MATERIAL_PARENT_ID,DELETE_FLAG,GROUP_UNIT_NUM) bomd
+    where cte.material_id=bomd.material_parent_id 
+       
+
+       and bomd.delete_flag=0   
+)
+
+select * from cte 
+)t
+left join sbm_material t1 on t1.objid = t.material_id
+left join sbm_material_minor_type t2 on t2.objid = t1.minor_type_id
+where t1.major_type_id=31
+      ]]>
+      <!--<isNotNull property="greenTyreVersion" prepend="AND">
+          <![CDATA[t.greentyre_version=#greenTyreVersion# ]]>
+        </isNotNull>-->
+    </select>
+   
+    <select id="GetGreenTyreVersion" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      select pdm_version from v_bpt_molding_tech t 
+      where t.delete_flag=0
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="techId" prepend="AND">
+          <![CDATA[t.objid=#techId#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <select id="GetTechExistInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        select * from v_bpt_molding_tech t 
+        where t.delete_flag=0
+        ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="moldingMaterial" prepend="AND">
+          <![CDATA[t.material_id=#moldingMaterial#]]>
+        </isNotNull>
+        <isNotNull property="techId" prepend="AND">
+          <![CDATA[t.objid=#techId#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <select id="GetBomExistInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        select * from sbm_bom_data t where t.delete_flag=0
+        ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="materialId" prepend="AND">
+          <![CDATA[t.material_parent_id=#materialId#]]>
+        </isNotNull>
+        <isNotNull property="bomId" prepend="AND">
+          <![CDATA[t.bom_version=#bomId#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <select id="GetAlertInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        select t3.equip_name,t2.material_name from bpp_plan t 
+        left join bpp_plan_detail t1 on t1.plan_id =t.objid and t1.delete_flag=0
+        left join sbm_material t2 on t2.objid = t1.material_id and t2.delete_flag=0
+        left join sbe_equip t3 on t3.objid = t.equip_id
+        where t.delete_flag=0 
+        ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="equipId" prepend="AND">
+          <![CDATA[t.equip_id=#equipId#]]>
+        </isNotNull>
+        <isNotNull property="materialId" prepend="AND">
+          <![CDATA[t1.material_id=#materialId#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <select id="GetALLPlanInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        select t.material_id,t.bom_id,t.tech_id,t1.plan_date,t1.equip_id from bpp_plan_detail t 
+        left join bpp_plan t1 on t1.objid = t.plan_id
+        where t.delete_flag=0 and t1.delete_flag=0 
+        ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="planDate" prepend="AND">
+          <![CDATA[t1.plan_date=#planDate#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[order by t1.equip_id]]>
+    </select>
+
+    <!--查询实例说明-->
+    <select id="getProductionVer" parameterClass="map" resultClass="Row">
+      select b.MATERIAL_NAME, a.* from sbm_material_productionver a
+      left join sbm_material b on a.sap_code = b.sap_code
+      where 1=1
+      and b.objid = #MaterialId#
+      and a.production_ver in (select c.bom_factroy || c.bom_version  bomVer
+      from sbm_bom_data c where c.material_parent_id = #MaterialId# and c.bom_version = #BomId# )
+    </select>
+
+    <!--查询物料状态-->
+    <select id="getMaterialStatus" parameterClass="map" resultClass="Row">
+      SELECT * FROM sbm_material WHERE objid = #MaterialId#
+    </select>
+    
+  </statements>
+</sqlMap>

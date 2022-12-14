@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="MajorType" Value="设备大类"></Caption>
+    <Caption Name="MinorType" Value="设备细类"></Caption>
+    <Caption Name="EquipName" Value="设备名称"></Caption>
+    <Caption Name="EquipCode" Value="设备代号"></Caption>
+    
+    <Caption Name="MAJOR_TYPE_NAME" Value="设备大类"></Caption>
+    <Caption Name="MINOR_TYPE_NAME" Value="设备细类"></Caption>
+    <Caption Name="EQUIP_NAME" Value="设备名称"></Caption>
+    <Caption Name="EQUIP_CODE" Value="设备代号"></Caption>
+  </Captions>
+  <WebPage Title="查找设备信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Equip/McUI/@McUI/SearchBoxSbeEquip.js" />
+    </JavaScripts>
+  </WebPage>
+  <Select>
+    <ParamPanel ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="MajorType" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MinorType" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="EquipName"></ParamField>
+        <ParamField FieldName="EquipCode"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="EQUIP_NAME"></GridColumn>
+        <GridColumn ColumnName="EQUIP_CODE"></GridColumn>
+        <GridColumn ColumnName="MAJOR_TYPE_NAME"></GridColumn>
+        <GridColumn ColumnName="MINOR_TYPE_NAME"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

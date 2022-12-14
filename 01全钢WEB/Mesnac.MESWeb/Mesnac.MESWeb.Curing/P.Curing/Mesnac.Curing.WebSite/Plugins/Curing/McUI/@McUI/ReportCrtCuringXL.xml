@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="EQUIP_ID" Value="机台"></Caption>
+    <Caption Name="EQUIP_NAME" Value="机台名称"></Caption>
+    <Caption Name="SAP_CODE" Value="SAP品号"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="规格"></Caption>
+    <Caption Name="LHXL" Value="硫化效率(%)"></Caption>
+    <Caption Name="KHMXL" Value="开合模效率(%)"></Caption>
+    <Caption Name="CURING_TIME" Value="硫化时间"></Caption>
+    <Caption Name="KHMSUMTIME" Value="开合模总时间"></Caption>
+    <Caption Name="XYJS" Value="步序1泄压解锁"></Caption>
+    <Caption Name="KMBS" Value="步序2开模闭锁"></Caption>
+    <Caption Name="XTZBRS" Value="步序3卸胎支臂入伸"></Caption>
+    <Caption Name="SXHTS" Value="步序4上下环脱胎"></Caption>
+    <Caption Name="XTZBS" Value="步序5卸胎支臂升"></Caption>
+    <Caption Name="XTZBSC" Value="步序6卸胎支臂缩、出"></Caption>
+    <Caption Name="ZTSZR" Value="步序7装胎手转入"></Caption>
+    <Caption Name="ZTSJ" Value="步序8装胎手降"></Caption>
+    <Caption Name="JNHX" Value="步序9胶囊呼吸"></Caption>
+    <Caption Name="TPDX" Value="步序10胎胚定型"></Caption>
+    <Caption Name="ZTSBHK" Value="步序11装胎手闭合、开"></Caption>
+    <Caption Name="ZTSZC" Value="步序12装胎手转出"></Caption>
+    <Caption Name="HMBS" Value="步序13合模、闭锁"></Caption>
+    <Caption Name="JHML" Value="步序14加合模力"></Caption>
+    <Caption Name="BeginTime" Value="开始时间"></Caption>
+    <Caption Name="EndTime" Value="结束时间"></Caption>
+  </Captions>
+  <WebPage Title="硫化统计效率汇总">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Curing/McUI/@McUI/ReportCrtCuringXL.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="CRT_CURING_STEPTIME">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_CRT_CURING_STEPTIME"></SeqField>
+    </SeqFields>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="BeginTime"         Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EndTime"           Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="SAP_CODE"                           Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME"                      Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_ID"          Type="SearchBox" Nullable="true" IsShow="true"></ParamField>
+        <ParamField FieldName="EQUIP_NAME"                         Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid>
+      <GridColumns>
+        <GridColumn ColumnName="EQUIP_NAME"         Width="100"></GridColumn>
+        <GridColumn ColumnName="SAP_CODE"           Width="100"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME"      Width="200"></GridColumn>
+        <GridColumn ColumnName="LHXL"               Width="120"></GridColumn>
+        <GridColumn ColumnName="KHMXL"              Width="120"></GridColumn>
+        <GridColumn ColumnName="CURING_TIME"        Width="160"></GridColumn>
+        <GridColumn ColumnName="KHMSUMTIME"         Width="160"></GridColumn>
+        <GridColumn ColumnName="XYJS"               Width="160"></GridColumn>
+        <GridColumn ColumnName="KMBS"               Width="160"></GridColumn>
+        <GridColumn ColumnName="XTZBRS"             Width="160"></GridColumn>
+        <GridColumn ColumnName="SXHTS"              Width="160"></GridColumn>
+        <GridColumn ColumnName="XTZBS"              Width="160"></GridColumn>
+        <GridColumn ColumnName="XTZBSC"             Width="160"></GridColumn>
+        <GridColumn ColumnName="ZTSZR"              Width="160"></GridColumn>
+        <GridColumn ColumnName="ZTSJ"               Width="160"></GridColumn>
+        <GridColumn ColumnName="JNHX"               Width="160"></GridColumn>
+        <GridColumn ColumnName="TPDX"               Width="160"></GridColumn>
+        <GridColumn ColumnName="ZTSBHK"             Width="160"></GridColumn>
+        <GridColumn ColumnName="ZTSZC"              Width="160"></GridColumn>
+        <GridColumn ColumnName="HMBS"               Width="160"></GridColumn>
+        <GridColumn ColumnName="JHML"               Width="160"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

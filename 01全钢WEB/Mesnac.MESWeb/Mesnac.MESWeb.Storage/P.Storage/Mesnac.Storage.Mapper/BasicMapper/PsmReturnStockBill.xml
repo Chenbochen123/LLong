@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Storage.Mapper.BasicMapper.PsmReturnStockBill"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="PsmReturnStockBill" type="Mesnac.Storage.Entity.BasicEntity.PsmReturnStockBill, Mesnac.Storage.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_PsmReturnStockBill" class="PsmReturnStockBill">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="BillCode" column="BILL_CODE"/>
+    <result property="ReturnShiftId" column="RETURN_SHIFT_ID"/>
+    <result property="ReturnClassId" column="RETURN_CLASS_ID"/>
+    <result property="ReturnDate" column="RETURN_DATE"/>
+    <result property="ReturnAmount" column="RETURN_AMOUNT"/>
+    <result property="UnitId" column="UNIT_ID"/>
+    <result property="UpdateTime" column="UPDATE_TIME"/>
+    <result property="UpdateUserId" column="UPDATE_USER_ID"/>
+    <result property="AffirmTime" column="AFFIRM_TIME"/>
+    <result property="AffirmUserId" column="AFFIRM_USER_ID"/>
+    <result property="BillState" column="BILL_STATE"/>
+    <result property="BillType" column="BILL_TYPE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_PsmReturnStockBill" class="PsmReturnStockBill">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="BillCode" column="BillCode"/>
+    <parameter property="ReturnShiftId" column="ReturnShiftId"/>
+    <parameter property="ReturnClassId" column="ReturnClassId"/>
+    <parameter property="ReturnDate" column="ReturnDate"/>
+    <parameter property="ReturnAmount" column="ReturnAmount"/>
+    <parameter property="UnitId" column="UnitId"/>
+    <parameter property="UpdateTime" column="UpdateTime"/>
+    <parameter property="UpdateUserId" column="UpdateUserId"/>
+    <parameter property="AffirmTime" column="AffirmTime"/>
+    <parameter property="AffirmUserId" column="AffirmUserId"/>
+    <parameter property="BillState" column="BillState"/>
+    <parameter property="BillType" column="BillType"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSM_RETURN_STOCK_BILL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BillCode" prepend="AND">
+          <![CDATA[BILL_CODE = #where.BillCode#]]>
+        </isNotNull>
+        <isNotNull property="where.ReturnShiftId" prepend="AND">
+          <![CDATA[RETURN_SHIFT_ID = #where.ReturnShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.ReturnClassId" prepend="AND">
+          <![CDATA[RETURN_CLASS_ID = #where.ReturnClassId#]]>
+        </isNotNull>
+        <isNotNull property="where.ReturnDate" prepend="AND">
+          <![CDATA[RETURN_DATE = #where.ReturnDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ReturnAmount" prepend="AND">
+          <![CDATA[RETURN_AMOUNT = #where.ReturnAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.UnitId" prepend="AND">
+          <![CDATA[UNIT_ID = #where.UnitId#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateUserId" prepend="AND">
+          <![CDATA[UPDATE_USER_ID = #where.UpdateUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmTime" prepend="AND">
+          <![CDATA[AFFIRM_TIME = #where.AffirmTime#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmUserId" prepend="AND">
+          <![CDATA[AFFIRM_USER_ID = #where.AffirmUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.BillState" prepend="AND">
+          <![CDATA[BILL_STATE = #where.BillState#]]>
+        </isNotNull>
+        <isNotNull property="where.BillType" prepend="AND">
+          <![CDATA[BILL_TYPE = #where.BillType#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO PSM_RETURN_STOCK_BILL]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="BillCode" prepend=",">BILL_CODE</isNotNull>
+        <isNotNull property="ReturnShiftId" prepend=",">RETURN_SHIFT_ID</isNotNull>
+        <isNotNull property="ReturnClassId" prepend=",">RETURN_CLASS_ID</isNotNull>
+        <isNotNull property="ReturnDate" prepend=",">RETURN_DATE</isNotNull>
+        <isNotNull property="ReturnAmount" prepend=",">RETURN_AMOUNT</isNotNull>
+        <isNotNull property="UnitId" prepend=",">UNIT_ID</isNotNull>
+        <isNotNull property="UpdateTime" prepend=",">UPDATE_TIME</isNotNull>
+        <isNotNull property="UpdateUserId" prepend=",">UPDATE_USER_ID</isNotNull>
+        <isNotNull property="AffirmTime" prepend=",">AFFIRM_TIME</isNotNull>
+        <isNotNull property="AffirmUserId" prepend=",">AFFIRM_USER_ID</isNotNull>
+        <isNotNull property="BillState" prepend=",">BILL_STATE</isNotNull>
+        <isNotNull property="BillType" prepend=",">BILL_TYPE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_PSM_RETURN_STOCK_BILL.NEXTVAL</isNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="BillCode" prepend=",">#BillCode#</isNotNull>
+        <isNotNull property="ReturnShiftId" prepend=",">#ReturnShiftId#</isNotNull>
+        <isNotNull property="ReturnClassId" prepend=",">#ReturnClassId#</isNotNull>
+        <isNotNull property="ReturnDate" prepend=",">#ReturnDate#</isNotNull>
+        <isNotNull property="ReturnAmount" prepend=",">#ReturnAmount#</isNotNull>
+        <isNotNull property="UnitId" prepend=",">#UnitId#</isNotNull>
+        <isNotNull property="UpdateTime" prepend=",">#UpdateTime#</isNotNull>
+        <isNotNull property="UpdateUserId" prepend=",">#UpdateUserId#</isNotNull>
+        <isNotNull property="AffirmTime" prepend=",">#AffirmTime#</isNotNull>
+        <isNotNull property="AffirmUserId" prepend=",">#AffirmUserId#</isNotNull>
+        <isNotNull property="BillState" prepend=",">#BillState#</isNotNull>
+        <isNotNull property="BillType" prepend=",">#BillType#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE PSM_RETURN_STOCK_BILL
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.BillCode"  prepend=",">
+          BILL_CODE = #update.BillCode#
+        </isNotNull>
+        <isNotNull  property="update.ReturnShiftId"  prepend=",">
+          RETURN_SHIFT_ID = #update.ReturnShiftId#
+        </isNotNull>
+        <isNotNull  property="update.ReturnClassId"  prepend=",">
+          RETURN_CLASS_ID = #update.ReturnClassId#
+        </isNotNull>
+        <isNotNull  property="update.ReturnDate"  prepend=",">
+          RETURN_DATE = #update.ReturnDate#
+        </isNotNull>
+        <isNotNull  property="update.ReturnAmount"  prepend=",">
+          RETURN_AMOUNT = #update.ReturnAmount#
+        </isNotNull>
+        <isNotNull  property="update.UnitId"  prepend=",">
+          UNIT_ID = #update.UnitId#
+        </isNotNull>
+        <isNotNull  property="update.UpdateTime"  prepend=",">
+          UPDATE_TIME = #update.UpdateTime#
+        </isNotNull>
+        <isNotNull  property="update.UpdateUserId"  prepend=",">
+          UPDATE_USER_ID = #update.UpdateUserId#
+        </isNotNull>
+        <isNotNull  property="update.AffirmTime"  prepend=",">
+          AFFIRM_TIME = #update.AffirmTime#
+        </isNotNull>
+        <isNotNull  property="update.AffirmUserId"  prepend=",">
+          AFFIRM_USER_ID = #update.AffirmUserId#
+        </isNotNull>
+        <isNotNull  property="update.BillState"  prepend=",">
+          BILL_STATE = #update.BillState#
+        </isNotNull>
+        <isNotNull  property="update.BillType"  prepend=",">
+          BILL_TYPE = #update.BillType#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM PSM_RETURN_STOCK_BILL
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_PsmReturnStockBill">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_PsmReturnStockBill">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM PSM_RETURN_STOCK_BILL
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM PSM_RETURN_STOCK_BILL
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_PsmReturnStockBill" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE PSM_RETURN_STOCK_BILL
+    </statement>
+  </statements>
+</sqlMap>

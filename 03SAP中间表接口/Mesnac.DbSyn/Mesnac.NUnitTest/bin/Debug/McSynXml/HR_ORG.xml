@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SynConfig>
+    <Tables>
+        <Table name="Table.Source">
+            <DbSourceName>PDM200</DbSourceName>
+            <TableName>HR_ORG</TableName>
+            <Primarykey FieldName="ORG_ID"/>
+        </Table>
+        <Table name="Table.Target">
+           <DbSourceName>MES</DbSourceName>
+            <TableName>SSB_DEPT</TableName>
+            <Primarykey FieldName="OBJID"/>
+            <SeqFields>
+                <SeqField FieldName="OBJID" SeqName="SEQ_SSB_DEPT"/>
+            </SeqFields>
+        </Table>
+    </Tables>
+    <SynDatas>
+        <SynData>
+            <SourceTable TableName="Table.Source">
+                <Command >
+                    <FileName value="Mesnac.DbSyn.LLCommand.dll"/>
+                    <ClassName value="Mesnac.DbSyn.LLERP.HR_ORG.Source"/>
+                </Command>
+                <BeginSyn>
+                    <add key="sql" value=""/>
+                </BeginSyn>
+                <SelectData>
+                    <add key="count" value="0"/>
+                    <add key="where">
+                        <![CDATA[ORG_ID='30015425']]>
+                    </add>
+                </SelectData>
+                <FinishRowSyn>
+                    <add key="update" value="MARK=0"/>
+                    <add key="where" value="ORG_ID"/>
+                </FinishRowSyn>
+            </SourceTable>
+            <TargetTable TableName="Table.Target">
+                <Command >
+                    <FileName value="Mesnac.DbSyn.LLCommand.dll"/>
+                    <ClassName value="Mesnac.DbSyn.LLERP.HR_ORG.Target"/>
+                </Command>
+                <BeginSyn>
+                    <add key="sql">
+                    </add>
+                </BeginSyn>
+                <ExcuteRowSyn>
+                    <add key="where" value="HR_CODE"/>
+                </ExcuteRowSyn>
+            </TargetTable>
+            <SourceTargetFields>
+                <SourceTargetField SourceFieldName="ORG_ID" TargetFieldName="HR_CODE"/>
+                <SourceTargetField SourceFieldName="PARENT_ID" TargetFieldName="HR_CODE_PARENT"/>
+                <SourceTargetField SourceFieldName="NAME" TargetFieldName="DEPT_NAME"/>
+            </SourceTargetFields>
+        </SynData>
+    </SynDatas>
+</SynConfig>

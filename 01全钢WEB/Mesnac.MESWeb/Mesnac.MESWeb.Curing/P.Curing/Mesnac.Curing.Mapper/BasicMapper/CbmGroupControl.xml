@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CbmGroupControl"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CbmGroupControl" type="Mesnac.Curing.Entity.BasicEntity.CbmGroupControl, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CbmGroupControl" class="CbmGroupControl">
+    <result property="IsGroupControl" column="IS_GROUP_CONTROL"/>
+    <result property="ObjId" column="OBJID"/>
+    <result property="GroupName" column="GROUP_NAME"/>
+    <result property="GroupIp" column="GROUP_IP"/>
+    <result property="GroupPort" column="GROUP_PORT"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CbmGroupControl" class="CbmGroupControl">
+    <parameter property="IsGroupControl" column="IsGroupControl"/>
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="GroupName" column="GroupName"/>
+    <parameter property="GroupIp" column="GroupIp"/>
+    <parameter property="GroupPort" column="GroupPort"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CBM_GROUP_CONTROL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.IsGroupControl" prepend="AND">
+          <![CDATA[IS_GROUP_CONTROL = #where.IsGroupControl#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.GroupName" prepend="AND">
+          <![CDATA[GROUP_NAME = #where.GroupName#]]>
+        </isNotNull>
+        <isNotNull property="where.GroupIp" prepend="AND">
+          <![CDATA[GROUP_IP = #where.GroupIp#]]>
+        </isNotNull>
+        <isNotNull property="where.GroupPort" prepend="AND">
+          <![CDATA[GROUP_PORT = #where.GroupPort#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE ( = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CBM_GROUP_CONTROL]]>
+       <dynamic prepend="(">
+        <isNotNull property="IsGroupControl" prepend=",">IS_GROUP_CONTROL</isNotNull>
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="GroupName" prepend=",">GROUP_NAME</isNotNull>
+        <isNotNull property="GroupIp" prepend=",">GROUP_IP</isNotNull>
+        <isNotNull property="GroupPort" prepend=",">GROUP_PORT</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="IsGroupControl" prepend=",">#IsGroupControl#</isNotNull>
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="GroupName" prepend=",">#GroupName#</isNotNull>
+        <isNotNull property="GroupIp" prepend=",">#GroupIp#</isNotNull>
+        <isNotNull property="GroupPort" prepend=",">#GroupPort#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CBM_GROUP_CONTROL
+       <dynamic prepend="SET">
+        <isNotNull  property="update.IsGroupControl"  prepend=",">
+          IS_GROUP_CONTROL = #update.IsGroupControl#
+        </isNotNull>
+        <isNotNull  property="update.ObjId"  prepend=",">
+          OBJID = #update.ObjId#
+        </isNotNull>
+        <isNotNull  property="update.GroupName"  prepend=",">
+          GROUP_NAME = #update.GroupName#
+        </isNotNull>
+        <isNotNull  property="update.GroupIp"  prepend=",">
+          GROUP_IP = #update.GroupIp#
+        </isNotNull>
+        <isNotNull  property="update.GroupPort"  prepend=",">
+          GROUP_PORT = #update.GroupPort#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CBM_GROUP_CONTROL
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CbmGroupControl">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CbmGroupControl">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max()
+      </isNotPropertyAvailable>
+      FROM CBM_GROUP_CONTROL
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CBM_GROUP_CONTROL
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CbmGroupControl" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CBM_GROUP_CONTROL
+    </statement>
+  </statements>
+</sqlMap>

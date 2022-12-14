@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.SqlMain.Mapper.BusinessMapper.Ppmrubberstorage"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PpmRubberStorage ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.Storageid" prepend="AND">
+          <![CDATA[StorageID = #where.Storageid#]]>
+        </isNotNull>
+        <isNotNull property="where.Storageplaceid" prepend="AND">
+          <![CDATA[StoragePlaceID = #where.Storageplaceid#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[Barcode = #where.Barcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Shelfbarcode" prepend="AND">
+          <![CDATA[ShelfBarcode = #where.Shelfbarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcodestart" prepend="AND">
+          <![CDATA[BarcodeStart = #where.Barcodestart#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcodeend" prepend="AND">
+          <![CDATA[BarcodeEnd = #where.Barcodeend#]]>
+        </isNotNull>
+        <isNotNull property="where.Shelfnum" prepend="AND">
+          <![CDATA[ShelfNum = #where.Shelfnum#]]>
+        </isNotNull>
+        <isNotNull property="where.Memnote" prepend="AND">
+          <![CDATA[MemNote = #where.Memnote#]]>
+        </isNotNull>
+        <isNotNull property="where.Plandate" prepend="AND">
+          <![CDATA[PlanDate = #where.Plandate#]]>
+        </isNotNull>
+        <isNotNull property="where.Shiftid" prepend="AND">
+          <![CDATA[ShiftID = #where.Shiftid#]]>
+        </isNotNull>
+        <isNotNull property="where.Shiftclassid" prepend="AND">
+          <![CDATA[ShiftClassID = #where.Shiftclassid#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipcode" prepend="AND">
+          <![CDATA[EquipCode = #where.Equipcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Matercode" prepend="AND">
+          <![CDATA[MaterCode = #where.Matercode#]]>
+        </isNotNull>
+        <isNotNull property="where.Validdate" prepend="AND">
+          <![CDATA[ValidDate = #where.Validdate#]]>
+        </isNotNull>
+        <isNotNull property="where.Productweight" prepend="AND">
+          <![CDATA[ProductWeight = #where.Productweight#]]>
+        </isNotNull>
+        <isNotNull property="where.Stockflag" prepend="AND">
+          <![CDATA[StockFlag = #where.Stockflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Checkflag" prepend="AND">
+          <![CDATA[CheckFlag = #where.Checkflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Tecdealflag" prepend="AND">
+          <![CDATA[TecDealFlag = #where.Tecdealflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Tecdealidea" prepend="AND">
+          <![CDATA[TecDealIdea = #where.Tecdealidea#]]>
+        </isNotNull>
+        <isNotNull property="where.Consumeweight" prepend="AND">
+          <![CDATA[ConsumeWeight = #where.Consumeweight#]]>
+        </isNotNull>
+        <isNotNull property="where.Realweight" prepend="AND">
+          <![CDATA[RealWeight = #where.Realweight#]]>
+        </isNotNull>
+        <isNotNull property="where.Recorddate" prepend="AND">
+          <![CDATA[RecordDate = #where.Recorddate#]]>
+        </isNotNull>
+        <isNotNull property="where.Operperson" prepend="AND">
+          <![CDATA[OperPerson = #where.Operperson#]]>
+        </isNotNull>
+        <isNotNull property="where.Rubtype" prepend="AND">
+          <![CDATA[RubType = #where.Rubtype#]]>
+        </isNotNull>
+        <isNotNull property="where.Llbarcode" prepend="AND">
+          <![CDATA[LLBarCode = #where.Llbarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Realnum" prepend="AND">
+          <![CDATA[RealNum = #where.Realnum#]]>
+        </isNotNull>
+        <isNotNull property="where.Isinvalid" prepend="AND">
+          <![CDATA[IsInValid = #where.Isinvalid#]]>
+        </isNotNull>
+        <isNotNull property="where.Useequipcode" prepend="AND">
+          <![CDATA[UseEquipCode = #where.Useequipcode#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+  
+    <select id="GetUseridInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[select  *  from  SysUserRole where RoleID = '20' and UserCode = #UserId#
+      ]]>
+    </select>
+    
+    <select id="GetTSInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+select  *  from  TDMCheckData with (nolock) where Recordtime>DATEADD(MINUTE,-1,GETDATE())
+      ]]>
+    </select>
+
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="BeginTime" Value="最早时间"></Caption>
+    <Caption Name="EndTime" Value="最晚时间"></Caption>
+    <Caption Name="BEGIN_TIME" Value="硫化开始时间"></Caption>
+    <Caption Name="END_TIME" Value="硫化结束时间"></Caption>
+    <Caption Name="EQUIP_NAME" Value="机台名称"></Caption>
+    <Caption Name="EquipName" Value="机台名称"></Caption>
+    <Caption Name="EQUIP_NAME" Value="机台名称"></Caption>
+    <Caption Name="EQUIP_ID" Value="机台名称"></Caption>
+    <Caption Name="TYRE_NO" Value="硫化号"></Caption>
+    <Caption Name="GREEN_TYRE_NO" Value="成型号"></Caption>
+    <Caption Name="NoCheckDay" Value="超期天数"></Caption>
+    <Caption Name="MATERIAL_ID" Value="成品胎规格"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="成品胎规格"></Caption>
+    <Caption Name="MaterialName" Value="成品胎规格"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="操作人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+  </Captions>
+  <WebPage Title="硫化未质检信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Curing/McUI/@McUI/ReportCppNoCheckProduction.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="CPP_CURING_PRODUCTION">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_CPP_CURING_PRODUCTION"></SeqField>
+    </SeqFields>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="BeginTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EndTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="NoCheckDay" Type="NumberBox" DefaultValue="7" Nullable="false"></ParamField>
+        <ParamField FieldName="EQUIP_ID" Type="SearchBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_ID" Type="SearchBox" Nullable="true"></ParamField>
+        <ParamField FieldName="EquipName" Nullable="true" IsShow="false"></ParamField>
+        <ParamField FieldName="MaterialName" Nullable="true" IsShow="false"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid>
+      <GridColumns>
+        <GridColumn ColumnName="TYRE_NO"></GridColumn>
+        <GridColumn ColumnName="GREEN_TYRE_NO"></GridColumn>
+        <GridColumn ColumnName="BEGIN_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="END_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="EQUIP_NAME"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+    <MainDetail>
+        <ParamFields>
+          <ParamField FieldName="TYRE_NO"></ParamField>
+          <ParamField FieldName="GREEN_TYRE_NO"></ParamField>
+          <ParamField FieldName="BEGIN_TIME" Type="DateTimeBox"></ParamField>
+          <ParamField FieldName="END_TIME" Type="DateTimeBox"></ParamField>
+          <ParamField FieldName="EQUIP_NAME"></ParamField>
+          <ParamField FieldName="MATERIAL_NAME"></ParamField>
+          <ParamField FieldName="RECORD_USER_NAME"></ParamField>
+          <ParamField FieldName="RECORD_TIME" Type="DateTimeBox"></ParamField>
+        </ParamFields>
+    </MainDetail>
+  </Select>
+</UiConfig>

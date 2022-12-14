@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BasicMapper.FqxXcheckInfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="FqxXcheckInfo" type="Mesnac.Quality.Entity.BasicEntity.FqxXcheckInfo, Mesnac.Quality.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_FqxXcheckInfo" class="FqxXcheckInfo">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Tyrdid" column="TYRDID"/>
+    <result property="Gradeid" column="GRADEID"/>
+    <result property="Seqid" column="SEQID"/>
+    <result property="NewFlag" column="NEW_FLAG"/>
+    <result property="WorkProcessId" column="WORK_PROCESS_ID"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="WorkshopId" column="WORKSHOP_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="StateFlag" column="STATE_FLAG"/>
+    <result property="Materialid" column="MATERIALID"/>
+    <result property="Equipcode" column="EQUIPCODE"/>
+    <result property="Defectname" column="DEFECTNAME"/>
+    <result property="ShiftId" column="SHIFT_ID"/>
+    <result property="TeamId" column="TEAM_ID"/>
+    <result property="PicturePath" column="PICTURE_PATH"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="Weight" column="WEIGHT"/>
+    <result property="SetWeight" column="SET_WEIGHT"/>
+    <result property="ChangeGradeId" column="CHANGE_GRADE_ID"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_FqxXcheckInfo" class="FqxXcheckInfo">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Tyrdid" column="Tyrdid"/>
+    <parameter property="Gradeid" column="Gradeid"/>
+    <parameter property="Seqid" column="Seqid"/>
+    <parameter property="NewFlag" column="NewFlag"/>
+    <parameter property="WorkProcessId" column="WorkProcessId"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="WorkshopId" column="WorkshopId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="StateFlag" column="StateFlag"/>
+    <parameter property="Materialid" column="Materialid"/>
+    <parameter property="Equipcode" column="Equipcode"/>
+    <parameter property="Defectname" column="Defectname"/>
+    <parameter property="ShiftId" column="ShiftId"/>
+    <parameter property="TeamId" column="TeamId"/>
+    <parameter property="PicturePath" column="PicturePath"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="Weight" column="Weight"/>
+    <parameter property="SetWeight" column="SetWeight"/>
+    <parameter property="ChangeGradeId" column="ChangeGradeId"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM FQX_XCHECK_INFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Tyrdid" prepend="AND">
+          <![CDATA[TYRDID = #where.Tyrdid#]]>
+        </isNotNull>
+        <isNotNull property="where.Gradeid" prepend="AND">
+          <![CDATA[GRADEID = #where.Gradeid#]]>
+        </isNotNull>
+        <isNotNull property="where.Seqid" prepend="AND">
+          <![CDATA[SEQID = #where.Seqid#]]>
+        </isNotNull>
+        <isNotNull property="where.NewFlag" prepend="AND">
+          <![CDATA[NEW_FLAG = #where.NewFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkProcessId" prepend="AND">
+          <![CDATA[WORK_PROCESS_ID = #where.WorkProcessId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.StateFlag" prepend="AND">
+          <![CDATA[STATE_FLAG = #where.StateFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Materialid" prepend="AND">
+          <![CDATA[MATERIALID = #where.Materialid#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipcode" prepend="AND">
+          <![CDATA[EQUIPCODE = #where.Equipcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Defectname" prepend="AND">
+          <![CDATA[DEFECTNAME = #where.Defectname#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.TeamId" prepend="AND">
+          <![CDATA[TEAM_ID = #where.TeamId#]]>
+        </isNotNull>
+        <isNotNull property="where.PicturePath" prepend="AND">
+          <![CDATA[PICTURE_PATH = #where.PicturePath#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Weight" prepend="AND">
+          <![CDATA[WEIGHT = #where.Weight#]]>
+        </isNotNull>
+        <isNotNull property="where.SetWeight" prepend="AND">
+          <![CDATA[SET_WEIGHT = #where.SetWeight#]]>
+        </isNotNull>
+        <isNotNull property="where.ChangeGradeId" prepend="AND">
+          <![CDATA[CHANGE_GRADE_ID = #where.ChangeGradeId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO FQX_XCHECK_INFO]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="Tyrdid" prepend=",">TYRDID</isNotNull>
+        <isNotNull property="Gradeid" prepend=",">GRADEID</isNotNull>
+        <isNotNull property="Seqid" prepend=",">SEQID</isNotNull>
+        <isNotNull property="NewFlag" prepend=",">NEW_FLAG</isNotNull>
+        <isNotNull property="WorkProcessId" prepend=",">WORK_PROCESS_ID</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">WORKSHOP_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="StateFlag" prepend=",">STATE_FLAG</isNotNull>
+        <isNotNull property="Materialid" prepend=",">MATERIALID</isNotNull>
+        <isNotNull property="Equipcode" prepend=",">EQUIPCODE</isNotNull>
+        <isNotNull property="Defectname" prepend=",">DEFECTNAME</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">SHIFT_ID</isNotNull>
+        <isNotNull property="TeamId" prepend=",">TEAM_ID</isNotNull>
+        <isNotNull property="PicturePath" prepend=",">PICTURE_PATH</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="Weight" prepend=",">WEIGHT</isNotNull>
+        <isNotNull property="SetWeight" prepend=",">SET_WEIGHT</isNotNull>
+        <isNotNull property="ChangeGradeId" prepend=",">CHANGE_GRADE_ID</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_FQX_XCHECK_INFO.NEXTVAL</isNull>
+        <isNotNull property="Tyrdid" prepend=",">#Tyrdid#</isNotNull>
+        <isNotNull property="Gradeid" prepend=",">#Gradeid#</isNotNull>
+        <isNotNull property="Seqid" prepend=",">#Seqid#</isNotNull>
+        <isNotNull property="NewFlag" prepend=",">#NewFlag#</isNotNull>
+        <isNotNull property="WorkProcessId" prepend=",">#WorkProcessId#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">#WorkshopId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="StateFlag" prepend=",">#StateFlag#</isNotNull>
+        <isNotNull property="Materialid" prepend=",">#Materialid#</isNotNull>
+        <isNotNull property="Equipcode" prepend=",">#Equipcode#</isNotNull>
+        <isNotNull property="Defectname" prepend=",">#Defectname#</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">#ShiftId#</isNotNull>
+        <isNotNull property="TeamId" prepend=",">#TeamId#</isNotNull>
+        <isNotNull property="PicturePath" prepend=",">#PicturePath#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="Weight" prepend=",">#Weight#</isNotNull>
+        <isNotNull property="SetWeight" prepend=",">#SetWeight#</isNotNull>
+        <isNotNull property="ChangeGradeId" prepend=",">#ChangeGradeId#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE FQX_XCHECK_INFO
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Tyrdid"  prepend=",">
+          TYRDID = #update.Tyrdid#
+        </isNotNull>
+        <isNotNull  property="update.Gradeid"  prepend=",">
+          GRADEID = #update.Gradeid#
+        </isNotNull>
+        <isNotNull  property="update.Seqid"  prepend=",">
+          SEQID = #update.Seqid#
+        </isNotNull>
+        <isNotNull  property="update.NewFlag"  prepend=",">
+          NEW_FLAG = #update.NewFlag#
+        </isNotNull>
+        <isNotNull  property="update.WorkProcessId"  prepend=",">
+          WORK_PROCESS_ID = #update.WorkProcessId#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.WorkshopId"  prepend=",">
+          WORKSHOP_ID = #update.WorkshopId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.StateFlag"  prepend=",">
+          STATE_FLAG = #update.StateFlag#
+        </isNotNull>
+        <isNotNull  property="update.Materialid"  prepend=",">
+          MATERIALID = #update.Materialid#
+        </isNotNull>
+        <isNotNull  property="update.Equipcode"  prepend=",">
+          EQUIPCODE = #update.Equipcode#
+        </isNotNull>
+        <isNotNull  property="update.Defectname"  prepend=",">
+          DEFECTNAME = #update.Defectname#
+        </isNotNull>
+        <isNotNull  property="update.ShiftId"  prepend=",">
+          SHIFT_ID = #update.ShiftId#
+        </isNotNull>
+        <isNotNull  property="update.TeamId"  prepend=",">
+          TEAM_ID = #update.TeamId#
+        </isNotNull>
+        <isNotNull  property="update.PicturePath"  prepend=",">
+          PICTURE_PATH = #update.PicturePath#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.Weight"  prepend=",">
+          WEIGHT = #update.Weight#
+        </isNotNull>
+        <isNotNull  property="update.SetWeight"  prepend=",">
+          SET_WEIGHT = #update.SetWeight#
+        </isNotNull>
+        <isNotNull  property="update.ChangeGradeId"  prepend=",">
+          CHANGE_GRADE_ID = #update.ChangeGradeId#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM FQX_XCHECK_INFO
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_FqxXcheckInfo">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_FqxXcheckInfo">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM FQX_XCHECK_INFO
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM FQX_XCHECK_INFO
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_FqxXcheckInfo" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE FQX_XCHECK_INFO
+    </statement>
+  </statements>
+</sqlMap>

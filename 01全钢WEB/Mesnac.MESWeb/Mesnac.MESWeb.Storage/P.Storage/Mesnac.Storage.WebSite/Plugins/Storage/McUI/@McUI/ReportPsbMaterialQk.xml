@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="MATERIAL_CODE_NEW" Value="新SAP号"></Caption>
+    <Caption Name="MATERIAL_CODE_OLD" Value="旧SAP号"></Caption>
+    <Caption Name="MATERIAL_NAME_LONG" Value="物料描述(长)"></Caption>
+    <Caption Name="MATERIAL_NAME_SHORT" Value="物料描述(短)"></Caption>
+    <Caption Name="MATERIAL_CODE_LONG" Value="40位物料号"></Caption>
+  </Captions>
+  <WebPage Title="成品调拨单">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Storage/McUI/@McUI/ReportPsbMaterialQk.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="PSB_MATERIAL_QK">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="MATERIAL_CODE_NEW" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_CODE_OLD" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME_LONG" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME_SHORT" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_CODE_LONG" Type="TextBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_CODE_NEW" Width="100"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_CODE_OLD" Width="100"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME_LONG" Width="350"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME_SHORT" Width="200"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_CODE_LONG" Width="150"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+    <MainDetail>
+      <ParamFields>
+        <ParamField FieldName="OBJID" IsShow="false"></ParamField>
+        <ParamField FieldName="MATERIAL_CODE_NEW"></ParamField>
+        <ParamField FieldName="MATERIAL_CODE_OLD"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME_LONG"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME_SHORT"></ParamField>
+        <ParamField FieldName="MATERIAL_CODE_LONG"></ParamField>
+      </ParamFields>
+    </MainDetail>
+  </Select>
+</UiConfig>

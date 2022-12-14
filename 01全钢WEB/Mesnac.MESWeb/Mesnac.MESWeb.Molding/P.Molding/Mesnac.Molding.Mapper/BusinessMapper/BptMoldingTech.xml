@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.BptMoldingTech"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BPT_MOLDING_TECH ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.PdmVersion" prepend="AND">
+          <![CDATA[PDM_VERSION = #where.PdmVersion#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmType" prepend="AND">
+          <![CDATA[PARM_TYPE = #where.ParmType#]]>
+        </isNotNull>
+        <isNotNull property="where.Lastmodifier" prepend="AND">
+          <![CDATA[LASTMODIFIER = #where.Lastmodifier#]]>
+        </isNotNull>
+        <isNotNull property="where.LastmodifyDate" prepend="AND">
+          <![CDATA[LASTMODIFY_DATE = #where.LastmodifyDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EffectDate" prepend="AND">
+          <![CDATA[EFFECT_DATE = #where.EffectDate#]]>
+        </isNotNull>
+        <isNotNull property="where.LoseEffectDate" prepend="AND">
+          <![CDATA[LOSE_EFFECT_DATE = #where.LoseEffectDate#]]>
+        </isNotNull>
+        <isNotNull property="where.TechType" prepend="AND">
+          <![CDATA[TECH_TYPE = #where.TechType#]]>
+        </isNotNull>
+        <isNotNull property="where.IsNewRow" prepend="AND">
+          <![CDATA[IS_NEW_ROW = #where.IsNewRow#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000001" prepend="AND">
+          <![CDATA[PAR32000001 = #where.Par32000001#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000002" prepend="AND">
+          <![CDATA[PAR32000002 = #where.Par32000002#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000003" prepend="AND">
+          <![CDATA[PAR32000003 = #where.Par32000003#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000004" prepend="AND">
+          <![CDATA[PAR32000004 = #where.Par32000004#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000005" prepend="AND">
+          <![CDATA[PAR32000005 = #where.Par32000005#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000006" prepend="AND">
+          <![CDATA[PAR32000006 = #where.Par32000006#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000007" prepend="AND">
+          <![CDATA[PAR32000007 = #where.Par32000007#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000008" prepend="AND">
+          <![CDATA[PAR32000008 = #where.Par32000008#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000009" prepend="AND">
+          <![CDATA[PAR32000009 = #where.Par32000009#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000010" prepend="AND">
+          <![CDATA[PAR32000010 = #where.Par32000010#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000011" prepend="AND">
+          <![CDATA[PAR32000011 = #where.Par32000011#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000012" prepend="AND">
+          <![CDATA[PAR32000012 = #where.Par32000012#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000013" prepend="AND">
+          <![CDATA[PAR32000013 = #where.Par32000013#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000014" prepend="AND">
+          <![CDATA[PAR32000014 = #where.Par32000014#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000015" prepend="AND">
+          <![CDATA[PAR32000015 = #where.Par32000015#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000016" prepend="AND">
+          <![CDATA[PAR32000016 = #where.Par32000016#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000017" prepend="AND">
+          <![CDATA[PAR32000017 = #where.Par32000017#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000018" prepend="AND">
+          <![CDATA[PAR32000018 = #where.Par32000018#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000019" prepend="AND">
+          <![CDATA[PAR32000019 = #where.Par32000019#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000020" prepend="AND">
+          <![CDATA[PAR32000020 = #where.Par32000020#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000021" prepend="AND">
+          <![CDATA[PAR32000021 = #where.Par32000021#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000022" prepend="AND">
+          <![CDATA[PAR32000022 = #where.Par32000022#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000023" prepend="AND">
+          <![CDATA[PAR32000023 = #where.Par32000023#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000024" prepend="AND">
+          <![CDATA[PAR32000024 = #where.Par32000024#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32000025" prepend="AND">
+          <![CDATA[PAR32000025 = #where.Par32000025#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001010" prepend="AND">
+          <![CDATA[PAR32001010 = #where.Par32001010#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001009" prepend="AND">
+          <![CDATA[PAR32001009 = #where.Par32001009#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001008" prepend="AND">
+          <![CDATA[PAR32001008 = #where.Par32001008#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001007" prepend="AND">
+          <![CDATA[PAR32001007 = #where.Par32001007#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001006" prepend="AND">
+          <![CDATA[PAR32001006 = #where.Par32001006#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001005" prepend="AND">
+          <![CDATA[PAR32001005 = #where.Par32001005#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001004" prepend="AND">
+          <![CDATA[PAR32001004 = #where.Par32001004#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001003" prepend="AND">
+          <![CDATA[PAR32001003 = #where.Par32001003#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001002" prepend="AND">
+          <![CDATA[PAR32001002 = #where.Par32001002#]]>
+        </isNotNull>
+        <isNotNull property="where.Par32001001" prepend="AND">
+          <![CDATA[PAR32001001 = #where.Par32001001#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetTechInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT * FROM bpt_molding_tech_data 
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="ObjID" prepend="AND">
+           <![CDATA[OBJID=#ObjID#]]>
+         </isNotNull>
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[DELETE_FLAG=#DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetMoldingTechParam" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T4.OBJID,T4.PARM_NAME,T3.PARM_VALUE,T3.PARM_VALUE_MAX,T3.PARM_VALUE_MIN,T5.PARM_TYPE_NAME FROM BPT_MOLDING_TECH T 
+      LEFT JOIN BPT_MOLDING_TECH_PARM_MAT T1 ON T1.MATERIAL_ID = T.MATERIAL_ID AND T1.TECH_TYPE = T.TECH_TYPE AND T1.PDM_VERSION = T.PDM_VERSION AND T1.DELETE_FLAG = T.DELETE_FLAG
+      LEFT JOIN BPT_MOLDING_TECH_PARM_GROUP T2 ON T2.OBJID = T1.PARM_GROUP_ID
+      LEFT JOIN BPT_MOLDING_TECH_PARM_DATA T3 ON T3.PARM_GROUP_ID = T2.OBJID
+      LEFT JOIN BPT_MOLDING_TECH_PARM_INFO T4 ON T4.OBJID  = T3.PARM_INFO_ID
+      LEFT JOIN BPT_MOLDING_TECH_PARM_TYPE T5 ON T5.OBJID = T3.PARM_TYPE_ID
+      WHERE T.OBJID = #techID# ORDER BY T5.PARM_TYPE_NAME DESC,PARM_NAME
+       ]]>
+     </select>
+     <select id="GetMoldingTechDataBySapCode" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select * from bpt_molding_tech_all_data where delete_flag=0 and sap_code=#SAP_CODE# and tech_version=#TECH_VERSION#
+       ]]>
+     </select>
+
+     <select id="GetALLMoldingTechParam" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select a.*,b.tech_color_name x5,c.tech_color_name x4,d.tech_color_name x3,e.tech_color_name x2,f.tech_color_name x1 
+       ,g.tech_color_name s5,g1.tech_color_name s4,g2.tech_color_name s3,g3.tech_color_name s2,g4.tech_color_name s1,HH.PARM_VALUE WEIGHT
+       from BPT_MOLDING_TECH_DATA_WEB a
+       left join cpt_curing_tech_parm_color b on b.tech_color_code = a.PAR32001010
+       left join cpt_curing_tech_parm_color c on c.tech_color_code = a.PAR32001009
+       left join cpt_curing_tech_parm_color d on d.tech_color_code = a.PAR32001008
+       left join cpt_curing_tech_parm_color e on e.tech_color_code = a.PAR32001007
+       left join cpt_curing_tech_parm_color f on f.tech_color_code = a.PAR32001006
+       left join cpt_curing_tech_parm_color g on g.tech_color_code = a.PAR32001005
+       left join cpt_curing_tech_parm_color g1 on g1.tech_color_code = a.PAR32001004
+       left join cpt_curing_tech_parm_color g2 on g2.tech_color_code = a.PAR32001003
+       left join cpt_curing_tech_parm_color g3 on g3.tech_color_code = a.PAR32001002
+       left join cpt_curing_tech_parm_color g4 on g4.tech_color_code = a.PAR32001001
+       left join BPT_MOLDING_TECH h on h.objid = a.objid
+       LEFT JOIN BPT_MOLDING_TECH_PARM_DATA HH ON HH.OBJID = H.WEIGHT
+       WHERE a.OBJID = #techID#
+       ]]>
+     </select>
+
+     <select id="GetMaterialInfo4" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select m.*,y.minor_type_name,t.min_time,t.valid_time from SBM_MATERIAL m 
+       left join sbm_material_minor_type y on m.minor_type_id=y.objid 
+        left join sbm_material_info t on t.material_id = m.objid
+       where m.major_type_id=31
+      ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="minobjid" prepend="AND">
+           <![CDATA[m.OBJID >= #minobjid#]]>
+         </isNotNull>
+         <isNotNull property="maxobjid" prepend="AND">
+           <![CDATA[m.OBJID <= #maxobjid#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetCarPassInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select c.size1,c.unlock  from  bpp_plan_detail a
+    left join sbm_material b on a.material_id = b.objid
+    left join bpm_matersize c on c.mater = b.material_name
+     where a.objid = #Plandetailid#
+     union all
+     select size1,0 from bpm_carsize where carno =#CarNo#
+      ]]>
+     </select>
+     <select id="GetHppStorageInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ select b.material_id,c.material_name,d.total_count gongz_num,d.qty,d.unit_name,d.store_place_name from bpp_plan_detail a
+left join bpt_molding_tech cc on cc.objid = a.tech_id
+left join sbm_bom_data b on b.material_parent_id=a.material_id and b.delete_flag = 0 and cc.pdm_version = b.greentyre_version
+left join sbm_material c on c.objid=b.material_id
+left join ( SELECT N2.MATERIAL_ID,COUNT(1) TOTAL_COUNT,SUM(N2.Left_Qty) AS QTY, N5.UNIT_NAME,n4.store_place_name
+                   FROM HPP_STORAGE_DETAIL N1
+                   INNER JOIN   HPP_SEMIS_PRODUCTION N2 ON N2.CARD_NO =N1.CARD_NO and n2.delete_flag = 0
+                   LEFT JOIN    SSB_UNIT N5 ON N5.OBJID = N2.UNIT_ID
+                   LEFT JOIN   SBM_MATERIAL N3 ON N3.OBJID = N2.MATERIAL_ID
+                   INNER JOIN   HPP_STORE_PLACE N4 ON N4.OBJID = N1.STORE_PLACE_ID AND  N4.POSITION_TYPE=0
+                   inner join hpp_store N6 ON n6.objid = n4.store_id and n6.delete_flag = 0
+                   WHERE n2.left_qty > 0
+                   and n6.store_higher_level = '0001005'  
+                   group by  N2.Material_Id,N3.SAP_CODE,N5.UNIT_NAME,n4.store_place_name) d on d.material_id = b.material_id
+where a.objid = #PlanDetailId#
+       ]]>
+     </select>
+
+
+     <insert id="InsertBpmMoldYL" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+         insert into bpm_moldyl(cardno,equipid,equippass) values(#cardno#,#equipid#,#equippass#)
+       ]]>
+     </insert>
+     <update id="UpdateBpmMoldYL" parameterClass="map" >
+       <![CDATA[ 
+        update bpm_moldyl set flag = #flag# where cardno = #cardno#
+       ]]>
+     </update>
+
+     <select id="GetMoldYL" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+select b.unit_name,case when b.unit_name = '米' then round((a.left_qty/a.qty)*100,2) else a.left_qty end info,c.config_value Mi,d.config_value Ge from  hpp_semis_production a
+left join ssb_unit b on a.unit_id = b.objid
+left join ssb_config c on c.objid = 60
+left join ssb_config d on d.objid = 61
+where card_no = #cardno# and a.delete_flag = 0
+       ]]>
+     </select>
+
+     <select id="ReMoldYLInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+select * from bpm_moldyl where flag <> 3 and equipid = #equipid# 
+       ]]>
+     </select>
+     <update id="UpdateMoldYLState2" parameterClass="map" >
+       <![CDATA[ 
+     update bpm_moldyl set state = 2 where cardno =#cardno#
+       ]]>
+     </update>
+     <update id="UpdateMoldYLState1" parameterClass="map" >
+       <![CDATA[ 
+     update bpm_moldyl set state = 1 where cardno =#cardno#
+       ]]>
+     </update>
+
+     <select id="ReMoldYLTwo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+    select * from (select a.*,3*60*60-ceil((sysdate-a.record_time)*24*60*60) sec from bpm_moldyl a where flag <> 3 and equipid = #equipid# order by record_time) where rownum =1
+       ]]>
+     </select>
+     <update id="UpdateMoldYLState3" parameterClass="map" >
+       <![CDATA[ 
+     update bpm_moldyl set state = 3 where cardno =#cardno#
+       ]]>
+     </update>
+
+     <select id="GetAppNoCuringInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+select  a.green_tyre_no,nvl(ccc.tooling_barcode,n.tooling_barcode) tooling_barcode,d.material_name,f.equip_name,h.shift_name,nvl(l.store_place_name,m.store_place_name) store_place_name,a.end_time
+ from (select * from (
+select y.* from bpm_production y,bpp_plan_detail y3,sbm_material y4
+where y.end_time>sysdate- 7 and not exists(select tyre_no from cpp_curing_production y2 where   y2.tyre_no = y.green_tyre_no)
+and y3.objid = y.plan_detail_id and y4.objid = y3.material_id 
+       ]]>
+       <isNotNull property="Mater" prepend="">
+         <![CDATA[ and y4.material_name like '%$Mater$%']]>
+       </isNotNull>
+       <![CDATA[
+order by y.end_time ) where rownum < 91) a 
+left join bsm_storage_detail b on b.green_tyre_no = a.green_tyre_no and b.delete_flag = 0
+left join bsm_storage_tooling c on c.objid = b.storage_tooling_id and c.delete_flag = 0
+left join BSM_TOOLING_LOAD_DETAIL bb on bb.green_tyre_no = a.green_tyre_no and bb.delete_flag = 0
+left join BSM_TOOLING_LOAD_MAIN ccc on ccc.objid = bb.MAIN_ID and ccc.delete_flag = 0
+left join bpp_plan_detail cc on cc.objid = a.plan_detail_id
+left join sbm_material d on d.objid = cc.material_id
+left join bpp_plan e on e.objid = a.plan_id
+left join sbe_equip f on f.objid = e.equip_id
+left join bpm_shift_master g on g.objid= a.shift_master_id
+left join ssb_shift h on h.objid = g.shift_id
+left join bsm_storage_main i on i.objid = b.storage_main_id
+left join csm_storage_detail j on j.green_tyre_no = a.green_tyre_no
+left join csm_storage_main k on k.objid = j.storage_main_id
+left join bsm_store_place l on l.objid = i.store_place_id
+left join csm_store_place m on m.objid = k.store_place_id
+left join csm_storage_tooling n on n.objid = j.storage_tooling_id
+order by a.end_time  ]]>
+     </select>
+
+
+   </statements>
+</sqlMap>

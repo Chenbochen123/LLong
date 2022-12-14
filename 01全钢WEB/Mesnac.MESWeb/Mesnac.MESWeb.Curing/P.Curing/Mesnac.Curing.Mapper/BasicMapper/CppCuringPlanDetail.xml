@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CppCuringPlanDetail"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <alias>
+    <typeAlias alias="CppCuringPlanDetail" type="Mesnac.Curing.Entity.BasicEntity.CppCuringPlanDetail, Mesnac.Curing.Entity" />
+  </alias>
+
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CppCuringPlanDetail" class="CppCuringPlanDetail">
+    <result property="BomId" column="BOM_ID"/>
+    <result property="TechId" column="TECH_ID"/>
+    <result property="MonthPlanId" column="MONTH_PLAN_ID"/>
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="PlanId" column="PLAN_ID"/>
+    <result property="Priority" column="PRIORITY"/>
+    <result property="EquipPosition" column="EQUIP_POSITION"/>
+    <result property="MaterialId" column="MATERIAL_ID"/>
+    <result property="PlanState" column="PLAN_STATE"/>
+    <result property="PlanAmount" column="PLAN_AMOUNT"/>
+    <result property="RealAmount" column="REAL_AMOUNT"/>
+    <result property="PlanType" column="PLAN_TYPE"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="Remark" column="REMARK"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CppCuringPlanDetail" class="CppCuringPlanDetail">
+    <parameter property="BomId" column="BomId"/>
+    <parameter property="TechId" column="TechId"/>
+    <parameter property="MonthPlanId" column="MonthPlanId"/>
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="PlanId" column="PlanId"/>
+    <parameter property="Priority" column="Priority"/>
+    <parameter property="EquipPosition" column="EquipPosition"/>
+    <parameter property="MaterialId" column="MaterialId"/>
+    <parameter property="PlanState" column="PlanState"/>
+    <parameter property="PlanAmount" column="PlanAmount"/>
+    <parameter property="RealAmount" column="RealAmount"/>
+    <parameter property="PlanType" column="PlanType"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="Remark" column="Remark"/>
+  </parameterMap>
+
+  <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CPP_CURING_PLAN_DETAIL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.BomId" prepend="AND">
+          <![CDATA[BOM_ID = #where.BomId#]]>
+        </isNotNull>
+        <isNotNull property="where.TechId" prepend="AND">
+          <![CDATA[TECH_ID = #where.TechId#]]>
+        </isNotNull>
+        <isNotNull property="where.MonthPlanId" prepend="AND">
+          <![CDATA[MONTH_PLAN_ID = #where.MonthPlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.Priority" prepend="AND">
+          <![CDATA[PRIORITY = #where.Priority#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipPosition" prepend="AND">
+          <![CDATA[EQUIP_POSITION = #where.EquipPosition#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanState" prepend="AND">
+          <![CDATA[PLAN_STATE = #where.PlanState#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanAmount" prepend="AND">
+          <![CDATA[PLAN_AMOUNT = #where.PlanAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.RealAmount" prepend="AND">
+          <![CDATA[REAL_AMOUNT = #where.RealAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanType" prepend="AND">
+          <![CDATA[PLAN_TYPE = #where.PlanType#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+    <sql id="includeInsert">
+      <![CDATA[INSERT INTO CPP_CURING_PLAN_DETAIL]]>
+      <dynamic prepend="(OBJID,">
+        <isNotNull property="BomId" prepend=",">BOM_ID</isNotNull>
+        <isNotNull property="TechId" prepend=",">TECH_ID</isNotNull>
+        <isNotNull property="MonthPlanId" prepend=",">MONTH_PLAN_ID</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="PlanId" prepend=",">PLAN_ID</isNotNull>
+        <isNotNull property="Priority" prepend=",">PRIORITY</isNotNull>
+        <isNotNull property="EquipPosition" prepend=",">EQUIP_POSITION</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">MATERIAL_ID</isNotNull>
+        <isNotNull property="PlanState" prepend=",">PLAN_STATE</isNotNull>
+        <isNotNull property="PlanAmount" prepend=",">PLAN_AMOUNT</isNotNull>
+        <isNotNull property="RealAmount" prepend=",">REAL_AMOUNT</isNotNull>
+        <isNotNull property="PlanType" prepend=",">PLAN_TYPE</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+      </dynamic>
+      <dynamic prepend=") VALUES (SEQ_CPP_CURING_PLAN_DETAIL.NEXTVAL,">
+        <isNotNull property="BomId" prepend=",">#BomId#</isNotNull>
+        <isNotNull property="TechId" prepend=",">#TechId#</isNotNull>
+        <isNotNull property="MonthPlanId" prepend=",">#MonthPlanId#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="PlanId" prepend=",">#PlanId#</isNotNull>
+        <isNotNull property="Priority" prepend=",">#Priority#</isNotNull>
+        <isNotNull property="EquipPosition" prepend=",">#EquipPosition#</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">#MaterialId#</isNotNull>
+        <isNotNull property="PlanState" prepend=",">#PlanState#</isNotNull>
+        <isNotNull property="PlanAmount" prepend=",">#PlanAmount#</isNotNull>
+        <isNotNull property="RealAmount" prepend=",">#RealAmount#</isNotNull>
+        <isNotNull property="PlanType" prepend=",">#PlanType#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+      </dynamic>
+      <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CPP_CURING_PLAN_DETAIL
+      <dynamic prepend="SET">
+        <isNotNull  property="update.BomId"  prepend=",">
+          BOM_ID = #update.BomId#
+        </isNotNull>
+        <isNotNull  property="update.TechId"  prepend=",">
+          TECH_ID = #update.TechId#
+        </isNotNull>
+        <isNotNull  property="update.MonthPlanId"  prepend=",">
+          MONTH_PLAN_ID = #update.MonthPlanId#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.PlanId"  prepend=",">
+          PLAN_ID = #update.PlanId#
+        </isNotNull>
+        <isNotNull  property="update.Priority"  prepend=",">
+          PRIORITY = #update.Priority#
+        </isNotNull>
+        <isNotNull  property="update.EquipPosition"  prepend=",">
+          EQUIP_POSITION = #update.EquipPosition#
+        </isNotNull>
+        <isNotNull  property="update.MaterialId"  prepend=",">
+          MATERIAL_ID = #update.MaterialId#
+        </isNotNull>
+        <isNotNull  property="update.PlanState"  prepend=",">
+          PLAN_STATE = #update.PlanState#
+        </isNotNull>
+        <isNotNull  property="update.PlanAmount"  prepend=",">
+          PLAN_AMOUNT = #update.PlanAmount#
+        </isNotNull>
+        <isNotNull  property="update.RealAmount"  prepend=",">
+          REAL_AMOUNT = #update.RealAmount#
+        </isNotNull>
+        <isNotNull  property="update.PlanType"  prepend=",">
+          PLAN_TYPE = #update.PlanType#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CPP_CURING_PLAN_DETAIL
+    </sql>
+
+
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CppCuringPlanDetail">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CppCuringPlanDetail">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CPP_CURING_PLAN_DETAIL
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CPP_CURING_PLAN_DETAIL
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CppCuringPlanDetail" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+      TRUNCATE TABLE CPP_CURING_PLAN_DETAIL
+    </statement>
+  </statements>
+</sqlMap>

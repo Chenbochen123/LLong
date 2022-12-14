@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CsmUserEquips"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CSM_USER_EQUIPS ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDate" prepend="AND">
+          <![CDATA[SHIFT_DATE = #where.ShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.ClassId" prepend="AND">
+          <![CDATA[CLASS_ID = #where.ClassId#]]>
+        </isNotNull>
+        <isNotNull property="where.Equips" prepend="AND">
+          <![CDATA[EQUIPS = #where.Equips#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetCuringEquips" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select objid,equip_name from sbe_equip t 
+       where substr(t.equip_name,0,1) in ($EquipName$) and delete_flag=0 and t.major_type_id='51'
+       ]]>
+     </select>
+     <select id="GetCuringStorageInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      select a.objid equip_id,a.equip_name,b.material_name,b.material_id,nvl(b.amount,0) amount,nvl(b.qty,0)qty 
+      ,b.bom_id
+      from sbe_equip a 
+      left join 
+      (
+      select t.equip_id,t5.equip_name,t4.material_name,t1.material_id,sum(nvl(t3.stock_amount,0)) Amount,
+      sum(t1.plan_amount-t1.real_amount) QTY,t1.bom_id from cpp_curing_plan t
+      left join cpp_curing_plan_detail t1 on t1.plan_id =t.objid and t1.delete_flag=0
+      left join csm_store_place t2 on t2.equip_id = t.equip_id and t2.delete_flag=0
+      left join csm_storage_main t3 on t3.store_place_id = t2.objid and t3.delete_flag=0
+      left join sbm_material t4 on t4.objid = t1.material_id
+      left join sbe_equip t5 on t5.objid = t.equip_id
+      where t.delete_flag=0  and t1.equip_position ='1' and t1.plan_state in('1', '2')   ]]>
+       <isNotNull property="equipId" prepend="AND">
+         <![CDATA[t5.objid in ($equipId$)]]>
+       </isNotNull>
+       <isNotNull property="shiftid" prepend="AND">
+         <![CDATA[ t.shift_id =#shiftid#]]>
+       </isNotNull>
+       <isNotNull property="shiftDate" prepend="AND">
+         <![CDATA[t.plan_date=#shiftDate#]]>
+       </isNotNull>
+       <![CDATA[   
+      group by  t.equip_id,t5.equip_name,t4.material_name,t1.material_id ,t1.bom_id)b on a.objid = b.equip_id
+      where a.objid in ($equipId$) order by a.equip_name,b.amount
+       ]]>
+     </select>
+     
+     <select id="GetMoldingStorage" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select * from (
+        select distinct b.tooling_barcode,b.load_amount,c.store_name,d.store_place_name,b.in_time,min(f.end_time) end_time  from bsm_storage_main a
+        left join  bsm_storage_tooling b on b.storage_main_id = a.objid and b.delete_flag=0
+        left join bsm_store c on c.objid = a.store_id
+        left join bsm_store_place d on d.objid = a.store_place_id
+        left join bsm_storage_detail e on e.storage_tooling_id = b.objid
+        left join bpm_production f on f.green_tyre_no =e.green_tyre_no
+        where b.material_id in (select material_id from sbm_bom_data t where t.material_parent_id = #materialId# and t.delete_flag=0) and a.delete_flag=0
+         group by b.tooling_barcode,b.load_amount,c.store_name,d.store_place_name,b.in_time
+         order by min(f.end_time)
+        ) where rownum<=#topNum#
+       ]]>
+     </select>
+     <select id="GetEquipId" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select listagg(objid,',') within group(order by equip_name) EQUIP_ID
+  from sbe_equip
+ where substr(equip_name,0,1) in ($EquipName$) and major_type_id=51 and delete_flag=0
+ group by major_type_id
+       ]]>
+     </select>
+  </statements>
+</sqlMap>

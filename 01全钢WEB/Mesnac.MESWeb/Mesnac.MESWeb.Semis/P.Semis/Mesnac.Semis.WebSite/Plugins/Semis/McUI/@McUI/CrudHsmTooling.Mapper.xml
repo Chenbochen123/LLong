@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudHsmTooling" parameterClass="map" resultClass="row">
+      <![CDATA[
+ SELECT 
+      T1.OBJID
+      ,T1.TOOLING_BARCODE
+      ,T1.TOOLING_RFID_BARCODE
+      ,T1.TOOLING_TYPE
+      ,T2.TOOLING_TYPE_NAME
+      ,T1.IS_USED
+      ,T3.USER_NAME RECORD_USER_NAME
+      ,T4.RECORD_TIME
+      ,T1.REMARK
+      ,T1.DELETE_FLAG
+      ,T4.CARD_NO
+      ,t1.seq_index
+      FROM HSM_TOOLING T1
+      LEFT JOIN HSM_TOOLING_TYPE T2 ON T1.TOOLING_TYPE=T2.TOOLING_TYPE
+      LEFT JOIN HSM_TOOLING_LOAD T4 ON T1.OBJID=T4.TOOLING_ID
+      LEFT JOIN SSB_USER T3 ON T4.RECORD_USER_ID=T3.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.CARD_NO" prepend="AND">
+          <![CDATA[T4.CARD_NO = #where.CARD_NO#]]>
+        </isNotNull>
+        <isNotNull property="where.TOOLING_RFID_BARCODE" prepend="AND">
+          <![CDATA[T1.TOOLING_RFID_BARCODE = #where.TOOLING_RFID_BARCODE#]]>
+        </isNotNull>
+        <isNotNull property="where.TOOLING_TYPE" prepend="AND">
+          <![CDATA[T1.TOOLING_TYPE in ( $where.TOOLING_TYPE$ )]]>
+        </isNotNull>
+        <!--<isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>-->
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    <select id="Select+Update@CrudHsmTooling" parameterClass="map" resultClass="row">
+      <![CDATA[    select t.*,t1.card_no from hsm_tooling t 
+      left join hsm_tooling_load t1 on t1.tooling_id = t.objid
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T.OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+
+    <!--查询工装分类信息，ID值固定为GetComboBoxData@Select@CrudCrtAlarmStandardItem@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudHsmTooling@TOOLING_TYPE" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+       SELECT * FROM (
+      select 'SELECT TOOLING_TYPE FROM HSM_TOOLING_TYPE' sskey ,N'===全部===' ssValue from dual
+      union 
+      select t1.TOOLING_TYPE sskey,t1.TOOLING_TYPE_NAME ssValue 
+      from HSM_TOOLING_TYPE t1  
+      where t1.DELETE_FLAG = 0) T
+      
+     ]]>
+      <![CDATA[ 
+      ORDER BY T.SSVALUE
+     ]]>
+    </select>
+
+    <select id="GetComboBoxData@Select@CrudHsmTooling@SEQ_INDEX" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      
+select '新增' sskey,'新增' ssvalue  from  dual 
+union 
+select '绑定信息错误' sskey,'绑定信息错误' ssvalue  from  dual 
+union 
+select '串扫' sskey,'串扫' ssvalue  from  dual 
+union 
+select '解绑信息' sskey,'解绑信息' ssvalue  from  dual 
+union 
+select '无信息' sskey,'无信息' ssvalue  from  dual 
+union 
+select '标签条码重复' sskey,'标签条码重复' ssvalue  from  dual 
+union 
+select '物料倒卷' sskey,'物料倒卷' ssvalue  from  dual 
+union 
+select '其他' sskey,'其他' ssvalue  from  dual 
+      
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

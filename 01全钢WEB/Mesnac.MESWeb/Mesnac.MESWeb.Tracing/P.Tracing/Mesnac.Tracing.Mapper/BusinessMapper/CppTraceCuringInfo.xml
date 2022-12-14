@@ -1,0 +1,635 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Tracing.Mapper.BusinessMapper.CppTraceCuringInfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CPP_TRACE_CURING_INFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[TYRE_NO = #where.TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[MATERIAL_NAME = #where.MaterialName#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[EQUIP_NAME = #where.EquipName#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDate" prepend="AND">
+          <![CDATA[SHIFT_DATE = #where.ShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftName" prepend="AND">
+          <![CDATA[SHIFT_NAME = #where.ShiftName#]]>
+        </isNotNull>
+        <isNotNull property="where.ClassName" prepend="AND">
+          <![CDATA[CLASS_NAME = #where.ClassName#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipPosition" prepend="AND">
+          <![CDATA[EQUIP_POSITION = #where.EquipPosition#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[BEGIN_TIME = #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[END_TIME = #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.MoldCode" prepend="AND">
+          <![CDATA[MOLD_CODE = #where.MoldCode#]]>
+        </isNotNull>
+        <isNotNull property="where.UserName" prepend="AND">
+          <![CDATA[USER_NAME = #where.UserName#]]>
+        </isNotNull>
+        <isNotNull property="where.MoldUseAmount" prepend="AND">
+          <![CDATA[MOLD_USE_AMOUNT = #where.MoldUseAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderUserAmount" prepend="AND">
+          <![CDATA[BLADDER_USER_AMOUNT = #where.BladderUserAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.IsFirst" prepend="AND">
+          <![CDATA[IS_FIRST = #where.IsFirst#]]>
+        </isNotNull>
+        <isNotNull property="where.AmountInShift" prepend="AND">
+          <![CDATA[AMOUNT_IN_SHIFT = #where.AmountInShift#]]>
+        </isNotNull>
+        <isNotNull property="where.DownGrade" prepend="AND">
+          <![CDATA[DOWN_GRADE = #where.DownGrade#]]>
+        </isNotNull>
+        <isNotNull property="where.PdmVision" prepend="AND">
+          <![CDATA[PDM_VISION = #where.PdmVision#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmTypeName" prepend="AND">
+          <![CDATA[PARM_TYPE_NAME = #where.ParmTypeName#]]>
+        </isNotNull>
+        <isNotNull property="where.TypeName" prepend="AND">
+          <![CDATA[TYPE_NAME = #where.TypeName#]]>
+        </isNotNull>
+        <isNotNull property="where.LoaderHeight" prepend="AND">
+          <![CDATA[LOADER_HEIGHT = #where.LoaderHeight#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingHeight" prepend="AND">
+          <![CDATA[SHAPING_HEIGHT = #where.ShapingHeight#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress1" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_1 = #where.SecondShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress2" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_2 = #where.SecondShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress3" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_3 = #where.SecondShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress1" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_1 = #where.FirstShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress2" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_2 = #where.FirstShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress3" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_3 = #where.FirstShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.ClampingPress" prepend="AND">
+          <![CDATA[CLAMPING_PRESS = #where.ClampingPress#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderTensileHeight" prepend="AND">
+          <![CDATA[BLADDER_TENSILE_HEIGHT = #where.BladderTensileHeight#]]>
+        </isNotNull>
+        <isNotNull property="where.TopLimitAmount" prepend="AND">
+          <![CDATA[TOP_LIMIT_AMOUNT = #where.TopLimitAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderSize" prepend="AND">
+          <![CDATA[BLADDER_SIZE = #where.BladderSize#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderCode" prepend="AND">
+          <![CDATA[BLADDER_CODE = #where.BladderCode#]]>
+        </isNotNull>
+        <isNotNull property="where.AllCuringTime" prepend="AND">
+          <![CDATA[ALL_CURING_TIME = #where.AllCuringTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempLow" prepend="AND">
+          <![CDATA[MODEL_TEMP_LOW = #where.ModelTempLow#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempHigh" prepend="AND">
+          <![CDATA[MODEL_TEMP_HIGH = #where.ModelTempHigh#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempSet" prepend="AND">
+          <![CDATA[MODEL_TEMP_SET = #where.ModelTempSet#]]>
+        </isNotNull>
+        <isNotNull property="where.HotRingSet" prepend="AND">
+          <![CDATA[HOT_RING_SET = #where.HotRingSet#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempSet" prepend="AND">
+          <![CDATA[PLATE_TEMP_SET = #where.PlateTempSet#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempHigh" prepend="AND">
+          <![CDATA[PLATE_TEMP_HIGH = #where.PlateTempHigh#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempLow" prepend="AND">
+          <![CDATA[PLATE_TEMP_LOW = #where.PlateTempLow#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime01" prepend="AND">
+          <![CDATA[CURING_TIME_01 = #where.CuringTime01#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime02" prepend="AND">
+          <![CDATA[CURING_TIME_02 = #where.CuringTime02#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime03" prepend="AND">
+          <![CDATA[CURING_TIME_03 = #where.CuringTime03#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime04" prepend="AND">
+          <![CDATA[CURING_TIME_04 = #where.CuringTime04#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime05" prepend="AND">
+          <![CDATA[CURING_TIME_05 = #where.CuringTime05#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime06" prepend="AND">
+          <![CDATA[CURING_TIME_06 = #where.CuringTime06#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime07" prepend="AND">
+          <![CDATA[CURING_TIME_07 = #where.CuringTime07#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime08" prepend="AND">
+          <![CDATA[CURING_TIME_08 = #where.CuringTime08#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime09" prepend="AND">
+          <![CDATA[CURING_TIME_09 = #where.CuringTime09#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime10" prepend="AND">
+          <![CDATA[CURING_TIME_10 = #where.CuringTime10#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime11" prepend="AND">
+          <![CDATA[CURING_TIME_11 = #where.CuringTime11#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime12" prepend="AND">
+          <![CDATA[CURING_TIME_12 = #where.CuringTime12#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime13" prepend="AND">
+          <![CDATA[CURING_TIME_13 = #where.CuringTime13#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime14" prepend="AND">
+          <![CDATA[CURING_TIME_14 = #where.CuringTime14#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime15" prepend="AND">
+          <![CDATA[CURING_TIME_15 = #where.CuringTime15#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime16" prepend="AND">
+          <![CDATA[CURING_TIME_16 = #where.CuringTime16#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime17" prepend="AND">
+          <![CDATA[CURING_TIME_17 = #where.CuringTime17#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime18" prepend="AND">
+          <![CDATA[CURING_TIME_18 = #where.CuringTime18#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime19" prepend="AND">
+          <![CDATA[CURING_TIME_19 = #where.CuringTime19#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime20" prepend="AND">
+          <![CDATA[CURING_TIME_20 = #where.CuringTime20#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime21" prepend="AND">
+          <![CDATA[CURING_TIME_21 = #where.CuringTime21#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime22" prepend="AND">
+          <![CDATA[CURING_TIME_22 = #where.CuringTime22#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime23" prepend="AND">
+          <![CDATA[CURING_TIME_23 = #where.CuringTime23#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime24" prepend="AND">
+          <![CDATA[CURING_TIME_24 = #where.CuringTime24#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime25" prepend="AND">
+          <![CDATA[CURING_TIME_25 = #where.CuringTime25#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime26" prepend="AND">
+          <![CDATA[CURING_TIME_26 = #where.CuringTime26#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime27" prepend="AND">
+          <![CDATA[CURING_TIME_27 = #where.CuringTime27#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime28" prepend="AND">
+          <![CDATA[CURING_TIME_28 = #where.CuringTime28#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime29" prepend="AND">
+          <![CDATA[CURING_TIME_29 = #where.CuringTime29#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime30" prepend="AND">
+          <![CDATA[CURING_TIME_30 = #where.CuringTime30#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeMarkLineU1" prepend="AND">
+          <![CDATA[SIZE_MARK_LINE_U1 = #where.SizeMarkLineU1#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeMarkLineU2" prepend="AND">
+          <![CDATA[SIZE_MARK_LINE_U2 = #where.SizeMarkLineU2#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeMarkLineU3" prepend="AND">
+          <![CDATA[SIZE_MARK_LINE_U3 = #where.SizeMarkLineU3#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeMarkLineU4" prepend="AND">
+          <![CDATA[SIZE_MARK_LINE_U4 = #where.SizeMarkLineU4#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeMarkLineU5" prepend="AND">
+          <![CDATA[SIZE_MARK_LINE_U5 = #where.SizeMarkLineU5#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeMarkLineD1" prepend="AND">
+          <![CDATA[SIZE_MARK_LINE_D1 = #where.SizeMarkLineD1#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeMarkLineD2" prepend="AND">
+          <![CDATA[SIZE_MARK_LINE_D2 = #where.SizeMarkLineD2#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeMarkLineD3" prepend="AND">
+          <![CDATA[SIZE_MARK_LINE_D3 = #where.SizeMarkLineD3#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeMarkLineD4" prepend="AND">
+          <![CDATA[SIZE_MARK_LINE_D4 = #where.SizeMarkLineD4#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeMarkLineD5" prepend="AND">
+          <![CDATA[SIZE_MARK_LINE_D5 = #where.SizeMarkLineD5#]]>
+        </isNotNull>
+        <isNotNull property="where.FCheckGradeName" prepend="AND">
+          <![CDATA[F_CHECK_GRADE_NAME = #where.FCheckGradeName#]]>
+        </isNotNull>
+        <isNotNull property="where.FCheckDefectName" prepend="AND">
+          <![CDATA[F_CHECK_DEFECT_NAME = #where.FCheckDefectName#]]>
+        </isNotNull>
+        <isNotNull property="where.FCheckUserName" prepend="AND">
+          <![CDATA[F_CHECK_USER_NAME = #where.FCheckUserName#]]>
+        </isNotNull>
+        <isNotNull property="where.FCheckRecordTime" prepend="AND">
+          <![CDATA[F_CHECK_RECORD_TIME = #where.FCheckRecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.XCheckGradeName" prepend="AND">
+          <![CDATA[X_CHECK_GRADE_NAME = #where.XCheckGradeName#]]>
+        </isNotNull>
+        <isNotNull property="where.XCheckDefectName" prepend="AND">
+          <![CDATA[X_CHECK_DEFECT_NAME = #where.XCheckDefectName#]]>
+        </isNotNull>
+        <isNotNull property="where.XCheckEquip" prepend="AND">
+          <![CDATA[X_CHECK_EQUIP = #where.XCheckEquip#]]>
+        </isNotNull>
+        <isNotNull property="where.XCheckUserName" prepend="AND">
+          <![CDATA[X_CHECK_USER_NAME = #where.XCheckUserName#]]>
+        </isNotNull>
+        <isNotNull property="where.XCheckRecordTime" prepend="AND">
+          <![CDATA[X_CHECK_RECORD_TIME = #where.XCheckRecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BCheckGradeName" prepend="AND">
+          <![CDATA[B_CHECK_GRADE_NAME = #where.BCheckGradeName#]]>
+        </isNotNull>
+        <isNotNull property="where.BCheckEquip" prepend="AND">
+          <![CDATA[B_CHECK_EQUIP = #where.BCheckEquip#]]>
+        </isNotNull>
+        <isNotNull property="where.BCheckUserName" prepend="AND">
+          <![CDATA[B_CHECK_USER_NAME = #where.BCheckUserName#]]>
+        </isNotNull>
+        <isNotNull property="where.BCheckRecordTime" prepend="AND">
+          <![CDATA[B_CHECK_RECORD_TIME = #where.BCheckRecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreName" prepend="AND">
+          <![CDATA[STORE_NAME = #where.StoreName#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceName" prepend="AND">
+          <![CDATA[STORE_PLACE_NAME = #where.StorePlaceName#]]>
+        </isNotNull>
+        <isNotNull property="where.StockInUserName" prepend="AND">
+          <![CDATA[STOCK_IN_USER_NAME = #where.StockInUserName#]]>
+        </isNotNull>
+        <isNotNull property="where.StockIntime" prepend="AND">
+          <![CDATA[STOCK_INTIME = #where.StockIntime#]]>
+        </isNotNull>
+        <isNotNull property="where.SNNo" prepend="AND">
+          <![CDATA[S_N_NO = #where.SNNo#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomeName" prepend="AND">
+          <![CDATA[CUSTOME_NAME = #where.CustomeName#]]>
+        </isNotNull>
+        <isNotNull property="where.Address" prepend="AND">
+          <![CDATA[ADDRESS = #where.Address#]]>
+        </isNotNull>
+        <isNotNull property="where.OutStockUser" prepend="AND">
+          <![CDATA[OUT_STOCK_USER = #where.OutStockUser#]]>
+        </isNotNull>
+        <isNotNull property="where.ConfirmUser" prepend="AND">
+          <![CDATA[CONFIRM_USER = #where.ConfirmUser#]]>
+        </isNotNull>
+        <isNotNull property="where.OutStockTime" prepend="AND">
+          <![CDATA[OUT_STOCK_TIME = #where.OutStockTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ConfirmTime" prepend="AND">
+          <![CDATA[CONFIRM_TIME = #where.ConfirmTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ReserNo" prepend="AND">
+          <![CDATA[RESER_NO = #where.ReserNo#]]>
+        </isNotNull>
+        <isNotNull property="where.PlantFrom" prepend="AND">
+          <![CDATA[PLANT_FROM = #where.PlantFrom#]]>
+        </isNotNull>
+        <isNotNull property="where.StorLocFrom" prepend="AND">
+          <![CDATA[STOR_LOC_FROM = #where.StorLocFrom#]]>
+        </isNotNull>
+        <isNotNull property="where.PlantTo" prepend="AND">
+          <![CDATA[PLANT_TO = #where.PlantTo#]]>
+        </isNotNull>
+        <isNotNull property="where.StorLocTo" prepend="AND">
+          <![CDATA[STOR_LOC_TO = #where.StorLocTo#]]>
+        </isNotNull>
+        <isNotNull property="where.MovType" prepend="AND">
+          <![CDATA[MOV_TYPE = #where.MovType#]]>
+        </isNotNull>
+        <isNotNull property="where.TransferUser" prepend="AND">
+          <![CDATA[TRANSFER_USER = #where.TransferUser#]]>
+        </isNotNull>
+        <isNotNull property="where.TransferConfirmUser" prepend="AND">
+          <![CDATA[TRANSFER_CONFIRM_USER = #where.TransferConfirmUser#]]>
+        </isNotNull>
+        <isNotNull property="where.TransferTime" prepend="AND">
+          <![CDATA[TRANSFER_TIME = #where.TransferTime#]]>
+        </isNotNull>
+        <isNotNull property="where.TransferConfirmTime" prepend="AND">
+          <![CDATA[TRANSFER_CONFIRM_TIME = #where.TransferConfirmTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy7" prepend="AND">
+          <![CDATA[DUMMY7 = #where.Dummy7#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy8" prepend="AND">
+          <![CDATA[DUMMY8 = #where.Dummy8#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy9" prepend="AND">
+          <![CDATA[DUMMY9 = #where.Dummy9#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy10" prepend="AND">
+          <![CDATA[DUMMY10 = #where.Dummy10#]]>
+        </isNotNull>
+        <isNotNull property="where.FCheckShift" prepend="AND">
+          <![CDATA[F_CHECK_SHIFT = #where.FCheckShift#]]>
+        </isNotNull>
+        <isNotNull property="where.FCheckShiftDate" prepend="AND">
+          <![CDATA[F_CHECK_SHIFT_DATE = #where.FCheckShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.XCheckShift" prepend="AND">
+          <![CDATA[X_CHECK_SHIFT = #where.XCheckShift#]]>
+        </isNotNull>
+        <isNotNull property="where.XCheckShiftDate" prepend="AND">
+          <![CDATA[X_CHECK_SHIFT_DATE = #where.XCheckShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.BCheckShift" prepend="AND">
+          <![CDATA[B_CHECK_SHIFT = #where.BCheckShift#]]>
+        </isNotNull>
+        <isNotNull property="where.BCheckShiftDate" prepend="AND">
+          <![CDATA[B_CHECK_SHIFT_DATE = #where.BCheckShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.TechId" prepend="AND">
+          <![CDATA[TECH_ID = #where.TechId#]]>
+        </isNotNull>
+        <isNotNull property="where.StockInShift" prepend="AND">
+          <![CDATA[STOCK_IN_SHIFT = #where.StockInShift#]]>
+        </isNotNull>
+        <isNotNull property="where.StockInShiftDate" prepend="AND">
+          <![CDATA[STOCK_IN_SHIFT_DATE = #where.StockInShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.StockOutShift" prepend="AND">
+          <![CDATA[STOCK_OUT_SHIFT = #where.StockOutShift#]]>
+        </isNotNull>
+        <isNotNull property="where.StockOutShiftDate" prepend="AND">
+          <![CDATA[STOCK_OUT_SHIFT_DATE = #where.StockOutShiftDate#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetTyreNoRegex" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T.CONFIG_VALUE FROM SSB_CONFIG T WHERE T.CONFIG_KEY='TyreNoRegex' AND T.DELETE_FLAG=0
+       ]]>
+     </select>
+     <select id="GetCompareTableCuring" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT  t3.minor_type_name C_MINOR_TYPE_NAME,t3.objid C_OBJID,T.TYRE_NO,t7.minor_type_name B_MINOR_TYPE_NAME,t7.objid B_OBJID,
+  T.GREEN_TYRE_NO,nvl(t10.minor_type_name,'无') H_MINOR_TYPE_NAME,nvl(t10.objid,'0') H_OBJID,T1.CARD_NO FROM cpp_curing_production T
+        LEFT JOIN BPM_TRACE_INFO T1 ON T1.GREEN_TYRE_NO = T.GREEN_TYRE_NO and t1.delete_flag=0
+        left join sbm_material t2 on t2.objid = t.material_id
+        left join sbm_material_minor_type t3 on t3.objid = t2.minor_type_id
+        left join bpm_production t4 on t4.green_tyre_no = t.green_tyre_no
+        left join bpp_plan_detail t5 on t5.objid = t4.plan_detail_id
+        left join sbm_material t6 on t6.objid = t5.material_id
+        left join sbm_material_minor_type t7 on t7.objid = t6.minor_type_id
+        left join hpp_semis_production t8 on t8.card_no = t1.card_no
+        left join sbm_material t9 on t9.objid = t8.material_id
+        left join sbm_material_minor_type t10 on t10.objid = t9.minor_type_id
+        where t.tyre_no in($barcodes$)
+        order by t.tyre_no,t10.minor_type_name
+       ]]>
+     </select>
+     <select id="GetCompareTableCuringNew" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT  t3.minor_type_name C_MINOR_TYPE_NAME,t3.objid,T.TYRE_NO,t7.minor_type_name B_MINOR_TYPE_NAME,t7.objid,
+        T.GREEN_TYRE_NO,t10.minor_type_name H_MINOR_TYPE_NAME,t10.objid,T1.CARD_NO FROM cpp_curing_production T
+        LEFT JOIN BPM_TRACE_INFO T1 ON T1.GREEN_TYRE_NO = T.GREEN_TYRE_NO
+        left join sbm_material t2 on t2.objid = t.material_id
+        left join sbm_material_minor_type t3 on t3.objid = t2.minor_type_id
+        left join bpm_production t4 on t4.green_tyre_no = t.green_tyre_no
+        left join bpp_plan_detail t5 on t5.objid = t4.plan_detail_id
+        left join sbm_material t6 on t6.objid = t5.material_id
+        left join sbm_material_minor_type t7 on t7.objid = t6.minor_type_id
+        left join hpp_semis_production t8 on t8.card_no = t1.card_no
+        left join sbm_material t9 on t9.objid = t8.material_id
+        left join sbm_material_minor_type t10 on t10.objid = t9.minor_type_id
+        where t.tyre_no =($barcodes$)
+        order by t.tyre_no,t10.minor_type_name
+       ]]>
+     </select>
+     <select id="GetCuringProductionCompareDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T.TYRE_NO 硫化号,T.GREEN_TYRE_NO 成型号,T.MATERIAL_NAME 规格,T.EQUIP_NAME 机台,T.SHIFT_DATE 接班日期,T.SHIFT_NAME 班次,T.CLASS_NAME 班组,
+      T.EQUIP_POSITION 左右模,T.BEGIN_TIME 硫化开始时间,T.END_TIME 硫化结束时间,T.MOLD_CODE 模具号,T.USER_NAME 硫化工,T.MOLD_USE_AMOUNT 模具使用次数,
+      T.BLADDER_USER_AMOUNT 胶囊使用次数,T.IS_FIRST 首件胎
+      FROM CPP_TRACE_CURING_INFO T WHERE TYRE_NO IN($barcodes$)
+       ]]>
+     </select>
+     <select id="GetMoldingProductionCompareDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T.GREEN_TYRE_NO 成型号 ,T.MATERIAL_FULL_NAME 规格,T.EQUIP_NAME 机台,
+        T.SHIFT_DATE 接班日期,T.SHIFT_NAME 班次,T.CLASS_NAME 班组,T.BEGIN_TIME 开始时间,T.END_TIME 结束时间,
+        T.IS_FIRST 是否首件,T.EMP1 主机,T.EMP2 副机,T.EMP3 帮车 FROM BPP_TRACE_MOLDING_INFO T WHERE GREEN_TYRE_NO IN($barcodes$)
+       ]]>
+     </select>
+     <select id="GetCuringTechCompareDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+     SELECT T.TYRE_NO 硫化号,T.GREEN_TYRE_NO 成型号,T.PDM_VISION 版本,T.PARM_TYPE_NAME 参数类型,T.TYPE_NAME 工艺阶段,T.LOADER_HEIGHT 装胎高度,
+      T.SHAPING_HEIGHT 定型高度,T.SECOND_SHAPING_PRESS_1 "二次定型压力(0-100次)",T.SECOND_SHAPING_PRESS_2 "二次定型压力(100-200次)",
+      T.SECOND_SHAPING_PRESS_3 "二次定型压力(200次以上)",T.FIRST_SHAPING_PRESS_1 "一次定型压力(0-100次)",
+      T.FIRST_SHAPING_PRESS_2 "一次定型压力(100-200次)",T.FIRST_SHAPING_PRESS_3 "一次定型压力(200次以上)",
+      T.CLAMPING_PRESS 合模力,T.BLADDER_TENSILE_HEIGHT 拉伸高度 ,T.TOP_LIMIT_AMOUNT 上限次数,T.BLADDER_SIZE 胶囊型号,
+      T.BLADDER_CODE 胶囊ERP品号,T.ALL_CURING_TIME 硫化总时间,T.MODEL_TEMP_LOW 模温低限,T.MODEL_TEMP_HIGH 模温高限,
+      T.MODEL_TEMP_SET 模温设定,T.HOT_RING_SET 热环设定,T.PLATE_TEMP_SET 板温设定,T.PLATE_TEMP_HIGH 板温高限,
+      T.PLATE_TEMP_LOW 板温低限,T.CURING_TIME_01 步01时间设定,T.CURING_TIME_02 步02时间设定,T.CURING_TIME_03 步03时间设定,
+      T.CURING_TIME_04 步04时间设定,T.CURING_TIME_05 步05时间设定,T.CURING_TIME_06 步06时间设定,T.CURING_TIME_07 步07时间设定,
+      T.CURING_TIME_08 步08时间设定,T.CURING_TIME_09 步09时间设定,T.CURING_TIME_10 步10时间设定,T.CURING_TIME_11 步11时间设定,
+      T.CURING_TIME_12 步12时间设定,T.CURING_TIME_13 步13时间设定,T.CURING_TIME_14 步14时间设定,T.CURING_TIME_15 步15时间设定,
+      T.CURING_TIME_16 步16时间设定,T.CURING_TIME_17 步17时间设定,T.CURING_TIME_18 步18时间设定,T.CURING_TIME_19 步19时间设定,
+      T.CURING_TIME_20 步20时间设定,T.CURING_TIME_21 步21时间设定,T.CURING_TIME_22 步22时间设定,T.CURING_TIME_23 步23时间设定,
+      T.CURING_TIME_24 步24时间设定,T.CURING_TIME_25 步25时间设定,T.CURING_TIME_26 步26时间设定,T.CURING_TIME_27 步27时间设定,
+      T.CURING_TIME_28 步28时间设定,T.CURING_TIME_29 步29时间设定,T.CURING_TIME_30 步30时间设定,T.SIZE_MARK_LINE_U1 上色标1,
+      T.SIZE_MARK_LINE_U2 上色标2,T.SIZE_MARK_LINE_U3 上色标3,T.SIZE_MARK_LINE_U4 上色标4,
+      T.SIZE_MARK_LINE_U5 上色标5,T.SIZE_MARK_LINE_D1 下色标1,T.SIZE_MARK_LINE_D2 下色标2,T.SIZE_MARK_LINE_D3 下色标3,
+      T.SIZE_MARK_LINE_D4 下色标4,T.SIZE_MARK_LINE_D5 下色标5
+      FROM CPP_TRACE_CURING_INFO T WHERE TYRE_NO IN($barcodes$)
+       ]]>
+     </select>
+     <select id="GetMoldingTechCompareDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T.GREEN_TYRE_NO 成型号,T.PDM_VERSION PDM版本,T.PARM_TYPE 参数类型,T.TECH_TYPE 工艺阶段,
+        T.PAR32000001 "主鼓灯标胎侧外定位:(MM)",T.PAR32000002 "主鼓灯标胎侧内定位:(MM)",T.PAR32000003 "主鼓灯标内衬定位:(MM)",
+        T.PAR32000004 "主鼓灯标胎体帘布定位:(MM)",T.PAR32000005 "主鼓灯标1钢丝包布内定位:(MM)",T.PAR32000006 "主鼓灯标1钢丝包布外定位:(MM)",
+        T.PAR32000007 "主鼓灯标2钢丝包布内定位:(MM)",T.PAR32000008 "主鼓灯标2钢丝包布外定位:(MM)",T.PAR32000009 "主鼓灯标1尼龙包布内定位:(MM)",
+        T.PAR32000010 "主鼓灯标1尼龙包布外定位:(MM)",T.PAR32000011 "主鼓灯标2尼龙包布内定位:(MM)",T.PAR32000012 "主鼓灯标2尼龙包布外定位:(MM)",
+        T.PAR32000013 "主鼓灯标型胶内定位:(MM)",T.PAR32000014 "灯标垫胶内定位:(MM)",T.PAR32000015 "辅鼓灯标1带束层定位:(MM)",
+        T.PAR32000016 "辅鼓灯标2带束层定位:(MM)",T.PAR32000017 "辅鼓灯标3带束层定位:(MM)",T.PAR32000018 "辅鼓灯标4带束层定位:(MM)",
+        T.PAR32000019 "辅鼓周长",T.PAR32000020 "平宽(钢丝圈内定位)",T.PAR32000021 "平宽(钢丝圈外定位)",T.PAR32000022 "机头宽度",
+        T.PAR32000023 "预定型机头宽度",T.PAR32000024 "定型机头宽度",T.PAR32000025 "内衬层复合件裁断长度：MM",
+        T.PAR32000026 "辅鼓灯标0°带束层定位:(MM)",T.BOTTOM_COLOR1 "下色标1",T.BOTTOM_COLOR2 "下色标2",T.BOTTOM_COLOR3 "下色标3",
+        T.BOTTOM_COLOR4 下色标4,T.BOTTOM_COLOR5 下色标5,T.TOP_COLOR1 上色标1,T.TOP_COLOR2 上色标2,T.TOP_COLOR3 上色标3,
+        T.TOP_COLOR4 上色标4,T.TOP_COLOR5 上色标5   
+        FROM BPP_TRACE_MOLDING_INFO T WHERE GREEN_TYRE_NO IN($barcodes$)
+       ]]>
+     </select>
+     <select id="GetCuringQtyCompareDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      SELECT T.TYRE_NO 硫化号,T.GREEN_TYRE_NO 成型号, T.DOWN_GRADE 硫化降级,T.F_CHECK_GRADE_NAME 外观品级,T.F_CHECK_DEFECT_NAME 外观病疵,T.F_CHECK_USER_NAME 外观质检人,
+      T.F_CHECK_RECORD_TIME 外观质检时间,T.X_CHECK_GRADE_NAME X光品级,T.X_CHECK_DEFECT_NAME X光病疵,T.X_CHECK_EQUIP X光机台,T.X_CHECK_USER_NAME X光质检人,
+      T.X_CHECK_RECORD_TIME X光质检时间,T.B_CHECK_GRADE_NAME 动平衡品级,T.B_CHECK_EQUIP 动平衡机台,T.B_CHECK_USER_NAME 动平衡质检人,T.B_CHECK_RECORD_TIME 动平衡质检时间
+      FROM CPP_TRACE_CURING_INFO T WHERE TYRE_NO IN($barcodes$)
+       ]]>
+     </select>
+     <select id="GetMoldingQtyCompareDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         SELECT T.GREEN_TYRE_NO 成型号, T.GRADE_NAME 胎胚品级,T.DEFECT_NAME1 胎胚病疵1,T.DEFECT_NAME2 胎胚病疵2,T.DEFECT_NAME3 胎胚病疵3,T.QUALITY_USER_NAME 质检人,T.QUALITY_RECORD_TIME 质检时间
+        FROM BPP_TRACE_MOLDING_INFO T  WHERE GREEN_TYRE_NO IN($barcodes$)
+       ]]>
+     </select>
+     <select id="GetCuringStockCompareDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT TS.TYRE_NO 胎号,TS.STORE_NAME 库区,TS.STORE_PLACE_NAME 库位,TS.USER1 入库人,TS.TIME1 入库时间,
+        TOUT.S_N_NO 发货单号,TOUT.CUSTOME_NAME 客户名称,TOUT.REMARK 地址,TOUT.USER2 出库人,TOUT.USER3 发货单确认人,TOUT.TIME2 出库时间,TOUT.TIME3 发货单确认时间,
+        TT.RESER_NO 预留单号,TT.STOR_LOC_TO 收货地点,TT.USER4 调拨人,TT.USER5 调拨单确认人,TT.TIME4 调拨时间,TT.TIME5 调拨单确认时间 
+        FROM 
+        (SELECT * FROM(
+        SELECT T.TYRE_NO,T2.STORE_NAME,T3.STORE_PLACE_NAME,T4.USER_NAME USER1,T.RECORD_TIME TIME1 FROM PSM_STORAGE_DETAIL T
+        LEFT JOIN PSM_STORAGE_MAIN T1 ON T1.OBJID = T.MAIN_ID
+        LEFT JOIN PSB_STORE T2 ON T2.OBJID = T1.STORE_ID
+        LEFT JOIN PSB_STORE_PLACE T3 ON T3.OBJID = T1.STORE_PLACE_ID
+        LEFT JOIN SSB_USER T4 ON T4.OBJID = T.RECORD_USER_ID
+        WHERE T.DELETE_FLAG=0 AND ROWNUM=1 ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="barcodes" prepend="AND">
+          <![CDATA[T.TYRE_NO in ($barcodes$)]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[ UNION ALL
+        SELECT NULL,NULL,NULL,NULL,NULL FROM DUAL)
+        WHERE ROWNUM<2)TS
+        ,
+        (SELECT * FROM(SELECT T5.TYRE_NO, T6.S_N_NO,T7.CUSTOME_NAME,T7.REMARK,T8.USER_NAME USER2,T9.USER_NAME USER3,T5.RECORD_TIME TIME2,T6.AFFIRM_TIME TIME3
+        FROM PSM_OUT_STOCK_DETAIL T5
+        LEFT JOIN PSM_OUT_STOCK_BILL T6 ON T6.OBJID = T5.BILL_ID
+        LEFT JOIN PSB_CUSTOMER T7 ON T7.OBJID = T6.CUSTOMER_OBJID
+        LEFT JOIN SSB_USER T8 ON T8.OBJID = T5.RECORD_USER_ID 
+        LEFT JOIN SSB_USER T9 ON T9.OBJID = T6.AFFIRM_USER_ID
+        WHERE T5.DELETE_FLAG=0 AND ROWNUM=1 ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="barcodes" prepend="AND">
+          <![CDATA[T5.TYRE_NO in ($barcodes$)]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[UNION ALL
+        SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM DUAL)
+        WHERE ROWNUM<2)TOUT
+        ,
+        (SELECT * FROM(SELECT T10.TYRE_NO, T11.RESER_NO,T11.STOR_LOC_TO,T12.USER_NAME USER4,T13.USER_NAME USER5,T10.RECORD_TIME TIME4,T11.AFFIRM_TIME TIME5
+        FROM PSM_TRANSFER_DETAIL T10
+        LEFT JOIN PSM_TRANSFER_BILL T11 ON T11.OBJID = T10.BILL_ID
+        LEFT JOIN SSB_USER T12 ON T12.OBJID = T10.RECORD_USER_ID 
+        LEFT JOIN SSB_USER T13 ON T13.OBJID = T11.AFFIRM_USER_ID
+        WHERE T10.DELETE_FLAG=0 AND ROWNUM=1]]>
+       <dynamic prepend="AND">
+         <isNotNull property="barcodes" prepend="AND">
+           <![CDATA[T10.TYRE_NO in ($barcodes$)]]>
+         </isNotNull>
+      </dynamic>
+      <![CDATA[UNION ALL
+        SELECT  NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM DUAL )
+        WHERE ROWNUM<2)TT
+      ]]>
+     </select>
+     <select id="GetMoldingStockCompareDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         SELECT t.green_tyre_no 成型号,t.store_name 库区名称,t.store_place_name 库位名称,t.tooling_barcode 胎胚车号,t.in_stock_user_name 入库人,t.in_stock_record_time 入库时间,t.out_stock_user_name 出库人,t.out_stock_record_time 出库时间
+        FROM BPP_TRACE_MOLDING_INFO T WHERE GREEN_TYRE_NO IN($barcodes$)
+       ]]>
+     </select>
+   <select id="GetCuringAlarmCompareInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      SELECT T.TYRE_NO,T3.EQUIP_NAME,T.CURING_STEP,T1.ITEM_NAME,T.ALARM_BEGIN_TIME,T.ALARM_END_TIME,T.MAX_VALUE,T.MIN_VALUE,T.SET_VALUE,T2.USER_NAME FROM CRT_CURING_ALARM_RECORD T
+      LEFT JOIN CRT_ALARM_STANDARD_ITEM T1 ON T1.ITEM_NO = T.ALARM_REASON
+      LEFT JOIN SSB_USER T2 ON T2.OBJID = T.RECORD_USER_ID
+      LEFT JOIN SBE_EQUIP T3 ON T3.OBJID = T.EQUIP_ID 
+      WHERE T.TYRE_NO IN($barcodes$) order by t.tyre_no
+       ]]>
+     </select>
+     <select id="GetSemisProductionCompareDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+     SELECT T.CARD_NO 卡片号,T.MATERIAL_MINOR_NAME 物料类别,T.EQUIP_NAME 机台,T.MATERIAL_NAME 规格,
+     T.SHIFT_DATE 接班日期,T.SHIFT_NAME 班次,T.CLASS_NAME 班组,
+    T.BEGIN_TIME 生产开始时间,T.END_TIME 生产结束时间,
+    T.RECORD_USER_NAME 操作工,T.QTY 数量,T.UNIT_NAME 单位,T.WASTE_QTY 废弃量,T.SHELF_NO 工装号 FROM HPP_TRACE_SEMIS_INFO T
+    WHERE T.DELETE_FLAG=0
+       ]]>
+       <isNotNull property="barcodes" prepend="AND">
+         <![CDATA[T.CARD_NO IN ($barcodes$)]]>
+       </isNotNull>
+     </select>
+  </statements>
+</sqlMap>

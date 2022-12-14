@@ -1,0 +1,809 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CrtCuringTechParams2"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CrtCuringTechParams2" type="Mesnac.Curing.Entity.BasicEntity.CrtCuringTechParams2, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CrtCuringTechParams2" class="CrtCuringTechParams2">
+    <result property="ShapingPressId" column="SHAPING_PRESS_ID"/>
+    <result property="UsedAmountRange1" column="USED_AMOUNT_RANGE_1"/>
+    <result property="FirstShapingPress1" column="FIRST_SHAPING_PRESS_1"/>
+    <result property="SecondShapingPress1" column="SECOND_SHAPING_PRESS_1"/>
+    <result property="ThirdShapingPress1" column="THIRD_SHAPING_PRESS_1"/>
+    <result property="UsedAmountRange2" column="USED_AMOUNT_RANGE_2"/>
+    <result property="FirstShapingPress2" column="FIRST_SHAPING_PRESS_2"/>
+    <result property="SecondShapingPress2" column="SECOND_SHAPING_PRESS_2"/>
+    <result property="ThirdShapingPress2" column="THIRD_SHAPING_PRESS_2"/>
+    <result property="UsedAmountRange3" column="USED_AMOUNT_RANGE_3"/>
+    <result property="FirstShapingPress3" column="FIRST_SHAPING_PRESS_3"/>
+    <result property="SecondShapingPress3" column="SECOND_SHAPING_PRESS_3"/>
+    <result property="ThirdShapingPress3" column="THIRD_SHAPING_PRESS_3"/>
+    <result property="ShapingTimeId" column="SHAPING_TIME_ID"/>
+    <result property="ShapingTime" column="SHAPING_TIME"/>
+    <result property="ShapingPositionId" column="SHAPING_POSITION_ID"/>
+    <result property="TopPosition" column="TOP_POSITION"/>
+    <result property="BottomPosition" column="BOTTOM_POSITION"/>
+    <result property="ChuckWidthId" column="CHUCK_WIDTH_ID"/>
+    <result property="ChuckWidth" column="CHUCK_WIDTH"/>
+    <result property="AeratePress" column="AERATE_PRESS"/>
+    <result property="Reserve1" column="RESERVE_1"/>
+    <result property="Reserve2" column="RESERVE_2"/>
+    <result property="Reserve3" column="RESERVE_3"/>
+    <result property="EnvironmentalFlag" column="ENVIRONMENTAL_FLAG"/>
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="Guid" column="GUID"/>
+    <result property="BladderTensileHeightId" column="BLADDER_TENSILE_HEIGHT_ID"/>
+    <result property="BladderTensileHeight" column="BLADDER_TENSILE_HEIGHT"/>
+    <result property="TopLimitAmount" column="TOP_LIMIT_AMOUNT"/>
+    <result property="CuringTechTimeIdWinter" column="CURING_TECH_TIME_ID_WINTER"/>
+    <result property="HotRingSetWinter" column="HOT_RING_SET_WINTER"/>
+    <result property="ModelTempSetWinter" column="MODEL_TEMP_SET_WINTER"/>
+    <result property="ModelTempHighWinter" column="MODEL_TEMP_HIGH_WINTER"/>
+    <result property="ModelTempLowWinter" column="MODEL_TEMP_LOW_WINTER"/>
+    <result property="PlateTempSetWinter" column="PLATE_TEMP_SET_WINTER"/>
+    <result property="PlateTempHighWinter" column="PLATE_TEMP_HIGH_WINTER"/>
+    <result property="PlateTempLowWinter" column="PLATE_TEMP_LOW_WINTER"/>
+    <result property="InnerTempSetWinter" column="INNER_TEMP_SET_WINTER"/>
+    <result property="InnerTempHighWinter" column="INNER_TEMP_HIGH_WINTER"/>
+    <result property="InnerTempLowWinter" column="INNER_TEMP_LOW_WINTER"/>
+    <result property="InnerPressSetWinter" column="INNER_PRESS_SET_WINTER"/>
+    <result property="InnerPressHighWinter" column="INNER_PRESS_HIGH_WINTER"/>
+    <result property="InnerPressLowWinter" column="INNER_PRESS_LOW_WINTER"/>
+    <result property="AllCuringTimeWinter" column="ALL_CURING_TIME_WINTER"/>
+    <result property="CuringTechTimeIdSummer" column="CURING_TECH_TIME_ID_SUMMER"/>
+    <result property="HotRingSetSummer" column="HOT_RING_SET_SUMMER"/>
+    <result property="ModelTempSetSummer" column="MODEL_TEMP_SET_SUMMER"/>
+    <result property="ModelTempHighSummer" column="MODEL_TEMP_HIGH_SUMMER"/>
+    <result property="ModelTempLowSummer" column="MODEL_TEMP_LOW_SUMMER"/>
+    <result property="PlateTempSetSummer" column="PLATE_TEMP_SET_SUMMER"/>
+    <result property="PlateTempHighSummer" column="PLATE_TEMP_HIGH_SUMMER"/>
+    <result property="PlateTempLowSummer" column="PLATE_TEMP_LOW_SUMMER"/>
+    <result property="InnerTempSetSummer" column="INNER_TEMP_SET_SUMMER"/>
+    <result property="InnerTempHighSummer" column="INNER_TEMP_HIGH_SUMMER"/>
+    <result property="InnerTempLowSummer" column="INNER_TEMP_LOW_SUMMER"/>
+    <result property="InnerPressSetSummer" column="INNER_PRESS_SET_SUMMER"/>
+    <result property="InnerPressHighSummer" column="INNER_PRESS_HIGH_SUMMER"/>
+    <result property="InnerPressLowSummer" column="INNER_PRESS_LOW_SUMMER"/>
+    <result property="AllCuringTimeSummer" column="ALL_CURING_TIME_SUMMER"/>
+    <result property="ClampingPress" column="CLAMPING_PRESS"/>
+    <result property="ShapingHeightId" column="SHAPING_HEIGHT_ID"/>
+    <result property="ShapingHeight" column="SHAPING_HEIGHT"/>
+    <result property="LoaderHeight" column="LOADER_HEIGHT"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CrtCuringTechParams2" class="CrtCuringTechParams2">
+    <parameter property="ShapingPressId" column="ShapingPressId"/>
+    <parameter property="UsedAmountRange1" column="UsedAmountRange1"/>
+    <parameter property="FirstShapingPress1" column="FirstShapingPress1"/>
+    <parameter property="SecondShapingPress1" column="SecondShapingPress1"/>
+    <parameter property="ThirdShapingPress1" column="ThirdShapingPress1"/>
+    <parameter property="UsedAmountRange2" column="UsedAmountRange2"/>
+    <parameter property="FirstShapingPress2" column="FirstShapingPress2"/>
+    <parameter property="SecondShapingPress2" column="SecondShapingPress2"/>
+    <parameter property="ThirdShapingPress2" column="ThirdShapingPress2"/>
+    <parameter property="UsedAmountRange3" column="UsedAmountRange3"/>
+    <parameter property="FirstShapingPress3" column="FirstShapingPress3"/>
+    <parameter property="SecondShapingPress3" column="SecondShapingPress3"/>
+    <parameter property="ThirdShapingPress3" column="ThirdShapingPress3"/>
+    <parameter property="ShapingTimeId" column="ShapingTimeId"/>
+    <parameter property="ShapingTime" column="ShapingTime"/>
+    <parameter property="ShapingPositionId" column="ShapingPositionId"/>
+    <parameter property="TopPosition" column="TopPosition"/>
+    <parameter property="BottomPosition" column="BottomPosition"/>
+    <parameter property="ChuckWidthId" column="ChuckWidthId"/>
+    <parameter property="ChuckWidth" column="ChuckWidth"/>
+    <parameter property="AeratePress" column="AeratePress"/>
+    <parameter property="Reserve1" column="Reserve1"/>
+    <parameter property="Reserve2" column="Reserve2"/>
+    <parameter property="Reserve3" column="Reserve3"/>
+    <parameter property="EnvironmentalFlag" column="EnvironmentalFlag"/>
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="Guid" column="Guid"/>
+    <parameter property="BladderTensileHeightId" column="BladderTensileHeightId"/>
+    <parameter property="BladderTensileHeight" column="BladderTensileHeight"/>
+    <parameter property="TopLimitAmount" column="TopLimitAmount"/>
+    <parameter property="CuringTechTimeIdWinter" column="CuringTechTimeIdWinter"/>
+    <parameter property="HotRingSetWinter" column="HotRingSetWinter"/>
+    <parameter property="ModelTempSetWinter" column="ModelTempSetWinter"/>
+    <parameter property="ModelTempHighWinter" column="ModelTempHighWinter"/>
+    <parameter property="ModelTempLowWinter" column="ModelTempLowWinter"/>
+    <parameter property="PlateTempSetWinter" column="PlateTempSetWinter"/>
+    <parameter property="PlateTempHighWinter" column="PlateTempHighWinter"/>
+    <parameter property="PlateTempLowWinter" column="PlateTempLowWinter"/>
+    <parameter property="InnerTempSetWinter" column="InnerTempSetWinter"/>
+    <parameter property="InnerTempHighWinter" column="InnerTempHighWinter"/>
+    <parameter property="InnerTempLowWinter" column="InnerTempLowWinter"/>
+    <parameter property="InnerPressSetWinter" column="InnerPressSetWinter"/>
+    <parameter property="InnerPressHighWinter" column="InnerPressHighWinter"/>
+    <parameter property="InnerPressLowWinter" column="InnerPressLowWinter"/>
+    <parameter property="AllCuringTimeWinter" column="AllCuringTimeWinter"/>
+    <parameter property="CuringTechTimeIdSummer" column="CuringTechTimeIdSummer"/>
+    <parameter property="HotRingSetSummer" column="HotRingSetSummer"/>
+    <parameter property="ModelTempSetSummer" column="ModelTempSetSummer"/>
+    <parameter property="ModelTempHighSummer" column="ModelTempHighSummer"/>
+    <parameter property="ModelTempLowSummer" column="ModelTempLowSummer"/>
+    <parameter property="PlateTempSetSummer" column="PlateTempSetSummer"/>
+    <parameter property="PlateTempHighSummer" column="PlateTempHighSummer"/>
+    <parameter property="PlateTempLowSummer" column="PlateTempLowSummer"/>
+    <parameter property="InnerTempSetSummer" column="InnerTempSetSummer"/>
+    <parameter property="InnerTempHighSummer" column="InnerTempHighSummer"/>
+    <parameter property="InnerTempLowSummer" column="InnerTempLowSummer"/>
+    <parameter property="InnerPressSetSummer" column="InnerPressSetSummer"/>
+    <parameter property="InnerPressHighSummer" column="InnerPressHighSummer"/>
+    <parameter property="InnerPressLowSummer" column="InnerPressLowSummer"/>
+    <parameter property="AllCuringTimeSummer" column="AllCuringTimeSummer"/>
+    <parameter property="ClampingPress" column="ClampingPress"/>
+    <parameter property="ShapingHeightId" column="ShapingHeightId"/>
+    <parameter property="ShapingHeight" column="ShapingHeight"/>
+    <parameter property="LoaderHeight" column="LoaderHeight"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_CURING_TECH_PARAMS2 ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ShapingPressId" prepend="AND">
+          <![CDATA[SHAPING_PRESS_ID = #where.ShapingPressId#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedAmountRange1" prepend="AND">
+          <![CDATA[USED_AMOUNT_RANGE_1 = #where.UsedAmountRange1#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress1" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_1 = #where.FirstShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress1" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_1 = #where.SecondShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.ThirdShapingPress1" prepend="AND">
+          <![CDATA[THIRD_SHAPING_PRESS_1 = #where.ThirdShapingPress1#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedAmountRange2" prepend="AND">
+          <![CDATA[USED_AMOUNT_RANGE_2 = #where.UsedAmountRange2#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress2" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_2 = #where.FirstShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress2" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_2 = #where.SecondShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.ThirdShapingPress2" prepend="AND">
+          <![CDATA[THIRD_SHAPING_PRESS_2 = #where.ThirdShapingPress2#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedAmountRange3" prepend="AND">
+          <![CDATA[USED_AMOUNT_RANGE_3 = #where.UsedAmountRange3#]]>
+        </isNotNull>
+        <isNotNull property="where.FirstShapingPress3" prepend="AND">
+          <![CDATA[FIRST_SHAPING_PRESS_3 = #where.FirstShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.SecondShapingPress3" prepend="AND">
+          <![CDATA[SECOND_SHAPING_PRESS_3 = #where.SecondShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.ThirdShapingPress3" prepend="AND">
+          <![CDATA[THIRD_SHAPING_PRESS_3 = #where.ThirdShapingPress3#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingTimeId" prepend="AND">
+          <![CDATA[SHAPING_TIME_ID = #where.ShapingTimeId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingTime" prepend="AND">
+          <![CDATA[SHAPING_TIME = #where.ShapingTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingPositionId" prepend="AND">
+          <![CDATA[SHAPING_POSITION_ID = #where.ShapingPositionId#]]>
+        </isNotNull>
+        <isNotNull property="where.TopPosition" prepend="AND">
+          <![CDATA[TOP_POSITION = #where.TopPosition#]]>
+        </isNotNull>
+        <isNotNull property="where.BottomPosition" prepend="AND">
+          <![CDATA[BOTTOM_POSITION = #where.BottomPosition#]]>
+        </isNotNull>
+        <isNotNull property="where.ChuckWidthId" prepend="AND">
+          <![CDATA[CHUCK_WIDTH_ID = #where.ChuckWidthId#]]>
+        </isNotNull>
+        <isNotNull property="where.ChuckWidth" prepend="AND">
+          <![CDATA[CHUCK_WIDTH = #where.ChuckWidth#]]>
+        </isNotNull>
+        <isNotNull property="where.AeratePress" prepend="AND">
+          <![CDATA[AERATE_PRESS = #where.AeratePress#]]>
+        </isNotNull>
+        <isNotNull property="where.Reserve1" prepend="AND">
+          <![CDATA[RESERVE_1 = #where.Reserve1#]]>
+        </isNotNull>
+        <isNotNull property="where.Reserve2" prepend="AND">
+          <![CDATA[RESERVE_2 = #where.Reserve2#]]>
+        </isNotNull>
+        <isNotNull property="where.Reserve3" prepend="AND">
+          <![CDATA[RESERVE_3 = #where.Reserve3#]]>
+        </isNotNull>
+        <isNotNull property="where.EnvironmentalFlag" prepend="AND">
+          <![CDATA[ENVIRONMENTAL_FLAG = #where.EnvironmentalFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Guid" prepend="AND">
+          <![CDATA[GUID = #where.Guid#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderTensileHeightId" prepend="AND">
+          <![CDATA[BLADDER_TENSILE_HEIGHT_ID = #where.BladderTensileHeightId#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderTensileHeight" prepend="AND">
+          <![CDATA[BLADDER_TENSILE_HEIGHT = #where.BladderTensileHeight#]]>
+        </isNotNull>
+        <isNotNull property="where.TopLimitAmount" prepend="AND">
+          <![CDATA[TOP_LIMIT_AMOUNT = #where.TopLimitAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTechTimeIdWinter" prepend="AND">
+          <![CDATA[CURING_TECH_TIME_ID_WINTER = #where.CuringTechTimeIdWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.HotRingSetWinter" prepend="AND">
+          <![CDATA[HOT_RING_SET_WINTER = #where.HotRingSetWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempSetWinter" prepend="AND">
+          <![CDATA[MODEL_TEMP_SET_WINTER = #where.ModelTempSetWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempHighWinter" prepend="AND">
+          <![CDATA[MODEL_TEMP_HIGH_WINTER = #where.ModelTempHighWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempLowWinter" prepend="AND">
+          <![CDATA[MODEL_TEMP_LOW_WINTER = #where.ModelTempLowWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempSetWinter" prepend="AND">
+          <![CDATA[PLATE_TEMP_SET_WINTER = #where.PlateTempSetWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempHighWinter" prepend="AND">
+          <![CDATA[PLATE_TEMP_HIGH_WINTER = #where.PlateTempHighWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempLowWinter" prepend="AND">
+          <![CDATA[PLATE_TEMP_LOW_WINTER = #where.PlateTempLowWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerTempSetWinter" prepend="AND">
+          <![CDATA[INNER_TEMP_SET_WINTER = #where.InnerTempSetWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerTempHighWinter" prepend="AND">
+          <![CDATA[INNER_TEMP_HIGH_WINTER = #where.InnerTempHighWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerTempLowWinter" prepend="AND">
+          <![CDATA[INNER_TEMP_LOW_WINTER = #where.InnerTempLowWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerPressSetWinter" prepend="AND">
+          <![CDATA[INNER_PRESS_SET_WINTER = #where.InnerPressSetWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerPressHighWinter" prepend="AND">
+          <![CDATA[INNER_PRESS_HIGH_WINTER = #where.InnerPressHighWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerPressLowWinter" prepend="AND">
+          <![CDATA[INNER_PRESS_LOW_WINTER = #where.InnerPressLowWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.AllCuringTimeWinter" prepend="AND">
+          <![CDATA[ALL_CURING_TIME_WINTER = #where.AllCuringTimeWinter#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTechTimeIdSummer" prepend="AND">
+          <![CDATA[CURING_TECH_TIME_ID_SUMMER = #where.CuringTechTimeIdSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.HotRingSetSummer" prepend="AND">
+          <![CDATA[HOT_RING_SET_SUMMER = #where.HotRingSetSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempSetSummer" prepend="AND">
+          <![CDATA[MODEL_TEMP_SET_SUMMER = #where.ModelTempSetSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempHighSummer" prepend="AND">
+          <![CDATA[MODEL_TEMP_HIGH_SUMMER = #where.ModelTempHighSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.ModelTempLowSummer" prepend="AND">
+          <![CDATA[MODEL_TEMP_LOW_SUMMER = #where.ModelTempLowSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempSetSummer" prepend="AND">
+          <![CDATA[PLATE_TEMP_SET_SUMMER = #where.PlateTempSetSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempHighSummer" prepend="AND">
+          <![CDATA[PLATE_TEMP_HIGH_SUMMER = #where.PlateTempHighSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.PlateTempLowSummer" prepend="AND">
+          <![CDATA[PLATE_TEMP_LOW_SUMMER = #where.PlateTempLowSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerTempSetSummer" prepend="AND">
+          <![CDATA[INNER_TEMP_SET_SUMMER = #where.InnerTempSetSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerTempHighSummer" prepend="AND">
+          <![CDATA[INNER_TEMP_HIGH_SUMMER = #where.InnerTempHighSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerTempLowSummer" prepend="AND">
+          <![CDATA[INNER_TEMP_LOW_SUMMER = #where.InnerTempLowSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerPressSetSummer" prepend="AND">
+          <![CDATA[INNER_PRESS_SET_SUMMER = #where.InnerPressSetSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerPressHighSummer" prepend="AND">
+          <![CDATA[INNER_PRESS_HIGH_SUMMER = #where.InnerPressHighSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.InnerPressLowSummer" prepend="AND">
+          <![CDATA[INNER_PRESS_LOW_SUMMER = #where.InnerPressLowSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.AllCuringTimeSummer" prepend="AND">
+          <![CDATA[ALL_CURING_TIME_SUMMER = #where.AllCuringTimeSummer#]]>
+        </isNotNull>
+        <isNotNull property="where.ClampingPress" prepend="AND">
+          <![CDATA[CLAMPING_PRESS = #where.ClampingPress#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingHeightId" prepend="AND">
+          <![CDATA[SHAPING_HEIGHT_ID = #where.ShapingHeightId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShapingHeight" prepend="AND">
+          <![CDATA[SHAPING_HEIGHT = #where.ShapingHeight#]]>
+        </isNotNull>
+        <isNotNull property="where.LoaderHeight" prepend="AND">
+          <![CDATA[LOADER_HEIGHT = #where.LoaderHeight#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CRT_CURING_TECH_PARAMS2]]>
+       <dynamic prepend="(">
+        <isNotNull property="ShapingPressId" prepend=",">SHAPING_PRESS_ID</isNotNull>
+        <isNotNull property="UsedAmountRange1" prepend=",">USED_AMOUNT_RANGE_1</isNotNull>
+        <isNotNull property="FirstShapingPress1" prepend=",">FIRST_SHAPING_PRESS_1</isNotNull>
+        <isNotNull property="SecondShapingPress1" prepend=",">SECOND_SHAPING_PRESS_1</isNotNull>
+        <isNotNull property="ThirdShapingPress1" prepend=",">THIRD_SHAPING_PRESS_1</isNotNull>
+        <isNotNull property="UsedAmountRange2" prepend=",">USED_AMOUNT_RANGE_2</isNotNull>
+        <isNotNull property="FirstShapingPress2" prepend=",">FIRST_SHAPING_PRESS_2</isNotNull>
+        <isNotNull property="SecondShapingPress2" prepend=",">SECOND_SHAPING_PRESS_2</isNotNull>
+        <isNotNull property="ThirdShapingPress2" prepend=",">THIRD_SHAPING_PRESS_2</isNotNull>
+        <isNotNull property="UsedAmountRange3" prepend=",">USED_AMOUNT_RANGE_3</isNotNull>
+        <isNotNull property="FirstShapingPress3" prepend=",">FIRST_SHAPING_PRESS_3</isNotNull>
+        <isNotNull property="SecondShapingPress3" prepend=",">SECOND_SHAPING_PRESS_3</isNotNull>
+        <isNotNull property="ThirdShapingPress3" prepend=",">THIRD_SHAPING_PRESS_3</isNotNull>
+        <isNotNull property="ShapingTimeId" prepend=",">SHAPING_TIME_ID</isNotNull>
+        <isNotNull property="ShapingTime" prepend=",">SHAPING_TIME</isNotNull>
+        <isNotNull property="ShapingPositionId" prepend=",">SHAPING_POSITION_ID</isNotNull>
+        <isNotNull property="TopPosition" prepend=",">TOP_POSITION</isNotNull>
+        <isNotNull property="BottomPosition" prepend=",">BOTTOM_POSITION</isNotNull>
+        <isNotNull property="ChuckWidthId" prepend=",">CHUCK_WIDTH_ID</isNotNull>
+        <isNotNull property="ChuckWidth" prepend=",">CHUCK_WIDTH</isNotNull>
+        <isNotNull property="AeratePress" prepend=",">AERATE_PRESS</isNotNull>
+        <isNotNull property="Reserve1" prepend=",">RESERVE_1</isNotNull>
+        <isNotNull property="Reserve2" prepend=",">RESERVE_2</isNotNull>
+        <isNotNull property="Reserve3" prepend=",">RESERVE_3</isNotNull>
+        <isNotNull property="EnvironmentalFlag" prepend=",">ENVIRONMENTAL_FLAG</isNotNull>
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="Guid" prepend=",">GUID</isNotNull>
+        <isNotNull property="BladderTensileHeightId" prepend=",">BLADDER_TENSILE_HEIGHT_ID</isNotNull>
+        <isNotNull property="BladderTensileHeight" prepend=",">BLADDER_TENSILE_HEIGHT</isNotNull>
+        <isNotNull property="TopLimitAmount" prepend=",">TOP_LIMIT_AMOUNT</isNotNull>
+        <isNotNull property="CuringTechTimeIdWinter" prepend=",">CURING_TECH_TIME_ID_WINTER</isNotNull>
+        <isNotNull property="HotRingSetWinter" prepend=",">HOT_RING_SET_WINTER</isNotNull>
+        <isNotNull property="ModelTempSetWinter" prepend=",">MODEL_TEMP_SET_WINTER</isNotNull>
+        <isNotNull property="ModelTempHighWinter" prepend=",">MODEL_TEMP_HIGH_WINTER</isNotNull>
+        <isNotNull property="ModelTempLowWinter" prepend=",">MODEL_TEMP_LOW_WINTER</isNotNull>
+        <isNotNull property="PlateTempSetWinter" prepend=",">PLATE_TEMP_SET_WINTER</isNotNull>
+        <isNotNull property="PlateTempHighWinter" prepend=",">PLATE_TEMP_HIGH_WINTER</isNotNull>
+        <isNotNull property="PlateTempLowWinter" prepend=",">PLATE_TEMP_LOW_WINTER</isNotNull>
+        <isNotNull property="InnerTempSetWinter" prepend=",">INNER_TEMP_SET_WINTER</isNotNull>
+        <isNotNull property="InnerTempHighWinter" prepend=",">INNER_TEMP_HIGH_WINTER</isNotNull>
+        <isNotNull property="InnerTempLowWinter" prepend=",">INNER_TEMP_LOW_WINTER</isNotNull>
+        <isNotNull property="InnerPressSetWinter" prepend=",">INNER_PRESS_SET_WINTER</isNotNull>
+        <isNotNull property="InnerPressHighWinter" prepend=",">INNER_PRESS_HIGH_WINTER</isNotNull>
+        <isNotNull property="InnerPressLowWinter" prepend=",">INNER_PRESS_LOW_WINTER</isNotNull>
+        <isNotNull property="AllCuringTimeWinter" prepend=",">ALL_CURING_TIME_WINTER</isNotNull>
+        <isNotNull property="CuringTechTimeIdSummer" prepend=",">CURING_TECH_TIME_ID_SUMMER</isNotNull>
+        <isNotNull property="HotRingSetSummer" prepend=",">HOT_RING_SET_SUMMER</isNotNull>
+        <isNotNull property="ModelTempSetSummer" prepend=",">MODEL_TEMP_SET_SUMMER</isNotNull>
+        <isNotNull property="ModelTempHighSummer" prepend=",">MODEL_TEMP_HIGH_SUMMER</isNotNull>
+        <isNotNull property="ModelTempLowSummer" prepend=",">MODEL_TEMP_LOW_SUMMER</isNotNull>
+        <isNotNull property="PlateTempSetSummer" prepend=",">PLATE_TEMP_SET_SUMMER</isNotNull>
+        <isNotNull property="PlateTempHighSummer" prepend=",">PLATE_TEMP_HIGH_SUMMER</isNotNull>
+        <isNotNull property="PlateTempLowSummer" prepend=",">PLATE_TEMP_LOW_SUMMER</isNotNull>
+        <isNotNull property="InnerTempSetSummer" prepend=",">INNER_TEMP_SET_SUMMER</isNotNull>
+        <isNotNull property="InnerTempHighSummer" prepend=",">INNER_TEMP_HIGH_SUMMER</isNotNull>
+        <isNotNull property="InnerTempLowSummer" prepend=",">INNER_TEMP_LOW_SUMMER</isNotNull>
+        <isNotNull property="InnerPressSetSummer" prepend=",">INNER_PRESS_SET_SUMMER</isNotNull>
+        <isNotNull property="InnerPressHighSummer" prepend=",">INNER_PRESS_HIGH_SUMMER</isNotNull>
+        <isNotNull property="InnerPressLowSummer" prepend=",">INNER_PRESS_LOW_SUMMER</isNotNull>
+        <isNotNull property="AllCuringTimeSummer" prepend=",">ALL_CURING_TIME_SUMMER</isNotNull>
+        <isNotNull property="ClampingPress" prepend=",">CLAMPING_PRESS</isNotNull>
+        <isNotNull property="ShapingHeightId" prepend=",">SHAPING_HEIGHT_ID</isNotNull>
+        <isNotNull property="ShapingHeight" prepend=",">SHAPING_HEIGHT</isNotNull>
+        <isNotNull property="LoaderHeight" prepend=",">LOADER_HEIGHT</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ShapingPressId" prepend=",">#ShapingPressId#</isNotNull>
+        <isNotNull property="UsedAmountRange1" prepend=",">#UsedAmountRange1#</isNotNull>
+        <isNotNull property="FirstShapingPress1" prepend=",">#FirstShapingPress1#</isNotNull>
+        <isNotNull property="SecondShapingPress1" prepend=",">#SecondShapingPress1#</isNotNull>
+        <isNotNull property="ThirdShapingPress1" prepend=",">#ThirdShapingPress1#</isNotNull>
+        <isNotNull property="UsedAmountRange2" prepend=",">#UsedAmountRange2#</isNotNull>
+        <isNotNull property="FirstShapingPress2" prepend=",">#FirstShapingPress2#</isNotNull>
+        <isNotNull property="SecondShapingPress2" prepend=",">#SecondShapingPress2#</isNotNull>
+        <isNotNull property="ThirdShapingPress2" prepend=",">#ThirdShapingPress2#</isNotNull>
+        <isNotNull property="UsedAmountRange3" prepend=",">#UsedAmountRange3#</isNotNull>
+        <isNotNull property="FirstShapingPress3" prepend=",">#FirstShapingPress3#</isNotNull>
+        <isNotNull property="SecondShapingPress3" prepend=",">#SecondShapingPress3#</isNotNull>
+        <isNotNull property="ThirdShapingPress3" prepend=",">#ThirdShapingPress3#</isNotNull>
+        <isNotNull property="ShapingTimeId" prepend=",">#ShapingTimeId#</isNotNull>
+        <isNotNull property="ShapingTime" prepend=",">#ShapingTime#</isNotNull>
+        <isNotNull property="ShapingPositionId" prepend=",">#ShapingPositionId#</isNotNull>
+        <isNotNull property="TopPosition" prepend=",">#TopPosition#</isNotNull>
+        <isNotNull property="BottomPosition" prepend=",">#BottomPosition#</isNotNull>
+        <isNotNull property="ChuckWidthId" prepend=",">#ChuckWidthId#</isNotNull>
+        <isNotNull property="ChuckWidth" prepend=",">#ChuckWidth#</isNotNull>
+        <isNotNull property="AeratePress" prepend=",">#AeratePress#</isNotNull>
+        <isNotNull property="Reserve1" prepend=",">#Reserve1#</isNotNull>
+        <isNotNull property="Reserve2" prepend=",">#Reserve2#</isNotNull>
+        <isNotNull property="Reserve3" prepend=",">#Reserve3#</isNotNull>
+        <isNotNull property="EnvironmentalFlag" prepend=",">#EnvironmentalFlag#</isNotNull>
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="Guid" prepend=",">#Guid#</isNotNull>
+        <isNotNull property="BladderTensileHeightId" prepend=",">#BladderTensileHeightId#</isNotNull>
+        <isNotNull property="BladderTensileHeight" prepend=",">#BladderTensileHeight#</isNotNull>
+        <isNotNull property="TopLimitAmount" prepend=",">#TopLimitAmount#</isNotNull>
+        <isNotNull property="CuringTechTimeIdWinter" prepend=",">#CuringTechTimeIdWinter#</isNotNull>
+        <isNotNull property="HotRingSetWinter" prepend=",">#HotRingSetWinter#</isNotNull>
+        <isNotNull property="ModelTempSetWinter" prepend=",">#ModelTempSetWinter#</isNotNull>
+        <isNotNull property="ModelTempHighWinter" prepend=",">#ModelTempHighWinter#</isNotNull>
+        <isNotNull property="ModelTempLowWinter" prepend=",">#ModelTempLowWinter#</isNotNull>
+        <isNotNull property="PlateTempSetWinter" prepend=",">#PlateTempSetWinter#</isNotNull>
+        <isNotNull property="PlateTempHighWinter" prepend=",">#PlateTempHighWinter#</isNotNull>
+        <isNotNull property="PlateTempLowWinter" prepend=",">#PlateTempLowWinter#</isNotNull>
+        <isNotNull property="InnerTempSetWinter" prepend=",">#InnerTempSetWinter#</isNotNull>
+        <isNotNull property="InnerTempHighWinter" prepend=",">#InnerTempHighWinter#</isNotNull>
+        <isNotNull property="InnerTempLowWinter" prepend=",">#InnerTempLowWinter#</isNotNull>
+        <isNotNull property="InnerPressSetWinter" prepend=",">#InnerPressSetWinter#</isNotNull>
+        <isNotNull property="InnerPressHighWinter" prepend=",">#InnerPressHighWinter#</isNotNull>
+        <isNotNull property="InnerPressLowWinter" prepend=",">#InnerPressLowWinter#</isNotNull>
+        <isNotNull property="AllCuringTimeWinter" prepend=",">#AllCuringTimeWinter#</isNotNull>
+        <isNotNull property="CuringTechTimeIdSummer" prepend=",">#CuringTechTimeIdSummer#</isNotNull>
+        <isNotNull property="HotRingSetSummer" prepend=",">#HotRingSetSummer#</isNotNull>
+        <isNotNull property="ModelTempSetSummer" prepend=",">#ModelTempSetSummer#</isNotNull>
+        <isNotNull property="ModelTempHighSummer" prepend=",">#ModelTempHighSummer#</isNotNull>
+        <isNotNull property="ModelTempLowSummer" prepend=",">#ModelTempLowSummer#</isNotNull>
+        <isNotNull property="PlateTempSetSummer" prepend=",">#PlateTempSetSummer#</isNotNull>
+        <isNotNull property="PlateTempHighSummer" prepend=",">#PlateTempHighSummer#</isNotNull>
+        <isNotNull property="PlateTempLowSummer" prepend=",">#PlateTempLowSummer#</isNotNull>
+        <isNotNull property="InnerTempSetSummer" prepend=",">#InnerTempSetSummer#</isNotNull>
+        <isNotNull property="InnerTempHighSummer" prepend=",">#InnerTempHighSummer#</isNotNull>
+        <isNotNull property="InnerTempLowSummer" prepend=",">#InnerTempLowSummer#</isNotNull>
+        <isNotNull property="InnerPressSetSummer" prepend=",">#InnerPressSetSummer#</isNotNull>
+        <isNotNull property="InnerPressHighSummer" prepend=",">#InnerPressHighSummer#</isNotNull>
+        <isNotNull property="InnerPressLowSummer" prepend=",">#InnerPressLowSummer#</isNotNull>
+        <isNotNull property="AllCuringTimeSummer" prepend=",">#AllCuringTimeSummer#</isNotNull>
+        <isNotNull property="ClampingPress" prepend=",">#ClampingPress#</isNotNull>
+        <isNotNull property="ShapingHeightId" prepend=",">#ShapingHeightId#</isNotNull>
+        <isNotNull property="ShapingHeight" prepend=",">#ShapingHeight#</isNotNull>
+        <isNotNull property="LoaderHeight" prepend=",">#LoaderHeight#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CRT_CURING_TECH_PARAMS2
+       <dynamic prepend="SET">
+        <isNotNull  property="update.ShapingPressId"  prepend=",">
+          SHAPING_PRESS_ID = #update.ShapingPressId#
+        </isNotNull>
+        <isNotNull  property="update.UsedAmountRange1"  prepend=",">
+          USED_AMOUNT_RANGE_1 = #update.UsedAmountRange1#
+        </isNotNull>
+        <isNotNull  property="update.FirstShapingPress1"  prepend=",">
+          FIRST_SHAPING_PRESS_1 = #update.FirstShapingPress1#
+        </isNotNull>
+        <isNotNull  property="update.SecondShapingPress1"  prepend=",">
+          SECOND_SHAPING_PRESS_1 = #update.SecondShapingPress1#
+        </isNotNull>
+        <isNotNull  property="update.ThirdShapingPress1"  prepend=",">
+          THIRD_SHAPING_PRESS_1 = #update.ThirdShapingPress1#
+        </isNotNull>
+        <isNotNull  property="update.UsedAmountRange2"  prepend=",">
+          USED_AMOUNT_RANGE_2 = #update.UsedAmountRange2#
+        </isNotNull>
+        <isNotNull  property="update.FirstShapingPress2"  prepend=",">
+          FIRST_SHAPING_PRESS_2 = #update.FirstShapingPress2#
+        </isNotNull>
+        <isNotNull  property="update.SecondShapingPress2"  prepend=",">
+          SECOND_SHAPING_PRESS_2 = #update.SecondShapingPress2#
+        </isNotNull>
+        <isNotNull  property="update.ThirdShapingPress2"  prepend=",">
+          THIRD_SHAPING_PRESS_2 = #update.ThirdShapingPress2#
+        </isNotNull>
+        <isNotNull  property="update.UsedAmountRange3"  prepend=",">
+          USED_AMOUNT_RANGE_3 = #update.UsedAmountRange3#
+        </isNotNull>
+        <isNotNull  property="update.FirstShapingPress3"  prepend=",">
+          FIRST_SHAPING_PRESS_3 = #update.FirstShapingPress3#
+        </isNotNull>
+        <isNotNull  property="update.SecondShapingPress3"  prepend=",">
+          SECOND_SHAPING_PRESS_3 = #update.SecondShapingPress3#
+        </isNotNull>
+        <isNotNull  property="update.ThirdShapingPress3"  prepend=",">
+          THIRD_SHAPING_PRESS_3 = #update.ThirdShapingPress3#
+        </isNotNull>
+        <isNotNull  property="update.ShapingTimeId"  prepend=",">
+          SHAPING_TIME_ID = #update.ShapingTimeId#
+        </isNotNull>
+        <isNotNull  property="update.ShapingTime"  prepend=",">
+          SHAPING_TIME = #update.ShapingTime#
+        </isNotNull>
+        <isNotNull  property="update.ShapingPositionId"  prepend=",">
+          SHAPING_POSITION_ID = #update.ShapingPositionId#
+        </isNotNull>
+        <isNotNull  property="update.TopPosition"  prepend=",">
+          TOP_POSITION = #update.TopPosition#
+        </isNotNull>
+        <isNotNull  property="update.BottomPosition"  prepend=",">
+          BOTTOM_POSITION = #update.BottomPosition#
+        </isNotNull>
+        <isNotNull  property="update.ChuckWidthId"  prepend=",">
+          CHUCK_WIDTH_ID = #update.ChuckWidthId#
+        </isNotNull>
+        <isNotNull  property="update.ChuckWidth"  prepend=",">
+          CHUCK_WIDTH = #update.ChuckWidth#
+        </isNotNull>
+        <isNotNull  property="update.AeratePress"  prepend=",">
+          AERATE_PRESS = #update.AeratePress#
+        </isNotNull>
+        <isNotNull  property="update.Reserve1"  prepend=",">
+          RESERVE_1 = #update.Reserve1#
+        </isNotNull>
+        <isNotNull  property="update.Reserve2"  prepend=",">
+          RESERVE_2 = #update.Reserve2#
+        </isNotNull>
+        <isNotNull  property="update.Reserve3"  prepend=",">
+          RESERVE_3 = #update.Reserve3#
+        </isNotNull>
+        <isNotNull  property="update.EnvironmentalFlag"  prepend=",">
+          ENVIRONMENTAL_FLAG = #update.EnvironmentalFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.Guid"  prepend=",">
+          GUID = #update.Guid#
+        </isNotNull>
+        <isNotNull  property="update.BladderTensileHeightId"  prepend=",">
+          BLADDER_TENSILE_HEIGHT_ID = #update.BladderTensileHeightId#
+        </isNotNull>
+        <isNotNull  property="update.BladderTensileHeight"  prepend=",">
+          BLADDER_TENSILE_HEIGHT = #update.BladderTensileHeight#
+        </isNotNull>
+        <isNotNull  property="update.TopLimitAmount"  prepend=",">
+          TOP_LIMIT_AMOUNT = #update.TopLimitAmount#
+        </isNotNull>
+        <isNotNull  property="update.CuringTechTimeIdWinter"  prepend=",">
+          CURING_TECH_TIME_ID_WINTER = #update.CuringTechTimeIdWinter#
+        </isNotNull>
+        <isNotNull  property="update.HotRingSetWinter"  prepend=",">
+          HOT_RING_SET_WINTER = #update.HotRingSetWinter#
+        </isNotNull>
+        <isNotNull  property="update.ModelTempSetWinter"  prepend=",">
+          MODEL_TEMP_SET_WINTER = #update.ModelTempSetWinter#
+        </isNotNull>
+        <isNotNull  property="update.ModelTempHighWinter"  prepend=",">
+          MODEL_TEMP_HIGH_WINTER = #update.ModelTempHighWinter#
+        </isNotNull>
+        <isNotNull  property="update.ModelTempLowWinter"  prepend=",">
+          MODEL_TEMP_LOW_WINTER = #update.ModelTempLowWinter#
+        </isNotNull>
+        <isNotNull  property="update.PlateTempSetWinter"  prepend=",">
+          PLATE_TEMP_SET_WINTER = #update.PlateTempSetWinter#
+        </isNotNull>
+        <isNotNull  property="update.PlateTempHighWinter"  prepend=",">
+          PLATE_TEMP_HIGH_WINTER = #update.PlateTempHighWinter#
+        </isNotNull>
+        <isNotNull  property="update.PlateTempLowWinter"  prepend=",">
+          PLATE_TEMP_LOW_WINTER = #update.PlateTempLowWinter#
+        </isNotNull>
+        <isNotNull  property="update.InnerTempSetWinter"  prepend=",">
+          INNER_TEMP_SET_WINTER = #update.InnerTempSetWinter#
+        </isNotNull>
+        <isNotNull  property="update.InnerTempHighWinter"  prepend=",">
+          INNER_TEMP_HIGH_WINTER = #update.InnerTempHighWinter#
+        </isNotNull>
+        <isNotNull  property="update.InnerTempLowWinter"  prepend=",">
+          INNER_TEMP_LOW_WINTER = #update.InnerTempLowWinter#
+        </isNotNull>
+        <isNotNull  property="update.InnerPressSetWinter"  prepend=",">
+          INNER_PRESS_SET_WINTER = #update.InnerPressSetWinter#
+        </isNotNull>
+        <isNotNull  property="update.InnerPressHighWinter"  prepend=",">
+          INNER_PRESS_HIGH_WINTER = #update.InnerPressHighWinter#
+        </isNotNull>
+        <isNotNull  property="update.InnerPressLowWinter"  prepend=",">
+          INNER_PRESS_LOW_WINTER = #update.InnerPressLowWinter#
+        </isNotNull>
+        <isNotNull  property="update.AllCuringTimeWinter"  prepend=",">
+          ALL_CURING_TIME_WINTER = #update.AllCuringTimeWinter#
+        </isNotNull>
+        <isNotNull  property="update.CuringTechTimeIdSummer"  prepend=",">
+          CURING_TECH_TIME_ID_SUMMER = #update.CuringTechTimeIdSummer#
+        </isNotNull>
+        <isNotNull  property="update.HotRingSetSummer"  prepend=",">
+          HOT_RING_SET_SUMMER = #update.HotRingSetSummer#
+        </isNotNull>
+        <isNotNull  property="update.ModelTempSetSummer"  prepend=",">
+          MODEL_TEMP_SET_SUMMER = #update.ModelTempSetSummer#
+        </isNotNull>
+        <isNotNull  property="update.ModelTempHighSummer"  prepend=",">
+          MODEL_TEMP_HIGH_SUMMER = #update.ModelTempHighSummer#
+        </isNotNull>
+        <isNotNull  property="update.ModelTempLowSummer"  prepend=",">
+          MODEL_TEMP_LOW_SUMMER = #update.ModelTempLowSummer#
+        </isNotNull>
+        <isNotNull  property="update.PlateTempSetSummer"  prepend=",">
+          PLATE_TEMP_SET_SUMMER = #update.PlateTempSetSummer#
+        </isNotNull>
+        <isNotNull  property="update.PlateTempHighSummer"  prepend=",">
+          PLATE_TEMP_HIGH_SUMMER = #update.PlateTempHighSummer#
+        </isNotNull>
+        <isNotNull  property="update.PlateTempLowSummer"  prepend=",">
+          PLATE_TEMP_LOW_SUMMER = #update.PlateTempLowSummer#
+        </isNotNull>
+        <isNotNull  property="update.InnerTempSetSummer"  prepend=",">
+          INNER_TEMP_SET_SUMMER = #update.InnerTempSetSummer#
+        </isNotNull>
+        <isNotNull  property="update.InnerTempHighSummer"  prepend=",">
+          INNER_TEMP_HIGH_SUMMER = #update.InnerTempHighSummer#
+        </isNotNull>
+        <isNotNull  property="update.InnerTempLowSummer"  prepend=",">
+          INNER_TEMP_LOW_SUMMER = #update.InnerTempLowSummer#
+        </isNotNull>
+        <isNotNull  property="update.InnerPressSetSummer"  prepend=",">
+          INNER_PRESS_SET_SUMMER = #update.InnerPressSetSummer#
+        </isNotNull>
+        <isNotNull  property="update.InnerPressHighSummer"  prepend=",">
+          INNER_PRESS_HIGH_SUMMER = #update.InnerPressHighSummer#
+        </isNotNull>
+        <isNotNull  property="update.InnerPressLowSummer"  prepend=",">
+          INNER_PRESS_LOW_SUMMER = #update.InnerPressLowSummer#
+        </isNotNull>
+        <isNotNull  property="update.AllCuringTimeSummer"  prepend=",">
+          ALL_CURING_TIME_SUMMER = #update.AllCuringTimeSummer#
+        </isNotNull>
+        <isNotNull  property="update.ClampingPress"  prepend=",">
+          CLAMPING_PRESS = #update.ClampingPress#
+        </isNotNull>
+        <isNotNull  property="update.ShapingHeightId"  prepend=",">
+          SHAPING_HEIGHT_ID = #update.ShapingHeightId#
+        </isNotNull>
+        <isNotNull  property="update.ShapingHeight"  prepend=",">
+          SHAPING_HEIGHT = #update.ShapingHeight#
+        </isNotNull>
+        <isNotNull  property="update.LoaderHeight"  prepend=",">
+          LOADER_HEIGHT = #update.LoaderHeight#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CRT_CURING_TECH_PARAMS2
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CrtCuringTechParams2">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CrtCuringTechParams2">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CRT_CURING_TECH_PARAMS2
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CRT_CURING_TECH_PARAMS2
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CrtCuringTechParams2" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CRT_CURING_TECH_PARAMS2
+    </statement>
+  </statements>
+</sqlMap>

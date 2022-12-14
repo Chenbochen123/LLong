@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="WinCEFrameworkFiles">
+        <s:complexType />
+      </s:element>
+      <s:element name="WinCEFrameworkFilesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WinCEFrameworkFilesResult" type="tns:ArrayOfUpdateFile" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUpdateFile">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UpdateFile" nillable="true" type="tns:UpdateFile" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UpdateFile">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileVersion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileMd5" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FileLength" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfUpdateFile" nillable="true" type="tns:ArrayOfUpdateFile" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="WinCEFrameworkFilesSoapIn">
+    <wsdl:part name="parameters" element="tns:WinCEFrameworkFiles" />
+  </wsdl:message>
+  <wsdl:message name="WinCEFrameworkFilesSoapOut">
+    <wsdl:part name="parameters" element="tns:WinCEFrameworkFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WinCEFrameworkFilesHttpGetIn" />
+  <wsdl:message name="WinCEFrameworkFilesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUpdateFile" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="WinCEFrameworkFilesHttpPostIn" />
+  <wsdl:message name="WinCEFrameworkFilesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUpdateFile" />
+  </wsdl:message>
+  <wsdl:portType name="UpdateServiceSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WinCEFrameworkFiles">
+      <wsdl:input message="tns:WinCEFrameworkFilesSoapIn" />
+      <wsdl:output message="tns:WinCEFrameworkFilesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="UpdateServiceHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WinCEFrameworkFiles">
+      <wsdl:input message="tns:WinCEFrameworkFilesHttpGetIn" />
+      <wsdl:output message="tns:WinCEFrameworkFilesHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="UpdateServiceHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="WinCEFrameworkFiles">
+      <wsdl:input message="tns:WinCEFrameworkFilesHttpPostIn" />
+      <wsdl:output message="tns:WinCEFrameworkFilesHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UpdateServiceSoap" type="tns:UpdateServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WinCEFrameworkFiles">
+      <soap:operation soapAction="http://tempuri.org/WinCEFrameworkFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UpdateServiceSoap12" type="tns:UpdateServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WinCEFrameworkFiles">
+      <soap12:operation soapAction="http://tempuri.org/WinCEFrameworkFiles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UpdateServiceHttpGet" type="tns:UpdateServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WinCEFrameworkFiles">
+      <http:operation location="/WinCEFrameworkFiles" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UpdateServiceHttpPost" type="tns:UpdateServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WinCEFrameworkFiles">
+      <http:operation location="/WinCEFrameworkFiles" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UpdateService">
+    <wsdl:port name="UpdateServiceSoap" binding="tns:UpdateServiceSoap">
+      <soap:address location="http://localhost:61995/McSys/UpdateService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UpdateServiceSoap12" binding="tns:UpdateServiceSoap12">
+      <soap12:address location="http://localhost:61995/McSys/UpdateService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UpdateServiceHttpGet" binding="tns:UpdateServiceHttpGet">
+      <http:address location="http://localhost:61995/McSys/UpdateService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UpdateServiceHttpPost" binding="tns:UpdateServiceHttpPost">
+      <http:address location="http://localhost:61995/McSys/UpdateService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

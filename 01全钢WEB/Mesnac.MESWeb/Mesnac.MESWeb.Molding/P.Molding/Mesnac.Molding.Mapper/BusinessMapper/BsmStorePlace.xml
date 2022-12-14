@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.BsmStorePlace"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BSM_STORE_PLACE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceName" prepend="AND">
+          <![CDATA[STORE_PLACE_NAME = #where.StorePlaceName#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceCode" prepend="AND">
+          <![CDATA[STORE_PLACE_CODE = #where.StorePlaceCode#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreId" prepend="AND">
+          <![CDATA[STORE_ID = #where.StoreId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <!--获取当前设备库存数量-->
+     <select id="GetEquipStorePlaceInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[   
+          SELECT T.EQUIP_ID,T.STORE_PLACE_ID,T2.STORE_PLACE_NAME,T2.MATERIAL_ID,T2.MAX_AMOUNT,T2.STORAGE_AMOUNT  FROM BSM_EQUIP_PLACE  T
+          LEFT JOIN BSM_STORE_PLACE T2 ON T.STORE_PLACE_ID=T2.OBJID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="EquipId" prepend="AND">
+           <![CDATA[T.EQUIP_ID=#EquipId#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+     <select id="GetStorePlaceInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[   
+          SELECT T0.OBJID,T0.STORE_PLACE_NAME,T0.STORE_PLACE_CODE FROM BSM_STORE_PLACE T0
+          LEFT JOIN BSM_STORE T1 ON T1.OBJID = T0.STORE_ID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[T0.DELETE_FLAG=#DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="StoreCode" prepend="AND">
+           <![CDATA[T1.STORE_CODE=#StoreCode#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="IsExistStorePlaceInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[   
+          select t0.objid from bsm_store_place t0 
+          left join bsm_store t1 on t1.objid= t0.store_id
+          where t0.DELETE_FLAG=0 AND T1.DELETE_FLAG = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="StorePlaceCode" prepend="AND">
+           <![CDATA[T0.STORE_PLACE_CODE=#StorePlaceCode#]]>
+         </isNotNull>
+         <isNotNull property="StoreCode" prepend="AND">
+           <![CDATA[T1.STORE_CODE=#StoreCode#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <update id="UpdateBsmStorePlaceAmount" parameterClass="map">
+       <![CDATA[
+       update bsm_store_place set storage_amount = storage_amount-1 where objid = #StorePlaceId#
+       ]]>
+     </update>
+     <select id="GetStorePlaceInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT OBJID,STORE_PLACE_NAME FROM BSM_STORE_PLACE WHERE DELETE_FLAG=0
+       ]]>
+       <isNotNull property="StoreId" prepend="AND">
+         <![CDATA[STORE_ID=#StoreId#]]>
+       </isNotNull>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[STORE_PLACE_NAME ]]>
+       </dynamic>
+     </select>
+
+     <select id="GetStorePlaceInfo1" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT OBJID,STORE_PLACE_NAME , STORE_PLACE_CODE FROM BSM_STORE_PLACE WHERE DELETE_FLAG=0
+       ]]>
+       <isNotNull property="StoreID" prepend="AND">
+         <![CDATA[STORE_ID=#StoreID#]]>
+       </isNotNull>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[STORE_PLACE_NAME ]]>
+       </dynamic>
+     </select>
+
+     <select id="GetStorePlaceInfo2" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT OBJID,STORE_PLACE_NAME FROM BSM_STORE_PLACE WHERE DELETE_FLAG=0
+       ]]>
+       <isNotNull property="StoreId" prepend="AND">
+         <![CDATA[STORE_ID=#StoreId#]]>
+       </isNotNull>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[STORE_PLACE_NAME ]]>
+       </dynamic>
+     </select>
+
+     <select id="GetStorePlaceInfoNEE" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT OBJID,STORE_PLACE_NAME FROM BSM_STORE_PLACE WHERE DELETE_FLAG=0
+       ]]>
+
+       <isNotNull property="storePlaceBarcode" prepend="AND">
+         <![CDATA[STORE_PLACE_CODE=#storePlaceBarcode#]]>
+       </isNotNull>
+       <isNotNull property="storePlaceId" prepend="AND">
+         <![CDATA[OBJID=#storePlaceId#]]>
+       </isNotNull>
+       <isNotNull property="StoreId" prepend="AND">
+         <![CDATA[STORE_ID=#StoreId#]]>
+       </isNotNull>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[STORE_PLACE_NAME ]]>
+       </dynamic>
+     </select>
+
+     <select id="GetMeatialInfo" parameterClass ="map" resultClass="Row">
+       <![CDATA[             
+            SELECT P1.OBJID ,P1.MATERIAL_NAME FROM BSM_STORE_PLACE P
+                   LEFT JOIN  SBM_MATERIAL P1 ON P1.OBJID = P.MATERIAL_ID
+                   WHERE P.OBJID=#StorePlaceId#  ]]>
+     </select>
+
+     <select id="GetPanCunToolingCount" parameterClass="map" resultClass="Row">
+       <![CDATA[   
+          select count(distinct dummy_3) num from Bsm_Inventory_Detail where bill_id = #BillId#
+       ]]>
+     </select>
+  </statements>
+</sqlMap>

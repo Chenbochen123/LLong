@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudSebStore" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT T1.*
+      , T2.USER_NAME RECORD_USER_NAME 
+      FROM SEB_STORE T1 
+      LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreName" prepend="AND">
+          <![CDATA[T1.STORE_NAME LIKE '%' || #where.StoreName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.StoreCode" prepend="AND">
+          <![CDATA[T1.STORE_CODE = #where.StoreCode#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.STORE_CODE, T1.OBJID
+      </isNull>
+    </select>
+    <select id="Select+Update@CrudSebStore" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM SEB_STORE ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <statements>
+        <select id="Select@SearchCuringMonthPlan" parameterClass="map" resultClass="row">
+            <![CDATA[ 
+             SELECT  T1.*,T2.MATERIAL_NAME FROM CPP_CURING_PLAN_MONTH T1
+            INNER JOIN SBM_MATERIAL T2 ON T1.MATERIAL_ID=T2.OBJID
+            ]]>
+            <dynamic>
+                <isNotNull property="where.PlanMonth" prepend="AND">
+                    <![CDATA[t1.PLAN_MONTH = #where.PlanMonth#]]>
+                </isNotNull>
+                <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+                  <![CDATA[t2.MATERIAL_NAME LIKE '%' || #where.MATERIAL_NAME# || '%']]>
+                </isNotNull>
+            </dynamic>
+          <!--AND T2.MATERIAL_CODE NOT LIKE '%■'-->
+          ORDER BY T1.PLAN_MONTH,T2.SAP_CODE  desc
+        </select>
+    </statements>
+</sqlMap>

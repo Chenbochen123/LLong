@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="SearchType" Value="查询类型"></Caption>
+    <Caption Name="BeginDate" Value="开始日期"></Caption>
+    <Caption Name="EndDate" Value="结束日期"></Caption>
+    <Caption Name="BeginTime" Value="开始时间"></Caption>
+    <Caption Name="EndTime" Value="结束时间"></Caption>
+    <Caption Name="SummaryState" Value="汇总状态"></Caption>
+    <Caption Name="LoadShiftId" Value="班次"></Caption>
+    <Caption Name="LoadClassId" Value="班组"></Caption>
+    <Caption Name="StoreId" Value="仓库"></Caption>
+    <Caption Name="StorePlaceName" Value="库位"></Caption>
+    <Caption Name="RecordUserName" Value="创建人"></Caption>
+    <Caption Name="BillCode" Value="单据编号"></Caption>
+    <Caption Name="MaterialId" Value="规格"></Caption>
+    <Caption Name="MaterialName" Value="规格"></Caption>
+    <Caption Name="CheckGradeCode" Value="品级"></Caption>
+    <Caption Name="GreenTyreNo" Value="成型条码"></Caption>
+    <Caption Name="TyreNo" Value="硫化条码"></Caption>  
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_TIME" Value="创建时间"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="创建人"></Caption>
+    <Caption Name="UPDATE_TIME" Value="更新时间"></Caption>
+    <Caption Name="UPDATE_USER_NAME" Value="更新人"></Caption>
+    <Caption Name="CAR_BARCODE" Value="车辆条码"></Caption>
+    <Caption Name="STORE_TYPE_NAME" Value="仓库类型"></Caption>
+    <Caption Name="STORE_NAME" Value="仓库"></Caption>
+    <Caption Name="STORE_PLACE_NAME" Value="库位"></Caption>
+    <Caption Name="CHECK_GRADE_NAME" Value="品级"></Caption>
+    <Caption Name="SUMMARY_STATE_CAPTION" Value="汇总状态"></Caption>
+    <Caption Name="AFFIRM_USER_NAME" Value="确认人"></Caption>
+    <Caption Name="AFFIRM_TIME" Value="确认时间"></Caption>
+    <Caption Name="LOAD_AMOUNT" Value="装车数量"></Caption>
+    <Caption Name="IN_AMOUNT" Value="入库数量"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="规格"></Caption>
+    <Caption Name="PLAN_MATERIAL_NAME" Value="计划规格"></Caption>
+    <Caption Name="GREEN_TYRE_NO" Value="成型条码"></Caption>
+    <Caption Name="TYRE_NO" Value="硫化条码"></Caption>
+    <Caption Name="TYRE_GREEN_TYRENO" Value="轮胎状态表中的成型条码"></Caption>  
+    <Caption Name="CURING_TIME" Value="硫化时间"></Caption>
+    <Caption Name="X_TIME" Value="X光时间"></Caption>
+    <Caption Name="FCHECK_TIME" Value="外观质检时间"></Caption>   
+    <Caption Name="XCHECK_GRADE" Value="X光质检品级"></Caption>
+    <Caption Name="XCHECK_NEW" Value="X光质检是否最新"></Caption>    
+    <Caption Name="FCHECK_GRADE" Value="外观质检品级"></Caption>
+    <Caption Name="FCHECK_NEW" Value="外观质检是否最新"></Caption>
+    <Caption Name="LOAD_DATE" Value="日期"></Caption>
+    <Caption Name="LOAD_SHIFT_NAME" Value="班次"></Caption>
+    <Caption Name="LOAD_CLASS_NAME" Value="班组"></Caption>
+    <Caption Name="DETAIL_STATE_CAPTION" Value="明细状态"></Caption>
+    <Caption Name="DELETE_FLAG" Value="删除标志"></Caption>
+  </Captions>
+  <WebPage Title="轮胎状态">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Storage/McUI/@McUI/ReportPsmTyreState.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="Spp_Tyre_State">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+  </Crud>
+
+   <select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="SearchType" Type="ComboBox"></ParamField>
+        <ParamField FieldName="BeginDate" Type="DateBox"></ParamField>
+        <ParamField FieldName="EndDate" Type="DateBox"></ParamField>
+        <ParamField FieldName="PositionNull" Type="TextBox" Nullable="true" IsShow="false"></ParamField>
+        <ParamField FieldName="BeginTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EndTime" Type="DateTimeBox"></ParamField>      
+        <ParamField FieldName="MaterialName" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="TyreNo" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="GreenTyreNo" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="RecordUserName" Type="TextBox" Nullable="true" IsShow="false"></ParamField>
+        <ParamField FieldName="BillCode" Type="TextBox" Nullable="true" IsShow="false"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+
+    <MainGrid PageSize="50">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="BILL_CODE" IsShow="false" ></GridColumn>
+        <GridColumn ColumnName="TYRE_NO" Width="100"></GridColumn>
+        <GridColumn ColumnName="GREEN_TYRE_NO" Width="100"></GridColumn>
+        <GridColumn ColumnName="TYRE_GREEN_TYRENO" Width="150"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="150"></GridColumn>
+        <GridColumn ColumnName="PLAN_MATERIAL_NAME" Width="150"></GridColumn>       
+        <GridColumn ColumnName="CURING_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="X_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="FCHECK_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="XCHECK_GRADE" Width="80"></GridColumn>
+        <GridColumn ColumnName="XCHECK_NEW" Width="100"></GridColumn>
+        <GridColumn ColumnName="FCHECK_GRADE" Width="100"></GridColumn>
+        <GridColumn ColumnName="FCHECK_NEW" Width="120"></GridColumn>
+        <GridColumn ColumnName="REMARK" IsShow="false" Width="180"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+    
+    <MainDetail>
+      <ParamFields>
+        <ParamField FieldName="OBJID"></ParamField>
+        <ParamField FieldName="RECORD_TIME"></ParamField>
+        <ParamField FieldName="DELETE_FLAG"></ParamField>
+        <ParamField FieldName="TYRE_NO"></ParamField>
+        <ParamField FieldName="GREEN_TYRE_NO" ></ParamField>
+      </ParamFields>
+    </MainDetail>
+</select>
+</UiConfig>

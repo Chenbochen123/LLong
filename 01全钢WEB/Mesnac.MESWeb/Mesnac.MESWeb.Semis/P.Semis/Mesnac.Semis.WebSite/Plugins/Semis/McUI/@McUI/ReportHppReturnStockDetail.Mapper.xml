@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportHppReturnStockDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+       SELECT T1.*, T2.USER_NAME RECORD_USER_NAME 
+      , T3.STORE_PLACE_NAME 
+      ,T4.STORE_NAME
+      ,T5.STORE_PLACE_SUB_CODE
+      ,T6.STORE_PLACE_NAME DES_STORE_PLACE_NAME
+      ,P.Left_Qty,M.Material_Name
+      FROM   HPP_RETURN_STOCK_DETAIL T1
+      Left JOIN hpp_semis_production P on P.card_no=T1.Card_No
+      Left JOIN sbm_material M on P.Material_Id=M.Objid
+      LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+      LEFT JOIN HPP_STORE_PLACE T3 ON T1.Store_Place_Id = T3.OBJID       
+      LEFT JOIN HPP_STORE T4 ON T3.STORE_ID = T4.OBJID 
+      LEFT JOIN HPP_STORE_PLACE_SUB T5 ON T1.Sub_Store_Place_Id_To = T5.OBJID  
+      LEFT JOIN Hpp_Store_Place T6 ON T1.Store_Place_Id_To = T6.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.CARD_NO" prepend="AND">
+          <![CDATA[T1.CARD_NO = #where.CARD_NO#]]>
+        </isNotNull>
+        <isNull property="where.CARD_NO">
+
+          <isNotNull property="where.OBJID" prepend="AND">
+            <![CDATA[T1.OBJID = #where.OBJID#]]>
+          </isNotNull>
+          <isNotNull property="where.BeginTime" prepend="AND">
+            <![CDATA[T1.RECORD_TIME >= #where.BeginTime#]]>
+          </isNotNull>
+          <isNotNull property="where.EndTime" prepend="AND">
+            <![CDATA[T1.RECORD_TIME <= #where.EndTime#]]>
+          </isNotNull>
+          <isNotNull property="where.STORE_PLACE_NAME" prepend="AND">
+            <![CDATA[T3.STORE_PLACE_NAME LIKE '%' || #where.STORE_PLACE_NAME# || '%']]>
+          </isNotNull>
+          <isNotNull property="where.DES_STORE_PLACE_NAME" prepend="AND">
+            <![CDATA[T6.STORE_PLACE_NAME LIKE '%' || #where.DES_STORE_PLACE_NAME# || '%']]>
+          </isNotNull>
+          <isNotNull property="where.STORE_PLACE_CODE" prepend="AND">
+            <![CDATA[T3.STORE_PLACE_CODE = #where.STORE_PLACE_CODE#]]>
+          </isNotNull>
+          <isNotNull property="where.SHELF_NO" prepend="AND">
+            <![CDATA[T1.SHELF_NO = #where.SHELF_NO#]]>
+          </isNotNull>
+          <isNotNull property="where.DELETE_FLAG" prepend="AND">
+            <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+          </isNotNull>
+        </isNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.OBJID
+      </isNull>
+    </select>
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportCrtCuringXL" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+   select S1.EQUIP_ID,NVL(S1.EQUIP_NAME,'合计：') EQUIP_NAME,S1.SAP_CODE,S1.MATERIAL_NAME,S1.LHXL,S1.KHMXL,S1.CURING_TIME,S1.KHMSUMTIME, 
+S1.XYJS, S1.KMBS, S1.XTZBRS,S1.SXHTS, S1.XTZBS,S1.XTZBSC,S1.ZTSZR,S1.ZTSJ,S1.JNHX,S1.TPDX,S1.ZTSBHK,S1.ZTSZC,S1.HMBS,S1.JHML 
+FROM
+(SELECT S.EQUIP_ID,S.EQUIP_NAME,S.SAP_CODE,S.MATERIAL_NAME,S.LHXL,S.KHMXL,S.CURING_TIME,S.KHMSUMTIME, 
+S.XYJS, S.KMBS, S.XTZBRS,S.SXHTS, S.XTZBS,S.XTZBSC,S.ZTSZR,S.ZTSJ,S.JNHX,S.TPDX,S.ZTSBHK,S.ZTSZC,S.HMBS,S.JHML
+FROM
+(SELECT B.EQUIP_ID,B.EQUIP_NAME,B.SAP_CODE,B.MATERIAL_NAME,ROUND((((B.CURING_TIME)/(B.KHMSUMTIME + B.CURING_TIME)) * 100),3) LHXL,
+ROUND((((B.KHMSUMTIME)/(B.KHMSUMTIME + B.CURING_TIME)) * 100),3) KHMXL,
+B.CURING_TIME,B.KHMSUMTIME, 
+B.XYJS, B.KMBS, B.XTZBRS,B.SXHTS, B.XTZBS,B.XTZBSC,B.ZTSZR,B.ZTSJ,B.JNHX,B.TPDX,B.ZTSBHK,B.ZTSZC,B.HMBS,B.JHML  
+FROM
+(SELECT NULL EQUIP_ID,NULL EQUIP_NAME,NULL SAP_CODE,NULL MATERIAL_NAME, SUM(A.CURING_TIME) CURING_TIME,SUM(A.KHMSUMTIME) KHMSUMTIME,
+SUM(A.XYJS) XYJS,SUM(A.KMBS) KMBS,SUM(A.XTZBRS) XTZBRS,SUM(A.SXHTS) SXHTS,SUM(A.XTZBS) XTZBS,SUM(A.XTZBSC) XTZBSC,
+SUM(A.ZTSZR) ZTSZR,SUM(A.ZTSJ) ZTSJ,SUM(A.JNHX) JNHX,SUM(A.TPDX) TPDX,SUM(A.ZTSBHK) ZTSBHK,SUM(A.ZTSZC) ZTSZC,SUM(A.HMBS) HMBS,SUM(A.JHML) JHML
+FROM 
+(SELECT T.EQUIP_ID,T2.EQUIP_NAME,T3.SAP_CODE,T3.MATERIAL_NAME,T.RECORD_TIME,T.LEFT_TYRE_NO TYRE_NO,T1.BEGIN_TIME,T1.END_TIME,CEIL((T1.END_TIME-T1.BEGIN_TIME)*24*60*60) CURING_TIME,
+T.XYJS,T.KMBS,T.XTZBRS,T.SXHTS,T.XTZBS,T.XTZBSC,T.ZTSZR,T.ZTSJ,T.JNHX,T.TPDX,T.ZTSBHK,T.ZTSZC,T.HMBS,T.JHML,T.KHMSUMTIME 
+FROM
+CRT_CURING_STEPTIME T
+LEFT JOIN CPP_CURING_PRODUCTION T1 ON T.LEFT_TYRE_NO = T1.TYRE_NO]]>
+      <dynamic>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[T1.END_TIME >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[T1.END_TIME <= #where.EndTime#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[ 
+LEFT JOIN SBE_EQUIP T2 ON T.EQUIP_ID = T2.OBJID
+LEFT JOIN SBM_MATERIAL T3 ON T1.MATERIAL_ID = T3.OBJID WHERE T.LEFT_TYRE_NO IS NOT NULL
+UNION
+SELECT T.EQUIP_ID,T2.EQUIP_NAME,T3.SAP_CODE,T3.MATERIAL_NAME,T.RECORD_TIME,T.RIGHT_TYRE_NO TYRE_NO,T1.BEGIN_TIME,T1.END_TIME,CEIL((T1.END_TIME-T1.BEGIN_TIME)*24*60*60) CURING_TIME,
+T.XYJS,T.KMBS,T.XTZBRS,T.SXHTS,T.XTZBS,T.XTZBSC,T.ZTSZR,T.ZTSJ,T.JNHX,T.TPDX,T.ZTSBHK,T.ZTSZC,T.HMBS,T.JHML,T.KHMSUMTIME 
+FROM 
+CRT_CURING_STEPTIME T
+LEFT JOIN CPP_CURING_PRODUCTION T1 ON T.RIGHT_TYRE_NO = T1.TYRE_NO
+]]>
+      <dynamic>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[T1.END_TIME >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[T1.END_TIME <= #where.EndTime#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[ 
+LEFT JOIN SBE_EQUIP T2 ON T.EQUIP_ID = T2.OBJID
+LEFT JOIN SBM_MATERIAL T3 ON T1.MATERIAL_ID = T3.OBJID WHERE T.RIGHT_TYRE_NO IS NOT NULL) A
+]]>
+<dynamic prepend="WHERE">
+  <isNotNull property="where.BeginTime" prepend="AND">
+    <![CDATA[A.END_TIME >= #where.BeginTime#]]>
+  </isNotNull>
+  <isNotNull property="where.EndTime" prepend="AND">
+    <![CDATA[A.END_TIME <= #where.EndTime#]]>
+  </isNotNull>
+  <isNotNull property="where.SAP_CODE" prepend="AND">
+    <![CDATA[A.SAP_CODE LIKE '%' || #where.SAP_CODE# || '%']]>
+  </isNotNull>
+  <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+    <![CDATA[A.MATERIAL_NAME LIKE '%' || #where.MATERIAL_NAME# || '%']]>
+  </isNotNull>
+  <isNotNull property="where.EQUIP_ID" prepend="AND">
+    <![CDATA[A.EQUIP_ID = #where.EQUIP_ID#]]>
+  </isNotNull>
+  <isNotNull property="where.EQUIP_NAME" prepend="AND">
+    <![CDATA[A.EQUIP_NAME LIKE '%' || #where.EQUIP_NAME# || '%']]>
+  </isNotNull>
+</dynamic>
+<![CDATA[
+)B
+UNION
+   SELECT B.EQUIP_ID,B.EQUIP_NAME,B.SAP_CODE,B.MATERIAL_NAME, ROUND((((B.CURING_TIME)/(B.KHMSUMTIME + B.CURING_TIME)) * 100),3) LHXL,
+ROUND((((B.KHMSUMTIME)/(B.KHMSUMTIME + B.CURING_TIME)) * 100),3) KHMXL,
+B.CURING_TIME,B.KHMSUMTIME, 
+B.XYJS, B.KMBS, B.XTZBRS,B.SXHTS, B.XTZBS,B.XTZBSC,B.ZTSZR,B.ZTSJ,B.JNHX,B.TPDX,B.ZTSBHK,B.ZTSZC,B.HMBS,B.JHML  FROM
+(SELECT A.EQUIP_ID,A.EQUIP_NAME,A.SAP_CODE,A.MATERIAL_NAME,SUM(A.CURING_TIME) CURING_TIME,SUM(A.KHMSUMTIME) KHMSUMTIME,
+SUM(A.XYJS) XYJS,SUM(A.KMBS) KMBS,SUM(A.XTZBRS) XTZBRS,SUM(A.SXHTS) SXHTS,SUM(A.XTZBS) XTZBS,SUM(A.XTZBSC) XTZBSC,
+SUM(A.ZTSZR) ZTSZR,SUM(A.ZTSJ) ZTSJ,SUM(A.JNHX) JNHX,SUM(A.TPDX) TPDX,SUM(A.ZTSBHK) ZTSBHK,SUM(A.ZTSZC) ZTSZC,SUM(A.HMBS) HMBS,SUM(A.JHML) JHML
+FROM 
+(SELECT T.EQUIP_ID,T2.EQUIP_NAME,T3.SAP_CODE,T3.MATERIAL_NAME,T.RECORD_TIME,T.LEFT_TYRE_NO TYRE_NO,T1.BEGIN_TIME,T1.END_TIME,CEIL((T1.END_TIME-T1.BEGIN_TIME)*24*60*60) CURING_TIME,
+T.XYJS,T.KMBS,T.XTZBRS,T.SXHTS,T.XTZBS,T.XTZBSC,T.ZTSZR,T.ZTSJ,T.JNHX,T.TPDX,T.ZTSBHK,T.ZTSZC,T.HMBS,T.JHML,T.KHMSUMTIME 
+FROM 
+CRT_CURING_STEPTIME T
+LEFT JOIN CPP_CURING_PRODUCTION T1 ON T.LEFT_TYRE_NO = T1.TYRE_NO]]>
+<dynamic>
+  <isNotNull property="where.SAP_CODE" prepend="AND">
+    <![CDATA[T1.END_TIME >= #where.SAP_CODE#]]>
+  </isNotNull>
+  <isNotNull property="where.EndTime" prepend="AND">
+    <![CDATA[T1.END_TIME <= #where.EndTime#]]>
+  </isNotNull>
+</dynamic>
+<![CDATA[ 
+LEFT JOIN SBE_EQUIP T2 ON T.EQUIP_ID = T2.OBJID
+LEFT JOIN SBM_MATERIAL T3 ON T1.MATERIAL_ID = T3.OBJID 
+WHERE T.LEFT_TYRE_NO IS NOT NULL
+UNION
+SELECT T.EQUIP_ID,T2.EQUIP_NAME,T3.SAP_CODE,T3.MATERIAL_NAME,T.RECORD_TIME,T.RIGHT_TYRE_NO TYRE_NO,T1.BEGIN_TIME,T1.END_TIME,CEIL((T1.END_TIME-T1.BEGIN_TIME)*24*60*60) CURING_TIME,
+T.XYJS,T.KMBS,T.XTZBRS,T.SXHTS,T.XTZBS,T.XTZBSC,T.ZTSZR,T.ZTSJ,T.JNHX,T.TPDX,T.ZTSBHK,T.ZTSZC,T.HMBS,T.JHML,T.KHMSUMTIME 
+FROM 
+CRT_CURING_STEPTIME T
+LEFT JOIN CPP_CURING_PRODUCTION T1 ON T.RIGHT_TYRE_NO = T1.TYRE_NO ]]>
+<dynamic>
+  <isNotNull property="where.BeginTime" prepend="AND">
+    <![CDATA[T1.END_TIME >= #where.BeginTime#]]>
+  </isNotNull>
+  <isNotNull property="where.EndTime" prepend="AND">
+    <![CDATA[T1.END_TIME <= #where.EndTime#]]>
+  </isNotNull>
+</dynamic>
+<![CDATA[ 
+LEFT JOIN SBE_EQUIP T2 ON T.EQUIP_ID = T2.OBJID
+LEFT JOIN SBM_MATERIAL T3 ON T1.MATERIAL_ID = T3.OBJID 
+WHERE T.RIGHT_TYRE_NO IS NOT NULL) A
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[A.END_TIME >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[A.END_TIME <= #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.SAP_CODE" prepend="AND">
+          <![CDATA[A.SAP_CODE LIKE '%' || #where.SAP_CODE# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+          <![CDATA[A.MATERIAL_NAME LIKE '%' || #where.MATERIAL_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[A.EQUIP_ID = #where.EQUIP_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_NAME" prepend="AND">
+          <![CDATA[A.EQUIP_NAME LIKE '%' || #where.EQUIP_NAME# || '%']]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[GROUP BY A.EQUIP_ID,A.EQUIP_NAME,A.SAP_CODE,A.MATERIAL_NAME) B )S ) S1]]>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        ORDER BY S1.EQUIP_ID DESC
+      </isNull>
+    </select>
+    <select id="Select+Update@ReportCrtCuringXL" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM CRT_CURING_STEPTIME ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

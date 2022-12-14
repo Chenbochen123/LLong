@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ECharts · Example</title>
+
+    <link href="./asset/css/echartsHome.css" rel="stylesheet">
+    <script src="./asset/js/echarts.js"></script>
+    <script>
+        var xdata0 = [];
+        if (parent && parent.xdata0 && parent.xdata0.length > 0) {
+            for (var i = 0; i < parent.xdata0.length; i++) {
+                xdata0.push(parent.xdata0[i]);
+            }
+        }
+        var ydata1 = [];
+        if (parent && parent.ydata1 && parent.ydata1.length > 0) {
+            for (var i = 0; i < parent.ydata1.length; i++) {
+                ydata1.push(parent.ydata1[i]);
+            }
+        }
+
+        var ydata2 = [];
+        if (parent && parent.ydata2 && parent.ydata2.length > 0) {
+            for (var i = 0; i < parent.ydata2.length; i++) {
+                ydata2.push(parent.ydata2[i]);
+            }
+        }
+
+        var ydata3 = [];
+        if (parent && parent.ydata3 && parent.ydata3.length > 0) {
+            for (var i = 0; i < parent.ydata3.length; i++) {
+                ydata3.push(parent.ydata3[i]);
+            }
+        }
+
+        var ydata4 = [];
+        if (parent && parent.ydata4 && parent.ydata4.length > 0) {
+            for (var i = 0; i < parent.ydata4.length; i++) {
+                ydata4.push(parent.ydata4[i]);
+            }
+        }
+
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    animation: false
+                },
+                formatter: function (datas) {
+            var res = datas[0].name + '<br/>', val;
+            for (var i = 0, length = datas.length; i < length; i++) {
+                val = (datas[i].value);
+                res += datas[i].seriesName + '：' + val + '<br/>';
+            }
+            return res;
+        } 
+            },
+            legend: {
+                data: ['150机筒温控', '200机筒温控', '250机筒温控']
+            },
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                feature: {
+                    mark: { show: false },
+                    dataZoom: { show: true },
+                    dataView: { show: false },
+                    magicType: { show: false, type: ['line', 'bar', 'stack', 'tiled'] },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            calculable: false,
+            dataZoom: {
+                show: true,
+                realtime: true,
+                start: 0,
+                end: 100
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: true,
+                    data: xdata0
+                }
+            ],
+            yAxis: [
+                {
+                    name: '机筒温控',
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '规格',
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: 0,
+                    data: ydata4
+                },
+                {
+                    name: '150机筒温控',
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: 0,
+                    data: ydata1,
+                    itemStyle: {
+                        normal: {
+                            color: 'red'
+                        }
+                    }
+                },
+                {
+                    name: '200机筒温控',
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: 0,
+                    data: ydata2
+                },
+                {
+                    name: '250机筒温控',
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: 0,
+                    data: ydata3
+                },
+            ]
+        };
+    </script>
+</head>
+<body>
+    <div id="main" class="main"></div>
+    <script src="./asset/js/jquery.min.js"></script>
+    <script src="./asset/js/echartsExample.js"></script>
+</body>
+</html>

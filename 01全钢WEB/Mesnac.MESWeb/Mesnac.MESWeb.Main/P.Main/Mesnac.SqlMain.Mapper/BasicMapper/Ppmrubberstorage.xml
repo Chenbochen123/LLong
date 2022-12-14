@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.SqlMain.Mapper.BasicMapper.Ppmrubberstorage"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="Ppmrubberstorage" type="Mesnac.SqlMain.Entity.BasicEntity.Ppmrubberstorage, Mesnac.SqlMain.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_Ppmrubberstorage" class="Ppmrubberstorage">
+    <result property="Storageid" column="StorageID"/>
+    <result property="Storageplaceid" column="StoragePlaceID"/>
+    <result property="Barcode" column="Barcode"/>
+    <result property="Shelfbarcode" column="ShelfBarcode"/>
+    <result property="Barcodestart" column="BarcodeStart"/>
+    <result property="Barcodeend" column="BarcodeEnd"/>
+    <result property="Shelfnum" column="ShelfNum"/>
+    <result property="Memnote" column="MemNote"/>
+    <result property="Plandate" column="PlanDate"/>
+    <result property="Shiftid" column="ShiftID"/>
+    <result property="Shiftclassid" column="ShiftClassID"/>
+    <result property="Equipcode" column="EquipCode"/>
+    <result property="Matercode" column="MaterCode"/>
+    <result property="Validdate" column="ValidDate"/>
+    <result property="Productweight" column="ProductWeight"/>
+    <result property="Stockflag" column="StockFlag"/>
+    <result property="Checkflag" column="CheckFlag"/>
+    <result property="Tecdealflag" column="TecDealFlag"/>
+    <result property="Tecdealidea" column="TecDealIdea"/>
+    <result property="Consumeweight" column="ConsumeWeight"/>
+    <result property="Realweight" column="RealWeight"/>
+    <result property="Recorddate" column="RecordDate"/>
+    <result property="Operperson" column="OperPerson"/>
+    <result property="Rubtype" column="RubType"/>
+    <result property="Llbarcode" column="LLBarCode"/>
+    <result property="Realnum" column="RealNum"/>
+    <result property="Isinvalid" column="IsInValid"/>
+    <result property="Useequipcode" column="UseEquipCode"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_Ppmrubberstorage" class="Ppmrubberstorage">
+    <parameter property="Storageid" column="Storageid"/>
+    <parameter property="Storageplaceid" column="Storageplaceid"/>
+    <parameter property="Barcode" column="Barcode"/>
+    <parameter property="Shelfbarcode" column="Shelfbarcode"/>
+    <parameter property="Barcodestart" column="Barcodestart"/>
+    <parameter property="Barcodeend" column="Barcodeend"/>
+    <parameter property="Shelfnum" column="Shelfnum"/>
+    <parameter property="Memnote" column="Memnote"/>
+    <parameter property="Plandate" column="Plandate"/>
+    <parameter property="Shiftid" column="Shiftid"/>
+    <parameter property="Shiftclassid" column="Shiftclassid"/>
+    <parameter property="Equipcode" column="Equipcode"/>
+    <parameter property="Matercode" column="Matercode"/>
+    <parameter property="Validdate" column="Validdate"/>
+    <parameter property="Productweight" column="Productweight"/>
+    <parameter property="Stockflag" column="Stockflag"/>
+    <parameter property="Checkflag" column="Checkflag"/>
+    <parameter property="Tecdealflag" column="Tecdealflag"/>
+    <parameter property="Tecdealidea" column="Tecdealidea"/>
+    <parameter property="Consumeweight" column="Consumeweight"/>
+    <parameter property="Realweight" column="Realweight"/>
+    <parameter property="Recorddate" column="Recorddate"/>
+    <parameter property="Operperson" column="Operperson"/>
+    <parameter property="Rubtype" column="Rubtype"/>
+    <parameter property="Llbarcode" column="Llbarcode"/>
+    <parameter property="Realnum" column="Realnum"/>
+    <parameter property="Isinvalid" column="Isinvalid"/>
+    <parameter property="Useequipcode" column="Useequipcode"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PpmRubberStorage ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.Storageid" prepend="AND">
+          <![CDATA[StorageID = #where.Storageid#]]>
+        </isNotNull>
+        <isNotNull property="where.Storageplaceid" prepend="AND">
+          <![CDATA[StoragePlaceID = #where.Storageplaceid#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[Barcode = #where.Barcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Shelfbarcode" prepend="AND">
+          <![CDATA[ShelfBarcode = #where.Shelfbarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcodestart" prepend="AND">
+          <![CDATA[BarcodeStart = #where.Barcodestart#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcodeend" prepend="AND">
+          <![CDATA[BarcodeEnd = #where.Barcodeend#]]>
+        </isNotNull>
+        <isNotNull property="where.Shelfnum" prepend="AND">
+          <![CDATA[ShelfNum = #where.Shelfnum#]]>
+        </isNotNull>
+        <isNotNull property="where.Memnote" prepend="AND">
+          <![CDATA[MemNote = #where.Memnote#]]>
+        </isNotNull>
+        <isNotNull property="where.Plandate" prepend="AND">
+          <![CDATA[PlanDate = #where.Plandate#]]>
+        </isNotNull>
+        <isNotNull property="where.Shiftid" prepend="AND">
+          <![CDATA[ShiftID = #where.Shiftid#]]>
+        </isNotNull>
+        <isNotNull property="where.Shiftclassid" prepend="AND">
+          <![CDATA[ShiftClassID = #where.Shiftclassid#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipcode" prepend="AND">
+          <![CDATA[EquipCode = #where.Equipcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Matercode" prepend="AND">
+          <![CDATA[MaterCode = #where.Matercode#]]>
+        </isNotNull>
+        <isNotNull property="where.Validdate" prepend="AND">
+          <![CDATA[ValidDate = #where.Validdate#]]>
+        </isNotNull>
+        <isNotNull property="where.Productweight" prepend="AND">
+          <![CDATA[ProductWeight = #where.Productweight#]]>
+        </isNotNull>
+        <isNotNull property="where.Stockflag" prepend="AND">
+          <![CDATA[StockFlag = #where.Stockflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Checkflag" prepend="AND">
+          <![CDATA[CheckFlag = #where.Checkflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Tecdealflag" prepend="AND">
+          <![CDATA[TecDealFlag = #where.Tecdealflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Tecdealidea" prepend="AND">
+          <![CDATA[TecDealIdea = #where.Tecdealidea#]]>
+        </isNotNull>
+        <isNotNull property="where.Consumeweight" prepend="AND">
+          <![CDATA[ConsumeWeight = #where.Consumeweight#]]>
+        </isNotNull>
+        <isNotNull property="where.Realweight" prepend="AND">
+          <![CDATA[RealWeight = #where.Realweight#]]>
+        </isNotNull>
+        <isNotNull property="where.Recorddate" prepend="AND">
+          <![CDATA[RecordDate = #where.Recorddate#]]>
+        </isNotNull>
+        <isNotNull property="where.Operperson" prepend="AND">
+          <![CDATA[OperPerson = #where.Operperson#]]>
+        </isNotNull>
+        <isNotNull property="where.Rubtype" prepend="AND">
+          <![CDATA[RubType = #where.Rubtype#]]>
+        </isNotNull>
+        <isNotNull property="where.Llbarcode" prepend="AND">
+          <![CDATA[LLBarCode = #where.Llbarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Realnum" prepend="AND">
+          <![CDATA[RealNum = #where.Realnum#]]>
+        </isNotNull>
+        <isNotNull property="where.Isinvalid" prepend="AND">
+          <![CDATA[IsInValid = #where.Isinvalid#]]>
+        </isNotNull>
+        <isNotNull property="where.Useequipcode" prepend="AND">
+          <![CDATA[UseEquipCode = #where.Useequipcode#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (STORAGEID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO PpmRubberStorage]]>
+       <dynamic prepend="(StorageID,">
+        <isNotNull property="Shelfbarcode" prepend=",">ShelfBarcode</isNotNull>
+        <isNotNull property="Barcodestart" prepend=",">BarcodeStart</isNotNull>
+        <isNotNull property="Barcodeend" prepend=",">BarcodeEnd</isNotNull>
+        <isNotNull property="Shelfnum" prepend=",">ShelfNum</isNotNull>
+        <isNotNull property="Memnote" prepend=",">MemNote</isNotNull>
+        <isNotNull property="Plandate" prepend=",">PlanDate</isNotNull>
+        <isNotNull property="Shiftid" prepend=",">ShiftID</isNotNull>
+        <isNotNull property="Shiftclassid" prepend=",">ShiftClassID</isNotNull>
+        <isNotNull property="Equipcode" prepend=",">EquipCode</isNotNull>
+        <isNotNull property="Validdate" prepend=",">ValidDate</isNotNull>
+        <isNotNull property="Productweight" prepend=",">ProductWeight</isNotNull>
+        <isNotNull property="Stockflag" prepend=",">StockFlag</isNotNull>
+        <isNotNull property="Checkflag" prepend=",">CheckFlag</isNotNull>
+        <isNotNull property="Tecdealflag" prepend=",">TecDealFlag</isNotNull>
+        <isNotNull property="Tecdealidea" prepend=",">TecDealIdea</isNotNull>
+        <isNotNull property="Consumeweight" prepend=",">ConsumeWeight</isNotNull>
+        <isNotNull property="Realweight" prepend=",">RealWeight</isNotNull>
+        <isNotNull property="Operperson" prepend=",">OperPerson</isNotNull>
+        <isNotNull property="Rubtype" prepend=",">RubType</isNotNull>
+        <isNotNull property="Realnum" prepend=",">RealNum</isNotNull>
+        <isNotNull property="Isinvalid" prepend=",">IsInValid</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="Storageid" prepend=",">#Storageid#</isNotNull>
+        <isNull property="Storageid" prepend=",">SEQ_PpmRubberStorage.NEXTVAL</isNull>
+        <isNotNull property="Shelfbarcode" prepend=",">#Shelfbarcode#</isNotNull>
+        <isNotNull property="Barcodestart" prepend=",">#Barcodestart#</isNotNull>
+        <isNotNull property="Barcodeend" prepend=",">#Barcodeend#</isNotNull>
+        <isNotNull property="Shelfnum" prepend=",">#Shelfnum#</isNotNull>
+        <isNotNull property="Memnote" prepend=",">#Memnote#</isNotNull>
+        <isNotNull property="Plandate" prepend=",">#Plandate#</isNotNull>
+        <isNotNull property="Shiftid" prepend=",">#Shiftid#</isNotNull>
+        <isNotNull property="Shiftclassid" prepend=",">#Shiftclassid#</isNotNull>
+        <isNotNull property="Equipcode" prepend=",">#Equipcode#</isNotNull>
+        <isNotNull property="Validdate" prepend=",">#Validdate#</isNotNull>
+        <isNotNull property="Productweight" prepend=",">#Productweight#</isNotNull>
+        <isNotNull property="Stockflag" prepend=",">#Stockflag#</isNotNull>
+        <isNotNull property="Checkflag" prepend=",">#Checkflag#</isNotNull>
+        <isNotNull property="Tecdealflag" prepend=",">#Tecdealflag#</isNotNull>
+        <isNotNull property="Tecdealidea" prepend=",">#Tecdealidea#</isNotNull>
+        <isNotNull property="Consumeweight" prepend=",">#Consumeweight#</isNotNull>
+        <isNotNull property="Realweight" prepend=",">#Realweight#</isNotNull>
+        <isNotNull property="Operperson" prepend=",">#Operperson#</isNotNull>
+        <isNotNull property="Rubtype" prepend=",">#Rubtype#</isNotNull>
+        <isNotNull property="Realnum" prepend=",">#Realnum#</isNotNull>
+        <isNotNull property="Isinvalid" prepend=",">#Isinvalid#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE PpmRubberStorage
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Shelfbarcode"  prepend=",">
+          ShelfBarcode = #update.Shelfbarcode#
+        </isNotNull>
+        <isNotNull  property="update.Barcodestart"  prepend=",">
+          BarcodeStart = #update.Barcodestart#
+        </isNotNull>
+        <isNotNull  property="update.Barcodeend"  prepend=",">
+          BarcodeEnd = #update.Barcodeend#
+        </isNotNull>
+        <isNotNull  property="update.Shelfnum"  prepend=",">
+          ShelfNum = #update.Shelfnum#
+        </isNotNull>
+        <isNotNull  property="update.Memnote"  prepend=",">
+          MemNote = #update.Memnote#
+        </isNotNull>
+        <isNotNull  property="update.Plandate"  prepend=",">
+          PlanDate = #update.Plandate#
+        </isNotNull>
+        <isNotNull  property="update.Shiftid"  prepend=",">
+          ShiftID = #update.Shiftid#
+        </isNotNull>
+        <isNotNull  property="update.Shiftclassid"  prepend=",">
+          ShiftClassID = #update.Shiftclassid#
+        </isNotNull>
+        <isNotNull  property="update.Equipcode"  prepend=",">
+          EquipCode = #update.Equipcode#
+        </isNotNull>
+        <isNotNull  property="update.Validdate"  prepend=",">
+          ValidDate = #update.Validdate#
+        </isNotNull>
+        <isNotNull  property="update.Productweight"  prepend=",">
+          ProductWeight = #update.Productweight#
+        </isNotNull>
+        <isNotNull  property="update.Stockflag"  prepend=",">
+          StockFlag = #update.Stockflag#
+        </isNotNull>
+        <isNotNull  property="update.Checkflag"  prepend=",">
+          CheckFlag = #update.Checkflag#
+        </isNotNull>
+        <isNotNull  property="update.Tecdealflag"  prepend=",">
+          TecDealFlag = #update.Tecdealflag#
+        </isNotNull>
+        <isNotNull  property="update.Tecdealidea"  prepend=",">
+          TecDealIdea = #update.Tecdealidea#
+        </isNotNull>
+        <isNotNull  property="update.Consumeweight"  prepend=",">
+          ConsumeWeight = #update.Consumeweight#
+        </isNotNull>
+        <isNotNull  property="update.Realweight"  prepend=",">
+          RealWeight = #update.Realweight#
+        </isNotNull>
+        <isNotNull  property="update.Operperson"  prepend=",">
+          OperPerson = #update.Operperson#
+        </isNotNull>
+        <isNotNull  property="update.Rubtype"  prepend=",">
+          RubType = #update.Rubtype#
+        </isNotNull>
+        <isNotNull  property="update.Realnum"  prepend=",">
+          RealNum = #update.Realnum#
+        </isNotNull>
+        <isNotNull  property="update.Isinvalid"  prepend=",">
+          IsInValid = #update.Isinvalid#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM PpmRubberStorage
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_Ppmrubberstorage">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_Ppmrubberstorage">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(STORAGEID)
+      </isNotPropertyAvailable>
+      FROM PpmRubberStorage
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM PpmRubberStorage
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_Ppmrubberstorage" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE PpmRubberStorage
+    </statement>
+  </statements>
+</sqlMap>

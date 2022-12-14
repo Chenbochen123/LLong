@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.HppRubberProduction"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HppRubberProduction" type="Mesnac.Semis.Entity.BasicEntity.HppRubberProduction, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HppRubberProduction" class="HppRubberProduction">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Barcode" column="BARCODE"/>
+    <result property="EquipCode" column="EQUIP_CODE"/>
+    <result property="MaterialCode" column="MATERIAL_CODE"/>
+    <result property="MaterialName" column="MATERIAL_NAME"/>
+    <result property="SapCode" column="SAP_CODE"/>
+    <result property="ProcUserName" column="PROC_USER_NAME"/>
+    <result property="EquipName" column="EQUIP_NAME"/>
+    <result property="Qty" column="QTY"/>
+    <result property="LeftQty" column="LEFT_QTY"/>
+    <result property="ProduceTime" column="PRODUCE_TIME"/>
+    <result property="ValidDate" column="VALID_DATE"/>
+    <result property="ShelfNo" column="SHELF_NO"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="Dummy1" column="DUMMY_1"/>
+    <result property="Dummy2" column="DUMMY_2"/>
+    <result property="Dummy3" column="DUMMY_3"/>
+    <result property="Dummy4" column="DUMMY_4"/>
+    <result property="UnitName" column="UNIT_NAME"/>
+    <result property="Batch" column="BATCH"/>
+    <result property="ProFactory" column="PRO_FACTORY"/>
+    <result property="MarkFlag" column="MARK_FLAG"/>
+    <result property="Dummy5" column="DUMMY_5"/>
+    <result property="Dummy6" column="DUMMY_6"/>
+    <result property="Amount" column="AMOUNT"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HppRubberProduction" class="HppRubberProduction">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Barcode" column="Barcode"/>
+    <parameter property="EquipCode" column="EquipCode"/>
+    <parameter property="MaterialCode" column="MaterialCode"/>
+    <parameter property="MaterialName" column="MaterialName"/>
+    <parameter property="SapCode" column="SapCode"/>
+    <parameter property="ProcUserName" column="ProcUserName"/>
+    <parameter property="EquipName" column="EquipName"/>
+    <parameter property="Qty" column="Qty"/>
+    <parameter property="LeftQty" column="LeftQty"/>
+    <parameter property="ProduceTime" column="ProduceTime"/>
+    <parameter property="ValidDate" column="ValidDate"/>
+    <parameter property="ShelfNo" column="ShelfNo"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="UnitName" column="UnitName"/>
+    <parameter property="Batch" column="Batch"/>
+    <parameter property="ProFactory" column="ProFactory"/>
+    <parameter property="MarkFlag" column="MarkFlag"/>
+    <parameter property="Dummy5" column="Dummy5"/>
+    <parameter property="Dummy6" column="Dummy6"/>
+    <parameter property="Amount" column="Amount"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_RUBBER_PRODUCTION ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[BARCODE = #where.Barcode#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipCode" prepend="AND">
+          <![CDATA[EQUIP_CODE = #where.EquipCode#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialCode" prepend="AND">
+          <![CDATA[MATERIAL_CODE = #where.MaterialCode#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[MATERIAL_NAME = #where.MaterialName#]]>
+        </isNotNull>
+        <isNotNull property="where.SapCode" prepend="AND">
+          <![CDATA[SAP_CODE = #where.SapCode#]]>
+        </isNotNull>
+        <isNotNull property="where.ProcUserName" prepend="AND">
+          <![CDATA[PROC_USER_NAME = #where.ProcUserName#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[EQUIP_NAME = #where.EquipName#]]>
+        </isNotNull>
+        <isNotNull property="where.Qty" prepend="AND">
+          <![CDATA[QTY = #where.Qty#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftQty" prepend="AND">
+          <![CDATA[LEFT_QTY = #where.LeftQty#]]>
+        </isNotNull>
+        <isNotNull property="where.ProduceTime" prepend="AND">
+          <![CDATA[PRODUCE_TIME = #where.ProduceTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ValidDate" prepend="AND">
+          <![CDATA[VALID_DATE = #where.ValidDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShelfNo" prepend="AND">
+          <![CDATA[SHELF_NO = #where.ShelfNo#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.UnitName" prepend="AND">
+          <![CDATA[UNIT_NAME = #where.UnitName#]]>
+        </isNotNull>
+        <isNotNull property="where.Batch" prepend="AND">
+          <![CDATA[BATCH = #where.Batch#]]>
+        </isNotNull>
+        <isNotNull property="where.ProFactory" prepend="AND">
+          <![CDATA[PRO_FACTORY = #where.ProFactory#]]>
+        </isNotNull>
+        <isNotNull property="where.MarkFlag" prepend="AND">
+          <![CDATA[MARK_FLAG = #where.MarkFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY_5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY_6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.Amount" prepend="AND">
+          <![CDATA[AMOUNT = #where.Amount#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE ( = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HPP_RUBBER_PRODUCTION]]>
+       <dynamic prepend="(">
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="Barcode" prepend=",">BARCODE</isNotNull>
+        <isNotNull property="EquipCode" prepend=",">EQUIP_CODE</isNotNull>
+        <isNotNull property="MaterialCode" prepend=",">MATERIAL_CODE</isNotNull>
+        <isNotNull property="MaterialName" prepend=",">MATERIAL_NAME</isNotNull>
+        <isNotNull property="SapCode" prepend=",">SAP_CODE</isNotNull>
+        <isNotNull property="ProcUserName" prepend=",">PROC_USER_NAME</isNotNull>
+        <isNotNull property="EquipName" prepend=",">EQUIP_NAME</isNotNull>
+        <isNotNull property="Qty" prepend=",">QTY</isNotNull>
+        <isNotNull property="LeftQty" prepend=",">LEFT_QTY</isNotNull>
+        <isNotNull property="ProduceTime" prepend=",">PRODUCE_TIME</isNotNull>
+        <isNotNull property="ValidDate" prepend=",">VALID_DATE</isNotNull>
+        <isNotNull property="ShelfNo" prepend=",">SHELF_NO</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY_1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY_2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY_3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY_4</isNotNull>
+        <isNotNull property="UnitName" prepend=",">UNIT_NAME</isNotNull>
+        <isNotNull property="Batch" prepend=",">BATCH</isNotNull>
+        <isNotNull property="ProFactory" prepend=",">PRO_FACTORY</isNotNull>
+        <isNotNull property="MarkFlag" prepend=",">MARK_FLAG</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">DUMMY_5</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">DUMMY_6</isNotNull>
+        <isNotNull property="Amount" prepend=",">AMOUNT</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="Barcode" prepend=",">#Barcode#</isNotNull>
+        <isNotNull property="EquipCode" prepend=",">#EquipCode#</isNotNull>
+        <isNotNull property="MaterialCode" prepend=",">#MaterialCode#</isNotNull>
+        <isNotNull property="MaterialName" prepend=",">#MaterialName#</isNotNull>
+        <isNotNull property="SapCode" prepend=",">#SapCode#</isNotNull>
+        <isNotNull property="ProcUserName" prepend=",">#ProcUserName#</isNotNull>
+        <isNotNull property="EquipName" prepend=",">#EquipName#</isNotNull>
+        <isNotNull property="Qty" prepend=",">#Qty#</isNotNull>
+        <isNotNull property="LeftQty" prepend=",">#LeftQty#</isNotNull>
+        <isNotNull property="ProduceTime" prepend=",">#ProduceTime#</isNotNull>
+        <isNotNull property="ValidDate" prepend=",">#ValidDate#</isNotNull>
+        <isNotNull property="ShelfNo" prepend=",">#ShelfNo#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="UnitName" prepend=",">#UnitName#</isNotNull>
+        <isNotNull property="Batch" prepend=",">#Batch#</isNotNull>
+        <isNotNull property="ProFactory" prepend=",">#ProFactory#</isNotNull>
+        <isNotNull property="MarkFlag" prepend=",">#MarkFlag#</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">#Dummy5#</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">#Dummy6#</isNotNull>
+        <isNotNull property="Amount" prepend=",">#Amount#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HPP_RUBBER_PRODUCTION
+       <dynamic prepend="SET">
+        <isNotNull  property="update.ObjId"  prepend=",">
+          OBJID = #update.ObjId#
+        </isNotNull>
+        <isNotNull  property="update.Barcode"  prepend=",">
+          BARCODE = #update.Barcode#
+        </isNotNull>
+        <isNotNull  property="update.EquipCode"  prepend=",">
+          EQUIP_CODE = #update.EquipCode#
+        </isNotNull>
+        <isNotNull  property="update.MaterialCode"  prepend=",">
+          MATERIAL_CODE = #update.MaterialCode#
+        </isNotNull>
+        <isNotNull  property="update.MaterialName"  prepend=",">
+          MATERIAL_NAME = #update.MaterialName#
+        </isNotNull>
+        <isNotNull  property="update.SapCode"  prepend=",">
+          SAP_CODE = #update.SapCode#
+        </isNotNull>
+        <isNotNull  property="update.ProcUserName"  prepend=",">
+          PROC_USER_NAME = #update.ProcUserName#
+        </isNotNull>
+        <isNotNull  property="update.EquipName"  prepend=",">
+          EQUIP_NAME = #update.EquipName#
+        </isNotNull>
+        <isNotNull  property="update.Qty"  prepend=",">
+          QTY = #update.Qty#
+        </isNotNull>
+        <isNotNull  property="update.LeftQty"  prepend=",">
+          LEFT_QTY = #update.LeftQty#
+        </isNotNull>
+        <isNotNull  property="update.ProduceTime"  prepend=",">
+          PRODUCE_TIME = #update.ProduceTime#
+        </isNotNull>
+        <isNotNull  property="update.ValidDate"  prepend=",">
+          VALID_DATE = #update.ValidDate#
+        </isNotNull>
+        <isNotNull  property="update.ShelfNo"  prepend=",">
+          SHELF_NO = #update.ShelfNo#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY_1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY_2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY_3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY_4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.UnitName"  prepend=",">
+          UNIT_NAME = #update.UnitName#
+        </isNotNull>
+        <isNotNull  property="update.Batch"  prepend=",">
+          BATCH = #update.Batch#
+        </isNotNull>
+        <isNotNull  property="update.ProFactory"  prepend=",">
+          PRO_FACTORY = #update.ProFactory#
+        </isNotNull>
+        <isNotNull  property="update.MarkFlag"  prepend=",">
+          MARK_FLAG = #update.MarkFlag#
+        </isNotNull>
+        <isNotNull  property="update.Dummy5"  prepend=",">
+          DUMMY_5 = #update.Dummy5#
+        </isNotNull>
+        <isNotNull  property="update.Dummy6"  prepend=",">
+          DUMMY_6 = #update.Dummy6#
+        </isNotNull>
+        <isNotNull  property="update.Amount"  prepend=",">
+          AMOUNT = #update.Amount#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HPP_RUBBER_PRODUCTION
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HppRubberProduction">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HppRubberProduction">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max()
+      </isNotPropertyAvailable>
+      FROM HPP_RUBBER_PRODUCTION
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HPP_RUBBER_PRODUCTION
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HppRubberProduction" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HPP_RUBBER_PRODUCTION
+    </statement>
+  </statements>
+</sqlMap>

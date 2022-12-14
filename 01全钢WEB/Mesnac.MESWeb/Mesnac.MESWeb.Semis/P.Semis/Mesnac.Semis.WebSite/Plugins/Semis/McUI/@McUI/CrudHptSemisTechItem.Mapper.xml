@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudHptSemisTechItem" parameterClass="map" resultClass="row">
+      <![CDATA[
+        select T.*,T1.MINOR_TYPE_NAME from HPT_SEMIS_TECH_ITEM T left join sbe_equip_minor_type t1 on T.EQUIP_MINOR_TYPE_ID=t1.objid
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_MINOR_TYPE_ID" prepend="AND">
+          <![CDATA[T.EQUIP_MINOR_TYPE_ID = #where.EQUIP_MINOR_TYPE_ID#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    <select id="Select+Update@CrudHptSemisTechItem" parameterClass="map" resultClass="row">
+      <![CDATA[
+     select T.*,T1.MINOR_TYPE_NAME from HPT_SEMIS_TECH_ITEM T left join sbe_equip_minor_type t1 on T.EQUIP_MINOR_TYPE_ID=t1.objid
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T.OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    
+    <!--查询左右模信息，ID值固定为GetComboBoxData@Select@CrudHppSemisProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudHptSemisTechItem@EQUIP_MINOR_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+     select objid  sskey,MINOR_TYPE_NAME ssValue from sbe_equip_minor_type where major_type_id in (31,22,32,33,21,32,33,34,35,36,37,38) and DELETE_FLAG=0
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

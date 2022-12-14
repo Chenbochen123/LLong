@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="BeginTime" Value="开始时间"></Caption>
+    <Caption Name="EndTime" Value="结束时间"></Caption>
+    <Caption Name="STORE_ID" Value="仓库"></Caption>
+    <Caption Name="STORE_NAME" Value="仓库"></Caption>
+    <Caption Name="STORE_PLACE_ID" Value="库位"></Caption>
+    <Caption Name="STORE_PLACE_NAME" Value="库位"></Caption>
+    <Caption Name="OPER_ID" Value="出库人"></Caption>
+    <Caption Name="OPER_NAME" Value="出库人"></Caption>
+    <Caption Name="OPER_TIME" Value="出库时间"></Caption>
+    <Caption Name="GREEN_TYRE_NO" Value="成型号"></Caption>
+    <Caption Name="TOOLING_BARCODE" Value="胎胚车号"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="物料规格"></Caption>
+  </Captions>
+  <WebPage Title="成型胎胚出库信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Molding/McUI/@McUI/ReportBsmStockIn.js?" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="BSM_STOCK_IN_DETAIL">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="BeginTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EndTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="GREEN_TYRE_NO" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="TOOLING_BARCODE" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_PLACE_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="OPER_NAME" Type="TextBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="FALSE"></GridColumn>
+        <GridColumn ColumnName="OPER_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="GREEN_TYRE_NO"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="300"></GridColumn>
+        <GridColumn ColumnName="TOOLING_BARCODE"></GridColumn>
+        <GridColumn ColumnName="STORE_NAME"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE_NAME"></GridColumn>
+        <GridColumn ColumnName="OPER_NAME"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+    <MainDetail>
+      <ParamFields>
+        <ParamField FieldName="GREEN_TYRE_NO"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="TOOLING_BARCODE"></ParamField>
+        <ParamField FieldName="STORE_NAME"></ParamField>
+        <ParamField FieldName="STORE_PLACE_NAME"></ParamField>
+        <ParamField FieldName="OPER_NAME"></ParamField>
+        <ParamField FieldName="OPER_TIME" Type="DateTimeBox"></ParamField>
+      </ParamFields>
+    </MainDetail>
+  </Select>
+</UiConfig>

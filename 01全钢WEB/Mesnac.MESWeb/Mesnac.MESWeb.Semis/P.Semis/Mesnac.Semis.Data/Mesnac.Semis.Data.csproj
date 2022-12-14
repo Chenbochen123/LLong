@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F6DD545E-3D3E-4301-BA04-3614618AF00D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Semis.Data</RootNamespace>
+    <AssemblyName>Mesnac.Semis.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\@packages\MyBatis\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\@packages\MyBatis\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="LogAgent">
+      <HintPath>..\..\@packages\LogAgent\LogAgent.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.DbAccess">
+      <HintPath>..\..\@packages\Frame\Mesnac.DbAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.Common">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.DataMapper">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Frame\Mesnac.DbAccess\Mesnac.DbAccess.csproj">
+      <Project>{60b919c5-c601-4999-a531-439042d59746}</Project>
+      <Name>Mesnac.DbAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Semis.Entity\Mesnac.Semis.Entity.csproj">
+      <Project>{9693eb18-296e-4e4f-b280-a4df3466c798}</Project>
+      <Name>Mesnac.Semis.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implements\HbeEquipControlService.cs" />
+    <Compile Include="Implements\HppBadGradeInfoService.cs" />
+    <Compile Include="Implements\HppDingzistoreService.cs" />
+    <Compile Include="Implements\HppEquipCurrentMaterialService.cs" />
+    <Compile Include="Implements\HppGetMaterPlanService.cs" />
+    <Compile Include="Implements\HppGetmatertosapService.cs" />
+    <Compile Include="Implements\HppGsoutRecordService.cs" />
+    <Compile Include="Implements\HppInStockDetailService.cs" />
+    <Compile Include="Implements\HppInventoryBillService.cs" />
+    <Compile Include="Implements\HppInventoryDetailService.cs" />
+    <Compile Include="Implements\HppKoumouldService.cs" />
+    <Compile Include="Implements\HppOutStockDetailService.cs" />
+    <Compile Include="Implements\HppPlanDetailService.cs" />
+    <Compile Include="Implements\HppPlanMonthService.cs" />
+    <Compile Include="Implements\HppPlanService.cs" />
+    <Compile Include="Implements\HppProcedureUnitService.cs" />
+    <Compile Include="Implements\HppRubberProductionService.cs" />
+    <Compile Include="Implements\HppScanLogService.cs" />
+    <Compile Include="Implements\HppSemisGydjService.cs" />
+    <Compile Include="Implements\HppSemisMaterialCodeService.cs" />
+    <Compile Include="Implements\HppSemisProductionService.cs" />
+    <Compile Include="Implements\HppShiftDetailService.cs" />
+    <Compile Include="Implements\HppShiftMasterService.cs" />
+    <Compile Include="Implements\HppStorageDetailService.cs" />
+    <Compile Include="Implements\HppStrippingService.cs" />
+    <Compile Include="Implements\HppTraceSemisInfoService.cs" />
+    <Compile Include="Implements\HppStorePlaceService.cs" />
+    <Compile Include="Implements\HppStorePlaceSubService.cs" />
+    <Compile Include="Implements\HppStoreService.cs" />
+    <Compile Include="Implements\HppTraceInfoService.cs" />
+    <Compile Include="Implements\HppTransferDetailService.cs" />
+    <Compile Include="Implements\HptSemisTech15xcService.cs" />
+    <Compile Include="Implements\HptSemisTech90zcService.cs" />
+    <Compile Include="Implements\HptSemisTechBjpService.cs" />
+    <Compile Include="Implements\HptSemisTechDdService.cs" />
+    <Compile Include="Implements\HptSemisTechDetailService.cs" />
+    <Compile Include="Implements\HptSemisTechFhxService.cs" />
+    <Compile Include="Implements\HptSemisTechFtService.cs" />
+    <Compile Include="Implements\HptSemisTechGsqService.cs" />
+    <Compile Include="Implements\HptSemisTechGsyyService.cs" />
+    <Compile Include="Implements\HptSemisTechItemService.cs" />
+    <Compile Include="Implements\HptSemisTechLdService.cs" />
+    <Compile Include="Implements\HptSemisTechMasterService.cs" />
+    <Compile Include="Implements\HptSemisTechNccService.cs" />
+    <Compile Include="Implements\HptSemisTechRtService.cs" />
+    <Compile Include="Implements\HptSemisTechWidthFhxService.cs" />
+    <Compile Include="Implements\HptSemisTechWidthGyService.cs" />
+    <Compile Include="Implements\HqcDefectService.cs" />
+    <Compile Include="Implements\HqcQcrecordService.cs" />
+    <Compile Include="Implements\HqcScanRecordsService.cs" />
+    <Compile Include="Implements\HqcSemisCheckService.cs" />
+    <Compile Include="Implements\HsmToolingLoadService.cs" />
+    <Compile Include="Implements\HsmToolingService.cs" />
+    <Compile Include="Implements\HsmToolingTypeService.cs" />
+    <Compile Include="Implements\HsmToolingUpdateService.cs" />
+    <Compile Include="Implements\ItfMesHproductionDetailService.cs" />
+    <Compile Include="Implements\ItfMesHproductionService.cs" />
+    <Compile Include="Implements\ItfSapProductionHeadService.cs" />
+    <Compile Include="Implements\ItfSapProductionRecordsService.cs" />
+    <Compile Include="Implements\SbeControlRecordService.cs" />
+    <Compile Include="Implements\SbeEquipInspectionPlanService.cs" />
+    <Compile Include="Implements\SbeEquipRepairPlanService.cs" />
+    <Compile Include="Implements\SbeFhcheckinfoService.cs" />
+    <Compile Include="Implements\SbeGsdatainfoService.cs" />
+    <Compile Include="Implements\SbeHbeEquipControlService.cs" />
+    <Compile Include="Implements\SbeInventoryRecordService.cs" />
+    <Compile Include="Implements\SbeReprintrecordService.cs" />
+    <Compile Include="Implements\SbeSmsequipalarmService.cs" />
+    <Compile Include="Implements\SbeWeightunlockService.cs" />
+    <Compile Include="Implements\SbmBomDataService.cs" />
+    <Compile Include="Implements\SbmBomService.cs" />
+    <Compile Include="Implements\SbmLockRecordService.cs" />
+    <Compile Include="Implements\SbmMaterialInfoService.cs" />
+    <Compile Include="Implements\SbmMaterialMinorTypeService.cs" />
+    <Compile Include="Implements\SbmMaterialService.cs" />
+    <Compile Include="Implements\SbmStandardweightService.cs" />
+    <Compile Include="Implements\SeeEquipStopRecordService.cs" />
+    <Compile Include="Implements\SppOldMaterialnameService.cs" />
+    <Compile Include="Implements\SspUserRoleService.cs" />
+    <Compile Include="Interface\IHbeEquipControlService.cs" />
+    <Compile Include="Interface\IHppBadGradeInfoService.cs" />
+    <Compile Include="Interface\IHppDingzistoreService.cs" />
+    <Compile Include="Interface\IHppEquipCurrentMaterialService.cs" />
+    <Compile Include="Interface\IHppGetMaterPlanService.cs" />
+    <Compile Include="Interface\IHppGetmatertosapService.cs" />
+    <Compile Include="Interface\IHppGsoutRecordService.cs" />
+    <Compile Include="Interface\IHppInStockDetailService.cs" />
+    <Compile Include="Interface\IHppInventoryBillService.cs" />
+    <Compile Include="Interface\IHppInventoryDetailService.cs" />
+    <Compile Include="Interface\IHppKoumouldService.cs" />
+    <Compile Include="Interface\IHppOutStockDetailService.cs" />
+    <Compile Include="Interface\IHppPlanDetailService.cs" />
+    <Compile Include="Interface\IHppPlanMonthService.cs" />
+    <Compile Include="Interface\IHppPlanService.cs" />
+    <Compile Include="Interface\IHppProcedureUnitService.cs" />
+    <Compile Include="Interface\IHppRubberProductionService.cs" />
+    <Compile Include="Interface\IHppScanLogService.cs" />
+    <Compile Include="Interface\IHppSemisGydjService.cs" />
+    <Compile Include="Interface\IHppSemisMaterialCodeService.cs" />
+    <Compile Include="Interface\IHppSemisProductionService.cs" />
+    <Compile Include="Interface\IHppShiftDetailService.cs" />
+    <Compile Include="Interface\IHppShiftMasterService.cs" />
+    <Compile Include="Interface\IHppStorageDetailService.cs" />
+    <Compile Include="Interface\IHppStrippingService.cs" />
+    <Compile Include="Interface\IHppTraceSemisInfoService.cs" />
+    <Compile Include="Interface\IHppStorePlaceService.cs" />
+    <Compile Include="Interface\IHppStorePlaceSubService.cs" />
+    <Compile Include="Interface\IHppStoreService.cs" />
+    <Compile Include="Interface\IHppTraceInfoService.cs" />
+    <Compile Include="Interface\IHppTransferDetailService.cs" />
+    <Compile Include="Interface\IHptSemisTech15xcService.cs" />
+    <Compile Include="Interface\IHptSemisTech90zcService.cs" />
+    <Compile Include="Interface\IHptSemisTechBjpService.cs" />
+    <Compile Include="Interface\IHptSemisTechDdService.cs" />
+    <Compile Include="Interface\IHptSemisTechDetailService.cs" />
+    <Compile Include="Interface\IHptSemisTechFhxService.cs" />
+    <Compile Include="Interface\IHptSemisTechFtService.cs" />
+    <Compile Include="Interface\IHptSemisTechGsqService.cs" />
+    <Compile Include="Interface\IHptSemisTechGsyyService.cs" />
+    <Compile Include="Interface\IHptSemisTechItemService.cs" />
+    <Compile Include="Interface\IHptSemisTechLdService.cs" />
+    <Compile Include="Interface\IHptSemisTechMasterService.cs" />
+    <Compile Include="Interface\IHptSemisTechNccService.cs" />
+    <Compile Include="Interface\IHptSemisTechRtService.cs" />
+    <Compile Include="Interface\IHptSemisTechWidthFhxService.cs" />
+    <Compile Include="Interface\IHptSemisTechWidthGyService.cs" />
+    <Compile Include="Interface\IHqcDefectService.cs" />
+    <Compile Include="Interface\IHqcQcrecordService.cs" />
+    <Compile Include="Interface\IHqcScanRecordsService.cs" />
+    <Compile Include="Interface\IHqcSemisCheckService.cs" />
+    <Compile Include="Interface\IHsmToolingLoadService.cs" />
+    <Compile Include="Interface\IHsmToolingService.cs" />
+    <Compile Include="Interface\IHsmToolingTypeService.cs" />
+    <Compile Include="Interface\IHsmToolingUpdateService.cs" />
+    <Compile Include="Interface\IItfMesHproductionDetailService.cs" />
+    <Compile Include="Interface\IItfMesHproductionService.cs" />
+    <Compile Include="Interface\IItfSapProductionHeadService.cs" />
+    <Compile Include="Interface\IItfSapProductionRecordsService.cs" />
+    <Compile Include="Interface\ISbeControlRecordService.cs" />
+    <Compile Include="Interface\ISbeEquipInspectionPlanService.cs" />
+    <Compile Include="Interface\ISbeEquipRepairPlanService.cs" />
+    <Compile Include="Interface\ISbeFhcheckinfoService.cs" />
+    <Compile Include="Interface\ISbeGsdatainfoService.cs" />
+    <Compile Include="Interface\ISbeHbeEquipControlService.cs" />
+    <Compile Include="Interface\ISbeInventoryRecordService.cs" />
+    <Compile Include="Interface\ISbeReprintrecordService.cs" />
+    <Compile Include="Interface\ISbeSmsequipalarmService.cs" />
+    <Compile Include="Interface\ISbeWeightunlockService.cs" />
+    <Compile Include="Interface\ISbmBomDataService.cs" />
+    <Compile Include="Interface\ISbmBomService.cs" />
+    <Compile Include="Interface\ISbmLockRecordService.cs" />
+    <Compile Include="Interface\ISbmMaterialInfoService.cs" />
+    <Compile Include="Interface\ISbmMaterialMinorTypeService.cs" />
+    <Compile Include="Interface\ISbmMaterialService.cs" />
+    <Compile Include="Interface\ISbmStandardweightService.cs" />
+    <Compile Include="Interface\ISeeEquipStopRecordService.cs" />
+    <Compile Include="Interface\ISppOldMaterialnameService.cs" />
+    <Compile Include="Interface\ISspUserRoleService.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BusinessMapper.FqbQualityStandard"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM FQB_QUALITY_STANDARD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.XstandardId" prepend="AND">
+          <![CDATA[XSTANDARD_ID = #where.XstandardId#]]>
+        </isNotNull>
+        <isNotNull property="where.UstandardId" prepend="AND">
+          <![CDATA[USTANDARD_ID = #where.UstandardId#]]>
+        </isNotNull>
+        <isNotNull property="where.BstandardId" prepend="AND">
+          <![CDATA[BSTANDARD_ID = #where.BstandardId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+
+    <insert id="InitMaterial" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      insert into FQB_QUALITY_STANDARD (objid,material_id)   
+      select objid,objid from v_cbm_materialinfo t1
+      where not EXISTS (select 1 from  FQB_QUALITY_STANDARD t0 where t0.MATERIAL_ID=t1.ObjId)
+      ]]>
+    </insert>
+
+    <select id="RefleshData" parameterClass="map" resultClass="Row">
+      <![CDATA[  select t0.objid,t1.material_name,t1.material_code,t0.ustandard_id,t0.xstandard_id,t0.bstandard_id, is_jun,is_dong,is_again,fj_num
+      from fqb_quality_standard t0,v_cbm_material t1
+      where t0.material_id=t1.ObjId and t1.Major_Type_Id = 51 and t1.Delete_Flag = 0
+      ]]>
+      <dynamic>
+        <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+          <![CDATA[ t1.material_name like '%$where.MATERIAL_NAME$%']]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_CODE" prepend="AND">
+          <![CDATA[ t1.material_code like '%'||#where.MATERIAL_CODE#||'%']]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <update id="UpdateByObjId" parameterClass="map">
+      <![CDATA[   
+          UPDATE FQB_QUALITY_STANDARD SET
+          USTANDARD_ID = #UstandardId#,
+          XSTANDARD_ID = #XstandardId#,
+          BSTANDARD_ID = #BstandardId#,
+          is_dong = #IsDong#,
+          is_jun = #IsJun#,
+          is_again = #IsAgain#,
+          fj_num = #FjNum#
+          WHERE (OBJID = #ObjId#) 
+      ]]>
+    </update>
+    <select id="GetBalanceStandardByMaterialID" parameterClass="map" resultClass="Row">
+      <![CDATA[   
+          select bstandard_id from fqb_quality_standard 
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="MATERIAL_ID" prepend="AND">
+          <![CDATA[ MATERIAL_ID=#MATERIAL_ID#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Storage.Mapper.BusinessMapper.PsmInStockSummary"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSM_IN_STOCK_SUMMARY ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BillId" prepend="AND">
+          <![CDATA[BILL_ID = #where.BillId#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreId" prepend="AND">
+          <![CDATA[STORE_ID = #where.StoreId#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceId" prepend="AND">
+          <![CDATA[STORE_PLACE_ID = #where.StorePlaceId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckGradeCode" prepend="AND">
+          <![CDATA[CHECK_GRADE_CODE = #where.CheckGradeCode#]]>
+        </isNotNull>
+        <isNotNull property="where.InAmount" prepend="AND">
+          <![CDATA[IN_AMOUNT = #where.InAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateUserId" prepend="AND">
+          <![CDATA[UPDATE_USER_ID = #where.UpdateUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmTime" prepend="AND">
+          <![CDATA[AFFIRM_TIME = #where.AffirmTime#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmUserId" prepend="AND">
+          <![CDATA[AFFIRM_USER_ID = #where.AffirmUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.SummaryState" prepend="AND">
+          <![CDATA[SUMMARY_STATE = #where.SummaryState#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <!--查看日报表-->
+     <select id="getProductionByDay" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T1.IN_AMOUNT QTY, TO_CHAR(T1.IN_DATE,'YYYY-MM') AS DATEVALUE , T2.MATERIAL_NAME,
+        TO_CHAR(TO_DATE(TO_CHAR(T1.IN_DATE,'YYYY-MM'),'YYYY-MM'),'MM') AS MONTH,
+        TO_CHAR(TO_DATE(TO_CHAR(T1.IN_DATE,'YYYY-MM-DD'),'YYYY-MM-DD'),'DD') AS DAY,
+         T3.SHIFT_NAME , T4.CLASS_NAME 
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '一级品' WHEN 2 THEN '二级品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' ELSE '' END GRADENAME 
+        FROM (
+          SELECT T1.IN_DATE, T1.IN_CLASS_ID, T1.IN_SHIFT_ID, T1.MATERIAL_ID, T1.CHECK_GRADE_CODE, SUM(T1.IN_AMOUNT) IN_AMOUNT
+          FROM (
+            SELECT T2.IN_DATE, T2.IN_CLASS_ID, T2.IN_SHIFT_ID, T1.IN_AMOUNT, T1.MATERIAL_ID, T1.CHECK_GRADE_CODE
+            FROM PSM_IN_STOCK_SUMMARY T1
+            JOIN PSM_IN_STOCK_BILL T2 ON T1.BILL_ID = T2.OBJID
+            WHERE T1.DELETE_FLAG = 0 AND T2.DELETE_FLAG = 0
+            AND TO_CHAR(T2.IN_DATE,'YYYY-MM-DD') = #where.DateValue#
+            
+            UNION ALL
+
+            SELECT T1.RETURN_DATE, T1.RETURN_CLASS_ID, T1.RETURN_SHIFT_ID, 0 - T2.RETURN_AMOUNT RETURN_AMOUNT, T2.MATERIAL_ID, T2.CHECK_GRADE_CODE
+            FROM PSM_RETURN_STOCK_BILL T1
+            JOIN PSM_RETURN_STOCK_SUMMARY T2 ON T1.OBJID = T2.BILL_ID
+            WHERE T1.DELETE_FLAG = 0 AND T2.DELETE_FLAG = 0
+            AND TO_CHAR(T1.RETURN_DATE,'YYYY-MM-DD') = #where.DateValue#
+          ) T1
+          GROUP BY T1.IN_DATE, T1.IN_CLASS_ID, T1.IN_SHIFT_ID, T1.MATERIAL_ID, T1.CHECK_GRADE_CODE
+        ) T1
+        
+        LEFT JOIN SBM_MATERIAL T2 ON T1.MATERIAL_ID = T2.OBJID
+        LEFT JOIN SSB_SHIFT T3 ON T1.IN_SHIFT_ID = T3.OBJID
+        LEFT JOIN SSB_CLASS T4 ON T1.IN_CLASS_ID = T4.OBJID  
+       ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T1.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.DateValue" prepend="AND">
+           <![CDATA[TO_CHAR(T1.IN_DATE,'YYYY-MM-DD') = #where.DateValue#]]>
+         </isNotNull>
+       </dynamic>
+        <![CDATA[ORDER BY T2.MATERIAL_NAME]]> 
+     </select>
+    
+     <!--查看月报表-->
+     <select id="getProductByMonth" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        
+       SELECT  SUM(T1.IN_AMOUNT) QTY, TO_CHAR(T1.IN_DATE,'YYYY-MM-DD') AS DATEVALUE , T2.MATERIAL_NAME,
+        TO_CHAR(TO_DATE(TO_CHAR(T1.IN_DATE,'YYYY-MM-DD'),'YYYY-MM-DD'),'MM') AS MONTH,
+        TO_CHAR(TO_DATE(TO_CHAR(T1.IN_DATE,'YYYY-MM-DD'),'YYYY-MM-DD'),'DD') AS DAY,
+         T3.SHIFT_NAME , T4.CLASS_NAME ,T1.STORE_NAME,T1.STORE_PLACE_NAME
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '一级品' WHEN 2 THEN '二级品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' ELSE '' END GRADENAME 
+        FROM (
+          SELECT T1.IN_DATE, T1.IN_CLASS_ID, T1.IN_SHIFT_ID, T1.MATERIAL_ID, T1.CHECK_GRADE_CODE, SUM(T1.IN_AMOUNT) IN_AMOUNT,T1.STORE_NAME,T1.STORE_PLACE_NAME
+          FROM (
+            SELECT T2.IN_DATE, T2.IN_CLASS_ID, T2.IN_SHIFT_ID, T1.IN_AMOUNT, T1.MATERIAL_ID, T1.CHECK_GRADE_CODE,T3.STORE_NAME,T4.STORE_PLACE_NAME
+            FROM PSM_IN_STOCK_SUMMARY T1
+            JOIN PSM_IN_STOCK_BILL T2 ON T1.BILL_ID = T2.OBJID
+            JOIN PSB_STORE T3 ON T3.OBJID=T1.STORE_ID
+            JOIN PSB_STORE_PLACE T4 ON T4.OBJID=T1.STORE_PLACE_ID
+            WHERE T1.DELETE_FLAG = 0 AND T2.DELETE_FLAG = 0
+            AND TO_CHAR(T2.IN_DATE,'YYYY-MM') = #where.DateValue#
+            
+            UNION ALL
+
+            SELECT T1.RETURN_DATE, T1.RETURN_CLASS_ID, T1.RETURN_SHIFT_ID, 0 - T2.RETURN_AMOUNT RETURN_AMOUNT, T2.MATERIAL_ID, T2.CHECK_GRADE_CODE,T3.STORE_NAME,T4.STORE_PLACE_NAME
+            FROM PSM_RETURN_STOCK_BILL T1
+            JOIN PSM_RETURN_STOCK_SUMMARY T2 ON T1.OBJID = T2.BILL_ID
+            JOIN PSB_STORE T3 ON T3.OBJID=T2.STORE_ID
+            JOIN PSB_STORE_PLACE T4 ON T4.OBJID=T2.STORE_PLACE_ID
+            WHERE T1.DELETE_FLAG = 0 AND T2.DELETE_FLAG = 0
+            AND TO_CHAR(T1.RETURN_DATE,'YYYY-MM') = #where.DateValue#
+          ) T1
+          GROUP BY T1.IN_DATE, T1.IN_CLASS_ID, T1.IN_SHIFT_ID, T1.MATERIAL_ID, T1.CHECK_GRADE_CODE,T1.STORE_NAME,T1.STORE_PLACE_NAME
+        ) T1
+        
+        LEFT JOIN SBM_MATERIAL T2 ON T1.MATERIAL_ID = T2.OBJID
+        LEFT JOIN SSB_SHIFT T3 ON T1.IN_SHIFT_ID = T3.OBJID
+        LEFT JOIN SSB_CLASS T4 ON T1.IN_CLASS_ID = T4.OBJID 
+        WHERE 1=1 
+      ]]>
+       <isNotNull property="where.DeleteFlag" prepend="AND">
+         <![CDATA[T1.DELETE_FLAG = #where.DeleteFlag#]]>
+       </isNotNull>
+     <isNotNull property="where.DateValue" prepend="AND">
+       <![CDATA[TO_CHAR(T1.IN_DATE,'YYYY-MM') = #where.DateValue#]]>
+     </isNotNull>
+       <isNotNull property="where.STORE_NAME" prepend="AND">
+         <![CDATA[T1.STORE_NAME = #where.STORE_NAME#]]>
+       </isNotNull>
+       <![CDATA[
+        GROUP BY T3.SHIFT_NAME,T4.CLASS_NAME,T2.MATERIAL_NAME,TO_CHAR(T1.IN_DATE,'YYYY-MM-DD'),t1.CHECK_GRADE_CODE,T1.STORE_NAME,T1.STORE_PLACE_NAME
+        ORDER BY T2.MATERIAL_NAME 
+     ]]>  
+     </select>
+     
+     <!--更新记录-->
+     <update id="UpdateAmountByObjId" parameterClass="map">
+       UPDATE PSM_IN_STOCK_SUMMARY
+       SET IN_AMOUNT = IN_AMOUNT + #update.UpdateAmount#
+       WHERE OBJID = #ObjId#
+     </update>
+   
+   </statements>
+</sqlMap>

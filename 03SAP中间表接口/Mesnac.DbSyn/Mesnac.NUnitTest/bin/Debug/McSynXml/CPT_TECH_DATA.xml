@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SynConfig>
+    <Tables>
+        <Table name="Table.Source">
+           <DbSourceName>MES</DbSourceName>
+            <TableName>CPT_CURING_TECH_PARM_DATA</TableName>
+        </Table>
+        <Table name="Table.Target">
+           <DbSourceName>MES</DbSourceName>
+            <TableName>CPT_CURING_TECH</TableName>
+            <Primarykey FieldName="OBJID"/>
+        </Table>
+    </Tables>
+    <SynDatas>
+        <SynData>
+            <SourceTable TableName="Table.Source">
+                <Command >
+                  <FileName value="Mesnac.DbSyn.dll"/>
+                    <ClassName value="Mesnac.DbSyn.TableSyn.Source"/>
+                </Command>
+                <BeginSyn>
+                    <add key="sql" value=""/>
+                </BeginSyn>
+                <SelectData>
+                    <add key="count" value="0"/>
+                    <add key="sql">
+                        <![CDATA[
+                                select t1.objid,
+                                       t1.material_id,
+                                       t1.pdm_version,
+                                       t2.parm_type_id,
+                                       t3.parm_name,
+                                       t3.pdm_code,
+                                       t1.RECORD_USER_ID,
+                                       t1.RECORD_TIME,
+                                       t1.DELETE_FLAG,
+                                       t1.LASTMODIFIER,
+                                       t1.LASTMODIFY_DATE,
+                                       t1.EFFECT_DATE,
+                                       t1.LOSE_EFFECT_DATE,
+                                       t1.TECH_TYPE,
+                                       t2.objid as valueid
+                                  from cpt_curing_tech_parm_mat t1
+                                 inner join cpt_curing_tech_parm_data t2
+                                    on t1.parm_group_id = t2.parm_group_id  and t2.delete_flag=0
+                                 inner join cpt_curing_tech_parm_info t3
+                                    on t2.parm_info_id = t3.objid
+                                 where t1.delete_flag=0
+                        ]]>
+                    </add>
+                </SelectData>
+                <FinishRowSyn>
+                    <add key="update" value="PARM_COMBINE=1"/>
+                    <add key="where" value="OBJID"/>
+                </FinishRowSyn>
+            </SourceTable>
+            <TargetTable TableName="Table.Target">
+                <Command >
+                    <FileName value="Mesnac.DbSyn.LLCommand.dll"/>
+                    <ClassName value="Mesnac.DbSyn.LLERP.CPT_TECH_DATA.Target"/>
+                </Command>
+            </TargetTable>
+            <SourceTargetFields>
+            </SourceTargetFields>
+        </SynData>
+    </SynDatas>
+</SynConfig>

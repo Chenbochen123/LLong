@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.SbeClearmould"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SbeClearmould" type="Mesnac.Curing.Entity.BasicEntity.SbeClearmould, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SbeClearmould" class="SbeClearmould">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Mouldname" column="MOULDNAME"/>
+    <result property="Maxnum" column="MAXNUM"/>
+    <result property="Realnum" column="REALNUM"/>
+    <result property="WarningFlag" column="WARNING_FLAG"/>
+    <result property="LockFlag" column="LOCK_FLAG"/>
+    <result property="RecordUserid" column="RECORD_USERID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="OkFlag" column="OK_FLAG"/>
+    <result property="OkUserid" column="OK_USERID"/>
+    <result property="OkTime" column="OK_TIME"/>
+    <result property="Mouldflag" column="MOULDFLAG"/>
+    <result property="UnwarningFlag" column="UNWARNING_FLAG"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SbeClearmould" class="SbeClearmould">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Mouldname" column="Mouldname"/>
+    <parameter property="Maxnum" column="Maxnum"/>
+    <parameter property="Realnum" column="Realnum"/>
+    <parameter property="WarningFlag" column="WarningFlag"/>
+    <parameter property="LockFlag" column="LockFlag"/>
+    <parameter property="RecordUserid" column="RecordUserid"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="OkFlag" column="OkFlag"/>
+    <parameter property="OkUserid" column="OkUserid"/>
+    <parameter property="OkTime" column="OkTime"/>
+    <parameter property="Mouldflag" column="Mouldflag"/>
+    <parameter property="UnwarningFlag" column="UnwarningFlag"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_CLEARMOULD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Mouldname" prepend="AND">
+          <![CDATA[MOULDNAME = #where.Mouldname#]]>
+        </isNotNull>
+        <isNotNull property="where.Maxnum" prepend="AND">
+          <![CDATA[MAXNUM = #where.Maxnum#]]>
+        </isNotNull>
+        <isNotNull property="where.Realnum" prepend="AND">
+          <![CDATA[REALNUM = #where.Realnum#]]>
+        </isNotNull>
+        <isNotNull property="where.WarningFlag" prepend="AND">
+          <![CDATA[WARNING_FLAG = #where.WarningFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.LockFlag" prepend="AND">
+          <![CDATA[LOCK_FLAG = #where.LockFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserid" prepend="AND">
+          <![CDATA[RECORD_USERID = #where.RecordUserid#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.OkFlag" prepend="AND">
+          <![CDATA[OK_FLAG = #where.OkFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.OkUserid" prepend="AND">
+          <![CDATA[OK_USERID = #where.OkUserid#]]>
+        </isNotNull>
+        <isNotNull property="where.OkTime" prepend="AND">
+          <![CDATA[OK_TIME = #where.OkTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Mouldflag" prepend="AND">
+          <![CDATA[MOULDFLAG = #where.Mouldflag#]]>
+        </isNotNull>
+        <isNotNull property="where.UnwarningFlag" prepend="AND">
+          <![CDATA[UNWARNING_FLAG = #where.UnwarningFlag#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SBE_CLEARMOULD]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="Mouldname" prepend=",">MOULDNAME</isNotNull>
+        <isNotNull property="Maxnum" prepend=",">MAXNUM</isNotNull>
+        <isNotNull property="Realnum" prepend=",">REALNUM</isNotNull>
+        <isNotNull property="WarningFlag" prepend=",">WARNING_FLAG</isNotNull>
+        <isNotNull property="LockFlag" prepend=",">LOCK_FLAG</isNotNull>
+        <isNotNull property="RecordUserid" prepend=",">RECORD_USERID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="OkFlag" prepend=",">OK_FLAG</isNotNull>
+        <isNotNull property="OkUserid" prepend=",">OK_USERID</isNotNull>
+        <isNotNull property="OkTime" prepend=",">OK_TIME</isNotNull>
+        <isNotNull property="Mouldflag" prepend=",">MOULDFLAG</isNotNull>
+        <isNotNull property="UnwarningFlag" prepend=",">UNWARNING_FLAG</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SBE_CLEARMOULD.NEXTVAL</isNull>
+        <isNotNull property="Mouldname" prepend=",">#Mouldname#</isNotNull>
+        <isNotNull property="Maxnum" prepend=",">#Maxnum#</isNotNull>
+        <isNotNull property="Realnum" prepend=",">#Realnum#</isNotNull>
+        <isNotNull property="WarningFlag" prepend=",">#WarningFlag#</isNotNull>
+        <isNotNull property="LockFlag" prepend=",">#LockFlag#</isNotNull>
+        <isNotNull property="RecordUserid" prepend=",">#RecordUserid#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="OkFlag" prepend=",">#OkFlag#</isNotNull>
+        <isNotNull property="OkUserid" prepend=",">#OkUserid#</isNotNull>
+        <isNotNull property="OkTime" prepend=",">#OkTime#</isNotNull>
+        <isNotNull property="Mouldflag" prepend=",">#Mouldflag#</isNotNull>
+        <isNotNull property="UnwarningFlag" prepend=",">#UnwarningFlag#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SBE_CLEARMOULD
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Mouldname"  prepend=",">
+          MOULDNAME = #update.Mouldname#
+        </isNotNull>
+        <isNotNull  property="update.Maxnum"  prepend=",">
+          MAXNUM = #update.Maxnum#
+        </isNotNull>
+        <isNotNull  property="update.Realnum"  prepend=",">
+          REALNUM = #update.Realnum#
+        </isNotNull>
+        <isNotNull  property="update.WarningFlag"  prepend=",">
+          WARNING_FLAG = #update.WarningFlag#
+        </isNotNull>
+        <isNotNull  property="update.LockFlag"  prepend=",">
+          LOCK_FLAG = #update.LockFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserid"  prepend=",">
+          RECORD_USERID = #update.RecordUserid#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.OkFlag"  prepend=",">
+          OK_FLAG = #update.OkFlag#
+        </isNotNull>
+        <isNotNull  property="update.OkUserid"  prepend=",">
+          OK_USERID = #update.OkUserid#
+        </isNotNull>
+        <isNotNull  property="update.OkTime"  prepend=",">
+          OK_TIME = #update.OkTime#
+        </isNotNull>
+        <isNotNull  property="update.Mouldflag"  prepend=",">
+          MOULDFLAG = #update.Mouldflag#
+        </isNotNull>
+        <isNotNull  property="update.UnwarningFlag"  prepend=",">
+          UNWARNING_FLAG = #update.UnwarningFlag#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SBE_CLEARMOULD
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SbeClearmould">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SbeClearmould">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SBE_CLEARMOULD
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SBE_CLEARMOULD
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SbeClearmould" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SBE_CLEARMOULD
+    </statement>
+  </statements>
+</sqlMap>

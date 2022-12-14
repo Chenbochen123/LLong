@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BusinessMapper.FqdDefectInfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM FQD_DEFECT_INFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Defectcode" prepend="AND">
+          <![CDATA[DEFECTCODE = #where.Defectcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Defectname" prepend="AND">
+          <![CDATA[DEFECTNAME = #where.Defectname#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkProcessId" prepend="AND">
+          <![CDATA[WORK_PROCESS_ID = #where.WorkProcessId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupFlag" prepend="AND">
+          <![CDATA[BAUP_FLAG = #where.BaupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupTime" prepend="AND">
+          <![CDATA[BAUP_TIME = #where.BaupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserid" prepend="AND">
+          <![CDATA[RECORD_USERID = #where.RecordUserid#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.DutyworkProcessId" prepend="AND">
+          <![CDATA[DUTYWORK_PROCESS_ID = #where.DutyworkProcessId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetAllDefectInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        SELECT TA.OBJID,TA.DEFECTNAME,TA.DEFECTCODE,TA.WORK_PROCESS_ID,TA.REMARK,TB.PROCEDURE_NAME,TA.ALARM_COUNT,TA.ALARM_COUNT_JJ,ALARM_TIME,
+        CASE WHEN ALARM_CONTROL=1 THEN '是' else '否' end ALARM_CONTROL FROM FQD_DEFECT_INFO TA
+        LEFT JOIN SSB_PROCEDURE TB ON TB.OBJID=TA.WORK_PROCESS_ID
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.WorkProcessID" prepend="AND">
+           <![CDATA[TA.WORK_PROCESS_ID = #where.WorkProcessID#]]>
+         </isNotNull>
+         <isNotNull property="where.DefectCode" prepend="AND">
+           <![CDATA[TA.DEFECTCODE = #where.DefectCode#]]>
+         </isNotNull>
+         <isNotNull property="where.DefectName" prepend="AND">
+           <![CDATA[TA.DEFECTNAME = #where.DefectName#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[TA.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+     <dynamic prepend="ORDER BY">
+       <![CDATA[TA.DEFECTCODE]]>
+     </dynamic>
+     </select>
+     <select id="GetWorkProcess" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select objid,procedure_name from SSB_PROCEDURE where objid between 500 and 599 and delete_flag=0
+      ]]>
+     </select>
+     
+     <update id="UpdateDefectInfo" parameterClass="map">
+       <![CDATA[ 
+        UPDATE FQD_DEFECT_INFO SET 
+        DEFECTNAME=#DefectName#,
+        WORK_PROCESS_ID=#Work_Process_Id#,
+        DEFECTCODE=#DefectCode#,
+        REMARK=#Remark#,
+        ALARM_COUNT = #AlarmCount#,
+        ALARM_COUNT_JJ = #AlarmCountjj#,
+        ALARM_TIME = #Alarmtime#,
+        ALARM_CONTROL = #Control#
+        WHERE (OBJID = #ObjId#) 
+      ]]>
+     </update>
+     <!--获取数据库服务器当前时间-->
+     <select id="GetSysDateTime" parameterClass="map" resultClass="Row">
+      <![CDATA[ select sysdate SYS_DATE from dual]]>
+     </select>
+
+     <select id="GetAllDefectInfo1" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        SELECT TA.OBJID,TA.DEFECTNAME,TA.DEFECTCODE,TA.WORK_PROCESS_ID,TA.REMARK,TB.PROCEDURE_NAME FROM FQD_DEFECT_INFO TA
+        LEFT JOIN SSB_PROCEDURE TB ON TB.OBJID=TA.WORK_PROCESS_ID
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.WorkProcessID" prepend="AND">
+           <![CDATA[TA.WORK_PROCESS_ID = #where.WorkProcessID#]]>
+         </isNotNull>
+         <isNotNull property="where.DefectCode" prepend="AND">
+           <![CDATA[TA.DEFECTCODE = #where.DefectCode#]]>
+         </isNotNull>
+         <isNotNull property="where.DefectName" prepend="AND">
+           <![CDATA[TA.DEFECTNAME = #where.DefectName#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[TA.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[TA.DEFECTCODE]]>
+       </dynamic>
+     </select>
+
+     <select id="GetAllFirstNoInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select t1.user_name, t.* 
+        from cbe_firstno_reason t 
+        left join ssb_user t1 on t.record_user_id = t1.objid
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.DefectName" prepend="AND">
+           <![CDATA[t.no_reason = #where.DefectName#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[t.delete_flag = #where.DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[t.objid]]>
+       </dynamic>
+     </select>
+
+     <insert id="InsertFirstNo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+      insert into cbe_firstno_reason(objid,record_user_id,record_time,delete_flag,no_reason,remark)
+      values(seq_cbe_firstno_reason.nextval,#UserID#,sysdate,0,#DefectName#,#Remark#)
+      ]]>
+     </insert>
+
+     <update id="UpdateFirstNo" parameterClass="map">
+       <![CDATA[ 
+        UPDATE cbe_firstno_reason SET 
+        no_reason=#DefectName#,
+        remark=#Remark#
+        WHERE (OBJID = #ObjId#) 
+      ]]>
+     </update>
+
+     <update id="UpdateFirstNoDelete" parameterClass="map">
+       <![CDATA[ 
+        UPDATE cbe_firstno_reason SET 
+        delete_flag=#DeleteFlag#
+        WHERE (OBJID = #ObjId#) 
+      ]]>
+     </update>
+
+     <select id="GetGSFXInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select  BARCODE,CASE WHEN FLAG = 1 THEN '否' else '是' END FLAG,RECORD_TIME  from  bpm_checkbarcode 
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.TyreNo" prepend="AND">
+           <![CDATA[ barcode = #where.TyreNo#]]>
+         </isNotNull>
+         <isNotNull property="where.beginTime" prepend="AND">
+           <![CDATA[record_time >= to_date(#where.beginTime#,'yyyy-MM-dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.endTime" prepend="AND">
+           <![CDATA[record_time <= to_date(#where.endTime#,'yyyy-MM-dd hh24:mi:ss')]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[record_time]]>
+       </dynamic>
+     </select>
+
+     <update id="UpdateGSFX" parameterClass="map">
+       <![CDATA[ 
+ update bpm_checkbarcode set flag = 0 where barcode = #BARCODE#
+      ]]>
+     </update>
+     <update id="UpdateWmsLockA" parameterClass="map">
+       <![CDATA[ 
+update cpp_curing_production set mark_flag = 0 where tyre_no = #BARCODE#
+      ]]>
+     </update>
+     <update id="UpdateWmsLockB" parameterClass="map">
+       <![CDATA[ 
+update wms_upload_record set returnstate = null,upload_flag = 0  where tyre_no = #BARCODE#
+      ]]>
+     </update>
+     
+     <select id="GetFirstFqfByhuizong" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        SELECT Y.*,case when y.压杂物 = 0 then '0%' else Round(y.压杂物/y.检测数量*100,2)||'%' end 压杂物lv
+,case when (y.胎侧缺胶+y.胎冠缺胶+y.子口缺胶+y.胎肩缺胶) = 0 then '0%' else Round((y.胎侧缺胶+y.胎冠缺胶+y.子口缺胶+y.胎肩缺胶)/y.检测数量*100,2)||'%' end 缺胶lv
+,case when y.子口气泡 = 0 then '0%' else Round(y.子口气泡/y.检测数量*100,2)||'%' end 子口气泡lv
+,case when y.胎冠缺胶 = 0 then '0%' else Round(y.胎冠缺胶/y.检测数量*100,2)||'%' end 胎冠缺胶lv
+,case when y.子口缺胶 = 0 then '0%' else Round(y.子口缺胶/y.检测数量*100,2)||'%' end 子口缺胶lv
+,case when y.胎侧缺胶 = 0 then '0%' else Round(y.胎侧缺胶/y.检测数量*100,2)||'%' end 胎侧缺胶lv
+,case when y.胎侧气泡 = 0 then '0%' else Round(y.胎侧气泡/y.检测数量*100,2)||'%' end 胎侧气泡lv
+,case when y.胎肩缺胶 = 0 then '0%' else Round(y.胎肩缺胶/y.检测数量*100,2)||'%' end 胎肩缺胶lv
+ FROM (
+       select x.* ,(x.MES返修数+x.降级胎数) 返修总数,Round(x.合格数量/x.检测数量*100,2)||'%' alv, allbingci- 胎侧缺胶- 胎冠缺胶- 子口缺胶- 压杂物- 子口气泡- 胎侧气泡 - 胎肩缺胶- 子口大边- 模型污垢模具脏 as 其它
+       from (
+select count(distinct c.tyreid) 检测数量,count(distinct d.tyreid) 合格数量,count(distinct e.tyreid) MES返修数,count(distinct ee.tyreid) 降级胎数,
+count(distinct f.tyreid) 胎侧缺胶,count(distinct f2.tyreid) 胎冠缺胶,count(distinct f3.tyreid) 子口缺胶,
+count(distinct f4.tyreid) 压杂物,count(distinct f5.tyreid) 子口气泡,count(distinct f6.tyreid) 胎侧气泡
+,count(distinct f7.tyreid) 胎肩缺胶,count(distinct f8.tyreid) 子口大边,count(distinct f9.tyreid) as 压杂物隔离剂
+,count(distinct f10.tyreid) 压杂物胶边,count(distinct f11.tyreid) 压杂物油泥,count(distinct f12.tyreid) 压杂物固体杂物
+,count(distinct f13.tyreid) 压杂物其他,count(distinct f14.tyreid) 模型污垢模具脏
+,count(distinct f16.tyreid) allbingci
+  from  fqf_fcheck_info a
+left join fqf_fcheck_info c on c.objid = a.objid 
+left join fqf_fcheck_info d on d.objid = a.objid and (d.gradeid = 1 or d.gradeid = 0)
+left join fqf_fcheck_info e on e.objid = a.objid and e.gradeid = 5
+left join fqf_fcheck_info ee on ee.objid = a.objid and (ee.gradeid = 2 or ee.gradeid = 3 or ee.gradeid = 4)
+left join fqf_fcheck_info f on f.objid = a.objid and f.defectname like '%胎侧缺胶%' and f.gradeid = 5
+left join fqf_fcheck_info f2 on f2.objid = a.objid and f2.defectname like '%胎冠缺胶%' and f2.gradeid = 5
+left join fqf_fcheck_info f3 on f3.objid = a.objid and f3.defectname like '%子口缺胶%' and f3.gradeid = 5
+left join fqf_fcheck_info f4 on f4.objid = a.objid and f4.defectname like '%压杂物%' and f4.gradeid = 5
+left join fqf_fcheck_info f5 on f5.objid = a.objid and f5.defectname like '%子口气泡%' and f5.gradeid = 5
+left join fqf_fcheck_info f6 on f6.objid = a.objid and f6.defectname like '%胎侧气泡%' and f6.gradeid = 5
+left join fqf_fcheck_info f7 on f7.objid = a.objid and f7.defectname like '%胎肩缺胶%' and f7.gradeid = 5
+left join fqf_fcheck_info f8 on f8.objid = a.objid and f8.defectname like '%子口大边%' and f8.gradeid = 5
+left join fqf_fcheck_info f9 on f9.objid = a.objid and f9.defectname like '%压杂物（隔离剂）%' and f9.gradeid = 5
+left join fqf_fcheck_info f10 on f10.objid = a.objid and f10.defectname like '%压杂物（胶边）%' and f10.gradeid = 5
+left join fqf_fcheck_info f11 on f11.objid = a.objid and f11.defectname like '%压杂物（油泥）%' and f11.gradeid = 5
+left join fqf_fcheck_info f12 on f12.objid = a.objid and f12.defectname like '%压杂物（固体杂物）%' and f12.gradeid = 5
+left join fqf_fcheck_info f13 on f13.objid = a.objid and f13.defectname like '%压杂物（其他）%' and f13.gradeid = 5
+left join fqf_fcheck_info f14 on f14.objid = a.objid and f14.defectname like '%模型污垢（模具脏）%' and f14.gradeid = 5
+left join fqf_fcheck_info f16 on f16.objid = a.objid and f16.defectname is not null and f16.gradeid = 5
+where a.record_time >= to_date('$where.beginTime$','yyyy-MM-dd hh24:mi:ss') and a.record_time <= to_date('$where.endTime$','yyyy-MM-dd hh24:mi:ss')
+and a.delete_flag = 0 and a.state_flag = 0) x where x.检测数量 <> 0
+) Y 
+      ]]>
+     </select>
+     <select id="GetFirstFqfByclass" parameterClass="map" resultClass="Row">
+       <![CDATA[         SELECT Y.*,case when y.压杂物 = 0 then '0%' else Round(y.压杂物/y.检测数量*100,2)||'%' end 压杂物lv
+,case when (y.胎侧缺胶+y.胎冠缺胶+y.子口缺胶+y.胎肩缺胶) = 0 then '0%' else Round((y.胎侧缺胶+y.胎冠缺胶+y.子口缺胶+y.胎肩缺胶)/y.检测数量*100,2)||'%' end 缺胶lv
+,case when y.子口气泡 = 0 then '0%' else Round(y.子口气泡/y.检测数量*100,2)||'%' end 子口气泡lv
+,case when y.胎冠缺胶 = 0 then '0%' else Round(y.胎冠缺胶/y.检测数量*100,2)||'%' end 胎冠缺胶lv
+,case when y.子口缺胶 = 0 then '0%' else Round(y.子口缺胶/y.检测数量*100,2)||'%' end 子口缺胶lv
+,case when y.胎侧缺胶 = 0 then '0%' else Round(y.胎侧缺胶/y.检测数量*100,2)||'%' end 胎侧缺胶lv
+,case when y.胎侧气泡 = 0 then '0%' else Round(y.胎侧气泡/y.检测数量*100,2)||'%' end 胎侧气泡lv
+,case when y.胎肩缺胶 = 0 then '0%' else Round(y.胎肩缺胶/y.检测数量*100,2)||'%' end 胎肩缺胶lv
+ FROM (
+       select x.* ,(x.MES返修数+x.降级胎数) 返修总数,Round(x.合格数量/x.检测数量*100,2)||'%' alv, allbingci- 胎侧缺胶- 胎冠缺胶- 子口缺胶- 压杂物- 子口气泡- 胎侧气泡 - 胎肩缺胶- 子口大边- 模型污垢模具脏 as 其它
+       from (
+select case c.shift_id when 1 then '早' when 2 then '中' else '晚' end shift_name,count(distinct c.tyreid) 检测数量,count(distinct d.tyreid) 合格数量,count(distinct e.tyreid) MES返修数,count(distinct ee.tyreid) 降级胎数,
+count(distinct f.tyreid) 胎侧缺胶,count(distinct f2.tyreid) 胎冠缺胶,count(distinct f3.tyreid) 子口缺胶,
+count(distinct f4.tyreid) 压杂物,count(distinct f5.tyreid) 子口气泡,count(distinct f6.tyreid) 胎侧气泡
+,count(distinct f7.tyreid) 胎肩缺胶,count(distinct f8.tyreid) 子口大边,count(distinct f9.tyreid) as 压杂物隔离剂
+,count(distinct f10.tyreid) 压杂物胶边,count(distinct f11.tyreid) 压杂物油泥,count(distinct f12.tyreid) 压杂物固体杂物
+,count(distinct f13.tyreid) 压杂物其他,count(distinct f14.tyreid) 模型污垢模具脏
+,count(distinct f16.tyreid) allbingci
+  from  fqf_fcheck_info a
+left join fqf_fcheck_info c on c.objid = a.objid 
+left join fqf_fcheck_info d on d.objid = a.objid and (d.gradeid = 1 or d.gradeid = 0)
+left join fqf_fcheck_info e on e.objid = a.objid and e.gradeid = 5
+left join fqf_fcheck_info ee on ee.objid = a.objid and (ee.gradeid = 2 or ee.gradeid = 3 or ee.gradeid = 4)
+left join fqf_fcheck_info f on f.objid = a.objid and f.defectname like '%胎侧缺胶%' and f.gradeid = 5
+left join fqf_fcheck_info f2 on f2.objid = a.objid and f2.defectname like '%胎冠缺胶%' and f2.gradeid = 5
+left join fqf_fcheck_info f3 on f3.objid = a.objid and f3.defectname like '%子口缺胶%' and f3.gradeid = 5
+left join fqf_fcheck_info f4 on f4.objid = a.objid and f4.defectname like '%压杂物%' and f4.gradeid = 5
+left join fqf_fcheck_info f5 on f5.objid = a.objid and f5.defectname like '%子口气泡%' and f5.gradeid = 5
+left join fqf_fcheck_info f6 on f6.objid = a.objid and f6.defectname like '%胎侧气泡%' and f6.gradeid = 5
+left join fqf_fcheck_info f7 on f7.objid = a.objid and f7.defectname like '%胎肩缺胶%' and f7.gradeid = 5
+left join fqf_fcheck_info f8 on f8.objid = a.objid and f8.defectname like '%子口大边%' and f8.gradeid = 5
+left join fqf_fcheck_info f9 on f9.objid = a.objid and f9.defectname like '%压杂物（隔离剂）%' and f9.gradeid = 5
+left join fqf_fcheck_info f10 on f10.objid = a.objid and f10.defectname like '%压杂物（胶边）%' and f10.gradeid = 5
+left join fqf_fcheck_info f11 on f11.objid = a.objid and f11.defectname like '%压杂物（油泥）%' and f11.gradeid = 5
+left join fqf_fcheck_info f12 on f12.objid = a.objid and f12.defectname like '%压杂物（固体杂物）%' and f12.gradeid = 5
+left join fqf_fcheck_info f13 on f13.objid = a.objid and f13.defectname like '%压杂物（其他）%' and f13.gradeid = 5
+left join fqf_fcheck_info f14 on f14.objid = a.objid and f14.defectname like '%模型污垢（模具脏）%' and f14.gradeid = 5
+left join fqf_fcheck_info f16 on f16.objid = a.objid and f16.defectname is not null and f16.gradeid = 5
+where a.record_time >= to_date('$where.beginTime$','yyyy-MM-dd hh24:mi:ss') and a.record_time <= to_date('$where.endTime$','yyyy-MM-dd hh24:mi:ss')
+and a.delete_flag = 0 and a.state_flag = 0 and c.shift_id is not null group by c.shift_id) x where x.检测数量 <> 0
+) Y 
+      ]]>
+     </select>
+     <select id="GetFirstFqfByday" parameterClass="map" resultClass="Row">
+       <![CDATA[   SELECT Y.*,case when y.压杂物 = 0 then '0%' else Round(y.压杂物/y.检测数量*100,2)||'%' end 压杂物lv
+,case when (y.胎侧缺胶+y.胎冠缺胶+y.子口缺胶+y.胎肩缺胶) = 0 then '0%' else Round((y.胎侧缺胶+y.胎冠缺胶+y.子口缺胶+y.胎肩缺胶)/y.检测数量*100,2)||'%' end 缺胶lv
+,case when y.子口气泡 = 0 then '0%' else Round(y.子口气泡/y.检测数量*100,2)||'%' end 子口气泡lv
+,case when y.胎冠缺胶 = 0 then '0%' else Round(y.胎冠缺胶/y.检测数量*100,2)||'%' end 胎冠缺胶lv
+,case when y.子口缺胶 = 0 then '0%' else Round(y.子口缺胶/y.检测数量*100,2)||'%' end 子口缺胶lv
+,case when y.胎侧缺胶 = 0 then '0%' else Round(y.胎侧缺胶/y.检测数量*100,2)||'%' end 胎侧缺胶lv
+,case when y.胎侧气泡 = 0 then '0%' else Round(y.胎侧气泡/y.检测数量*100,2)||'%' end 胎侧气泡lv
+,case when y.胎肩缺胶 = 0 then '0%' else Round(y.胎肩缺胶/y.检测数量*100,2)||'%' end 胎肩缺胶lv
+ FROM (
+       select x.* ,(x.MES返修数+x.降级胎数) 返修总数,Round(x.合格数量/x.检测数量*100,2)||'%' alv, allbingci- 胎侧缺胶- 胎冠缺胶- 子口缺胶- 压杂物- 子口气泡- 胎侧气泡 - 胎肩缺胶- 子口大边- 模型污垢模具脏 as 其它
+       from (
+select to_date(to_nchar(c.record_time,'yyyy-MM-dd'),'yyyy-MM-dd') day,count(distinct c.tyreid) 检测数量,count(distinct d.tyreid) 合格数量,count(distinct e.tyreid) MES返修数,count(distinct ee.tyreid) 降级胎数,
+count(distinct f.tyreid) 胎侧缺胶,count(distinct f2.tyreid) 胎冠缺胶,count(distinct f3.tyreid) 子口缺胶,
+count(distinct f4.tyreid) 压杂物,count(distinct f5.tyreid) 子口气泡,count(distinct f6.tyreid) 胎侧气泡
+,count(distinct f7.tyreid) 胎肩缺胶,count(distinct f8.tyreid) 子口大边,count(distinct f9.tyreid) as 压杂物隔离剂
+,count(distinct f10.tyreid) 压杂物胶边,count(distinct f11.tyreid) 压杂物油泥,count(distinct f12.tyreid) 压杂物固体杂物
+,count(distinct f13.tyreid) 压杂物其他,count(distinct f14.tyreid) 模型污垢模具脏
+,count(distinct f16.tyreid) allbingci
+  from  fqf_fcheck_info a
+left join fqf_fcheck_info c on c.objid = a.objid 
+left join fqf_fcheck_info d on d.objid = a.objid and (d.gradeid = 1 or d.gradeid = 0)
+left join fqf_fcheck_info e on e.objid = a.objid and e.gradeid = 5
+left join fqf_fcheck_info ee on ee.objid = a.objid and (ee.gradeid = 2 or ee.gradeid = 3 or ee.gradeid = 4)
+left join fqf_fcheck_info f on f.objid = a.objid and f.defectname like '%胎侧缺胶%' and f.gradeid = 5
+left join fqf_fcheck_info f2 on f2.objid = a.objid and f2.defectname like '%胎冠缺胶%' and f2.gradeid = 5
+left join fqf_fcheck_info f3 on f3.objid = a.objid and f3.defectname like '%子口缺胶%' and f3.gradeid = 5
+left join fqf_fcheck_info f4 on f4.objid = a.objid and f4.defectname like '%压杂物%' and f4.gradeid = 5
+left join fqf_fcheck_info f5 on f5.objid = a.objid and f5.defectname like '%子口气泡%' and f5.gradeid = 5
+left join fqf_fcheck_info f6 on f6.objid = a.objid and f6.defectname like '%胎侧气泡%' and f6.gradeid = 5
+left join fqf_fcheck_info f7 on f7.objid = a.objid and f7.defectname like '%胎肩缺胶%' and f7.gradeid = 5
+left join fqf_fcheck_info f8 on f8.objid = a.objid and f8.defectname like '%子口大边%' and f8.gradeid = 5
+left join fqf_fcheck_info f9 on f9.objid = a.objid and f9.defectname like '%压杂物（隔离剂）%' and f9.gradeid = 5
+left join fqf_fcheck_info f10 on f10.objid = a.objid and f10.defectname like '%压杂物（胶边）%' and f10.gradeid = 5
+left join fqf_fcheck_info f11 on f11.objid = a.objid and f11.defectname like '%压杂物（油泥）%' and f11.gradeid = 5
+left join fqf_fcheck_info f12 on f12.objid = a.objid and f12.defectname like '%压杂物（固体杂物）%' and f12.gradeid = 5
+left join fqf_fcheck_info f13 on f13.objid = a.objid and f13.defectname like '%压杂物（其他）%' and f13.gradeid = 5
+left join fqf_fcheck_info f14 on f14.objid = a.objid and f14.defectname like '%模型污垢（模具脏）%' and f14.gradeid = 5
+left join fqf_fcheck_info f16 on f16.objid = a.objid and f16.defectname is not null and f16.gradeid = 5
+where a.record_time >= to_date('$where.beginTime$','yyyy-MM-dd hh24:mi:ss') and a.record_time <= to_date('$where.endTime$','yyyy-MM-dd hh24:mi:ss')
+and a.delete_flag = 0 and a.state_flag = 0 group by  to_date(to_nchar(c.record_time,'yyyy-MM-dd'),'yyyy-MM-dd')) x where x.检测数量 <> 0
+) Y 
+      ]]>
+     </select>
+     <select id="GetFirstFqfBymater" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        SELECT Y.*,case when y.压杂物 = 0 then '0%' else Round(y.压杂物/y.检测数量*100,2)||'%' end 压杂物lv
+,case when (y.胎侧缺胶+y.胎冠缺胶+y.子口缺胶+y.胎肩缺胶) = 0 then '0%' else Round((y.胎侧缺胶+y.胎冠缺胶+y.子口缺胶+y.胎肩缺胶)/y.检测数量*100,2)||'%' end 缺胶lv
+,case when y.子口气泡 = 0 then '0%' else Round(y.子口气泡/y.检测数量*100,2)||'%' end 子口气泡lv
+,case when y.胎冠缺胶 = 0 then '0%' else Round(y.胎冠缺胶/y.检测数量*100,2)||'%' end 胎冠缺胶lv
+,case when y.子口缺胶 = 0 then '0%' else Round(y.子口缺胶/y.检测数量*100,2)||'%' end 子口缺胶lv
+,case when y.胎侧缺胶 = 0 then '0%' else Round(y.胎侧缺胶/y.检测数量*100,2)||'%' end 胎侧缺胶lv
+,case when y.胎侧气泡 = 0 then '0%' else Round(y.胎侧气泡/y.检测数量*100,2)||'%' end 胎侧气泡lv
+,case when y.胎肩缺胶 = 0 then '0%' else Round(y.胎肩缺胶/y.检测数量*100,2)||'%' end 胎肩缺胶lv
+ FROM (
+       select x.* ,(x.MES返修数+x.降级胎数) 返修总数,Round(x.合格数量/x.检测数量*100,2)||'%' alv, allbingci- 胎侧缺胶- 胎冠缺胶- 子口缺胶- 压杂物- 子口气泡- 胎侧气泡 - 胎肩缺胶- 子口大边- 模型污垢模具脏 as 其它
+       from (
+select b.sap_code,b.material_name,count(distinct c.tyreid) 检测数量,count(distinct d.tyreid) 合格数量,count(distinct e.tyreid) MES返修数,count(distinct ee.tyreid) 降级胎数,
+count(distinct f.tyreid) 胎侧缺胶,count(distinct f2.tyreid) 胎冠缺胶,count(distinct f3.tyreid) 子口缺胶,
+count(distinct f4.tyreid) 压杂物,count(distinct f5.tyreid) 子口气泡,count(distinct f6.tyreid) 胎侧气泡
+,count(distinct f7.tyreid) 胎肩缺胶,count(distinct f8.tyreid) 子口大边,count(distinct f9.tyreid) as 压杂物隔离剂
+,count(distinct f10.tyreid) 压杂物胶边,count(distinct f11.tyreid) 压杂物油泥,count(distinct f12.tyreid) 压杂物固体杂物
+,count(distinct f13.tyreid) 压杂物其他,count(distinct f14.tyreid) 模型污垢模具脏
+,count(distinct f16.tyreid) allbingci
+  from  fqf_fcheck_info a
+inner join sbm_material b on b.objid = a.materialid
+left join fqf_fcheck_info c on c.objid = a.objid 
+left join fqf_fcheck_info d on d.objid = a.objid and (d.gradeid = 1 or d.gradeid = 0)
+left join fqf_fcheck_info e on e.objid = a.objid and e.gradeid = 5
+left join fqf_fcheck_info ee on ee.objid = a.objid and (ee.gradeid = 2 or ee.gradeid = 3 or ee.gradeid = 4)
+left join fqf_fcheck_info f on f.objid = a.objid and f.defectname like '%胎侧缺胶%' and f.gradeid = 5
+left join fqf_fcheck_info f2 on f2.objid = a.objid and f2.defectname like '%胎冠缺胶%' and f2.gradeid = 5
+left join fqf_fcheck_info f3 on f3.objid = a.objid and f3.defectname like '%子口缺胶%' and f3.gradeid = 5
+left join fqf_fcheck_info f4 on f4.objid = a.objid and f4.defectname like '%压杂物%' and f4.gradeid = 5
+left join fqf_fcheck_info f5 on f5.objid = a.objid and f5.defectname like '%子口气泡%' and f5.gradeid = 5
+left join fqf_fcheck_info f6 on f6.objid = a.objid and f6.defectname like '%胎侧气泡%' and f6.gradeid = 5
+left join fqf_fcheck_info f7 on f7.objid = a.objid and f7.defectname like '%胎肩缺胶%' and f7.gradeid = 5
+left join fqf_fcheck_info f8 on f8.objid = a.objid and f8.defectname like '%子口大边%' and f8.gradeid = 5
+left join fqf_fcheck_info f9 on f9.objid = a.objid and f9.defectname like '%压杂物（隔离剂）%' and f9.gradeid = 5
+left join fqf_fcheck_info f10 on f10.objid = a.objid and f10.defectname like '%压杂物（胶边）%' and f10.gradeid = 5
+left join fqf_fcheck_info f11 on f11.objid = a.objid and f11.defectname like '%压杂物（油泥）%' and f11.gradeid = 5
+left join fqf_fcheck_info f12 on f12.objid = a.objid and f12.defectname like '%压杂物（固体杂物）%' and f12.gradeid = 5
+left join fqf_fcheck_info f13 on f13.objid = a.objid and f13.defectname like '%压杂物（其他）%' and f13.gradeid = 5
+left join fqf_fcheck_info f14 on f14.objid = a.objid and f14.defectname like '%模型污垢（模具脏）%' and f14.gradeid = 5
+left join fqf_fcheck_info f16 on f16.objid = a.objid and f16.defectname is not null and f16.gradeid = 5
+where a.record_time >= to_date('$where.beginTime$','yyyy-MM-dd hh24:mi:ss') and a.record_time <= to_date('$where.endTime$','yyyy-MM-dd hh24:mi:ss')
+      ]]>
+         <isNotNull property="where.Mater" prepend="AND">
+           <![CDATA[ b.material_name like '%' || #where.Mater# || '%' ]]>
+         </isNotNull>
+           <![CDATA[ and a.delete_flag = 0  and a.state_flag = 0 group by  b.sap_code,b.material_name ) x where x.检测数量 <> 0 and allbingci <> 0) Y]]>
+     </select>
+     <update id="UpdateYLFX" parameterClass="map">
+       <![CDATA[ 
+update bpm_checkbarcode set flag = 0 where barcode in ($BARCODE$)
+      ]]>
+     </update>
+
+     <update id="UpdateWmsLockPLA" parameterClass="map">
+       <![CDATA[ 
+update cpp_curing_production set mark_flag = 0 where tyre_no in ($BARCODE$)
+      ]]>
+     </update>
+     <update id="UpdateWmsLockPLB" parameterClass="map">
+       <![CDATA[ 
+update wms_upload_record set returnstate = null,upload_flag = 0  where tyre_no in ($BARCODE$)
+      ]]>
+     </update>
+
+
+     <update id="UpdateFqfCppFX" parameterClass="map">
+       <![CDATA[ 
+        update fqf_fcheck_info set remark = '硫化返修' where tyreid = #TyreNo#
+      ]]>
+     </update>
+  </statements>
+</sqlMap>

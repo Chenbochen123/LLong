@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="EQUIP_ID" Value="机台名称"></Caption>
+    <Caption Name="EQUIP_NAME" Value="机台名称"></Caption>
+    <Caption Name="LRFLAG" Value="左右模"></Caption>
+    <Caption Name="YEARWEEK" Value="年周号"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="操作人"></Caption>
+    <Caption Name="RECORD_TIME" Value="操作时间"></Caption>
+    <Caption Name="CONFIRM_USER_NAME" Value="确认人"></Caption>
+    <Caption Name="CONFIRM_TIME" Value="确认时间"></Caption>
+    <Caption Name="FLAG" Value="状态"></Caption>
+    <Caption Name="TYRE_NO" Value="硫化号"></Caption>
+    <Caption Name="CPP_TIMENEW" Value="硫化开始时间"></Caption>
+    <Caption Name="END_TIME" Value="硫化结束时间"></Caption>
+    <Caption Name="CPP_USER" Value="硫化主机"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="规格"></Caption>
+  </Captions>
+  <WebPage Title="年周号信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Curing/McUI/@McUI/CrudCppCuringYearWeekInfo.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="CIM_YEAR_WEEK_INFO">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_CIM_YEAR_WEEK_INFO"></SeqField>
+    </SeqFields>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="EQUIP_ID" Type="SearchBox" Nullable="true" IsShow="true"></ParamField>
+        <ParamField FieldName="BeginTime" Type="DateTimeBox" IsShow="false"></ParamField>
+        <ParamField FieldName="EndTime" Type="DateTimeBox" IsShow="false"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid>
+      <GridColumns>
+        <GridColumn ColumnName="EQUIP_NAME"></GridColumn>
+        <GridColumn ColumnName="LRFLAG"></GridColumn>
+        <GridColumn ColumnName="YEARWEEK"></GridColumn>
+        <GridColumn ColumnName="TYRE_NO"></GridColumn>
+        <GridColumn ColumnName="CPP_USER"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME"></GridColumn>
+        <GridColumn ColumnName="CPP_TIMENEW" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="END_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME"></GridColumn>
+        <GridColumn ColumnName="CONFIRM_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="CONFIRM_USER_NAME"></GridColumn>
+        <GridColumn ColumnName="FLAG"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

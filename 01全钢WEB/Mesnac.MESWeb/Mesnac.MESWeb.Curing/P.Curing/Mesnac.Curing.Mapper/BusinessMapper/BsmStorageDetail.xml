@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.BsmStorageDetail"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BSM_STORAGE_DETAIL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.StorageMainId" prepend="AND">
+          <![CDATA[STORAGE_MAIN_ID = #where.StorageMainId#]]>
+        </isNotNull>
+        <isNotNull property="where.StorageToolingId" prepend="AND">
+          <![CDATA[STORAGE_TOOLING_ID = #where.StorageToolingId#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreId" prepend="AND">
+          <![CDATA[GREEN_TYRE_ID = #where.GreenTyreId#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.ScanTime" prepend="AND">
+          <![CDATA[SCAN_TIME = #where.ScanTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ScannerId" prepend="AND">
+          <![CDATA[SCANNER_ID = #where.ScannerId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="ReturnStorage" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT N.GREEN_TYRE_NO,N1.TOOLING_BARCODE,N9.MATERIAL_NAME,N6.STORE_NAME AS CURING_STORE_NAME,
+           N7.STORE_PLACE_NAME AS CURING_STORE_PLACE_NAME ,N2.STORE_NAME AS MOLDING_STORE_NAME ,
+           N3.STORE_PLACE_NAME AS MOLDING_STORE_PLACE_NAME , N1.OPER_TIME ,N8.USER_NAME 
+                FROM CSM_RETURN_STORE_DETAIL N
+                LEFT JOIN CSM_RETURN_STORE_TOOLING N1 ON N1.OBJID = N.RETURN_TOOLING_ID
+                LEFT JOIN BSM_STORE N2 ON N2.OBJID= N1.MOLDING_STORE_ID 
+                LEFT JOIN BSM_STORE_PLACE N3 ON N3.OBJID=N1.MOLDING_STORE_PLACE_ID
+                LEFT JOIN CSM_STORE N6 ON N6.OBJID =n1.curing_store_id 
+                LEFT JOIN CSM_STORE_PLACE N7 ON N7.OBJID = n1.curing_store_place_id 
+                LEFT JOIN SSB_USER N8 ON N8.OBJID=N1.OPER_ID 
+                LEFT JOIN SBM_MATERIAL N9 ON N9.OBJID=N1.MATERIAL_ID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[N1.OPER_TIME >= #where.BeginTime# ]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[N1.OPER_TIME <= #where.EndTime# ]]>
+         </isNotNull>
+         <isNotNull property="where.UserName" prepend="AND">
+           <![CDATA[N8.USER_NAME = #where.UserName#]]>
+         </isNotNull>
+         <isNotNull property="where.GREEN_TYRE_NO" prepend="AND">
+           <![CDATA[N.GREEN_TYRE_NO=#where.GREEN_TYRE_NO#]]>
+         </isNotNull>
+         <isNotNull property="where.TOOLING_BARCODE" prepend="AND">
+           <![CDATA[ N1.TOOLING_BARCODE = #where.TOOLING_BARCODE#]]>
+         </isNotNull>
+         <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+           <![CDATA[N9.MATERIAL_NAME like '%' || #where.MaterialName# || '%']]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetDegradeWeekInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select rownum,x.* from (select a.record_time,C.EQUIP_NAME,A.tyre_no,CASE B.EQUIP_POSITION WHEN 1 THEN '左' WHEN 2 THEN '右' ELSE '' END EQUIP_POSITION,A.DEGRADE_REASON,D.USER_NAME from CPP_CURING_DEGRADE a
+LEFT JOIN CPP_CURING_PRODUCTION B ON B.TYRE_NO = A.TYRE_NO
+LEFT JOIN SBE_EQUIP C ON C.OBJID = A.EQUIP_ID
+LEFT JOIN SSB_USER D ON D.OBJID = A.RECORD_USER_ID
+where a.record_time>=#where.begintime# and a.record_time<=#where.endtime# )x  ORDER BY RECORD_TIME  desc
+       ]]>
+     </select>
+
+     <select id="GetDegradeMonthNum" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select count(tyre_no) NUM,B.USER_NAME from CPP_CURING_DEGRADE a
+left join SSB_USER B ON B.OBJID = A.RECORD_USER_ID
+where a.record_time>=#where.begintime# and a.record_time<=#where.endtime#
+group by   USER_NAME
+       ]]>
+     </select>
+     
+     <select id="GetAlarmNumWeekInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+ SELECT ROWNUM,X.* FROM (SELECT B.EQUIP_NAME,COUNT(1) NUM,C.USER_NAME from CRT_CURING_ALARM_RECORD A 
+LEFT JOIN SBE_EQUIP B ON B.OBJID = A.EQUIP_ID
+LEFT JOIN SSB_USER C ON C.OBJID = A.RECORD_USER_ID
+where a.record_time>=#where.begintime# and a.record_time<=#where.endtime#
+AND A.ALARM_REASON=#where.ALARM_REASON_id#
+
+GROUP BY B.EQUIP_NAME,C.USER_NAME ORDER BY COUNT(1) desc)X WHERE ROWNUM < 11
+       ]]>
+     </select>
+
+     <select id="GetAlarmNumMonthNum" parameterClass="map" resultClass="Row">
+       <![CDATA[
+  select * from (SELECT B.EQUIP_NAME,COUNT(a.objid) NUM from CRT_CURING_ALARM_RECORD A 
+ LEFT JOIN SBE_EQUIP B ON B.OBJID = A.EQUIP_ID
+where a.record_time>=#where.begintime# and a.record_time<=#where.endtime#
+
+ GROUP BY B.EQUIP_NAME ORDER BY COUNT(a.objid) desc) where rownum <21
+       ]]>
+     </select>
+
+      <select id="GetMouldInStore" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select '甲' class,'班次产量' type,count( *) as euipnum,sum(low) as low,sum(mid) as mid,sum(high) as high from sbe_curing_screen where class=1 and record_time>=#where.begintime# and record_time<=#where.endtime#
+union all 
+select '甲' class,'机台占比' type,count(*) as euipnum,round(sum(low)/count(*),2) as low,round(sum(mid)/count(*),2) as mid,round(sum(high)/count(*),2) as high from sbe_curing_screen where class=1 and record_time>=#where.begintime# and record_time<=#where.endtime#
+union all 
+select '乙' class,'班次产量' type,count( *) as euipnum,sum(low) as low,sum(mid) as mid,sum(high) as high from sbe_curing_screen where class=2 and record_time>=#where.begintime# and record_time<=#where.endtime#
+union all 
+select '乙' class,'机台占比' type,count(*) as euipnum,round(sum(low)/count(*),2) as low,round(sum(mid)/count(*),2) as mid,round(sum(high)/count(*),2) from sbe_curing_screen where class=2 and record_time>=#where.begintime# and record_time<=#where.endtime#
+union all 
+select '丙' class,'班次产量' type,count( *) as euipnum,sum(low) as low,sum(mid) as mid,sum(high) as high from sbe_curing_screen where class=3 and record_time>=#where.begintime# and record_time<=#where.endtime#
+union all 
+select '丙' class,'机台占比' type,count(*) as euipnum,round(sum(low)/count(*),2) as low,round(sum(mid)/count(*),2) as mid,round(sum(high)/count(*),2) from sbe_curing_screen where class=3 and record_time>=#where.begintime# and record_time<=#where.endtime#
+
+       ]]>
+     </select>
+
+     <select id="GetMouldInStoreWeek" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select ROUND(a.lowmid,2) as week,ROUND(b.lowmid,2) as lastweek,ROUND(a.lowmid/b.lowmid,2) HUANBI from
+(
+select 1 as flag, '甲' class,count( *) as euipnum,sum(low)+sum(mid) as lowmid from sbe_curing_screen where class=1  and record_time>=#where.begintime1# and record_time<=#where.endtime1#
+union all 
+select 2 as flag,'甲' class,count(*) as euipnum,(sum(low)+sum(mid))/count(*) as lowmid from sbe_curing_screen where class=1  and record_time>=#where.begintime1# and record_time<=#where.endtime1#
+union all 
+select 3 as flag,'乙' class,count( *) as euipnum,sum(low)+sum(mid) as lowmid from sbe_curing_screen where class=2 and record_time>=#where.begintime1# and record_time<=#where.endtime1#
+union all 
+select 4 as flag,'乙' class,count(*) as euipnum,(sum(low)+sum(mid))/count(*) as lowmidh from sbe_curing_screen where class=2 and record_time>=#where.begintime1# and record_time<=#where.endtime1#
+union all 
+select 5 as flag,'丙' class,count( *) as euipnum,sum(low)+sum(mid) as lowmid from sbe_curing_screen where class=3 and record_time>=#where.begintime1# and record_time<=#where.endtime1#
+union all 
+select 6 as flag,'丙' class,count(*) as euipnum,(sum(low)+sum(mid))/count(*) as lowmid from sbe_curing_screen where class=3 and record_time>=#where.begintime1# and record_time<=#where.endtime1#)
+a
+join 
+(select 1 as flag, '甲' class,count( *) as euipnum,sum(low)+sum(mid) as lowmid from sbe_curing_screen where class=1 and record_time>=#where.begintime2# and record_time<=#where.endtime2#
+union all 
+select 2 as flag,'甲' class,count(*) as euipnum,(sum(low)+sum(mid))/count(*) as lowmid from sbe_curing_screen where class=1 and record_time>=#where.begintime2# and record_time<=#where.endtime2#
+union all 
+select 3 as flag,'乙' class,count( *) as euipnum,sum(low)+sum(mid) as lowmid from sbe_curing_screen where class=2 and record_time>=#where.begintime2# and record_time<=#where.endtime2#
+union all 
+select 4 as flag,'乙' class,count(*) as euipnum,(sum(low)+sum(mid))/count(*) as lowmidh from sbe_curing_screen where class=2 and record_time>=#where.begintime2# and record_time<=#where.endtime2#
+union all 
+select 5 as flag,'丙' class,count( *) as euipnum,sum(low)+sum(mid) as lowmid from sbe_curing_screen where class=3 and record_time>=#where.begintime2# and record_time<=#where.endtime2#
+union all 
+select 6 as flag,'丙' class,count(*) as euipnum,(sum(low)+sum(mid))/count(*) as lowmid from sbe_curing_screen where class=3 and record_time>=#where.begintime2# and record_time<=#where.endtime2#)
+b
+on a.flag=b.flag
+
+       ]]>
+     </select>
+
+
+     <select id="GetMinUseTime" parameterClass="map" resultClass="Row">
+       <![CDATA[
+SELECT ROWNUM,X.* FROM (
+select B.EQUIP_NAME,A.USE_TIME from sbe_curing_screen A
+LEFT JOIN SBE_EQUIP B ON B.OBJID = A.EQUIP_ID
+WHERE a.record_time>=#where.begintime# and a.record_time<=#where.endtime# AND A.CLASS = #where.classid#
+ORDER BY A.USE_TIME )X WHERE ROWNUM <6
+       ]]>
+     </select>
+     <select id="GetMaxUseTime" parameterClass="map" resultClass="Row">
+       <![CDATA[
+SELECT ROWNUM,X.* FROM (
+select B.EQUIP_NAME,A.USE_TIME from sbe_curing_screen A
+LEFT JOIN SBE_EQUIP B ON B.OBJID = A.EQUIP_ID
+WHERE a.record_time>=#where.begintime# and a.record_time<=#where.endtime# AND A.CLASS = #where.classid#
+ORDER BY A.USE_TIME DESC )X WHERE ROWNUM <6
+       ]]>
+     </select>
+
+     <select id="Geteqiupid" parameterClass="map" resultClass="Row">
+       <![CDATA[
+SELECT objid from sbe_equip where equip_name = #where.equipname#
+       ]]>
+     </select>
+
+     <insert id="InsertCppOnErrorRecord" parameterClass="map" resultClass="Row">
+       <![CDATA[
+insert into cpp_onerrorrecord values(seq_cpp_onerrorrecord.nextval,#Equipname#,'','',#stoptime#,'',sysdate,#MaterName#,'','','')
+       ]]>
+     </insert>
+
+     <select id="GetOnErrorIsBar" parameterClass="map" resultClass="Row">
+       <![CDATA[select  config_value  from  ssb_config a where objid = 55 or objid = 56 order by objid
+       ]]>
+     </select>
+
+     <select id="GetCppOnErrorLastInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select * from (
+select  a.*  from cpp_curing_production a
+left join sbe_equip b on a.equip_id = b.objid
+where b.equip_name = #Equipname# and a.equip_position = 1 and a.end_time >sysdate - 1 and a.end_time is not null
+order by a.end_time desc) where rownum = 1
+union 
+select * from (
+select  a.*  from cpp_curing_production a
+left join sbe_equip b on a.equip_id = b.objid
+where b.equip_name = #Equipname#  and a.equip_position = 2 and a.end_time >sysdate - 1 and a.end_time is not null
+order by a.end_time desc) where rownum = 1
+       ]]>
+     </select>
+     <insert id="InsertCppOnErrorLastInfoL" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       insert into cpp_onerrorbarcode values(seq_cpp_onerrorbarcode.nextval,#Equipname#,'1',#beginbarL#,to_date(#timeL1#,'yyyy-MM-dd hh24:mi:ss'),#endbarL#,to_date(#timeL#,'yyyy-MM-dd hh24:mi:ss'),sysdate)
+       ]]>
+     </insert>
+     <insert id="InsertCppOnErrorLastInfoR" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       insert into cpp_onerrorbarcode values(seq_cpp_onerrorbarcode.nextval,#Equipname#,'2',#beginbarR#,to_date(#timeR1#,'yyyy-MM-dd hh24:mi:ss'),#endbarR#,to_date(#timeR#,'yyyy-MM-dd hh24:mi:ss'),sysdate)
+       ]]>
+     </insert>
+
+     <select id="GetOnErrorReason" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select  equip_stop_reason_name  from  sbe_equip_stop_reason where  delete_flag = 0 and equip_major_type_id = 51
+       ]]>
+     </select>
+
+     <select id="GetIsEquipStop" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select * from (select  stop_reason from cpp_onerrorrecord where equip_id = #equipname# order by record_time desc) where rownum = 1
+
+       ]]>
+     </select>
+     
+     <update id="UpdateCppErrorInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[update cpp_onerrorrecord set stop_reason = #reason#,record_userid = #userid# where objid = 
+(select * from (select  objid from cpp_onerrorrecord where equip_id = #equipname# order by record_time desc) where rownum = 1)
+
+       ]]>
+     </update>
+     
+        <select id="GetMoldShowInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+SELECT ROWNUM,XX.* FROM (select * from (
+select  type,tyreno,material_name,check_time,defectname,to_char(up_or_down) up_or_down,record_time MoldTime,equip_name
+        , MAX(DECODE(T.WORK_NAME,'成型主机',T.USER_NAME,NULL)) EMP1
+        , MAX(DECODE(T.WORK_NAME,'成型副机',T.USER_NAME,NULL)) EMP2
+        from (
+
+select 'X光次品' type,a.tyrdid tyreno,b.material_name,a.record_time check_time,d.defectname,c.up_or_down,
+e.record_time,g.equip_name, l.WORK_NAME,k.USER_NAME
+from  fqx_xcheck_info a
+left join fqx_xcheck_detail c on c.xcheck_id = a.objid
+left join fqd_defect_info d on d.objid = c.defectid  
+left join bpm_production e on e.green_tyre_no = a.tyrdid and e.delete_flag = 0
+left join bpp_plan_detail f on f.objid = e.plan_detail_id
+left join bpp_plan ff on ff.objid = e.plan_id
+left join sbm_material b on b.objid = a.materialid
+left join sbe_equip g on g.objid = ff.equip_id
+LEFT JOIN BPM_SHIFT_MASTER i ON e.SHIFT_MASTER_ID = i.OBJID 
+LEFT JOIN bpm_shift_detail j on j.master_id = i.objid
+LEFT JOIN SSB_USER k ON k.OBJID = j.WORKER_ID1
+LEFT JOIN SSB_WORK l ON l.OBJID = j.WORKER_ID8
+where a.record_time >sysdate - 16/24 and a.gradeid =2 and a.delete_flag = 0) t
+group  by  type,tyreno,material_name,check_time,defectname,up_or_down,record_time,equip_name
+
+union all
+
+select  type,tyre_id,material_name,check_time,'','',record_time,equip_name, MAX(DECODE(T.WORK_NAME,'成型主机',T.USER_NAME,NULL)) EMP1
+        , MAX(DECODE(T.WORK_NAME,'成型副机',T.USER_NAME,NULL)) EMP2
+         from  (
+select  '动平衡D品' type,a.tyre_id,e.material_name,a.record_time check_time,b.record_time,f.equip_name, l.WORK_NAME,k.USER_NAME
+  from fqb_balance_info a
+left join bpm_production b on b.green_tyre_no = a.tyre_id and b.delete_flag = 0
+left join bpp_plan c on c.objid = b.plan_id
+left join bpp_plan_detail d on d.objid = b.plan_detail_id
+left join sbm_material e on e.objid = a.material_id
+left join sbe_equip f on f.objid = c.equip_id
+LEFT JOIN BPM_SHIFT_MASTER i ON b.SHIFT_MASTER_ID = i.OBJID 
+LEFT JOIN bpm_shift_detail j on j.master_id = i.objid
+LEFT JOIN SSB_USER k ON k.OBJID = j.WORKER_ID1
+LEFT JOIN SSB_WORK l ON l.OBJID = j.WORKER_ID8
+where  a.record_time >sysdate - 16/24 and a.ufrank =4 and a.delete_flag = 0) t
+group by type,tyre_id,material_name,check_time,record_time,equip_name
+  
+union all
+
+select type,tyreno,material_name,checktime,'','',record_time,equip_name, MAX(DECODE(T.WORK_NAME,'成型主机',T.USER_NAME,NULL)) EMP1
+        , MAX(DECODE(T.WORK_NAME,'成型副机',T.USER_NAME,NULL)) EMP2
+        from (
+select  '均匀性D品' type,a.tyreno,e.material_name,a.checktime,b.record_time,f.equip_name, l.WORK_NAME,k.USER_NAME  from  sbe_uniformity a
+left join bpm_production b on b.green_tyre_no = a.tyreno and b.delete_flag = 0
+left join bpp_plan c on c.objid = b.plan_id
+left join bpp_plan_detail d on d.objid = b.plan_detail_id
+left join sbm_material e on e.objid = a.materialid
+left join sbe_equip f on f.objid = c.equip_id
+LEFT JOIN BPM_SHIFT_MASTER i ON b.SHIFT_MASTER_ID = i.OBJID 
+LEFT JOIN bpm_shift_detail j on j.master_id = i.objid
+LEFT JOIN SSB_USER k ON k.OBJID = j.WORKER_ID1
+LEFT JOIN SSB_WORK l ON l.OBJID = j.WORKER_ID8
+where  a.checktime >sysdate - 16/24 and a.UFMTOTALRANK =4 ) t
+group by type,tyreno,material_name,checktime,record_time,equip_name
+ )  order by equip_name,check_time) XX   ]]>
+     </select>
+
+     <select id="GetMinTimeAndShift" parameterClass="map" resultClass="Row">
+       <![CDATA[select min(begin_time) min_time,a.shift_date,case a.shift_id when 1 then '早' when 2 then '中' when 3 then '夜' end shiftname from cpp_curing_production a
+ left join ssb_user b on b.objid = a.worker_id
+ where shift_date = (
+select shift_date from (
+ select  *  from  cpp_curing_production where begin_time is not null and begin_time > sysdate - 0.1 order by begin_time) where rownum = 1)
+ and a.shift_id = (select shift_id from (
+ select  *  from  cpp_curing_production where begin_time is not null and begin_time > sysdate - 0.1 order by begin_time) where rownum = 1) 
+ group by a.shift_date,a.shift_id
+       ]]>
+     </select>
+     <select id="GetCuringAmount" parameterClass="map" resultClass="Row">
+       <![CDATA[ select y1.*,nvl(y2.defectnum,0) defectnum,case when nvl(y2.defectnum,0) =0 then 100 else round(xx/nvl(y2.defectnum,0),2) end hgl  from (
+select user_name,x1,x2,x3,x4,x5,x6,x7,x8,sum(x1+x2+x3+x4+x5+x6+x7+x8) xx from (
+ select   user_name,sum(x1) x1,sum(x2) x2,sum(x3) x3,sum(x4) x4,sum(x5) x5,sum(x6) x6,sum(x7) x7,sum(x8) x8  from  (
+ select b.user_name,sum(case when begin_time>=to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss') and begin_time<to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+1/24 then 1 else 0 end) x1,
+ sum(case when begin_time>=to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+1/24 and begin_time<to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+2/24 then 1 else 0 end) x2,
+ sum(case when begin_time>=to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+2/24 and begin_time<to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+3/24 then 1 else 0 end) x3,
+ sum(case when begin_time>=to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+3/24 and begin_time<to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+4/24 then 1 else 0 end) x4,
+ sum(case when begin_time>=to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+4/24 and begin_time<to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+5/24 then 1 else 0 end) x5,
+ sum(case when begin_time>=to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+5/24 and begin_time<to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+6/24 then 1 else 0 end) x6,
+ sum(case when begin_time>=to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+6/24 and begin_time<to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+7/24 then 1 else 0 end) x7,
+ sum(case when begin_time>=to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+7/24 and begin_time<to_date(#mintime#,'yyyy-MM-dd hh24:mi:ss')+8/24 then 1 else 0 end) x8
+  from cpp_curing_production a
+ left join ssb_user b on b.objid = a.worker_id
+ where shift_date = (
+select shift_date from (
+ select  *  from  cpp_curing_production where begin_time is not null and begin_time > sysdate - 0.1 order by begin_time) where rownum = 1)
+ and a.shift_id = (select shift_id from (
+ select  *  from  cpp_curing_production where begin_time is not null and begin_time > sysdate - 0.1 order by begin_time) where rownum = 1) 
+ group by b.user_name,begin_time
+ ) group by user_name ) group by user_name,x1,x2,x3,x4,x5,x6,x7,x8) y1
+ 
+ left join (
+ select  x3.user_name,count(x3.user_name) defectnum from  cpp_curing_degrade x1
+ inner join cpp_curing_production x2 on x1.tyre_no =x2.tyre_no and x2.delete_flag = 0 
+ left join ssb_user x3 on  x2.worker_id =  x3.objid
+ where x2.shift_date = (
+select shift_date from (
+ select  *  from  cpp_curing_production where begin_time is not null and begin_time > sysdate - 0.1 order by begin_time) where rownum = 1)
+ and x2.shift_id = (select shift_id from (
+ select  *  from  cpp_curing_production where begin_time is not null and begin_time > sysdate - 0.1 order by begin_time) where rownum = 1) 
+ and x1.degrade_id <> 5 and  x1.degrade_id >1
+ group by x3.user_name) y2 on y1.user_name = y2.user_name
+       ]]>
+     </select>
+     
+    <select id="GetMoldAmount" parameterClass="map" resultClass="Row">
+       <![CDATA[ select o1.*,round(o1.nownum/o1.plan_amount,2) LV from (
+select m1.*,m3.plan_date,case m3.shift_id when 1 then '早' when 2 then '中' when 3 then '夜' end shiftname,sum(X1+X2+X3+X4+X5+X6+X7+X8) nownum from (
+select equip_name,sap_code,plan_amount,plandetailid,mintime,X1,X2,X3,X4,X5,X6,X7,count(x9.objid) X8 from (
+select equip_name,sap_code,plan_amount,plandetailid,mintime,X1,X2,X3,X4,X5,X6,count(x8.objid) X7 from (
+select equip_name,sap_code,plan_amount,plandetailid,mintime,X1,X2,X3,X4,X5,count(x7.objid) X6 from (
+select equip_name,sap_code,plan_amount,plandetailid,mintime,X1,X2,X3,X4,count(x6.objid) X5 from (
+select equip_name,sap_code,plan_amount,plandetailid,mintime,X1,X2,X3,count(x5.objid) X4 from (
+select equip_name,sap_code,plan_amount,plandetailid,mintime,X1,X2,count(x4.objid) X3 from (
+select equip_name,sap_code,plan_amount,plandetailid,mintime,X1,count(x3.objid) X2 from (
+ select equip_name,sap_code,plan_amount,plandetailid,mintime,count(x2.objid) X1   from (
+select  e.equip_name,d.sap_code,a.plan_amount,a.objid plandetailid,f.mintime  from  bpp_plan_detail a
+inner join bpp_plan b on a.plan_id = b.objid 
+inner join sbm_material d on d.objid = a.material_id
+inner join sbe_equip e on e.objid = b.equip_id
+inner join (select n.plan_detail_id,min(n1.end_time) mintime from (
+select plan_detail_id from bpm_production where objid in (
+select maxobjid from (
+select equip_id,max(a.objid) maxobjid  from  bpm_production a
+left join bpp_plan b on b.objid = a.plan_id
+ where end_time is not null and end_time > sysdate - 0.5/24 and a.delete_flag = 0
+group by equip_id))group by plan_detail_id) n
+left join bpm_production n1 on n1.plan_detail_id = n.plan_detail_id
+group by n.plan_detail_id) f on f.plan_detail_id = a.objid
+where a.delete_flag = 0 ) x1
+left join bpm_production x2 on x2.plan_detail_id = x1.plandetailid and x2.end_time is not null and x2.delete_flag = 0 
+and x2.end_time >=x1.mintime and x2.end_time < x1.mintime+1/24 
+group by equip_name,sap_code,plan_amount,plandetailid,mintime) x11
+left join bpm_production x3 on x3.plan_detail_id = x11.plandetailid and x3.end_time is not null and x3.delete_flag = 0 
+and x3.end_time >=x11.mintime+1/24  and x3.end_time < x11.mintime+2/24 
+group by equip_name,sap_code,plan_amount,plandetailid,mintime,X1) x12
+left join bpm_production x4 on x4.plan_detail_id = x12.plandetailid and x4.end_time is not null and x4.delete_flag = 0 
+and x4.end_time >=x12.mintime+2/24  and x4.end_time < x12.mintime+3/24 
+group by equip_name,sap_code,plan_amount,plandetailid,mintime,X1,X2) x13
+left join bpm_production x5 on x5.plan_detail_id = x13.plandetailid and x5.end_time is not null and x5.delete_flag = 0 
+and x5.end_time >=x13.mintime+3/24  and x5.end_time < x13.mintime+4/24 
+group by equip_name,sap_code,plan_amount,plandetailid,mintime,X1,X2,X3) x14
+left join bpm_production x6 on x6.plan_detail_id = x14.plandetailid and x6.end_time is not null and x6.delete_flag = 0 
+and x6.end_time >=x14.mintime+4/24  and x6.end_time < x14.mintime+5/24 
+group by equip_name,sap_code,plan_amount,plandetailid,mintime,X1,X2,X3,X4) x15
+left join bpm_production x7 on x7.plan_detail_id = x15.plandetailid and x7.end_time is not null and x7.delete_flag = 0 
+and x7.end_time >=x15.mintime+5/24  and x7.end_time < x15.mintime+6/24 
+group by equip_name,sap_code,plan_amount,plandetailid,mintime,X1,X2,X3,X4,X5) x16
+left join bpm_production x8 on x8.plan_detail_id = x16.plandetailid and x8.end_time is not null and x8.delete_flag = 0 
+and x8.end_time >=x16.mintime+6/24  and x8.end_time < x16.mintime+7/24 
+group by equip_name,sap_code,plan_amount,plandetailid,mintime,X1,X2,X3,X4,X5,X6) x17
+left join bpm_production x9 on x9.plan_detail_id = x17.plandetailid and x9.end_time is not null and x9.delete_flag = 0 
+and x9.end_time >=x17.mintime+7/24  and x9.end_time < x17.mintime+8/24 
+group by equip_name,sap_code,plan_amount,plandetailid,mintime,X1,X2,X3,X4,X5,X6,X7
+) m1
+inner join bpp_plan_detail m2 on m2.objid = m1.plandetailid
+inner join bpp_plan m3 on m3.objid = m2.plan_id
+GROUP BY  equip_name,sap_code,m1.plan_amount,plandetailid,mintime,X1,X2,X3,X4,X5,X6,X7,X8,plan_date,shift_id
+) o1
+order by equip_name 
+       ]]>
+     </select>
+
+
+  </statements>
+</sqlMap>

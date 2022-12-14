@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EquipFactory>
+  <Equip name="" project="空项目" isEnableGroup="True" groupRange="2">    <!--每一排的群控程序的nodeDevice都不一样，需要从服务器考下来改-->
+    <Main>
+      <Brand value="OMRON" />
+      <Model value="FINS" />
+      <ReadHz value="3000" />
+      <UnitLen value="8" />
+      <Connection mode="GroupNet">
+        <IPList value="" />
+      </Connection>
+    </Main>
+    <Group>
+      <Group name="D1000" block="1000" start="0" len="9" access="ReadWrite" remark="阀门状态" isautoread="True">
+        <Data>
+          <Data name="阀门状态_NY1" runname="FM_NY" start="0" len="1" method="" max="" issave="False" subtractor="" remark="内压蒸汽进" />
+          <Data name="阀门状态_DQ1" runname="FM_DQ" start="1" len="1" method="" max="" issave="False" subtractor="" remark="氮气开" />
+          <Data name="阀门状态_DQHS1" runname="FM_DQHS" start="2" len="1" method="" max="" issave="False" subtractor="" remark="氮气回收开" />
+          <Data name="阀门状态_ZP1" runname="FM_ZP" start="3" len="1" method="" max="" issave="False" subtractor="" remark="主排开" />
+          <Data name="阀门状态_CZK1" runname="FM_CZK" start="4" len="1" method="" max="" issave="False" subtractor="" remark="抽真空开" />
+          <Data name="阀门状态_CKBY1" runname="FM_CKBY" start="5" len="1" method="" max="" issave="False" subtractor="" remark="出口保压开" />
+          <Data name="阀门状态_JKBY1" runname="FM_JKBY" start="6" len="1" method="" max="" issave="False" subtractor="" remark="进口保压开" />
+          <Data name="阀门状态_PN1" runname="FM_PN" start="7" len="1" method="" max="" issave="False" subtractor="" remark="排凝开" />
+        </Data>
+      </Group>
+      <Group name="D1550" block="1550" start="0" len="29" access="ReadWrite" remark="实时参数显示" isautoread="True">
+        <Data>
+          <Data name="SulfLastTimeHMS" runname="" start="0" len="1" method="除法(10)" max="" issave="False" subtractor="" remark="硫化总时间设定值" />
+          <Data name="SulfLastTime" runname="SulfLastTime" start="0" len="1" method="" max="" issave="False" subtractor="" remark="硫化总时间设定值" />
+          <Data name="DelaySulfTime" runname="DelaySulfTime" start="1" len="1" method="" max="" issave="False" subtractor="" remark="延时硫化时间" />
+          <Data name="DelaySulfTimeHMS" runname="" start="1" len="1" method="时间格式化()" max="" issave="False" subtractor="" remark="延时硫化时间" />
+          <Data name="LeftInnerTemp" runname="" start="2" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="左内温蒸汽温度" />
+          <Data name="ZRightModelTemp" runname="RightModelTemp" start="3" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="右模套蒸汽温度" />
+          <Data name="LeftUpHotExtent" runname="LeftUpHotExtent" start="4" len="1" method="" max="" issave="False" subtractor="" remark="热环开启度" />
+          <Data name="LeftCapsuleCount" runname="LeftCapsuleCount" start="5" len="1" method="" max="" issave="True" subtractor="" remark="左胶囊计数" />
+          <Data name="SulfState" runname="SulfState" start="6" len="1" method="" max="" issave="False" subtractor="" remark="硫化状态" />
+          <Data name="CurrentStep" runname="CurrentStep" start="7" len="1" method="" max="" issave="False" subtractor="" remark="当前步序号" />
+          <Data name="StepLastTime" runname="StepLastTime" start="8" len="1" method="" max="" issave="False" subtractor="" remark="步剩余时间" />
+          <Data name="ZRightInnerPress" runname="RightInnerPress" start="9" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="右内压压力" />
+          <Data name="ZRightInnerTemp" runname="RightInnerTemp" start="10" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="右内温蒸汽温度" />
+          <Data name="RightDownHotExtent" runname="RightDownHotExtent" start="11" len="1" method="" max="" issave="False" subtractor="" remark="热板开启度" />
+          <Data name="RightCapsuleCount" runname="RightCapsuleCount" start="12" len="1" method="" max="" issave="True" subtractor="" remark="右胶囊计数" />
+          <Data name="ZRightHotPlateTemp" runname="RightHotPlateTemp" start="14" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="下热板蒸汽温度" />
+          <Data name="ZLeftHotPlateTemp" runname="LeftHotPlateTemp" start="15" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="上热板蒸汽温度" />
+          <Data name="ZLeftModelTemp" runname="LeftModelTemp" start="16" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="左模套蒸汽温度" />
+          <Data name="ChengKQState" runname="ChengKQState" start="17" len="1" method="" max="" issave="True" subtractor="" remark="程控器状态" />
+          <Data name="SulfStopTime" runname="SulfStopTime" start="18" len="1" method="时间格式化()" max="" issave="True" subtractor="" remark="待机时间" />
+          <Data name="ZLeftInnerTemp" runname="LeftInnerTemp" start="19" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="左内温" />
+          <Data name="ZLeftInnerPress" runname="LeftInnerPress" start="20" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="左内压压力" />
+          <Data name="LeftMoldSetExtent" runname="LeftMoldSetExtent" start="21" len="1" method="" max="" issave="False" subtractor="" remark="左上环位置显示" />
+          <Data name="RightMoldSetExtent" runname="RightMoldSetExtent" start="22" len="1" method="" max="" issave="False" subtractor="" remark="右上环位置显示" />
+          <Data name="MouldSulfState" runname="MouldSulfState" start="23" len="1" method="" max="" issave="False" subtractor="" remark="模具与硫化状态显示" />
+          <Data name="RightSulfPlace" runname="RightSulfPlace" start="27" len="1" method="" max="" issave="False" subtractor="" remark="右硫化机位置显示" />
+          <Data name="CloseMouldPress" runname="CloseMouldPress" start="28" len="1" method="" max="" issave="False" subtractor="" remark="合模力显示" />
+        </Data>
+      </Group>
+      <Group name="D1710" block="1710" start="0" len="40" access="ReadWrite" remark="PLC时间" isautoread="False">
+        <Data>
+          <Data name="PCYear" runname="PCYear" start="0" len="1" method="" max="" issave="True" subtractor="" remark="时间年" />
+          <Data name="PCMonth" runname="PCMonth" start="1" len="1" method="" max="" issave="True" subtractor="" remark="时间月" />
+          <Data name="PCDATE" runname="PCDATE" start="2" len="1" method="" max="" issave="True" subtractor="" remark="时间日" />
+          <Data name="PCHour" runname="PCHour" start="3" len="1" method="" max="" issave="True" subtractor="" remark="时间时" />
+          <Data name="PCMinute" runname="PCMinute" start="4" len="1" method="" max="" issave="True" subtractor="" remark="时间分" />
+          <Data name="PCScend" runname="PCScend" start="5" len="1" method="" max="" issave="True" subtractor="" remark="时间秒" />
+          <Data name="EditTimeFlag" runname="EditTimeFlag" start="6" len="1" method="" max="" issave="True" subtractor="" remark="PLC 时间修改请求" />
+        </Data>
+      </Group>
+      <Group name="D1605" block="1605" start="0" len="40" access="ReadWrite" remark="阀门状态" isautoread="False">
+        <Data>
+          <Data name="ValveState1" runname="ValveState1" start="0" len="1" method="" max="" issave="True" subtractor="" remark="内压蒸汽进" />
+          <Data name="ValveState2" runname="ValveState2" start="1" len="1" method="" max="" issave="True" subtractor="" remark="氮气进" />
+          <Data name="ValveState3" runname="ValveState3" start="2" len="1" method="" max="" issave="True" subtractor="" remark="氮气回收" />
+          <Data name="ValveState4" runname="ValveState4" start="3" len="1" method="" max="" issave="True" subtractor="" remark="主排" />
+          <Data name="ValveState5" runname="ValveState5" start="4" len="1" method="" max="" issave="True" subtractor="" remark="抽真空" />
+          <Data name="ValveState6" runname="ValveState6" start="30" len="1" method="" max="" issave="True" subtractor="" remark="出口保压" />
+          <Data name="ValveState7" runname="ValveState7" start="31" len="1" method="" max="" issave="True" subtractor="" remark="进口保压" />
+          <Data name="ValveState8" runname="ValveState8" start="32" len="1" method="" max="" issave="True" subtractor="" remark="排凝" />
+          <Data name="ValveState9" runname="ValveState9" start="33" len="1" method="" max="" issave="True" subtractor="" remark="延时硫化" />
+        </Data>
+      </Group>
+      <Group name="D1639" block="1639" start="0" len="1" access="ReadWrite" remark="阀门状态实时显示" isautoread="False">
+        <Data>
+          <Data name="阀门状态_NY" runname="ValveStateNY" start="0" len="1" method="" max="" issave="False" subtractor="" remark="内压蒸汽进" />
+        </Data>
+      </Group>
+      <Group name="D4140" block="4140" start="0" len="40" access="ReadWrite" remark="阀门状态实时显示" isautoread="False">
+        <Data>
+          <Data name="LeftGreenCode" runname="LeftGreenCode" start="0" len="10" method="" max="" issave="False" subtractor="" remark="左跳马" />
+          <Data name="LeftBarCode" runname="LeftBarCode" start="10" len="10" method="" max="" issave="False" subtractor="" remark="左跳马" />
+          <Data name="RightGreenCode" runname="RightGreenCode" start="20" len="10" method="" max="" issave="False" subtractor="" remark="右跳马" />
+          <Data name="RightBarCode" runname="RightBarCode" start="30" len="10" method="" max="" issave="False" subtractor="" remark="右跳马" />
+        </Data>
+      </Group>
+      <Group name="D4180" block="4180" start="0" len="5" access="ReadWrite" remark="阀门状态实时显示" isautoread="True">
+        <Data>
+          <Data name="阀门状态_YSLH" runname="ValveStateYSLH" start="0" len="1" method="" max="" issave="False" subtractor="" remark="延时硫化灯" />
+          <Data name="ChooseMould" runname="ChooseMould" start="1" len="1" method="" max="" issave="False" subtractor="" remark="活络模选择" />
+          <Data name="ChooseCapSule" runname="ChooseCapSule" start="2" len="1" method="" max="" issave="False" subtractor="" remark="胶囊选择" />
+          <Data name="CuringAuto" runname="CuringAuto" start="3" len="1" method="" max="" issave="False" subtractor="" remark="是否自动生产" />
+          <Data name="MoldAction" runname="MoldAction" start="5" len="1" method="" max="" issave="False" subtractor="" remark="模具动作1.开始硫化 2.硫化结束" />
+        </Data>
+      </Group>
+      <Group name="D4195" block="4195" start="0" len="3" access="ReadWrite" remark="网络信号" isautoread="True">
+        <Data>
+          <Data name="NetSignal" runname="NetSignal" start="0" len="1" method="" max="" issave="False" subtractor="" remark="网络信号" />
+        </Data>
+      </Group>
+      <Group name="D4215" block="4215" start="0" len="3" access="ReadWrite" remark="模具计数" isautoread="True">
+        <Data>
+          <Data name="LeftMoldCount" runname="LeftMoldCount" start="0" len="1" method="" max="" issave="False" subtractor="" remark="左模具计数" />
+          <Data name="RightMoldCount" runname="RightMoldCount" start="1" len="1" method="" max="" issave="False" subtractor="" remark="右模具计数" />
+          <Data name="BeginCloseMold" runname="BeginCloseMold" start="2" len="1" method="" max="" issave="False" subtractor="" remark="合模信号" />
+        </Data>
+      </Group>
+      <Group name="D4208" block="4208" start="0" len="5" access="ReadWrite" remark="设备主动报警" isautoread="True">
+        <Data>
+          <Data name="DelayOpenAlarm" runname="DelayOpenAlarm" start="0" len="1" method="" max="" issave="False" subtractor="" remark="焖锅报警" />
+          <Data name="EquipStopReason" runname="EquipStopReason" start="4" len="1" method="" max="" issave="False" subtractor="" remark="报警原因" />
+        </Data>
+      </Group>
+      <Group name="D4000" block="4000" start="0" len="10" access="ReadWrite" remark="胎胚属性" isautoread="False">
+        <Data>
+          <Data name="TyreEnvir" runname="TyreEnvir" start="5" len="1" method="" max="" issave="False" subtractor="" remark="0:普通 1:环保" />
+          <Data name="UpColorFlag" runname="UpColorFlag" start="6" len="1" method="" max="" issave="False" subtractor="" remark="上色标的B5.B4.B3.B2" />
+          <Data name="UpDownColorFlag" runname="UpDownColorFlag" start="7" len="1" method="" max="" issave="False" subtractor="" remark="上色标的B1.空 下色标的B5.B4" />
+          <Data name="DownColorFlag" runname="DownColorFlag" start="8" len="1" method="" max="" issave="False" subtractor="" remark="下色标的B3.B2.B1 空" />
+        </Data>
+      </Group>
+      <Group name="D4010" block="4010" start="0" len="60" access="ReadWrite" remark="配方参数下传1" isautoread="False">
+        <Data>
+          <Data name="LeftMaterial" runname="LeftMaterial" start="0" len="20" method="" max="" issave="False" subtractor="" remark="左轮胎规格" />
+          <Data name="RightMaterial" runname="RightMaterial" start="20" len="20" method="" max="" issave="False" subtractor="" remark="右轮胎规格" />
+          <Data name="LeftErpNo" runname="LeftErpNo" start="40" len="10" method="" max="" issave="False" subtractor="" remark="左ERP品号" />
+          <Data name="RightErpNo" runname="RightErpNo" start="50" len="10" method="" max="" issave="False" subtractor="" remark="右ERP品号" />
+        </Data>
+      </Group>
+      <Group name="D4120" block="4120" start="0" len="40" access="ReadWrite" remark="胶囊规格" isautoread="False">
+        <Data>
+          <Data name="LeftCapsulf" runname="LeftCapsulf" start="0" len="10" method="" max="" issave="False" subtractor="" remark="左轮胎规格" />
+          <Data name="RightCapsulf" runname="RightCapsulf" start="10" len="10" method="" max="" issave="False" subtractor="" remark="右轮胎规格" />
+        </Data>
+      </Group>
+      <Group name="D4070" block="4070" start="0" len="20" access="ReadWrite" remark="配方参数下传1" isautoread="True">
+        <Data>
+          <Data name="CuringTime1" runname="CuringTime1" start="0" len="1" method="" max="" issave="False" subtractor="" remark="步序1时间设定" />
+          <Data name="CuringTime2" runname="CuringTime2" start="1" len="1" method="" max="" issave="False" subtractor="" remark="步序2时间设定" />
+          <Data name="CuringTime3" runname="CuringTime3" start="2" len="1" method="" max="" issave="False" subtractor="" remark="步序3时间设定" />
+          <Data name="CuringTime4" runname="CuringTime4" start="3" len="1" method="" max="" issave="False" subtractor="" remark="步序4时间设定" />
+          <Data name="CuringTime5" runname="CuringTime5" start="4" len="1" method="" max="" issave="False" subtractor="" remark="步序5时间设定" />
+          <Data name="CuringTime6" runname="CuringTime6" start="5" len="1" method="" max="" issave="False" subtractor="" remark="步序6时间设定" />
+          <Data name="CuringTime7" runname="CuringTime7" start="6" len="1" method="" max="" issave="False" subtractor="" remark="步序7时间设定" />
+          <Data name="CuringTime8" runname="CuringTime8" start="7" len="1" method="" max="" issave="False" subtractor="" remark="步序8时间设定" />
+          <Data name="CuringTime9" runname="CuringTime9" start="8" len="1" method="" max="" issave="False" subtractor="" remark="步序9时间设定" />
+          <Data name="CuringTime10" runname="CuringTime10" start="9" len="1" method="" max="" issave="False" subtractor="" remark="步序10时间设定" />
+          <Data name="CuringTime11" runname="CuringTime11" start="10" len="1" method="" max="" issave="False" subtractor="" remark="步序11时间设定" />
+          <Data name="CuringTime12" runname="CuringTime12" start="11" len="1" method="" max="" issave="False" subtractor="" remark="步序12时间设定" />
+          <Data name="CuringTime13" runname="CuringTime13" start="12" len="1" method="" max="" issave="False" subtractor="" remark="步序13时间设定" />
+          <Data name="CuringTime14" runname="CuringTime14" start="13" len="1" method="" max="" issave="False" subtractor="" remark="步序14时间设定" />
+          <Data name="CuringTime15" runname="CuringTime15" start="14" len="1" method="" max="" issave="False" subtractor="" remark="步序15时间设定" />
+          <Data name="CuringTime16" runname="CuringTime16" start="15" len="1" method="" max="" issave="False" subtractor="" remark="步序16时间设定" />
+          <Data name="CountTime" runname="CountTime" start="16" len="1" method="" max="" issave="False" subtractor="" remark="总时间" />
+          <Data name="CountTimeHMS" runname="CountTimeHMS" start="16" len="1" method="除法(10)" max="" issave="False" subtractor="" remark="总时间" />
+        </Data>
+      </Group>
+      <Group name="D4088" block="4088" start="0" len="10" access="ReadWrite" remark="配方参数下传2" isautoread="True">
+        <Data>
+          <Data name="MouldTempDiff" runname="MouldTempDiff" start="0" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="模温温差" />
+          <Data name="InnerTempDiff" runname="InnerTempDiff" start="1" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="内温温差" />
+          <Data name="PlateTempDiff" runname="PlateTempDiff" start="2" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="板温温差" />
+          <Data name="InnerPressDiff" runname="InnerPressDiff" start="3" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="内压压差" />
+          <Data name="MouldTempSet" runname="MouldTempSet" start="4" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="模温设定" />
+          <Data name="PlateTempSet" runname="PlateTempSet" start="5" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="板温设定" />
+          <Data name="NRevealSet" runname="NRevealSet" start="6" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="氮气泄露值设定" />
+          <Data name="InnerSteamTemp" runname="InnerSteamTemp" start="7" len="1" method="除法(10)" max="" issave="True" subtractor="" remark="内压蒸汽温度" />
+          <Data name="InnerSteamPress" runname="InnerSteamPress" start="8" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="内压蒸汽压力" />
+          <Data name="InnerNPress" runname="InnerNPress" start="9" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="内压氮气压力" />
+        </Data>
+      </Group>
+      <Group name="D4400" block="4400" start="0" len="31" access="ReadWrite" remark="配方参数下传3" isautoread="True">
+        <Data>
+          <Data name="LFFDesigenPress" runname="LFFDesigenPress" start="0" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="左首期一次定型压力（0-100次" />
+          <Data name="LFSDesigenPress" runname="LFSDesigenPress" start="1" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="左首期二次定型压力（0-100次" />
+          <Data name="LMFDesigenPress" runname="LMFDesigenPress" start="2" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="左中期一次定型压力（100-200次" />
+          <Data name="LMSDesigenPress" runname="LMSDesigenPress" start="3" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="左中期二次定型压力（100-200次" />
+          <Data name="LLFDesigenPress" runname="LLFDesigenPress" start="4" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="左末期一次定型压力（200次以上）" />
+          <Data name="LLSDesigenPress" runname="LLSDesigenPress" start="5" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="左末期二次定型压力（200次以上）" />
+          <Data name="RFFDesigenPress" runname="RFFDesigenPress" start="6" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="右首期一次定型压力（0-100次" />
+          <Data name="RFSDesigenPress" runname="RFSDesigenPress" start="7" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="右首期二次定型压力（0-100次" />
+          <Data name="RMFDesigenPress" runname="RMFDesigenPress" start="8" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="右中期一次定型压力（100-200次" />
+          <Data name="RMSDesigenPress" runname="RMSDesigenPress" start="9" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="右中期二次定型压力（100-200次" />
+          <Data name="RLFDesigenPress" runname="RLFDesigenPress" start="10" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="右末期一次定型压力（200次以上）" />
+          <Data name="RLSDesigenPress" runname="RLSDesigenPress" start="11" len="1" method="除法(100)" max="" issave="True" subtractor="" remark="右末期二次定型压力（200次以上）" />
+          <Data name="MCapsulfChanges" runname="MCapsulfChanges" start="12" len="1" method="" max="" issave="True" subtractor="" remark="中期胶囊压力切换次数" />
+          <Data name="LCapsulfChanges" runname="LCapsulfChanges" start="13" len="1" method="" max="" issave="True" subtractor="" remark="拉伸高度上限" />
+          <Data name="LUStretch" runname="LUStretch" start="14" len="1" method="" max="" issave="True" subtractor="" remark="左上环拉伸位" />
+          <Data name="LUBeginDesigen" runname="LUBeginDesigen" start="15" len="1" method="" max="" issave="True" subtractor="" remark="左上环预定型位" />
+          <Data name="LUDesigen" runname="LUDesigen" start="16" len="1" method="" max="" issave="True" subtractor="" remark="左上环定型位" />
+          <Data name="LUPlaceOffset" runname="LUPlaceOffset" start="17" len="1" method="" max="" issave="True" subtractor="" remark="左上环位置偏移量" />
+          <Data name="RUPlaceOffset" runname="RUPlaceOffset" start="18" len="1" method="" max="" issave="True" subtractor="" remark="右上环位置偏移量" />
+          <Data name="LMouldHigthSet" runname="LMouldHigthSet" start="19" len="1" method="" max="" issave="True" subtractor="" remark="左模具高度设定值" />
+          <Data name="RMouldHigthSet" runname="RMouldHigthSet" start="20" len="1" method="" max="" issave="True" subtractor="" remark="右模具高度设定值" />
+          <Data name="RUStretch" runname="RUStretch" start="21" len="1" method="" max="" issave="True" subtractor="" remark="右上环拉伸位" />
+          <Data name="RUBeginDesigen" runname="RUBeginDesigen" start="22" len="1" method="" max="" issave="True" subtractor="" remark="右上环预定型位" />
+          <Data name="RUDesigen" runname="RUDesigen" start="23" len="1" method="" max="" issave="True" subtractor="" remark="右上环定型位" />
+          <Data name="CloseMPress" runname="CloseMPress" start="24" len="1" method="" max="" issave="True" subtractor="" remark="合模力" />
+          <Data name="CloseMPressDiff" runname="CloseMPressDiff" start="25" len="1" method="" max="" issave="True" subtractor="" remark="合模力差值" />
+          <Data name="TyreHandIn" runname="TyreHandIn" start="26" len="1" method="" max="" issave="True" subtractor="" remark="装胎手生胎入模位" />
+          <Data name="TyreHandOut" runname="TyreHandOut" start="27" len="1" method="" max="" issave="True" subtractor="" remark="装胎手自动摆出位" />
+          <Data name="TyreHandDesigen" runname="TyreHandDesigen" start="28" len="1" method="" max="" issave="True" subtractor="" remark="装胎手定型位" />
+          <Data name="TyreHandHold" runname="TyreHandHold" start="29" len="1" method="" max="" issave="True" subtractor="" remark="装胎手抓生胎位" />
+        </Data>
+      </Group>
+      <Group name="D4330" block="4330" start="0" len="1" access="ReadWrite" remark="配方参数下传3" isautoread="True">
+        <Data>
+          <Data name="TechnologyFlag" runname="TechnologyFlag" start="0" len="1" method="" max="" issave="True" subtractor="" remark="技术信息状态" />
+        </Data>
+      </Group>
+      <Group name="D4417" block="4417" start="0" len="1" access="ReadWrite" remark="配方参数下传4" isautoread="True">
+        <Data>
+          <Data name="LoaderHeight" runname="LoaderHeight" start="0" len="1" method="" max="" issave="True" subtractor="" remark="装胎高度" />
+        </Data>
+      </Group>
+      <Group name="D4430" block="4430" start="0" len="10" access="ReadWrite" remark="配方参数下传5" isautoread="True">
+        <Data>
+          <Data name="PDMCode" runname="PDMCode" start="0" len="10" method="" max="" issave="True" subtractor="" remark="PDM编号版本" />
+        </Data>
+      </Group>
+      <Group name="D4303" block="4303" start="0" len="5" access="ReadWrite" remark="报警控制" isautoread="False">
+        <Data>
+          <Data name="TechAlarmPriority" runname="TechAlarmPriority" start="0" len="1" method="" max="" issave="True" subtractor="" remark="工艺报警等级" />
+          <Data name="TechAlarm" runname="TechAlarm" start="1" len="1" method="" max="" issave="True" subtractor="" remark="工艺报警内容" />
+          <Data name="HandHoldAlarm" runname="HandHoldAlarm" start="2" len="1" method="" max="" issave="True" subtractor="" remark="手持报警" />
+          <Data name="LeftBladderMax" runname="LeftBladderMax" start="3" len="1" method="" max="" issave="True" subtractor="" remark="左胶囊使用次数上限" />
+          <Data name="RightBladderMax" runname="RightBladderMax" start="4" len="1" method="" max="" issave="True" subtractor="" remark="右胶囊使用次数上限" />
+        </Data>
+      </Group>
+      <Group name="M50" block="50" start="0" len="50" access="ReadWrite" remark="主控界面" isautoread="True">
+        <Data>
+          <Data name="OpenMold" runname="OpenMold" start="1" len="1" method="" max="" issave="True" subtractor="" remark="开模地址" />
+          <Data name="CloseMold" runname="CloseMold" start="2" len="1" method="" max="" issave="True" subtractor="" remark="合模地址" />
+        </Data>
+      </Group>
+      <Group name="D999" block="999" start="0" len="1" access="ReadWrite" remark="焖锅时间" isautoread="True">
+        <Data>
+          <Data name="DelayOpenAlarmTime" runname="DelayOpenAlarmTime" start="0" len="1" method="" max="" issave="True" subtractor="" remark="焖锅时间" />
+        </Data>
+      </Group>
+      <Group name="D888" block="888" start="0" len="1" access="ReadWrite" remark="工艺变更" isautoread="False">
+        <Data>
+          <Data name="TechChange" runname="TechChange" start="0" len="1" method="" max="" issave="True" subtractor="" remark="工艺变更停机点" />
+        </Data>
+      </Group>
+      <Group name="D889" block="889" start="0" len="1" access="ReadWrite" remark="外检停机" isautoread="False">
+        <Data>
+          <Data name="FcheckStop" runname="FcheckStop" start="0" len="1" method="" max="" issave="True" subtractor="" remark="外检停机点" />
+        </Data>
+      </Group>
+      <Group name="D890" block="890" start="0" len="1" access="ReadWrite" remark="换模规格变更停机" isautoread="False">
+        <Data>
+          <Data name="MouldMaterStop" runname="MouldMaterStop" start="0" len="1" method="" max="" issave="True" subtractor="" remark="换模规格变更停机" />
+        </Data>
+      </Group>
+      <Group name="D555" block="555" start="0" len="1" access="ReadWrite" remark="左二次定型时间" isautoread="True">
+        <Data>
+          <Data name="LeftSetTime" runname="LeftSetTime" start="0" len="1" method="" max="" issave="True" subtractor="" remark="左二次定型时间" />
+        </Data>
+      </Group>
+      <Group name="D560" block="560" start="0" len="1" access="ReadWrite" remark="右二次定型时间" isautoread="True">
+        <Data>
+          <Data name="RightSetTime" runname="RightSetTime" start="0" len="1" method="" max="" issave="True" subtractor="" remark="右二次定型时间" />
+        </Data>
+      </Group>
+      <Group name="D998" block="998" start="0" len="1" access="ReadWrite" remark="装卸模待机时间" isautoread="True">
+        <Data>
+          <Data name="Stoptime" runname="Stoptime" start="0" len="1" method="" max="" issave="True" subtractor="" remark="装卸模待机时间" />
+        </Data>
+      </Group>
+      <Group name="D892" block="892" start="0" len="1" access="ReadWrite" remark="错峰装模控制点" isautoread="True">
+        <Data>
+          <Data name="MoudleStopFlag" runname="MoudleStopFlag" start="0" len="1" method="" max="" issave="True" subtractor="" remark="错峰装模控制点" />
+        </Data>
+      </Group>
+      <Group name="D893" block="893" start="0" len="1" access="ReadWrite" remark="错峰装模解锁需求点" isautoread="True">
+        <Data>
+          <Data name="MoudleStopNoLock" runname="MoudleStopNoLock" start="0" len="1" method="" max="" issave="True" subtractor="" remark="错峰装模解锁需求点" />
+        </Data>
+      </Group>
+      <Group name="D4217" block="4217" start="0" len="1" access="ReadWrite" remark="错峰装模信号点" isautoread="True">
+        <Data>
+          <Data name="MoudleCloseFlag" runname="MoudleCloseFlag" start="0" len="1" method="" max="" issave="True" subtractor="" remark="错峰装模信号点" />
+        </Data>
+      </Group>
+      <Group name="D4209" block="4209" start="0" len="1" access="ReadWrite" remark="干冰洗膜首胎控制点" isautoread="True">
+        <Data>
+          <Data name="WashMouldFlag" runname="WashMouldFlag" start="0" len="1" method="" max="" issave="True" subtractor="" remark="干冰洗膜首胎控制点" />
+        </Data>
+      </Group>
+      <Group name="D891" block="891" start="0" len="1" access="ReadWrite" remark="抽真空报警解锁" isautoread="True">
+        <Data>
+          <Data name="CZKFlag" runname="CZKFlag" start="0" len="1" method="" max="" issave="True" subtractor="" remark="抽真空报警解锁" />
+        </Data>
+      </Group>
+      <Group name="D4218" block="4218" start="0" len="1" access="ReadWrite" remark="异常停机点" isautoread="True">
+        <Data>
+          <Data name="OnErrFlag" runname="OnErrFlag" start="0" len="1" method="" max="" issave="True" subtractor="" remark="异常停机点" />
+        </Data>
+      </Group>
+      <Group name="D556" block="556" start="0" len="1" access="ReadWrite" remark="左一次定型时间" isautoread="True">
+        <Data>
+          <Data name="LeftDXTime" runname="LeftDXTime" start="0" len="1" method="" max="" issave="True" subtractor="" remark="左一次定型时间" />
+        </Data>
+      </Group>
+      <Group name="D557" block="557" start="0" len="1" access="ReadWrite" remark="右一次定型时间" isautoread="True">
+        <Data>
+          <Data name="RightDXTime" runname="RightDXTime" start="0" len="1" method="" max="" issave="True" subtractor="" remark="右一次定型时间" />
+        </Data>
+      </Group>
+      <Group name="D447" block="447" start="0" len="1" access="ReadWrite" remark="左一次定型压力最大值" isautoread="True">
+        <Data>
+          <Data name="LeftDXOneMax" runname="LeftDXOneMax" start="0" len="1" method="" max="" issave="True" subtractor="" remark="左一次定型压力最大值" />
+        </Data>
+      </Group>
+      <Group name="D448" block="448" start="0" len="1" access="ReadWrite" remark="右一次定型压力最大值" isautoread="True">
+        <Data>
+          <Data name="RightDXOneMax" runname="RightDXOneMax" start="0" len="1" method="" max="" issave="True" subtractor="" remark="右一次定型压力最大值" />
+        </Data>
+      </Group>
+
+      <Group name="D445" block="445" start="0" len="1" access="ReadWrite" remark="左二次定型压力最大值" isautoread="True">
+        <Data>
+          <Data name="LeftDXTwoMax" runname="LeftDXTwoMax" start="0" len="1" method="" max="" issave="True" subtractor="" remark="左二次定型压力最大值" />
+        </Data>
+      </Group>
+      <Group name="D446" block="446" start="0" len="1" access="ReadWrite" remark="右二次定型压力最大值" isautoread="True">
+        <Data>
+          <Data name="RightDXTwoMax" runname="RightDXTwoMax" start="0" len="1" method="" max="" issave="True" subtractor="" remark="右二次定型压力最大值" />
+        </Data>
+      </Group>
+      <Group name="D449" block="449" start="0" len="1" access="ReadWrite" remark="心跳检测" isautoread="True">
+        <Data>
+          <Data name="CheckXT" runname="CheckXT" start="0" len="1" method="" max="" issave="True" subtractor="" remark="心跳检测" />
+        </Data>
+      </Group>
+      <Group name="D5018" block="5018" start="0" len="1" access="ReadWrite" remark="A0降级点" isautoread="True">
+        <Data>
+          <Data name="DownGrade" runname="DownGrade" start="0" len="1" method="" max="" issave="True" subtractor="" remark="A0降级点" />
+        </Data>
+      </Group>
+      <Group name="D567" block="567" start="0" len="1" access="ReadWrite" remark="左定型时间" isautoread="True">
+        <Data>
+          <Data name="LeftDingx" runname="LeftDingx" start="0" len="1" method="" max="" issave="True" subtractor="" remark="左定型时间" />
+        </Data>
+      </Group>
+      <Group name="D568" block="568" start="0" len="1" access="ReadWrite" remark="右定型时间" isautoread="True">
+        <Data>
+          <Data name="RightDingx" runname="RightDingx" start="0" len="1" method="" max="" issave="True" subtractor="" remark="右定型时间" />
+        </Data>
+      </Group>
+      <Group name="D450" block="450" start="0" len="1" access="ReadWrite" remark="蒸汽时间" isautoread="True">
+        <Data>
+          <Data name="ZQTime" runname="ZQTime" start="0" len="1" method="" max="" issave="True" subtractor="" remark="蒸汽时间" />
+        </Data>
+      </Group>
+      <Group name="D451" block="451" start="0" len="1" access="ReadWrite" remark="氮气时间" isautoread="True">
+        <Data>
+          <Data name="DQTime" runname="DQTime" start="0" len="1" method="" max="" issave="True" subtractor="" remark="氮气时间" />
+        </Data>
+      </Group>
+      <Group name="D452" block="452" start="0" len="1" access="ReadWrite" remark="左硫化总时间" isautoread="True">
+        <Data>
+          <Data name="LCuringZongTime" runname="LCuringZongTime" start="0" len="1" method="" max="" issave="True" subtractor="" remark="左硫化总时间" />
+        </Data>
+      </Group>
+      <Group name="D453" block="453" start="0" len="1" access="ReadWrite" remark="右硫化总时间" isautoread="True">
+        <Data>
+          <Data name="RCuringZongTime" runname="RCuringZongTime" start="0" len="1" method="" max="" issave="True" subtractor="" remark="右硫化总时间" />
+        </Data>
+      </Group>
+      <Group name="D455" block="455" start="0" len="1" access="ReadWrite" remark="手自动标识" isautoread="True">
+        <Data>
+          <Data name="ManuFlag" runname="ManuFlag" start="0" len="1" method="" max="" issave="True" subtractor="" remark="手自动标识" />
+        </Data>
+      </Group>
+      <Group name="D586" block="586" start="0" len="1" access="ReadWrite" remark="定型压力峰值停机" isautoread="True">
+        <Data>
+          <Data name="DxPressStop" runname="DxPressStop" start="0" len="1" method="" max="" issave="True" subtractor="" remark="定型压力峰值停机" />
+        </Data>
+      </Group>
+      <Group name="D587" block="587" start="0" len="1" access="ReadWrite" remark="胶囊停机" isautoread="True">
+        <Data>
+          <Data name="CheckBladderStop" runname="CheckBladderStop" start="0" len="1" method="" max="" issave="True" subtractor="" remark="胶囊停机" />
+        </Data>
+      </Group>
+      <Group name="D605" block="605" start="0" len="1" access="ReadWrite" remark="右开合模信号" isautoread="True">
+        <Data>
+          <Data name="RightMoldState" runname="RightMoldState" start="0" len="1" method="" max="" issave="True" subtractor="" remark="右开合模信号" />
+        </Data>
+      </Group>
+      <Group name="D606" block="606" start="0" len="1" access="ReadWrite" remark="左开合模信号" isautoread="True">
+        <Data>
+          <Data name="LeftMoldState" runname="LeftMoldState" start="0" len="1" method="" max="" issave="True" subtractor="" remark="左开合模信号" />
+        </Data>
+      </Group>
+      <Group name="D639" block="639" start="0" len="1" access="ReadWrite" remark="模具预热时间" isautoread="True">
+        <Data>
+          <Data name="MouldYRTime" runname="MouldYRTime" start="0" len="1" method="" max="" issave="True" subtractor="" remark="模具预热时间" />
+        </Data>
+      </Group>
+      <Group name="D640" block="640" start="0" len="1" access="ReadWrite" remark="子口间距" isautoread="True">
+        <Data>
+          <Data name="ZKJJ" runname="ZKJJ" start="0" len="1" method="" max="" issave="True" subtractor="" remark="子口间距" />
+        </Data>
+      </Group>
+      <Group name="D4414" block="4414" start="0" len="1" access="ReadWrite" remark="左胶囊拉伸高度" isautoread="True">
+        <Data>
+          <Data name="JNLSLeft" runname="JNLSLeft" start="0" len="1" method="" max="" issave="True" subtractor="" remark="左胶囊拉伸高度" />
+        </Data>
+      </Group>
+      <Group name="D4421" block="4421" start="0" len="1" access="ReadWrite" remark="右胶囊拉伸高度" isautoread="True">
+        <Data>
+          <Data name="JNLSRight" runname="JNLSRight" start="0" len="1" method="" max="" issave="True" subtractor="" remark="右胶囊拉伸高度" />
+        </Data>
+      </Group>
+
+      <Group name="D1731" block="1731" start="0" len="1" access="ReadWrite" remark="步序1泄压解锁" isautoread="True">
+        <Data>
+          <Data name="XYJS" runname="XYJS" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序1泄压解锁" />
+        </Data>
+      </Group>
+      <Group name="D1732" block="1732" start="0" len="1" access="ReadWrite" remark="步序2开模闭锁" isautoread="True">
+        <Data>
+          <Data name="KMBS" runname="KMBS" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序2开模闭锁" />
+        </Data>
+      </Group>
+      <Group name="D1733" block="1733" start="0" len="1" access="ReadWrite" remark="步序3卸胎支臂入伸" isautoread="True">
+        <Data>
+          <Data name="XTZBRS" runname="XTZBRS" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序3卸胎支臂入伸" />
+        </Data>
+      </Group>
+      <Group name="D1734" block="1734" start="0" len="1" access="ReadWrite" remark="步序4上下环脱胎" isautoread="True">
+        <Data>
+          <Data name="SXHTS" runname="SXHTS" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序4上下环脱胎" />
+        </Data>
+      </Group>
+      <Group name="D1735" block="1735" start="0" len="1" access="ReadWrite" remark="步序5卸胎支臂升" isautoread="True">
+        <Data>
+          <Data name="XTZBS" runname="XTZBS" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序5卸胎支臂升" />
+        </Data>
+      </Group>
+      <Group name="D1736" block="1736" start="0" len="1" access="ReadWrite" remark="步序6卸胎支臂缩、出" isautoread="True">
+        <Data>
+          <Data name="XTZBSC" runname="XTZBSC" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序6卸胎支臂缩、出" />
+        </Data>
+      </Group>
+      <Group name="D1737" block="1737" start="0" len="1" access="ReadWrite" remark="步序7装胎手转入" isautoread="True">
+        <Data>
+          <Data name="ZTSZR" runname="ZTSZR" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序7装胎手转入" />
+        </Data>
+      </Group>
+      <Group name="D1738" block="1738" start="0" len="1" access="ReadWrite" remark="步序8装胎手降" isautoread="True">
+        <Data>
+          <Data name="ZTSJ" runname="ZTSJ" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序8装胎手降" />
+        </Data>
+      </Group>
+      <Group name="D1739" block="1739" start="0" len="1" access="ReadWrite" remark="步序9胶囊呼吸" isautoread="True">
+        <Data>
+          <Data name="JNHX" runname="JNHX" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序9胶囊呼吸" />
+        </Data>
+      </Group>
+      <Group name="D1740" block="1740" start="0" len="1" access="ReadWrite" remark="步序10胎胚定型" isautoread="True">
+        <Data>
+          <Data name="TPDX" runname="TPDX" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序10胎胚定型" />
+        </Data>
+      </Group>
+      <Group name="D1741" block="1741" start="0" len="1" access="ReadWrite" remark="步序11装胎手闭合、开" isautoread="True">
+        <Data>
+          <Data name="ZTSBHK" runname="ZTSBHK" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序11装胎手闭合、开" />
+        </Data>
+      </Group>
+      <Group name="D1742" block="1742" start="0" len="1" access="ReadWrite" remark="步序12装胎手转出" isautoread="True">
+        <Data>
+          <Data name="ZTSZC" runname="ZTSZC" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序12装胎手转出" />
+        </Data>
+      </Group>
+      <Group name="D1743" block="1743" start="0" len="1" access="ReadWrite" remark="步序13合模、闭锁" isautoread="True">
+        <Data>
+          <Data name="HMBS" runname="HMBS" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序13合模、闭锁" />
+        </Data>
+      </Group>
+      <Group name="D1744" block="1744" start="0" len="1" access="ReadWrite" remark="步序14加合模力" isautoread="True">
+        <Data>
+          <Data name="JHML" runname="JHML" start="0" len="1" method="" max="" issave="True" subtractor="" remark="步序14加合模力" />
+        </Data>
+      </Group>
+      <Group name="D1745" block="1745" start="0" len="1" access="ReadWrite" remark="开合模总时间" isautoread="True">
+        <Data>
+          <Data name="KHMSUMTIME" runname="KHMSUMTIME" start="0" len="1" method="" max="" issave="True" subtractor="" remark="开合模总时间" />
+        </Data>
+      </Group>
+    </Group>
+  </Equip>
+</EquipFactory>

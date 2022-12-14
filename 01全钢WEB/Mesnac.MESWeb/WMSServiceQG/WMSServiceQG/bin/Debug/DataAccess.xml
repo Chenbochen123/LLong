@@ -1,0 +1,233 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DataAccess</name>
+    </assembly>
+    <members>
+        <member name="T:DataAccess.AccessDB">
+            <summary>
+            access数据库操作类
+            </summary>
+        </member>
+        <member name="T:DataAccess.IAccessDB">
+            <summary>
+            数据库操作类接口
+            </summary>
+        </member>
+        <member name="M:DataAccess.IAccessDB.GetDataSet(System.String,System.String[],System.Object[])">
+            <summary>
+            执行动态SQL，返回数据集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.IAccessDB.ExeSql(System.String,System.String[],System.Object[])">
+            <summary>
+            执行动态SQL，不返回数据集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.IAccessDB.GetDataSetByProc(System.String,System.String[],System.Object[])">
+            <summary>
+            执行存储过程，返回数据集
+            </summary>
+            <param name="procName"></param>
+            <param name="strKey"></param>
+            <param name="objValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.IAccessDB.ExeSqlByProc(System.String,System.String[],System.Object[])">
+            <summary>
+            执行存储过程，不返回数据集
+            </summary>
+            <param name="procName"></param>
+            <param name="strKey"></param>
+            <param name="objValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.AccessDB.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="strConn"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:DataAccess.AccessDB.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:DataAccess.AccessDB.GetDataSet(System.String,System.String[],System.Object[])">
+            <summary>
+            使用动态SQL返回数据集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.AccessDB.ExeSql(System.String,System.String[],System.Object[])">
+            <summary>
+            执行动态SQL
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.AccessDB.GetDataSetByProc(System.String,System.String[],System.Object[])">
+            <summary>
+            执行存储过程返回数据集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.AccessDB.ExeSqlByProc(System.String,System.String[],System.Object[])">
+            <summary>
+            执行存储过程
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DataAccess.Config.ConnDB">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DataAccess.Config.ConnDB.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DataAccess.Config.ConnDB.StrConn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:DataAccess.Config.DLLConfig">
+            <summary>
+            该类用于获取DLL的配置文件（在应用程序目录中的）
+            </summary>
+        </member>
+        <member name="P:DataAccess.Config.DLLConfig.DllConfigFilePath">
+            <summary>
+            获取类库的配置文件路径（在应用程序下面的，不是类库输出路径）
+            应用程序使用该DLL时，需要将DLL的配置文件拷贝到应用程序目录。
+            </summary>
+        </member>
+        <member name="T:DataAccess.DbFactory">
+            <summary>
+            数据库工厂类
+            </summary>
+            <remarks>
+            使用该类的两个静态方法创建对数据库操作类对象
+            </remarks>
+        </member>
+        <member name="M:DataAccess.DbFactory.CreateDb">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.DbFactory.CreateDb(System.String,System.String)">
+            <summary>
+            根据数据库类型不同，选择相对应的类
+            </summary>
+            <param name="dbType">数据库类型</param>
+            <param name="strDbConn">连接方式</param>
+            <returns></returns>
+        </member>
+        <member name="T:DataAccess.OracleDB">
+            <summary>
+            Oracle数据库操作类
+            </summary>
+            <remarks>
+            封装Oracle数据库操作
+            </remarks>
+        </member>
+        <member name="M:DataAccess.OracleDB.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="strConn">数据库连接字符串</param>
+        </member>
+        <member name="M:DataAccess.OracleDB.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:DataAccess.OracleDB.GetDataSet(System.String,System.String[],System.Object[])">
+            <summary>
+            使用动态SQL返回数据集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.OracleDB.ExeSql(System.String,System.String[],System.Object[])">
+            <summary>
+            执行动态SQL
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.OracleDB.GetDataSetByProc(System.String,System.String[],System.Object[])">
+            <summary>
+            执行存储过程返回数据集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.OracleDB.ExeSqlByProc(System.String,System.String[],System.Object[])">
+            <summary>
+            执行存储过程
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DataAccess.SimpleLogFile">
+            <summary>
+            简易日志文件处理类
+            </summary>
+        </member>
+        <member name="M:DataAccess.SimpleLogFile.WriteLog(System.String)">
+            <summary>
+            写入日志
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="T:DataAccess.SqlDB">
+            <summary>
+            Sql Server数据库操作类
+            </summary>
+            <remarks>
+            封装Sql Server数据库操作
+            </remarks>
+        </member>
+        <member name="M:DataAccess.SqlDB.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="strConn">数据库连接字符串</param>
+        </member>
+        <member name="M:DataAccess.SqlDB.#ctor">
+            <summary>
+            构造函数
+            </summary>
+            <remarks>
+            数据库连接字符串设置为默认值
+            </remarks>
+        </member>
+        <member name="M:DataAccess.SqlDB.GetDataSet(System.String,System.String[],System.Object[])">
+            <summary>
+            使用动态SQL返回数据集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.SqlDB.ExeSql(System.String,System.String[],System.Object[])">
+            <summary>
+            执行动态SQL
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.SqlDB.GetDataSetByProc(System.String,System.String[],System.Object[])">
+            <summary>
+            执行存储过程返回数据集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DataAccess.SqlDB.ExeSqlByProc(System.String,System.String[],System.Object[])">
+            <summary>
+            执行存储过程
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

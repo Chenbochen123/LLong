@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BusinessMapper.FqgGradeInfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM FQG_GRADE_INFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Gradename" prepend="AND">
+          <![CDATA[GRADENAME = #where.Gradename#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkProcessId" prepend="AND">
+          <![CDATA[WORK_PROCESS_ID = #where.WorkProcessId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupFlag" prepend="AND">
+          <![CDATA[BAUP_FLAG = #where.BaupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupTime" prepend="AND">
+          <![CDATA[BAUP_TIME = #where.BaupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserid" prepend="AND">
+          <![CDATA[RECORD_USERID = #where.RecordUserid#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.GradeCode" prepend="AND">
+        <![CDATA[GRADE_CODE = #where.GradeCode#]]>
+        </isNotNull>
+        <isNotNull property="where.FinalGradeCode" prepend="AND">
+        <![CDATA[FINAL_GRADE_CODE = #where.FinalGradeCode#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetQualityLevel" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        SELECT case GRADENAME when '一级品' then '合格品' when '二级品' then '次品' when '一级品B' then '合格品B' else GRADENAME end GRADENAME,FINAL_GRADE_CODE,DEFECTCODE FROM FQG_GRADE_INFO TA
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.WorkProcessID" prepend="AND">
+           <![CDATA[TA.WORK_PROCESS_ID = #where.WorkProcessID#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[TA.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetAllGradeInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+         SELECT TA.OBJID,TA.GRADENAME,TA.FINAL_GRADE_CODE,TA.WORK_PROCESS_ID,TA.REMARK,TB.PROCEDURE_NAME FROM FQG_GRADE_INFO TA
+        LEFT JOIN SSB_PROCEDURE TB ON TB.OBJID=TA.WORK_PROCESS_ID
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.WorkProcessID" prepend="AND">
+           <![CDATA[TA.WORK_PROCESS_ID = #where.WorkProcessID#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[TA.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.FinalGradeCode" prepend="AND">
+           <![CDATA[TA.FINAL_GRADE_CODE = #where.FinalGradeCode#]]>
+         </isNotNull>
+         <isNotNull property="where.GradeName" prepend="AND">
+           <![CDATA[TA.GRADENAME = #where.GradeName#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="order by">
+         <![CDATA[WORK_PROCESS_ID,FINAL_GRADE_CODE]]>
+       </dynamic>
+     </select>
+     <update id="UpdateGradeInfo" parameterClass="map">
+       <![CDATA[ 
+        UPDATE FQG_GRADE_INFO SET 
+        GRADENAME=#GradeName#,
+        REMARK=#Remark#
+        WHERE (OBJID = #ObjId#) 
+      ]]>
+     </update>
+     <select id="GetGradeOfBalance" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        SELECT GRADE_CODE, FINAL_GRADE_CODE FROM FQG_GRADE_INFO WHERE WORK_PROCESS_ID=520
+      ]]>
+     </select>
+     <select id="GetCuringQualityLevel" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        SELECT TA.GRADENAME,TA.FINAL_GRADE_CODE FROM FQG_GRADE_INFO TA WHERE TA.OBJID=5
+      ]]>
+     </select>
+
+     <select id="QualityGradeInit" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        SELECT TA.GRADENAME,TA.FINAL_GRADE_CODE FROM FQG_GRADE_INFO TA WHERE TA.WORK_PROCESS_ID=699
+      ]]>
+     </select>
+
+     <select id="QualityFQBGradeInit" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+               SELECT TA.GRADENAME,TA.FINAL_GRADE_CODE FROM FQG_GRADE_INFO TA WHERE TA.WORK_PROCESS_ID=520
+      ]]>
+     </select>
+
+     <select id="GetCuringEquipInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select a.* from sbe_equip a
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.EquipCode" prepend="AND">
+           <![CDATA[a.equip_name = #where.EquipCode#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[a.delete_flag = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.MajorTypeID" prepend="AND">
+           <![CDATA[a.major_type_id = #where.MajorTypeID#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+        order by a.equip_code
+      ]]>
+     </select>
+
+     <select id="GetFcheckDefectInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select * from Fqd_Defect_Info a
+        where a.work_process_id = 610
+        and a.delete_flag = 0
+        order by a.defectcode
+      ]]>
+     </select>
+
+     <select id="GetAllRepairPart" parameterClass="map" resultClass="Row">
+       <![CDATA[SELECT * FROM FQR_REPAIR_PART WHERE DELETE_FLAG = 0]]>
+     </select>
+
+     <select id="GetRepairInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T0.TYRE_NO,T0.GREEN_TYRE_NO,T0.MATERIAL_ID,T0.REPEAT_ID,T0.REPAIR_RESULT_ID,T0.RECORD_USER_ID,T0.RECORD_TIME,t0.shift_id,T0.REMARK,
+        t1.result_name,t2.repeat_name,t3.shift_name,t4.user_name,t5.Material_Name
+        FROM FQR_REPAIR_RECORDS T0 
+        LEFT JOIN FQR_REPAIR_RESULT T1 ON T1.OBJID = T0.REPAIR_RESULT_ID
+        LEFT JOIN FQR_REPEAT T2 ON T2.OBJID = T0.REPEAT_ID
+        LEFT JOIN ssb_shift t3 on t3.objid = t0.shift_id
+        left join ssb_user t4 on t4.objid =t0.record_user_id
+        left join v_cbm_materialinfo t5 on t5.ObjId=t0.material_id
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.TyreNo" prepend="AND">
+           <![CDATA[T0.TYRE_NO=#where.TyreNo#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[T0.RECORD_TIME > #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[T0.RECORD_TIME <= #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialID" prepend="AND">
+           <![CDATA[T0.MATERIAL_ID= #where.MaterialID# ]]>
+         </isNotNull>
+         <isNotNull property="where.ResultID" prepend="AND">
+           <![CDATA[T0.REPAIR_RESULT_ID= #where.ResultID# ]]>
+         </isNotNull>
+         <isNotNull property="where.RepeatID" prepend="AND">
+           <![CDATA[T0.REPEAT_ID= #where.RepeatID# ]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+   </statements>
+</sqlMap>

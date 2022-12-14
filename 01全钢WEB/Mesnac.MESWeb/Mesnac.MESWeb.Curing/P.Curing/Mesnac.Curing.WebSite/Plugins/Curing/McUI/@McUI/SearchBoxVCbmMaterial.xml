@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="MAJOR_TYPE_ID" Value="物料大类名称"></Caption>
+    <Caption Name="MINOR_TYPE_ID" Value="物料细类名称"></Caption>
+    <Caption Name="MAJOR_TYPE_NAME" Value="物料大类名称"></Caption>
+    <Caption Name="MINOR_TYPE_NAME" Value="物料细类名称"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="物料名称"></Caption>
+    <Caption Name="MATERIAL_CODE" Value="物料代码"></Caption>
+  </Captions>
+  <WebPage Title="成品胎信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Curing/McUI/@McUI/SearchBoxVCbmMaterial.js" />
+    </JavaScripts>
+  </WebPage>
+  <Select>
+    <ParamPanel ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="MAJOR_TYPE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="MINOR_TYPE_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="MATERIAL_CODE"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="T1.MAJOR_TYPE_ID,T1.MINOR_TYPE_ID,T1.MATERIAL_NAME">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_CODE"></GridColumn>
+        <GridColumn ColumnName="MAJOR_TYPE_NAME"></GridColumn>
+        <GridColumn ColumnName="MINOR_TYPE_NAME"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

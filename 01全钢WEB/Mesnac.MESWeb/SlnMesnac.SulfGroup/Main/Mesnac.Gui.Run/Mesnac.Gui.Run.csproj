@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{902D2229-8803-4B7C-B245-4AD4B04D0C3F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Gui.Run</RootNamespace>
+    <AssemblyName>Mesnac.Gui.Run</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.Core, Version=4.3.0.9338, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\Mesnac.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Gui, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\Mesnac.Gui.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.PlugIn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\Mesnac.PlugIn.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dialog\FrmMoveChild.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\FrmMoveChild.Designer.cs">
+      <DependentUpon>FrmMoveChild.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\FrmRunConfigMenuItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\FrmRunConfigMenuItem.Designer.cs">
+      <DependentUpon>FrmRunConfigMenuItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pad\FrmSysFunction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pad\FrmSysFunction.Designer.cs">
+      <DependentUpon>FrmSysFunction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewContent\BrowserCommand.cs" />
+    <Compile Include="ViewContent\FrmSysConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewContent\FrmSysConfig.Designer.cs">
+      <DependentUpon>FrmSysConfig.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mensac.Gui.Run.Global\Mesnac.Gui.Run.Global.csproj">
+      <Project>{CC98CB3B-F532-4510-AC08-7DDBD520CB06}</Project>
+      <Name>Mesnac.Gui.Run.Global</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Basic\Mesnac.Basic.csproj">
+      <Project>{28ACACF1-9936-4E97-A866-F84366EC5286}</Project>
+      <Name>Mesnac.Basic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Gui.Common\Mesnac.Gui.Common.csproj">
+      <Project>{235DF851-9EA7-43D4-B3F9-0CAB7F60AD17}</Project>
+      <Name>Mesnac.Gui.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dialog\FrmMoveChild.resx">
+      <DependentUpon>FrmMoveChild.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\FrmRunConfigMenuItem.resx">
+      <DependentUpon>FrmRunConfigMenuItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pad\FrmSysFunction.resx">
+      <DependentUpon>FrmSysFunction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewContent\FrmSysConfig.resx">
+      <DependentUpon>FrmSysConfig.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

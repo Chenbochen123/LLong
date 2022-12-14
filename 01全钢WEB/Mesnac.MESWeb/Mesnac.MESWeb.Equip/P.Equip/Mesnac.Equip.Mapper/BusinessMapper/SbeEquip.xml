@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Equip.Mapper.BusinessMapper.SbeEquip"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_EQUIP ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.MajorTypeId" prepend="AND">
+          <![CDATA[MAJOR_TYPE_ID = #where.MajorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.MinorTypeId" prepend="AND">
+          <![CDATA[MINOR_TYPE_ID = #where.MinorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[EQUIP_NAME = #where.EquipName#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipCode" prepend="AND">
+          <![CDATA[EQUIP_CODE = #where.EquipCode#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ProduceFactory" prepend="AND">
+          <![CDATA[PRODUCE_FACTORY = #where.ProduceFactory#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedDate" prepend="AND">
+          <![CDATA[USED_DATE = #where.UsedDate#]]>
+        </isNotNull>
+        <isNotNull property="where.IpAddress" prepend="AND">
+          <![CDATA[IP_ADDRESS = #where.IpAddress#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipUuid" prepend="AND">
+          <![CDATA[EQUIP_UUID = #where.EquipUuid#]]>
+        </isNotNull>
+        <isNotNull property="where.RegisterCode" prepend="AND">
+          <![CDATA[REGISTER_CODE = #where.RegisterCode#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+
+
+     <select id="GetEquip" parameterClass="map" resultClass="Row">
+       <![CDATA[
+          SELECT T.* FROM SBE_EQUIP T WHERE 1=1
+          AND T.MAJOR_TYPE_ID=51 AND T.DELETE_FLAG=0
+       ]]>
+       <dynamic prepend="">
+         <isNotNull property="OrderString" prepend="AND">
+           ORDER BY $OrderString$
+         </isNotNull>
+         <isNotNull>
+           ORDER BY T.EQUIP_CODE
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetEquipInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+          select t.* from sbe_equip t
+          where t.delete_flag = 0
+          order by t.major_type_id,t.minor_type_id,t.equip_name
+       ]]>
+     </select>
+
+     <select id="GetAloneEquipInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+          select t.* from sbe_equip t
+          where t.delete_flag = 0
+          and t.objid = #EquipID#
+          order by t.major_type_id,t.minor_type_id,t.equip_name
+       ]]>
+     </select>
+
+     <select id="GetOutStockInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T.*,T2.USER_NAME,T3.EQUIP_NAME,T4.SUB_STORE_PLACE_NAME FROM CIM_MOULD_OUTPUT T 
+        LEFT JOIN SSB_USER T2 ON T.RECORD_USER_ID=T2.OBJID
+        LEFT JOIN SBE_EQUIP T3 ON T.EQUIP_ID=T3.OBJID  
+        LEFT JOIN    SEB_SUB_STORE_PLACE T4 ON T.SUB_STORE_PLACE_ID=T4.OBJID   
+        WHERE 1=1
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="MouldBarcode" prepend="AND">
+           <![CDATA[T.MOULD_NAME=#MouldBarcode#]]>
+         </isNotNull>
+         <isNotNull >
+           ORDER BY T.RECORD_TIME
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetInStockInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T.*,T2.USER_NAME,T3.EQUIP_NAME,T4.SUB_STORE_PLACE_NAME FROM CIM_MOULD_INPUT T 
+        LEFT JOIN SSB_USER T2 ON T.RECORD_USER_ID=T2.OBJID
+        LEFT JOIN SBE_EQUIP T3 ON T.EQUIP_ID=T3.OBJID  
+        LEFT JOIN    SEB_SUB_STORE_PLACE T4 ON T.SUB_STORE_PLACE_ID=T4.OBJID   
+        WHERE 1=1
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="MouldBarcode" prepend="AND">
+           <![CDATA[T.MOULD_NAME=#MouldBarcode#]]>
+         </isNotNull>
+       </dynamic>
+       <isNotNull property="OrderString" prepend="">
+         ORDER BY T.RECORD_TIME
+       </isNotNull>
+     </select>
+     <select id="GetMouldStorePlace" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T.*,T.ROWID FROM SEB_STORE_PLACE T
+        WHERE T.DELETE_FLAG=0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="StoreID" prepend="AND">
+           <![CDATA[t.STORE_ID=#StoreID#]]>
+         </isNotNull>
+         <isNotNull property="StorePlaceCode" prepend="AND">
+           <![CDATA[t.STORE_PLACE_CODE=#StorePlaceCode#]]>
+         </isNotNull>
+         <isNotNull property="StorePlaceName" prepend="AND">
+           <![CDATA[t.STORE_PLACE_NAME=#StorePlaceName#]]>
+         </isNotNull>
+         <isNotNull >
+           ORDER BY T.store_place_code
+         </isNotNull>
+       </dynamic>
+
+     </select>
+     
+
+
+     <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

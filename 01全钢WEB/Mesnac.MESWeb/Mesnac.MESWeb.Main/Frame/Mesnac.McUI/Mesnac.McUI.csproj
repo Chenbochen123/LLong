@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4033D84E-201E-4413-88AB-1FE56F8F7CF0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.McUI</RootNamespace>
+    <AssemblyName>Mesnac.McUI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\@packages\MyBatis\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\@packages\MyBatis\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Ext.Net">
+      <HintPath>..\..\@packages\Ext.net\Ext.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Ext.Net.Utilities">
+      <HintPath>..\..\@packages\Ext.net\Ext.Net.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.Common">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.DataMapper">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\@packages\Ext.net\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Transformer.NET">
+      <HintPath>..\..\@packages\Ext.net\Transformer.NET.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Page\Page.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UiHelper\Command.cs" />
+    <Compile Include="DefaultCommand\BaseCommand.cs" />
+    <Compile Include="DefaultCommand\Delete\ExecuteCommand.cs" />
+    <Compile Include="DefaultCommand\Delete\TrimCommand.cs" />
+    <Compile Include="DefaultCommand\Delete\VerifyCommand.cs" />
+    <Compile Include="DefaultCommand\IniCommand.cs" />
+    <Compile Include="DefaultCommand\Insert\ExecuteCommand.cs" />
+    <Compile Include="DefaultCommand\Insert\TrimCommand.cs" />
+    <Compile Include="DefaultCommand\Insert\VerifyCommand.cs" />
+    <Compile Include="DefaultCommand\Select\ExecuteCommand.cs" />
+    <Compile Include="DefaultCommand\Select\TrimCommand.cs" />
+    <Compile Include="DefaultCommand\Select\VerifyCommand.cs" />
+    <Compile Include="DefaultCommand\Update\ExecuteCommand.cs" />
+    <Compile Include="DefaultCommand\Update\TrimCommand.cs" />
+    <Compile Include="DefaultCommand\Update\VerifyCommand.cs" />
+    <Compile Include="ExtNet\PageData.cs" />
+    <Compile Include="ExtNet\PageIni.cs" />
+    <Compile Include="ExtNet\UiControlNamePrefix.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UiHelper\UiHelper.cs" />
+    <Compile Include="UiHelper\UiXHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LogAgent\LogAgent\LogAgent.csproj">
+      <Project>{b220d455-7f70-4672-a19b-e264f87b12f3}</Project>
+      <Name>LogAgent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.DbAccess\Mesnac.DbAccess.csproj">
+      <Project>{60b919c5-c601-4999-a531-439042d59746}</Project>
+      <Name>Mesnac.DbAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.UI.Db\Mesnac.FrameDb.Mapper.csproj">
+      <Project>{57d6db7a-e0b3-4798-8d57-ce65afa4f474}</Project>
+      <Name>Mesnac.FrameDb.Mapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Utility\Mesnac.Utility.csproj">
+      <Project>{03b7f91d-fc5b-4c3d-a4b5-abf78bb4f884}</Project>
+      <Name>Mesnac.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Web.UI\Mesnac.Web.UI.csproj">
+      <Project>{e0e6f36a-3e1b-4b9b-a4d9-eecf9329c520}</Project>
+      <Name>Mesnac.Web.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(TargetPath)" /S/Y "$(SolutionDir)@bin\McUI\"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

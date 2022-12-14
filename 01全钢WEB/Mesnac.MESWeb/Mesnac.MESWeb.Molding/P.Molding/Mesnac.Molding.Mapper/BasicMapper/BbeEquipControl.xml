@@ -1,0 +1,739 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BasicMapper.BbeEquipControl"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="BbeEquipControl" type="Mesnac.Molding.Entity.BasicEntity.BbeEquipControl, Mesnac.Molding.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_BbeEquipControl" class="BbeEquipControl">
+    <result property="ObjId" column="OBJID"/>
+    <result property="IsControl" column="IS_CONTROL"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BakupFlag" column="BAKUP_FLAG"/>
+    <result property="BakupTime" column="BAKUP_TIME"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="WorkshopId" column="WORKSHOP_ID"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="CShoulderwedge" column="C_SHOULDERWEDGE"/>
+    <result property="CBelt1" column="C_BELT1"/>
+    <result property="CBelt2" column="C_BELT2"/>
+    <result property="CBelt3" column="C_BELT3"/>
+    <result property="CTread" column="C_TREAD"/>
+    <result property="CInsideline" column="C_INSIDELINE"/>
+    <result property="CLsidewall" column="C_LSIDEWALL"/>
+    <result property="CRsidewall" column="C_RSIDEWALL"/>
+    <result property="CBead" column="C_BEAD"/>
+    <result property="CLwirecovering" column="C_LWIRECOVERING"/>
+    <result property="CRwirecovering" column="C_RWIRECOVERING"/>
+    <result property="CIsolatin" column="C_ISOLATIN"/>
+    <result property="CBelt0" column="C_BELT0"/>
+    <result property="CCarcass" column="C_CARCASS"/>
+    <result property="CNylonc" column="C_NYLONC"/>
+    <result property="BakupDate" column="BAKUP_DATE"/>
+    <result property="CShoulderwedgeDate" column="C_SHOULDERWEDGE_DATE"/>
+    <result property="CBelt1Date" column="C_BELT1_DATE"/>
+    <result property="CBelt2Date" column="C_BELT2_DATE"/>
+    <result property="CBelt3Date" column="C_BELT3_DATE"/>
+    <result property="CTreadDate" column="C_TREAD_DATE"/>
+    <result property="CInsidelineDate" column="C_INSIDELINE_DATE"/>
+    <result property="CLsidewallDate" column="C_LSIDEWALL_DATE"/>
+    <result property="CRsidewallDate" column="C_RSIDEWALL_DATE"/>
+    <result property="CBeadDate" column="C_BEAD_DATE"/>
+    <result property="CLwirecoveringDate" column="C_LWIRECOVERING_DATE"/>
+    <result property="CRwirecoveringDate" column="C_RWIRECOVERING_DATE"/>
+    <result property="CIsolatinDate" column="C_ISOLATIN_DATE"/>
+    <result property="CBelt0Date" column="C_BELT0_DATE"/>
+    <result property="CCarcassDate" column="C_CARCASS_DATE"/>
+    <result property="CNyloncDate" column="C_NYLONC_DATE"/>
+    <result property="CShoulderwedgeTime" column="C_SHOULDERWEDGE_TIME"/>
+    <result property="CBelt1Time" column="C_BELT1_TIME"/>
+    <result property="CBelt2Time" column="C_BELT2_TIME"/>
+    <result property="CBelt3Time" column="C_BELT3_TIME"/>
+    <result property="CTreadTime" column="C_TREAD_TIME"/>
+    <result property="CInsidelineTime" column="C_INSIDELINE_TIME"/>
+    <result property="CLsidewallTime" column="C_LSIDEWALL_TIME"/>
+    <result property="CRsidewallTime" column="C_RSIDEWALL_TIME"/>
+    <result property="CBeadTime" column="C_BEAD_TIME"/>
+    <result property="CLwirecoveringTime" column="C_LWIRECOVERING_TIME"/>
+    <result property="CRwirecoveringTime" column="C_RWIRECOVERING_TIME"/>
+    <result property="CIsolatinTime" column="C_ISOLATIN_TIME"/>
+    <result property="CBelt0Time" column="C_BELT0_TIME"/>
+    <result property="CCarcassTime" column="C_CARCASS_TIME"/>
+    <result property="CNyloncTime" column="C_NYLONC_TIME"/>
+    <result property="IsControlTime" column="IS_CONTROL_TIME"/>
+    <result property="IsControlDate" column="IS_CONTROL_DATE"/>
+    <result property="WorkshopIdTime" column="WORKSHOP_ID_TIME"/>
+    <result property="WorkshopIdDate" column="WORKSHOP_ID_DATE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_BbeEquipControl" class="BbeEquipControl">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="IsControl" column="IsControl"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BakupFlag" column="BakupFlag"/>
+    <parameter property="BakupTime" column="BakupTime"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="WorkshopId" column="WorkshopId"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="CShoulderwedge" column="CShoulderwedge"/>
+    <parameter property="CBelt1" column="CBelt1"/>
+    <parameter property="CBelt2" column="CBelt2"/>
+    <parameter property="CBelt3" column="CBelt3"/>
+    <parameter property="CTread" column="CTread"/>
+    <parameter property="CInsideline" column="CInsideline"/>
+    <parameter property="CLsidewall" column="CLsidewall"/>
+    <parameter property="CRsidewall" column="CRsidewall"/>
+    <parameter property="CBead" column="CBead"/>
+    <parameter property="CLwirecovering" column="CLwirecovering"/>
+    <parameter property="CRwirecovering" column="CRwirecovering"/>
+    <parameter property="CIsolatin" column="CIsolatin"/>
+    <parameter property="CBelt0" column="CBelt0"/>
+    <parameter property="CCarcass" column="CCarcass"/>
+    <parameter property="CNylonc" column="CNylonc"/>
+    <parameter property="BakupDate" column="BakupDate"/>
+    <parameter property="CShoulderwedgeDate" column="CShoulderwedgeDate"/>
+    <parameter property="CBelt1Date" column="CBelt1Date"/>
+    <parameter property="CBelt2Date" column="CBelt2Date"/>
+    <parameter property="CBelt3Date" column="CBelt3Date"/>
+    <parameter property="CTreadDate" column="CTreadDate"/>
+    <parameter property="CInsidelineDate" column="CInsidelineDate"/>
+    <parameter property="CLsidewallDate" column="CLsidewallDate"/>
+    <parameter property="CRsidewallDate" column="CRsidewallDate"/>
+    <parameter property="CBeadDate" column="CBeadDate"/>
+    <parameter property="CLwirecoveringDate" column="CLwirecoveringDate"/>
+    <parameter property="CRwirecoveringDate" column="CRwirecoveringDate"/>
+    <parameter property="CIsolatinDate" column="CIsolatinDate"/>
+    <parameter property="CBelt0Date" column="CBelt0Date"/>
+    <parameter property="CCarcassDate" column="CCarcassDate"/>
+    <parameter property="CNyloncDate" column="CNyloncDate"/>
+    <parameter property="CShoulderwedgeTime" column="CShoulderwedgeTime"/>
+    <parameter property="CBelt1Time" column="CBelt1Time"/>
+    <parameter property="CBelt2Time" column="CBelt2Time"/>
+    <parameter property="CBelt3Time" column="CBelt3Time"/>
+    <parameter property="CTreadTime" column="CTreadTime"/>
+    <parameter property="CInsidelineTime" column="CInsidelineTime"/>
+    <parameter property="CLsidewallTime" column="CLsidewallTime"/>
+    <parameter property="CRsidewallTime" column="CRsidewallTime"/>
+    <parameter property="CBeadTime" column="CBeadTime"/>
+    <parameter property="CLwirecoveringTime" column="CLwirecoveringTime"/>
+    <parameter property="CRwirecoveringTime" column="CRwirecoveringTime"/>
+    <parameter property="CIsolatinTime" column="CIsolatinTime"/>
+    <parameter property="CBelt0Time" column="CBelt0Time"/>
+    <parameter property="CCarcassTime" column="CCarcassTime"/>
+    <parameter property="CNyloncTime" column="CNyloncTime"/>
+    <parameter property="IsControlTime" column="IsControlTime"/>
+    <parameter property="IsControlDate" column="IsControlDate"/>
+    <parameter property="WorkshopIdTime" column="WorkshopIdTime"/>
+    <parameter property="WorkshopIdDate" column="WorkshopIdDate"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BBE_EQUIP_CONTROL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.IsControl" prepend="AND">
+          <![CDATA[IS_CONTROL = #where.IsControl#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.CShoulderwedge" prepend="AND">
+          <![CDATA[C_SHOULDERWEDGE = #where.CShoulderwedge#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt1" prepend="AND">
+          <![CDATA[C_BELT1 = #where.CBelt1#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt2" prepend="AND">
+          <![CDATA[C_BELT2 = #where.CBelt2#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt3" prepend="AND">
+          <![CDATA[C_BELT3 = #where.CBelt3#]]>
+        </isNotNull>
+        <isNotNull property="where.CTread" prepend="AND">
+          <![CDATA[C_TREAD = #where.CTread#]]>
+        </isNotNull>
+        <isNotNull property="where.CInsideline" prepend="AND">
+          <![CDATA[C_INSIDELINE = #where.CInsideline#]]>
+        </isNotNull>
+        <isNotNull property="where.CLsidewall" prepend="AND">
+          <![CDATA[C_LSIDEWALL = #where.CLsidewall#]]>
+        </isNotNull>
+        <isNotNull property="where.CRsidewall" prepend="AND">
+          <![CDATA[C_RSIDEWALL = #where.CRsidewall#]]>
+        </isNotNull>
+        <isNotNull property="where.CBead" prepend="AND">
+          <![CDATA[C_BEAD = #where.CBead#]]>
+        </isNotNull>
+        <isNotNull property="where.CLwirecovering" prepend="AND">
+          <![CDATA[C_LWIRECOVERING = #where.CLwirecovering#]]>
+        </isNotNull>
+        <isNotNull property="where.CRwirecovering" prepend="AND">
+          <![CDATA[C_RWIRECOVERING = #where.CRwirecovering#]]>
+        </isNotNull>
+        <isNotNull property="where.CIsolatin" prepend="AND">
+          <![CDATA[C_ISOLATIN = #where.CIsolatin#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt0" prepend="AND">
+          <![CDATA[C_BELT0 = #where.CBelt0#]]>
+        </isNotNull>
+        <isNotNull property="where.CCarcass" prepend="AND">
+          <![CDATA[C_CARCASS = #where.CCarcass#]]>
+        </isNotNull>
+        <isNotNull property="where.CNylonc" prepend="AND">
+          <![CDATA[C_NYLONC = #where.CNylonc#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupDate" prepend="AND">
+          <![CDATA[BAKUP_DATE = #where.BakupDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CShoulderwedgeDate" prepend="AND">
+          <![CDATA[C_SHOULDERWEDGE_DATE = #where.CShoulderwedgeDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt1Date" prepend="AND">
+          <![CDATA[C_BELT1_DATE = #where.CBelt1Date#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt2Date" prepend="AND">
+          <![CDATA[C_BELT2_DATE = #where.CBelt2Date#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt3Date" prepend="AND">
+          <![CDATA[C_BELT3_DATE = #where.CBelt3Date#]]>
+        </isNotNull>
+        <isNotNull property="where.CTreadDate" prepend="AND">
+          <![CDATA[C_TREAD_DATE = #where.CTreadDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CInsidelineDate" prepend="AND">
+          <![CDATA[C_INSIDELINE_DATE = #where.CInsidelineDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CLsidewallDate" prepend="AND">
+          <![CDATA[C_LSIDEWALL_DATE = #where.CLsidewallDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CRsidewallDate" prepend="AND">
+          <![CDATA[C_RSIDEWALL_DATE = #where.CRsidewallDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CBeadDate" prepend="AND">
+          <![CDATA[C_BEAD_DATE = #where.CBeadDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CLwirecoveringDate" prepend="AND">
+          <![CDATA[C_LWIRECOVERING_DATE = #where.CLwirecoveringDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CRwirecoveringDate" prepend="AND">
+          <![CDATA[C_RWIRECOVERING_DATE = #where.CRwirecoveringDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CIsolatinDate" prepend="AND">
+          <![CDATA[C_ISOLATIN_DATE = #where.CIsolatinDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt0Date" prepend="AND">
+          <![CDATA[C_BELT0_DATE = #where.CBelt0Date#]]>
+        </isNotNull>
+        <isNotNull property="where.CCarcassDate" prepend="AND">
+          <![CDATA[C_CARCASS_DATE = #where.CCarcassDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CNyloncDate" prepend="AND">
+          <![CDATA[C_NYLONC_DATE = #where.CNyloncDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CShoulderwedgeTime" prepend="AND">
+          <![CDATA[C_SHOULDERWEDGE_TIME = #where.CShoulderwedgeTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt1Time" prepend="AND">
+          <![CDATA[C_BELT1_TIME = #where.CBelt1Time#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt2Time" prepend="AND">
+          <![CDATA[C_BELT2_TIME = #where.CBelt2Time#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt3Time" prepend="AND">
+          <![CDATA[C_BELT3_TIME = #where.CBelt3Time#]]>
+        </isNotNull>
+        <isNotNull property="where.CTreadTime" prepend="AND">
+          <![CDATA[C_TREAD_TIME = #where.CTreadTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CInsidelineTime" prepend="AND">
+          <![CDATA[C_INSIDELINE_TIME = #where.CInsidelineTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CLsidewallTime" prepend="AND">
+          <![CDATA[C_LSIDEWALL_TIME = #where.CLsidewallTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CRsidewallTime" prepend="AND">
+          <![CDATA[C_RSIDEWALL_TIME = #where.CRsidewallTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CBeadTime" prepend="AND">
+          <![CDATA[C_BEAD_TIME = #where.CBeadTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CLwirecoveringTime" prepend="AND">
+          <![CDATA[C_LWIRECOVERING_TIME = #where.CLwirecoveringTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CRwirecoveringTime" prepend="AND">
+          <![CDATA[C_RWIRECOVERING_TIME = #where.CRwirecoveringTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CIsolatinTime" prepend="AND">
+          <![CDATA[C_ISOLATIN_TIME = #where.CIsolatinTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CBelt0Time" prepend="AND">
+          <![CDATA[C_BELT0_TIME = #where.CBelt0Time#]]>
+        </isNotNull>
+        <isNotNull property="where.CCarcassTime" prepend="AND">
+          <![CDATA[C_CARCASS_TIME = #where.CCarcassTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CNyloncTime" prepend="AND">
+          <![CDATA[C_NYLONC_TIME = #where.CNyloncTime#]]>
+        </isNotNull>
+        <isNotNull property="where.IsControlTime" prepend="AND">
+          <![CDATA[IS_CONTROL_TIME = #where.IsControlTime#]]>
+        </isNotNull>
+        <isNotNull property="where.IsControlDate" prepend="AND">
+          <![CDATA[IS_CONTROL_DATE = #where.IsControlDate#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopIdTime" prepend="AND">
+          <![CDATA[WORKSHOP_ID_TIME = #where.WorkshopIdTime#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopIdDate" prepend="AND">
+          <![CDATA[WORKSHOP_ID_DATE = #where.WorkshopIdDate#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO BBE_EQUIP_CONTROL]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="IsControl" prepend=",">IS_CONTROL</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BakupFlag" prepend=",">BAKUP_FLAG</isNotNull>
+        <isNotNull property="BakupTime" prepend=",">BAKUP_TIME</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">WORKSHOP_ID</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="CShoulderwedge" prepend=",">C_SHOULDERWEDGE</isNotNull>
+        <isNotNull property="CBelt1" prepend=",">C_BELT1</isNotNull>
+        <isNotNull property="CBelt2" prepend=",">C_BELT2</isNotNull>
+        <isNotNull property="CBelt3" prepend=",">C_BELT3</isNotNull>
+        <isNotNull property="CTread" prepend=",">C_TREAD</isNotNull>
+        <isNotNull property="CInsideline" prepend=",">C_INSIDELINE</isNotNull>
+        <isNotNull property="CLsidewall" prepend=",">C_LSIDEWALL</isNotNull>
+        <isNotNull property="CRsidewall" prepend=",">C_RSIDEWALL</isNotNull>
+        <isNotNull property="CBead" prepend=",">C_BEAD</isNotNull>
+        <isNotNull property="CLwirecovering" prepend=",">C_LWIRECOVERING</isNotNull>
+        <isNotNull property="CRwirecovering" prepend=",">C_RWIRECOVERING</isNotNull>
+        <isNotNull property="CIsolatin" prepend=",">C_ISOLATIN</isNotNull>
+        <isNotNull property="CBelt0" prepend=",">C_BELT0</isNotNull>
+        <isNotNull property="CCarcass" prepend=",">C_CARCASS</isNotNull>
+        <isNotNull property="CNylonc" prepend=",">C_NYLONC</isNotNull>
+        <isNotNull property="BakupDate" prepend=",">BAKUP_DATE</isNotNull>
+        <isNotNull property="CShoulderwedgeDate" prepend=",">C_SHOULDERWEDGE_DATE</isNotNull>
+        <isNotNull property="CBelt1Date" prepend=",">C_BELT1_DATE</isNotNull>
+        <isNotNull property="CBelt2Date" prepend=",">C_BELT2_DATE</isNotNull>
+        <isNotNull property="CBelt3Date" prepend=",">C_BELT3_DATE</isNotNull>
+        <isNotNull property="CTreadDate" prepend=",">C_TREAD_DATE</isNotNull>
+        <isNotNull property="CInsidelineDate" prepend=",">C_INSIDELINE_DATE</isNotNull>
+        <isNotNull property="CLsidewallDate" prepend=",">C_LSIDEWALL_DATE</isNotNull>
+        <isNotNull property="CRsidewallDate" prepend=",">C_RSIDEWALL_DATE</isNotNull>
+        <isNotNull property="CBeadDate" prepend=",">C_BEAD_DATE</isNotNull>
+        <isNotNull property="CLwirecoveringDate" prepend=",">C_LWIRECOVERING_DATE</isNotNull>
+        <isNotNull property="CRwirecoveringDate" prepend=",">C_RWIRECOVERING_DATE</isNotNull>
+        <isNotNull property="CIsolatinDate" prepend=",">C_ISOLATIN_DATE</isNotNull>
+        <isNotNull property="CBelt0Date" prepend=",">C_BELT0_DATE</isNotNull>
+        <isNotNull property="CCarcassDate" prepend=",">C_CARCASS_DATE</isNotNull>
+        <isNotNull property="CNyloncDate" prepend=",">C_NYLONC_DATE</isNotNull>
+        <isNotNull property="CShoulderwedgeTime" prepend=",">C_SHOULDERWEDGE_TIME</isNotNull>
+        <isNotNull property="CBelt1Time" prepend=",">C_BELT1_TIME</isNotNull>
+        <isNotNull property="CBelt2Time" prepend=",">C_BELT2_TIME</isNotNull>
+        <isNotNull property="CBelt3Time" prepend=",">C_BELT3_TIME</isNotNull>
+        <isNotNull property="CTreadTime" prepend=",">C_TREAD_TIME</isNotNull>
+        <isNotNull property="CInsidelineTime" prepend=",">C_INSIDELINE_TIME</isNotNull>
+        <isNotNull property="CLsidewallTime" prepend=",">C_LSIDEWALL_TIME</isNotNull>
+        <isNotNull property="CRsidewallTime" prepend=",">C_RSIDEWALL_TIME</isNotNull>
+        <isNotNull property="CBeadTime" prepend=",">C_BEAD_TIME</isNotNull>
+        <isNotNull property="CLwirecoveringTime" prepend=",">C_LWIRECOVERING_TIME</isNotNull>
+        <isNotNull property="CRwirecoveringTime" prepend=",">C_RWIRECOVERING_TIME</isNotNull>
+        <isNotNull property="CIsolatinTime" prepend=",">C_ISOLATIN_TIME</isNotNull>
+        <isNotNull property="CBelt0Time" prepend=",">C_BELT0_TIME</isNotNull>
+        <isNotNull property="CCarcassTime" prepend=",">C_CARCASS_TIME</isNotNull>
+        <isNotNull property="CNyloncTime" prepend=",">C_NYLONC_TIME</isNotNull>
+        <isNotNull property="IsControlTime" prepend=",">IS_CONTROL_TIME</isNotNull>
+        <isNotNull property="IsControlDate" prepend=",">IS_CONTROL_DATE</isNotNull>
+        <isNotNull property="WorkshopIdTime" prepend=",">WORKSHOP_ID_TIME</isNotNull>
+        <isNotNull property="WorkshopIdDate" prepend=",">WORKSHOP_ID_DATE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_BBE_EQUIP_CONTROL.NEXTVAL</isNull>
+        <isNotNull property="IsControl" prepend=",">#IsControl#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BakupFlag" prepend=",">#BakupFlag#</isNotNull>
+        <isNotNull property="BakupTime" prepend=",">#BakupTime#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">#WorkshopId#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="CShoulderwedge" prepend=",">#CShoulderwedge#</isNotNull>
+        <isNotNull property="CBelt1" prepend=",">#CBelt1#</isNotNull>
+        <isNotNull property="CBelt2" prepend=",">#CBelt2#</isNotNull>
+        <isNotNull property="CBelt3" prepend=",">#CBelt3#</isNotNull>
+        <isNotNull property="CTread" prepend=",">#CTread#</isNotNull>
+        <isNotNull property="CInsideline" prepend=",">#CInsideline#</isNotNull>
+        <isNotNull property="CLsidewall" prepend=",">#CLsidewall#</isNotNull>
+        <isNotNull property="CRsidewall" prepend=",">#CRsidewall#</isNotNull>
+        <isNotNull property="CBead" prepend=",">#CBead#</isNotNull>
+        <isNotNull property="CLwirecovering" prepend=",">#CLwirecovering#</isNotNull>
+        <isNotNull property="CRwirecovering" prepend=",">#CRwirecovering#</isNotNull>
+        <isNotNull property="CIsolatin" prepend=",">#CIsolatin#</isNotNull>
+        <isNotNull property="CBelt0" prepend=",">#CBelt0#</isNotNull>
+        <isNotNull property="CCarcass" prepend=",">#CCarcass#</isNotNull>
+        <isNotNull property="CNylonc" prepend=",">#CNylonc#</isNotNull>
+        <isNotNull property="BakupDate" prepend=",">#BakupDate#</isNotNull>
+        <isNotNull property="CShoulderwedgeDate" prepend=",">#CShoulderwedgeDate#</isNotNull>
+        <isNotNull property="CBelt1Date" prepend=",">#CBelt1Date#</isNotNull>
+        <isNotNull property="CBelt2Date" prepend=",">#CBelt2Date#</isNotNull>
+        <isNotNull property="CBelt3Date" prepend=",">#CBelt3Date#</isNotNull>
+        <isNotNull property="CTreadDate" prepend=",">#CTreadDate#</isNotNull>
+        <isNotNull property="CInsidelineDate" prepend=",">#CInsidelineDate#</isNotNull>
+        <isNotNull property="CLsidewallDate" prepend=",">#CLsidewallDate#</isNotNull>
+        <isNotNull property="CRsidewallDate" prepend=",">#CRsidewallDate#</isNotNull>
+        <isNotNull property="CBeadDate" prepend=",">#CBeadDate#</isNotNull>
+        <isNotNull property="CLwirecoveringDate" prepend=",">#CLwirecoveringDate#</isNotNull>
+        <isNotNull property="CRwirecoveringDate" prepend=",">#CRwirecoveringDate#</isNotNull>
+        <isNotNull property="CIsolatinDate" prepend=",">#CIsolatinDate#</isNotNull>
+        <isNotNull property="CBelt0Date" prepend=",">#CBelt0Date#</isNotNull>
+        <isNotNull property="CCarcassDate" prepend=",">#CCarcassDate#</isNotNull>
+        <isNotNull property="CNyloncDate" prepend=",">#CNyloncDate#</isNotNull>
+        <isNotNull property="CShoulderwedgeTime" prepend=",">#CShoulderwedgeTime#</isNotNull>
+        <isNotNull property="CBelt1Time" prepend=",">#CBelt1Time#</isNotNull>
+        <isNotNull property="CBelt2Time" prepend=",">#CBelt2Time#</isNotNull>
+        <isNotNull property="CBelt3Time" prepend=",">#CBelt3Time#</isNotNull>
+        <isNotNull property="CTreadTime" prepend=",">#CTreadTime#</isNotNull>
+        <isNotNull property="CInsidelineTime" prepend=",">#CInsidelineTime#</isNotNull>
+        <isNotNull property="CLsidewallTime" prepend=",">#CLsidewallTime#</isNotNull>
+        <isNotNull property="CRsidewallTime" prepend=",">#CRsidewallTime#</isNotNull>
+        <isNotNull property="CBeadTime" prepend=",">#CBeadTime#</isNotNull>
+        <isNotNull property="CLwirecoveringTime" prepend=",">#CLwirecoveringTime#</isNotNull>
+        <isNotNull property="CRwirecoveringTime" prepend=",">#CRwirecoveringTime#</isNotNull>
+        <isNotNull property="CIsolatinTime" prepend=",">#CIsolatinTime#</isNotNull>
+        <isNotNull property="CBelt0Time" prepend=",">#CBelt0Time#</isNotNull>
+        <isNotNull property="CCarcassTime" prepend=",">#CCarcassTime#</isNotNull>
+        <isNotNull property="CNyloncTime" prepend=",">#CNyloncTime#</isNotNull>
+        <isNotNull property="IsControlTime" prepend=",">#IsControlTime#</isNotNull>
+        <isNotNull property="IsControlDate" prepend=",">#IsControlDate#</isNotNull>
+        <isNotNull property="WorkshopIdTime" prepend=",">#WorkshopIdTime#</isNotNull>
+        <isNotNull property="WorkshopIdDate" prepend=",">#WorkshopIdDate#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE BBE_EQUIP_CONTROL
+       <dynamic prepend="SET">
+        <isNotNull  property="update.IsControl"  prepend=",">
+          IS_CONTROL = #update.IsControl#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BakupFlag"  prepend=",">
+          BAKUP_FLAG = #update.BakupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BakupTime"  prepend=",">
+          BAKUP_TIME = #update.BakupTime#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.WorkshopId"  prepend=",">
+          WORKSHOP_ID = #update.WorkshopId#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.CShoulderwedge"  prepend=",">
+          C_SHOULDERWEDGE = #update.CShoulderwedge#
+        </isNotNull>
+        <isNotNull  property="update.CBelt1"  prepend=",">
+          C_BELT1 = #update.CBelt1#
+        </isNotNull>
+        <isNotNull  property="update.CBelt2"  prepend=",">
+          C_BELT2 = #update.CBelt2#
+        </isNotNull>
+        <isNotNull  property="update.CBelt3"  prepend=",">
+          C_BELT3 = #update.CBelt3#
+        </isNotNull>
+        <isNotNull  property="update.CTread"  prepend=",">
+          C_TREAD = #update.CTread#
+        </isNotNull>
+        <isNotNull  property="update.CInsideline"  prepend=",">
+          C_INSIDELINE = #update.CInsideline#
+        </isNotNull>
+        <isNotNull  property="update.CLsidewall"  prepend=",">
+          C_LSIDEWALL = #update.CLsidewall#
+        </isNotNull>
+        <isNotNull  property="update.CRsidewall"  prepend=",">
+          C_RSIDEWALL = #update.CRsidewall#
+        </isNotNull>
+        <isNotNull  property="update.CBead"  prepend=",">
+          C_BEAD = #update.CBead#
+        </isNotNull>
+        <isNotNull  property="update.CLwirecovering"  prepend=",">
+          C_LWIRECOVERING = #update.CLwirecovering#
+        </isNotNull>
+        <isNotNull  property="update.CRwirecovering"  prepend=",">
+          C_RWIRECOVERING = #update.CRwirecovering#
+        </isNotNull>
+        <isNotNull  property="update.CIsolatin"  prepend=",">
+          C_ISOLATIN = #update.CIsolatin#
+        </isNotNull>
+        <isNotNull  property="update.CBelt0"  prepend=",">
+          C_BELT0 = #update.CBelt0#
+        </isNotNull>
+        <isNotNull  property="update.CCarcass"  prepend=",">
+          C_CARCASS = #update.CCarcass#
+        </isNotNull>
+        <isNotNull  property="update.CNylonc"  prepend=",">
+          C_NYLONC = #update.CNylonc#
+        </isNotNull>
+        <isNotNull  property="update.BakupDate"  prepend=",">
+          BAKUP_DATE = #update.BakupDate#
+        </isNotNull>
+        <isNotNull  property="update.CShoulderwedgeDate"  prepend=",">
+          C_SHOULDERWEDGE_DATE = #update.CShoulderwedgeDate#
+        </isNotNull>
+        <isNotNull  property="update.CBelt1Date"  prepend=",">
+          C_BELT1_DATE = #update.CBelt1Date#
+        </isNotNull>
+        <isNotNull  property="update.CBelt2Date"  prepend=",">
+          C_BELT2_DATE = #update.CBelt2Date#
+        </isNotNull>
+        <isNotNull  property="update.CBelt3Date"  prepend=",">
+          C_BELT3_DATE = #update.CBelt3Date#
+        </isNotNull>
+        <isNotNull  property="update.CTreadDate"  prepend=",">
+          C_TREAD_DATE = #update.CTreadDate#
+        </isNotNull>
+        <isNotNull  property="update.CInsidelineDate"  prepend=",">
+          C_INSIDELINE_DATE = #update.CInsidelineDate#
+        </isNotNull>
+        <isNotNull  property="update.CLsidewallDate"  prepend=",">
+          C_LSIDEWALL_DATE = #update.CLsidewallDate#
+        </isNotNull>
+        <isNotNull  property="update.CRsidewallDate"  prepend=",">
+          C_RSIDEWALL_DATE = #update.CRsidewallDate#
+        </isNotNull>
+        <isNotNull  property="update.CBeadDate"  prepend=",">
+          C_BEAD_DATE = #update.CBeadDate#
+        </isNotNull>
+        <isNotNull  property="update.CLwirecoveringDate"  prepend=",">
+          C_LWIRECOVERING_DATE = #update.CLwirecoveringDate#
+        </isNotNull>
+        <isNotNull  property="update.CRwirecoveringDate"  prepend=",">
+          C_RWIRECOVERING_DATE = #update.CRwirecoveringDate#
+        </isNotNull>
+        <isNotNull  property="update.CIsolatinDate"  prepend=",">
+          C_ISOLATIN_DATE = #update.CIsolatinDate#
+        </isNotNull>
+        <isNotNull  property="update.CBelt0Date"  prepend=",">
+          C_BELT0_DATE = #update.CBelt0Date#
+        </isNotNull>
+        <isNotNull  property="update.CCarcassDate"  prepend=",">
+          C_CARCASS_DATE = #update.CCarcassDate#
+        </isNotNull>
+        <isNotNull  property="update.CNyloncDate"  prepend=",">
+          C_NYLONC_DATE = #update.CNyloncDate#
+        </isNotNull>
+        <isNotNull  property="update.CShoulderwedgeTime"  prepend=",">
+          C_SHOULDERWEDGE_TIME = #update.CShoulderwedgeTime#
+        </isNotNull>
+        <isNotNull  property="update.CBelt1Time"  prepend=",">
+          C_BELT1_TIME = #update.CBelt1Time#
+        </isNotNull>
+        <isNotNull  property="update.CBelt2Time"  prepend=",">
+          C_BELT2_TIME = #update.CBelt2Time#
+        </isNotNull>
+        <isNotNull  property="update.CBelt3Time"  prepend=",">
+          C_BELT3_TIME = #update.CBelt3Time#
+        </isNotNull>
+        <isNotNull  property="update.CTreadTime"  prepend=",">
+          C_TREAD_TIME = #update.CTreadTime#
+        </isNotNull>
+        <isNotNull  property="update.CInsidelineTime"  prepend=",">
+          C_INSIDELINE_TIME = #update.CInsidelineTime#
+        </isNotNull>
+        <isNotNull  property="update.CLsidewallTime"  prepend=",">
+          C_LSIDEWALL_TIME = #update.CLsidewallTime#
+        </isNotNull>
+        <isNotNull  property="update.CRsidewallTime"  prepend=",">
+          C_RSIDEWALL_TIME = #update.CRsidewallTime#
+        </isNotNull>
+        <isNotNull  property="update.CBeadTime"  prepend=",">
+          C_BEAD_TIME = #update.CBeadTime#
+        </isNotNull>
+        <isNotNull  property="update.CLwirecoveringTime"  prepend=",">
+          C_LWIRECOVERING_TIME = #update.CLwirecoveringTime#
+        </isNotNull>
+        <isNotNull  property="update.CRwirecoveringTime"  prepend=",">
+          C_RWIRECOVERING_TIME = #update.CRwirecoveringTime#
+        </isNotNull>
+        <isNotNull  property="update.CIsolatinTime"  prepend=",">
+          C_ISOLATIN_TIME = #update.CIsolatinTime#
+        </isNotNull>
+        <isNotNull  property="update.CBelt0Time"  prepend=",">
+          C_BELT0_TIME = #update.CBelt0Time#
+        </isNotNull>
+        <isNotNull  property="update.CCarcassTime"  prepend=",">
+          C_CARCASS_TIME = #update.CCarcassTime#
+        </isNotNull>
+        <isNotNull  property="update.CNyloncTime"  prepend=",">
+          C_NYLONC_TIME = #update.CNyloncTime#
+        </isNotNull>
+        <isNotNull  property="update.IsControlTime"  prepend=",">
+          IS_CONTROL_TIME = #update.IsControlTime#
+        </isNotNull>
+        <isNotNull  property="update.IsControlDate"  prepend=",">
+          IS_CONTROL_DATE = #update.IsControlDate#
+        </isNotNull>
+        <isNotNull  property="update.WorkshopIdTime"  prepend=",">
+          WORKSHOP_ID_TIME = #update.WorkshopIdTime#
+        </isNotNull>
+        <isNotNull  property="update.WorkshopIdDate"  prepend=",">
+          WORKSHOP_ID_DATE = #update.WorkshopIdDate#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM BBE_EQUIP_CONTROL
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_BbeEquipControl">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_BbeEquipControl">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM BBE_EQUIP_CONTROL
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM BBE_EQUIP_CONTROL
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_BbeEquipControl" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE BBE_EQUIP_CONTROL
+    </statement>
+  </statements>
+</sqlMap>

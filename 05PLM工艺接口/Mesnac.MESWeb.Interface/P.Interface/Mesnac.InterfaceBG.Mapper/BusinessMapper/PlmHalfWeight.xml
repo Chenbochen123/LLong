@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.InterfaceBG.Mapper.BusinessMapper.PlmHalfWeight"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PLM_HALF_WEIGHT ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Mastersap" prepend="AND">
+          <![CDATA[MASTERSAP = #where.Mastersap#]]>
+        </isNotNull>
+        <isNotNull property="where.Masterrevision" prepend="AND">
+          <![CDATA[MASTERREVISION = #where.Masterrevision#]]>
+        </isNotNull>
+        <isNotNull property="where.Masterspec" prepend="AND">
+          <![CDATA[MASTERSPEC = #where.Masterspec#]]>
+        </isNotNull>
+        <isNotNull property="where.Masterdesc" prepend="AND">
+          <![CDATA[MASTERDESC = #where.Masterdesc#]]>
+        </isNotNull>
+        <isNotNull property="where.Subitemsap" prepend="AND">
+          <![CDATA[SUBITEMSAP = #where.Subitemsap#]]>
+        </isNotNull>
+        <isNotNull property="where.Subitemrevision" prepend="AND">
+          <![CDATA[SUBITEMREVISION = #where.Subitemrevision#]]>
+        </isNotNull>
+        <isNotNull property="where.Subitemspec" prepend="AND">
+          <![CDATA[SUBITEMSPEC = #where.Subitemspec#]]>
+        </isNotNull>
+        <isNotNull property="where.Subitemdesc" prepend="AND">
+          <![CDATA[SUBITEMDESC = #where.Subitemdesc#]]>
+        </isNotNull>
+        <isNotNull property="where.Weight" prepend="AND">
+          <![CDATA[WEIGHT = #where.Weight#]]>
+        </isNotNull>
+        <isNotNull property="where.Unit" prepend="AND">
+          <![CDATA[UNIT = #where.Unit#]]>
+        </isNotNull>
+        <isNotNull property="where.Prophase" prepend="AND">
+          <![CDATA[PROPHASE = #where.Prophase#]]>
+        </isNotNull>
+        <isNotNull property="where.Factory" prepend="AND">
+          <![CDATA[FACTORY = #where.Factory#]]>
+        </isNotNull>
+        <isNotNull property="where.Werks" prepend="AND">
+          <![CDATA[WERKS = #where.Werks#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

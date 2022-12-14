@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CppFirsttyreEquip"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CppFirsttyreEquip" type="Mesnac.Curing.Entity.BasicEntity.CppFirsttyreEquip, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CppFirsttyreEquip" class="CppFirsttyreEquip">
+    <result property="ValNum" column="VAL_NUM"/>
+    <result property="ValPlanNum" column="VAL_PLAN_NUM"/>
+    <result property="ObjId" column="OBJID"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="EquipPosition" column="EQUIP_POSITION"/>
+    <result property="MouldNo" column="MOULD_NO"/>
+    <result property="TyreNum" column="TYRE_NUM"/>
+    <result property="MouldState" column="MOULD_STATE"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="MouldPlanId" column="MOULD_PLAN_ID"/>
+    <result property="MouldRecordId" column="MOULD_RECORD_ID"/>
+    <result property="StateTime" column="STATE_TIME"/>
+    <result property="TyrePlanNum" column="TYRE_PLAN_NUM"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CppFirsttyreEquip" class="CppFirsttyreEquip">
+    <parameter property="ValNum" column="ValNum"/>
+    <parameter property="ValPlanNum" column="ValPlanNum"/>
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="EquipPosition" column="EquipPosition"/>
+    <parameter property="MouldNo" column="MouldNo"/>
+    <parameter property="TyreNum" column="TyreNum"/>
+    <parameter property="MouldState" column="MouldState"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="MouldPlanId" column="MouldPlanId"/>
+    <parameter property="MouldRecordId" column="MouldRecordId"/>
+    <parameter property="StateTime" column="StateTime"/>
+    <parameter property="TyrePlanNum" column="TyrePlanNum"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CPP_FIRSTTYRE_EQUIP ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ValNum" prepend="AND">
+          <![CDATA[VAL_NUM = #where.ValNum#]]>
+        </isNotNull>
+        <isNotNull property="where.ValPlanNum" prepend="AND">
+          <![CDATA[VAL_PLAN_NUM = #where.ValPlanNum#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipPosition" prepend="AND">
+          <![CDATA[EQUIP_POSITION = #where.EquipPosition#]]>
+        </isNotNull>
+        <isNotNull property="where.MouldNo" prepend="AND">
+          <![CDATA[MOULD_NO = #where.MouldNo#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNum" prepend="AND">
+          <![CDATA[TYRE_NUM = #where.TyreNum#]]>
+        </isNotNull>
+        <isNotNull property="where.MouldState" prepend="AND">
+          <![CDATA[MOULD_STATE = #where.MouldState#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.MouldPlanId" prepend="AND">
+          <![CDATA[MOULD_PLAN_ID = #where.MouldPlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.MouldRecordId" prepend="AND">
+          <![CDATA[MOULD_RECORD_ID = #where.MouldRecordId#]]>
+        </isNotNull>
+        <isNotNull property="where.StateTime" prepend="AND">
+          <![CDATA[STATE_TIME = #where.StateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.TyrePlanNum" prepend="AND">
+          <![CDATA[TYRE_PLAN_NUM = #where.TyrePlanNum#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CPP_FIRSTTYRE_EQUIP]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="ValNum" prepend=",">VAL_NUM</isNotNull>
+        <isNotNull property="ValPlanNum" prepend=",">VAL_PLAN_NUM</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="EquipPosition" prepend=",">EQUIP_POSITION</isNotNull>
+        <isNotNull property="MouldNo" prepend=",">MOULD_NO</isNotNull>
+        <isNotNull property="TyreNum" prepend=",">TYRE_NUM</isNotNull>
+        <isNotNull property="MouldState" prepend=",">MOULD_STATE</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="MouldPlanId" prepend=",">MOULD_PLAN_ID</isNotNull>
+        <isNotNull property="MouldRecordId" prepend=",">MOULD_RECORD_ID</isNotNull>
+        <isNotNull property="StateTime" prepend=",">STATE_TIME</isNotNull>
+        <isNotNull property="TyrePlanNum" prepend=",">TYRE_PLAN_NUM</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_CPP_FIRSTTYRE_EQUIP.NEXTVAL</isNull>
+        <isNotNull property="ValNum" prepend=",">#ValNum#</isNotNull>
+        <isNotNull property="ValPlanNum" prepend=",">#ValPlanNum#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="EquipPosition" prepend=",">#EquipPosition#</isNotNull>
+        <isNotNull property="MouldNo" prepend=",">#MouldNo#</isNotNull>
+        <isNotNull property="TyreNum" prepend=",">#TyreNum#</isNotNull>
+        <isNotNull property="MouldState" prepend=",">#MouldState#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="MouldPlanId" prepend=",">#MouldPlanId#</isNotNull>
+        <isNotNull property="MouldRecordId" prepend=",">#MouldRecordId#</isNotNull>
+        <isNotNull property="StateTime" prepend=",">#StateTime#</isNotNull>
+        <isNotNull property="TyrePlanNum" prepend=",">#TyrePlanNum#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CPP_FIRSTTYRE_EQUIP
+       <dynamic prepend="SET">
+        <isNotNull  property="update.ValNum"  prepend=",">
+          VAL_NUM = #update.ValNum#
+        </isNotNull>
+        <isNotNull  property="update.ValPlanNum"  prepend=",">
+          VAL_PLAN_NUM = #update.ValPlanNum#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.EquipPosition"  prepend=",">
+          EQUIP_POSITION = #update.EquipPosition#
+        </isNotNull>
+        <isNotNull  property="update.MouldNo"  prepend=",">
+          MOULD_NO = #update.MouldNo#
+        </isNotNull>
+        <isNotNull  property="update.TyreNum"  prepend=",">
+          TYRE_NUM = #update.TyreNum#
+        </isNotNull>
+        <isNotNull  property="update.MouldState"  prepend=",">
+          MOULD_STATE = #update.MouldState#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.MouldPlanId"  prepend=",">
+          MOULD_PLAN_ID = #update.MouldPlanId#
+        </isNotNull>
+        <isNotNull  property="update.MouldRecordId"  prepend=",">
+          MOULD_RECORD_ID = #update.MouldRecordId#
+        </isNotNull>
+        <isNotNull  property="update.StateTime"  prepend=",">
+          STATE_TIME = #update.StateTime#
+        </isNotNull>
+        <isNotNull  property="update.TyrePlanNum"  prepend=",">
+          TYRE_PLAN_NUM = #update.TyrePlanNum#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CPP_FIRSTTYRE_EQUIP
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CppFirsttyreEquip">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CppFirsttyreEquip">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CPP_FIRSTTYRE_EQUIP
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CPP_FIRSTTYRE_EQUIP
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CppFirsttyreEquip" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CPP_FIRSTTYRE_EQUIP
+    </statement>
+  </statements>
+</sqlMap>

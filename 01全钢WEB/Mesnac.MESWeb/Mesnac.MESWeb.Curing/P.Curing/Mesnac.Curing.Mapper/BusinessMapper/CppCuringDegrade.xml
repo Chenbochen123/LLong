@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CppCuringDegrade"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CPP_CURING_DEGRADE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[TYRE_NO = #where.TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.CurrentGreenTyre" prepend="AND">
+          <![CDATA[CURRENT_GREEN_TYRE = #where.CurrentGreenTyre#]]>
+        </isNotNull>
+        <isNotNull property="where.DegradeReason" prepend="AND">
+          <![CDATA[DEGRADE_REASON = #where.DegradeReason#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.DegradeId" prepend="AND">
+          <![CDATA[DEGRADE_ID = #where.DegradeId#]]>
+        </isNotNull>
+        <isNotNull property="where.DegradeState" prepend="AND">
+          <![CDATA[DEGRADE_STATE = #where.DegradeState#]]>
+        </isNotNull>
+        <isNotNull property="where.UserId" prepend="AND">
+          <![CDATA[USER_ID = #where.UserId#]]>
+        </isNotNull>
+      <isNotNull property="where.IsConfirm" prepend="AND">
+        <![CDATA[IS_CONFIRM = #where.IsConfirm#]]>
+      </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <!--查询-->
+     <select id="GetCuringInfo" parameterClass="map" resultClass="row">
+       <![CDATA[
+        select t1.*,t2.equip_code,t4.material_name from CPP_CURING_DEGRADE t1
+        left join sbe_equip t2 on t1.equip_id=t2.objid 
+        left join cpp_curing_production  t3 on t1.tyre_no=t3.tyre_no
+        left join sbm_material t4 on t3.material_id=t4.objid
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.TyreNO" prepend="AND">
+           <![CDATA[t1.tyre_no = #where.TyreNO#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <!--查询-->
+     <select id="GetCuringInfoByEquipID" parameterClass="map" resultClass="row">
+       <![CDATA[
+         select t1.*,t2.EQUIP_POSITION from (select * from cpp_curing_degrade where degrade_state=0) t1 left join CPP_CURING_PRODUCTION t2 on t1.tyre_no=t2.tyre_no
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.EquipID" prepend="AND">
+           <![CDATA[t1.EQUIP_ID = #where.EquipID#]]>
+         </isNotNull>
+         <isNotNull property="where.RecordTime" prepend="AND">
+           <![CDATA[t1.RECORD_TIME > #where.RecordTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipPosition" prepend="AND">
+           <![CDATA[t2.EQUIP_POSITION = #where.EquipPosition#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+         order by t1.record_time desc
+        ]]>
+     </select>
+
+     <select id="Select@CrudCppCuringDegrade" parameterClass="map" resultClass="row">
+       <![CDATA[
+      select * from (  select T.OBJID,T.TYRE_NO,T.GREEN_TYRE_NO,T.CURRENT_GREEN_TYRE,T.DEGRADE_REASON,T.RECORD_USER_ID,T.RECORD_TIME,T.EQUIP_ID,DEGRADE_ID,DEGRADE_STATE,USER_ID,
+ IS_CONFIRM,RECORD_USER_NAME,EQUIP_NAME,GRADENAME,DEGRADE_NAME,MATERIAL,REASON,MOULD_EQUIPNAME ,equip_position
+               , MAX(DECODE(T.WORK_NAME,'成型主机',T.USER_NAME,NULL)) EMP1
+               , MAX(DECODE(T.WORK_NAME,'成型副机',T.USER_NAME,NULL)) EMP2
+               , MAX(DECODE(T.WORK_NAME,'成型帮车',T.USER_NAME,NULL)) EMP3
+ 
+  from ( 
+SELECT T1.*, T2.USER_NAME RECORD_USER_NAME 
+        , T3.EQUIP_NAME,case t4.GRADENAME when '一级品' then '合格品' when '二级品' then '次品' when '一级品B' then '合格品B' else T4.GRADENAME end GRADENAME,T5.USER_NAME DEGRADE_NAME,T7.MATERIAL_NAME MATERIAL,T8.REASON,
+        C.EQUIP_NAME MOULD_EQUIPNAME,E.USER_NAME,WORK_NAME,case t6.equip_position when 1 then '左模' when 2 then '右模' else '' end equip_position 
+        FROM CPP_CURING_DEGRADE T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        LEFT JOIN SBE_EQUIP T3 ON T1.EQUIP_ID = T3.OBJID 
+        LEFT JOIN (SELECT * FROM FQG_GRADE_INFO WHERE WORK_PROCESS_ID=499) T4 ON T1.DEGRADE_ID=T4.GRADE_CODE
+        LEFT JOIN SSB_USER T5 ON T1.USER_ID=T5.OBJID
+        LEFT JOIN CPP_CURING_PRODUCTION T6 ON T1.TYRE_NO=T6.TYRE_NO
+        LEFT JOIN SBM_MATERIAL T7 ON T7.OBJID= T6.Material_Id
+        LEFT JOIN FQD_DEGRADE_REASONS T8 ON T8.OBJID = T1.IS_CONFIRM
+        LEFT JOIN BPM_PRODUCTION A ON A.GREEN_TYRE_NO = T1.GREEN_TYRE_NO
+        LEFT JOIN BPM_SHIFT_MASTER B ON A.SHIFT_MASTER_ID = B.OBJID 
+        LEFT JOIN SBE_EQUIP C ON B.EQUIP_ID = C.OBJID 
+        LEFT JOIN bpm_shift_detail D on D.master_id = B.objid
+        LEFT JOIN SSB_USER E ON E.OBJID = D.WORKER_ID1
+        LEFT JOIN SSB_WORK F ON F.OBJID = D.WORKER_ID8
+        WHERE 1=1
+      ]]>
+         <isNotNull property="where.OBJID" prepend="AND">
+           <![CDATA[T1.OBJID = #where.OBJID#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[T1.RECORD_TIME >= to_date(#where.BeginTime#,'yyyy-mm-dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[T1.RECORD_TIME <= to_date(#where.EndTime#,'yyyy-mm-dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.EQUIP_ID" prepend="AND">
+           <![CDATA[T1.EQUIP_ID = #where.EQUIP_ID#]]>
+         </isNotNull>
+         <isNotNull property="where.TyreNo" prepend="AND">
+           <![CDATA[T1.TYRE_NO = #where.TyreNo# ]]>
+         </isNotNull>
+         <isNotNull property="where.GreenNo" prepend="AND">
+           <![CDATA[T1.GREEN_TYRE_NO = #where.GreenNo# ]]>
+         </isNotNull>
+         <isNotNull property="where.DEGRADE_ID" prepend="AND">
+           <![CDATA[T1.DEGRADE_ID = #where.DEGRADE_ID#]]>
+         </isNotNull>
+       <![CDATA[ )    T
+        GROUP BY T.OBJID,T.TYRE_NO,T.GREEN_TYRE_NO,T.CURRENT_GREEN_TYRE,T.DEGRADE_REASON,T.RECORD_USER_ID,T.RECORD_TIME,T.EQUIP_ID,DEGRADE_ID,DEGRADE_STATE,USER_ID,
+ IS_CONFIRM,RECORD_USER_NAME,EQUIP_NAME,GRADENAME,DEGRADE_NAME,MATERIAL,REASON,MOULD_EQUIPNAME,equip_position ) order by RECORD_TIME ASC]]>
+     </select>
+     <select id="GetGradeInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T.GREEN_TYRE_NO,NVL(T.DEGRADE_ID,0) DEGRADE,NVL(T1.GRADEID,0) XGRADE,NVL(T2.GRADEID,0) FGRADE FROM CPP_CURING_DEGRADE T 
+        LEFT JOIN FQX_XCHECK_INFO T1 ON T1.TYRDID = T.GREEN_TYRE_NO AND T1.DELETE_FLAG=0 AND T1.NEW_FLAG=1
+        LEFT JOIN FQF_FCHECK_INFO T2 ON T2.TYREID = T.GREEN_TYRE_NO AND T2.DELETE_FLAG=0 AND T2.NEW_FLAG=1
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property ="greenTyreNo" prepend="AND">
+           <![CDATA[T.GREEN_TYRE_NO =#greenTyreNo#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <update id="UpdateTyreState" parameterClass="map">
+       <![CDATA[
+       UPDATE SPP_TYRE_STATE SET FINAL_CHECK_GRADE =#gradeID# WHERE GREEN_TYRE_NO =#greenTyreNo#
+       ]]>
+     </update>
+     <select id="GetCapsuleDegrade" parameterClass="map" resultClass="Row">
+       <![CDATA[
+     SELECT TR.TYRE_NO,TR.GREEN_TYRE_NO,T9.MATERIAL_NAME,T5.EQUIP_NAME,CASE TR.EQUIP_POSITION WHEN 1 THEN '左模' ELSE '右模' END EQUIP_POSITION,TR.BLADDER_USER_AMOUNT
+    ,TR.SHIFT_DATE,TR.BEGIN_TIME,TR.END_TIME,T6.SHIFT_NAME,T7.CLASS_NAME,T8.USER_NAME,case t4.GRADENAME when '一级品' then '合格品' when '二级品' then '次品' when '一级品B' then '合格品B' else T4.GRADENAME end GRADENAME,T3.DEFECTNAME,TR.WORKER_ID,TR.EQUIP_ID FROM (SELECT * FROM (SELECT TM.* FROM CPP_CURING_PRODUCTION TM 
+    LEFT JOIN 
+    (SELECT T1.* FROM CPP_CURING_PRODUCTION T1  WHERE T1.DELETE_FLAG=0]]>
+       <dynamic prepend="AND">
+         <isNotNull property="TyreNo" prepend="AND">
+           <![CDATA[T1.TYRE_NO =#TyreNo#]]>
+         </isNotNull>
+         <isNotNull property="GreenNo" prepend="AND">
+           <![CDATA[T1.GREEN_TYRE_NO =#GreenNo#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[) T2
+    ON TM.EQUIP_ID = T2.EQUIP_ID AND TM.EQUIP_POSITION = T2.EQUIP_POSITION
+    WHERE TM.END_TIME <T2.END_TIME AND TM.END_TIME >T2.END_TIME-1 AND T2.DELETE_FLAG=0 and tm.delete_flag = 0
+    ORDER BY TM.END_TIME DESC )WHERE ROWNUM<($Num$+1)
+    UNION ALL
+    SELECT * FROM（SELECT T.* FROM CPP_CURING_PRODUCTION T 
+    LEFT JOIN 
+    (SELECT T1.* FROM CPP_CURING_PRODUCTION T1  WHERE T1.DELETE_FLAG=0]]>
+       <dynamic prepend="AND">
+         <isNotNull property="TyreNo" prepend="AND">
+           <![CDATA[T1.TYRE_NO =#TyreNo#]]>
+         </isNotNull>
+         <isNotNull property="GreenNo" prepend="AND">
+           <![CDATA[T1.GREEN_TYRE_NO =#GreenNo#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ ) T2
+    ON T.EQUIP_ID = T2.EQUIP_ID AND T.EQUIP_POSITION = T2.EQUIP_POSITION
+    WHERE T.END_TIME >=T2.END_TIME AND T.END_TIME <T2.END_TIME+1 AND T2.DELETE_FLAG=0 and t.delete_flag = 0
+    ORDER BY T.END_TIME) WHERE ROWNUM<($Num$+2)) TR
+    LEFT JOIN FQF_FCHECK_INFO T3 ON T3.TYREID = TR.GREEN_TYRE_NO AND T3.NEW_FLAG=1 AND T3.DELETE_FLAG=0
+    LEFT JOIN FQG_GRADE_INFO T4 ON T4.FINAL_GRADE_CODE = T3.GRADEID AND T4.WORK_PROCESS_ID=500
+    LEFT JOIN SBE_EQUIP T5 ON T5.OBJID = TR.EQUIP_ID
+    LEFT JOIN SSB_SHIFT T6 ON T6.OBJID = TR.SHIFT_ID
+    LEFT JOIN SSB_CLASS T7 ON T7.OBJID = TR.CLASS_ID
+    LEFT JOIN SSB_USER T8 ON T8.OBJID = TR.WORKER_ID
+    LEFT JOIN SBM_MATERIAL T9 ON T9.OBJID = TR.MATERIAL_ID
+    ORDER BY TR.END_TIME 
+       ]]>
+     </select>
+     <procedure id="SaveFcheckInfo" parameterClass="map" resultClass="Row">
+       PRO_FQF_SAVETYRE_FCHECKINFO
+       @{TyreNoOrGreenTyreNo,column=TyreNoOrGreenTyreNo}
+       @{BarcodeTypeID,column=BarcodeTypeID}
+       @{DeviceID,column=DeviceID}
+       @{ShiftID,column=ShiftID}
+       @{ClassID,column=ClassID}
+       @{RecorderID,column=RecorderID}
+       @{GradeID,column=GradeID}
+       @{DefectIDs,column=DefectIDs}
+       @{UpOrDowns,column=UpOrDowns}
+       @{DefectNames,column=DefectNames}
+       @{RepairFlag,column=RepairFlag}
+       @{Remark,column=Remark}
+       @{IsFirst,column=IsFirst}
+       @{IsRecheck,column=IsRecheck}
+       @{IsLeader,column=IsLeader}
+       @{IsLast,column=IsLast}
+       @{ShiftNo,column=ShiftNo}
+       @{Duty1,column=Duty1}
+       @{Duty2,column=Duty2}
+       @{Duty3,column=Duty3}
+       @{myResult,column=myResult,direction=Output,dbType=RefCursor}
+     </procedure>
+
+
+
+     <select id="GetGradeInfoName2" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select FINAL_GRADE_CODE,case GRADENAME when '一级品' then '合格品' when '二级品' then '次品' when '一级品B' then '合格品B' else GRADENAME end GRADENAME from FQG_GRADE_INFO WHERE WORK_PROCESS_ID=499 AND DELETE_FLAG=0
+       ]]>
+     </select>
+   </statements>
+</sqlMap>

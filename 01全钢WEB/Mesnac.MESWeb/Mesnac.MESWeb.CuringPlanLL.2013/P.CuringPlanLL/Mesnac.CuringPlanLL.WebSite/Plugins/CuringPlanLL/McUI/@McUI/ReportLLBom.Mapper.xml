@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <statements>
+        <select id="Select@ReportLLBom" parameterClass="map" resultClass="row">
+            <![CDATA[ 
+SELECT T.BOM_VERSION || '@' || T2.SAP_CODE || '@' || T1.SAP_CODE || '@' ||
+       TO_CHAR(T.LASTMODIFY_DATE, 'YYYYMMDD') || '@' || T10.TYPE_NAME AS BOM_NAME,
+       T.BOM_VERSION,
+       T2.SAP_CODE as LTSAP_CODE,
+       T1.SAP_CODE as TPSAP_CODE,
+       T10.TYPE_NAME,
+       T.OBJID,
+       T.LASTMODIFY_DATE,
+       T.MATERIAL_ID,
+       T.UNIT_ID,
+       T.GROUP_NUM,
+       T.GREENTYRE_VERSION,
+       T.BOM_TYPE,
+       T.BOM_FACTROY,
+       T.GROUP_UNIT_NUM,
+       T.EFFECT_DATE,
+       T.LOSE_EFFECT_DATE,
+       T.PDM_CODE,
+       T.DROP_FLAG,
+       T.GREENTYRE_MATERIAL_ID,
+       T.MATERIAL_PARENT_ID,
+       T.RECORD_USER_ID,
+       T.RECORD_TIME,
+       T.BACKUP_FLAG,
+       T.BACKUP_TIME,
+       T.DELETE_FLAG
+  FROM SBM_BOM T
+ INNER JOIN SBM_MATERIAL T1
+    ON T.MATERIAL_ID = T1.OBJID and 
+ INNER JOIN SBM_MATERIAL T2
+    ON T.MATERIAL_PARENT_ID = T2.OBJID and t2.major_type_id=51
+ INNER JOIN SBM_BOM_TYPE T10
+    ON T.BOM_TYPE = T10.OBJID
+            ]]>
+            <dynamic>
+                <isNotNull property="where.LTSAP_CODE" prepend="AND">
+                    <![CDATA[T2.SAP_CODE  = #where.LTSAP_CODE#]]>
+                </isNotNull>
+                <isNotNull property="where.TPSAP_CODE" prepend="AND">
+                    <![CDATA[T1.SAP_CODE  = #where.TPSAP_CODE#]]>
+                </isNotNull>
+            </dynamic>
+            order by t1.material_name
+        </select>
+    </statements>
+</sqlMap>

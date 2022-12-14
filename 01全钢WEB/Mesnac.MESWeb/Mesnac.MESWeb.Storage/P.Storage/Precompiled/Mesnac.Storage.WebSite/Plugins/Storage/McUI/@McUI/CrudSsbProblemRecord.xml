@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="SUBJECT" Value="主题"></Caption>
+    <Caption Name="SUBMIT_USER" Value="提交人"></Caption>
+    <Caption Name="PROBLEM_DESC" Value="问题描述"></Caption>
+    <Caption Name="EXPECT_DATE" Value="期望解决日期"></Caption>
+    <Caption Name="RESPONSE_USER" Value="责任人"></Caption>
+    <Caption Name="PLAN_DATE" Value="计划解决日期"></Caption>
+    <Caption Name="PROBLEM_ANALYSIS" Value="原因分析"></Caption>
+    <Caption Name="PROBLEM_SOLVE" Value="解决方案"></Caption>
+    <Caption Name="EXCUTE_USER" Value="处理人"></Caption>
+    <Caption Name="FACT_DATE" Value="实际解决日期"></Caption>
+    <Caption Name="PROBLEM_STATE" Value="问题状态"></Caption>
+    <Caption Name="PROBLEM_STATE_SHOW" Value="问题状态"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+  </Captions>
+  <WebPage Title="问题记录信息">
+  </WebPage>
+  <Crud TableName="SSB_PROBLEM_RECORD">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_SSB_PROBLEM_RECORD"></SeqField>
+    </SeqFields>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel Width="600">
+      <ParamFields>
+        <ParamField FieldName="SUBJECT"></ParamField>
+        <ParamField FieldName="SUBMIT_USER" Nullable="true"></ParamField>
+        <ParamField FieldName="PROBLEM_DESC" Nullable="true"></ParamField>
+        <ParamField FieldName="EXPECT_DATE" Nullable="true" Type="DateBox"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel Width="600" Height="500">
+      <ParamFields>
+        <ParamField FieldName="SUBJECT" ReadOnly="true"></ParamField>
+        <ParamField FieldName="SUBMIT_USER" ReadOnly="true"></ParamField>
+        <ParamField FieldName="PROBLEM_DESC" ReadOnly="true"></ParamField>
+        <ParamField FieldName="EXPECT_DATE" Type="DateBox" ReadOnly="true"></ParamField>
+        <ParamField FieldName="RESPONSE_USER" Nullable="true"></ParamField>
+        <ParamField FieldName="PLAN_DATE" Nullable="true" Type="DateBox"></ParamField>
+        <ParamField FieldName="PROBLEM_ANALYSIS" Nullable="true"></ParamField>
+        <ParamField FieldName="PROBLEM_SOLVE" Nullable="true"></ParamField>
+        <ParamField FieldName="EXCUTE_USER" Nullable="true"></ParamField>
+        <ParamField FieldName="FACT_DATE" Nullable="true" Type="DateBox"></ParamField>
+        <ParamField FieldName="PROBLEM_STATE" Type="ComboBox"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="PROBLEM_STATE" Type="ComboBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID"></GridColumn>
+        <GridColumn ColumnName="SUBJECT"></GridColumn>
+        <GridColumn ColumnName="SUBMIT_USER"></GridColumn>
+        <GridColumn ColumnName="EXPECT_DATE" ColumnType="Date"></GridColumn>
+        <GridColumn ColumnName="RESPONSE_USER"></GridColumn>
+        <GridColumn ColumnName="PLAN_DATE" ColumnType="Date"></GridColumn>
+        <GridColumn ColumnName="EXCUTE_USER"></GridColumn>
+        <GridColumn ColumnName="FACT_DATE" ColumnType="Date"></GridColumn>
+        <GridColumn ColumnName="PROBLEM_STATE_SHOW"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="AUDIT_USER_ID" Value="审核人员"></Caption>
+    <Caption Name="AUDIT_USER_NAME" Value="审核人员"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+  </Captions>
+  <WebPage Title="报警审核人员信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Curing/McUI/@McUI/CrudCrtAlarmAuditUser.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="CRT_ALARM_AUDIT_USER">
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_CRT_ALARM_AUDIT_USER"></SeqField>
+    </SeqFields>
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <Uniques>
+      <Unique Fields="AUDIT_USER_ID"></Unique>
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="AUDIT_USER_ID" Type="SearchBox"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="AUDIT_USER_ID" Type="SearchBox"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="AUDIT_USER_NAME"></ParamField>
+        <ParamField FieldName="AUDIT_USER_ID" Type="ComboBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="T1.OBJID">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="AUDIT_USER_NAME"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

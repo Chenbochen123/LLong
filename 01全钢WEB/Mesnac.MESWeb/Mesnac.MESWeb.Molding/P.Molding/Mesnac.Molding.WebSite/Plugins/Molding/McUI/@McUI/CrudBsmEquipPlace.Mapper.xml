@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudBsmEquipPlace" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*,
+        CASE T1.DUMMY1 WHEN 1 THEN '绑定' WHEN 2 THEN '否'  ELSE '' END STATE,
+        T2.EQUIP_NAME EQUIP_NAME,T3.STORE_PLACE_NAME STORE_PLACE,
+        T4.USER_NAME RECORD_USER_NAME,T5.MATERIAL_NAME,T6.USER_NAME UPDATE_USER_NAME FROM BSM_EQUIP_PLACE T1
+        LEFT JOIN  SBE_EQUIP T2 ON T1.EQUIP_ID=T2.OBJID
+        LEFT JOIN BSM_STORE_PLACE T3 ON T1.STORE_PLACE_ID=T3.OBJID
+        LEFT JOIN SSB_USER T4 ON T1.RECORD_USER_ID=T4.OBJID
+        LEFT JOIN SBM_MATERIAL T5 ON T1.MATERIAL_ID=T5.OBJID
+        LEFT JOIN SSB_USER T6 ON T1.UPDATE_ID=T6.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[T1.equip_id = #where.EQUIP_ID#  ]]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_ID" prepend="AND">
+          <![CDATA[T5.OBJID = #where.MATERIAL_ID#  ]]>
+        </isNotNull>
+        <isNotNull property="where.RECORD_USER_NAME" prepend="AND">
+          <![CDATA[T4.user_name LIKE '%' || #where.RECORD_USER_NAME# || '%' ]]>
+        </isNotNull>
+        <isNotNull property="where.UPDATE_USER_NAME" prepend="AND">
+          <![CDATA[T6.user_name LIKE '%' || #where.UPDATE_USER_NAME# || '%' ]]>
+        </isNotNull>
+        <isNotNull property="where.STORE_PLACE_ID" prepend="AND">
+          <![CDATA[T1.STORE_PLACE_ID = #where.STORE_PLACE_ID# ]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.delete_flag = #where.DELETE_FLAG#  ]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t2.EQUIP_CODE, t3.STORE_PLACE_NAME
+      </isNull>
+    </select>
+
+
+    <select id="Select+Update@CrudBsmEquipPlace" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*
+        FROM BSM_EQUIP_PLACE T1 
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[T1.OBJID = #OBJID#]]>
+      </dynamic>
+    </select>
+
+    <!--查询类型信息，ID值固定为GetComboBoxData@Select@ReportBsmEquipManager@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBsmEquipPlace@SearchType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select 1 sskey, '按胎胚库位' ssValue from dual union select 2 sskey, '按设备信息' ssValue from dual
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by sskey
+      </isNull>
+    </select>
+    <!--查询绑定关系信息，ID值固定为GetComboBoxData@Select@DUMMY1@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBsmEquipPlace@DUMMY1" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select 1 sskey, '绑定' ssValue from dual union select 2 sskey, '不绑定' ssValue from dual
+     ]]>
+    </select>
+    <!--查询库位，ID值固定为GetComboBoxData@Select@ReportBsmEquipManager@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBsmEquipPlace@STORE_PLACE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.objid sskey,t1.store_place_name ssValue from BSM_STORE_PLACE t1 
+      join BSM_STORE t2 on t1.STORE_ID = t2.OBJID 
+      where t1.DELETE_FLAG = '0' and t2.DELETE_FLAG = 0
+      and t2.STORE_TYPE = 1
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.STORE_PLACE_NAME
+      </isNull>
+    </select>
+
+    <!--查询成型机设备名称，ID值固定为GetComboBoxData@Select@ReportBsmEquipManager@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBsmEquipPlace@EQUIP_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select objid sskey,equip_name ssValue from sbe_equip where DELETE_FLAG = '0' and equip_name like '%成型机%'
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by OBJID
+      </isNull>
+    </select>
+
+    <!--查询操作人，ID值固定为GetComboBoxData@Select@ReportBsmEquipManager@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudBsmEquipPlace@RECORD_USER_NAME" parameterClass="map" resultClass="Row">
+      <![CDATA[     
+      select t2.objid sskey,t2.user_name ssValue from bsm_equip_place t1 left join ssb_user t2 on t1.record_user_id=t2.objid where t1.DELETE_FLAG = 0
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+
+  </statements>
+</sqlMap>

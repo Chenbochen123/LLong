@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.InterfaceBG.Mapper.BusinessMapper.PlmToleranceParameterMain"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PLM_TOLERANCE_PARAMETER_MAIN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.Createuser" prepend="AND">
+          <![CDATA[CREATEUSER = #where.Createuser#]]>
+        </isNotNull>
+        <isNotNull property="where.Modifier" prepend="AND">
+          <![CDATA[MODIFIER = #where.Modifier#]]>
+        </isNotNull>
+        <isNotNull property="where.Createdate" prepend="AND">
+          <![CDATA[CREATEDATE = #where.Createdate#]]>
+        </isNotNull>
+        <isNotNull property="where.Sections" prepend="AND">
+          <![CDATA[SECTIONS = #where.Sections#]]>
+        </isNotNull>
+        <isNotNull property="where.Classification" prepend="AND">
+          <![CDATA[CLASSIFICATION = #where.Classification#]]>
+        </isNotNull>
+        <isNotNull property="where.Werks" prepend="AND">
+          <![CDATA[WERKS = #where.Werks#]]>
+        </isNotNull>
+        <isNotNull property="where.Factory" prepend="AND">
+          <![CDATA[FACTORY = #where.Factory#]]>
+        </isNotNull>
+        <isNotNull property="where.Parmname" prepend="AND">
+          <![CDATA[PARMNAME = #where.Parmname#]]>
+        </isNotNull>
+        <isNotNull property="where.Parcode" prepend="AND">
+          <![CDATA[PARCODE = #where.Parcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Valuemax" prepend="AND">
+          <![CDATA[VALUEMAX = #where.Valuemax#]]>
+        </isNotNull>
+        <isNotNull property="where.Valuemin" prepend="AND">
+          <![CDATA[VALUEMIN = #where.Valuemin#]]>
+        </isNotNull>
+        <isNotNull property="where.Valuemaxsign" prepend="AND">
+          <![CDATA[VALUEMAXSIGN = #where.Valuemaxsign#]]>
+        </isNotNull>
+        <isNotNull property="where.Valueminsign" prepend="AND">
+          <![CDATA[VALUEMINSIGN = #where.Valueminsign#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy7" prepend="AND">
+          <![CDATA[DUMMY7 = #where.Dummy7#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy8" prepend="AND">
+          <![CDATA[DUMMY8 = #where.Dummy8#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy9" prepend="AND">
+          <![CDATA[DUMMY9 = #where.Dummy9#]]>
+        </isNotNull>
+        <isNotNull property="where.Deleteflag" prepend="AND">
+          <![CDATA[DELETEFLAG = #where.Deleteflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Processname" prepend="AND">
+          <![CDATA[PROCESSNAME = #where.Processname#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

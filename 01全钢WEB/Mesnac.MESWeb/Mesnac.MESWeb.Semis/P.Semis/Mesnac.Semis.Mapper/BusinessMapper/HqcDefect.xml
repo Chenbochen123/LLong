@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HqcDefect"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HQC_DEFECT ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.DefectCode" prepend="AND">
+          <![CDATA[DEFECT_CODE = #where.DefectCode#]]>
+        </isNotNull>
+        <isNotNull property="where.DefectName" prepend="AND">
+          <![CDATA[DEFECT_NAME = #where.DefectName#]]>
+        </isNotNull>
+        <isNotNull property="where.DefectPos" prepend="AND">
+          <![CDATA[DEFECT_POS = #where.DefectPos#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupFlag" prepend="AND">
+          <![CDATA[BAUP_FLAG = #where.BaupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupTime" prepend="AND">
+          <![CDATA[BAUP_TIME = #where.BaupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetDefectList" parameterClass="map" resultClass="Row">
+       <![CDATA[select * from hqc_defect where delete_flag=0 order by objid]]>
+     </select>
+     <select id="GetAllHqcDefectInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T.OBJID,T.DEFECT_CODE,T.DEFECT_POS,T1.MINOR_TYPE_NAME DEFECT_POS2,T.DEFECT_NAME,T.REMARK FROM HQC_DEFECT  T
+        LEFT JOIN SBM_MATERIAL_MINOR_TYPE T1 ON T.DEFECT_POS=T1.OBJID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[t.DELETE_FLAG=#where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.DefectName" prepend="AND">
+           <![CDATA[t.DEFECT_NAME=#where.DefectName#]]>
+         </isNotNull>
+         <isNotNull property="where.DefectPos" prepend="AND">
+           <![CDATA[t.DEFECT_POS=#where.DefectPos#]]>
+         </isNotNull>
+         <isNotNull property="where.DefectPos2" prepend="AND">
+           <![CDATA[t1.MINOR_TYPE_NAME=#where.DefectPos2#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <update id="UpdateHqcDefectInfo" parameterClass="map">
+       <![CDATA[ 
+        UPDATE HQC_DEFECT SET 
+        DEFECT_NAME=#DefectName#,
+        DEFECT_POS=#DefectPos#,
+        REMARK=#Remark#,
+        RECORD_USER_ID=#UserId#
+        WHERE (OBJID = #ObjId#) 
+      ]]>
+     </update>
+
+
+     <!--半制品所有可能的病疵部位-->
+     <select id="GetSemisDefectPos" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       
+        SELECT Q.OBJID,Q.MINOR_TYPE_NAME FROM SBM_MATERIAL_MINOR_TYPE Q
+        WHERE Q.MAJOR_TYPE_ID = 31
+        
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[DELETE_FLAG=#where.DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+       ORDER BY Q.OBJID
+     </select>
+  </statements>
+</sqlMap>

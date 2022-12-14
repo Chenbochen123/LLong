@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.SbeEquip"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_EQUIP ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.MajorTypeId" prepend="AND">
+          <![CDATA[MAJOR_TYPE_ID = #where.MajorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.MinorTypeId" prepend="AND">
+          <![CDATA[MINOR_TYPE_ID = #where.MinorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[EQUIP_NAME = #where.EquipName#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipCode" prepend="AND">
+          <![CDATA[EQUIP_CODE = #where.EquipCode#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ProduceFactory" prepend="AND">
+          <![CDATA[PRODUCE_FACTORY = #where.ProduceFactory#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedDate" prepend="AND">
+          <![CDATA[USED_DATE = #where.UsedDate#]]>
+        </isNotNull>
+        <isNotNull property="where.IpAddress" prepend="AND">
+          <![CDATA[IP_ADDRESS = #where.IpAddress#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipUuid" prepend="AND">
+          <![CDATA[EQUIP_UUID = #where.EquipUuid#]]>
+        </isNotNull>
+        <isNotNull property="where.RegisterCode" prepend="AND">
+          <![CDATA[REGISTER_CODE = #where.RegisterCode#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     
+     <select id="wsAppDownloadMoldingEquipInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT OBJID,EQUIP_NAME FROM SBE_EQUIP T WHERE T.MAJOR_TYPE_ID=41 AND T.DELETE_FLAG=0 ORDER BY OBJID
+       ]]>
+     </select>
+
+     <select id="GetStopReasonAll" parameterClass="map" resultClass="Row">
+       <![CDATA[
+     SELECT OBJID sskey,equip_stop_reason_name ssValue FROM sbe_equip_stop_reason WHERE DELETE_FLAG = '0' 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="equiptype" prepend="AND">
+           <![CDATA[Equip_major_type_id=#equiptype#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetStopTypeAll" parameterClass="map" resultClass="Row">
+       <![CDATA[
+    SELECT OBJID sskey,equip_stop_type_name ssValue FROM sbe_equip_stop_type WHERE DELETE_FLAG = '0' 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="equiptype" prepend="AND">
+           <![CDATA[Equip_major_type_id=#equiptype#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetEquipStopReason" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select t1.objid,t1.stop_begin_time,t1.stop_end_time,t1.remark,t2.equip_name equip_code,t3.equip_stop_type_name,t4.equip_stop_reason_name,round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60*60) as RoundSecend from SEE_EQUIP_STOP_RECORD t1 left join sbe_equip t2 on t1.equip_id=t2.objid
+        left join sbe_equip_stop_type t3 on t1.stop_type_id=t3.objid
+        left join sbe_equip_stop_reason t4 on t1.stop_reason_id=t4.objid
+        where round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60*60) > 90  
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.equiptype" prepend="AND">
+           <![CDATA[t2.MAJOR_type_id = #where.equiptype#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[t1.STOP_BEGIN_TIME >= #where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[t1.STOP_BEGIN_TIME < #where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.reason" prepend="AND">
+           <![CDATA[T1.STOP_REASON_ID = #where.reason#]]>
+         </isNotNull>
+         <isNotNull property="where.type" prepend="AND">
+           <![CDATA[T1.STOP_TYPE_ID = #where.type#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipName" prepend="AND">
+           <![CDATA[t2.equip_code like '%'||#where.EquipName# ||'%']]>
+         </isNotNull>
+         <isNotNull property="where.Time" prepend="AND">
+           <![CDATA[round(TO_NUMBER(STOP_END_TIME - STOP_BEGIN_TIME) * 24 * 60*60) >= #where.Time#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        order by equip_code,STOP_BEGIN_TIME
+       ]]>
+     </select>
+     <!--查询设备大类信息，ID值固定为GetComboBoxData@Select@CrudSbeEquipStopType@字段，id值不允许重复-->
+     <select id="GetEquipMajorType" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+      select OBJID sskey, MAJOR_TYPE_NAME ssValue from SBE_EQUIP_MAJOR_TYPE where DELETE_FLAG = '0'  and objid!=1 ORDER BY OBJID
+     ]]>
+     </select>
+  </statements>
+</sqlMap>

@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Main.Mapper.BasicMapper.TestMybatis"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="TestMybatis" type="Mesnac.Main.Entity.BasicEntity.TestMybatis, Mesnac.Main.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_TestMybatis" class="TestMybatis">
+    <result property="ObjId" column="OBJID"/>
+    <result property="TNumber102" column="T_NUMBER_10_2"/>
+    <result property="TNumber" column="T_NUMBER"/>
+    <result property="TChar10" column="T_CHAR_10"/>
+    <result property="TVarchar10" column="T_VARCHAR_10"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_TestMybatis" class="TestMybatis">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="TNumber102" column="TNumber102"/>
+    <parameter property="TNumber" column="TNumber"/>
+    <parameter property="TChar10" column="TChar10"/>
+    <parameter property="TVarchar10" column="TVarchar10"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM TEST_MYBATIS ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.TNumber102" prepend="AND">
+          <![CDATA[T_NUMBER_10_2 = #where.TNumber102#]]>
+        </isNotNull>
+        <isNotNull property="where.TNumber" prepend="AND">
+          <![CDATA[T_NUMBER = #where.TNumber#]]>
+        </isNotNull>
+        <isNotNull property="where.TChar10" prepend="AND">
+          <![CDATA[T_CHAR_10 = #where.TChar10#]]>
+        </isNotNull>
+        <isNotNull property="where.TVarchar10" prepend="AND">
+          <![CDATA[T_VARCHAR_10 = #where.TVarchar10#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO TEST_MYBATIS]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="TNumber102" prepend=",">T_NUMBER_10_2</isNotNull>
+        <isNotNull property="TNumber" prepend=",">T_NUMBER</isNotNull>
+        <isNotNull property="TChar10" prepend=",">T_CHAR_10</isNotNull>
+        <isNotNull property="TVarchar10" prepend=",">T_VARCHAR_10</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_TEST_MYBATIS.NEXTVAL</isNull>
+        <isNotNull property="TNumber102" prepend=",">#TNumber102#</isNotNull>
+        <isNotNull property="TNumber" prepend=",">#TNumber#</isNotNull>
+        <isNotNull property="TChar10" prepend=",">#TChar10#</isNotNull>
+        <isNotNull property="TVarchar10" prepend=",">#TVarchar10#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE TEST_MYBATIS
+       <dynamic prepend="SET">
+        <isNotNull  property="update.TNumber102"  prepend=",">
+          T_NUMBER_10_2 = #update.TNumber102#
+        </isNotNull>
+        <isNotNull  property="update.TNumber"  prepend=",">
+          T_NUMBER = #update.TNumber#
+        </isNotNull>
+        <isNotNull  property="update.TChar10"  prepend=",">
+          T_CHAR_10 = #update.TChar10#
+        </isNotNull>
+        <isNotNull  property="update.TVarchar10"  prepend=",">
+          T_VARCHAR_10 = #update.TVarchar10#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM TEST_MYBATIS
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_TestMybatis">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_TestMybatis">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM TEST_MYBATIS
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM TEST_MYBATIS
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_TestMybatis" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE TEST_MYBATIS
+    </statement>
+  </statements>
+</sqlMap>

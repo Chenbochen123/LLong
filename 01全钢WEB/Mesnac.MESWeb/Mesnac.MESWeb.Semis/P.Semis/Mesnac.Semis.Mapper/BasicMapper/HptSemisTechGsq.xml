@@ -1,0 +1,679 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.HptSemisTechGsq"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HptSemisTechGsq" type="Mesnac.Semis.Entity.BasicEntity.HptSemisTechGsq, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HptSemisTechGsq" class="HptSemisTechGsq">
+    <result property="ObjId" column="OBJID"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="ShiftId" column="SHIFT_ID"/>
+    <result property="MaterialId" column="MATERIAL_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="PlanId" column="PLAN_ID"/>
+    <result property="PlanDetailId" column="PLAN_DETAIL_ID"/>
+    <result property="Jcjtemp1" column="JCJTEMP1"/>
+    <result property="Jcjtemp2" column="JCJTEMP2"/>
+    <result property="Jcjtemp3" column="JCJTEMP3"/>
+    <result property="Innerdiameter" column="INNERDIAMETER"/>
+    <result property="Innerdiametercpk" column="INNERDIAMETERCPK"/>
+    <result property="Diacorrection" column="DIACORRECTION"/>
+    <result property="Jcjpre" column="JCJPRE"/>
+    <result property="Letofftension" column="LETOFFTENSION"/>
+    <result property="Screwspeed" column="SCREWSPEED"/>
+    <result property="Linespeed" column="LINESPEED"/>
+    <result property="Param11" column="PARAM11"/>
+    <result property="Param12" column="PARAM12"/>
+    <result property="Param13" column="PARAM13"/>
+    <result property="Param14" column="PARAM14"/>
+    <result property="Param15" column="PARAM15"/>
+    <result property="Param16" column="PARAM16"/>
+    <result property="Param17" column="PARAM17"/>
+    <result property="Param18" column="PARAM18"/>
+    <result property="Param19" column="PARAM19"/>
+    <result property="Param20" column="PARAM20"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="GsPreheatTempe" column="GS_PREHEAT_TEMPE"/>
+    <result property="Jcjwksuhuaval" column="JCJWKSUHUAVAL"/>
+    <result property="Jcjwkjitongval" column="JCJWKJITONGVAL"/>
+    <result property="Jcjwkjitouval" column="JCJWKJITOUVAL"/>
+    <result property="Jcjwkluoganval" column="JCJWKLUOGANVAL"/>
+    <result property="Gsqnjval" column="GSQNJVAL"/>
+    <result property="Zjxzval" column="ZJXZVAL"/>
+    <result property="JcjPress" column="JCJ_PRESS"/>
+    <result property="DkStrain" column="DK_STRAIN"/>
+    <result property="Crspeedval" column="CRSPEEDVAL"/>
+    <result property="Gsqxzval" column="GSQXZVAL"/>
+    <result property="Gsdkzl1" column="GSDKZL1"/>
+    <result property="Gsdkzl2" column="GSDKZL2"/>
+    <result property="Gsdkzl3" column="GSDKZL3"/>
+    <result property="Gsdkzl4" column="GSDKZL4"/>
+    <result property="Gsdkzl5" column="GSDKZL5"/>
+    <result property="Gsdkzl6" column="GSDKZL6"/>
+    <result property="Jcjwdxj1" column="JCJWDXJ1"/>
+    <result property="Jcjwdxj2" column="JCJWDXJ2"/>
+    <result property="Jcjwdxj3" column="JCJWDXJ3"/>
+    <result property="Jcjwdxj4" column="JCJWDXJ4"/>
+    <result property="Jcjwddj1" column="JCJWDDJ1"/>
+    <result property="Jcjwddj2" column="JCJWDDJ2"/>
+    <result property="Jcjwddj3" column="JCJWDDJ3"/>
+    <result property="Jcjwddj4" column="JCJWDDJ4"/>
+    <result property="Jcjcjwd" column="JCJCJWD"/>
+    <result property="Barcode" column="BARCODE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HptSemisTechGsq" class="HptSemisTechGsq">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="ShiftId" column="ShiftId"/>
+    <parameter property="MaterialId" column="MaterialId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="PlanId" column="PlanId"/>
+    <parameter property="PlanDetailId" column="PlanDetailId"/>
+    <parameter property="Jcjtemp1" column="Jcjtemp1"/>
+    <parameter property="Jcjtemp2" column="Jcjtemp2"/>
+    <parameter property="Jcjtemp3" column="Jcjtemp3"/>
+    <parameter property="Innerdiameter" column="Innerdiameter"/>
+    <parameter property="Innerdiametercpk" column="Innerdiametercpk"/>
+    <parameter property="Diacorrection" column="Diacorrection"/>
+    <parameter property="Jcjpre" column="Jcjpre"/>
+    <parameter property="Letofftension" column="Letofftension"/>
+    <parameter property="Screwspeed" column="Screwspeed"/>
+    <parameter property="Linespeed" column="Linespeed"/>
+    <parameter property="Param11" column="Param11"/>
+    <parameter property="Param12" column="Param12"/>
+    <parameter property="Param13" column="Param13"/>
+    <parameter property="Param14" column="Param14"/>
+    <parameter property="Param15" column="Param15"/>
+    <parameter property="Param16" column="Param16"/>
+    <parameter property="Param17" column="Param17"/>
+    <parameter property="Param18" column="Param18"/>
+    <parameter property="Param19" column="Param19"/>
+    <parameter property="Param20" column="Param20"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="GsPreheatTempe" column="GsPreheatTempe"/>
+    <parameter property="Jcjwksuhuaval" column="Jcjwksuhuaval"/>
+    <parameter property="Jcjwkjitongval" column="Jcjwkjitongval"/>
+    <parameter property="Jcjwkjitouval" column="Jcjwkjitouval"/>
+    <parameter property="Jcjwkluoganval" column="Jcjwkluoganval"/>
+    <parameter property="Gsqnjval" column="Gsqnjval"/>
+    <parameter property="Zjxzval" column="Zjxzval"/>
+    <parameter property="JcjPress" column="JcjPress"/>
+    <parameter property="DkStrain" column="DkStrain"/>
+    <parameter property="Crspeedval" column="Crspeedval"/>
+    <parameter property="Gsqxzval" column="Gsqxzval"/>
+    <parameter property="Gsdkzl1" column="Gsdkzl1"/>
+    <parameter property="Gsdkzl2" column="Gsdkzl2"/>
+    <parameter property="Gsdkzl3" column="Gsdkzl3"/>
+    <parameter property="Gsdkzl4" column="Gsdkzl4"/>
+    <parameter property="Gsdkzl5" column="Gsdkzl5"/>
+    <parameter property="Gsdkzl6" column="Gsdkzl6"/>
+    <parameter property="Jcjwdxj1" column="Jcjwdxj1"/>
+    <parameter property="Jcjwdxj2" column="Jcjwdxj2"/>
+    <parameter property="Jcjwdxj3" column="Jcjwdxj3"/>
+    <parameter property="Jcjwdxj4" column="Jcjwdxj4"/>
+    <parameter property="Jcjwddj1" column="Jcjwddj1"/>
+    <parameter property="Jcjwddj2" column="Jcjwddj2"/>
+    <parameter property="Jcjwddj3" column="Jcjwddj3"/>
+    <parameter property="Jcjwddj4" column="Jcjwddj4"/>
+    <parameter property="Jcjcjwd" column="Jcjcjwd"/>
+    <parameter property="Barcode" column="Barcode"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPT_SEMIS_TECH_GSQ ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjtemp1" prepend="AND">
+          <![CDATA[JCJTEMP1 = #where.Jcjtemp1#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjtemp2" prepend="AND">
+          <![CDATA[JCJTEMP2 = #where.Jcjtemp2#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjtemp3" prepend="AND">
+          <![CDATA[JCJTEMP3 = #where.Jcjtemp3#]]>
+        </isNotNull>
+        <isNotNull property="where.Innerdiameter" prepend="AND">
+          <![CDATA[INNERDIAMETER = #where.Innerdiameter#]]>
+        </isNotNull>
+        <isNotNull property="where.Innerdiametercpk" prepend="AND">
+          <![CDATA[INNERDIAMETERCPK = #where.Innerdiametercpk#]]>
+        </isNotNull>
+        <isNotNull property="where.Diacorrection" prepend="AND">
+          <![CDATA[DIACORRECTION = #where.Diacorrection#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjpre" prepend="AND">
+          <![CDATA[JCJPRE = #where.Jcjpre#]]>
+        </isNotNull>
+        <isNotNull property="where.Letofftension" prepend="AND">
+          <![CDATA[LETOFFTENSION = #where.Letofftension#]]>
+        </isNotNull>
+        <isNotNull property="where.Screwspeed" prepend="AND">
+          <![CDATA[SCREWSPEED = #where.Screwspeed#]]>
+        </isNotNull>
+        <isNotNull property="where.Linespeed" prepend="AND">
+          <![CDATA[LINESPEED = #where.Linespeed#]]>
+        </isNotNull>
+        <isNotNull property="where.Param11" prepend="AND">
+          <![CDATA[PARAM11 = #where.Param11#]]>
+        </isNotNull>
+        <isNotNull property="where.Param12" prepend="AND">
+          <![CDATA[PARAM12 = #where.Param12#]]>
+        </isNotNull>
+        <isNotNull property="where.Param13" prepend="AND">
+          <![CDATA[PARAM13 = #where.Param13#]]>
+        </isNotNull>
+        <isNotNull property="where.Param14" prepend="AND">
+          <![CDATA[PARAM14 = #where.Param14#]]>
+        </isNotNull>
+        <isNotNull property="where.Param15" prepend="AND">
+          <![CDATA[PARAM15 = #where.Param15#]]>
+        </isNotNull>
+        <isNotNull property="where.Param16" prepend="AND">
+          <![CDATA[PARAM16 = #where.Param16#]]>
+        </isNotNull>
+        <isNotNull property="where.Param17" prepend="AND">
+          <![CDATA[PARAM17 = #where.Param17#]]>
+        </isNotNull>
+        <isNotNull property="where.Param18" prepend="AND">
+          <![CDATA[PARAM18 = #where.Param18#]]>
+        </isNotNull>
+        <isNotNull property="where.Param19" prepend="AND">
+          <![CDATA[PARAM19 = #where.Param19#]]>
+        </isNotNull>
+        <isNotNull property="where.Param20" prepend="AND">
+          <![CDATA[PARAM20 = #where.Param20#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.GsPreheatTempe" prepend="AND">
+          <![CDATA[GS_PREHEAT_TEMPE = #where.GsPreheatTempe#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjwksuhuaval" prepend="AND">
+          <![CDATA[JCJWKSUHUAVAL = #where.Jcjwksuhuaval#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjwkjitongval" prepend="AND">
+          <![CDATA[JCJWKJITONGVAL = #where.Jcjwkjitongval#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjwkjitouval" prepend="AND">
+          <![CDATA[JCJWKJITOUVAL = #where.Jcjwkjitouval#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjwkluoganval" prepend="AND">
+          <![CDATA[JCJWKLUOGANVAL = #where.Jcjwkluoganval#]]>
+        </isNotNull>
+        <isNotNull property="where.Gsqnjval" prepend="AND">
+          <![CDATA[GSQNJVAL = #where.Gsqnjval#]]>
+        </isNotNull>
+        <isNotNull property="where.Zjxzval" prepend="AND">
+          <![CDATA[ZJXZVAL = #where.Zjxzval#]]>
+        </isNotNull>
+        <isNotNull property="where.JcjPress" prepend="AND">
+          <![CDATA[JCJ_PRESS = #where.JcjPress#]]>
+        </isNotNull>
+        <isNotNull property="where.DkStrain" prepend="AND">
+          <![CDATA[DK_STRAIN = #where.DkStrain#]]>
+        </isNotNull>
+        <isNotNull property="where.Crspeedval" prepend="AND">
+          <![CDATA[CRSPEEDVAL = #where.Crspeedval#]]>
+        </isNotNull>
+        <isNotNull property="where.Gsqxzval" prepend="AND">
+          <![CDATA[GSQXZVAL = #where.Gsqxzval#]]>
+        </isNotNull>
+        <isNotNull property="where.Gsdkzl1" prepend="AND">
+          <![CDATA[GSDKZL1 = #where.Gsdkzl1#]]>
+        </isNotNull>
+        <isNotNull property="where.Gsdkzl2" prepend="AND">
+          <![CDATA[GSDKZL2 = #where.Gsdkzl2#]]>
+        </isNotNull>
+        <isNotNull property="where.Gsdkzl3" prepend="AND">
+          <![CDATA[GSDKZL3 = #where.Gsdkzl3#]]>
+        </isNotNull>
+        <isNotNull property="where.Gsdkzl4" prepend="AND">
+          <![CDATA[GSDKZL4 = #where.Gsdkzl4#]]>
+        </isNotNull>
+        <isNotNull property="where.Gsdkzl5" prepend="AND">
+          <![CDATA[GSDKZL5 = #where.Gsdkzl5#]]>
+        </isNotNull>
+        <isNotNull property="where.Gsdkzl6" prepend="AND">
+          <![CDATA[GSDKZL6 = #where.Gsdkzl6#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjwdxj1" prepend="AND">
+          <![CDATA[JCJWDXJ1 = #where.Jcjwdxj1#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjwdxj2" prepend="AND">
+          <![CDATA[JCJWDXJ2 = #where.Jcjwdxj2#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjwdxj3" prepend="AND">
+          <![CDATA[JCJWDXJ3 = #where.Jcjwdxj3#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjwdxj4" prepend="AND">
+          <![CDATA[JCJWDXJ4 = #where.Jcjwdxj4#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjwddj1" prepend="AND">
+          <![CDATA[JCJWDDJ1 = #where.Jcjwddj1#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjwddj2" prepend="AND">
+          <![CDATA[JCJWDDJ2 = #where.Jcjwddj2#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjwddj3" prepend="AND">
+          <![CDATA[JCJWDDJ3 = #where.Jcjwddj3#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjwddj4" prepend="AND">
+          <![CDATA[JCJWDDJ4 = #where.Jcjwddj4#]]>
+        </isNotNull>
+        <isNotNull property="where.Jcjcjwd" prepend="AND">
+          <![CDATA[JCJCJWD = #where.Jcjcjwd#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[BARCODE = #where.Barcode#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HPT_SEMIS_TECH_GSQ]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">SHIFT_ID</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">MATERIAL_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="PlanId" prepend=",">PLAN_ID</isNotNull>
+        <isNotNull property="PlanDetailId" prepend=",">PLAN_DETAIL_ID</isNotNull>
+        <isNotNull property="Jcjtemp1" prepend=",">JCJTEMP1</isNotNull>
+        <isNotNull property="Jcjtemp2" prepend=",">JCJTEMP2</isNotNull>
+        <isNotNull property="Jcjtemp3" prepend=",">JCJTEMP3</isNotNull>
+        <isNotNull property="Innerdiameter" prepend=",">INNERDIAMETER</isNotNull>
+        <isNotNull property="Innerdiametercpk" prepend=",">INNERDIAMETERCPK</isNotNull>
+        <isNotNull property="Diacorrection" prepend=",">DIACORRECTION</isNotNull>
+        <isNotNull property="Jcjpre" prepend=",">JCJPRE</isNotNull>
+        <isNotNull property="Letofftension" prepend=",">LETOFFTENSION</isNotNull>
+        <isNotNull property="Screwspeed" prepend=",">SCREWSPEED</isNotNull>
+        <isNotNull property="Linespeed" prepend=",">LINESPEED</isNotNull>
+        <isNotNull property="Param11" prepend=",">PARAM11</isNotNull>
+        <isNotNull property="Param12" prepend=",">PARAM12</isNotNull>
+        <isNotNull property="Param13" prepend=",">PARAM13</isNotNull>
+        <isNotNull property="Param14" prepend=",">PARAM14</isNotNull>
+        <isNotNull property="Param15" prepend=",">PARAM15</isNotNull>
+        <isNotNull property="Param16" prepend=",">PARAM16</isNotNull>
+        <isNotNull property="Param17" prepend=",">PARAM17</isNotNull>
+        <isNotNull property="Param18" prepend=",">PARAM18</isNotNull>
+        <isNotNull property="Param19" prepend=",">PARAM19</isNotNull>
+        <isNotNull property="Param20" prepend=",">PARAM20</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="GsPreheatTempe" prepend=",">GS_PREHEAT_TEMPE</isNotNull>
+        <isNotNull property="Jcjwksuhuaval" prepend=",">JCJWKSUHUAVAL</isNotNull>
+        <isNotNull property="Jcjwkjitongval" prepend=",">JCJWKJITONGVAL</isNotNull>
+        <isNotNull property="Jcjwkjitouval" prepend=",">JCJWKJITOUVAL</isNotNull>
+        <isNotNull property="Jcjwkluoganval" prepend=",">JCJWKLUOGANVAL</isNotNull>
+        <isNotNull property="Gsqnjval" prepend=",">GSQNJVAL</isNotNull>
+        <isNotNull property="Zjxzval" prepend=",">ZJXZVAL</isNotNull>
+        <isNotNull property="JcjPress" prepend=",">JCJ_PRESS</isNotNull>
+        <isNotNull property="DkStrain" prepend=",">DK_STRAIN</isNotNull>
+        <isNotNull property="Crspeedval" prepend=",">CRSPEEDVAL</isNotNull>
+        <isNotNull property="Gsqxzval" prepend=",">GSQXZVAL</isNotNull>
+        <isNotNull property="Gsdkzl1" prepend=",">GSDKZL1</isNotNull>
+        <isNotNull property="Gsdkzl2" prepend=",">GSDKZL2</isNotNull>
+        <isNotNull property="Gsdkzl3" prepend=",">GSDKZL3</isNotNull>
+        <isNotNull property="Gsdkzl4" prepend=",">GSDKZL4</isNotNull>
+        <isNotNull property="Gsdkzl5" prepend=",">GSDKZL5</isNotNull>
+        <isNotNull property="Gsdkzl6" prepend=",">GSDKZL6</isNotNull>
+        <isNotNull property="Jcjwdxj1" prepend=",">JCJWDXJ1</isNotNull>
+        <isNotNull property="Jcjwdxj2" prepend=",">JCJWDXJ2</isNotNull>
+        <isNotNull property="Jcjwdxj3" prepend=",">JCJWDXJ3</isNotNull>
+        <isNotNull property="Jcjwdxj4" prepend=",">JCJWDXJ4</isNotNull>
+        <isNotNull property="Jcjwddj1" prepend=",">JCJWDDJ1</isNotNull>
+        <isNotNull property="Jcjwddj2" prepend=",">JCJWDDJ2</isNotNull>
+        <isNotNull property="Jcjwddj3" prepend=",">JCJWDDJ3</isNotNull>
+        <isNotNull property="Jcjwddj4" prepend=",">JCJWDDJ4</isNotNull>
+        <isNotNull property="Jcjcjwd" prepend=",">JCJCJWD</isNotNull>
+        <isNotNull property="Barcode" prepend=",">BARCODE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_HPT_SEMIS_TECH_GSQ.NEXTVAL</isNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">#ShiftId#</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">#MaterialId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="PlanId" prepend=",">#PlanId#</isNotNull>
+        <isNotNull property="PlanDetailId" prepend=",">#PlanDetailId#</isNotNull>
+        <isNotNull property="Jcjtemp1" prepend=",">#Jcjtemp1#</isNotNull>
+        <isNotNull property="Jcjtemp2" prepend=",">#Jcjtemp2#</isNotNull>
+        <isNotNull property="Jcjtemp3" prepend=",">#Jcjtemp3#</isNotNull>
+        <isNotNull property="Innerdiameter" prepend=",">#Innerdiameter#</isNotNull>
+        <isNotNull property="Innerdiametercpk" prepend=",">#Innerdiametercpk#</isNotNull>
+        <isNotNull property="Diacorrection" prepend=",">#Diacorrection#</isNotNull>
+        <isNotNull property="Jcjpre" prepend=",">#Jcjpre#</isNotNull>
+        <isNotNull property="Letofftension" prepend=",">#Letofftension#</isNotNull>
+        <isNotNull property="Screwspeed" prepend=",">#Screwspeed#</isNotNull>
+        <isNotNull property="Linespeed" prepend=",">#Linespeed#</isNotNull>
+        <isNotNull property="Param11" prepend=",">#Param11#</isNotNull>
+        <isNotNull property="Param12" prepend=",">#Param12#</isNotNull>
+        <isNotNull property="Param13" prepend=",">#Param13#</isNotNull>
+        <isNotNull property="Param14" prepend=",">#Param14#</isNotNull>
+        <isNotNull property="Param15" prepend=",">#Param15#</isNotNull>
+        <isNotNull property="Param16" prepend=",">#Param16#</isNotNull>
+        <isNotNull property="Param17" prepend=",">#Param17#</isNotNull>
+        <isNotNull property="Param18" prepend=",">#Param18#</isNotNull>
+        <isNotNull property="Param19" prepend=",">#Param19#</isNotNull>
+        <isNotNull property="Param20" prepend=",">#Param20#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="GsPreheatTempe" prepend=",">#GsPreheatTempe#</isNotNull>
+        <isNotNull property="Jcjwksuhuaval" prepend=",">#Jcjwksuhuaval#</isNotNull>
+        <isNotNull property="Jcjwkjitongval" prepend=",">#Jcjwkjitongval#</isNotNull>
+        <isNotNull property="Jcjwkjitouval" prepend=",">#Jcjwkjitouval#</isNotNull>
+        <isNotNull property="Jcjwkluoganval" prepend=",">#Jcjwkluoganval#</isNotNull>
+        <isNotNull property="Gsqnjval" prepend=",">#Gsqnjval#</isNotNull>
+        <isNotNull property="Zjxzval" prepend=",">#Zjxzval#</isNotNull>
+        <isNotNull property="JcjPress" prepend=",">#JcjPress#</isNotNull>
+        <isNotNull property="DkStrain" prepend=",">#DkStrain#</isNotNull>
+        <isNotNull property="Crspeedval" prepend=",">#Crspeedval#</isNotNull>
+        <isNotNull property="Gsqxzval" prepend=",">#Gsqxzval#</isNotNull>
+        <isNotNull property="Gsdkzl1" prepend=",">#Gsdkzl1#</isNotNull>
+        <isNotNull property="Gsdkzl2" prepend=",">#Gsdkzl2#</isNotNull>
+        <isNotNull property="Gsdkzl3" prepend=",">#Gsdkzl3#</isNotNull>
+        <isNotNull property="Gsdkzl4" prepend=",">#Gsdkzl4#</isNotNull>
+        <isNotNull property="Gsdkzl5" prepend=",">#Gsdkzl5#</isNotNull>
+        <isNotNull property="Gsdkzl6" prepend=",">#Gsdkzl6#</isNotNull>
+        <isNotNull property="Jcjwdxj1" prepend=",">#Jcjwdxj1#</isNotNull>
+        <isNotNull property="Jcjwdxj2" prepend=",">#Jcjwdxj2#</isNotNull>
+        <isNotNull property="Jcjwdxj3" prepend=",">#Jcjwdxj3#</isNotNull>
+        <isNotNull property="Jcjwdxj4" prepend=",">#Jcjwdxj4#</isNotNull>
+        <isNotNull property="Jcjwddj1" prepend=",">#Jcjwddj1#</isNotNull>
+        <isNotNull property="Jcjwddj2" prepend=",">#Jcjwddj2#</isNotNull>
+        <isNotNull property="Jcjwddj3" prepend=",">#Jcjwddj3#</isNotNull>
+        <isNotNull property="Jcjwddj4" prepend=",">#Jcjwddj4#</isNotNull>
+        <isNotNull property="Jcjcjwd" prepend=",">#Jcjcjwd#</isNotNull>
+        <isNotNull property="Barcode" prepend=",">#Barcode#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HPT_SEMIS_TECH_GSQ
+       <dynamic prepend="SET">
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.ShiftId"  prepend=",">
+          SHIFT_ID = #update.ShiftId#
+        </isNotNull>
+        <isNotNull  property="update.MaterialId"  prepend=",">
+          MATERIAL_ID = #update.MaterialId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.PlanId"  prepend=",">
+          PLAN_ID = #update.PlanId#
+        </isNotNull>
+        <isNotNull  property="update.PlanDetailId"  prepend=",">
+          PLAN_DETAIL_ID = #update.PlanDetailId#
+        </isNotNull>
+        <isNotNull  property="update.Jcjtemp1"  prepend=",">
+          JCJTEMP1 = #update.Jcjtemp1#
+        </isNotNull>
+        <isNotNull  property="update.Jcjtemp2"  prepend=",">
+          JCJTEMP2 = #update.Jcjtemp2#
+        </isNotNull>
+        <isNotNull  property="update.Jcjtemp3"  prepend=",">
+          JCJTEMP3 = #update.Jcjtemp3#
+        </isNotNull>
+        <isNotNull  property="update.Innerdiameter"  prepend=",">
+          INNERDIAMETER = #update.Innerdiameter#
+        </isNotNull>
+        <isNotNull  property="update.Innerdiametercpk"  prepend=",">
+          INNERDIAMETERCPK = #update.Innerdiametercpk#
+        </isNotNull>
+        <isNotNull  property="update.Diacorrection"  prepend=",">
+          DIACORRECTION = #update.Diacorrection#
+        </isNotNull>
+        <isNotNull  property="update.Jcjpre"  prepend=",">
+          JCJPRE = #update.Jcjpre#
+        </isNotNull>
+        <isNotNull  property="update.Letofftension"  prepend=",">
+          LETOFFTENSION = #update.Letofftension#
+        </isNotNull>
+        <isNotNull  property="update.Screwspeed"  prepend=",">
+          SCREWSPEED = #update.Screwspeed#
+        </isNotNull>
+        <isNotNull  property="update.Linespeed"  prepend=",">
+          LINESPEED = #update.Linespeed#
+        </isNotNull>
+        <isNotNull  property="update.Param11"  prepend=",">
+          PARAM11 = #update.Param11#
+        </isNotNull>
+        <isNotNull  property="update.Param12"  prepend=",">
+          PARAM12 = #update.Param12#
+        </isNotNull>
+        <isNotNull  property="update.Param13"  prepend=",">
+          PARAM13 = #update.Param13#
+        </isNotNull>
+        <isNotNull  property="update.Param14"  prepend=",">
+          PARAM14 = #update.Param14#
+        </isNotNull>
+        <isNotNull  property="update.Param15"  prepend=",">
+          PARAM15 = #update.Param15#
+        </isNotNull>
+        <isNotNull  property="update.Param16"  prepend=",">
+          PARAM16 = #update.Param16#
+        </isNotNull>
+        <isNotNull  property="update.Param17"  prepend=",">
+          PARAM17 = #update.Param17#
+        </isNotNull>
+        <isNotNull  property="update.Param18"  prepend=",">
+          PARAM18 = #update.Param18#
+        </isNotNull>
+        <isNotNull  property="update.Param19"  prepend=",">
+          PARAM19 = #update.Param19#
+        </isNotNull>
+        <isNotNull  property="update.Param20"  prepend=",">
+          PARAM20 = #update.Param20#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.GsPreheatTempe"  prepend=",">
+          GS_PREHEAT_TEMPE = #update.GsPreheatTempe#
+        </isNotNull>
+        <isNotNull  property="update.Jcjwksuhuaval"  prepend=",">
+          JCJWKSUHUAVAL = #update.Jcjwksuhuaval#
+        </isNotNull>
+        <isNotNull  property="update.Jcjwkjitongval"  prepend=",">
+          JCJWKJITONGVAL = #update.Jcjwkjitongval#
+        </isNotNull>
+        <isNotNull  property="update.Jcjwkjitouval"  prepend=",">
+          JCJWKJITOUVAL = #update.Jcjwkjitouval#
+        </isNotNull>
+        <isNotNull  property="update.Jcjwkluoganval"  prepend=",">
+          JCJWKLUOGANVAL = #update.Jcjwkluoganval#
+        </isNotNull>
+        <isNotNull  property="update.Gsqnjval"  prepend=",">
+          GSQNJVAL = #update.Gsqnjval#
+        </isNotNull>
+        <isNotNull  property="update.Zjxzval"  prepend=",">
+          ZJXZVAL = #update.Zjxzval#
+        </isNotNull>
+        <isNotNull  property="update.JcjPress"  prepend=",">
+          JCJ_PRESS = #update.JcjPress#
+        </isNotNull>
+        <isNotNull  property="update.DkStrain"  prepend=",">
+          DK_STRAIN = #update.DkStrain#
+        </isNotNull>
+        <isNotNull  property="update.Crspeedval"  prepend=",">
+          CRSPEEDVAL = #update.Crspeedval#
+        </isNotNull>
+        <isNotNull  property="update.Gsqxzval"  prepend=",">
+          GSQXZVAL = #update.Gsqxzval#
+        </isNotNull>
+        <isNotNull  property="update.Gsdkzl1"  prepend=",">
+          GSDKZL1 = #update.Gsdkzl1#
+        </isNotNull>
+        <isNotNull  property="update.Gsdkzl2"  prepend=",">
+          GSDKZL2 = #update.Gsdkzl2#
+        </isNotNull>
+        <isNotNull  property="update.Gsdkzl3"  prepend=",">
+          GSDKZL3 = #update.Gsdkzl3#
+        </isNotNull>
+        <isNotNull  property="update.Gsdkzl4"  prepend=",">
+          GSDKZL4 = #update.Gsdkzl4#
+        </isNotNull>
+        <isNotNull  property="update.Gsdkzl5"  prepend=",">
+          GSDKZL5 = #update.Gsdkzl5#
+        </isNotNull>
+        <isNotNull  property="update.Gsdkzl6"  prepend=",">
+          GSDKZL6 = #update.Gsdkzl6#
+        </isNotNull>
+        <isNotNull  property="update.Jcjwdxj1"  prepend=",">
+          JCJWDXJ1 = #update.Jcjwdxj1#
+        </isNotNull>
+        <isNotNull  property="update.Jcjwdxj2"  prepend=",">
+          JCJWDXJ2 = #update.Jcjwdxj2#
+        </isNotNull>
+        <isNotNull  property="update.Jcjwdxj3"  prepend=",">
+          JCJWDXJ3 = #update.Jcjwdxj3#
+        </isNotNull>
+        <isNotNull  property="update.Jcjwdxj4"  prepend=",">
+          JCJWDXJ4 = #update.Jcjwdxj4#
+        </isNotNull>
+        <isNotNull  property="update.Jcjwddj1"  prepend=",">
+          JCJWDDJ1 = #update.Jcjwddj1#
+        </isNotNull>
+        <isNotNull  property="update.Jcjwddj2"  prepend=",">
+          JCJWDDJ2 = #update.Jcjwddj2#
+        </isNotNull>
+        <isNotNull  property="update.Jcjwddj3"  prepend=",">
+          JCJWDDJ3 = #update.Jcjwddj3#
+        </isNotNull>
+        <isNotNull  property="update.Jcjwddj4"  prepend=",">
+          JCJWDDJ4 = #update.Jcjwddj4#
+        </isNotNull>
+        <isNotNull  property="update.Jcjcjwd"  prepend=",">
+          JCJCJWD = #update.Jcjcjwd#
+        </isNotNull>
+        <isNotNull  property="update.Barcode"  prepend=",">
+          BARCODE = #update.Barcode#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HPT_SEMIS_TECH_GSQ
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HptSemisTechGsq">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HptSemisTechGsq">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM HPT_SEMIS_TECH_GSQ
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HPT_SEMIS_TECH_GSQ
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HptSemisTechGsq" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HPT_SEMIS_TECH_GSQ
+    </statement>
+  </statements>
+</sqlMap>

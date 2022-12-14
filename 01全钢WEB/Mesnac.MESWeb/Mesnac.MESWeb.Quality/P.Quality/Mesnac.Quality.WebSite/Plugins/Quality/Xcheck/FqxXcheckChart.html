@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ECharts · Example</title>
+
+    <link href="./asset/css/echartsHome.css" rel="stylesheet">
+    <script src="./asset/js/echarts.min.js"></script>
+    
+</head>
+<body>
+    <div id="main" class="main" ></div>
+</body>
+<script type="text/javascript">
+    var xdata0 = [];
+    if (parent && parent.xdata0 && parent.xdata0.length > 0) {
+        for (var i = 0; i < parent.xdata0.length; i++) {
+            xdata0.push(parent.xdata0[i]);
+        }
+    }
+    var ydata1 = [];
+    if (parent && parent.ydata1 && parent.ydata1.length > 0) {
+        for (var i = 0; i < parent.ydata1.length; i++) {
+            ydata1.push(parent.ydata1[i]);
+        }
+    }
+    var myChart = echarts.init(document.getElementById('main'));
+    option = {
+        title: {
+            text: ''
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['次品率']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                dataView: { readOnly: false },
+                magicType: { type: ['line'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: xdata0
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value} %'
+            }
+        },
+        series: [
+            {
+                name: '次品率',
+                type: 'line',
+                data: ydata1,
+                itemStyle: { normal: { label: { show: true } } }
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+</html>

@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DD5B4334-ACD9-4D25-B2B3-13E964EB26AA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Molding.Webservice</RootNamespace>
+    <AssemblyName>Mesnac.Molding.Webservice</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\@packages\MyBatis\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\@packages\MyBatis\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.DbAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\@packages\Frame\Mesnac.DbAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.FrameDb.Mapper">
+      <HintPath>..\..\@packages\Frame\Mesnac.FrameDb.Mapper.dll</HintPath>
+    </Reference>
+    <Reference Include="LogAgent">
+      <HintPath>..\..\@packages\LogAgent\LogAgent.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Main.Business">
+      <HintPath>..\..\@packages\P.Main\Mesnac.Main.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Main.Data">
+      <HintPath>..\..\@packages\P.Main\Mesnac.Main.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Main.Entity">
+      <HintPath>..\..\@packages\P.Main\Mesnac.Main.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Main.Mapper">
+      <HintPath>..\..\@packages\P.Main\Mesnac.Main.Mapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Main.WebSite">
+      <HintPath>..\..\@packages\P.Main\Mesnac.Main.WebSite.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\@packages\Frame\Mesnac.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MyBatis.Common">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.DataMapper">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log4net\log4net.dll" />
+    <Content Include="Molding\AppService.asmx" />
+    <Content Include="Molding\ClientDataService.asmx" />
+    <Content Include="Molding\SAPTestWebService.asmx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Molding\AppService.asmx.cs">
+      <DependentUpon>AppService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Molding\ClientDataService.asmx.cs">
+      <SubType>Component</SubType>
+      <DependentUpon>ClientDataService.asmx</DependentUpon>
+    </Compile>
+    <Compile Include="Molding\MoldingManager.cs" />
+    <Compile Include="Molding\SAPTestWebService.asmx.cs">
+      <DependentUpon>SAPTestWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\dbVersion.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\providers.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\SqlMap.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WinCEFiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\LogAgent.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="log4net\log4net.config" />
+    <None Include="Properties\PublishProfiles\publish.pubxml" />
+    <None Include="Properties\PublishProfiles\发布配置1.pubxml" />
+    <None Include="Properties\PublishProfiles\配置文件1.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Frame\Mesnac.DbAccess\Mesnac.DbAccess.csproj">
+      <Project>{60b919c5-c601-4999-a531-439042d59746}</Project>
+      <Name>Mesnac.DbAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Frame\Mesnac.UI.Db\Mesnac.FrameDb.Mapper.csproj">
+      <Project>{57d6db7a-e0b3-4798-8d57-ce65afa4f474}</Project>
+      <Name>Mesnac.FrameDb.Mapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Frame\Mesnac.Utility\Mesnac.Utility.csproj">
+      <Project>{03b7f91d-fc5b-4c3d-a4b5-abf78bb4f884}</Project>
+      <Name>Mesnac.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Molding.Business\Mesnac.Molding.Business.csproj">
+      <Project>{a9ca6236-5311-4b62-a441-8efa978ba2e9}</Project>
+      <Name>Mesnac.Molding.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Molding.Data\Mesnac.Molding.Data.csproj">
+      <Project>{88020d7a-9063-4ae4-aa91-364bcd04c71f}</Project>
+      <Name>Mesnac.Molding.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Molding.Entity\Mesnac.Molding.Entity.csproj">
+      <Project>{e62cd168-27b2-4670-b521-1e9f4c3944b8}</Project>
+      <Name>Mesnac.Molding.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Molding.Mapper\Mesnac.Molding.Mapper.csproj">
+      <Project>{0a0c6353-6971-41e8-ac92-61be8a35d51a}</Project>
+      <Name>Mesnac.Molding.Mapper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61095</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

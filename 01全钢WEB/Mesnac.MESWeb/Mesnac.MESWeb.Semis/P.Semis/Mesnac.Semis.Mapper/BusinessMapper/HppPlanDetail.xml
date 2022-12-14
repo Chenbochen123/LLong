@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HppPlanDetail"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_PLAN_DETAIL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.Priority" prepend="AND">
+          <![CDATA[PRIORITY = #where.Priority#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanState" prepend="AND">
+          <![CDATA[PLAN_STATE = #where.PlanState#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanAmount" prepend="AND">
+          <![CDATA[PLAN_AMOUNT = #where.PlanAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.RealAmount" prepend="AND">
+          <![CDATA[REAL_AMOUNT = #where.RealAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanType" prepend="AND">
+          <![CDATA[PLAN_TYPE = #where.PlanType#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BomId" prepend="AND">
+          <![CDATA[BOM_ID = #where.BomId#]]>
+        </isNotNull>
+        <isNotNull property="where.TechId" prepend="AND">
+          <![CDATA[TECH_ID = #where.TechId#]]>
+        </isNotNull>
+        <isNotNull property="where.MonthPlanId" prepend="AND">
+          <![CDATA[MONTH_PLAN_ID = #where.MonthPlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <!--获取半制品生产计划监控信息-->
+     <select id="GetPageData@HppSemisPlanMonitorByReader" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+       
+        select  nvl(t1.EQUIP_NAME, '') EQUIP_NAME,t1.PLAN_DATE, t1.EQUIP_ID, t1.MATERIAL_ID
+         , t1.MATERIAL_ID_1, t1.MATERIAL_ID_2, t1.MATERIAL_ID_3
+         , t1.MATERIAL_NAME_1, t1.PLAN_AMOUNT_1, t1.REAL_AMOUNT_1, round(case when t1.PLAN_AMOUNT_1 = 0 then 0 else t1.REAL_AMOUNT_1 * 100 / t1.PLAN_AMOUNT_1 end, 2) COMPLETE_RATE_1
+         , t1.MATERIAL_NAME_2, t1.PLAN_AMOUNT_2 , t1.REAL_AMOUNT_2, round(case when t1.PLAN_AMOUNT_2 = 0 then 0 else t1.REAL_AMOUNT_2 * 100 / t1.PLAN_AMOUNT_2 end, 2) COMPLETE_RATE_2
+         ,t1.MATERIAL_NAME_3, t1.PLAN_AMOUNT_3, t1.REAL_AMOUNT_3 , round(case when t1.PLAN_AMOUNT_3 = 0 then 0 else t1.REAL_AMOUNT_3 * 100 / t1.PLAN_AMOUNT_3 end, 2) COMPLETE_RATE_3
+         
+         , t1.MATERIAL_NAME
+         from (
+         select t1.PLAN_DATE, t1.EQUIP_ID, t2.MATERIAL_ID
+          , t3.EQUIP_NAME, t5.MATERIAL_NAME, t5.MATERIAL_CODE,t7.UNIT_NAME
+          , min(case when t1.SHIFT_ID = 1 then t2.MATERIAL_ID else null end) MATERIAL_ID_1
+          , min(case when t1.SHIFT_ID = 2 then t2.MATERIAL_ID else null end) MATERIAL_ID_2
+          , min(case when t1.SHIFT_ID = 3 then t2.MATERIAL_ID else null end) MATERIAL_ID_3
+          , min(case when t1.SHIFT_ID = 1 then t5.MATERIAL_NAME else null end) MATERIAL_NAME_1
+          , min(case when t1.SHIFT_ID = 2 then t5.MATERIAL_NAME else null end) MATERIAL_NAME_2
+          , min(case when t1.SHIFT_ID = 3 then t5.MATERIAL_NAME else null end) MATERIAL_NAME_3
+          , sum(case when t1.SHIFT_ID = 1 then t2.PLAN_AMOUNT else 0 end) PLAN_AMOUNT_1
+          , sum(case when t1.SHIFT_ID = 2 then t2.PLAN_AMOUNT else 0 end) PLAN_AMOUNT_2
+          , sum(case when t1.SHIFT_ID = 3 then t2.PLAN_AMOUNT else 0 end) PLAN_AMOUNT_3
+          , sum(case when t1.SHIFT_ID = 1 then t.QTY else 0 end) REAL_AMOUNT_1
+          , sum(case when t1.SHIFT_ID = 2 then t.QTY else 0 end) REAL_AMOUNT_2
+          , sum(case when t1.SHIFT_ID = 3 then t.QTY else 0 end) REAL_AMOUNT_3
+         from HPP_PLAN t1 
+         join HPP_PLAN_DETAIL t2 on t1.OBJID = t2.PLAN_ID
+         left join SBE_EQUIP t3 on t1.EQUIP_ID = t3.OBJID
+         left join SBM_MATERIAL t5 on t2.MATERIAL_ID = t5.OBJID
+         left join HPP_PROCEDURE_UNIT t6 on t3.MAJOR_TYPE_ID=t6.PROCEDURE_ID
+         left join SSB_UNIT t7 on t6.UNIT_ID=t7.OBJID
+         left join HPP_SEMIS_PRODUCTION t on t2.objid = t.plan_detail_id
+         where t1.DELETE_FLAG = 0 and t2.DELETE_FLAG = 0
+         and t1.PLAN_STATE > 0 and t2.PLAN_STATE > 0
+      ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.PlanDate" prepend="AND">
+           <![CDATA[t1.PLAN_DATE = #where.PlanDate#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t1.EQUIP_ID = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipName" prepend="AND">
+           <![CDATA[t3.EQUIP_NAME like '%' || #where.EquipName# || '%']]>
+         </isNotNull>
+         <isNotNull property="where.MaterialName" prepend="AND">
+           <![CDATA[t5.MATERIAL_NAME like '%' || #where.MaterialName# || '%']]>
+         </isNotNull>
+         <isNotNull property="where.MaterialCode" prepend="AND">
+           <![CDATA[t5.MATERIAL_CODE like '%' || #where.MaterialCode# || '%']]>
+         </isNotNull>
+         <isNotNull property="where.MajorTypeId" prepend="AND">
+           <![CDATA[t3.MAJOR_TYPE_ID  = #where.MajorTypeId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ 
+         GROUP BY t1.PLAN_DATE, t1.EQUIP_ID, t2.MATERIAL_ID
+          , t3.EQUIP_NAME, t5.MATERIAL_NAME, t5.MATERIAL_CODE,t7.UNIT_NAME
+        ) t1
+      ]]>
+       <![CDATA[
+        order by t1.PLAN_DATE, t1.EQUIP_NAME, t1.MATERIAL_NAME
+      ]]>
+     </select>
+
+     <select id="getPlanAutoScrollInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select shift_name,equip_name,material_name,planAmount,realAmount,round(case when planAmount=0 then 0 else realAmount*100/planAmount end ,2)||'%' rate from (
+      select t5.shift_name, t2.equip_name,t3.material_name,sum(t1.plan_amount) planAmount,nvl(sum(t4.qty),0) realAmount from hpp_plan t
+      left join hpp_plan_detail t1 on t1.plan_id = t.objid
+      left join sbe_equip t2 on t2.objid = t.equip_id
+      left join sbm_material t3 on t3.objid = t1.material_id
+      left join hpp_semis_production t4 on t4.plan_detail_id = t1.objid
+      left join ssb_shift t5 on t5.objid = t.shift_id
+      where t1.plan_state>='2']]>
+       <isNotNull property="ObjId" prepend="AND">
+         <![CDATA[T.equip_id=#ObjId#]]>
+       </isNotNull>
+       <isNotNull property="MaterialId" prepend="AND">
+         <![CDATA[T1.material_id=#MaterialId#]]>
+       </isNotNull>
+       <isNotNull property="EquipTypeId" prepend="AND">
+         <![CDATA[ t2.minor_type_id=#EquipTypeId#]]>
+       </isNotNull>
+       <![CDATA[and t.plan_date=to_date(#PlanDate#,'yyyy-MM-dd hh24:mi:ss') group by t5.shift_name,t2.equip_name,t3.material_name) a
+      where realAmount<>0
+      order by shift_name,equip_name
+      ]]>
+    </select>
+  </statements>
+
+ 
+
+</sqlMap>

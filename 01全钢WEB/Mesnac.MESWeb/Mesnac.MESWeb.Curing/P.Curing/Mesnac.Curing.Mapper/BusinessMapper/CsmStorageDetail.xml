@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CsmStorageDetail"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CSM_STORAGE_DETAIL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.StorageMainId" prepend="AND">
+          <![CDATA[STORAGE_MAIN_ID = #where.StorageMainId#]]>
+        </isNotNull>
+        <isNotNull property="where.StorageToolingId" prepend="AND">
+          <![CDATA[STORAGE_TOOLING_ID = #where.StorageToolingId#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreId" prepend="AND">
+          <![CDATA[GREEN_TYRE_ID = #where.GreenTyreId#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.ScanTime" prepend="AND">
+          <![CDATA[SCAN_TIME = #where.ScanTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ScannerId" prepend="AND">
+          <![CDATA[SCANNER_ID = #where.ScannerId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetToolingBarcodeExists" parameterClass="map" resultClass="Row">
+       <![CDATA[
+           SELECT N1.GREEN_TYRE_NO,N5.MATERIAL_NAME,N.MATERIAL_ID,N3.STORE_NAME,N3.OBJID AS STORE_ID ,N4.STORE_PLACE_NAME ,N4.OBJID AS STORE_PLACE_ID FROM CSM_STORAGE_MAIN N 
+             LEFT JOIN CSM_STORAGE_DETAIL N1  ON N1.STORAGE_MAIN_ID = N.OBJID
+             INNER JOIN CSM_STORAGE_TOOLING N2 ON N1.STORAGE_TOOLING_ID = N2.OBJID
+             LEFT JOIN CSM_STORE N3 ON N.STORE_ID = N3.OBJID
+             LEFT JOIN CSM_STORE_PLACE N4  ON N.STORE_PLACE_ID = N4.OBJID
+             LEFT JOIN SBM_MATERIAL N5  ON N5.OBJID = N.MATERIAL_ID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[T0.DELETE_FLAG =0 ]]>
+         </isNotNull>
+         <isNotNull property="toolingBarcode" prepend="AND">
+           <![CDATA[N2.TOOLING_BARCODE = #toolingBarcode#]]>
+         </isNotNull>
+        <!--<isNotNull property="MaterialId" prepend="AND">
+           <![CDATA[N.MATERIAL_ID=#MaterialId#]]>
+       </isNotNull>-->
+       </dynamic>
+     </select>
+
+
+
+     <select id="GetStorageMainOBJID" parameterClass="map" resultClass="Row">
+       <![CDATA[SELECT OBJID FROM CSM_STORAGE_MAIN T WHERE T.STORE_ID =#StoreId# AND T.STORE_PLACE_ID =#StorePlaceId# AND T.MATERIAL_ID=#MaterialId#  ]]>
+     </select>
+     <update id="UpdateStoragePlace" parameterClass="map">
+       <![CDATA[update csm_storage_detail t1 set t1.storage_main_id=#objid#  
+                where t1.storage_tooling_id in (select objid from csm_storage_tooling t1 where t1.tooling_barcode=#toolingBarcode#) ]]>
+      
+     </update>
+     <update id="UpdateStorageTooling" parameterClass="map">
+       <![CDATA[update csm_storage_tooling t1 set t1.storage_main_id=#objid#  where t1.tooling_barcode=#toolingBarcode# ]]>
+     </update>
+     
+     <insert id="InsertStorageMainOBJID" parameterClass="map" resultClass="Row">
+       <![CDATA[insert into csm_storage_main(objid,store_id,store_place_id,material_id,stock_amount)
+                                  values(seq_csm_storage_main.nextval,#StoreId#,#StorePlaceId#,#MaterialId#,2)]]>               
+     </insert>
+
+     <select id="GetStopTime" parameterClass="map" resultClass="Row">
+       <![CDATA[             
+       SELECT T.MATERIAL_ID,T1.MATERIAL_CODE,T1.MATERIAL_NAME,T.MIN_TIME,T.VALID_TIME FROM SBM_MATERIAL_INFO T
+       LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID = T.MATERIAL_ID
+       WHERE T.MATERIAL_MINOR_TYPE NOT IN(32,33) and T.MATERIAL_ID=#materialId# ]]>
+     </select>
+     <select id="GetGreenTyreNoInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[             
+       select b.material_id,c.material_name,c.material_code, d.min_time,d.valid_time, a.* from bpm_production a
+       left join bpp_plan_detail b on a.plan_detail_id = b.objid 
+       left join sbm_material c on b.material_id = c.objid and c.delete_flag =0
+       left join sbm_material_info d on d.material_id = c.objid and d.delete_flag =0
+       where a.green_tyre_no = #greenTyreNo# ]]>
+     </select>
+     <select id="GetMoldingControlSet" parameterClass="map" resultClass="Row">
+       <![CDATA[select config_key,config_value from ssb_config where config_key in('MoldingisVerityTime','MoldingIsTFTime')]]>
+     </select>
+
+
+
+     <select id="GetlockInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[             
+select end_time,equip_position from cpp_curing_production where tyre_no = #barcode# and delete_flag=0]]>
+     </select>
+
+     <select id="GetLockBarcode" parameterClass="map" resultClass="Row">
+       <![CDATA[             
+select * from cpp_curing_production where  end_time <= to_date(#endtime#,'yyyy-mm-dd hh24:mi:ss')
+ and equip_position = #position# and delete_flag = 0 and rownum<5 order by end_time desc
+ ]]>
+     </select>
+
+     <select id="GetlockReason" parameterClass="map" resultClass="Row">
+       <![CDATA[             
+select * from sbm_lock_reason 
+ ]]>
+     </select>
+
+
+     <select id="GetIsInWMS" parameterClass="map" resultClass="Row">
+       <![CDATA[             
+       select TYRE_NO,UPLOAD_FLAG,attribute3 FROM WMS_UPLOAD_RECORD WHERE DELETE_FLAG=0 AND TYRE_NO= #barcode# ]]>
+     </select>
+     <select id="GetIsInSbmMarkInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[             
+       select BARCODE,MARK_FLAG from sbm_mark_info WHERE BARCODE= #barcode# order by record_time desc ]]>
+     </select>
+
+     <select id="GetCapsuleMaxNum" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+         select t.dummy1,t.dummy5 from CBE_CURING_BLADDER_IN t
+ where t.bladder_code = 
+ (select * from (
+ select a.capsuleid_new from cim_capsule_replace_record a
+ left join sbe_equip b on b.objid = a.equipid
+ where b.equip_name = #EquipName# and a.lrflag=#LEFTorR#
+  order by a.endtime desc) where rownum=1)
+       ]]>
+     </select>
+       <select id="GetCapsuleInfo2" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+         select t.dummy5,t.bladder_code,nvl(t.change_num,0) change_num from CBE_CURING_BLADDER_IN t
+ where t.bladder_code = 
+ (select * from (
+ select a.capsuleid_new from cim_capsule_replace_record a
+ left join sbe_equip b on b.objid = a.equipid
+where b.equip_name = #EquipName# and a.lrflag=#LEFTorR#
+  order by a.endtime desc) where rownum=1)
+       ]]>
+     </select>
+
+     <insert id="InsertBpmCheckBarcode" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+       insert into bpm_checkbarcode (barcode) values (#greenTyreNo#) 
+       ]]>
+     </insert>
+     
+     <update id="UpdateUnlockBarcodeCpp" parameterClass="map">
+       <![CDATA[ 
+update  cpp_curing_production set mark_flag = 0 where tyre_no = #barcode#
+       ]]>
+     </update>
+     <update id="UpdateUnlockBarcodeWms" parameterClass="map">
+       <![CDATA[ 
+update wms_upload_record set upload_flag = 0,returnstate = null where tyre_no = #barcode#
+       ]]>
+     </update>
+
+     <select id="GetClearUserNum" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+select distinct equipid from sbe_clearstomata where record_userid = #userid# and begin_time = end_time and remark = '气孔疏通'
+       ]]>
+     </select>
+     <select id="GetCuringScanXRXC" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select * from (
+select  c.tooling_barcode,a.green_tyre_no,scan_time  from  csm_storage_detail a
+left join csm_storage_main b on b.objid = a.storage_main_id
+left join csm_storage_tooling c on c.objid = a.storage_tooling_id
+left join csm_store_place d on d.objid = b.store_place_id
+left join sbe_equip e on e.objid = d.equip_id
+where a.delete_flag  = 0 and  NOT EXISTS (SELECT * FROM CPP_CURING_WAIT_TYRE X WHERE X.GREEN_TYRE_NO = A.GREEN_TYRE_NO)
+and b.material_id = (
+select x2.material_id from bpm_production x1
+left join bpp_plan_detail x2 on x2.objid = x1.plan_detail_id where x1.green_tyre_no = #tyreNo#)
+order by  scan_time) where rownum = 1
+union all
+select  c.tooling_barcode,'',scan_time  from  csm_storage_detail a
+left join csm_storage_main b on b.objid = a.storage_main_id
+left join csm_storage_tooling c on c.objid = a.storage_tooling_id
+left join csm_store_place d on d.objid = b.store_place_id
+left join sbe_equip e on e.objid = d.equip_id
+where a.delete_flag  = 0 and a.green_tyre_no = #tyreNo#
+union all
+select  to_char(nvl(config_value,0)),'',to_date('9999-10-10 10:00:00','yyyy-MM-dd hh24:mi:ss')  from  ssb_config where config_key = 'CuringScanXRXC'
+union all 
+select to_char(nvl(config_value,0)),'',to_date('9999-10-10 10:00:00','yyyy-MM-dd hh24:mi:ss')  from  ssb_config where config_key = 'CuringGetTyreXRXC'
+
+       ]]>
+     </select>
+     <select id="GetChangeMouldMater" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select distinct material_id from sbm_bom where objid in (select distinct bom_id from cpp_curing_mould_plan  where objid in 
+(select  change_mold_planid  from (SELECT CHANGE_MOLD_PLANID FROM cim_mould_changeinfo WHERE OBJID IN (
+SELECT OBJID FROM (
+select MAX(OBJID) OBJID ,EQUIP_POSITION  from  cim_mould_changeinfo where equip_id = 
+(select objid from sbe_equip where equip_code = #equipcode#)  GROUP BY EQUIP_POSITION)))
+)) 
+]]>
+     </select>
+     <select id="GetNowTyreMater" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select b.material_id from bpm_production a left join bpp_plan_detail b on b.objid = a.plan_detail_id where green_tyre_no = #tyreNo#
+       ]]>
+     </select>
+     
+   </statements>
+</sqlMap>

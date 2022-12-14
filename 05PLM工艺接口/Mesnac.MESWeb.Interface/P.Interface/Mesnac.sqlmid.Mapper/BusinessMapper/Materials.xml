@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.sqlmid.Mapper.BusinessMapper.Materials"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM Materials ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.Materialpure" prepend="AND">
+          <![CDATA[MaterialPure = #where.Materialpure#]]>
+        </isNotNull>
+        <isNotNull property="where.Materialcode" prepend="AND">
+          <![CDATA[MaterialCode = #where.Materialcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Materialdesc" prepend="AND">
+          <![CDATA[MaterialDesc = #where.Materialdesc#]]>
+        </isNotNull>
+        <isNotNull property="where.Materialshort" prepend="AND">
+          <![CDATA[MaterialShort = #where.Materialshort#]]>
+        </isNotNull>
+        <isNotNull property="where.Matdescfull" prepend="AND">
+          <![CDATA[MatDescFull = #where.Matdescfull#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialdescEn" prepend="AND">
+          <![CDATA[MaterialDesc_EN = #where.MaterialdescEn#]]>
+        </isNotNull>
+        <isNotNull property="where.MatdescfullEn" prepend="AND">
+          <![CDATA[MatDescFull_EN = #where.MatdescfullEn#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialdescTh" prepend="AND">
+          <![CDATA[MaterialDesc_TH = #where.MaterialdescTh#]]>
+        </isNotNull>
+        <isNotNull property="where.MatdescfullTh" prepend="AND">
+          <![CDATA[MatDescFull_TH = #where.MatdescfullTh#]]>
+        </isNotNull>
+        <isNotNull property="where.Matgrp" prepend="AND">
+          <![CDATA[MatGrp = #where.Matgrp#]]>
+        </isNotNull>
+        <isNotNull property="where.Mattyp" prepend="AND">
+          <![CDATA[MatTyp = #where.Mattyp#]]>
+        </isNotNull>
+        <isNotNull property="where.Baseunit" prepend="AND">
+          <![CDATA[BaseUnit = #where.Baseunit#]]>
+        </isNotNull>
+        <isNotNull property="where.Stockunit" prepend="AND">
+          <![CDATA[StockUnit = #where.Stockunit#]]>
+        </isNotNull>
+        <isNotNull property="where.Ratest2b" prepend="AND">
+          <![CDATA[RateSt2b = #where.Ratest2b#]]>
+        </isNotNull>
+        <isNotNull property="where.Salesunit" prepend="AND">
+          <![CDATA[SalesUnit = #where.Salesunit#]]>
+        </isNotNull>
+        <isNotNull property="where.Rateso2b" prepend="AND">
+          <![CDATA[RateSo2b = #where.Rateso2b#]]>
+        </isNotNull>
+        <isNotNull property="where.Gissueunit" prepend="AND">
+          <![CDATA[GIssueUnit = #where.Gissueunit#]]>
+        </isNotNull>
+        <isNotNull property="where.Rategi2b" prepend="AND">
+          <![CDATA[RateGI2b = #where.Rategi2b#]]>
+        </isNotNull>
+        <isNotNull property="where.Productunit" prepend="AND">
+          <![CDATA[ProductUnit = #where.Productunit#]]>
+        </isNotNull>
+        <isNotNull property="where.Ratepp2b" prepend="AND">
+          <![CDATA[RatePp2b = #where.Ratepp2b#]]>
+        </isNotNull>
+        <isNotNull property="where.Purchaseunit" prepend="AND">
+          <![CDATA[PurchaseUnit = #where.Purchaseunit#]]>
+        </isNotNull>
+        <isNotNull property="where.Ratepr2b" prepend="AND">
+          <![CDATA[RatePr2b = #where.Ratepr2b#]]>
+        </isNotNull>
+        <isNotNull property="where.Materialspec" prepend="AND">
+          <![CDATA[MaterialSpec = #where.Materialspec#]]>
+        </isNotNull>
+        <isNotNull property="where.Overdeliveryrate" prepend="AND">
+          <![CDATA[OverDeliveryRate = #where.Overdeliveryrate#]]>
+        </isNotNull>
+        <isNotNull property="where.Status" prepend="AND">
+          <![CDATA[Status = #where.Status#]]>
+        </isNotNull>
+        <isNotNull property="where.Statusz1" prepend="AND">
+          <![CDATA[StatusZ1 = #where.Statusz1#]]>
+        </isNotNull>
+        <isNotNull property="where.Lotname" prepend="AND">
+          <![CDATA[LotName = #where.Lotname#]]>
+        </isNotNull>
+        <isNotNull property="where.Netheavy" prepend="AND">
+          <![CDATA[NetHeavy = #where.Netheavy#]]>
+        </isNotNull>
+        <isNotNull property="where.Materialgroup" prepend="AND">
+          <![CDATA[MaterialGroup = #where.Materialgroup#]]>
+        </isNotNull>
+        <isNotNull property="where.Division" prepend="AND">
+          <![CDATA[Division = #where.Division#]]>
+        </isNotNull>
+        <isNotNull property="where.Tpno" prepend="AND">
+          <![CDATA[TPNo = #where.Tpno#]]>
+        </isNotNull>
+        <isNotNull property="where.Companycode" prepend="AND">
+          <![CDATA[CompanyCode = #where.Companycode#]]>
+        </isNotNull>
+        <isNotNull property="where.Plant" prepend="AND">
+          <![CDATA[Plant = #where.Plant#]]>
+        </isNotNull>
+        <isNotNull property="where.Subplant" prepend="AND">
+          <![CDATA[SubPlant = #where.Subplant#]]>
+        </isNotNull>
+        <isNotNull property="where.Ctime" prepend="AND">
+          <![CDATA[CTIME = #where.Ctime#]]>
+        </isNotNull>
+        <isNotNull property="where.Cdate" prepend="AND">
+          <![CDATA[Cdate = #where.Cdate#]]>
+        </isNotNull>
+        <isNotNull property="where.Udate" prepend="AND">
+          <![CDATA[Udate = #where.Udate#]]>
+        </isNotNull>
+        <isNotNull property="where.Utime" prepend="AND">
+          <![CDATA[UTIME = #where.Utime#]]>
+        </isNotNull>
+        <isNotNull property="where.Oldmatcode" prepend="AND">
+          <![CDATA[OldMatCode = #where.Oldmatcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Matstatus" prepend="AND">
+          <![CDATA[MatStatus = #where.Matstatus#]]>
+        </isNotNull>
+        <isNotNull property="where.Brand" prepend="AND">
+          <![CDATA[Brand = #where.Brand#]]>
+        </isNotNull>
+        <isNotNull property="where.Cj" prepend="AND">
+          <![CDATA[CJ = #where.Cj#]]>
+        </isNotNull>
+        <isNotNull property="where.Thspec" prepend="AND">
+          <![CDATA[THSpec = #where.Thspec#]]>
+        </isNotNull>
+        <isNotNull property="where.Extwg" prepend="AND">
+          <![CDATA[EXTWG = #where.Extwg#]]>
+        </isNotNull>
+        <isNotNull property="where.Ewbez" prepend="AND">
+          <![CDATA[EWBEZ = #where.Ewbez#]]>
+        </isNotNull>
+        <isNotNull property="where.Zbyz1" prepend="AND">
+          <![CDATA[ZBYZ1 = #where.Zbyz1#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs01" prepend="AND">
+          <![CDATA[ZCS01 = #where.Zcs01#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs02" prepend="AND">
+          <![CDATA[ZCS02 = #where.Zcs02#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs03" prepend="AND">
+          <![CDATA[ZCS03 = #where.Zcs03#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs04" prepend="AND">
+          <![CDATA[ZCS04 = #where.Zcs04#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs05" prepend="AND">
+          <![CDATA[ZCS05 = #where.Zcs05#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs06" prepend="AND">
+          <![CDATA[ZCS06 = #where.Zcs06#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs07" prepend="AND">
+          <![CDATA[ZCS07 = #where.Zcs07#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs08" prepend="AND">
+          <![CDATA[ZCS08 = #where.Zcs08#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs09" prepend="AND">
+          <![CDATA[ZCS09 = #where.Zcs09#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs10" prepend="AND">
+          <![CDATA[ZCS10 = #where.Zcs10#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs11" prepend="AND">
+          <![CDATA[ZCS11 = #where.Zcs11#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs12" prepend="AND">
+          <![CDATA[ZCS12 = #where.Zcs12#]]>
+        </isNotNull>
+        <isNotNull property="where.Lbmc" prepend="AND">
+          <![CDATA[LBMC = #where.Lbmc#]]>
+        </isNotNull>
+        <isNotNull property="where.Spmc" prepend="AND">
+          <![CDATA[SPMC = #where.Spmc#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs13" prepend="AND">
+          <![CDATA[ZCS13 = #where.Zcs13#]]>
+        </isNotNull>
+        <isNotNull property="where.Hh" prepend="AND">
+          <![CDATA[HH = #where.Hh#]]>
+        </isNotNull>
+        <isNotNull property="where.Hs" prepend="AND">
+          <![CDATA[HS = #where.Hs#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs15" prepend="AND">
+          <![CDATA[ZCS15 = #where.Zcs15#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs16" prepend="AND">
+          <![CDATA[ZCS16 = #where.Zcs16#]]>
+        </isNotNull>
+        <isNotNull property="where.Zcs17" prepend="AND">
+          <![CDATA[ZCS17 = #where.Zcs17#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[Dummy1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[Dummy2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[Dummy3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[Dummy4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Materialname" prepend="AND">
+          <![CDATA[MaterialName = #where.Materialname#]]>
+        </isNotNull>
+        <isNotNull property="where.Pattern" prepend="AND">
+          <![CDATA[Pattern = #where.Pattern#]]>
+        </isNotNull>
+        <isNotNull property="where.Zml3" prepend="AND">
+          <![CDATA[ZML3 = #where.Zml3#]]>
+        </isNotNull>
+        <isNotNull property="where.Zml4" prepend="AND">
+          <![CDATA[ZML4 = #where.Zml4#]]>
+        </isNotNull>
+        <isNotNull property="where.Zpos" prepend="AND">
+          <![CDATA[ZPOS = #where.Zpos#]]>
+        </isNotNull>
+        <isNotNull property="where.Zpel" prepend="AND">
+          <![CDATA[ZPEL = #where.Zpel#]]>
+        </isNotNull>
+        <isNotNull property="where.Ztic" prepend="AND">
+          <![CDATA[ZTIC = #where.Ztic#]]>
+        </isNotNull>
+        <isNotNull property="where.Zwbm" prepend="AND">
+          <![CDATA[ZWBM = #where.Zwbm#]]>
+        </isNotNull>
+        <isNotNull property="where.Sobsl" prepend="AND">
+          <![CDATA[SOBSL = #where.Sobsl#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT * from dbo.Materials
+       where 1=1
+       and CompanyCode='8002'
+       ]]>
+       <isNotNull property="Materialpure" prepend="AND">
+         <![CDATA[Materialpure=#Materialpure#]]>
+       </isNotNull>
+     </select>
+     
+  </statements>
+</sqlMap>

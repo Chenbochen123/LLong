@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CppCuringFirsttyre"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <alias>
+    <typeAlias alias="CppCuringFirsttyre" type="Mesnac.Curing.Entity.BasicEntity.CppCuringFirsttyre, Mesnac.Curing.Entity" />
+  </alias>
+
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CppCuringFirsttyre" class="CppCuringFirsttyre">
+    <result property="ObjId" column="OBJID"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="EquipPosition" column="EQUIP_POSITION"/>
+    <result property="MouldNo" column="MOULD_NO"/>
+    <result property="GreenTyreNo" column="GREEN_TYRE_NO"/>
+    <result property="TyreNo" column="TYRE_NO"/>
+    <result property="TyreNum" column="TYRE_NUM"/>
+    <result property="MouldState" column="MOULD_STATE"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CppCuringFirsttyre" class="CppCuringFirsttyre">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="EquipPosition" column="EquipPosition"/>
+    <parameter property="MouldNo" column="MouldNo"/>
+    <parameter property="GreenTyreNo" column="GreenTyreNo"/>
+    <parameter property="TyreNo" column="TyreNo"/>
+    <parameter property="TyreNum" column="TyreNum"/>
+    <parameter property="MouldState" column="MouldState"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+  </parameterMap>
+
+  <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CPP_CURING_FIRSTTYRE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipPosition" prepend="AND">
+          <![CDATA[EQUIP_POSITION = #where.EquipPosition#]]>
+        </isNotNull>
+        <isNotNull property="where.MouldNo" prepend="AND">
+          <![CDATA[MOULD_NO = #where.MouldNo#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[TYRE_NO = #where.TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNum" prepend="AND">
+          <![CDATA[TYRE_NUM = #where.TyreNum#]]>
+        </isNotNull>
+        <isNotNull property="where.MouldState" prepend="AND">
+          <![CDATA[MOULD_STATE = #where.MouldState#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE ( = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+    <sql id="includeInsert">
+      <![CDATA[INSERT INTO CPP_CURING_FIRSTTYRE]]>
+      <dynamic prepend="(">
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="EquipPosition" prepend=",">EQUIP_POSITION</isNotNull>
+        <isNotNull property="MouldNo" prepend=",">MOULD_NO</isNotNull>
+        <isNotNull property="GreenTyreNo" prepend=",">GREEN_TYRE_NO</isNotNull>
+        <isNotNull property="TyreNo" prepend=",">TYRE_NO</isNotNull>
+        <isNotNull property="TyreNum" prepend=",">TYRE_NUM</isNotNull>
+        <isNotNull property="MouldState" prepend=",">MOULD_STATE</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+      </dynamic>
+      <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="EquipPosition" prepend=",">#EquipPosition#</isNotNull>
+        <isNotNull property="MouldNo" prepend=",">#MouldNo#</isNotNull>
+        <isNotNull property="GreenTyreNo" prepend=",">#GreenTyreNo#</isNotNull>
+        <isNotNull property="TyreNo" prepend=",">#TyreNo#</isNotNull>
+        <isNotNull property="TyreNum" prepend=",">#TyreNum#</isNotNull>
+        <isNotNull property="MouldState" prepend=",">#MouldState#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+      </dynamic>
+      <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CPP_CURING_FIRSTTYRE
+      <dynamic prepend="SET">
+        <isNotNull  property="update.ObjId"  prepend=",">
+          OBJID = #update.ObjId#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.EquipPosition"  prepend=",">
+          EQUIP_POSITION = #update.EquipPosition#
+        </isNotNull>
+        <isNotNull  property="update.MouldNo"  prepend=",">
+          MOULD_NO = #update.MouldNo#
+        </isNotNull>
+        <isNotNull  property="update.GreenTyreNo"  prepend=",">
+          GREEN_TYRE_NO = #update.GreenTyreNo#
+        </isNotNull>
+        <isNotNull  property="update.TyreNo"  prepend=",">
+          TYRE_NO = #update.TyreNo#
+        </isNotNull>
+        <isNotNull  property="update.TyreNum"  prepend=",">
+          TYRE_NUM = #update.TyreNum#
+        </isNotNull>
+        <isNotNull  property="update.MouldState"  prepend=",">
+          MOULD_STATE = #update.MouldState#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CPP_CURING_FIRSTTYRE
+    </sql>
+
+
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CppCuringFirsttyre">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CppCuringFirsttyre">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max()
+      </isNotPropertyAvailable>
+      FROM CPP_CURING_FIRSTTYRE
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CPP_CURING_FIRSTTYRE
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CppCuringFirsttyre" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+      TRUNCATE TABLE CPP_CURING_FIRSTTYRE
+    </statement>
+  </statements>
+</sqlMap>

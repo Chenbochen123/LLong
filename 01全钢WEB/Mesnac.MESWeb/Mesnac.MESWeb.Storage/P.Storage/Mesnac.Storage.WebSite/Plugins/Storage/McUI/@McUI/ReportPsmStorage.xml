@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="StoreId" Value="仓库"></Caption>
+    <Caption Name="StorePlaceName" Value="库位"></Caption>
+    <Caption Name="MaterialId" Value="规格"></Caption>
+    <Caption Name="MaterialName" Value="规格"></Caption>
+    <Caption Name="CheckGradeCode" Value="品级"></Caption>
+    <Caption Name="VirtualStorePlace" Value="虚拟库位"></Caption>
+    <Caption Name="STORE_NAME" Value="仓库"></Caption>
+    <Caption Name="STORE_PLACE_NAME" Value="库位"></Caption>
+    <Caption Name="CHECK_GRADE_NAME" Value="品级"></Caption>
+    <Caption Name="LOAD_AMOUNT" Value="扫描数量"></Caption>
+    <Caption Name="SUMMARY_AMOUNT" Value="库存数量"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="规格"></Caption>
+    <Caption Name="RECORD_TIME" Value="创建时间"></Caption>
+    <Caption Name="UPDATE_TIME" Value="更新时间"></Caption>
+    <Caption Name="OPER_MEMO_1" Value="业务类型"></Caption>
+    <Caption Name="IN_OR_OUT_CAPTION" Value="出入类型"></Caption>
+    <Caption Name="AMOUNT" Value="数量"></Caption>
+  </Captions>
+  <WebPage Title="成品库存统计">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Storage/McUI/@McUI/ReportPsmStorage.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="PSM_STORAGE_SUMMARY">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="StoreId" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="StorePlaceName" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MaterialName" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="CheckGradeCode" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="VirtualStorePlace" Type="ComboBox"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <TotalColumns Fields="SUMMARY_AMOUNT"></TotalColumns>
+      <GridColumns>
+        <!--<GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>-->
+        <GridColumn ColumnName="STORE_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="280"></GridColumn>
+        <GridColumn ColumnName="CHECK_GRADE_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="SUMMARY_AMOUNT" Width="60"></GridColumn>
+        <GridColumn ColumnName="STORE_ID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE_ID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_ID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="CHECK_GRADE_CODE" IsShow="false"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+    <MainDetail>
+      <ParamFields>
+        <!--<ParamField FieldName="OBJID" IsShow="false"></ParamField>-->
+        <ParamField FieldName="STORE_NAME"></ParamField>
+        <ParamField FieldName="STORE_PLACE_NAME"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="CHECK_GRADE_NAME"></ParamField>
+        <ParamField FieldName="SUMMARY_AMOUNT"></ParamField>
+      </ParamFields>
+    </MainDetail>
+    <DetailGrid Width="800">
+      <GridColumns>
+        <!--<GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>-->
+        <GridColumn ColumnName="STORE_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="280"></GridColumn>
+        <GridColumn ColumnName="CHECK_GRADE_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="IN_OR_OUT_CAPTION" Width="60"></GridColumn>
+        <GridColumn ColumnName="OPER_MEMO_1" Width="60"></GridColumn>
+        <GridColumn ColumnName="AMOUNT" Width="60"></GridColumn>
+        <GridColumn ColumnName="OPER_TYPE" Width="60" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormat="yyyy-MM-dd HH:mm:ss" Width="150"></GridColumn>
+        <GridColumn ColumnName="UPDATE_TIME" ColumnType="Date" ColumnFormat="yyyy-MM-dd HH:mm:ss" Width="150"></GridColumn>
+      </GridColumns>
+    </DetailGrid>
+  </Select>
+</UiConfig>

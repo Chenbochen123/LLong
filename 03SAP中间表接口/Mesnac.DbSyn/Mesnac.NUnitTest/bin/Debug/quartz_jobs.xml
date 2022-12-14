@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 				version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+
+  <schedule>
+    <job>
+      <name>部门人员</name>
+      <group>基础数据</group>
+      <description>基础数据 部门人员 数据同步</description>
+      <job-type>Mesnac.DbSyn.DbSynJob, Mesnac.DbSyn</job-type>
+      <job-data-map>
+        <entry>
+          <key>HR_ORG</key>
+          <value>HR_ORG</value>
+        </entry>
+        <entry>
+          <key>HR_PERSON</key>
+          <value>HR_PERSON</value>
+        </entry>
+        <entry>
+          <key>MesDept</key>
+          <value>MesDept</value>
+        </entry>
+        <entry>
+          <key>MesUser</key>
+          <value>MesUser</value>
+        </entry>
+      </job-data-map>
+    </job>
+    <trigger>
+      <cron>
+        <name>部门人员触发器</name>
+        <group>基础数据触发器</group>
+        <description>基础数据 部门人员 数据同步 每周二23时15分</description>
+        <job-name>部门人员</job-name>
+        <job-group>基础数据</job-group>
+        <cron-expression>0 15 23 ? * WED</cron-expression>
+      </cron>
+    </trigger>
+
+    <job>
+      <name>生产基础数据</name>
+      <group>生产数据</group>
+      <description>生产数据 生产基础数据 数据同步</description>
+      <job-type>Mesnac.DbSyn.DbSynJob, Mesnac.DbSyn</job-type>
+      <job-data-map>
+        <entry>
+          <key>Materials</key>
+          <value>Materials</value>
+        </entry>
+        <entry>
+          <key>PDMMESQ</key>
+          <value>PDMMESQ</value>
+        </entry>
+        <entry>
+          <key>SBM_BOM</key>
+          <value>SBM_BOM</value>
+        </entry>
+        <entry>
+          <key>CPT_PDM_MES_PARMMAIN</key>
+          <value>CPT_PDM_MES_PARMMAIN</value>
+        </entry>
+        <entry>
+          <key>CPT_PDM_MES_PARMB</key>
+          <value>CPT_PDM_MES_PARMB</value>
+        </entry>
+        <entry>
+          <key>CPT_PDM_MES_PARMC</key>
+          <value>CPT_PDM_MES_PARMC</value>
+        </entry>
+        <entry>
+          <key>CPT_TECH_MAT</key>
+          <value>CPT_TECH_MAT</value>
+        </entry>
+        <entry>
+          <key>CPT_TECH_DATA</key>
+          <value>CPT_TECH_DATA</value>
+        </entry>
+        <entry>
+          <key>BPT_PDM_MES_PARMMAIN</key>
+          <value>BPT_PDM_MES_PARMMAIN</value>
+        </entry>
+        <entry>
+          <key>BPT_PDM_MES_PARMB</key>
+          <value>BPT_PDM_MES_PARMB</value>
+        </entry>
+        <entry>
+          <key>BPT_TECH_MAT</key>
+          <value>BPT_TECH_MAT</value>
+        </entry>
+        <entry>
+          <key>BPT_TECH_DATA</key>
+          <value>BPT_TECH_DATA</value>
+        </entry>
+      </job-data-map>
+    </job>
+    <trigger>
+      <cron>
+        <name>生产基础数据触发器</name>
+        <group>生产数据触发器</group>
+        <description>生产数据 生产基础数据 数据同步 每日14时</description>
+        <job-name>生产基础数据</job-name>
+        <job-group>生产数据</job-group>
+        <cron-expression>0 0 14 * * ?</cron-expression>
+      </cron>
+    </trigger>
+  </schedule>
+</job-scheduling-data>

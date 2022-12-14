@@ -1,0 +1,1059 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="CuringTechnology.aspx.cs" Inherits="Plugins_Curing_Technology_CuringTechnology" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>硫化工艺标准</title>
+    <style>
+        .dirty-row .x-grid-cell, .dirty-row .x-grid-rowwrap-div {
+            background-color: #FFFDD8 !important;
+        }
+
+        .new-row .x-grid-cell, .new-row .x-grid-rowwrap-div {
+            background: #c8ffc8 !important;
+        }
+
+        .row_0 .x-grid-cell, .row_0 .x-grid-rowwrap-div {
+        }
+
+        .row_1 .x-grid-cell, .row_1 .x-grid-rowwrap-div {
+            background: yellow !important;
+        }
+
+        .row_2 .x-grid-cell, .row_2 .x-grid-rowwrap-div {
+            background: green !important;
+            color: white !important;
+        }
+
+        .row_3 .x-grid-cell, .row_3 .x-grid-rowwrap-div {
+            background: red !important;
+            color: white !important;
+        }
+
+        .row_4 .x-grid-cell, .row_4 .x-grid-rowwrap-div {
+            background: blue !important;
+            color: white !important;
+        }
+
+        .row_5 .x-grid-cell, .row_5 .x-grid-rowwrap-div {
+            background: gray !important;
+            color: white !important;
+        }
+    </style>
+    <script type="text/javascript" src="CuringTechnology.js?<%=DateTime.Now.ToString("HHmmss") %>"></script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <ext:ResourceManager runat="server" ID="ResourceManager1" />
+        <ext:Viewport runat="server" ID="Viewport1" Layout="BorderLayout">
+            <Items>
+                <ext:Panel runat="server" Region="North">
+                    <Items>
+                        <%--操作按钮--%>
+                        <ext:Toolbar runat="server">
+                            <Items>
+                                <ext:Button runat="server" ID="btnSearch" Text="查询" Icon="PageFind">
+                                    <Listeners>
+                                        <Click Fn="search" />
+                                    </Listeners>
+                                </ext:Button>
+                                <ext:Button runat="server" ID="btnView" Text="查看" Icon="PageWord">
+                                    <Listeners>
+                                        <Click Handler="return btnView_Click();" />
+                                    </Listeners>
+                                </ext:Button>
+                                <ext:Button runat="server" ID="btnCopy" Text="复制" Icon="PageCopy">
+                                    <Listeners>
+                                        <Click Handler="return btnCopy_Click();" />
+                                    </Listeners>
+                                </ext:Button>
+                                <ext:Button runat="server" ID="btnAdd" Text="添加" Icon="PageAdd">
+                                    <DirectEvents>
+                                        <Click OnEvent="btnAdd_Click" />
+                                    </DirectEvents>
+                                </ext:Button>
+                                <ext:Button runat="server" ID="btnEdit" Text="修改" Icon="PageEdit">
+                                    <Listeners>
+                                        <Click Handler="return btnEdit_Click();" />
+                                    </Listeners>
+                                </ext:Button>
+                                <ext:Button runat="server" ID="btnDelete" Text="删除" Icon="PageDelete">
+                                    <Listeners>
+                                        <Click Handler="return btnDelete_Click();" />
+                                    </Listeners>
+                                </ext:Button>
+                                <ext:Button runat="server" ID="btnSubmit" Text="提交" Icon="PageGo">
+                                    <Listeners>
+                                        <Click Handler="return btnSubmit_Click();" />
+                                    </Listeners>
+                                </ext:Button>
+                                <ext:Button runat="server" ID="btnAudit" Text="审核" Icon="PageKey">
+                                    <Listeners>
+                                        <Click Handler="return btnAudit_Click();" />
+                                    </Listeners>
+                                </ext:Button>
+                                <ext:Button runat="server" ID="btnSend" Text="下发" Icon="PageForward">
+                                    <Listeners>
+                                        <Click Handler="return btnSend_Click();" />
+                                    </Listeners>
+                                </ext:Button>
+                            </Items>
+                        </ext:Toolbar>
+                        <%--查询条件--%>
+                        <ext:Panel runat="server" Layout="ColumnLayout">
+                            <Items>
+                                <ext:TextField runat="server" ID="txtSearchTechnologyCode" FieldLabel="工艺编号" LabelAlign="Right"></ext:TextField>
+                                <ext:ComboBox runat="server" ID="cboSearchTechnologyType" FieldLabel="工艺类型" LabelAlign="Right" ForceSelection="true">
+                                    <Triggers>
+                                        <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                    </Triggers>
+                                    <Listeners>
+                                        <TriggerClick Handler="this.setValue('');" />
+                                    </Listeners>
+                                </ext:ComboBox>
+                                <ext:ComboBox runat="server" ID="cboSearchMinorTypeId" FieldLabel="硫化机类型" LabelAlign="Right" ForceSelection="true">
+                                    <Triggers>
+                                        <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                    </Triggers>
+                                    <Listeners>
+                                        <TriggerClick Handler="this.setValue('');" />
+                                    </Listeners>
+                                </ext:ComboBox>
+                                <ext:ComboBox runat="server" ID="cboSearchBuildingMaterialId" LabelAlign="Right" FieldLabel="胎胚规格"
+                                    AllowBlank="false" ForceSelection="true" QueryMode="Local">
+                                    <Triggers>
+                                        <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                    </Triggers>
+                                    <Listeners>
+                                        <TriggerClick Handler="this.setValue('');" />
+                                    </Listeners>
+                                </ext:ComboBox>
+                                <ext:ComboBox runat="server" ID="cboSearchTechSubmitState" LabelAlign="Right" FieldLabel="提交状态" Editable="false">
+                                    <Triggers>
+                                        <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                    </Triggers>
+                                    <Listeners>
+                                        <TriggerClick Handler="this.setValue('');" />
+                                    </Listeners>
+                                </ext:ComboBox>
+                                <ext:ComboBox runat="server" ID="cboSearchTechAuditState" LabelAlign="Right" FieldLabel="审核状态" Editable="false">
+                                    <Triggers>
+                                        <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                    </Triggers>
+                                    <Listeners>
+                                        <TriggerClick Handler="this.setValue('');" />
+                                    </Listeners>
+                                </ext:ComboBox>
+                                <ext:ComboBox runat="server" ID="cboSearchTechSendState" LabelAlign="Right" FieldLabel="下发状态" Editable="false">
+                                    <Triggers>
+                                        <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                    </Triggers>
+                                    <Listeners>
+                                        <TriggerClick Handler="this.setValue('');" />
+                                    </Listeners>
+                                </ext:ComboBox>
+                                <ext:ComboBox runat="server" ID="cboSearchUsedFlag" LabelAlign="Right" FieldLabel="使用状态" Editable="false">
+                                    <Items>
+                                        <ext:ListItem Value="1" Text="使用" />
+                                        <ext:ListItem Value="2" Text="停用" />
+                                    </Items>
+                                    <Triggers>
+                                        <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                    </Triggers>
+                                    <Listeners>
+                                        <TriggerClick Handler="this.setValue('');" />
+                                    </Listeners>
+                                </ext:ComboBox>
+                                <ext:ComboBox runat="server" ID="cboSearchTechState" LabelAlign="Right" FieldLabel="状态" Editable="false">
+                                    <Triggers>
+                                        <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                    </Triggers>
+                                    <Listeners>
+                                        <TriggerClick Handler="this.setValue('');" />
+                                    </Listeners>
+                                </ext:ComboBox>
+                                <%--<ext:TriggerField runat="server" ID="tgrSearchMaterialName" FieldLabel="成品胎规格" LabelAlign="Right" Editable="false">
+                                    <Triggers>
+                                        <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                        <ext:FieldTrigger Icon="Search" Qtip="查找" />
+                                    </Triggers>
+                                    <Listeners>
+                                        <TriggerClick Fn="searchMaterial" />
+                                    </Listeners>
+                                </ext:TriggerField>
+                                <ext:Hidden runat="server" ID="hdnSearchMaterialId" />--%>
+                            </Items>
+                        </ext:Panel>
+                    </Items>
+                </ext:Panel>
+                <%--硫化工艺列表--%>
+                <ext:Panel runat="server" Region="Center" Layout="FitLayout">
+                    <Items>
+                        <ext:GridPanel runat="server" ID="gridPanelMain">
+                            <Store>
+                                <ext:Store runat="server" ID="gridPanelMainStore" AutoLoad="false">
+                                    <Proxy>
+                                        <ext:PageProxy DirectFn="App.direct.GridPanelBindData" />
+                                    </Proxy>
+                                    <Model>
+                                        <ext:Model runat="server" ID="gridPanelMainModel">
+                                            <Fields>
+                                                <ext:ModelField Name="OBJID" />
+                                                <ext:ModelField Name="TECHNOLOGY_CODE" />
+                                                <ext:ModelField Name="TECHNOLOGY_TYPE_CAPTION" />
+                                                <ext:ModelField Name="MAJOR_TYPE_ID" />
+                                                <ext:ModelField Name="MAJOR_TYPE_NAME" />
+                                                <ext:ModelField Name="MINOR_TYPE_ID" />
+                                                <ext:ModelField Name="MINOR_TYPE_NAME" />
+                                                <ext:ModelField Name="BUILDING_MATERIAL_ID" />
+                                                <ext:ModelField Name="BUILDING_MATERIAL_NAME" />
+                                                <ext:ModelField Name="GREEN_TIRE_MATERIAL_NAME" />
+                                                <ext:ModelField Name="BLADDER_TYPE_NAME" />
+                                                <ext:ModelField Name="STATE" />
+                                                <ext:ModelField Name="STATE_CAPTION" />
+                                                <ext:ModelField Name="SUBMIT_STATE" />
+                                                <ext:ModelField Name="SUBMIT_STATE_CAPTION" />
+                                                <ext:ModelField Name="AUDIT_FLAG" />
+                                                <ext:ModelField Name="AUDIT_STATE_CAPTION" />
+                                                <ext:ModelField Name="SEND_FLAG" />
+                                                <ext:ModelField Name="SEND_STATE_CAPTION" />
+                                                <ext:ModelField Name="VERSION" />
+                                                <ext:ModelField Name="RECORD_USER_NAME" />
+                                                <ext:ModelField Name="RECORD_TIME" Type="Date" />
+                                                <ext:ModelField Name="ALL_CURING_TIME" />
+                                                <ext:ModelField Name="USED_FLAG" />
+
+                                                <ext:ModelField Name="BLADDER_TENSILE_HEIGHT_HIGH" />
+                                                <ext:ModelField Name="BLADDER_TENSILE_HEIGHT_LOW" />
+                                                <ext:ModelField Name="COPPER_TENSILE_HEIGHT_HIGH" />
+                                                <ext:ModelField Name="COPPER_TENSILE_HEIGHT_LOW" />
+                                                <ext:ModelField Name="FIRST_SHAPING_HEIGHT_HIGH" />
+                                                <ext:ModelField Name="FIRST_SHAPING_HEIGHT_LOW" />
+                                                <ext:ModelField Name="SECOND_SHAPING_HEIGHT_HIGH" />
+                                                <ext:ModelField Name="SECOND_SHAPING_HEIGHT_LOW" />
+                                                <ext:ModelField Name="COOPER_SHAPING_HEIGHT_HIGH" />
+                                                <ext:ModelField Name="COOPER_SHAPING_HEIGHT_LOW" />
+                                                <ext:ModelField Name="BLADDER_TENSILE_HEIGHT_SET" />
+                                                <ext:ModelField Name="BLADDER_TENSILE_HEIGHT_TOL" />
+                                                <ext:ModelField Name="COPPER_TENSILE_HEIGHT_SET" />
+                                                <ext:ModelField Name="COPPER_TENSILE_HEIGHT_TOL" />
+                                                <ext:ModelField Name="FIRST_SHAPING_HEIGHT_SET" />
+                                                <ext:ModelField Name="FIRST_SHAPING_HEIGHT_TOL" />
+                                                <ext:ModelField Name="SECOND_SHAPING_HEIGHT_SET" />
+                                                <ext:ModelField Name="SECOND_SHAPING_HEIGHT_TOL" />
+                                                <ext:ModelField Name="COOPER_SHAPING_HEIGHT_SET" />
+                                                <ext:ModelField Name="COOPER_SHAPING_HEIGHT_TOL" />
+                                                <ext:ModelField Name="CLAMPING_PRESS_HIGH" />
+                                                <ext:ModelField Name="CLAMPING_PRESS_LOW" />
+                                                <ext:ModelField Name="MANIPULATOR_OPEN_HIGH" />
+                                                <ext:ModelField Name="MANIPULATOR_OPEN_LOW" />
+                                                <ext:ModelField Name="FIRST_SHAPING_PRESS_HIGH" />
+                                                <ext:ModelField Name="FIRST_SHAPING_PRESS_LOW" />
+                                                <ext:ModelField Name="SECOND_SHAPING_PRESS_HIGH" />
+                                                <ext:ModelField Name="SECOND_SHAPING_PRESS_LOW" />
+                                                <ext:ModelField Name="SECOND_SHAPING_TIME_SET" />
+                                                <ext:ModelField Name="SELECT_AUDIT_USER_NAME" />
+                                            </Fields>
+                                        </ext:Model>
+                                    </Model>
+                                </ext:Store>
+                            </Store>
+                            <ColumnModel>
+                                <Columns>
+                                    <ext:CommandColumn runat="server" Width="380" Text="操作" Align="Center" Hidden="true">
+                                        <Commands>
+                                            <ext:GridCommand Icon="TableCell" CommandName="View" Text="查看">
+                                                <ToolTip Text="查看本条数据" />
+                                            </ext:GridCommand>
+                                            <ext:CommandSeparator />
+                                            <ext:GridCommand Icon="TableGo" CommandName="Submit" Text="提交">
+                                                <ToolTip Text="提交本条数据" />
+                                            </ext:GridCommand>
+                                            <ext:CommandSeparator />
+                                            <ext:GridCommand Icon="TableEdit" CommandName="Edit" Text="修改">
+                                                <ToolTip Text="修改本条数据" />
+                                            </ext:GridCommand>
+                                            <ext:CommandSeparator />
+                                            <ext:GridCommand Icon="Delete" CommandName="Delete" Text="删除">
+                                                <ToolTip Text="删除本条数据" />
+                                            </ext:GridCommand>
+                                            <ext:CommandSeparator />
+                                            <ext:GridCommand Icon="PageAttach" CommandName="Audit" Text="审核">
+                                                <ToolTip Text="审核本条数据" />
+                                            </ext:GridCommand>
+                                            <ext:CommandSeparator />
+                                            <ext:GridCommand Icon="PageCopy" CommandName="Send" Text="下发">
+                                                <ToolTip Text="下发本条数据" />
+                                            </ext:GridCommand>
+                                            <ext:CommandSeparator />
+                                        </Commands>
+                                        <Listeners>
+                                            <Command Handler="return commandcolumn_click(command, record);" />
+                                        </Listeners>
+                                    </ext:CommandColumn>
+                                    <ext:RowNumbererColumn />
+                                    <ext:Column DataIndex="STATE_CAPTION" Text="状态" Width="60" />
+                                    <ext:Column DataIndex="SUBMIT_STATE_CAPTION" Text="提交状态" Width="60" />
+                                    <ext:Column DataIndex="AUDIT_STATE_CAPTION" Text="审核状态" Width="60" />
+                                    <ext:Column DataIndex="SEND_STATE_CAPTION" Text="下发状态" Width="60" />
+                                    <ext:Column DataIndex="USED_FLAG" Text="使用状态" Width="60">
+                                        <Renderer Handler="if (value == null || value == '' || value == '0') { return ''; } else if (value == 1) { return '使用'; } else if (value == 2) { return '停用'; }" />
+                                    </ext:Column>
+                                    <ext:Column DataIndex="TECHNOLOGY_CODE" Text="工艺编号" />
+                                    <ext:Column DataIndex="TECHNOLOGY_TYPE_CAPTION" Text="工艺类型" Width="60" />
+                                    <ext:Column DataIndex="MINOR_TYPE_NAME" Text="硫化机类型" Width="80" />
+                                    <ext:Column DataIndex="BUILDING_MATERIAL_NAME" Text="胎胚规格" />
+                                    <ext:Column DataIndex="BLADDER_TYPE_NAME" Text="胶囊型号" />
+                                    <ext:Column DataIndex="VERSION" Text="版本号" Width="60" />
+                                    <ext:Column DataIndex="ALL_CURING_TIME" Text="硫化总时间(秒)" Width="100" Hidden="true" />
+                                    <ext:Column DataIndex="ALL_CURING_TIME" Text="硫化总时间(时:分:秒)" Width="120">
+                                        <Renderer Handler="return getShowTime(value);" />
+                                    </ext:Column>
+                                    <ext:Column DataIndex="SELECT_AUDIT_USER_NAME" Text="选择的审核人" />
+                                    <ext:Column DataIndex="RECORD_USER_NAME" Text="录入人" Width="60" />
+                                    <ext:DateColumn DataIndex="RECORD_TIME" Text="录入时间" Format="yyyy-MM-dd HH:mm:ss" Width="60" />
+                                    <ext:ComponentColumn ID="PARAMS1" DataIndex="PARAMS1" Text="工艺参数">
+                                        <Columns>
+                                            <ext:Column DataIndex="BLADDER_TENSILE_HEIGHT_SET" Text="胶囊拉伸高度设定" />
+                                            <ext:Column DataIndex="BLADDER_TENSILE_HEIGHT_TOL" Text="胶囊拉伸高度公差" />
+                                            <ext:Column DataIndex="COPPER_TENSILE_HEIGHT_SET" Text="伸张铜套高度设定" />
+                                            <ext:Column DataIndex="COPPER_TENSILE_HEIGHT_TOL" Text="伸张铜套高度公差" />
+                                            <ext:Column DataIndex="FIRST_SHAPING_HEIGHT_SET" Text="一次定型高度设定" />
+                                            <ext:Column DataIndex="FIRST_SHAPING_HEIGHT_TOL" Text="一次定型高度公差" />
+                                            <ext:Column DataIndex="SECOND_SHAPING_HEIGHT_SET" Text="二次定型高度设定" />
+                                            <ext:Column DataIndex="SECOND_SHAPING_HEIGHT_TOL" Text="二次定型高度公差" />
+                                            <ext:Column DataIndex="COOPER_SHAPING_HEIGHT_SET" Text="定型铜套高度设定" />
+                                            <ext:Column DataIndex="COOPER_SHAPING_HEIGHT_TOL" Text="定型铜套高度公差" />
+                                            <ext:Column DataIndex="CLAMPING_PRESS_HIGH" Text="合模力高限" />
+                                            <ext:Column DataIndex="CLAMPING_PRESS_LOW" Text="合模力低限" />
+                                            <ext:Column DataIndex="MANIPULATOR_OPEN_HIGH" Text="机械手张开直径高限" />
+                                            <ext:Column DataIndex="MANIPULATOR_OPEN_LOW" Text="机械手张开直径低限" />
+                                            <ext:Column DataIndex="FIRST_SHAPING_PRESS_HIGH" Text="一次定型压力高限" />
+                                            <ext:Column DataIndex="FIRST_SHAPING_PRESS_LOW" Text="一次定型压力低限" />
+                                            <ext:Column DataIndex="SECOND_SHAPING_PRESS_HIGH" Text="二次定型压力高限" />
+                                            <ext:Column DataIndex="SECOND_SHAPING_PRESS_LOW" Text="二次定型压力低限" />
+                                            <ext:Column DataIndex="SECOND_SHAPING_TIME_SET" Text="二次定型时间设定" />
+                                        </Columns>
+                                    </ext:ComponentColumn>
+                                </Columns>
+                            </ColumnModel>
+                            <SelectionModel>
+                                <ext:CheckboxSelectionModel runat="server" ID="gridPanelMainCheckboxSelectionModel" Mode="Single" AllowDeselect="true" ShowHeaderCheckbox="false" />
+                            </SelectionModel>
+                            <View>
+                                <ext:GridView runat="server" ID="gridPanelMainView">
+                                    <GetRowClass Handler="return gridPanelMainView_GetRowClass(record,index,rowParams,store);" />
+                                </ext:GridView>
+                            </View>
+                            <BottomBar>
+                                <ext:PagingToolbar ID="gridPanelMainPagingToolbar" runat="server">
+                                    <Items>
+                                    </Items>
+                                </ext:PagingToolbar>
+                            </BottomBar>
+                        </ext:GridPanel>
+                    </Items>
+                </ext:Panel>
+                <%--添加/修改硫化工艺--%>
+                <ext:Window runat="server" ID="winMain" Height="450" Width="700" Layout="FitLayout" Hidden="true" Modal="true">
+                    <Buttons>
+                        <ext:Button ID="btnMainSave" runat="server" Icon="Accept" Text="确定">
+                            <DirectEvents>
+                                <Click OnEvent="btnMainSave_Click" />
+                            </DirectEvents>
+                        </ext:Button>
+                        <ext:Button ID="btnMainAuditAcept" runat="server" Icon="Accept" Text="审核通过">
+                            <DirectEvents>
+                                <Click OnEvent="btnMainAuditAcept_Click">
+                                    <Confirmation ConfirmRequest="true" Title="提示" Message="确定要将该条数据审核通过吗" />
+                                </Click>
+                            </DirectEvents>
+                        </ext:Button>
+                        <ext:Button ID="btnMainAuditReject" runat="server" Icon="Accept" Text="退回修改">
+                            <DirectEvents>
+                                <Click OnEvent="btnMainAuditReject_Click">
+                                    <Confirmation ConfirmRequest="true" Title="提示" Message="确定要将该条数据退回修改吗" />
+
+                                </Click>
+                            </DirectEvents>
+                        </ext:Button>
+                        <ext:Button runat="server" Icon="Cancel" Text="取消">
+                            <Listeners>
+                                <Click Handler="#{winMain}.close();" />
+                            </Listeners>
+                        </ext:Button>
+                    </Buttons>
+                    <Items>
+                        <ext:TabPanel runat="server" ID="tabPanelMain">
+                            <Items>
+                                <%--基本信息--%>
+                                <ext:Panel runat="server" Title="基本信息" ActiveIndex="1" TabIndex="1" Layout="FitLayout">
+                                    <Items>
+                                        <ext:Panel runat="server" Layout="ColumnLayout">
+                                            <Items>
+                                                <ext:Hidden runat="server" ID="hdnMainObjId" />
+                                                <ext:Hidden runat="server" ID="hdnMainGuid" />
+                                                <ext:Hidden runat="server" ID="hdnMainRefreshDetailFlag" />
+                                                <ext:Hidden runat="server" ID="hdnMainVisitCuringTimeFlag" />
+                                                <ext:Hidden runat="server" ID="hdnMainVisitParams1Flag" />
+                                                <ext:TextField runat="server" ID="txtMainTechnologyCode" LabelAlign="Right" FieldLabel="工艺编号" ColumnWidth="0.5" Padding="2">
+                                                </ext:TextField>
+                                                <ext:ComboBox runat="server" ID="cboMainTechnologyType" LabelAlign="Right" FieldLabel="工艺类型" ColumnWidth="0.5" Padding="2" Editable="false">
+                                                </ext:ComboBox>
+                                                <ext:ComboBox runat="server" ID="cboMainBuildingMaterialId" LabelAlign="Right" FieldLabel="胎胚规格" ColumnWidth="0.5" Padding="2" ForceSelection="true">
+                                                </ext:ComboBox>
+                                                <%--<ext:TriggerField runat="server" ID="tgrMainMaterialName" LabelAlign="Right" FieldLabel="成品胎规格" ColumnWidth="1" Padding="2" Editable="false">
+                                                    <Triggers>
+                                                        <ext:FieldTrigger Icon="Clear" Qtip="清空" HideTrigger="true" />
+                                                        <ext:FieldTrigger Icon="Search" Qtip="查找" />
+                                                    </Triggers>
+                                                    <Listeners>
+                                                        <TriggerClick Fn="searchMaterial" />
+                                                    </Listeners>
+                                                </ext:TriggerField>
+                                                <ext:Hidden runat="server" ID="hdnMainMaterialId" />--%>
+                                                <ext:ComboBox runat="server" ID="cboMainMajorTypeId" LabelAlign="Right" FieldLabel="设备大类" ColumnWidth="0.5" Padding="2" Editable="false" Hidden="true">
+                                                </ext:ComboBox>
+                                                <ext:ComboBox runat="server" ID="cboMainMinorTypeId" LabelAlign="Right" FieldLabel="硫化机类型" ColumnWidth="0.5" Padding="2" Editable="false">
+                                                    <Listeners>
+                                                        <Change Fn="cboMainMinorTypeId_Change" />
+                                                    </Listeners>
+                                                </ext:ComboBox>
+                                                <ext:ComboBox runat="server" ID="cboMainBladderTypeId" LabelAlign="Right" FieldLabel="胶囊型号" ColumnWidth="0.5" Padding="2" Editable="false" ForceSelection="true">
+                                                    <Listeners>
+                                                        <Change Fn="cboMainBladderTypeId_Change" />
+                                                    </Listeners>
+                                                </ext:ComboBox>
+                                                <ext:ComboBox runat="server" ID="cboMainFactoryId" LabelAlign="Right" FieldLabel="所属工厂" ColumnWidth="0.5" Padding="2" Editable="false">
+                                                </ext:ComboBox>
+                                                <ext:Panel runat="server" ID="pnlMainSizeMarkLine" ColumnWidth="1" Layout="ColumnLayout" Title="规格标识线" TitleAlign="Center">
+                                                    <Items>
+                                                        <ext:ComboBox runat="server" ID="cboMainSizeMarkLineU5" LabelAlign="Right" FieldLabel="上五" ColumnWidth="0.2" Padding="2" LabelWidth="40" Editable="false">
+                                                            <Triggers>
+                                                                <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                                            </Triggers>
+                                                            <Listeners>
+                                                                <TriggerClick Handler="this.setValue('');" />
+                                                            </Listeners>
+                                                        </ext:ComboBox>
+                                                        <ext:ComboBox runat="server" ID="cboMainSizeMarkLineU4" LabelAlign="Right" FieldLabel="上四" ColumnWidth="0.2" Padding="2" LabelWidth="40" Editable="false">
+                                                            <Triggers>
+                                                                <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                                            </Triggers>
+                                                            <Listeners>
+                                                                <TriggerClick Handler="this.setValue('');" />
+                                                            </Listeners>
+                                                        </ext:ComboBox>
+                                                        <ext:ComboBox runat="server" ID="cboMainSizeMarkLineU3" LabelAlign="Right" FieldLabel="上三" ColumnWidth="0.2" Padding="2" LabelWidth="40" Editable="false">
+                                                            <Triggers>
+                                                                <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                                            </Triggers>
+                                                            <Listeners>
+                                                                <TriggerClick Handler="this.setValue('');" />
+                                                            </Listeners>
+                                                        </ext:ComboBox>
+                                                        <ext:ComboBox runat="server" ID="cboMainSizeMarkLineU2" LabelAlign="Right" FieldLabel="上二" ColumnWidth="0.2" Padding="2" LabelWidth="40" Editable="false">
+                                                            <Triggers>
+                                                                <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                                            </Triggers>
+                                                            <Listeners>
+                                                                <TriggerClick Handler="this.setValue('');" />
+                                                            </Listeners>
+                                                        </ext:ComboBox>
+                                                        <ext:ComboBox runat="server" ID="cboMainSizeMarkLineU1" LabelAlign="Right" FieldLabel="上一" ColumnWidth="0.2" Padding="2" LabelWidth="40" Editable="false">
+                                                            <Triggers>
+                                                                <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                                            </Triggers>
+                                                            <Listeners>
+                                                                <TriggerClick Handler="this.setValue('');" />
+                                                            </Listeners>
+                                                        </ext:ComboBox>
+                                                        <ext:ComboBox runat="server" ID="cboMainSizeMarkLineM" LabelAlign="Right" FieldLabel="中" ColumnWidth="0.2" Padding="2" LabelWidth="40" Editable="false">
+                                                            <Triggers>
+                                                                <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                                            </Triggers>
+                                                            <Listeners>
+                                                                <TriggerClick Handler="this.setValue('');" />
+                                                            </Listeners>
+                                                        </ext:ComboBox>
+                                                        <ext:ComboBox runat="server" ID="cboMainSizeMarkLineD1" LabelAlign="Right" FieldLabel="下一" ColumnWidth="0.2" Padding="2" LabelWidth="40" Editable="false">
+                                                            <Triggers>
+                                                                <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                                            </Triggers>
+                                                            <Listeners>
+                                                                <TriggerClick Handler="this.setValue('');" />
+                                                            </Listeners>
+                                                        </ext:ComboBox>
+                                                        <ext:ComboBox runat="server" ID="cboMainSizeMarkLineD2" LabelAlign="Right" FieldLabel="下二" ColumnWidth="0.2" Padding="2" LabelWidth="40" Editable="false">
+                                                            <Triggers>
+                                                                <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                                            </Triggers>
+                                                            <Listeners>
+                                                                <TriggerClick Handler="this.setValue('');" />
+                                                            </Listeners>
+                                                        </ext:ComboBox>
+                                                        <ext:ComboBox runat="server" ID="cboMainSizeMarkLineD3" LabelAlign="Right" FieldLabel="下三" ColumnWidth="0.2" Padding="2" LabelWidth="40" Editable="false">
+                                                            <Triggers>
+                                                                <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                                            </Triggers>
+                                                            <Listeners>
+                                                                <TriggerClick Handler="this.setValue('');" />
+                                                            </Listeners>
+                                                        </ext:ComboBox>
+                                                        <ext:ComboBox runat="server" ID="cboMainSizeMarkLineD4" LabelAlign="Right" FieldLabel="下四" ColumnWidth="0.2" Padding="2" LabelWidth="40" Editable="false">
+                                                            <Triggers>
+                                                                <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                                            </Triggers>
+                                                            <Listeners>
+                                                                <TriggerClick Handler="this.setValue('');" />
+                                                            </Listeners>
+                                                        </ext:ComboBox>
+                                                        <ext:ComboBox runat="server" ID="cboMainSizeMarkLineD5" LabelAlign="Right" FieldLabel="下五" ColumnWidth="0.2" Padding="2" LabelWidth="40" Editable="false">
+                                                            <Triggers>
+                                                                <ext:FieldTrigger Icon="Clear" Qtip="清空" />
+                                                            </Triggers>
+                                                            <Listeners>
+                                                                <TriggerClick Handler="this.setValue('');" />
+                                                            </Listeners>
+                                                        </ext:ComboBox>
+                                                    </Items>
+                                                </ext:Panel>
+                                            </Items>
+                                        </ext:Panel>
+                                    </Items>
+                                </ext:Panel>
+                                <%--硫化工艺时间--%>
+                                <ext:Panel runat="server" Title="硫化工艺时间" ActiveIndex="2" TabIndex="2" Layout="BorderLayout">
+                                    <Items>
+                                        <ext:Panel runat="server" ID="pnlDetailCuringTime" Region="North" Height="30" Layout="ColumnLayout">
+                                            <Items>
+                                                <ext:ComboBox runat="server" ID="cboMainCuringTimeType" LabelAlign="Right" FieldLabel="当前执行(冬/夏)" ColumnWidth="0.5" Padding="2">
+                                                </ext:ComboBox>
+                                            </Items>
+                                        </ext:Panel>
+                                        <ext:TabPanel runat="server" ID="tabPanelDetail" Region="Center">
+                                            <Items>
+                                                <%--当前工艺时间--%>
+                                                <ext:Panel runat="server" ID="pnlDetailStandardTime" Title="当前工艺时间" ActiveIndex="1" TabIndex="1" Layout="BorderLayout">
+                                                    <Items>
+                                                        <ext:Panel runat="server" Region="North" Layout="ColumnLayout">
+                                                            <Items>
+                                                                <ext:NumberField runat="server" ID="numMainInnerTempSet" LabelAlign="Right" FieldLabel="内压温度设定" ColumnWidth="0.33" Padding="2" LabelWidth="120">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numMainInnerTempHigh" LabelAlign="Right" FieldLabel="内压温度高限" ColumnWidth="0.33" Padding="2" LabelWidth="120">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numMainInnerTempLow" LabelAlign="Right" FieldLabel="内压温度低限" ColumnWidth="0.33" Padding="2" LabelWidth="120">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numMainInnerPressSet" LabelAlign="Right" FieldLabel="内压压力设定" ColumnWidth="0.33" Padding="2" LabelWidth="120">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numMainInnerPressHigh" LabelAlign="Right" FieldLabel="内压压力高限" ColumnWidth="0.33" Padding="2" LabelWidth="120">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numMainInnerPressLow" LabelAlign="Right" FieldLabel="内压压力低限" ColumnWidth="0.33" Padding="2" LabelWidth="120">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numMainHotRingSet" LabelAlign="Right" FieldLabel="热环设定" ColumnWidth="0.33" Padding="2" Hidden="true" LabelWidth="120">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numMainModelTempSet" LabelAlign="Right" FieldLabel="模套温度/外压设定" ColumnWidth="0.33" Padding="2" LabelWidth="120">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numMainModelTempHigh" LabelAlign="Right" FieldLabel="模套温度/外压高限" ColumnWidth="0.33" Padding="2" LabelWidth="120">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numMainModelTempLow" LabelAlign="Right" FieldLabel="模套温度/外压低限" ColumnWidth="0.33" Padding="2" LabelWidth="120">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numMainPlateTempSet" LabelAlign="Right" FieldLabel="热板温度/外温设定" ColumnWidth="0.33" Padding="2" LabelWidth="120">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numMainPlateTempHigh" LabelAlign="Right" FieldLabel="热板温度/外温高限" ColumnWidth="0.33" Padding="2" LabelWidth="120">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numMainPlateTempLow" LabelAlign="Right" FieldLabel="热板温度/外温低限" ColumnWidth="0.33" Padding="2" LabelWidth="120">
+                                                                </ext:NumberField>
+                                                            </Items>
+                                                        </ext:Panel>
+                                                        <ext:Panel runat="server" Region="Center" Layout="FitLayout">
+                                                            <Items>
+                                                                <ext:GridPanel runat="server" ID="gridPanelDetail" AutoScroll="true">
+                                                                    <TopBar>
+                                                                        <ext:Toolbar runat="server">
+                                                                            <Items>
+                                                                                <ext:Button runat="server" ID="btnDetailAdd" Text="添加明细" Icon="TableAdd">
+                                                                                    <DirectEvents>
+                                                                                        <Click OnEvent="btnDetailAdd_Click" />
+                                                                                    </DirectEvents>
+                                                                                </ext:Button>
+                                                                                <ext:Button runat="server" ID="btnDetailEdit" Text="修改明细" Icon="TableEdit">
+                                                                                    <Listeners>
+                                                                                        <Click Handler="return btnDetailEdit_Click();" />
+                                                                                    </Listeners>
+                                                                                </ext:Button>
+                                                                                <ext:Button runat="server" ID="btnDetailDelete" Text="删除明细" Icon="TableDelete">
+                                                                                    <Listeners>
+                                                                                        <Click Handler="return btnDetailDelete_Click();" />
+                                                                                    </Listeners>
+                                                                                </ext:Button>
+                                                                                <ext:TextField runat="server" ID="txtMainAllCuringTimeShow" LabelAlign="Right" FieldLabel="硫化总时间(时:分:秒)" InputWidth="110" Padding="2" LabelWidth="120" ReadOnly="true">
+                                                                                </ext:TextField>
+                                                                                <ext:NumberField runat="server" ID="numMainAllCuringTime" LabelAlign="Right" FieldLabel="硫化总时间(秒)" InputWidth="60" Padding="2" LabelWidth="120" Hidden="false">
+                                                                                    <Listeners>
+                                                                                        <Change Handler="return numMainAllCuringTime_Change(this.getValue());" />
+                                                                                    </Listeners>
+                                                                                </ext:NumberField>
+                                                                            </Items>
+                                                                        </ext:Toolbar>
+                                                                    </TopBar>
+                                                                    <Store>
+                                                                        <ext:Store runat="server" ID="gridPanelDetailStore" PageSize="0" AutoLoad="false">
+                                                                            <Proxy>
+                                                                                <ext:PageProxy DirectFn="App.direct.GridPanelDetailBindData" AutoDataBind="true" />
+
+                                                                            </Proxy>
+                                                                            <Model>
+                                                                                <ext:Model runat="server" ID="gridPanelDetailModel" IDProperty="OBJID">
+                                                                                    <Fields>
+                                                                                        <ext:ModelField Name="OBJID" />
+                                                                                        <ext:ModelField Name="TECHNOLOGY_ID" />
+                                                                                        <ext:ModelField Name="CURING_STEP" />
+                                                                                        <ext:ModelField Name="CURING_TIME" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_1" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_2" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_3" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_4" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_5" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_6" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_7" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_8" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_9" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_10" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_11" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_12" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_13" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_14" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_15" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_16" Type="Boolean" />
+                                                                                    </Fields>
+                                                                                </ext:Model>
+                                                                            </Model>
+                                                                        </ext:Store>
+                                                                    </Store>
+                                                                    <SelectionModel>
+                                                                        <ext:CheckboxSelectionModel runat="server" ID="gridPanelDetailCheckboxSelectionModel" Mode="Single" ShowHeaderCheckbox="false" AllowDeselect="true">
+                                                                        </ext:CheckboxSelectionModel>
+                                                                    </SelectionModel>
+                                                                    <ColumnModel>
+                                                                        <Columns>
+                                                                            <ext:CommandColumn ID="commandColumnDetail" runat="server" Width="120" Text="操作" Align="Center" Hidden="true">
+                                                                                <Commands>
+                                                                                    <ext:GridCommand Icon="TableEdit" CommandName="Edit" Text="修改">
+                                                                                        <ToolTip Text="修改本条数据" />
+                                                                                    </ext:GridCommand>
+                                                                                    <ext:CommandSeparator />
+                                                                                    <ext:GridCommand Icon="Delete" CommandName="Delete" Text="删除">
+                                                                                        <ToolTip Text="删除本条数据" />
+                                                                                    </ext:GridCommand>
+                                                                                    <ext:CommandSeparator />
+                                                                                </Commands>
+                                                                                <Listeners>
+                                                                                    <Command Handler="return detailcommandcolumn_click(command, record);" />
+                                                                                </Listeners>
+                                                                            </ext:CommandColumn>
+                                                                            <ext:Column DataIndex="CURING_STEP" Text="步序" Align="Center" Width="40">
+                                                                            </ext:Column>
+                                                                            <ext:Column DataIndex="CURING_TIME" Text="硫化时间(秒)" Align="Center"></ext:Column>
+                                                                            <ext:ComponentColumn ID="VALVE_STATE" Text="阀门状态" DataIndex="VALVE_STATE" Align="Center" Hidden="true">
+                                                                                <Columns>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_1" DataIndex="VALVE_STATE_1" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_2" DataIndex="VALVE_STATE_2" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_3" DataIndex="VALVE_STATE_3" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_4" DataIndex="VALVE_STATE_4" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_5" DataIndex="VALVE_STATE_5" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_6" DataIndex="VALVE_STATE_6" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_7" DataIndex="VALVE_STATE_7" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_8" DataIndex="VALVE_STATE_8" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_9" DataIndex="VALVE_STATE_9" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_10" DataIndex="VALVE_STATE_10" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_11" DataIndex="VALVE_STATE_11" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_12" DataIndex="VALVE_STATE_12" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_13" DataIndex="VALVE_STATE_13" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_14" DataIndex="VALVE_STATE_14" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_15" DataIndex="VALVE_STATE_15" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="VALVE_STATE_16" DataIndex="VALVE_STATE_16" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                </Columns>
+                                                                            </ext:ComponentColumn>
+                                                                        </Columns>
+                                                                    </ColumnModel>
+                                                                    <BottomBar>
+                                                                        <ext:PagingToolbar ID="gridPanelDetailPagingToolbar" runat="server">
+                                                                            <Items>
+                                                                            </Items>
+                                                                        </ext:PagingToolbar>
+                                                                    </BottomBar>
+                                                                </ext:GridPanel>
+
+                                                            </Items>
+                                                        </ext:Panel>
+                                                    </Items>
+                                                </ext:Panel>
+                                                <%--冬季工艺时间--%>
+                                                <ext:Panel runat="server" ID="pnlDetailWinterTime" Title="冬季工艺时间" ActiveIndex="2" TabIndex="2" Layout="BorderLayout">
+                                                    <Items>
+                                                        <ext:Panel runat="server" ID="pnlDetailWinter" Region="North" Layout="ColumnLayout">
+                                                            <Items>
+                                                                <ext:NumberField runat="server" ID="numWinterInnerTempSet" LabelAlign="Right" FieldLabel="内压温度设定" ColumnWidth="0.33">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numWinterInnerTempHigh" LabelAlign="Right" FieldLabel="内压温度高限" ColumnWidth="0.33">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numWinterInnerTempLow" LabelAlign="Right" FieldLabel="内压温度低限" ColumnWidth="0.33">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numWinterInnerPressSet" LabelAlign="Right" FieldLabel="内压压力设定" ColumnWidth="0.33">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numWinterInnerPressHigh" LabelAlign="Right" FieldLabel="内压压力高限" ColumnWidth="0.33">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numWinterInnerPressLow" LabelAlign="Right" FieldLabel="内压压力低限" ColumnWidth="0.33">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numWinterHotRingSet" LabelAlign="Right" FieldLabel="热环设定" ColumnWidth="0.33">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numWinterModelTempHigh" LabelAlign="Right" FieldLabel="模温高限" ColumnWidth="0.33">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numWinterModelTempLow" LabelAlign="Right" FieldLabel="模温低限" ColumnWidth="0.33">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numWinterPlateTempSet" LabelAlign="Right" FieldLabel="热板温度设定" ColumnWidth="0.33">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numWinterPlateTempHigh" LabelAlign="Right" FieldLabel="热板温度高限" ColumnWidth="0.33">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numWinterPlateTempLow" LabelAlign="Right" FieldLabel="热板温度低限" ColumnWidth="0.33">
+                                                                </ext:NumberField>
+                                                                <ext:NumberField runat="server" ID="numWinterAllCuringTime" LabelAlign="Right" FieldLabel="硫化总时间" ColumnWidth="0.33">
+                                                                </ext:NumberField>
+                                                            </Items>
+                                                        </ext:Panel>
+                                                        <ext:Panel runat="server" Region="Center" Layout="FitLayout">
+                                                            <TopBar>
+                                                                <ext:Toolbar runat="server">
+                                                                    <Items>
+                                                                        <ext:Button runat="server" ID="btnWinterAdd" Text="添加明细">
+                                                                            <DirectEvents>
+                                                                                <Click OnEvent="btnWinterAdd_Click" />
+                                                                            </DirectEvents>
+                                                                        </ext:Button>
+                                                                    </Items>
+                                                                </ext:Toolbar>
+                                                            </TopBar>
+                                                            <Items>
+                                                                <ext:GridPanel runat="server" ID="gridPanelWinter" AutoScroll="true">
+                                                                    <Store>
+                                                                        <ext:Store runat="server" ID="gridPanelWinterStore" PageSize="0" AutoLoad="false">
+                                                                            <Proxy>
+                                                                                <ext:PageProxy DirectFn="App.direct.GridPanelDetailBindData" AutoDataBind="true" />
+
+                                                                            </Proxy>
+                                                                            <Model>
+                                                                                <ext:Model runat="server" ID="gridPanelWinterModel">
+                                                                                    <Fields>
+                                                                                        <ext:ModelField Name="OBJID" />
+                                                                                        <ext:ModelField Name="TECHNOLOGY_ID" />
+                                                                                        <ext:ModelField Name="CURING_STEP" />
+                                                                                        <ext:ModelField Name="CURING_TIME" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_1" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_2" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_3" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_4" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_5" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_6" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_7" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_8" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_9" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_10" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_11" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_12" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_13" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_14" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_15" Type="Boolean" />
+                                                                                        <ext:ModelField Name="VALVE_STATE_16" Type="Boolean" />
+                                                                                    </Fields>
+                                                                                </ext:Model>
+                                                                            </Model>
+                                                                        </ext:Store>
+                                                                    </Store>
+                                                                    <ColumnModel>
+                                                                        <Columns>
+                                                                            <ext:CommandColumn ID="commandColumnWinter" runat="server" Width="120" Text="操作" Align="Center">
+                                                                                <Commands>
+                                                                                    <ext:GridCommand Icon="TableEdit" CommandName="Edit" Text="修改">
+                                                                                        <ToolTip Text="修改本条数据" />
+                                                                                    </ext:GridCommand>
+                                                                                    <ext:CommandSeparator />
+                                                                                    <ext:GridCommand Icon="Delete" CommandName="Delete" Text="删除">
+                                                                                        <ToolTip Text="删除本条数据" />
+                                                                                    </ext:GridCommand>
+                                                                                    <ext:CommandSeparator />
+                                                                                </Commands>
+                                                                                <Listeners>
+                                                                                    <Command Handler="return wintercommandcolumn_click(command, record);" />
+                                                                                </Listeners>
+                                                                            </ext:CommandColumn>
+                                                                            <ext:Column DataIndex="CURING_STEP" Text="硫化步序" Align="Center">
+                                                                            </ext:Column>
+                                                                            <ext:Column DataIndex="CURING_TIME" Text="硫化时间" Align="Center"></ext:Column>
+                                                                            <ext:ComponentColumn ID="W_VALVE_STATE" Text="阀门状态" DataIndex="VALVE_STATE" Align="Center" Hidden="true">
+                                                                                <Columns>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_1" DataIndex="VALVE_STATE_1" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_2" DataIndex="VALVE_STATE_2" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_3" DataIndex="VALVE_STATE_3" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_4" DataIndex="VALVE_STATE_4" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_5" DataIndex="VALVE_STATE_5" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_6" DataIndex="VALVE_STATE_6" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_7" DataIndex="VALVE_STATE_7" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_8" DataIndex="VALVE_STATE_8" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_9" DataIndex="VALVE_STATE_9" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_10" DataIndex="VALVE_STATE_10" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_11" DataIndex="VALVE_STATE_11" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_12" DataIndex="VALVE_STATE_12" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_13" DataIndex="VALVE_STATE_13" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_14" DataIndex="VALVE_STATE_14" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_15" DataIndex="VALVE_STATE_15" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                    <ext:CheckColumn ID="W_VALVE_STATE_16" DataIndex="VALVE_STATE_16" Text="备用" Align="Center"></ext:CheckColumn>
+                                                                                </Columns>
+                                                                            </ext:ComponentColumn>
+                                                                        </Columns>
+                                                                    </ColumnModel>
+                                                                    <BottomBar>
+                                                                        <ext:PagingToolbar ID="gridPanelWinterPagingToolbar" runat="server">
+                                                                            <Items>
+                                                                            </Items>
+                                                                        </ext:PagingToolbar>
+                                                                    </BottomBar>
+                                                                </ext:GridPanel>
+
+                                                            </Items>
+                                                        </ext:Panel>
+                                                    </Items>
+                                                </ext:Panel>
+                                            </Items>
+                                            <%--<Listeners>
+                                                <TabChange Handler="if (App.hdnMainRefreshDetailFlag.getValue() == '1') { App.hdnMainRefreshDetailFlag.setValue(''); if (App.gridPanelDetailPagingToolbar.doRefresh(); }" />
+                                            </Listeners>--%>
+                                        </ext:TabPanel>
+                                    </Items>
+                                </ext:Panel>
+                                <%--硫化工艺参数--%>
+                                <ext:Panel runat="server" Title="硫化工艺参数" ActiveIndex="3" TabIndex="3" Layout="FitLayout">
+                                    <Items>
+                                        <ext:Panel runat="server" ID="pnlDetailParams1" Layout="ColumnLayout">
+                                            <Items>
+                                                <%--参数1--%>
+                                                <ext:NumberField runat="server" ID="numMainBladderTensileHeightHigh" LabelAlign="Right" FieldLabel="胶囊拉伸高度高限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainBladderTensileHeightLow" LabelAlign="Right" FieldLabel="胶囊拉伸高度低限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainCopperTensileHeightHigh" LabelAlign="Right" FieldLabel="伸张铜套高度高限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainCopperTensileHeightLow" LabelAlign="Right" FieldLabel="伸张铜套高度低限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainFirstShapingHeightHigh" LabelAlign="Right" FieldLabel="一次定型高度高限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainFirstShapingHeightLow" LabelAlign="Right" FieldLabel="一次定型高度低限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainSecondShapingHeightHigh" LabelAlign="Right" FieldLabel="二次定型高度高限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainSecondShapingHeightLow" LabelAlign="Right" FieldLabel="二次定型高度低限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainCooperShapingHeightHigh" LabelAlign="Right" FieldLabel="定型铜套高度高限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainCooperShapingHeightLow" LabelAlign="Right" FieldLabel="定型铜套高度低限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainBladderTensileHeightSet" LabelAlign="Right" FieldLabel="胶囊拉伸高度设定" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainBladderTensileHeightTol" LabelAlign="Right" FieldLabel="胶囊拉伸高度公差(±)" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainCopperTensileHeightSet" LabelAlign="Right" FieldLabel="伸张铜套高度设定" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainCopperTensileHeightTol" LabelAlign="Right" FieldLabel="伸张铜套高度公差(±)" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainFirstShapingHeightSet" LabelAlign="Right" FieldLabel="一次定型高度设定" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainFirstShapingHeightTol" LabelAlign="Right" FieldLabel="一次定型高度公差(±)" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainSecondShapingHeightSet" LabelAlign="Right" FieldLabel="二次定型高度设定" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainSecondShapingHeightTol" LabelAlign="Right" FieldLabel="二次定型高度公差(±)" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainCooperShapingHeightSet" LabelAlign="Right" FieldLabel="定型铜套高度设定" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainCooperShapingHeightTol" LabelAlign="Right" FieldLabel="定型铜套高度公差(±)" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainClampingPressHigh" LabelAlign="Right" FieldLabel="合模力高限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainClampingPressLow" LabelAlign="Right" FieldLabel="合模力低限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainManipulatorOpenHigh" LabelAlign="Right" FieldLabel="机械手张开直径高限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainManipulatorOpenLow" LabelAlign="Right" FieldLabel="机械手张开直径低限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainFirstShapingPressHigh" LabelAlign="Right" FieldLabel="一次定型压力高限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainFirstShapingPressLow" LabelAlign="Right" FieldLabel="一次定型压力低限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainSecondShapingPressHigh" LabelAlign="Right" FieldLabel="二次定型压力高限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainSecondShapingPressLow" LabelAlign="Right" FieldLabel="二次定型压力低限" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainSecondShapingTimeSet" LabelAlign="Right" FieldLabel="二次定型时间设定" ColumnWidth="0.5" LabelWidth="120" Padding="2">
+                                                </ext:NumberField>
+
+                                            </Items>
+                                        </ext:Panel>
+                                        <ext:Panel runat="server" ID="pnlDetailParams2" Layout="ColumnLayout">
+                                            <Items>
+                                                <%--参数2--%>
+                                                <ext:ComboBox runat="server" ID="cboMainBladderTensileHeightId" LabelAlign="Right" FieldLabel="胶囊拉伸高度" ColumnWidth="0.33">
+                                                </ext:ComboBox>
+                                                <ext:NumberField runat="server" ID="numMainBladderTensileHeight" LabelAlign="Right" FieldLabel="胶囊拉伸高度" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainTopLimitAmount" LabelAlign="Right" FieldLabel="上限次数" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:ComboBox runat="server" ID="cboMainShapingHeightId" LabelAlign="Right" FieldLabel="定型高度" ColumnWidth="0.33">
+                                                </ext:ComboBox>
+                                                <ext:NumberField runat="server" ID="numMainShapingHeight" LabelAlign="Right" FieldLabel="定型高度" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainLoaderHeight" LabelAlign="Right" FieldLabel="装胎高度" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:ComboBox runat="server" ID="cboMainShapingPressId" LabelAlign="Right" FieldLabel="定型压力" ColumnWidth="0.33">
+                                                </ext:ComboBox>
+                                                <ext:NumberField runat="server" ID="numMainUsedAmountRange1" LabelAlign="Right" FieldLabel="使用次数范围1" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainFirstShapingPress1" LabelAlign="Right" FieldLabel="一次定型压力1" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainSecondShapingPress1" LabelAlign="Right" FieldLabel="二次定型压力1" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainThirdShapingPress1" LabelAlign="Right" FieldLabel="三次定型压力1" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainUsedAmountRange2" LabelAlign="Right" FieldLabel="使用次数范围2" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainFirstShapingPress2" LabelAlign="Right" FieldLabel="一次定型压力2" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainSecondShapingPress2" LabelAlign="Right" FieldLabel="二次定型压力2" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainThirdShapingPress2" LabelAlign="Right" FieldLabel="三次定型压力2" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainUsedAmountRange3" LabelAlign="Right" FieldLabel="使用次数范围3" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainFirstShapingPress3" LabelAlign="Right" FieldLabel="一次定型压力3" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainSecondShapingPress3" LabelAlign="Right" FieldLabel="二次定型压力3" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainThirdShapingPress3" LabelAlign="Right" FieldLabel="三次定型压力3" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:ComboBox runat="server" ID="cboMainShapingTimeId" LabelAlign="Right" FieldLabel="定型时间" ColumnWidth="0.33">
+                                                </ext:ComboBox>
+                                                <ext:NumberField runat="server" ID="numMainShapingTime" LabelAlign="Right" FieldLabel="定型时间" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:ComboBox runat="server" ID="cboMainShapingPositionId" LabelAlign="Right" FieldLabel="定型位置" ColumnWidth="0.33">
+                                                </ext:ComboBox>
+                                                <ext:NumberField runat="server" ID="numMainTopPosition" LabelAlign="Right" FieldLabel="定型位置上线" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainBottomPosition" LabelAlign="Right" FieldLabel="定型位置下线" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:ComboBox runat="server" ID="cboMainChuckWidthId" LabelAlign="Right" FieldLabel="卡盘宽度" ColumnWidth="0.33">
+                                                </ext:ComboBox>
+                                                <ext:NumberField runat="server" ID="numMainChuckWidth" LabelAlign="Right" FieldLabel="卡盘宽度" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainAeratePress" LabelAlign="Right" FieldLabel="充气压力" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainCuringTimeWinter" LabelAlign="Right" FieldLabel="冬季工艺时间" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainClampingPress" LabelAlign="Right" FieldLabel="合模力" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainReserve1" LabelAlign="Right" FieldLabel="备用1" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainReserve2" LabelAlign="Right" FieldLabel="备用2" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:NumberField runat="server" ID="numMainReserve3" LabelAlign="Right" FieldLabel="备用3" ColumnWidth="0.33">
+                                                </ext:NumberField>
+                                                <ext:ComboBox runat="server" ID="cboMainEnvironmentalFlag" LabelAlign="Right" FieldLabel="是否环保" ColumnWidth="0.33">
+                                                </ext:ComboBox>
+
+                                            </Items>
+                                        </ext:Panel>
+                                    </Items>
+                                </ext:Panel>
+                                <%--审核信息--%>
+                                <ext:Panel runat="server" Title="审核信息" ActiveIndex="99" TabIndex="99" Layout="FitLayout">
+                                    <Items>
+                                        <ext:Panel runat="server" Layout="FormLayout">
+                                            <Items>
+                                                <ext:Hidden runat="server" ID="hdnMainAuditSelects" />
+                                                <ext:Hidden runat="server" ID="hdnMainAuditSelectNames" />
+                                                <ext:CheckboxGroup runat="server" ID="cbgMainAuditUser" LabelAlign="Right" FieldLabel="选择审核人员" Layout="ColumnLayout">
+                                                    <Listeners>
+                                                        <Change Handler="return cbgMainAuditUser_Change(item);" />
+                                                    </Listeners>
+                                                </ext:CheckboxGroup>
+                                                <ext:TextField runat="server" ID="txtMainLastAuditUserName" LabelAlign="Right" FieldLabel="上次审核人">
+                                                </ext:TextField>
+                                                <ext:TextField runat="server" ID="txtMainLastAuditTime" LabelAlign="Right" FieldLabel="上次审核时间">
+                                                </ext:TextField>
+                                                <ext:TextArea runat="server" ID="txtMainLastAuditRemark" LabelAlign="Right" FieldLabel="上次审核意见">
+                                                </ext:TextArea>
+                                                <ext:TextArea runat="server" ID="txtMainAuditRemark" LabelAlign="Right" FieldLabel="本次审核意见">
+                                                </ext:TextArea>
+                                            </Items>
+                                        </ext:Panel>
+                                    </Items>
+                                </ext:Panel>
+                            </Items>
+                            <Listeners>
+                                <TabChange Handler="return tabPanelMain_Click(newTab);" />
+                            </Listeners>
+                        </ext:TabPanel>
+                    </Items>
+                </ext:Window>
+                <%--添加/修改硫化步序--%>
+                <ext:Window runat="server" ID="winDetail" Height="300" Width="350" Layout="FormLayout" Hidden="true" Modal="true">
+                    <Items>
+                        <ext:Panel runat="server" Layout="FormLayout">
+                            <Items>
+                                <ext:Hidden runat="server" ID="hdnDetailObjId" />
+                                <ext:Hidden runat="server" ID="hdnDetailGuid" />
+                                <ext:Hidden runat="server" ID="hdnDetailTechnologyId" />
+                                <ext:Hidden runat="server" ID="hdnDetailCuringTimeType" />
+                                <ext:NumberField runat="server" ID="numDetailCuringStep" FieldLabel="硫化步序" LabelAlign="Right"></ext:NumberField>
+                                <ext:NumberField runat="server" ID="numDetailCuringTime" FieldLabel="硫化时间" LabelAlign="Right"></ext:NumberField>
+                                <ext:CheckboxGroup runat="server" ID="chkgrpDetailValveState" Layout="ColumnLayout" AutoScroll="true">
+                                    <Items>
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState1" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState2" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState3" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState4" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState5" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState6" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState7" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState8" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState9" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState10" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState11" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState12" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState13" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState14" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState15" FieldLabel="备用" LabelAlign="Right" />
+                                        <ext:Checkbox runat="server" ID="chkDetailValveState16" FieldLabel="备用" LabelAlign="Right" />
+                                    </Items>
+                                </ext:CheckboxGroup>
+                            </Items>
+                        </ext:Panel>
+                    </Items>
+                    <Buttons>
+                        <ext:Button runat="server" ID="btnDetailSave" Icon="Accept" Text="确定">
+                            <DirectEvents>
+                                <Click OnEvent="btnDetailSave_Click" />
+                            </DirectEvents>
+                        </ext:Button>
+                        <ext:Button runat="server" ID="btnDetailCancel" Icon="Cancel" Text="取消">
+                            <Listeners>
+                                <Click Handler="#{winDetail}.close();" />
+                            </Listeners>
+                        </ext:Button>
+                    </Buttons>
+                </ext:Window>
+            </Items>
+        </ext:Viewport>
+    </form>
+</body>
+</html>

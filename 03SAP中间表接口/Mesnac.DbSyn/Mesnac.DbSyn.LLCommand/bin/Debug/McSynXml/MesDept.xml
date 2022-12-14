@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SynConfig>
+  <Tables>
+    <Table name="Table.Source">
+      <DbSourceName>MES</DbSourceName>
+      <TableName>SSB_DEPT</TableName>
+    </Table>
+    <Table name="Table.Target">
+      <DbSourceName>MENS</DbSourceName>
+      <TableName>BasDept</TableName>
+    </Table>
+  </Tables>
+  <SynDatas>
+    <SynData>
+      <SourceTable TableName="Table.Source">
+        <Command >
+          <FileName value="Mesnac.DbSyn.dll"/>
+          <ClassName value="Mesnac.DbSyn.TableSyn.Source"/>
+        </Command>
+        <BeginSyn>
+          <add key="sql" value=""/>
+        </BeginSyn>
+        <SelectData>
+          <add key="count" value="0"/>
+          <add key="where">
+            <![CDATA[TOMENS<>0]]>
+          </add>
+        </SelectData>
+        <FinishRowSyn>
+          <add key="update" value="TOMENS=0"/>
+          <add key="where" value="OBJID"/>
+        </FinishRowSyn>
+      </SourceTable>
+      <TargetTable TableName="Table.Target">
+        <Command >
+          <FileName value="Mesnac.DbSyn.dll"/>
+          <ClassName value="Mesnac.DbSyn.TableSyn.Target"/>
+        </Command>
+        <ExcuteRowSyn>
+          <add key="where" value="OBJID"/>
+        </ExcuteRowSyn>
+      </TargetTable>
+      <SourceTargetFields>
+        <SourceTargetField SourceFieldName="OBJID" TargetFieldName="ObjID"/>
+        <SourceTargetField SourceFieldName="OBJID" TargetFieldName="DepCode"/>
+        <SourceTargetField SourceFieldName="DEPT_NAME" TargetFieldName="DepName"/>
+        <SourceTargetField SourceFieldName="DEPT_LEVEL" TargetFieldName="DepLevel"/>
+        <SourceTargetField SourceFieldName="PARENT_ID" TargetFieldName="ParentNum"/>
+        <SourceTargetField SourceFieldName="REMARK" TargetFieldName="Remark"/>
+        <SourceTargetField SourceFieldName="ERP_CODE" TargetFieldName="ERPCode"/>
+        <SourceTargetField SourceFieldName="HR_CODE" TargetFieldName="HRCode"/>
+        <SourceTargetField SourceFieldName="DISPLAY_ID" TargetFieldName="DisplayId"/>
+        <SourceTargetField SourceFieldName="DELETE_FLAG" TargetFieldName="DeleteFlag"/>
+      </SourceTargetFields>
+    </SynData>
+  </SynDatas>
+</SynConfig>

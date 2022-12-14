@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudCppCuringScanRecord" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*, T2.USER_NAME RECORD_USER_NAME 
+        , T3.EQUIP_NAME
+        FROM CPP_CURING_SCAN_RECORD T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        LEFT JOIN SBE_EQUIP T3 ON T1.EQUIP_ID = T3.OBJID 
+        
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[T1.TYPE_NO LIKE '%' || #where.TyreNo# || '%']]>
+        </isNotNull>
+        <isNull property="where.TyreNo">
+          <isNotNull property="where.OBJID" prepend="AND">
+            <![CDATA[T1.OBJID = #where.OBJID#]]>
+          </isNotNull>
+          <isNotNull property="where.BeginTime" prepend="AND">
+            <![CDATA[T1.RECORD_TIME >= #where.BeginTime#]]>
+          </isNotNull>
+          <isNotNull property="where.EndTime" prepend="AND">
+            <![CDATA[T1.RECORD_TIME <= #where.EndTime#]]>
+          </isNotNull>
+          <isNotNull property="where.EQUIP_ID" prepend="AND">
+            <![CDATA[T1.EQUIP_ID = #where.EQUIP_ID#]]>
+          </isNotNull>
+          <isNotNull property="where.GreenNo" prepend="AND">
+            <![CDATA[T1.GREEN_NO LIKE '%' || #where.GreenNo# || '%']]>
+          </isNotNull>
+        </isNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+
+    <select id="Select@CrudCppCuringScanRecord@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*, T2.USER_NAME RECORD_USER_NAME 
+        , T3.EQUIP_NAME
+        FROM CPP_CURING_SCAN_RECORD T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        LEFT JOIN SBE_EQUIP T3 ON T1.EQUIP_ID = T3.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T1.OBJID = #where.OBJID#)]]>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="SearchType" Value="查询类型"></Caption>
+    <Caption Name="BeginDate" Value="开始日期"></Caption>
+    <Caption Name="EndDate" Value="结束日期"></Caption>
+    <Caption Name="BeginTime" Value="开始时间"></Caption>
+    <Caption Name="EndTime" Value="结束时间"></Caption>
+    <Caption Name="SummaryState" Value="汇总状态"></Caption>
+    <Caption Name="IN_SHIFT_ID" Value="班次"></Caption>
+    <Caption Name="IN_CLASS_ID" Value="班组"></Caption>
+    <Caption Name="StoreId" Value="仓库"></Caption>
+    <Caption Name="StorePlaceName" Value="库位"></Caption>
+    <Caption Name="RecordUserName" Value="创建人"></Caption>
+    <Caption Name="BillCode" Value="单据编号"></Caption>
+    <Caption Name="MaterialId" Value="规格"></Caption>
+    <Caption Name="MaterialName" Value="规格"></Caption>
+    <Caption Name="CheckGradeCode" Value="品级"></Caption>
+    <Caption Name="GreenTyreNo" Value="成型条码"></Caption>
+    <Caption Name="TyreNo" Value="硫化条码"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_TIME" Value="创建时间"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="创建人"></Caption>
+    <Caption Name="UPDATE_TIME" Value="更新时间"></Caption>
+    <Caption Name="UPDATE_USER_NAME" Value="更新人"></Caption>
+    <Caption Name="CAR_BARCODE" Value="车辆条码"></Caption>
+    <Caption Name="STORE_TYPE_NAME" Value="仓库类型"></Caption>
+    <Caption Name="STORE_NAME" Value="仓库"></Caption>
+    <Caption Name="STORE_PLACE_NAME" Value="库位"></Caption>
+    <Caption Name="CHECK_GRADE_NAME" Value="品级"></Caption>
+    <Caption Name="SUMMARY_STATE_CAPTION" Value="汇总状态"></Caption>
+    <Caption Name="AFFIRM_USER_NAME" Value="确认人"></Caption>
+    <Caption Name="AFFIRM_TIME" Value="确认时间"></Caption>
+    <Caption Name="LOAD_AMOUNT" Value="扫描数量"></Caption>
+    <Caption Name="IN_AMOUNT" Value="入库数量"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="规格"></Caption>
+    <Caption Name="GREEN_TYRE_NO" Value="成型条码"></Caption>
+    <Caption Name="TYRE_NO" Value="硫化条码"></Caption>
+    <Caption Name="SCANNER_NAME" Value="扫描人"></Caption>
+    <Caption Name="SCAN_TIME" Value="扫描时间"></Caption>
+    <Caption Name="IN_DATE" Value="日期"></Caption>
+    <Caption Name="IN_SHIFT_NAME" Value="班次"></Caption>
+    <Caption Name="IN_CLASS_NAME" Value="班组"></Caption>
+    <Caption Name="BILL_TYPE" Value="扫描方式"></Caption>
+  </Captions>
+  <WebPage Title="成品入库装车统计">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Storage/McUI/@McUI/ReportPsmInLoadAndStockStat.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="PSM_IN_LOAD_SUMMARY">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="SearchType" Type="ComboBox"></ParamField>
+        <ParamField FieldName="BeginDate" Type="DateBox"></ParamField>
+        <ParamField FieldName="EndDate" Type="DateBox"></ParamField>
+        <ParamField FieldName="PositionNull" Type="TextBox" Nullable="true" IsShow="false"></ParamField>
+        <ParamField FieldName="BeginTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EndTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="MaterialName" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="SummaryState" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="IN_CLASS_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="IN_SHIFT_ID" Type="ComboBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <TotalColumns Fields="IN_AMOUNT"></TotalColumns>
+      <GridColumns>
+        <!--<GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>-->
+        <GridColumn ColumnName="IN_DATE" ColumnType="Date" ColumnFormt="yyyy-MM-dd" Width="80"></GridColumn>
+        <GridColumn ColumnName="IN_CLASS_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="IN_SHIFT_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="280"></GridColumn>
+        <GridColumn ColumnName="CHECK_GRADE_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="IN_AMOUNT" Width="60"></GridColumn>
+        <GridColumn ColumnName="IN_CLASS_ID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="IN_SHIFT_ID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="CHECK_GRADE_CODE" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_ID" IsShow="false"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+    <MainDetail>
+      <ParamFields>
+        <!--<ParamField FieldName="OBJID" IsShow="false"></ParamField>-->
+        <ParamField FieldName="IN_DATE" Type="DateBox"></ParamField>
+        <ParamField FieldName="IN_CLASS_NAME"></ParamField>
+        <ParamField FieldName="IN_SHIFT_NAME"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="CHECK_GRADE_NAME"></ParamField>
+        <ParamField FieldName="IN_AMOUNT"></ParamField>
+      </ParamFields>
+    </MainDetail>
+    <DetailGrid Width="800">
+      <GridColumns>
+        <!--<GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>-->
+        <GridColumn ColumnName="BILL_TYPE" Width="100"></GridColumn>
+        <GridColumn ColumnName="IN_DATE" ColumnType="Date" ColumnFormt="yyyy-MM-dd" Width="80"></GridColumn>
+        <GridColumn ColumnName="IN_CLASS_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="IN_SHIFT_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="280"></GridColumn>
+        <GridColumn ColumnName="CHECK_GRADE_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="IN_AMOUNT" Width="60"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME" Width="60"></GridColumn>
+      </GridColumns>
+    </DetailGrid>
+  </Select>
+</UiConfig>

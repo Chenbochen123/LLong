@@ -1,0 +1,609 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BasicMapper.FqbBalanceInfo3"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="FqbBalanceInfo3" type="Mesnac.Quality.Entity.BasicEntity.FqbBalanceInfo3, Mesnac.Quality.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_FqbBalanceInfo3" class="FqbBalanceInfo3">
+    <result property="ObjId" column="OBJID"/>
+    <result property="TyreId" column="TYRE_ID"/>
+    <result property="MaterialId" column="MATERIAL_ID"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="Seqid" column="SEQID"/>
+    <result property="UpAmount" column="UP_AMOUNT"/>
+    <result property="LowerAmount" column="LOWER_AMOUNT"/>
+    <result property="UplowerAmount" column="UPLOWER_AMOUNT"/>
+    <result property="StaticAmount" column="STATIC_AMOUNT"/>
+    <result property="CoupleAmount" column="COUPLE_AMOUNT"/>
+    <result property="LtoaAmount" column="LTOA_AMOUNT"/>
+    <result property="LboaAmount" column="LBOA_AMOUNT"/>
+    <result property="RcoaAmount" column="RCOA_AMOUNT"/>
+    <result property="Ufrank" column="UFRANK"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="WorkshopId" column="WORKSHOP_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="Uprank" column="UPRANK"/>
+    <result property="Lowerrank" column="LOWERRANK"/>
+    <result property="Uplowerrank" column="UPLOWERRANK"/>
+    <result property="Staticrank" column="STATICRANK"/>
+    <result property="Couplerank" column="COUPLERANK"/>
+    <result property="Rcoarank" column="RCOARANK"/>
+    <result property="Standard" column="STANDARD"/>
+    <result property="LtoaRank" column="LTOA_RANK"/>
+    <result property="LboaRank" column="LBOA_RANK"/>
+    <result property="Upperunbalancedeg" column="UPPERUNBALANCEDEG"/>
+    <result property="Lowerunbalancedeg" column="LOWERUNBALANCEDEG"/>
+    <result property="Staticunbalancedeg" column="STATICUNBALANCEDEG"/>
+    <result property="Coupleunbalancedeg" column="COUPLEUNBALANCEDEG"/>
+    <result property="Rcoadeg" column="RCOADEG"/>
+    <result property="Ltoadeg" column="LTOADEG"/>
+    <result property="Lboadeg" column="LBOADEG"/>
+    <result property="Lt1hOaLtmm" column="LT_1H_OA_LTMM"/>
+    <result property="Lt1hOaDeg" column="LT_1H_OA_DEG"/>
+    <result property="Lt1hOaRank" column="LT_1H_OA_RANK"/>
+    <result property="Lb1hOaLbmm" column="LB_1H_OA_LBMM"/>
+    <result property="Lb1hOaDeg" column="LB_1H_OA_DEG"/>
+    <result property="Lb1hOaRank" column="LB_1H_OA_RANK"/>
+    <result property="Rt1hOaLtmm" column="RT_1H_OA_LTMM"/>
+    <result property="Rt1hOaDeg" column="RT_1H_OA_DEG"/>
+    <result property="Rt1hOaRank" column="RT_1H_OA_RANK"/>
+    <result property="IsNew" column="IS_NEW"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_FqbBalanceInfo3" class="FqbBalanceInfo3">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="TyreId" column="TyreId"/>
+    <parameter property="MaterialId" column="MaterialId"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="Seqid" column="Seqid"/>
+    <parameter property="UpAmount" column="UpAmount"/>
+    <parameter property="LowerAmount" column="LowerAmount"/>
+    <parameter property="UplowerAmount" column="UplowerAmount"/>
+    <parameter property="StaticAmount" column="StaticAmount"/>
+    <parameter property="CoupleAmount" column="CoupleAmount"/>
+    <parameter property="LtoaAmount" column="LtoaAmount"/>
+    <parameter property="LboaAmount" column="LboaAmount"/>
+    <parameter property="RcoaAmount" column="RcoaAmount"/>
+    <parameter property="Ufrank" column="Ufrank"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="WorkshopId" column="WorkshopId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="Uprank" column="Uprank"/>
+    <parameter property="Lowerrank" column="Lowerrank"/>
+    <parameter property="Uplowerrank" column="Uplowerrank"/>
+    <parameter property="Staticrank" column="Staticrank"/>
+    <parameter property="Couplerank" column="Couplerank"/>
+    <parameter property="Rcoarank" column="Rcoarank"/>
+    <parameter property="Standard" column="Standard"/>
+    <parameter property="LtoaRank" column="LtoaRank"/>
+    <parameter property="LboaRank" column="LboaRank"/>
+    <parameter property="Upperunbalancedeg" column="Upperunbalancedeg"/>
+    <parameter property="Lowerunbalancedeg" column="Lowerunbalancedeg"/>
+    <parameter property="Staticunbalancedeg" column="Staticunbalancedeg"/>
+    <parameter property="Coupleunbalancedeg" column="Coupleunbalancedeg"/>
+    <parameter property="Rcoadeg" column="Rcoadeg"/>
+    <parameter property="Ltoadeg" column="Ltoadeg"/>
+    <parameter property="Lboadeg" column="Lboadeg"/>
+    <parameter property="Lt1hOaLtmm" column="Lt1hOaLtmm"/>
+    <parameter property="Lt1hOaDeg" column="Lt1hOaDeg"/>
+    <parameter property="Lt1hOaRank" column="Lt1hOaRank"/>
+    <parameter property="Lb1hOaLbmm" column="Lb1hOaLbmm"/>
+    <parameter property="Lb1hOaDeg" column="Lb1hOaDeg"/>
+    <parameter property="Lb1hOaRank" column="Lb1hOaRank"/>
+    <parameter property="Rt1hOaLtmm" column="Rt1hOaLtmm"/>
+    <parameter property="Rt1hOaDeg" column="Rt1hOaDeg"/>
+    <parameter property="Rt1hOaRank" column="Rt1hOaRank"/>
+    <parameter property="IsNew" column="IsNew"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM FQB_BALANCE_INFO_3 ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreId" prepend="AND">
+          <![CDATA[TYRE_ID = #where.TyreId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.Seqid" prepend="AND">
+          <![CDATA[SEQID = #where.Seqid#]]>
+        </isNotNull>
+        <isNotNull property="where.UpAmount" prepend="AND">
+          <![CDATA[UP_AMOUNT = #where.UpAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.LowerAmount" prepend="AND">
+          <![CDATA[LOWER_AMOUNT = #where.LowerAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.UplowerAmount" prepend="AND">
+          <![CDATA[UPLOWER_AMOUNT = #where.UplowerAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.StaticAmount" prepend="AND">
+          <![CDATA[STATIC_AMOUNT = #where.StaticAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.CoupleAmount" prepend="AND">
+          <![CDATA[COUPLE_AMOUNT = #where.CoupleAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.LtoaAmount" prepend="AND">
+          <![CDATA[LTOA_AMOUNT = #where.LtoaAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.LboaAmount" prepend="AND">
+          <![CDATA[LBOA_AMOUNT = #where.LboaAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.RcoaAmount" prepend="AND">
+          <![CDATA[RCOA_AMOUNT = #where.RcoaAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.Ufrank" prepend="AND">
+          <![CDATA[UFRANK = #where.Ufrank#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Uprank" prepend="AND">
+          <![CDATA[UPRANK = #where.Uprank#]]>
+        </isNotNull>
+        <isNotNull property="where.Lowerrank" prepend="AND">
+          <![CDATA[LOWERRANK = #where.Lowerrank#]]>
+        </isNotNull>
+        <isNotNull property="where.Uplowerrank" prepend="AND">
+          <![CDATA[UPLOWERRANK = #where.Uplowerrank#]]>
+        </isNotNull>
+        <isNotNull property="where.Staticrank" prepend="AND">
+          <![CDATA[STATICRANK = #where.Staticrank#]]>
+        </isNotNull>
+        <isNotNull property="where.Couplerank" prepend="AND">
+          <![CDATA[COUPLERANK = #where.Couplerank#]]>
+        </isNotNull>
+        <isNotNull property="where.Rcoarank" prepend="AND">
+          <![CDATA[RCOARANK = #where.Rcoarank#]]>
+        </isNotNull>
+        <isNotNull property="where.Standard" prepend="AND">
+          <![CDATA[STANDARD = #where.Standard#]]>
+        </isNotNull>
+        <isNotNull property="where.LtoaRank" prepend="AND">
+          <![CDATA[LTOA_RANK = #where.LtoaRank#]]>
+        </isNotNull>
+        <isNotNull property="where.LboaRank" prepend="AND">
+          <![CDATA[LBOA_RANK = #where.LboaRank#]]>
+        </isNotNull>
+        <isNotNull property="where.Upperunbalancedeg" prepend="AND">
+          <![CDATA[UPPERUNBALANCEDEG = #where.Upperunbalancedeg#]]>
+        </isNotNull>
+        <isNotNull property="where.Lowerunbalancedeg" prepend="AND">
+          <![CDATA[LOWERUNBALANCEDEG = #where.Lowerunbalancedeg#]]>
+        </isNotNull>
+        <isNotNull property="where.Staticunbalancedeg" prepend="AND">
+          <![CDATA[STATICUNBALANCEDEG = #where.Staticunbalancedeg#]]>
+        </isNotNull>
+        <isNotNull property="where.Coupleunbalancedeg" prepend="AND">
+          <![CDATA[COUPLEUNBALANCEDEG = #where.Coupleunbalancedeg#]]>
+        </isNotNull>
+        <isNotNull property="where.Rcoadeg" prepend="AND">
+          <![CDATA[RCOADEG = #where.Rcoadeg#]]>
+        </isNotNull>
+        <isNotNull property="where.Ltoadeg" prepend="AND">
+          <![CDATA[LTOADEG = #where.Ltoadeg#]]>
+        </isNotNull>
+        <isNotNull property="where.Lboadeg" prepend="AND">
+          <![CDATA[LBOADEG = #where.Lboadeg#]]>
+        </isNotNull>
+        <isNotNull property="where.Lt1hOaLtmm" prepend="AND">
+          <![CDATA[LT_1H_OA_LTMM = #where.Lt1hOaLtmm#]]>
+        </isNotNull>
+        <isNotNull property="where.Lt1hOaDeg" prepend="AND">
+          <![CDATA[LT_1H_OA_DEG = #where.Lt1hOaDeg#]]>
+        </isNotNull>
+        <isNotNull property="where.Lt1hOaRank" prepend="AND">
+          <![CDATA[LT_1H_OA_RANK = #where.Lt1hOaRank#]]>
+        </isNotNull>
+        <isNotNull property="where.Lb1hOaLbmm" prepend="AND">
+          <![CDATA[LB_1H_OA_LBMM = #where.Lb1hOaLbmm#]]>
+        </isNotNull>
+        <isNotNull property="where.Lb1hOaDeg" prepend="AND">
+          <![CDATA[LB_1H_OA_DEG = #where.Lb1hOaDeg#]]>
+        </isNotNull>
+        <isNotNull property="where.Lb1hOaRank" prepend="AND">
+          <![CDATA[LB_1H_OA_RANK = #where.Lb1hOaRank#]]>
+        </isNotNull>
+        <isNotNull property="where.Rt1hOaLtmm" prepend="AND">
+          <![CDATA[RT_1H_OA_LTMM = #where.Rt1hOaLtmm#]]>
+        </isNotNull>
+        <isNotNull property="where.Rt1hOaDeg" prepend="AND">
+          <![CDATA[RT_1H_OA_DEG = #where.Rt1hOaDeg#]]>
+        </isNotNull>
+        <isNotNull property="where.Rt1hOaRank" prepend="AND">
+          <![CDATA[RT_1H_OA_RANK = #where.Rt1hOaRank#]]>
+        </isNotNull>
+        <isNotNull property="where.IsNew" prepend="AND">
+          <![CDATA[IS_NEW = #where.IsNew#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO FQB_BALANCE_INFO_3]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="TyreId" prepend=",">TYRE_ID</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">MATERIAL_ID</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="Seqid" prepend=",">SEQID</isNotNull>
+        <isNotNull property="UpAmount" prepend=",">UP_AMOUNT</isNotNull>
+        <isNotNull property="LowerAmount" prepend=",">LOWER_AMOUNT</isNotNull>
+        <isNotNull property="UplowerAmount" prepend=",">UPLOWER_AMOUNT</isNotNull>
+        <isNotNull property="StaticAmount" prepend=",">STATIC_AMOUNT</isNotNull>
+        <isNotNull property="CoupleAmount" prepend=",">COUPLE_AMOUNT</isNotNull>
+        <isNotNull property="LtoaAmount" prepend=",">LTOA_AMOUNT</isNotNull>
+        <isNotNull property="LboaAmount" prepend=",">LBOA_AMOUNT</isNotNull>
+        <isNotNull property="RcoaAmount" prepend=",">RCOA_AMOUNT</isNotNull>
+        <isNotNull property="Ufrank" prepend=",">UFRANK</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">WORKSHOP_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="Uprank" prepend=",">UPRANK</isNotNull>
+        <isNotNull property="Lowerrank" prepend=",">LOWERRANK</isNotNull>
+        <isNotNull property="Uplowerrank" prepend=",">UPLOWERRANK</isNotNull>
+        <isNotNull property="Staticrank" prepend=",">STATICRANK</isNotNull>
+        <isNotNull property="Couplerank" prepend=",">COUPLERANK</isNotNull>
+        <isNotNull property="Rcoarank" prepend=",">RCOARANK</isNotNull>
+        <isNotNull property="Standard" prepend=",">STANDARD</isNotNull>
+        <isNotNull property="LtoaRank" prepend=",">LTOA_RANK</isNotNull>
+        <isNotNull property="LboaRank" prepend=",">LBOA_RANK</isNotNull>
+        <isNotNull property="Upperunbalancedeg" prepend=",">UPPERUNBALANCEDEG</isNotNull>
+        <isNotNull property="Lowerunbalancedeg" prepend=",">LOWERUNBALANCEDEG</isNotNull>
+        <isNotNull property="Staticunbalancedeg" prepend=",">STATICUNBALANCEDEG</isNotNull>
+        <isNotNull property="Coupleunbalancedeg" prepend=",">COUPLEUNBALANCEDEG</isNotNull>
+        <isNotNull property="Rcoadeg" prepend=",">RCOADEG</isNotNull>
+        <isNotNull property="Ltoadeg" prepend=",">LTOADEG</isNotNull>
+        <isNotNull property="Lboadeg" prepend=",">LBOADEG</isNotNull>
+        <isNotNull property="Lt1hOaLtmm" prepend=",">LT_1H_OA_LTMM</isNotNull>
+        <isNotNull property="Lt1hOaDeg" prepend=",">LT_1H_OA_DEG</isNotNull>
+        <isNotNull property="Lt1hOaRank" prepend=",">LT_1H_OA_RANK</isNotNull>
+        <isNotNull property="Lb1hOaLbmm" prepend=",">LB_1H_OA_LBMM</isNotNull>
+        <isNotNull property="Lb1hOaDeg" prepend=",">LB_1H_OA_DEG</isNotNull>
+        <isNotNull property="Lb1hOaRank" prepend=",">LB_1H_OA_RANK</isNotNull>
+        <isNotNull property="Rt1hOaLtmm" prepend=",">RT_1H_OA_LTMM</isNotNull>
+        <isNotNull property="Rt1hOaDeg" prepend=",">RT_1H_OA_DEG</isNotNull>
+        <isNotNull property="Rt1hOaRank" prepend=",">RT_1H_OA_RANK</isNotNull>
+        <isNotNull property="IsNew" prepend=",">IS_NEW</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_FQB_BALANCE_INFO_3.NEXTVAL</isNull>
+        <isNotNull property="TyreId" prepend=",">#TyreId#</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">#MaterialId#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="Seqid" prepend=",">#Seqid#</isNotNull>
+        <isNotNull property="UpAmount" prepend=",">#UpAmount#</isNotNull>
+        <isNotNull property="LowerAmount" prepend=",">#LowerAmount#</isNotNull>
+        <isNotNull property="UplowerAmount" prepend=",">#UplowerAmount#</isNotNull>
+        <isNotNull property="StaticAmount" prepend=",">#StaticAmount#</isNotNull>
+        <isNotNull property="CoupleAmount" prepend=",">#CoupleAmount#</isNotNull>
+        <isNotNull property="LtoaAmount" prepend=",">#LtoaAmount#</isNotNull>
+        <isNotNull property="LboaAmount" prepend=",">#LboaAmount#</isNotNull>
+        <isNotNull property="RcoaAmount" prepend=",">#RcoaAmount#</isNotNull>
+        <isNotNull property="Ufrank" prepend=",">#Ufrank#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">#WorkshopId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="Uprank" prepend=",">#Uprank#</isNotNull>
+        <isNotNull property="Lowerrank" prepend=",">#Lowerrank#</isNotNull>
+        <isNotNull property="Uplowerrank" prepend=",">#Uplowerrank#</isNotNull>
+        <isNotNull property="Staticrank" prepend=",">#Staticrank#</isNotNull>
+        <isNotNull property="Couplerank" prepend=",">#Couplerank#</isNotNull>
+        <isNotNull property="Rcoarank" prepend=",">#Rcoarank#</isNotNull>
+        <isNotNull property="Standard" prepend=",">#Standard#</isNotNull>
+        <isNotNull property="LtoaRank" prepend=",">#LtoaRank#</isNotNull>
+        <isNotNull property="LboaRank" prepend=",">#LboaRank#</isNotNull>
+        <isNotNull property="Upperunbalancedeg" prepend=",">#Upperunbalancedeg#</isNotNull>
+        <isNotNull property="Lowerunbalancedeg" prepend=",">#Lowerunbalancedeg#</isNotNull>
+        <isNotNull property="Staticunbalancedeg" prepend=",">#Staticunbalancedeg#</isNotNull>
+        <isNotNull property="Coupleunbalancedeg" prepend=",">#Coupleunbalancedeg#</isNotNull>
+        <isNotNull property="Rcoadeg" prepend=",">#Rcoadeg#</isNotNull>
+        <isNotNull property="Ltoadeg" prepend=",">#Ltoadeg#</isNotNull>
+        <isNotNull property="Lboadeg" prepend=",">#Lboadeg#</isNotNull>
+        <isNotNull property="Lt1hOaLtmm" prepend=",">#Lt1hOaLtmm#</isNotNull>
+        <isNotNull property="Lt1hOaDeg" prepend=",">#Lt1hOaDeg#</isNotNull>
+        <isNotNull property="Lt1hOaRank" prepend=",">#Lt1hOaRank#</isNotNull>
+        <isNotNull property="Lb1hOaLbmm" prepend=",">#Lb1hOaLbmm#</isNotNull>
+        <isNotNull property="Lb1hOaDeg" prepend=",">#Lb1hOaDeg#</isNotNull>
+        <isNotNull property="Lb1hOaRank" prepend=",">#Lb1hOaRank#</isNotNull>
+        <isNotNull property="Rt1hOaLtmm" prepend=",">#Rt1hOaLtmm#</isNotNull>
+        <isNotNull property="Rt1hOaDeg" prepend=",">#Rt1hOaDeg#</isNotNull>
+        <isNotNull property="Rt1hOaRank" prepend=",">#Rt1hOaRank#</isNotNull>
+        <isNotNull property="IsNew" prepend=",">#IsNew#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE FQB_BALANCE_INFO_3
+       <dynamic prepend="SET">
+        <isNotNull  property="update.TyreId"  prepend=",">
+          TYRE_ID = #update.TyreId#
+        </isNotNull>
+        <isNotNull  property="update.MaterialId"  prepend=",">
+          MATERIAL_ID = #update.MaterialId#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.Seqid"  prepend=",">
+          SEQID = #update.Seqid#
+        </isNotNull>
+        <isNotNull  property="update.UpAmount"  prepend=",">
+          UP_AMOUNT = #update.UpAmount#
+        </isNotNull>
+        <isNotNull  property="update.LowerAmount"  prepend=",">
+          LOWER_AMOUNT = #update.LowerAmount#
+        </isNotNull>
+        <isNotNull  property="update.UplowerAmount"  prepend=",">
+          UPLOWER_AMOUNT = #update.UplowerAmount#
+        </isNotNull>
+        <isNotNull  property="update.StaticAmount"  prepend=",">
+          STATIC_AMOUNT = #update.StaticAmount#
+        </isNotNull>
+        <isNotNull  property="update.CoupleAmount"  prepend=",">
+          COUPLE_AMOUNT = #update.CoupleAmount#
+        </isNotNull>
+        <isNotNull  property="update.LtoaAmount"  prepend=",">
+          LTOA_AMOUNT = #update.LtoaAmount#
+        </isNotNull>
+        <isNotNull  property="update.LboaAmount"  prepend=",">
+          LBOA_AMOUNT = #update.LboaAmount#
+        </isNotNull>
+        <isNotNull  property="update.RcoaAmount"  prepend=",">
+          RCOA_AMOUNT = #update.RcoaAmount#
+        </isNotNull>
+        <isNotNull  property="update.Ufrank"  prepend=",">
+          UFRANK = #update.Ufrank#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.WorkshopId"  prepend=",">
+          WORKSHOP_ID = #update.WorkshopId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.Uprank"  prepend=",">
+          UPRANK = #update.Uprank#
+        </isNotNull>
+        <isNotNull  property="update.Lowerrank"  prepend=",">
+          LOWERRANK = #update.Lowerrank#
+        </isNotNull>
+        <isNotNull  property="update.Uplowerrank"  prepend=",">
+          UPLOWERRANK = #update.Uplowerrank#
+        </isNotNull>
+        <isNotNull  property="update.Staticrank"  prepend=",">
+          STATICRANK = #update.Staticrank#
+        </isNotNull>
+        <isNotNull  property="update.Couplerank"  prepend=",">
+          COUPLERANK = #update.Couplerank#
+        </isNotNull>
+        <isNotNull  property="update.Rcoarank"  prepend=",">
+          RCOARANK = #update.Rcoarank#
+        </isNotNull>
+        <isNotNull  property="update.Standard"  prepend=",">
+          STANDARD = #update.Standard#
+        </isNotNull>
+        <isNotNull  property="update.LtoaRank"  prepend=",">
+          LTOA_RANK = #update.LtoaRank#
+        </isNotNull>
+        <isNotNull  property="update.LboaRank"  prepend=",">
+          LBOA_RANK = #update.LboaRank#
+        </isNotNull>
+        <isNotNull  property="update.Upperunbalancedeg"  prepend=",">
+          UPPERUNBALANCEDEG = #update.Upperunbalancedeg#
+        </isNotNull>
+        <isNotNull  property="update.Lowerunbalancedeg"  prepend=",">
+          LOWERUNBALANCEDEG = #update.Lowerunbalancedeg#
+        </isNotNull>
+        <isNotNull  property="update.Staticunbalancedeg"  prepend=",">
+          STATICUNBALANCEDEG = #update.Staticunbalancedeg#
+        </isNotNull>
+        <isNotNull  property="update.Coupleunbalancedeg"  prepend=",">
+          COUPLEUNBALANCEDEG = #update.Coupleunbalancedeg#
+        </isNotNull>
+        <isNotNull  property="update.Rcoadeg"  prepend=",">
+          RCOADEG = #update.Rcoadeg#
+        </isNotNull>
+        <isNotNull  property="update.Ltoadeg"  prepend=",">
+          LTOADEG = #update.Ltoadeg#
+        </isNotNull>
+        <isNotNull  property="update.Lboadeg"  prepend=",">
+          LBOADEG = #update.Lboadeg#
+        </isNotNull>
+        <isNotNull  property="update.Lt1hOaLtmm"  prepend=",">
+          LT_1H_OA_LTMM = #update.Lt1hOaLtmm#
+        </isNotNull>
+        <isNotNull  property="update.Lt1hOaDeg"  prepend=",">
+          LT_1H_OA_DEG = #update.Lt1hOaDeg#
+        </isNotNull>
+        <isNotNull  property="update.Lt1hOaRank"  prepend=",">
+          LT_1H_OA_RANK = #update.Lt1hOaRank#
+        </isNotNull>
+        <isNotNull  property="update.Lb1hOaLbmm"  prepend=",">
+          LB_1H_OA_LBMM = #update.Lb1hOaLbmm#
+        </isNotNull>
+        <isNotNull  property="update.Lb1hOaDeg"  prepend=",">
+          LB_1H_OA_DEG = #update.Lb1hOaDeg#
+        </isNotNull>
+        <isNotNull  property="update.Lb1hOaRank"  prepend=",">
+          LB_1H_OA_RANK = #update.Lb1hOaRank#
+        </isNotNull>
+        <isNotNull  property="update.Rt1hOaLtmm"  prepend=",">
+          RT_1H_OA_LTMM = #update.Rt1hOaLtmm#
+        </isNotNull>
+        <isNotNull  property="update.Rt1hOaDeg"  prepend=",">
+          RT_1H_OA_DEG = #update.Rt1hOaDeg#
+        </isNotNull>
+        <isNotNull  property="update.Rt1hOaRank"  prepend=",">
+          RT_1H_OA_RANK = #update.Rt1hOaRank#
+        </isNotNull>
+        <isNotNull  property="update.IsNew"  prepend=",">
+          IS_NEW = #update.IsNew#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM FQB_BALANCE_INFO_3
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_FqbBalanceInfo3">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_FqbBalanceInfo3">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM FQB_BALANCE_INFO_3
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM FQB_BALANCE_INFO_3
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_FqbBalanceInfo3" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE FQB_BALANCE_INFO_3
+    </statement>
+  </statements>
+</sqlMap>

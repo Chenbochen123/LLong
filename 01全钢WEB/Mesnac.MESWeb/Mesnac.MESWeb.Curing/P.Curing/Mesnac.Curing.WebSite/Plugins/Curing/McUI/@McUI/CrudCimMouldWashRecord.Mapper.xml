@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudCimMouldWashRecord" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.EQUIP_NAME,T2.SHOW_NAME,T3.USER_NAME, T.*,T4.USER_NAME CHECK_USER FROM CIM_MOULD_WASH_RECORD T 
+        LEFT JOIN SBE_EQUIP T1 ON T.EQUIPID = T1.OBJID
+        LEFT JOIN CBE_EQUIP_POSITION T2 ON T.LRFLAG = T2.OBJID
+        LEFT JOIN SSB_USER T3 ON T.MOULDID = T3.OBJID
+        LEFT JOIN SSB_USER T4 ON T.CHECK_USERID = T4.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTimeS" prepend="AND">
+          <![CDATA[T.BEGINTIME >= #where.BeginTimeS#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTimeS" prepend="AND">
+          <![CDATA[T.BEGINTIME <= #where.EndTimeS#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[T1.EQUIP_NAME LIKE '%' || #where.EquipName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.EquipPosition" prepend="AND">
+          <![CDATA[T.LRFLAG = #where.EquipPosition#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    <select id="Select+Update@CrudCimMouldWashRecord" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM CIM_MOULD_WASH_RECORD ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+    
+    <select id="Select@CrudCimMouldWashRecord@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.EQUIP_NAME,T2.SHOW_NAME,T3.USER_NAME, T.* FROM CIM_MOULD_WASH_RECORD T 
+        LEFT JOIN SBE_EQUIP T1 ON T.EQUIPID = T1.OBJID
+        LEFT JOIN CBE_EQUIP_POSITION T2 ON T.LRFLAG = T2.OBJID
+        LEFT JOIN SSB_USER T3 ON T.MOULDID = T3.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T.OBJID = #where.OBJID#)]]>
+      </dynamic>
+    </select>
+    
+    <!--查询左右模信息，ID值固定为GetComboBoxData@Select@CrudCimMouldWashRecord@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudCimMouldWashRecord@EquipPosition" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey,SHOW_NAME ssValue FROM CBE_EQUIP_POSITION WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

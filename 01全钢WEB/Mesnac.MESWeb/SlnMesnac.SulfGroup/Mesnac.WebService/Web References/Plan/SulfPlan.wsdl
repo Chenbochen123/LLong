@@ -1,0 +1,1403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryPlanInfoByPlanid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="planid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryPlanInfoByPlanidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryPlanInfoByPlanidResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryPlanDetailInfoByid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="planid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="did" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryPlanDetailInfoByidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryPlanDetailInfoByidResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryPlanListByShift">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="shiftID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="shiftDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="equipID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryPlanListByShiftResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryPlanListByShiftResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryUserInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="QueryUserInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryUserInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryShiftInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="QueryShiftInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryShiftInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryClassInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="QueryClassInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryClassInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryWorkInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="QueryWorkInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryWorkInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEquipTable">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetEquipTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEquipTableResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEquipTableByIP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GroupIP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEquipTableByIPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEquipTableByIPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAlarmInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="minor_type" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAlarmInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAlarmInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAlarmRecord">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="FACTORYID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EQUIPID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ALARM_REASON" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ALARM_BEGIN_TIME" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ALARM_END_TIME" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="MAX_VALUE" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="MIN_VALUE" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="SET_VALUE" type="s:double" />
+            <s:element minOccurs="1" maxOccurs="1" name="CURING_STEP" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="TYRE_NO" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="RECORD_USER_ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="orterInfo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAlarmRecordResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAlarmGradeInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="minor_type" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAlarmGradeInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAlarmGradeInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCppCuringPlan">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EquipID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PlanDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ShiftID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EquipPosition" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCppCuringPlanResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCppCuringPlanResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCuringAlarmCount">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCuringAlarmCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetCuringAlarmCountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAlarmCuringTenPress">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAlarmCuringTenPressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAlarmCuringTenPressResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataTable" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="int" type="s:int" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanInfoByPlanidSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryPlanInfoByPlanid" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanInfoByPlanidSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryPlanInfoByPlanidResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanDetailInfoByidSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryPlanDetailInfoByid" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanDetailInfoByidSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryPlanDetailInfoByidResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanListByShiftSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryPlanListByShift" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanListByShiftSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryPlanListByShiftResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryShiftInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryShiftInfo" />
+  </wsdl:message>
+  <wsdl:message name="QueryShiftInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryShiftInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryClassInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryClassInfo" />
+  </wsdl:message>
+  <wsdl:message name="QueryClassInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryClassInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryWorkInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryWorkInfo" />
+  </wsdl:message>
+  <wsdl:message name="QueryWorkInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryWorkInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEquipTable" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEquipTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableByIPSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEquipTableByIP" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableByIPSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEquipTableByIPResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAlarmInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAlarmInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAlarmRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAlarmRecord" />
+  </wsdl:message>
+  <wsdl:message name="AddAlarmRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAlarmRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmGradeInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAlarmGradeInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmGradeInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAlarmGradeInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCppCuringPlanSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCppCuringPlan" />
+  </wsdl:message>
+  <wsdl:message name="GetCppCuringPlanSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCppCuringPlanResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringAlarmCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCuringAlarmCount" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringAlarmCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCuringAlarmCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmCuringTenPressSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAlarmCuringTenPress" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmCuringTenPressSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAlarmCuringTenPressResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanInfoByPlanidHttpGetIn">
+    <wsdl:part name="planid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanInfoByPlanidHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanDetailInfoByidHttpGetIn">
+    <wsdl:part name="planid" type="s:string" />
+    <wsdl:part name="did" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanDetailInfoByidHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanListByShiftHttpGetIn">
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="shiftDate" type="s:string" />
+    <wsdl:part name="equipID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanListByShiftHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoHttpGetIn" />
+  <wsdl:message name="QueryUserInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="QueryShiftInfoHttpGetIn" />
+  <wsdl:message name="QueryShiftInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="QueryClassInfoHttpGetIn" />
+  <wsdl:message name="QueryClassInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="QueryWorkInfoHttpGetIn" />
+  <wsdl:message name="QueryWorkInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableHttpGetIn" />
+  <wsdl:message name="GetEquipTableHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableByIPHttpGetIn">
+    <wsdl:part name="GroupIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableByIPHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmInfoHttpGetIn">
+    <wsdl:part name="minor_type" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="AddAlarmRecordHttpGetIn">
+    <wsdl:part name="FACTORYID" type="s:string" />
+    <wsdl:part name="EQUIPID" type="s:string" />
+    <wsdl:part name="ALARM_REASON" type="s:string" />
+    <wsdl:part name="ALARM_BEGIN_TIME" type="s:string" />
+    <wsdl:part name="ALARM_END_TIME" type="s:string" />
+    <wsdl:part name="MAX_VALUE" type="s:string" />
+    <wsdl:part name="MIN_VALUE" type="s:string" />
+    <wsdl:part name="SET_VALUE" type="s:string" />
+    <wsdl:part name="CURING_STEP" type="s:string" />
+    <wsdl:part name="TYRE_NO" type="s:string" />
+    <wsdl:part name="RECORD_USER_ID" type="s:string" />
+    <wsdl:part name="orterInfo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddAlarmRecordHttpGetOut" />
+  <wsdl:message name="GetAlarmGradeInfoHttpGetIn">
+    <wsdl:part name="minor_type" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmGradeInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetCppCuringPlanHttpGetIn">
+    <wsdl:part name="EquipID" type="s:string" />
+    <wsdl:part name="PlanDate" type="s:string" />
+    <wsdl:part name="ShiftID" type="s:string" />
+    <wsdl:part name="EquipPosition" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCppCuringPlanHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringAlarmCountHttpGetIn" />
+  <wsdl:message name="GetCuringAlarmCountHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmCuringTenPressHttpGetIn" />
+  <wsdl:message name="GetAlarmCuringTenPressHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanInfoByPlanidHttpPostIn">
+    <wsdl:part name="planid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanInfoByPlanidHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanDetailInfoByidHttpPostIn">
+    <wsdl:part name="planid" type="s:string" />
+    <wsdl:part name="did" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanDetailInfoByidHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanListByShiftHttpPostIn">
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="shiftDate" type="s:string" />
+    <wsdl:part name="equipID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryPlanListByShiftHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoHttpPostIn" />
+  <wsdl:message name="QueryUserInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="QueryShiftInfoHttpPostIn" />
+  <wsdl:message name="QueryShiftInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="QueryClassInfoHttpPostIn" />
+  <wsdl:message name="QueryClassInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="QueryWorkInfoHttpPostIn" />
+  <wsdl:message name="QueryWorkInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableHttpPostIn" />
+  <wsdl:message name="GetEquipTableHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableByIPHttpPostIn">
+    <wsdl:part name="GroupIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableByIPHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmInfoHttpPostIn">
+    <wsdl:part name="minor_type" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="AddAlarmRecordHttpPostIn">
+    <wsdl:part name="FACTORYID" type="s:string" />
+    <wsdl:part name="EQUIPID" type="s:string" />
+    <wsdl:part name="ALARM_REASON" type="s:string" />
+    <wsdl:part name="ALARM_BEGIN_TIME" type="s:string" />
+    <wsdl:part name="ALARM_END_TIME" type="s:string" />
+    <wsdl:part name="MAX_VALUE" type="s:string" />
+    <wsdl:part name="MIN_VALUE" type="s:string" />
+    <wsdl:part name="SET_VALUE" type="s:string" />
+    <wsdl:part name="CURING_STEP" type="s:string" />
+    <wsdl:part name="TYRE_NO" type="s:string" />
+    <wsdl:part name="RECORD_USER_ID" type="s:string" />
+    <wsdl:part name="orterInfo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddAlarmRecordHttpPostOut" />
+  <wsdl:message name="GetAlarmGradeInfoHttpPostIn">
+    <wsdl:part name="minor_type" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmGradeInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetCppCuringPlanHttpPostIn">
+    <wsdl:part name="EquipID" type="s:string" />
+    <wsdl:part name="PlanDate" type="s:string" />
+    <wsdl:part name="ShiftID" type="s:string" />
+    <wsdl:part name="EquipPosition" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCppCuringPlanHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringAlarmCountHttpPostIn" />
+  <wsdl:message name="GetCuringAlarmCountHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmCuringTenPressHttpPostIn" />
+  <wsdl:message name="GetAlarmCuringTenPressHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:portType name="SulfPlanSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanInfoByPlanid">
+      <wsdl:input message="tns:QueryPlanInfoByPlanidSoapIn" />
+      <wsdl:output message="tns:QueryPlanInfoByPlanidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanDetailInfoByid">
+      <wsdl:input message="tns:QueryPlanDetailInfoByidSoapIn" />
+      <wsdl:output message="tns:QueryPlanDetailInfoByidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanListByShift">
+      <wsdl:input message="tns:QueryPlanListByShiftSoapIn" />
+      <wsdl:output message="tns:QueryPlanListByShiftSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <wsdl:input message="tns:QueryUserInfoSoapIn" />
+      <wsdl:output message="tns:QueryUserInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryShiftInfo">
+      <wsdl:input message="tns:QueryShiftInfoSoapIn" />
+      <wsdl:output message="tns:QueryShiftInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryClassInfo">
+      <wsdl:input message="tns:QueryClassInfoSoapIn" />
+      <wsdl:output message="tns:QueryClassInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryWorkInfo">
+      <wsdl:input message="tns:QueryWorkInfoSoapIn" />
+      <wsdl:output message="tns:QueryWorkInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <wsdl:input message="tns:GetEquipTableSoapIn" />
+      <wsdl:output message="tns:GetEquipTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTableByIP">
+      <wsdl:input message="tns:GetEquipTableByIPSoapIn" />
+      <wsdl:output message="tns:GetEquipTableByIPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmInfo">
+      <wsdl:input message="tns:GetAlarmInfoSoapIn" />
+      <wsdl:output message="tns:GetAlarmInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAlarmRecord">
+      <wsdl:input message="tns:AddAlarmRecordSoapIn" />
+      <wsdl:output message="tns:AddAlarmRecordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmGradeInfo">
+      <wsdl:input message="tns:GetAlarmGradeInfoSoapIn" />
+      <wsdl:output message="tns:GetAlarmGradeInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCppCuringPlan">
+      <wsdl:input message="tns:GetCppCuringPlanSoapIn" />
+      <wsdl:output message="tns:GetCppCuringPlanSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringAlarmCount">
+      <wsdl:input message="tns:GetCuringAlarmCountSoapIn" />
+      <wsdl:output message="tns:GetCuringAlarmCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmCuringTenPress">
+      <wsdl:input message="tns:GetAlarmCuringTenPressSoapIn" />
+      <wsdl:output message="tns:GetAlarmCuringTenPressSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SulfPlanHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanInfoByPlanid">
+      <wsdl:input message="tns:QueryPlanInfoByPlanidHttpGetIn" />
+      <wsdl:output message="tns:QueryPlanInfoByPlanidHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanDetailInfoByid">
+      <wsdl:input message="tns:QueryPlanDetailInfoByidHttpGetIn" />
+      <wsdl:output message="tns:QueryPlanDetailInfoByidHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanListByShift">
+      <wsdl:input message="tns:QueryPlanListByShiftHttpGetIn" />
+      <wsdl:output message="tns:QueryPlanListByShiftHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <wsdl:input message="tns:QueryUserInfoHttpGetIn" />
+      <wsdl:output message="tns:QueryUserInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryShiftInfo">
+      <wsdl:input message="tns:QueryShiftInfoHttpGetIn" />
+      <wsdl:output message="tns:QueryShiftInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryClassInfo">
+      <wsdl:input message="tns:QueryClassInfoHttpGetIn" />
+      <wsdl:output message="tns:QueryClassInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryWorkInfo">
+      <wsdl:input message="tns:QueryWorkInfoHttpGetIn" />
+      <wsdl:output message="tns:QueryWorkInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <wsdl:input message="tns:GetEquipTableHttpGetIn" />
+      <wsdl:output message="tns:GetEquipTableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTableByIP">
+      <wsdl:input message="tns:GetEquipTableByIPHttpGetIn" />
+      <wsdl:output message="tns:GetEquipTableByIPHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmInfo">
+      <wsdl:input message="tns:GetAlarmInfoHttpGetIn" />
+      <wsdl:output message="tns:GetAlarmInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAlarmRecord">
+      <wsdl:input message="tns:AddAlarmRecordHttpGetIn" />
+      <wsdl:output message="tns:AddAlarmRecordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmGradeInfo">
+      <wsdl:input message="tns:GetAlarmGradeInfoHttpGetIn" />
+      <wsdl:output message="tns:GetAlarmGradeInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCppCuringPlan">
+      <wsdl:input message="tns:GetCppCuringPlanHttpGetIn" />
+      <wsdl:output message="tns:GetCppCuringPlanHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringAlarmCount">
+      <wsdl:input message="tns:GetCuringAlarmCountHttpGetIn" />
+      <wsdl:output message="tns:GetCuringAlarmCountHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmCuringTenPress">
+      <wsdl:input message="tns:GetAlarmCuringTenPressHttpGetIn" />
+      <wsdl:output message="tns:GetAlarmCuringTenPressHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SulfPlanHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanInfoByPlanid">
+      <wsdl:input message="tns:QueryPlanInfoByPlanidHttpPostIn" />
+      <wsdl:output message="tns:QueryPlanInfoByPlanidHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanDetailInfoByid">
+      <wsdl:input message="tns:QueryPlanDetailInfoByidHttpPostIn" />
+      <wsdl:output message="tns:QueryPlanDetailInfoByidHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanListByShift">
+      <wsdl:input message="tns:QueryPlanListByShiftHttpPostIn" />
+      <wsdl:output message="tns:QueryPlanListByShiftHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <wsdl:input message="tns:QueryUserInfoHttpPostIn" />
+      <wsdl:output message="tns:QueryUserInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryShiftInfo">
+      <wsdl:input message="tns:QueryShiftInfoHttpPostIn" />
+      <wsdl:output message="tns:QueryShiftInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryClassInfo">
+      <wsdl:input message="tns:QueryClassInfoHttpPostIn" />
+      <wsdl:output message="tns:QueryClassInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryWorkInfo">
+      <wsdl:input message="tns:QueryWorkInfoHttpPostIn" />
+      <wsdl:output message="tns:QueryWorkInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <wsdl:input message="tns:GetEquipTableHttpPostIn" />
+      <wsdl:output message="tns:GetEquipTableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTableByIP">
+      <wsdl:input message="tns:GetEquipTableByIPHttpPostIn" />
+      <wsdl:output message="tns:GetEquipTableByIPHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmInfo">
+      <wsdl:input message="tns:GetAlarmInfoHttpPostIn" />
+      <wsdl:output message="tns:GetAlarmInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAlarmRecord">
+      <wsdl:input message="tns:AddAlarmRecordHttpPostIn" />
+      <wsdl:output message="tns:AddAlarmRecordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmGradeInfo">
+      <wsdl:input message="tns:GetAlarmGradeInfoHttpPostIn" />
+      <wsdl:output message="tns:GetAlarmGradeInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCppCuringPlan">
+      <wsdl:input message="tns:GetCppCuringPlanHttpPostIn" />
+      <wsdl:output message="tns:GetCppCuringPlanHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringAlarmCount">
+      <wsdl:input message="tns:GetCuringAlarmCountHttpPostIn" />
+      <wsdl:output message="tns:GetCuringAlarmCountHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmCuringTenPress">
+      <wsdl:input message="tns:GetAlarmCuringTenPressHttpPostIn" />
+      <wsdl:output message="tns:GetAlarmCuringTenPressHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SulfPlanSoap" type="tns:SulfPlanSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanInfoByPlanid">
+      <soap:operation soapAction="http://tempuri.org/QueryPlanInfoByPlanid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanDetailInfoByid">
+      <soap:operation soapAction="http://tempuri.org/QueryPlanDetailInfoByid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanListByShift">
+      <soap:operation soapAction="http://tempuri.org/QueryPlanListByShift" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <soap:operation soapAction="http://tempuri.org/QueryUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryShiftInfo">
+      <soap:operation soapAction="http://tempuri.org/QueryShiftInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryClassInfo">
+      <soap:operation soapAction="http://tempuri.org/QueryClassInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryWorkInfo">
+      <soap:operation soapAction="http://tempuri.org/QueryWorkInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <soap:operation soapAction="http://tempuri.org/GetEquipTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTableByIP">
+      <soap:operation soapAction="http://tempuri.org/GetEquipTableByIP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmInfo">
+      <soap:operation soapAction="http://tempuri.org/GetAlarmInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAlarmRecord">
+      <soap:operation soapAction="http://tempuri.org/AddAlarmRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmGradeInfo">
+      <soap:operation soapAction="http://tempuri.org/GetAlarmGradeInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCppCuringPlan">
+      <soap:operation soapAction="http://tempuri.org/GetCppCuringPlan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringAlarmCount">
+      <soap:operation soapAction="http://tempuri.org/GetCuringAlarmCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmCuringTenPress">
+      <soap:operation soapAction="http://tempuri.org/GetAlarmCuringTenPress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SulfPlanSoap12" type="tns:SulfPlanSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanInfoByPlanid">
+      <soap12:operation soapAction="http://tempuri.org/QueryPlanInfoByPlanid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanDetailInfoByid">
+      <soap12:operation soapAction="http://tempuri.org/QueryPlanDetailInfoByid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanListByShift">
+      <soap12:operation soapAction="http://tempuri.org/QueryPlanListByShift" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <soap12:operation soapAction="http://tempuri.org/QueryUserInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryShiftInfo">
+      <soap12:operation soapAction="http://tempuri.org/QueryShiftInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryClassInfo">
+      <soap12:operation soapAction="http://tempuri.org/QueryClassInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryWorkInfo">
+      <soap12:operation soapAction="http://tempuri.org/QueryWorkInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <soap12:operation soapAction="http://tempuri.org/GetEquipTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTableByIP">
+      <soap12:operation soapAction="http://tempuri.org/GetEquipTableByIP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetAlarmInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAlarmRecord">
+      <soap12:operation soapAction="http://tempuri.org/AddAlarmRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmGradeInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetAlarmGradeInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCppCuringPlan">
+      <soap12:operation soapAction="http://tempuri.org/GetCppCuringPlan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringAlarmCount">
+      <soap12:operation soapAction="http://tempuri.org/GetCuringAlarmCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmCuringTenPress">
+      <soap12:operation soapAction="http://tempuri.org/GetAlarmCuringTenPress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SulfPlanHttpGet" type="tns:SulfPlanHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanInfoByPlanid">
+      <http:operation location="/QueryPlanInfoByPlanid" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanDetailInfoByid">
+      <http:operation location="/QueryPlanDetailInfoByid" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanListByShift">
+      <http:operation location="/QueryPlanListByShift" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <http:operation location="/QueryUserInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryShiftInfo">
+      <http:operation location="/QueryShiftInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryClassInfo">
+      <http:operation location="/QueryClassInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryWorkInfo">
+      <http:operation location="/QueryWorkInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <http:operation location="/GetEquipTable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTableByIP">
+      <http:operation location="/GetEquipTableByIP" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmInfo">
+      <http:operation location="/GetAlarmInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAlarmRecord">
+      <http:operation location="/AddAlarmRecord" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmGradeInfo">
+      <http:operation location="/GetAlarmGradeInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCppCuringPlan">
+      <http:operation location="/GetCppCuringPlan" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringAlarmCount">
+      <http:operation location="/GetCuringAlarmCount" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmCuringTenPress">
+      <http:operation location="/GetAlarmCuringTenPress" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SulfPlanHttpPost" type="tns:SulfPlanHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanInfoByPlanid">
+      <http:operation location="/QueryPlanInfoByPlanid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanDetailInfoByid">
+      <http:operation location="/QueryPlanDetailInfoByid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryPlanListByShift">
+      <http:operation location="/QueryPlanListByShift" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <http:operation location="/QueryUserInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryShiftInfo">
+      <http:operation location="/QueryShiftInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryClassInfo">
+      <http:operation location="/QueryClassInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryWorkInfo">
+      <http:operation location="/QueryWorkInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <http:operation location="/GetEquipTable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTableByIP">
+      <http:operation location="/GetEquipTableByIP" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmInfo">
+      <http:operation location="/GetAlarmInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAlarmRecord">
+      <http:operation location="/AddAlarmRecord" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmGradeInfo">
+      <http:operation location="/GetAlarmGradeInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCppCuringPlan">
+      <http:operation location="/GetCppCuringPlan" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringAlarmCount">
+      <http:operation location="/GetCuringAlarmCount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmCuringTenPress">
+      <http:operation location="/GetAlarmCuringTenPress" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SulfPlan">
+    <wsdl:port name="SulfPlanSoap" binding="tns:SulfPlanSoap">
+      <soap:address location="http://localhost:8067/Curing/SulfPlan.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SulfPlanSoap12" binding="tns:SulfPlanSoap12">
+      <soap12:address location="http://localhost:8067/Curing/SulfPlan.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SulfPlanHttpGet" binding="tns:SulfPlanHttpGet">
+      <http:address location="http://localhost:8067/Curing/SulfPlan.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SulfPlanHttpPost" binding="tns:SulfPlanHttpPost">
+      <http:address location="http://localhost:8067/Curing/SulfPlan.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

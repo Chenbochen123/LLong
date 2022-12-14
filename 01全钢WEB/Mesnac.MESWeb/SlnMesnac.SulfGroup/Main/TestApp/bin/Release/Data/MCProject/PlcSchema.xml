@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <PlcRecipeWrite>
+        <PmtRecipe>
+            <add equip="RecipeName" field="RecipeMaterialName" len="6" datatype="string" />
+            <add equip="CarbonRecycleType" field="CarbonRecycleType" />
+            <add equip="CarbonRecycleTime" field="CarbonRecycleTime" />
+            <add equip="OverTempSetTemp" field="OverTempSetTemp" multiply="10" />
+            <add equip="OverTimeSetTime" field="OverTimeSetTime" />
+            <add equip="OverTempMinTime" field="OverTempMinTime" />
+            <add equip="MakeUpTemp" field="MakeUpTemp" multiply="10" />
+            <add equip="InPloyMaxTemp" field="InPloyMaxTemp" />
+            <add equip="SmallRecipPlyName" field="SmallRecipPlyName" />
+            <add equip="RecipPlyName" field="RecipPlyName" />
+            <add equip="InPloyMinTemp" field="InPloyMinTemp" />
+        </PmtRecipe>
+        <PmtRecipeMixing count="25" equip="Mixing">
+            <add field="TermAddress" />
+            <add field="MixingTime" />
+            <add field="MixingTemp" multiply="10" />
+            <add field="MixingEnergy" multiply="10" />
+            <add field="MixingPower" />
+            <add field="ActionAddress" />
+            <add field="MixingPress" multiply="10" />
+            <add field="MixingSpeed" />
+        </PmtRecipeMixing>
+        <PmtRecipeWeight count="12" equip="RecipCarbon" type="0">
+            <add field="JarSerial" />
+            <add field="SetWeight" multiply="100" />
+        </PmtRecipeWeight>
+        <PmtRecipeWeight count="8" equip="RecipOil1" type="1">
+            <add field="JarSerial" />
+            <add field="SetWeight" multiply="100" />
+        </PmtRecipeWeight>
+        <PmtRecipeWeight count="8" equip="RecipOil2" type="5">
+            <add field="JarSerial" />
+            <add field="Weight" multiply="100" />
+        </PmtRecipeWeight>
+        <PmtRecipeWeight count="6" equip="RecipPly" type="2">
+            <add field="Weight" multiply="10" />
+        </PmtRecipeWeight>
+        <PmtRecipeWeight count="1" equip="SmallRecipPly" type="4">
+            <add field="Weight" multiply="100" />
+        </PmtRecipeWeight>
+    </PlcRecipeWrite>
+    <PlcSaveRead>
+        <PptLot>
+        </PptLot>
+        <PptMixData count="20" equip="SaveMixingData">
+            <add field="Term_code" />
+            <add field="Set_time" />
+            <add field="Set_temp" multiply="10" />
+            <add field="Set_ener" multiply="10" />
+            <add field="Set_power" />
+            <add field="Set_pres" />
+            <add field="Set_rota" multiply="10" />
+            <add field="Act_code" />
+        </PptMixData>
+        <PptWeighData count="12" equip="SaveDataCB" type="0">
+            <!--aaa-->
+            <add field="JarSerial" />
+            <add field="Real_weight" multiply="100" />
+        </PptWeighData>
+        <PptWeighData count="8" equip="SaveDataOil" type="1">
+            <add field="JarSerial" />
+            <add field="Real_weight" multiply="100" />
+        </PptWeighData>
+        <PptWeighData count="8" equip="SaveDataOil2" type="5">
+            <add field="JarSerial" />
+            <add field="Real_weight" multiply="100" />
+        </PptWeighData>
+        <PptWeighData count="7" equip="SaveDataPly" type="2">
+            <add field="Real_weight" multiply="100" />
+        </PptWeighData>
+        <PptWeighData count="1" equip="xlSaveDataPly" type="4">
+            <add field="Real_weight" multiply="1000" />
+        </PptWeighData>
+    </PlcSaveRead>
+</configuration>

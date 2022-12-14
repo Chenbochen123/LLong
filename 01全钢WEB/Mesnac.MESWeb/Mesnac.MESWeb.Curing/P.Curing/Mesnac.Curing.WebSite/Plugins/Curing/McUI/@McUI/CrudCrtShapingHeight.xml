@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="SHAPING_HEIGHT_CODE" Value="定型时间代码"></Caption>
+    <Caption Name="SHAPING_HEIGHT" Value="定型高度"></Caption>
+    <Caption Name="LOADER_HEIGHT" Value="装胎高度"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+  </Captions>
+  <WebPage Title="硫化定型高度信息">
+  </WebPage>
+  <Crud TableName="CRT_SHAPING_HEIGHT">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <Uniques>
+      <Unique Fields="SHAPING_HEIGHT_CODE"></Unique>
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="SHAPING_HEIGHT_CODE"></ParamField>
+        <ParamField FieldName="SHAPING_HEIGHT" Type="NumberBox"></ParamField>
+        <ParamField FieldName="LOADER_HEIGHT" Type="NumberBox"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="SHAPING_HEIGHT_CODE"></ParamField>
+        <ParamField FieldName="SHAPING_HEIGHT" Type="NumberBox"></ParamField>
+        <ParamField FieldName="LOADER_HEIGHT" Type="NumberBox"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="SHAPING_HEIGHT_CODE"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="T1.OBJID">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="SHAPING_HEIGHT_CODE"></GridColumn>
+        <GridColumn ColumnName="SHAPING_HEIGHT"></GridColumn>
+        <GridColumn ColumnName="LOADER_HEIGHT"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

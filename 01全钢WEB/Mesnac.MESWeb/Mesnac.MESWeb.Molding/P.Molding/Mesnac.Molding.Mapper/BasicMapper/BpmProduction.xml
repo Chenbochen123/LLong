@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BasicMapper.BpmProduction"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="BpmProduction" type="Mesnac.Molding.Entity.BasicEntity.BpmProduction, Mesnac.Molding.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_BpmProduction" class="BpmProduction">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="GreenTyreNo" column="GREEN_TYRE_NO"/>
+    <result property="PlanId" column="PLAN_ID"/>
+    <result property="PlanDetailId" column="PLAN_DETAIL_ID"/>
+    <result property="ShiftMasterId" column="SHIFT_MASTER_ID"/>
+    <result property="ShiftDetailId" column="SHIFT_DETAIL_ID"/>
+    <result property="BeginTime" column="BEGIN_TIME"/>
+    <result property="EndTime" column="END_TIME"/>
+    <result property="IsFirst" column="IS_FIRST"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="BlFlag" column="BL_FLAG"/>
+    <result property="PlanIdOrigin" column="PLAN_ID_ORIGIN"/>
+    <result property="PlanDetailIdOrigin" column="PLAN_DETAIL_ID_ORIGIN"/>
+    <result property="MaterChangeFlag" column="MATER_CHANGE_FLAG"/>
+    <result property="MaterChangeTime" column="MATER_CHANGE_TIME"/>
+    <result property="ShiftMasterIdOrigin" column="SHIFT_MASTER_ID_ORIGIN"/>
+    <result property="MonthFlag" column="MONTH_FLAG"/>
+    <result property="YcTime" column="YC_TIME"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_BpmProduction" class="BpmProduction">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="GreenTyreNo" column="GreenTyreNo"/>
+    <parameter property="PlanId" column="PlanId"/>
+    <parameter property="PlanDetailId" column="PlanDetailId"/>
+    <parameter property="ShiftMasterId" column="ShiftMasterId"/>
+    <parameter property="ShiftDetailId" column="ShiftDetailId"/>
+    <parameter property="BeginTime" column="BeginTime"/>
+    <parameter property="EndTime" column="EndTime"/>
+    <parameter property="IsFirst" column="IsFirst"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="BlFlag" column="BlFlag"/>
+    <parameter property="PlanIdOrigin" column="PlanIdOrigin"/>
+    <parameter property="PlanDetailIdOrigin" column="PlanDetailIdOrigin"/>
+    <parameter property="MaterChangeFlag" column="MaterChangeFlag"/>
+    <parameter property="MaterChangeTime" column="MaterChangeTime"/>
+    <parameter property="ShiftMasterIdOrigin" column="ShiftMasterIdOrigin"/>
+    <parameter property="MonthFlag" column="MonthFlag"/>
+    <parameter property="YcTime" column="YcTime"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BPM_PRODUCTION ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftMasterId" prepend="AND">
+          <![CDATA[SHIFT_MASTER_ID = #where.ShiftMasterId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDetailId" prepend="AND">
+          <![CDATA[SHIFT_DETAIL_ID = #where.ShiftDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[BEGIN_TIME = #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[END_TIME = #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.IsFirst" prepend="AND">
+          <![CDATA[IS_FIRST = #where.IsFirst#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BlFlag" prepend="AND">
+          <![CDATA[BL_FLAG = #where.BlFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanIdOrigin" prepend="AND">
+          <![CDATA[PLAN_ID_ORIGIN = #where.PlanIdOrigin#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailIdOrigin" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID_ORIGIN = #where.PlanDetailIdOrigin#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterChangeFlag" prepend="AND">
+          <![CDATA[MATER_CHANGE_FLAG = #where.MaterChangeFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterChangeTime" prepend="AND">
+          <![CDATA[MATER_CHANGE_TIME = #where.MaterChangeTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftMasterIdOrigin" prepend="AND">
+          <![CDATA[SHIFT_MASTER_ID_ORIGIN = #where.ShiftMasterIdOrigin#]]>
+        </isNotNull>
+        <isNotNull property="where.MonthFlag" prepend="AND">
+          <![CDATA[MONTH_FLAG = #where.MonthFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.YcTime" prepend="AND">
+          <![CDATA[YC_TIME = #where.YcTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO BPM_PRODUCTION]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="GreenTyreNo" prepend=",">GREEN_TYRE_NO</isNotNull>
+        <isNotNull property="PlanId" prepend=",">PLAN_ID</isNotNull>
+        <isNotNull property="PlanDetailId" prepend=",">PLAN_DETAIL_ID</isNotNull>
+        <isNotNull property="ShiftMasterId" prepend=",">SHIFT_MASTER_ID</isNotNull>
+        <isNotNull property="ShiftDetailId" prepend=",">SHIFT_DETAIL_ID</isNotNull>
+        <isNotNull property="BeginTime" prepend=",">BEGIN_TIME</isNotNull>
+        <isNotNull property="EndTime" prepend=",">END_TIME</isNotNull>
+        <isNotNull property="IsFirst" prepend=",">IS_FIRST</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="BlFlag" prepend=",">BL_FLAG</isNotNull>
+        <isNotNull property="PlanIdOrigin" prepend=",">PLAN_ID_ORIGIN</isNotNull>
+        <isNotNull property="PlanDetailIdOrigin" prepend=",">PLAN_DETAIL_ID_ORIGIN</isNotNull>
+        <isNotNull property="MaterChangeFlag" prepend=",">MATER_CHANGE_FLAG</isNotNull>
+        <isNotNull property="MaterChangeTime" prepend=",">MATER_CHANGE_TIME</isNotNull>
+        <isNotNull property="ShiftMasterIdOrigin" prepend=",">SHIFT_MASTER_ID_ORIGIN</isNotNull>
+        <isNotNull property="MonthFlag" prepend=",">MONTH_FLAG</isNotNull>
+        <isNotNull property="YcTime" prepend=",">YC_TIME</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_BPM_PRODUCTION.NEXTVAL</isNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="GreenTyreNo" prepend=",">#GreenTyreNo#</isNotNull>
+        <isNotNull property="PlanId" prepend=",">#PlanId#</isNotNull>
+        <isNotNull property="PlanDetailId" prepend=",">#PlanDetailId#</isNotNull>
+        <isNotNull property="ShiftMasterId" prepend=",">#ShiftMasterId#</isNotNull>
+        <isNotNull property="ShiftDetailId" prepend=",">#ShiftDetailId#</isNotNull>
+        <isNotNull property="BeginTime" prepend=",">#BeginTime#</isNotNull>
+        <isNotNull property="EndTime" prepend=",">#EndTime#</isNotNull>
+        <isNotNull property="IsFirst" prepend=",">#IsFirst#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="BlFlag" prepend=",">#BlFlag#</isNotNull>
+        <isNotNull property="PlanIdOrigin" prepend=",">#PlanIdOrigin#</isNotNull>
+        <isNotNull property="PlanDetailIdOrigin" prepend=",">#PlanDetailIdOrigin#</isNotNull>
+        <isNotNull property="MaterChangeFlag" prepend=",">#MaterChangeFlag#</isNotNull>
+        <isNotNull property="MaterChangeTime" prepend=",">#MaterChangeTime#</isNotNull>
+        <isNotNull property="ShiftMasterIdOrigin" prepend=",">#ShiftMasterIdOrigin#</isNotNull>
+        <isNotNull property="MonthFlag" prepend=",">#MonthFlag#</isNotNull>
+        <isNotNull property="YcTime" prepend=",">#YcTime#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE BPM_PRODUCTION
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.GreenTyreNo"  prepend=",">
+          GREEN_TYRE_NO = #update.GreenTyreNo#
+        </isNotNull>
+        <isNotNull  property="update.PlanId"  prepend=",">
+          PLAN_ID = #update.PlanId#
+        </isNotNull>
+        <isNotNull  property="update.PlanDetailId"  prepend=",">
+          PLAN_DETAIL_ID = #update.PlanDetailId#
+        </isNotNull>
+        <isNotNull  property="update.ShiftMasterId"  prepend=",">
+          SHIFT_MASTER_ID = #update.ShiftMasterId#
+        </isNotNull>
+        <isNotNull  property="update.ShiftDetailId"  prepend=",">
+          SHIFT_DETAIL_ID = #update.ShiftDetailId#
+        </isNotNull>
+        <isNotNull  property="update.BeginTime"  prepend=",">
+          BEGIN_TIME = #update.BeginTime#
+        </isNotNull>
+        <isNotNull  property="update.EndTime"  prepend=",">
+          END_TIME = #update.EndTime#
+        </isNotNull>
+        <isNotNull  property="update.IsFirst"  prepend=",">
+          IS_FIRST = #update.IsFirst#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.BlFlag"  prepend=",">
+          BL_FLAG = #update.BlFlag#
+        </isNotNull>
+        <isNotNull  property="update.PlanIdOrigin"  prepend=",">
+          PLAN_ID_ORIGIN = #update.PlanIdOrigin#
+        </isNotNull>
+        <isNotNull  property="update.PlanDetailIdOrigin"  prepend=",">
+          PLAN_DETAIL_ID_ORIGIN = #update.PlanDetailIdOrigin#
+        </isNotNull>
+        <isNotNull  property="update.MaterChangeFlag"  prepend=",">
+          MATER_CHANGE_FLAG = #update.MaterChangeFlag#
+        </isNotNull>
+        <isNotNull  property="update.MaterChangeTime"  prepend=",">
+          MATER_CHANGE_TIME = #update.MaterChangeTime#
+        </isNotNull>
+        <isNotNull  property="update.ShiftMasterIdOrigin"  prepend=",">
+          SHIFT_MASTER_ID_ORIGIN = #update.ShiftMasterIdOrigin#
+        </isNotNull>
+        <isNotNull  property="update.MonthFlag"  prepend=",">
+          MONTH_FLAG = #update.MonthFlag#
+        </isNotNull>
+        <isNotNull  property="update.YcTime"  prepend=",">
+          YC_TIME = #update.YcTime#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM BPM_PRODUCTION
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_BpmProduction">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_BpmProduction">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM BPM_PRODUCTION
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM BPM_PRODUCTION
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_BpmProduction" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE BPM_PRODUCTION
+    </statement>
+  </statements>
+</sqlMap>

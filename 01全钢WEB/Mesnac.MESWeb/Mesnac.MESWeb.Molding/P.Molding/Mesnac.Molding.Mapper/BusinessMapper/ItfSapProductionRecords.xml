@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.ItfSapProductionRecords"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM ITF_SAP_PRODUCTION_RECORDS ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Bustyp" prepend="AND">
+          <![CDATA[BUSTYP = #where.Bustyp#]]>
+        </isNotNull>
+        <isNotNull property="where.Tldid" prepend="AND">
+          <![CDATA[TLDID = #where.Tldid#]]>
+        </isNotNull>
+        <isNotNull property="where.Tlgnam" prepend="AND">
+          <![CDATA[TLGNAM = #where.Tlgnam#]]>
+        </isNotNull>
+        <isNotNull property="where.Dtsend" prepend="AND">
+          <![CDATA[DTSEND = #where.Dtsend#]]>
+        </isNotNull>
+        <isNotNull property="where.Sender" prepend="AND">
+          <![CDATA[SENDER = #where.Sender#]]>
+        </isNotNull>
+        <isNotNull property="where.Reciever" prepend="AND">
+          <![CDATA[RECIEVER = #where.Reciever#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Serid" prepend="AND">
+          <![CDATA[SERID = #where.Serid#]]>
+        </isNotNull>
+        <isNotNull property="where.Producttype" prepend="AND">
+          <![CDATA[PRODUCTTYPE = #where.Producttype#]]>
+        </isNotNull>
+        <isNotNull property="where.Plant" prepend="AND">
+          <![CDATA[PLANT = #where.Plant#]]>
+        </isNotNull>
+        <isNotNull property="where.Materialcode" prepend="AND">
+          <![CDATA[MATERIALCODE = #where.Materialcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Proversion" prepend="AND">
+          <![CDATA[PROVERSION = #where.Proversion#]]>
+        </isNotNull>
+        <isNotNull property="where.Qty" prepend="AND">
+          <![CDATA[QTY = #where.Qty#]]>
+        </isNotNull>
+        <isNotNull property="where.Rejectqty" prepend="AND">
+          <![CDATA[REJECTQTY = #where.Rejectqty#]]>
+        </isNotNull>
+        <isNotNull property="where.Rejectmatcode" prepend="AND">
+          <![CDATA[REJECTMATCODE = #where.Rejectmatcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Postdate" prepend="AND">
+          <![CDATA[POSTDATE = #where.Postdate#]]>
+        </isNotNull>
+        <isNotNull property="where.Docdate" prepend="AND">
+          <![CDATA[DOCDATE = #where.Docdate#]]>
+        </isNotNull>
+        <isNotNull property="where.Storageloc" prepend="AND">
+          <![CDATA[STORAGELOC = #where.Storageloc#]]>
+        </isNotNull>
+        <isNotNull property="where.Batch" prepend="AND">
+          <![CDATA[BATCH = #where.Batch#]]>
+        </isNotNull>
+        <isNotNull property="where.Headtxt" prepend="AND">
+          <![CDATA[HEADTXT = #where.Headtxt#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy7" prepend="AND">
+          <![CDATA[DUMMY7 = #where.Dummy7#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy8" prepend="AND">
+          <![CDATA[DUMMY8 = #where.Dummy8#]]>
+        </isNotNull>
+        <isNotNull property="where.Busid" prepend="AND">
+          <![CDATA[BUSID = #where.Busid#]]>
+        </isNotNull>
+        <isNotNull property="where.MproductionDetailId" prepend="AND">
+          <![CDATA[MPRODUCTION_DETAIL_ID = #where.MproductionDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDate" prepend="AND">
+          <![CDATA[SHIFT_DATE = #where.ShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetRecordNewID" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT COUNT(*) ID FROM ITF_SAP_PRODUCTION_RECORDS  
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="ShiftDate" prepend="AND">
+           <![CDATA[SHIFT_DATE = #ShiftDate#]]>
+         </isNotNull>
+         <isNotNull property="ShiftID" prepend="AND">
+           <![CDATA[SHIFT_ID = #ShiftID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+  </statements>
+</sqlMap>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportMouldSummaryAccount" parameterClass="map" resultClass="row">
+    <![CDATA[
+     SELECT T2.SIZE_NAME,T3.PATTERN_NAME, A.CNTA,
+    CASE WHEN B.CNTB IS NULL THEN 0 
+     WHEN B.CNTB IS NOT NULL THEN B.CNTB END CNTB,
+    CASE WHEN C.CNTC IS NULL THEN 0 
+     WHEN C.CNTC IS NOT NULL THEN C.CNTC END CNTC
+     FROM (
+    SELECT SIZE_ID,PATTERN_ID, COUNT(*) CNTA FROM   CIM_MOULD_INFO T    
+             GROUP BY SIZE_ID,PATTERN_ID
+             ORDER BY SIZE_ID) A
+     LEFT JOIN(
+     --入
+     SELECT SIZE_ID,PATTERN_ID, COUNT(*) CNTB FROM
+    ( SELECT T2.*,T.* FROM  CIM_MOULD_INFO  T 
+       INNER  JOIN CIM_MOULD_STORAGE T2 ON T2.MOULD_NAME=T.MOULD_BARCODE  
+          WHERE T2.STORE_TYPE='I' OR T2.STORE_TYPE='P'
+      )
+     GROUP BY SIZE_ID,PATTERN_ID ) B ON A.SIZE_ID =B.SIZE_ID AND A.PATTERN_ID=B.PATTERN_ID
+ 
+     LEFT JOIN (
+     --出    
+     SELECT SIZE_ID,PATTERN_ID, COUNT(*) CNTC FROM
+     ( SELECT T2.*,T.* FROM  CIM_MOULD_INFO  T 
+      INNER  JOIN CIM_MOULD_STORAGE T2 ON T2.MOULD_NAME=T.MOULD_BARCODE
+       WHERE T2.STORE_TYPE='O'
+       )
+     GROUP BY SIZE_ID,PATTERN_ID ) C ON A.SIZE_ID =C.SIZE_ID AND A.PATTERN_ID=C.PATTERN_ID
+      LEFT JOIN CBM_SIZE T2 ON A.SIZE_ID=T2.OBJID  
+           LEFT JOIN CBM_PATTERN T3 ON A.PATTERN_ID=T3.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+        <![CDATA[A.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.PATTERN_NAME" prepend="AND">
+          <![CDATA[T3.PATTERN_NAME LIKE '%' || #where.PATTERN_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.SIZE_NAME" prepend="AND">
+          <![CDATA[T2.SIZE_NAME LIKE '%' || #where.SIZE_NAME# || '%']]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend="">
+        order by $OrderString$
+      </isNotNull>
+    </select>
+    <select id="Select+Update@ReportMouldSummaryAccount" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM CIM_MOULD_INFO ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+    
+    
+    <!--查询模具库存，ID值固定为GetComboBoxData@Select@ReportMouldStorageAccount@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportMouldSummaryAccount@STORE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+        select t1.OBJID sskey,t1.store_name ssValue from SEB_STORE t1 where t1.DELETE_FLAG = '0'
+        order by t1.store_code
+     ]]>
+    </select>
+  </statements>
+  
+</sqlMap>

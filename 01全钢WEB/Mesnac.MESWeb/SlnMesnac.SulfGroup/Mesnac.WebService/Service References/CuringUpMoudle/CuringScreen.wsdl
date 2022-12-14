@@ -1,0 +1,846 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDegradeWeekInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDegradeWeekInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDegradeWeekInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDegradeMonthNum">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDegradeMonthNumResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDegradeMonthNumResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAlarmNumWeekInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ALARM_REASON_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAlarmNumWeekInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAlarmNumWeekInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAlarmNumMonthNum">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAlarmNumMonthNumResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAlarmNumMonthNumResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertSbeCuringScreen">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="datetime1" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="usetime" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="equipname" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertSbeCuringScreenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertSbeCuringScreenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMouldInStore">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMouldInStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMouldInStoreResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMouldInStoreWeek">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMouldInStoreWeekResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMouldInStoreWeekResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMinUseTime">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMinUseTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMinUseTimeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMaxUseTime">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMaxUseTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMaxUseTimeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="DataTable" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDegradeWeekInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDegradeWeekInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetDegradeWeekInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDegradeWeekInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDegradeMonthNumSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDegradeMonthNum" />
+  </wsdl:message>
+  <wsdl:message name="GetDegradeMonthNumSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDegradeMonthNumResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmNumWeekInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAlarmNumWeekInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmNumWeekInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAlarmNumWeekInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmNumMonthNumSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAlarmNumMonthNum" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmNumMonthNumSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAlarmNumMonthNumResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertSbeCuringScreenSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertSbeCuringScreen" />
+  </wsdl:message>
+  <wsdl:message name="InsertSbeCuringScreenSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertSbeCuringScreenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldInStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMouldInStore" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldInStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMouldInStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldInStoreWeekSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMouldInStoreWeek" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldInStoreWeekSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMouldInStoreWeekResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMinUseTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMinUseTime" />
+  </wsdl:message>
+  <wsdl:message name="GetMinUseTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMinUseTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMaxUseTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMaxUseTime" />
+  </wsdl:message>
+  <wsdl:message name="GetMaxUseTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMaxUseTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDegradeWeekInfoHttpGetIn" />
+  <wsdl:message name="GetDegradeWeekInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetDegradeMonthNumHttpGetIn" />
+  <wsdl:message name="GetDegradeMonthNumHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmNumWeekInfoHttpGetIn">
+    <wsdl:part name="ALARM_REASON_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmNumWeekInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmNumMonthNumHttpGetIn" />
+  <wsdl:message name="GetAlarmNumMonthNumHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="InsertSbeCuringScreenHttpGetIn">
+    <wsdl:part name="datetime1" type="s:string" />
+    <wsdl:part name="usetime" type="s:string" />
+    <wsdl:part name="equipname" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertSbeCuringScreenHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldInStoreHttpGetIn" />
+  <wsdl:message name="GetMouldInStoreHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldInStoreWeekHttpGetIn" />
+  <wsdl:message name="GetMouldInStoreWeekHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetMinUseTimeHttpGetIn" />
+  <wsdl:message name="GetMinUseTimeHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetMaxUseTimeHttpGetIn" />
+  <wsdl:message name="GetMaxUseTimeHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDegradeWeekInfoHttpPostIn" />
+  <wsdl:message name="GetDegradeWeekInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetDegradeMonthNumHttpPostIn" />
+  <wsdl:message name="GetDegradeMonthNumHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmNumWeekInfoHttpPostIn">
+    <wsdl:part name="ALARM_REASON_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmNumWeekInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAlarmNumMonthNumHttpPostIn" />
+  <wsdl:message name="GetAlarmNumMonthNumHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="InsertSbeCuringScreenHttpPostIn">
+    <wsdl:part name="datetime1" type="s:string" />
+    <wsdl:part name="usetime" type="s:string" />
+    <wsdl:part name="equipname" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertSbeCuringScreenHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldInStoreHttpPostIn" />
+  <wsdl:message name="GetMouldInStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetMouldInStoreWeekHttpPostIn" />
+  <wsdl:message name="GetMouldInStoreWeekHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetMinUseTimeHttpPostIn" />
+  <wsdl:message name="GetMinUseTimeHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetMaxUseTimeHttpPostIn" />
+  <wsdl:message name="GetMaxUseTimeHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:portType name="CuringScreenSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeWeekInfo">
+      <wsdl:input message="tns:GetDegradeWeekInfoSoapIn" />
+      <wsdl:output message="tns:GetDegradeWeekInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeMonthNum">
+      <wsdl:input message="tns:GetDegradeMonthNumSoapIn" />
+      <wsdl:output message="tns:GetDegradeMonthNumSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumWeekInfo">
+      <wsdl:input message="tns:GetAlarmNumWeekInfoSoapIn" />
+      <wsdl:output message="tns:GetAlarmNumWeekInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumMonthNum">
+      <wsdl:input message="tns:GetAlarmNumMonthNumSoapIn" />
+      <wsdl:output message="tns:GetAlarmNumMonthNumSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeCuringScreen">
+      <wsdl:input message="tns:InsertSbeCuringScreenSoapIn" />
+      <wsdl:output message="tns:InsertSbeCuringScreenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStore">
+      <wsdl:input message="tns:GetMouldInStoreSoapIn" />
+      <wsdl:output message="tns:GetMouldInStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStoreWeek">
+      <wsdl:input message="tns:GetMouldInStoreWeekSoapIn" />
+      <wsdl:output message="tns:GetMouldInStoreWeekSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMinUseTime">
+      <wsdl:input message="tns:GetMinUseTimeSoapIn" />
+      <wsdl:output message="tns:GetMinUseTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMaxUseTime">
+      <wsdl:input message="tns:GetMaxUseTimeSoapIn" />
+      <wsdl:output message="tns:GetMaxUseTimeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CuringScreenHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeWeekInfo">
+      <wsdl:input message="tns:GetDegradeWeekInfoHttpGetIn" />
+      <wsdl:output message="tns:GetDegradeWeekInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeMonthNum">
+      <wsdl:input message="tns:GetDegradeMonthNumHttpGetIn" />
+      <wsdl:output message="tns:GetDegradeMonthNumHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumWeekInfo">
+      <wsdl:input message="tns:GetAlarmNumWeekInfoHttpGetIn" />
+      <wsdl:output message="tns:GetAlarmNumWeekInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumMonthNum">
+      <wsdl:input message="tns:GetAlarmNumMonthNumHttpGetIn" />
+      <wsdl:output message="tns:GetAlarmNumMonthNumHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeCuringScreen">
+      <wsdl:input message="tns:InsertSbeCuringScreenHttpGetIn" />
+      <wsdl:output message="tns:InsertSbeCuringScreenHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStore">
+      <wsdl:input message="tns:GetMouldInStoreHttpGetIn" />
+      <wsdl:output message="tns:GetMouldInStoreHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStoreWeek">
+      <wsdl:input message="tns:GetMouldInStoreWeekHttpGetIn" />
+      <wsdl:output message="tns:GetMouldInStoreWeekHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMinUseTime">
+      <wsdl:input message="tns:GetMinUseTimeHttpGetIn" />
+      <wsdl:output message="tns:GetMinUseTimeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMaxUseTime">
+      <wsdl:input message="tns:GetMaxUseTimeHttpGetIn" />
+      <wsdl:output message="tns:GetMaxUseTimeHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CuringScreenHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeWeekInfo">
+      <wsdl:input message="tns:GetDegradeWeekInfoHttpPostIn" />
+      <wsdl:output message="tns:GetDegradeWeekInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeMonthNum">
+      <wsdl:input message="tns:GetDegradeMonthNumHttpPostIn" />
+      <wsdl:output message="tns:GetDegradeMonthNumHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumWeekInfo">
+      <wsdl:input message="tns:GetAlarmNumWeekInfoHttpPostIn" />
+      <wsdl:output message="tns:GetAlarmNumWeekInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumMonthNum">
+      <wsdl:input message="tns:GetAlarmNumMonthNumHttpPostIn" />
+      <wsdl:output message="tns:GetAlarmNumMonthNumHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeCuringScreen">
+      <wsdl:input message="tns:InsertSbeCuringScreenHttpPostIn" />
+      <wsdl:output message="tns:InsertSbeCuringScreenHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStore">
+      <wsdl:input message="tns:GetMouldInStoreHttpPostIn" />
+      <wsdl:output message="tns:GetMouldInStoreHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStoreWeek">
+      <wsdl:input message="tns:GetMouldInStoreWeekHttpPostIn" />
+      <wsdl:output message="tns:GetMouldInStoreWeekHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMinUseTime">
+      <wsdl:input message="tns:GetMinUseTimeHttpPostIn" />
+      <wsdl:output message="tns:GetMinUseTimeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMaxUseTime">
+      <wsdl:input message="tns:GetMaxUseTimeHttpPostIn" />
+      <wsdl:output message="tns:GetMaxUseTimeHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CuringScreenSoap" type="tns:CuringScreenSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeWeekInfo">
+      <soap:operation soapAction="http://tempuri.org/GetDegradeWeekInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeMonthNum">
+      <soap:operation soapAction="http://tempuri.org/GetDegradeMonthNum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumWeekInfo">
+      <soap:operation soapAction="http://tempuri.org/GetAlarmNumWeekInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumMonthNum">
+      <soap:operation soapAction="http://tempuri.org/GetAlarmNumMonthNum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeCuringScreen">
+      <soap:operation soapAction="http://tempuri.org/InsertSbeCuringScreen" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStore">
+      <soap:operation soapAction="http://tempuri.org/GetMouldInStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStoreWeek">
+      <soap:operation soapAction="http://tempuri.org/GetMouldInStoreWeek" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMinUseTime">
+      <soap:operation soapAction="http://tempuri.org/GetMinUseTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaxUseTime">
+      <soap:operation soapAction="http://tempuri.org/GetMaxUseTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CuringScreenSoap12" type="tns:CuringScreenSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeWeekInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetDegradeWeekInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeMonthNum">
+      <soap12:operation soapAction="http://tempuri.org/GetDegradeMonthNum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumWeekInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetAlarmNumWeekInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumMonthNum">
+      <soap12:operation soapAction="http://tempuri.org/GetAlarmNumMonthNum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeCuringScreen">
+      <soap12:operation soapAction="http://tempuri.org/InsertSbeCuringScreen" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStore">
+      <soap12:operation soapAction="http://tempuri.org/GetMouldInStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStoreWeek">
+      <soap12:operation soapAction="http://tempuri.org/GetMouldInStoreWeek" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMinUseTime">
+      <soap12:operation soapAction="http://tempuri.org/GetMinUseTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaxUseTime">
+      <soap12:operation soapAction="http://tempuri.org/GetMaxUseTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CuringScreenHttpGet" type="tns:CuringScreenHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeWeekInfo">
+      <http:operation location="/GetDegradeWeekInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeMonthNum">
+      <http:operation location="/GetDegradeMonthNum" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumWeekInfo">
+      <http:operation location="/GetAlarmNumWeekInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumMonthNum">
+      <http:operation location="/GetAlarmNumMonthNum" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeCuringScreen">
+      <http:operation location="/InsertSbeCuringScreen" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStore">
+      <http:operation location="/GetMouldInStore" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStoreWeek">
+      <http:operation location="/GetMouldInStoreWeek" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMinUseTime">
+      <http:operation location="/GetMinUseTime" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaxUseTime">
+      <http:operation location="/GetMaxUseTime" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CuringScreenHttpPost" type="tns:CuringScreenHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeWeekInfo">
+      <http:operation location="/GetDegradeWeekInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDegradeMonthNum">
+      <http:operation location="/GetDegradeMonthNum" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumWeekInfo">
+      <http:operation location="/GetAlarmNumWeekInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlarmNumMonthNum">
+      <http:operation location="/GetAlarmNumMonthNum" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeCuringScreen">
+      <http:operation location="/InsertSbeCuringScreen" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStore">
+      <http:operation location="/GetMouldInStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMouldInStoreWeek">
+      <http:operation location="/GetMouldInStoreWeek" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMinUseTime">
+      <http:operation location="/GetMinUseTime" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaxUseTime">
+      <http:operation location="/GetMaxUseTime" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CuringScreen">
+    <wsdl:port name="CuringScreenSoap" binding="tns:CuringScreenSoap">
+      <soap:address location="http://172.20.254.22:8066/MesServiceBG/Curing/CuringScreen.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CuringScreenSoap12" binding="tns:CuringScreenSoap12">
+      <soap12:address location="http://172.20.254.22:8066/MesServiceBG/Curing/CuringScreen.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CuringScreenHttpGet" binding="tns:CuringScreenHttpGet">
+      <http:address location="http://172.20.254.22:8066/MesServiceBG/Curing/CuringScreen.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CuringScreenHttpPost" binding="tns:CuringScreenHttpPost">
+      <http:address location="http://172.20.254.22:8066/MesServiceBG/Curing/CuringScreen.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.HptSemisTechWidthGy"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HptSemisTechWidthGy" type="Mesnac.Semis.Entity.BasicEntity.HptSemisTechWidthGy, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HptSemisTechWidthGy" class="HptSemisTechWidthGy">
+    <result property="ObjId" column="OBJID"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="MaterialId" column="MATERIAL_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="Gage3Pro" column="GAGE3_PRO"/>
+    <result property="Gage3Avg" column="GAGE3_AVG"/>
+    <result property="Gage3Target" column="GAGE3_TARGET"/>
+    <result property="Gage3Max" column="GAGE3_MAX"/>
+    <result property="Gage3Min" column="GAGE3_MIN"/>
+    <result property="Gage3HighAlarm" column="GAGE3_HIGH_ALARM"/>
+    <result property="Gage3HighAlert" column="GAGE3_HIGH_ALERT"/>
+    <result property="Gage3LowAlarm" column="GAGE3_LOW_ALARM"/>
+    <result property="Gage3LowAlert" column="GAGE3_LOW_ALERT"/>
+    <result property="Gage3Maxcw" column="GAGE3_MAXCW"/>
+    <result property="Gage3Mincw" column="GAGE3_MINCW"/>
+    <result property="Gage3Minvalidcw" column="GAGE3_MINVALIDCW"/>
+    <result property="Clients" column="CLIENTS"/>
+    <result property="CastProfToTarget" column="CAST_PROF_TO_TARGET"/>
+    <result property="OfflineRecipeName" column="OFFLINE_RECIPE_NAME"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="Dummy5" column="DUMMY5"/>
+    <result property="Dummy6" column="DUMMY6"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HptSemisTechWidthGy" class="HptSemisTechWidthGy">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="MaterialId" column="MaterialId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="Gage3Pro" column="Gage3Pro"/>
+    <parameter property="Gage3Avg" column="Gage3Avg"/>
+    <parameter property="Gage3Target" column="Gage3Target"/>
+    <parameter property="Gage3Max" column="Gage3Max"/>
+    <parameter property="Gage3Min" column="Gage3Min"/>
+    <parameter property="Gage3HighAlarm" column="Gage3HighAlarm"/>
+    <parameter property="Gage3HighAlert" column="Gage3HighAlert"/>
+    <parameter property="Gage3LowAlarm" column="Gage3LowAlarm"/>
+    <parameter property="Gage3LowAlert" column="Gage3LowAlert"/>
+    <parameter property="Gage3Maxcw" column="Gage3Maxcw"/>
+    <parameter property="Gage3Mincw" column="Gage3Mincw"/>
+    <parameter property="Gage3Minvalidcw" column="Gage3Minvalidcw"/>
+    <parameter property="Clients" column="Clients"/>
+    <parameter property="CastProfToTarget" column="CastProfToTarget"/>
+    <parameter property="OfflineRecipeName" column="OfflineRecipeName"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="Dummy5" column="Dummy5"/>
+    <parameter property="Dummy6" column="Dummy6"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPT_SEMIS_TECH_WIDTH_GY ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Gage3Pro" prepend="AND">
+          <![CDATA[GAGE3_PRO = #where.Gage3Pro#]]>
+        </isNotNull>
+        <isNotNull property="where.Gage3Avg" prepend="AND">
+          <![CDATA[GAGE3_AVG = #where.Gage3Avg#]]>
+        </isNotNull>
+        <isNotNull property="where.Gage3Target" prepend="AND">
+          <![CDATA[GAGE3_TARGET = #where.Gage3Target#]]>
+        </isNotNull>
+        <isNotNull property="where.Gage3Max" prepend="AND">
+          <![CDATA[GAGE3_MAX = #where.Gage3Max#]]>
+        </isNotNull>
+        <isNotNull property="where.Gage3Min" prepend="AND">
+          <![CDATA[GAGE3_MIN = #where.Gage3Min#]]>
+        </isNotNull>
+        <isNotNull property="where.Gage3HighAlarm" prepend="AND">
+          <![CDATA[GAGE3_HIGH_ALARM = #where.Gage3HighAlarm#]]>
+        </isNotNull>
+        <isNotNull property="where.Gage3HighAlert" prepend="AND">
+          <![CDATA[GAGE3_HIGH_ALERT = #where.Gage3HighAlert#]]>
+        </isNotNull>
+        <isNotNull property="where.Gage3LowAlarm" prepend="AND">
+          <![CDATA[GAGE3_LOW_ALARM = #where.Gage3LowAlarm#]]>
+        </isNotNull>
+        <isNotNull property="where.Gage3LowAlert" prepend="AND">
+          <![CDATA[GAGE3_LOW_ALERT = #where.Gage3LowAlert#]]>
+        </isNotNull>
+        <isNotNull property="where.Gage3Maxcw" prepend="AND">
+          <![CDATA[GAGE3_MAXCW = #where.Gage3Maxcw#]]>
+        </isNotNull>
+        <isNotNull property="where.Gage3Mincw" prepend="AND">
+          <![CDATA[GAGE3_MINCW = #where.Gage3Mincw#]]>
+        </isNotNull>
+        <isNotNull property="where.Gage3Minvalidcw" prepend="AND">
+          <![CDATA[GAGE3_MINVALIDCW = #where.Gage3Minvalidcw#]]>
+        </isNotNull>
+        <isNotNull property="where.Clients" prepend="AND">
+          <![CDATA[CLIENTS = #where.Clients#]]>
+        </isNotNull>
+        <isNotNull property="where.CastProfToTarget" prepend="AND">
+          <![CDATA[CAST_PROF_TO_TARGET = #where.CastProfToTarget#]]>
+        </isNotNull>
+        <isNotNull property="where.OfflineRecipeName" prepend="AND">
+          <![CDATA[OFFLINE_RECIPE_NAME = #where.OfflineRecipeName#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY6 = #where.Dummy6#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HPT_SEMIS_TECH_WIDTH_GY]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">MATERIAL_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="Gage3Pro" prepend=",">GAGE3_PRO</isNotNull>
+        <isNotNull property="Gage3Avg" prepend=",">GAGE3_AVG</isNotNull>
+        <isNotNull property="Gage3Target" prepend=",">GAGE3_TARGET</isNotNull>
+        <isNotNull property="Gage3Max" prepend=",">GAGE3_MAX</isNotNull>
+        <isNotNull property="Gage3Min" prepend=",">GAGE3_MIN</isNotNull>
+        <isNotNull property="Gage3HighAlarm" prepend=",">GAGE3_HIGH_ALARM</isNotNull>
+        <isNotNull property="Gage3HighAlert" prepend=",">GAGE3_HIGH_ALERT</isNotNull>
+        <isNotNull property="Gage3LowAlarm" prepend=",">GAGE3_LOW_ALARM</isNotNull>
+        <isNotNull property="Gage3LowAlert" prepend=",">GAGE3_LOW_ALERT</isNotNull>
+        <isNotNull property="Gage3Maxcw" prepend=",">GAGE3_MAXCW</isNotNull>
+        <isNotNull property="Gage3Mincw" prepend=",">GAGE3_MINCW</isNotNull>
+        <isNotNull property="Gage3Minvalidcw" prepend=",">GAGE3_MINVALIDCW</isNotNull>
+        <isNotNull property="Clients" prepend=",">CLIENTS</isNotNull>
+        <isNotNull property="CastProfToTarget" prepend=",">CAST_PROF_TO_TARGET</isNotNull>
+        <isNotNull property="OfflineRecipeName" prepend=",">OFFLINE_RECIPE_NAME</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">DUMMY5</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">DUMMY6</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_HPT_SEMIS_TECH_WIDTH_GY.NEXTVAL</isNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">#MaterialId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="Gage3Pro" prepend=",">#Gage3Pro#</isNotNull>
+        <isNotNull property="Gage3Avg" prepend=",">#Gage3Avg#</isNotNull>
+        <isNotNull property="Gage3Target" prepend=",">#Gage3Target#</isNotNull>
+        <isNotNull property="Gage3Max" prepend=",">#Gage3Max#</isNotNull>
+        <isNotNull property="Gage3Min" prepend=",">#Gage3Min#</isNotNull>
+        <isNotNull property="Gage3HighAlarm" prepend=",">#Gage3HighAlarm#</isNotNull>
+        <isNotNull property="Gage3HighAlert" prepend=",">#Gage3HighAlert#</isNotNull>
+        <isNotNull property="Gage3LowAlarm" prepend=",">#Gage3LowAlarm#</isNotNull>
+        <isNotNull property="Gage3LowAlert" prepend=",">#Gage3LowAlert#</isNotNull>
+        <isNotNull property="Gage3Maxcw" prepend=",">#Gage3Maxcw#</isNotNull>
+        <isNotNull property="Gage3Mincw" prepend=",">#Gage3Mincw#</isNotNull>
+        <isNotNull property="Gage3Minvalidcw" prepend=",">#Gage3Minvalidcw#</isNotNull>
+        <isNotNull property="Clients" prepend=",">#Clients#</isNotNull>
+        <isNotNull property="CastProfToTarget" prepend=",">#CastProfToTarget#</isNotNull>
+        <isNotNull property="OfflineRecipeName" prepend=",">#OfflineRecipeName#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">#Dummy5#</isNotNull>
+        <isNotNull property="Dummy6" prepend=",">#Dummy6#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HPT_SEMIS_TECH_WIDTH_GY
+       <dynamic prepend="SET">
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.MaterialId"  prepend=",">
+          MATERIAL_ID = #update.MaterialId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.Gage3Pro"  prepend=",">
+          GAGE3_PRO = #update.Gage3Pro#
+        </isNotNull>
+        <isNotNull  property="update.Gage3Avg"  prepend=",">
+          GAGE3_AVG = #update.Gage3Avg#
+        </isNotNull>
+        <isNotNull  property="update.Gage3Target"  prepend=",">
+          GAGE3_TARGET = #update.Gage3Target#
+        </isNotNull>
+        <isNotNull  property="update.Gage3Max"  prepend=",">
+          GAGE3_MAX = #update.Gage3Max#
+        </isNotNull>
+        <isNotNull  property="update.Gage3Min"  prepend=",">
+          GAGE3_MIN = #update.Gage3Min#
+        </isNotNull>
+        <isNotNull  property="update.Gage3HighAlarm"  prepend=",">
+          GAGE3_HIGH_ALARM = #update.Gage3HighAlarm#
+        </isNotNull>
+        <isNotNull  property="update.Gage3HighAlert"  prepend=",">
+          GAGE3_HIGH_ALERT = #update.Gage3HighAlert#
+        </isNotNull>
+        <isNotNull  property="update.Gage3LowAlarm"  prepend=",">
+          GAGE3_LOW_ALARM = #update.Gage3LowAlarm#
+        </isNotNull>
+        <isNotNull  property="update.Gage3LowAlert"  prepend=",">
+          GAGE3_LOW_ALERT = #update.Gage3LowAlert#
+        </isNotNull>
+        <isNotNull  property="update.Gage3Maxcw"  prepend=",">
+          GAGE3_MAXCW = #update.Gage3Maxcw#
+        </isNotNull>
+        <isNotNull  property="update.Gage3Mincw"  prepend=",">
+          GAGE3_MINCW = #update.Gage3Mincw#
+        </isNotNull>
+        <isNotNull  property="update.Gage3Minvalidcw"  prepend=",">
+          GAGE3_MINVALIDCW = #update.Gage3Minvalidcw#
+        </isNotNull>
+        <isNotNull  property="update.Clients"  prepend=",">
+          CLIENTS = #update.Clients#
+        </isNotNull>
+        <isNotNull  property="update.CastProfToTarget"  prepend=",">
+          CAST_PROF_TO_TARGET = #update.CastProfToTarget#
+        </isNotNull>
+        <isNotNull  property="update.OfflineRecipeName"  prepend=",">
+          OFFLINE_RECIPE_NAME = #update.OfflineRecipeName#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.Dummy5"  prepend=",">
+          DUMMY5 = #update.Dummy5#
+        </isNotNull>
+        <isNotNull  property="update.Dummy6"  prepend=",">
+          DUMMY6 = #update.Dummy6#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HPT_SEMIS_TECH_WIDTH_GY
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HptSemisTechWidthGy">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HptSemisTechWidthGy">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM HPT_SEMIS_TECH_WIDTH_GY
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HPT_SEMIS_TECH_WIDTH_GY
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HptSemisTechWidthGy" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HPT_SEMIS_TECH_WIDTH_GY
+    </statement>
+  </statements>
+</sqlMap>

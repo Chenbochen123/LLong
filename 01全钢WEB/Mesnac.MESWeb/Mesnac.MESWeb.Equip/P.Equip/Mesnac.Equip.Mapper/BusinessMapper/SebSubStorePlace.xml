@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Equip.Mapper.BusinessMapper.SebSubStorePlace"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SEB_SUB_STORE_PLACE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceId" prepend="AND">
+          <![CDATA[STORE_PLACE_ID = #where.StorePlaceId#]]>
+        </isNotNull>
+        <isNotNull property="where.SubStorePlaceCode" prepend="AND">
+          <![CDATA[SUB_STORE_PLACE_CODE = #where.SubStorePlaceCode#]]>
+        </isNotNull>
+        <isNotNull property="where.SubStorePlaceName" prepend="AND">
+          <![CDATA[SUB_STORE_PLACE_NAME = #where.SubStorePlaceName#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreId" prepend="AND">
+          <![CDATA[STORE_ID = #where.StoreId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+     <select id="GetMouldSubStorePlace" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         SELECT T.*,T.ROWID FROM SEB_SUB_STORE_PLACE T
+        WHERE T.DELETE_FLAG=0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="StorePlaceID" prepend="AND">
+           <![CDATA[t.STORE_PLACE_ID=#StorePlaceID#]]>
+         </isNotNull>
+         <isNotNull property="SubStorePlaceCode" prepend="AND">
+           <![CDATA[t.SUB_STORE_PLACE_CODE=#SubStorePlaceCode#]]>
+         </isNotNull>
+         <isNotNull property="SubStorePlaceName" prepend="AND">
+           <![CDATA[t.SUB_STORE_PLACE_NAME=#SubStorePlaceName#]]>
+         </isNotNull>
+         <isNotNull >
+           AND NOT EXISTS (SELECT 1 FROM CIM_MOULD_INFO T1 WHERE T1.STORE_PLACE_ID_SUB = T.OBJID AND T1.STREAM_STATE = 0)
+           ORDER BY T.sub_store_place_code
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="wsGetSubStorePlaceInfoNew" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         SELECT T.*,T.ROWID FROM SEB_SUB_STORE_PLACE T
+        WHERE T.DELETE_FLAG=0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="StorePlaceID" prepend="AND">
+           <![CDATA[t.STORE_PLACE_ID=#StorePlaceID#]]>
+         </isNotNull>
+         <isNotNull property="SubStorePlaceCode" prepend="AND">
+           <![CDATA[t.SUB_STORE_PLACE_CODE=#SubStorePlaceCode#]]>
+         </isNotNull>
+         <isNotNull property="SubStorePlaceName" prepend="AND">
+           <![CDATA[t.SUB_STORE_PLACE_NAME=#SubStorePlaceName#]]>
+         </isNotNull>
+         <isNotNull >
+           ORDER BY T.sub_store_place_code
+         </isNotNull>
+       </dynamic>
+     </select>
+
+
+     <select id="getSubPlace" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT A.*,A.SUB_STORE_PLACE_NAME AS V 
+        FROM SEB_SUB_STORE_PLACE A
+        WHERE A.DELETE_FLAG=0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="StorePlaceId" prepend="AND">
+           <![CDATA[A.STORE_PLACE_ID=#StorePlaceId#]]>
+         </isNotNull>
+         <isNotNull property="SubStorePlaceCode" prepend="AND">
+           <![CDATA[A.SUB_STORE_PLACE_CODE=#SubStorePlaceCode#]]>
+         </isNotNull>
+         <isNotNull property="SubStorePlaceName" prepend="AND">
+           <![CDATA[A.SUB_STORE_PLACE_NAME=#SubStorePlaceName#]]>
+         </isNotNull>
+         <isNotNull >
+           ORDER BY A.sub_store_place_code
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+     <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetMouldClearMould" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select B.MOULD_CODE from  CIM_MOULD_EQUIP A 
+     LEFT JOIN CIM_MOULD_INFO B ON A.MOULD_ID = B.OBJID
+     left join sbe_equip C ON C.OBJID = A.EQUIP_ID
+     where c.equip_name=#equipname# and a.baup_flag=#left#
+       ]]>
+     </select>
+
+     <select id="GetClearWarning" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select C.WARNING_FLAG,C.lock_flag from Cim_Mould_Equip A
+LEFT JOIN CIM_MOULD_INFO B ON A.MOULD_ID = B.OBJID
+LEFT JOIN sbe_clearmould C ON C.MOULDNAME=B.MOULD_CODE and c.dummy1 = 1
+LEFT JOIN SBE_EQUIP D ON A.EQUIP_ID =D.OBJID
+WHERE D.EQUIP_NAME=#equip_id#  AND A.BAUP_FLAG=#leftOrright#
+       ]]>
+     </select>
+
+     <select id="GetClearWarningnumber" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select case when C.Realnum >= E.ERROR_NUMBER THEN 1 ELSE 0 END Diffnumber
+ from Cim_Mould_Equip A
+LEFT JOIN CIM_MOULD_INFO B ON A.MOULD_ID = B.OBJID
+LEFT JOIN sbe_clearmould C ON C.MOULDNAME=B.MOULD_NAME and c.dummy1= 1
+LEFT JOIN SBE_EQUIP D ON A.EQUIP_ID =D.OBJID
+LEFT JOIN MOULD_ERRORNUMBER E ON B.IN_TYPE = E.MOULD_TYPE
+     where d.equip_name=#equip_id#   AND A.BAUP_FLAG=#leftOrright#  AND ROWNUM = 1
+       ]]>
+     </select>
+     
+     <select id="GetOutMouldInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+
+  select MOULD_NAME,SIZE_ID,PATTERN_ID,b.size_name,c.pattern_name from cim_mould_info a
+ left join cbm_size b on b.objid = a.size_id
+ left join cbm_pattern c on c.objid = a.pattern_id where mould_code =#mouldcode#
+       ]]>
+     </select>
+     
+
+   </statements>
+</sqlMap>

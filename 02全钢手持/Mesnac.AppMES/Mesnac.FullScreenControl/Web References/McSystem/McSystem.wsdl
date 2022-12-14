@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="DbHelperClearCache">
+        <s:complexType />
+      </s:element>
+      <s:element name="DbHelperClearCacheResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDateTime">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDateTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDateTimeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSysConfig">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSysConfigResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSysConfigResult" type="tns:ArrayOfSysConfig" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSysConfig">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SysConfig" nillable="true" type="tns:SysConfig" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SysConfig">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SsKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SsVaule" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="HandEquipVerify">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="equipUUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HandEquipVerifyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HandEquipVerifyResult" type="tns:HandEquip" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="HandEquip">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ObjId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EquipName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EquipCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OwnerName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Enabled" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getUserName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getUserNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getUserNameResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserLoginResult" type="tns:McUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="McUser">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ObjId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RealName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WorkBarcode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sex" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Telephone" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClassId" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DeptId" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="WorkId" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ShiftId" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="WorkshopId" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="HrCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErpCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsEmployee" nillable="true" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ChangeUserPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="oldPwd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newPwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeUserPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChangeUserPasswordResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserCEMenuAction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserCEMenuActionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserCEMenuActionResult" type="tns:CEMenuAction" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CEMenuAction">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Menus" type="tns:ArrayOfCEMenu" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCEMenu">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CEMenu" nillable="true" type="tns:CEMenu" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CEMenu">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MenuName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MenuLevel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IconName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileInfo" type="tns:UpdateFile" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Forms" type="tns:ArrayOfCEForm" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UpdateFile">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileVersion" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileMd5" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FileLength" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCEForm">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CEForm" nillable="true" type="tns:CEForm" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CEForm">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FormName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MenuLevel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClassName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IconName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Actions" type="tns:ArrayOfCEAction" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCEAction">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CEAction" nillable="true" type="tns:CEAction" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CEAction">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MenuLevel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActionID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActionName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfSysConfig" nillable="true" type="tns:ArrayOfSysConfig" />
+      <s:element name="HandEquip" nillable="true" type="tns:HandEquip" />
+      <s:element name="McUser" nillable="true" type="tns:McUser" />
+      <s:element name="int" type="s:int" />
+      <s:element name="CEMenuAction" nillable="true" type="tns:CEMenuAction" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="DbHelperClearCacheSoapIn">
+    <wsdl:part name="parameters" element="tns:DbHelperClearCache" />
+  </wsdl:message>
+  <wsdl:message name="DbHelperClearCacheSoapOut">
+    <wsdl:part name="parameters" element="tns:DbHelperClearCacheResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDateTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDateTime" />
+  </wsdl:message>
+  <wsdl:message name="GetDateTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDateTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSysConfigSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSysConfig" />
+  </wsdl:message>
+  <wsdl:message name="GetSysConfigSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSysConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="HandEquipVerifySoapIn">
+    <wsdl:part name="parameters" element="tns:HandEquipVerify" />
+  </wsdl:message>
+  <wsdl:message name="HandEquipVerifySoapOut">
+    <wsdl:part name="parameters" element="tns:HandEquipVerifyResponse" />
+  </wsdl:message>
+  <wsdl:message name="getUserNameSoapIn">
+    <wsdl:part name="parameters" element="tns:getUserName" />
+  </wsdl:message>
+  <wsdl:message name="getUserNameSoapOut">
+    <wsdl:part name="parameters" element="tns:getUserNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:UserLogin" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:UserLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeUserPassword" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeUserPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserCEMenuActionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserCEMenuAction" />
+  </wsdl:message>
+  <wsdl:message name="GetUserCEMenuActionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserCEMenuActionResponse" />
+  </wsdl:message>
+  <wsdl:message name="DbHelperClearCacheHttpGetIn" />
+  <wsdl:message name="DbHelperClearCacheHttpGetOut" />
+  <wsdl:message name="GetDateTimeHttpGetIn" />
+  <wsdl:message name="GetDateTimeHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSysConfigHttpGetIn" />
+  <wsdl:message name="GetSysConfigHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSysConfig" />
+  </wsdl:message>
+  <wsdl:message name="HandEquipVerifyHttpGetIn">
+    <wsdl:part name="equipUUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HandEquipVerifyHttpGetOut">
+    <wsdl:part name="Body" element="tns:HandEquip" />
+  </wsdl:message>
+  <wsdl:message name="getUserNameHttpGetIn">
+    <wsdl:part name="user" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getUserNameHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginHttpGetIn">
+    <wsdl:part name="user" type="s:string" />
+    <wsdl:part name="pwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:McUser" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPasswordHttpGetIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="oldPwd" type="s:string" />
+    <wsdl:part name="newPwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPasswordHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetUserCEMenuActionHttpGetIn">
+    <wsdl:part name="userId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserCEMenuActionHttpGetOut">
+    <wsdl:part name="Body" element="tns:CEMenuAction" />
+  </wsdl:message>
+  <wsdl:message name="DbHelperClearCacheHttpPostIn" />
+  <wsdl:message name="DbHelperClearCacheHttpPostOut" />
+  <wsdl:message name="GetDateTimeHttpPostIn" />
+  <wsdl:message name="GetDateTimeHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSysConfigHttpPostIn" />
+  <wsdl:message name="GetSysConfigHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSysConfig" />
+  </wsdl:message>
+  <wsdl:message name="HandEquipVerifyHttpPostIn">
+    <wsdl:part name="equipUUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HandEquipVerifyHttpPostOut">
+    <wsdl:part name="Body" element="tns:HandEquip" />
+  </wsdl:message>
+  <wsdl:message name="getUserNameHttpPostIn">
+    <wsdl:part name="user" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="getUserNameHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginHttpPostIn">
+    <wsdl:part name="user" type="s:string" />
+    <wsdl:part name="pwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:McUser" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPasswordHttpPostIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="oldPwd" type="s:string" />
+    <wsdl:part name="newPwd" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeUserPasswordHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetUserCEMenuActionHttpPostIn">
+    <wsdl:part name="userId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserCEMenuActionHttpPostOut">
+    <wsdl:part name="Body" element="tns:CEMenuAction" />
+  </wsdl:message>
+  <wsdl:portType name="McSystemSoap">
+    <wsdl:operation name="DbHelperClearCache">
+      <wsdl:input message="tns:DbHelperClearCacheSoapIn" />
+      <wsdl:output message="tns:DbHelperClearCacheSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDateTime">
+      <wsdl:input message="tns:GetDateTimeSoapIn" />
+      <wsdl:output message="tns:GetDateTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSysConfig">
+      <wsdl:input message="tns:GetSysConfigSoapIn" />
+      <wsdl:output message="tns:GetSysConfigSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HandEquipVerify">
+      <wsdl:input message="tns:HandEquipVerifySoapIn" />
+      <wsdl:output message="tns:HandEquipVerifySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserName">
+      <wsdl:input message="tns:getUserNameSoapIn" />
+      <wsdl:output message="tns:getUserNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <wsdl:input message="tns:UserLoginSoapIn" />
+      <wsdl:output message="tns:UserLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <wsdl:input message="tns:ChangeUserPasswordSoapIn" />
+      <wsdl:output message="tns:ChangeUserPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCEMenuAction">
+      <wsdl:input message="tns:GetUserCEMenuActionSoapIn" />
+      <wsdl:output message="tns:GetUserCEMenuActionSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="McSystemHttpGet">
+    <wsdl:operation name="DbHelperClearCache">
+      <wsdl:input message="tns:DbHelperClearCacheHttpGetIn" />
+      <wsdl:output message="tns:DbHelperClearCacheHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDateTime">
+      <wsdl:input message="tns:GetDateTimeHttpGetIn" />
+      <wsdl:output message="tns:GetDateTimeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSysConfig">
+      <wsdl:input message="tns:GetSysConfigHttpGetIn" />
+      <wsdl:output message="tns:GetSysConfigHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HandEquipVerify">
+      <wsdl:input message="tns:HandEquipVerifyHttpGetIn" />
+      <wsdl:output message="tns:HandEquipVerifyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserName">
+      <wsdl:input message="tns:getUserNameHttpGetIn" />
+      <wsdl:output message="tns:getUserNameHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <wsdl:input message="tns:UserLoginHttpGetIn" />
+      <wsdl:output message="tns:UserLoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <wsdl:input message="tns:ChangeUserPasswordHttpGetIn" />
+      <wsdl:output message="tns:ChangeUserPasswordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCEMenuAction">
+      <wsdl:input message="tns:GetUserCEMenuActionHttpGetIn" />
+      <wsdl:output message="tns:GetUserCEMenuActionHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="McSystemHttpPost">
+    <wsdl:operation name="DbHelperClearCache">
+      <wsdl:input message="tns:DbHelperClearCacheHttpPostIn" />
+      <wsdl:output message="tns:DbHelperClearCacheHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDateTime">
+      <wsdl:input message="tns:GetDateTimeHttpPostIn" />
+      <wsdl:output message="tns:GetDateTimeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSysConfig">
+      <wsdl:input message="tns:GetSysConfigHttpPostIn" />
+      <wsdl:output message="tns:GetSysConfigHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HandEquipVerify">
+      <wsdl:input message="tns:HandEquipVerifyHttpPostIn" />
+      <wsdl:output message="tns:HandEquipVerifyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserName">
+      <wsdl:input message="tns:getUserNameHttpPostIn" />
+      <wsdl:output message="tns:getUserNameHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <wsdl:input message="tns:UserLoginHttpPostIn" />
+      <wsdl:output message="tns:UserLoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <wsdl:input message="tns:ChangeUserPasswordHttpPostIn" />
+      <wsdl:output message="tns:ChangeUserPasswordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCEMenuAction">
+      <wsdl:input message="tns:GetUserCEMenuActionHttpPostIn" />
+      <wsdl:output message="tns:GetUserCEMenuActionHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="McSystemSoap" type="tns:McSystemSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DbHelperClearCache">
+      <soap:operation soapAction="http://tempuri.org/DbHelperClearCache" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDateTime">
+      <soap:operation soapAction="http://tempuri.org/GetDateTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysConfig">
+      <soap:operation soapAction="http://tempuri.org/GetSysConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HandEquipVerify">
+      <soap:operation soapAction="http://tempuri.org/HandEquipVerify" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserName">
+      <soap:operation soapAction="http://tempuri.org/getUserName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <soap:operation soapAction="http://tempuri.org/UserLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <soap:operation soapAction="http://tempuri.org/ChangeUserPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCEMenuAction">
+      <soap:operation soapAction="http://tempuri.org/GetUserCEMenuAction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="McSystemSoap12" type="tns:McSystemSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DbHelperClearCache">
+      <soap12:operation soapAction="http://tempuri.org/DbHelperClearCache" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDateTime">
+      <soap12:operation soapAction="http://tempuri.org/GetDateTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysConfig">
+      <soap12:operation soapAction="http://tempuri.org/GetSysConfig" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HandEquipVerify">
+      <soap12:operation soapAction="http://tempuri.org/HandEquipVerify" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserName">
+      <soap12:operation soapAction="http://tempuri.org/getUserName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <soap12:operation soapAction="http://tempuri.org/UserLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <soap12:operation soapAction="http://tempuri.org/ChangeUserPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCEMenuAction">
+      <soap12:operation soapAction="http://tempuri.org/GetUserCEMenuAction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="McSystemHttpGet" type="tns:McSystemHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="DbHelperClearCache">
+      <http:operation location="/DbHelperClearCache" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetDateTime">
+      <http:operation location="/GetDateTime" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysConfig">
+      <http:operation location="/GetSysConfig" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HandEquipVerify">
+      <http:operation location="/HandEquipVerify" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserName">
+      <http:operation location="/getUserName" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <http:operation location="/UserLogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <http:operation location="/ChangeUserPassword" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCEMenuAction">
+      <http:operation location="/GetUserCEMenuAction" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="McSystemHttpPost" type="tns:McSystemHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="DbHelperClearCache">
+      <http:operation location="/DbHelperClearCache" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetDateTime">
+      <http:operation location="/GetDateTime" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysConfig">
+      <http:operation location="/GetSysConfig" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HandEquipVerify">
+      <http:operation location="/HandEquipVerify" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserName">
+      <http:operation location="/getUserName" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <http:operation location="/UserLogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserPassword">
+      <http:operation location="/ChangeUserPassword" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCEMenuAction">
+      <http:operation location="/GetUserCEMenuAction" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="McSystem">
+    <wsdl:port name="McSystemSoap" binding="tns:McSystemSoap">
+      <soap:address location="http://192.168.60.80:8080/McSys/McSystem.asmx" />
+    </wsdl:port>
+    <wsdl:port name="McSystemSoap12" binding="tns:McSystemSoap12">
+      <soap12:address location="http://192.168.60.80:8080/McSys/McSystem.asmx" />
+    </wsdl:port>
+    <wsdl:port name="McSystemHttpGet" binding="tns:McSystemHttpGet">
+      <http:address location="http://192.168.60.80:8080/McSys/McSystem.asmx" />
+    </wsdl:port>
+    <wsdl:port name="McSystemHttpPost" binding="tns:McSystemHttpPost">
+      <http:address location="http://192.168.60.80:8080/McSys/McSystem.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="STORE_ID" Value="仓库名称"></Caption>
+    <Caption Name="STORE_NAME" Value="仓库名称"></Caption>
+    <Caption Name="STORE_PLACE_NAME" Value="库位名称"></Caption>
+    <Caption Name="STORE_PLACE_CODE" Value="库位代号"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+    <Caption Name="MAX_AMOUNT" Value="最大库存车数"></Caption>
+    <Caption Name="STORAGE_AMOUNT" Value="库存车数"></Caption>
+    <Caption Name="EQUIP_NAME" Value="机台"></Caption>
+    <Caption Name="EQUIP_ID" Value="机台"></Caption>
+    <Caption Name="EQUIP_POSITION" Value="左右模"></Caption>
+    <Caption Name="EQUIP_POSITION_CAPTION" Value="左右模"></Caption>
+    <Caption Name="STORE_PLACE_TYPE" Value="库位类型"></Caption>
+    <Caption Name="STORE_PLACE_TYPE_CAPTION" Value="库位类型"></Caption>
+  </Captions>
+  <WebPage Title="硫化胎胚库位信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Curing/McUI/@McUI/CrudCsmStorePlace.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="CSM_STORE_PLACE">
+    <Primarykey FieldName="OBJID" Identity="true"></Primarykey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_CSM_STORE_PLACE"></SeqField>
+    </SeqFields>
+    <Uniques>
+      <Unique Fields="EQUIP_ID,EQUIP_POSITION"></Unique>
+      <Unique Fields="STORE_PLACE_NAME"></Unique>
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="STORE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="STORE_PLACE_NAME"></ParamField>
+        <ParamField FieldName="STORE_PLACE_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_PLACE_TYPE" Type="ComboBox"></ParamField>
+        <ParamField FieldName="MAX_AMOUNT" Type="NumberBox" DefaultValue="3"></ParamField>
+        <ParamField FieldName="STORAGE_AMOUNT" Type="NumberBox" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_POSITION" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="STORE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="STORE_PLACE_NAME"></ParamField>
+        <ParamField FieldName="STORE_PLACE_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_PLACE_TYPE" Type="ComboBox"></ParamField>
+        <ParamField FieldName="MAX_AMOUNT" Type="NumberBox" Nullable="true"></ParamField>
+        <ParamField FieldName="STORAGE_AMOUNT" Type="NumberBox" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_POSITION" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="STORE_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_PLACE_NAME" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_PLACE_CODE" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="STORE_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE_CODE" Width="100"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE_TYPE_CAPTION" Width="60"></GridColumn>
+        <GridColumn ColumnName="MAX_AMOUNT" Width="60"></GridColumn>
+        <GridColumn ColumnName="STORAGE_AMOUNT" Width="60"></GridColumn>
+        <GridColumn ColumnName="EQUIP_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="EQUIP_POSITION_CAPTION" Width="60"></GridColumn>
+        <GridColumn ColumnName="REMARK" Width="100"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="160"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

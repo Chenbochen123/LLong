@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="TYPE_NAME" Value="规格名称"></Caption>
+    <Caption Name="TYPE_CODE" Value="规格代码"></Caption>
+    <Caption Name="YJ_NUM" Value="预警次数"></Caption>
+    <Caption Name="MAX_NUM" Value="最大使用次数"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+    <!--<Caption Name="JYM" Value="校验码"></Caption>
+    <Caption Name="ERP_CODE" Value="校验码"></Caption>-->
+    <Caption Name="JY" Value="校验码"></Caption>
+  </Captions>
+  <WebPage Title="胶囊规格信息">
+  </WebPage>
+  <Crud TableName="CBE_BLADDER_SPEC">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <Uniques>
+      <Unique Fields="TYPE_NAME"></Unique>
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="TYPE_NAME"></ParamField>
+        <ParamField FieldName="TYPE_CODE"></ParamField>
+        <!--<ParamField FieldName="ERP_CODE"></ParamField>-->
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="TYPE_NAME"></ParamField>
+        <ParamField FieldName="TYPE_CODE"></ParamField>
+        <!--<ParamField FieldName="ERP_CODE"></ParamField>-->
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="TYPE_NAME"></ParamField>
+        <ParamField FieldName="TYPE_CODE"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="T1.OBJID">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="TYPE_NAME"></GridColumn>
+        <GridColumn ColumnName="TYPE_CODE"></GridColumn>
+        <GridColumn ColumnName="JY"></GridColumn>
+        <GridColumn ColumnName="YJ_NUM"></GridColumn>
+        <GridColumn ColumnName="MAX_NUM"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

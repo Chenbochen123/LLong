@@ -1,0 +1,472 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.WmsUploadRecord"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="WmsUploadRecord" type="Mesnac.Curing.Entity.BasicEntity.WmsUploadRecord, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_WmsUploadRecord" class="WmsUploadRecord">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="WhId" column="WH_ID"/>
+    <result property="TyreNo" column="TYRE_NO"/>
+    <result property="GreenTyreNo" column="GREEN_TYRE_NO"/>
+    <result property="SubWareHouse" column="SUB_WARE_HOUSE"/>
+    <result property="ItemNumber" column="ITEM_NUMBER"/>
+    <result property="ItemDesc" column="ITEM_DESC"/>
+    <result property="SapLineLoc" column="SAP_LINE_LOC"/>
+    <result property="LotNumber" column="LOT_NUMBER"/>
+    <result property="MesLot" column="MES_LOT"/>
+    <result property="TestFlag" column="TEST_FLAG"/>
+    <result property="ReturnFlag" column="RETURN_FLAG"/>
+    <result property="Grade" column="GRADE"/>
+    <result property="Week" column="WEEK"/>
+    <result property="Shift" column="SHIFT"/>
+    <result property="ProductionTime" column="PRODUCTION_TIME"/>
+    <result property="Attribute1" column="ATTRIBUTE1"/>
+    <result property="Attribute2" column="ATTRIBUTE2"/>
+    <result property="Attribute3" column="ATTRIBUTE3"/>
+    <result property="Attribute4" column="ATTRIBUTE4"/>
+    <result property="Attribute5" column="ATTRIBUTE5"/>
+    <result property="Attribute6" column="ATTRIBUTE6"/>
+    <result property="Attribute7" column="ATTRIBUTE7"/>
+    <result property="Attribute8" column="ATTRIBUTE8"/>
+    <result property="Attribute9" column="ATTRIBUTE9"/>
+    <result property="Attribute10" column="ATTRIBUTE10"/>
+    <result property="UploadFlag" column="UPLOAD_FLAG"/>
+    <result property="UploadTime" column="UPLOAD_TIME"/>
+    <result property="Returnstate" column="RETURNSTATE"/>
+    <result property="Returnmsg" column="RETURNMSG"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_WmsUploadRecord" class="WmsUploadRecord">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="WhId" column="WhId"/>
+    <parameter property="TyreNo" column="TyreNo"/>
+    <parameter property="GreenTyreNo" column="GreenTyreNo"/>
+    <parameter property="SubWareHouse" column="SubWareHouse"/>
+    <parameter property="ItemNumber" column="ItemNumber"/>
+    <parameter property="ItemDesc" column="ItemDesc"/>
+    <parameter property="SapLineLoc" column="SapLineLoc"/>
+    <parameter property="LotNumber" column="LotNumber"/>
+    <parameter property="MesLot" column="MesLot"/>
+    <parameter property="TestFlag" column="TestFlag"/>
+    <parameter property="ReturnFlag" column="ReturnFlag"/>
+    <parameter property="Grade" column="Grade"/>
+    <parameter property="Week" column="Week"/>
+    <parameter property="Shift" column="Shift"/>
+    <parameter property="ProductionTime" column="ProductionTime"/>
+    <parameter property="Attribute1" column="Attribute1"/>
+    <parameter property="Attribute2" column="Attribute2"/>
+    <parameter property="Attribute3" column="Attribute3"/>
+    <parameter property="Attribute4" column="Attribute4"/>
+    <parameter property="Attribute5" column="Attribute5"/>
+    <parameter property="Attribute6" column="Attribute6"/>
+    <parameter property="Attribute7" column="Attribute7"/>
+    <parameter property="Attribute8" column="Attribute8"/>
+    <parameter property="Attribute9" column="Attribute9"/>
+    <parameter property="Attribute10" column="Attribute10"/>
+    <parameter property="UploadFlag" column="UploadFlag"/>
+    <parameter property="UploadTime" column="UploadTime"/>
+    <parameter property="Returnstate" column="Returnstate"/>
+    <parameter property="Returnmsg" column="Returnmsg"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM WMS_UPLOAD_RECORD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.WhId" prepend="AND">
+          <![CDATA[WH_ID = #where.WhId#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[TYRE_NO = #where.TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.SubWareHouse" prepend="AND">
+          <![CDATA[SUB_WARE_HOUSE = #where.SubWareHouse#]]>
+        </isNotNull>
+        <isNotNull property="where.ItemNumber" prepend="AND">
+          <![CDATA[ITEM_NUMBER = #where.ItemNumber#]]>
+        </isNotNull>
+        <isNotNull property="where.ItemDesc" prepend="AND">
+          <![CDATA[ITEM_DESC = #where.ItemDesc#]]>
+        </isNotNull>
+        <isNotNull property="where.SapLineLoc" prepend="AND">
+          <![CDATA[SAP_LINE_LOC = #where.SapLineLoc#]]>
+        </isNotNull>
+        <isNotNull property="where.LotNumber" prepend="AND">
+          <![CDATA[LOT_NUMBER = #where.LotNumber#]]>
+        </isNotNull>
+        <isNotNull property="where.MesLot" prepend="AND">
+          <![CDATA[MES_LOT = #where.MesLot#]]>
+        </isNotNull>
+        <isNotNull property="where.TestFlag" prepend="AND">
+          <![CDATA[TEST_FLAG = #where.TestFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ReturnFlag" prepend="AND">
+          <![CDATA[RETURN_FLAG = #where.ReturnFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Grade" prepend="AND">
+          <![CDATA[GRADE = #where.Grade#]]>
+        </isNotNull>
+        <isNotNull property="where.Week" prepend="AND">
+          <![CDATA[WEEK = #where.Week#]]>
+        </isNotNull>
+        <isNotNull property="where.Shift" prepend="AND">
+          <![CDATA[SHIFT = #where.Shift#]]>
+        </isNotNull>
+        <isNotNull property="where.ProductionTime" prepend="AND">
+          <![CDATA[PRODUCTION_TIME = #where.ProductionTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Attribute1" prepend="AND">
+          <![CDATA[ATTRIBUTE1 = #where.Attribute1#]]>
+        </isNotNull>
+        <isNotNull property="where.Attribute2" prepend="AND">
+          <![CDATA[ATTRIBUTE2 = #where.Attribute2#]]>
+        </isNotNull>
+        <isNotNull property="where.Attribute3" prepend="AND">
+          <![CDATA[ATTRIBUTE3 = #where.Attribute3#]]>
+        </isNotNull>
+        <isNotNull property="where.Attribute4" prepend="AND">
+          <![CDATA[ATTRIBUTE4 = #where.Attribute4#]]>
+        </isNotNull>
+        <isNotNull property="where.Attribute5" prepend="AND">
+          <![CDATA[ATTRIBUTE5 = #where.Attribute5#]]>
+        </isNotNull>
+        <isNotNull property="where.Attribute6" prepend="AND">
+          <![CDATA[ATTRIBUTE6 = #where.Attribute6#]]>
+        </isNotNull>
+        <isNotNull property="where.Attribute7" prepend="AND">
+          <![CDATA[ATTRIBUTE7 = #where.Attribute7#]]>
+        </isNotNull>
+        <isNotNull property="where.Attribute8" prepend="AND">
+          <![CDATA[ATTRIBUTE8 = #where.Attribute8#]]>
+        </isNotNull>
+        <isNotNull property="where.Attribute9" prepend="AND">
+          <![CDATA[ATTRIBUTE9 = #where.Attribute9#]]>
+        </isNotNull>
+        <isNotNull property="where.Attribute10" prepend="AND">
+          <![CDATA[ATTRIBUTE10 = #where.Attribute10#]]>
+        </isNotNull>
+        <isNotNull property="where.UploadFlag" prepend="AND">
+          <![CDATA[UPLOAD_FLAG = #where.UploadFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.UploadTime" prepend="AND">
+          <![CDATA[UPLOAD_TIME = #where.UploadTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Returnstate" prepend="AND">
+          <![CDATA[RETURNSTATE = #where.Returnstate#]]>
+        </isNotNull>
+        <isNotNull property="where.Returnmsg" prepend="AND">
+          <![CDATA[RETURNMSG = #where.Returnmsg#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE ( = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO WMS_UPLOAD_RECORD]]>
+       <dynamic prepend="(">
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="WhId" prepend=",">WH_ID</isNotNull>
+        <isNotNull property="TyreNo" prepend=",">TYRE_NO</isNotNull>
+        <isNotNull property="GreenTyreNo" prepend=",">GREEN_TYRE_NO</isNotNull>
+        <isNotNull property="SubWareHouse" prepend=",">SUB_WARE_HOUSE</isNotNull>
+        <isNotNull property="ItemNumber" prepend=",">ITEM_NUMBER</isNotNull>
+        <isNotNull property="ItemDesc" prepend=",">ITEM_DESC</isNotNull>
+        <isNotNull property="SapLineLoc" prepend=",">SAP_LINE_LOC</isNotNull>
+        <isNotNull property="LotNumber" prepend=",">LOT_NUMBER</isNotNull>
+        <isNotNull property="MesLot" prepend=",">MES_LOT</isNotNull>
+        <isNotNull property="TestFlag" prepend=",">TEST_FLAG</isNotNull>
+        <isNotNull property="ReturnFlag" prepend=",">RETURN_FLAG</isNotNull>
+        <isNotNull property="Grade" prepend=",">GRADE</isNotNull>
+        <isNotNull property="Week" prepend=",">WEEK</isNotNull>
+        <isNotNull property="Shift" prepend=",">SHIFT</isNotNull>
+        <isNotNull property="ProductionTime" prepend=",">PRODUCTION_TIME</isNotNull>
+        <isNotNull property="Attribute1" prepend=",">ATTRIBUTE1</isNotNull>
+        <isNotNull property="Attribute2" prepend=",">ATTRIBUTE2</isNotNull>
+        <isNotNull property="Attribute3" prepend=",">ATTRIBUTE3</isNotNull>
+        <isNotNull property="Attribute4" prepend=",">ATTRIBUTE4</isNotNull>
+        <isNotNull property="Attribute5" prepend=",">ATTRIBUTE5</isNotNull>
+        <isNotNull property="Attribute6" prepend=",">ATTRIBUTE6</isNotNull>
+        <isNotNull property="Attribute7" prepend=",">ATTRIBUTE7</isNotNull>
+        <isNotNull property="Attribute8" prepend=",">ATTRIBUTE8</isNotNull>
+        <isNotNull property="Attribute9" prepend=",">ATTRIBUTE9</isNotNull>
+        <isNotNull property="Attribute10" prepend=",">ATTRIBUTE10</isNotNull>
+        <isNotNull property="UploadFlag" prepend=",">UPLOAD_FLAG</isNotNull>
+        <isNotNull property="UploadTime" prepend=",">UPLOAD_TIME</isNotNull>
+        <isNotNull property="Returnstate" prepend=",">RETURNSTATE</isNotNull>
+        <isNotNull property="Returnmsg" prepend=",">RETURNMSG</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="WhId" prepend=",">#WhId#</isNotNull>
+        <isNotNull property="TyreNo" prepend=",">#TyreNo#</isNotNull>
+        <isNotNull property="GreenTyreNo" prepend=",">#GreenTyreNo#</isNotNull>
+        <isNotNull property="SubWareHouse" prepend=",">#SubWareHouse#</isNotNull>
+        <isNotNull property="ItemNumber" prepend=",">#ItemNumber#</isNotNull>
+        <isNotNull property="ItemDesc" prepend=",">#ItemDesc#</isNotNull>
+        <isNotNull property="SapLineLoc" prepend=",">#SapLineLoc#</isNotNull>
+        <isNotNull property="LotNumber" prepend=",">#LotNumber#</isNotNull>
+        <isNotNull property="MesLot" prepend=",">#MesLot#</isNotNull>
+        <isNotNull property="TestFlag" prepend=",">#TestFlag#</isNotNull>
+        <isNotNull property="ReturnFlag" prepend=",">#ReturnFlag#</isNotNull>
+        <isNotNull property="Grade" prepend=",">#Grade#</isNotNull>
+        <isNotNull property="Week" prepend=",">#Week#</isNotNull>
+        <isNotNull property="Shift" prepend=",">#Shift#</isNotNull>
+        <isNotNull property="ProductionTime" prepend=",">#ProductionTime#</isNotNull>
+        <isNotNull property="Attribute1" prepend=",">#Attribute1#</isNotNull>
+        <isNotNull property="Attribute2" prepend=",">#Attribute2#</isNotNull>
+        <isNotNull property="Attribute3" prepend=",">#Attribute3#</isNotNull>
+        <isNotNull property="Attribute4" prepend=",">#Attribute4#</isNotNull>
+        <isNotNull property="Attribute5" prepend=",">#Attribute5#</isNotNull>
+        <isNotNull property="Attribute6" prepend=",">#Attribute6#</isNotNull>
+        <isNotNull property="Attribute7" prepend=",">#Attribute7#</isNotNull>
+        <isNotNull property="Attribute8" prepend=",">#Attribute8#</isNotNull>
+        <isNotNull property="Attribute9" prepend=",">#Attribute9#</isNotNull>
+        <isNotNull property="Attribute10" prepend=",">#Attribute10#</isNotNull>
+        <isNotNull property="UploadFlag" prepend=",">#UploadFlag#</isNotNull>
+        <isNotNull property="UploadTime" prepend=",">#UploadTime#</isNotNull>
+        <isNotNull property="Returnstate" prepend=",">#Returnstate#</isNotNull>
+        <isNotNull property="Returnmsg" prepend=",">#Returnmsg#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE WMS_UPLOAD_RECORD
+       <dynamic prepend="SET">
+        <isNotNull  property="update.ObjId"  prepend=",">
+          OBJID = #update.ObjId#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.WhId"  prepend=",">
+          WH_ID = #update.WhId#
+        </isNotNull>
+        <isNotNull  property="update.TyreNo"  prepend=",">
+          TYRE_NO = #update.TyreNo#
+        </isNotNull>
+        <isNotNull  property="update.GreenTyreNo"  prepend=",">
+          GREEN_TYRE_NO = #update.GreenTyreNo#
+        </isNotNull>
+        <isNotNull  property="update.SubWareHouse"  prepend=",">
+          SUB_WARE_HOUSE = #update.SubWareHouse#
+        </isNotNull>
+        <isNotNull  property="update.ItemNumber"  prepend=",">
+          ITEM_NUMBER = #update.ItemNumber#
+        </isNotNull>
+        <isNotNull  property="update.ItemDesc"  prepend=",">
+          ITEM_DESC = #update.ItemDesc#
+        </isNotNull>
+        <isNotNull  property="update.SapLineLoc"  prepend=",">
+          SAP_LINE_LOC = #update.SapLineLoc#
+        </isNotNull>
+        <isNotNull  property="update.LotNumber"  prepend=",">
+          LOT_NUMBER = #update.LotNumber#
+        </isNotNull>
+        <isNotNull  property="update.MesLot"  prepend=",">
+          MES_LOT = #update.MesLot#
+        </isNotNull>
+        <isNotNull  property="update.TestFlag"  prepend=",">
+          TEST_FLAG = #update.TestFlag#
+        </isNotNull>
+        <isNotNull  property="update.ReturnFlag"  prepend=",">
+          RETURN_FLAG = #update.ReturnFlag#
+        </isNotNull>
+        <isNotNull  property="update.Grade"  prepend=",">
+          GRADE = #update.Grade#
+        </isNotNull>
+        <isNotNull  property="update.Week"  prepend=",">
+          WEEK = #update.Week#
+        </isNotNull>
+        <isNotNull  property="update.Shift"  prepend=",">
+          SHIFT = #update.Shift#
+        </isNotNull>
+        <isNotNull  property="update.ProductionTime"  prepend=",">
+          PRODUCTION_TIME = #update.ProductionTime#
+        </isNotNull>
+        <isNotNull  property="update.Attribute1"  prepend=",">
+          ATTRIBUTE1 = #update.Attribute1#
+        </isNotNull>
+        <isNotNull  property="update.Attribute2"  prepend=",">
+          ATTRIBUTE2 = #update.Attribute2#
+        </isNotNull>
+        <isNotNull  property="update.Attribute3"  prepend=",">
+          ATTRIBUTE3 = #update.Attribute3#
+        </isNotNull>
+        <isNotNull  property="update.Attribute4"  prepend=",">
+          ATTRIBUTE4 = #update.Attribute4#
+        </isNotNull>
+        <isNotNull  property="update.Attribute5"  prepend=",">
+          ATTRIBUTE5 = #update.Attribute5#
+        </isNotNull>
+        <isNotNull  property="update.Attribute6"  prepend=",">
+          ATTRIBUTE6 = #update.Attribute6#
+        </isNotNull>
+        <isNotNull  property="update.Attribute7"  prepend=",">
+          ATTRIBUTE7 = #update.Attribute7#
+        </isNotNull>
+        <isNotNull  property="update.Attribute8"  prepend=",">
+          ATTRIBUTE8 = #update.Attribute8#
+        </isNotNull>
+        <isNotNull  property="update.Attribute9"  prepend=",">
+          ATTRIBUTE9 = #update.Attribute9#
+        </isNotNull>
+        <isNotNull  property="update.Attribute10"  prepend=",">
+          ATTRIBUTE10 = #update.Attribute10#
+        </isNotNull>
+        <isNotNull  property="update.UploadFlag"  prepend=",">
+          UPLOAD_FLAG = #update.UploadFlag#
+        </isNotNull>
+        <isNotNull  property="update.UploadTime"  prepend=",">
+          UPLOAD_TIME = #update.UploadTime#
+        </isNotNull>
+        <isNotNull  property="update.Returnstate"  prepend=",">
+          RETURNSTATE = #update.Returnstate#
+        </isNotNull>
+        <isNotNull  property="update.Returnmsg"  prepend=",">
+          RETURNMSG = #update.Returnmsg#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM WMS_UPLOAD_RECORD
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_WmsUploadRecord">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_WmsUploadRecord">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max()
+      </isNotPropertyAvailable>
+      FROM WMS_UPLOAD_RECORD
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM WMS_UPLOAD_RECORD
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_WmsUploadRecord" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE WMS_UPLOAD_RECORD
+    </statement>
+  </statements>
+</sqlMap>

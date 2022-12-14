@@ -1,0 +1,698 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HppPlan"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_PLAN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDate" prepend="AND">
+          <![CDATA[PLAN_DATE = #where.PlanDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanState" prepend="AND">
+          <![CDATA[PLAN_STATE = #where.PlanState#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanType" prepend="AND">
+          <![CDATA[PLAN_TYPE = #where.PlanType#]]>
+        </isNotNull>
+        <isNotNull property="where.ProcedureId" prepend="AND">
+          <![CDATA[PROCEDURE_ID = #where.ProcedureId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+    <!--查询实例说明-->
+    <select id="getPlan" parameterClass="map" resultClass="Row">
+      SELECT H.* FROM(SELECT T1.OBJID,T1.PLAN_DATE,T2.PLAN_STATE,T1.EQUIP_ID,T1.SHIFT_ID,T2.MATERIAL_ID,
+      T8.MATERIAL_FULL_NAME,T8.SAP_CODE AS MATERIAL_SAP_CODE,
+      T2.MONTH_PLAN_ID,t2.PLAN_AMOUNT,T9.UNIT_NAME,T5.MAJOR_TYPE_NAME AS PROCEDURE_NAME,
+      T6.SHOW_NAME AS PLAN_STATE_NAME,T7.EQUIP_NAME,T3.UNIT_ID,
+      NULL AS PLAN_MONTH,T1.PROCEDURE_ID,
+      bom.OBJID||'@'||bom.bom_version||'@'||bom.greentyre_version||'@'||t8.sap_code||'@'||to_char(bom.effect_date,'yyyyMMdd')||'@'||type.type_name as bom_name,
+      (plm.process_route || '@' || plm.process_version) TECH_NAME,
+      case when plm.process_route is not null then 1 when plm.process_route is null then 2 else 3 end VERSIONFLAG,
+      T2.BOM_ID,T2.TECH_ID,T2.MATERIAL_CODE,T12.real_name,t1.record_time,'D2'||bom.bom_version as NEWVERSION
+      FROM HPP_PLAN T1
+      left join ssb_user T12 on T1.Record_User_Id=T12.objid
+      INNER JOIN HPP_PLAN_DETAIL T2 ON T1.OBJID=T2.PLAN_ID
+      LEFT JOIN HPP_PROCEDURE_UNIT T3 ON T1.PROCEDURE_ID = T3.PROCEDURE_ID
+      LEFT JOIN SSB_UNIT T4 ON T3.UNIT_ID=T4.OBJID
+      LEFT JOIN SBM_BOM_DATA bom ON T2.BOM_ID=bom.OBJID
+      LEFT JOIN SBM_BOM_TYPE type ON type.OBJID =bom.BOM_TYPE
+      LEFT JOIN (SELECT DISTINCT MATERIAL_ID,UNIT_ID FROM V_SBM_BOM WHERE DELETE_FLAG=0 ORDER BY MATERIAL_ID) T10 ON T2.MATERIAL_ID= T10.MATERIAL_ID
+      LEFT JOIN ssb_unit T9 ON T10.UNIT_ID=T9.OBJID
+      LEFT JOIN V_CPT_CURING_TECH tech ON T2.TECH_ID=tech.OBJID
+      INNER JOIN BPP_PLAN_STATE T6 ON T2.PLAN_STATE=T6.OBJID
+      INNER JOIN SBE_EQUIP T7 ON T1.EQUIP_ID=T7.OBJID
+      LEFT JOIN SBE_EQUIP_MAJOR_TYPE T5 ON T7.MAJOR_TYPE_ID=T5.OBJID
+      INNER JOIN SBM_MATERIAL T8 ON T2.MATERIAL_ID= T8.OBJID
+      LEFT JOIN EQUIP_RELATION equip ON T7.Objid = equip.mes_equipid
+      LEFT JOIN (SELECT distinct T.EQUIPMENT_CODE,T.ASSEM_SAPMAT,T.PROCESS_ROUTE,T.PROCESS_VERSION FROM PLM_HALF_MAIN T WHERE T.DELETE_FLAG = 0) plm ON T8.SAP_FULL_CODE = plm.assem_sapmat and equip.plm_equipcode = plm.equipment_code
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.PlanDate" prepend="AND">
+          <![CDATA[t1.PLAN_DATE = to_date(#where.PlanDate#,'yyyy-MM-dd')]]>
+        </isNotNull>
+        <isNotNull property="where.MajorTypeId" prepend="AND">
+          <![CDATA[t7.MAJOR_TYPE_ID = #where.MajorTypeId#]]>
+        </isNotNull>
+      </dynamic>
+      order by plm.process_route,t1.EQUIP_ID) H
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.Version" prepend="AND">
+          <![CDATA[H.VERSIONFLAG = #where.Version#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+
+    
+    
+    <!--删除计划时查询-->
+    <select id="getPlanDelete" parameterClass="map" resultClass="Row">
+     <![CDATA[ SELECT T1.OBJID,T1.PLAN_DATE,T2.PLAN_STATE
+      FROM HPP_PLAN T1
+      INNER JOIN HPP_PLAN_DETAIL T2 ON T1.OBJID=T2.PLAN_ID
+      and t1.PLAN_DATE = to_date(#planDate#,'yyyy-MM-dd') ]]>
+    </select>
+
+    <!--查询实例说明-->
+    <select id="GetEQUIP" parameterClass="map" resultClass="Row">
+      SELECT t.* FROM SBE_EQUIP T WHERE t.DELETE_FLAG=0
+      <dynamic>
+        <isNotNull property="where.MajorTypeId" prepend="AND">
+          <![CDATA[T.MAJOR_TYPE_ID = #where.MajorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[t.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[t.EQUIP_NAME = #where.EquipName#]]>
+        </isNotNull>
+      </dynamic>
+      order by t.EQUIP_CODE
+    </select>
+
+    <!--更新记录 下发计划-->
+    <update id="updatePlanState" parameterClass="map">
+      update HPP_PLAN set PLAN_STATE=1,record_user_id=#recorduserID#,record_time=sysdate
+      where 1=1 and PLAN_STATE = 0
+      <dynamic>
+        <isNotEmpty property="plandate" prepend="AND">
+          PLAN_DATE=to_date(#plandate#,'yyyy-mm-dd')
+        </isNotEmpty>
+        <isNotEmpty property="equipId" prepend="AND">
+          EQUIP_ID=#equipId#
+        </isNotEmpty>
+      </dynamic>
+    </update>
+
+    <!--更新记录 下发计划明细-->
+    <update id="updatePlanDetailState" parameterClass="map">
+      update HPP_PLAN_DETAIL set PLAN_STATE=1
+      where 1 = 1 and PLAN_STATE = 0 and PLAN_ID in (
+      select t.OBJID from HPP_PLAN t
+      where 1=1
+      <dynamic>
+        <isNotNull property="plandate" prepend="AND">
+          t.PLAN_DATE=to_date(#plandate#,'yyyy-mm-dd')
+        </isNotNull>
+        <isNotEmpty property="equipId" prepend="AND">
+          t.EQUIP_ID=#equipId#
+        </isNotEmpty>
+        )
+        <isNotEmpty property="materialId" prepend="AND">
+          MATERIAL_ID=#materialId#
+        </isNotEmpty>
+        <isNotEmpty property="greenTyreCode" prepend="AND">
+          MATERIAL_CODE=#greenTyreCode#
+        </isNotEmpty>
+        <isNotEmpty property="bomId" prepend="AND">
+          BOM_ID=#bomId#
+        </isNotEmpty>
+        <isNotEmpty property="techId" prepend="AND">
+          TECH_ID=#techId#
+        </isNotEmpty>
+      </dynamic>
+    </update>
+    
+     <!--更新记录-->
+        <update id="resetPlanDetailState" parameterClass="map">
+            update HPP_PLAN_DETAIL set PLAN_STATE=0
+            where PLAN_ID in (
+            select  t.OBJID from HPP_PLAN t
+            where 1=1
+            <dynamic>
+                <isNotNull property="plandate" prepend="AND">
+                    t.PLAN_DATE=to_date(#plandate#,'yyyy-mm-dd')
+                </isNotNull>
+                <isNotEmpty property="equipId" prepend="AND">
+                    t.EQUIP_ID=$equipId$
+                </isNotEmpty>
+                )
+                <isNotEmpty property="materialId" prepend="AND">
+                    MATERIAL_ID=$materialId$
+                </isNotEmpty>
+                <isNotEmpty property="bomId" prepend="AND">
+                    BOM_ID=#bomId#
+                </isNotEmpty>
+                <isNotEmpty property="techId" prepend="AND">
+                    TECH_ID=#techId#
+                </isNotEmpty>
+              <isNotEmpty property="greenTyreCode" prepend="AND">
+                MATERIAL_CODE=#greenTyreCode#
+              </isNotEmpty>
+            </dynamic>
+        </update>
+        <!--更新记录-->
+        <update id="resetPlanState" parameterClass="map">
+            update HPP_PLAN set PLAN_STATE=0
+            where 1=1 AND OBJID not in (
+              select t.OBJID
+              from HPP_PLAN t
+              join HPP_PLAN_DETAIL d on t.OBJID = d.PLAN_ID
+              where 1=1 AND d.PLAN_STATE > 0
+            <dynamic>
+                <isNotEmpty property="plandate" prepend="AND">
+                    PLAN_DATE=to_date(#plandate#,'yyyy-mm-dd')
+                </isNotEmpty>
+                <isNotEmpty property="equipId" prepend="AND">
+                    EQUIP_ID=$equipId$
+                </isNotEmpty>
+            </dynamic>
+          )
+            <dynamic>
+                <isNotEmpty property="plandate" prepend="AND">
+                    PLAN_DATE=to_date(#plandate#,'yyyy-mm-dd')
+                </isNotEmpty>
+                <isNotEmpty property="equipId" prepend="AND">
+                    EQUIP_ID=$equipId$
+                </isNotEmpty>
+            </dynamic>
+        </update>
+
+    <!--查询实例说明-->
+    <select id="getSemisTyreMaterial" parameterClass="int" resultClass="Row">
+      SELECT T.* FROM sbm_bom_data T WHERE t.OBJID = #MATERIALID#
+    </select>
+
+    <!--查询实例说明-->
+    <select id="getBomVersion" parameterClass="int" resultClass="Row">
+      SELECT T.*, T.BOM_NAME V
+      FROM V_SBM_BOM_DATA T
+      WHERE t.DELETE_FLAG = 0
+      AND t.MATERIAL_PARENT_ID = #MATERIALID#
+      ORDER BY T.LASTMODIFY_DATE DESC
+    </select>
+    
+    <select id="getSemisTechVersion" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      SELECT DISTINCT (T.PROCESS_ROUTE || '@' || T.PROCESS_VERSION) AS OBJID,(T.PROCESS_ROUTE || '@' || T.PROCESS_VERSION) AS V FROM PLM_HALF_MAIN T
+      LEFT JOIN SBM_MATERIAL T1 ON T.ASSEM_SAPMAT = T1.SAP_FULL_CODE
+      LEFT JOIN EQUIP_RELATION T2 ON T.EQUIPMENT_CODE = T2.PLM_EQUIPCODE
+      WHERE T.DELETE_FLAG = 0
+      ]]>
+    <dynamic prepend="AND">
+         <isNotNull property="MATERIALID" prepend="AND">
+           <![CDATA[T1.OBJID= #MATERIALID#]]>
+         </isNotNull>
+         <isNotNull property="EQUIPID" prepend="AND">
+           <![CDATA[T2.MES_EQUIPID = #EQUIPID#]]>
+         </isNotNull>
+     </dynamic>
+    </select>
+    
+    <!--<select id="getSemisTechVersion" parameterClass="int" resultClass="Row">
+      select greentyre_version from sbm_bom_data where objid = #MATERIALID#
+    </select>-->
+
+    <select id="getEquipRelation" parameterClass="int" resultClass="Row">
+      SELECT T.MES_EQUIPID,T.PLM_EQUIPCODE FROM EQUIP_RELATION T WHERE T.MES_EQUIPID = #EQUIPID#
+    </select>
+
+    <select id="getEquipMajor" parameterClass="int" resultClass="Row">
+      SELECT T1.major_type_name AS PROCEDURE_NAME FROM SBE_EQUIP T
+      LEFT JOIN SBE_EQUIP_MAJOR_TYPE T1 ON T.MAJOR_TYPE_ID=T1.OBJID
+      WHERE T.OBJID = #EQUIPID#
+    </select>
+
+    <!--查询实例说明-->
+    <select id="getGreenTyre" parameterClass="int" resultClass="Row">
+      SELECT distinct t1.material_code
+      FROM V_SBM_BOM T
+      inner join sbm_material t1 on t.GREENTYRE_MATERIAL_ID=t1.objid where t.delete_flag=0 and t.MATERIAL_ID=#MATERIALID#
+      order by t1.material_code 
+    </select>
+
+    <!--查询实例说明-->
+    <select id="getTechVersion" parameterClass="int" resultClass="Row">
+      SELECT T.*, T.TECH_NAME AS V
+      FROM V_CPT_CURING_TECH T
+      WHERE T.DELETE_FLAG = 0
+      AND t.MATERIAL_ID = #MATERIALID#
+      ORDER BY T.LASTMODIFY_DATE DESC
+    </select>
+
+    <!--Webservice 接口方法-->
+    <!--Webservice 获取计划明细-->
+    <statement id="wsGetPlanDetailInfo" parameterClass="map" resultClass="Row">
+      select d.PLAN_ID, d.OBJID AS PLAN_DETAIL_ID, m.MATERIAL_NAME, s.SHIFT_NAME, d.PLAN_AMOUNT, d.REAL_AMOUNT
+      , 0 AS PRIORITY, 0 AS PLAN_FLAG, d.PLAN_STATE, '' AS REMARK
+      from HPP_PLAN_DETAIL d
+      join HPP_PLAN p on d.PLAN_ID = p.OBJID
+      join SBE_EQUIP e on p.EQUIP_ID = e.OBJID
+      join SBM_MATERIAL m on d.MATERIAL_ID = m.OBJID
+      join SSB_SHIFT s on p.SHIFT_ID = s.OBJID
+      where d.DELETE_FLAG = 0 and p.DELETE_FLAG = 0 and d.PLAN_STATE > 0
+      <dynamic>
+        <isNotNull property="PlanDate" prepend="and">
+          <![CDATA[p.PLAN_DATE = to_date(#PlanDate#,'yyyy-mm-dd')]]>
+        </isNotNull>
+        <isNotNull property="EquipId" prepend="and">
+          <![CDATA[p.EQUIP_ID = #EquipId#]]>
+        </isNotNull>
+        <isNotNull property="ShiftId" prepend="and">
+          <![CDATA[p.SHIFT_ID = #ShiftId#]]>
+        </isNotNull>
+      </dynamic>
+    </statement>
+
+      <!--更新记录 删除计划-->
+    <delete id="deletePlanState" parameterClass="map">
+      DELETE FROM HPP_PLAN T
+      where T.PLAN_STATE=0 AND NOT EXISTS
+      (SELECT 1 FROM HPP_PLAN_DETAIL T1 WHERE T1.PLAN_ID = T.OBJID)
+      <dynamic>
+        <isNotEmpty property="plandate" prepend="AND">
+          T.PLAN_DATE=#plandate#
+        </isNotEmpty>
+        <isNotEmpty property="equipId" prepend="AND">
+          T.EQUIP_ID=#equipId#
+        </isNotEmpty>
+      </dynamic>
+    </delete>
+
+    <!--更新记录 删除计划明细-->
+    <delete id="deletePlanDetailState" parameterClass="map">
+      DELETE FROM HPP_PLAN_DETAIL
+      where  PLAN_STATE=0 AND PLAN_ID in (
+      select t.OBJID from HPP_PLAN t
+      where 1=1
+      <dynamic>
+        <isNotNull property="plandate" prepend="AND">
+          t.PLAN_DATE=#plandate#
+        </isNotNull>
+        <isNotEmpty property="equipId" prepend="AND">
+          t.EQUIP_ID=#equipId#
+        </isNotEmpty>
+        )
+        <isNotEmpty property="materialId" prepend="AND">
+          MATERIAL_ID=#materialId#
+        </isNotEmpty>
+        <isNotEmpty property="bomId" prepend="AND">
+          BOM_ID=#bomId#
+        </isNotEmpty>
+        <isNotEmpty property="techId" prepend="AND">
+          TECH_ID=#techId#
+        </isNotEmpty>
+        <isNotEmpty property="greenTyreCode" prepend="AND">
+          MATERIAL_CODE=#greenTyreCode#
+        </isNotEmpty>
+      </dynamic>
+    </delete>
+
+    <!--查询实例说明-->
+    <select id="getProcedure" parameterClass="int" resultClass="Row">
+      SELECT OBJID,MAJOR_TYPE_NAME FROM SBE_EQUIP_MAJOR_TYPE WHERE OBJID IN (31,22,32,33,21,32,33,34,35,36,37,38) AND DELETE_FLAG=0
+    </select>
+    
+    <select id="getVersion" parameterClass="int" resultClass="Row">
+      SELECT 1 OBJID,'是' VERSIONNAME FROM DUAL
+      UNION
+      SELECT 2 OBJID,'否' VERSIONNAME FROM DUAL
+      UNION  
+      SELECT 3 OBJID,'全部  ' VERSIONNAME FROM DUAL
+    </select>
+
+    <!--Webservice 下载计划明细-->
+    <statement id="wsDownloadPlanDetailInfo" parameterClass="map" resultClass="Row">
+      select d.PLAN_ID, d.OBJID AS PLAN_DETAIL_ID, d.MATERIAL_ID, m.MATERIAL_NAME,m.sap_code, s.SHIFT_NAME, d.PLAN_AMOUNT, d.REAL_AMOUNT
+      , 0 AS PRIORITY, 0 AS PLAN_FLAG, d.PLAN_STATE, '' AS REMARK, t9.OBJID AS UNIT_ID, '' AS TIRE_TYPE_FLAG,y.minor_type_name,d.MATERIAL_CODE,t9.UNIT_NAME,d.bom_id,d.tech_id,
+      T11.MIN_TIME,T11.VALID_TIME,M.COLOR,t12.material_prod_code as material_proc_code
+      from HPP_PLAN_DETAIL d
+      join HPP_PLAN p on d.PLAN_ID = p.OBJID
+      join SBE_EQUIP e on p.EQUIP_ID = e.OBJID
+      join SBM_MATERIAL m on d.MATERIAL_ID = m.OBJID
+      join SSB_SHIFT s on p.SHIFT_ID = s.OBJID
+      left join sbm_material_minor_type y on m.minor_type_id=y.objid
+      LEFT JOIN (SELECT DISTINCT MATERIAL_ID,UNIT_ID FROM V_SBM_BOM WHERE DELETE_FLAG=0 ORDER BY MATERIAL_ID) T10 ON d.MATERIAL_ID= T10.MATERIAL_ID
+      LEFT JOIN ssb_unit T9 ON T10.UNIT_ID=T9.OBJID
+      LEFT JOIN SBM_MATERIAL_INFO T11 ON T11.MATERIAL_ID = d.MATERIAL_ID
+      left join HPP_SEMIS_MATERIAL_CODE t12 on t12.material_id = m.objid and t12.delete_flag = 0
+      where d.DELETE_FLAG = 0 and p.DELETE_FLAG = 0 and  d.PLAN_STATE > 0
+      <dynamic>
+        <isNotNull property="PlanDate" prepend="and">
+          <![CDATA[p.PLAN_DATE = to_date(#PlanDate#,'yyyy-mm-dd')]]>
+        </isNotNull>
+        <isNotNull property="EquipId" prepend="and">
+          <![CDATA[p.EQUIP_ID = #EquipId#]]>
+        </isNotNull>
+        <isNotNull property="ShiftId" prepend="and">
+          <![CDATA[p.SHIFT_ID = #ShiftId#]]>
+        </isNotNull>
+      </dynamic>
+    </statement>
+
+    <!--Webservice 接收计划明细-->
+    <update id="wsReceivePlanDetailInfo" parameterClass="map">
+      update HPP_PLAN_DETAIL set PLAN_STATE = 2
+      where DELETE_FLAG = 0 and PLAN_STATE = 1 and PLAN_ID in (
+      select t.OBJID from HPP_PLAN t
+      join SBE_EQUIP e on t.EQUIP_ID = e.OBJID
+      where 1=1 and t.DELETE_FLAG = 0 and t.PLAN_STATE > 0
+      <dynamic>
+        <isNotNull property="PlanDate" prepend="and">
+          t.PLAN_DATE=to_date(#PlanDate#,'yyyy-mm-dd')
+        </isNotNull>
+        <isNotEmpty property="EquipId" prepend="and">
+          t.EQUIP_ID=#EquipId#
+        </isNotEmpty>
+        <isNotNull property="ShiftId" prepend="and">
+          t.SHIFT_ID=#ShiftId#
+        </isNotNull>
+      </dynamic>
+      )
+    </update>
+
+    <!--Webservice 接收计划-->
+    <update id="wsReceivePlanInfo" parameterClass="map">
+      update HPP_PLAN set PLAN_STATE = 2
+      where DELETE_FLAG = 0 and PLAN_STATE = 1 and OBJID in (
+      select t.OBJID from HPP_PLAN t
+      join HPP_PLAN_DETAIL d on t.OBJID = d.PLAN_ID
+      join SBE_EQUIP e on t.EQUIP_ID = e.OBJID
+      where 1=1 and d.DELETE_FLAG = 0 and d.PLAN_STATE = 2
+      <dynamic>
+        <isNotNull property="PlanDate" prepend="and">
+          t.PLAN_DATE=to_date(#PlanDate#,'yyyy-mm-dd')
+        </isNotNull>
+        <isNotEmpty property="EquipId" prepend="and">
+          t.EQUIP_ID=#EquipId#
+        </isNotEmpty>
+        <isNotNull property="ShiftId" prepend="and">
+          t.SHIFT_ID=#ShiftId#
+        </isNotNull>
+        )
+      </dynamic>
+    </update>
+
+    <!--下载A区半制品用户-->
+    <select id="wsDownloadEmployeesA" parameterClass="map" resultClass="Row">
+     <![CDATA[
+      select lpad(u.OBJID, 10, '0') EMP_ID, u.USER_NAME EMP_NAME, u.USER_PWD PASSWD, lpad(u.DEPT_ID, 4, '0') DEPT_ID,u.work_barcode
+      from SSB_USER u
+      where u.DELETE_FLAG = 0 and u.work_barcode <> '000001'
+     ]]>
+
+    </select>
+
+    <!--下载A区半制品用户-->
+    <select id="wsDownloadEmployeesA2" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      select lpad(u.OBJID, 10, '0') EMP_ID, u.USER_NAME EMP_NAME, u.USER_PWD PASSWD, lpad(u.DEPT_ID, 4, '0') DEPT_ID, u.WORK_BARCODE
+      from SSB_USER u
+      where u.DELETE_FLAG = 0
+      and nvl(u.work_barcode,'') <> '000001'
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="Objid" prepend="AND">
+          <![CDATA[u.Objid>=#Objid#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <!--Webservice方法 下载半制品机台-->
+    <select id="wsDownloadSemisEquipInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+        select t1.objid,lpad(t1.OBJID, 7, '0') AS EQUIP_ID, t1.EQUIP_NAME, t1.EQUIP_CODE,t1.major_type_id,t1.minor_type_id
+        from SBE_EQUIP t1
+        where 1 = 1 and t1.DELETE_FLAG = 0 and t1.MAJOR_TYPE_ID in (31,22,32,33,21,32,33,34,35,36,37,38)
+      ]]>
+      <dynamic>
+        <isNotNull property="ObjId" prepend="AND">
+          <![CDATA[t1.OBJID = #ObjId#]]>
+        </isNotNull>
+        <isNotNull property="EquipName" prepend="AND">
+          <![CDATA[t1.EQUIP_NAME like '%' || #EquipName# || '%']]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+        order by t1.EQUIP_CODE, t1.EQUIP_NAME, t1.DELETE_FLAG
+      ]]>
+    </select>
+
+    <!--查询机台类别-->
+    <select id="getEquipType" parameterClass="int" resultClass="Row">
+      select t1.objid as MinorID,t2.objid as MajorID,t1.minor_type_name as MinorName,t2.major_type_name as MajorName
+      from sbe_equip_minor_type t1 left join sbe_equip_major_type t2 on t1.major_type_id=t2.objid
+    </select>
+    <delete id="DeleteAllPlanDetail" parameterClass="map">
+      <![CDATA[
+      delete from hpp_plan_detail where plan_id in (select objid from hpp_plan t where t.delete_flag=0
+      and t.plan_date= to_date(#planDate#,'yyyy-MM-dd'))
+      ]]>
+    </delete>
+    <delete id="DeleteAllPlan" parameterClass="map">
+      <![CDATA[
+     delete from hpp_plan t where t.delete_flag=0
+      and t.plan_date=to_date(#planDate#,'yyyy-MM-dd')
+      
+      ]]>
+    </delete>
+    <select id="GetSemisBomInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      select distinct t.material_id,t1.material_name,t.unit_id,t.group_num,t.greentyre_version,
+      t.bom_type,t2.type_name,t.bom_factroy,t.bom_version,t.material_parent_id,t.group_unit_num,
+      t1.minor_type_id,t3.minor_type_name,t1.sap_code,T.SUB_ITEM_REVISION
+       from sbm_bom_data t 
+       left join sbm_material t1 on t1.objid = t.material_id
+       left join sbm_bom_type t2 on t2.objid = t.bom_type
+       left join sbm_material_minor_type t3 on t3.objid = t1.minor_type_id
+      where t.material_parent_id=(select material_parent_id from sbm_bom_data  where delete_flag=0 and objid = #BomId#)
+      and t.greentyre_version = (select greentyre_version from sbm_bom_data  where delete_flag=0 and objid = #BomId#) 
+      and t.bom_type=(select bom_type from sbm_bom_data  where delete_flag=0 and objid = #BomId#) 
+      and t.bom_version=(select bom_version from sbm_bom_data  where delete_flag=0 and objid = #BomId#)
+      and t.delete_flag=0
+      ]]>
+    </select>
+    <select id="GetSplitPlanInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      SELECT A.MATERIAL_ID,C.MATERIAL_NAME,SUM(A.GROUP_NUM*A.GROUP_UNIT_NUM*B.PLAN_AMOUNT) QTY,C.MINOR_TYPE_ID FROM 
+      (SELECT T1.MATERIAL_ID,T1.PLAN_AMOUNT,T2.GREENTYRE_VERSION,T2.GREENTYRE_MATERIAL_ID,T2.BOM_TYPE,T2.MATERIAL_PARENT_ID FROM HPP_PLAN T 
+      LEFT JOIN HPP_PLAN_DETAIL T1 ON T1.PLAN_ID = T.OBJID
+      LEFT JOIN SBM_BOM_DATA T2 ON T2.OBJID = T1.BOM_ID 
+       ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="EquipId" prepend="AND">
+          <![CDATA[T.EQUIP_ID=#EquipId#]]>
+        </isNotNull>
+        <isNotNull property="ShiftId" prepend="AND">
+          <![CDATA[T.SHIFT_ID=#ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="ShiftDate" prepend="AND">
+          <![CDATA[T.PLAN_DATE=#ShiftDate#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[ ) B
+      LEFT JOIN SBM_BOM_DATA A
+      ON B.GREENTYRE_MATERIAL_ID = A.GREENTYRE_MATERIAL_ID AND B.GREENTYRE_VERSION = A.GREENTYRE_VERSION AND B.BOM_TYPE = A.BOM_TYPE
+      AND A.MATERIAL_PARENT_ID =B.MATERIAL_PARENT_ID
+      LEFT JOIN SBM_MATERIAL C ON C.OBJID = A.MATERIAL_ID
+      WHERE A.DELETE_FLAG=0 and C.MAJOR_TYPE_ID<>1 GROUP BY A.MATERIAL_ID,C.MATERIAL_NAME,C.MINOR_TYPE_ID
+   ]]>
+      
+    </select>
+    <select id="GetRingBom" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      SELECT DISTINCT T.MATERIAL_ID,T1.MATERIAL_NAME,T.UNIT_ID,T.GROUP_NUM,T.GREENTYRE_VERSION,
+      T.BOM_TYPE,T2.TYPE_NAME,
+      T.BOM_FACTROY,T.BOM_VERSION, #MaterialParentId#,T.GROUP_UNIT_NUM,T1.MINOR_TYPE_ID,T3.MINOR_TYPE_NAME,
+      T1.SAP_CODE,t.SUB_ITEM_REVISION FROM SBM_BOM_DATA T
+      LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID = T.MATERIAL_ID
+      LEFT JOIN SBM_BOM_TYPE T2 ON T2.OBJID = T.BOM_TYPE
+      LEFT JOIN SBM_MATERIAL_MINOR_TYPE T3 ON T3.OBJID = T1.MINOR_TYPE_ID
+      WHERE MATERIAL_PARENT_ID=#MaterialId# AND T.DELETE_FLAG=0 AND 
+      T.BOM_TYPE=#Bom_type# AND T.BOM_VERSION=#Bom_version# and T.GREENTYRE_VERSION=#SUB_ITEM_REVISION#
+      ]]>
+    </select>
+
+    <select id="GetRingBom2" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      SELECT DISTINCT T.MATERIAL_ID,T1.MATERIAL_NAME,T.UNIT_ID,T.GROUP_NUM,T.GREENTYRE_VERSION,
+      T.BOM_TYPE,T2.TYPE_NAME,
+      T.BOM_FACTROY,T.BOM_VERSION, #MaterialParentId#,T.GROUP_UNIT_NUM,T1.MINOR_TYPE_ID,T3.MINOR_TYPE_NAME,
+      T1.SAP_CODE,t.SUB_ITEM_REVISION FROM SBM_BOM_DATA T
+      LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID = T.MATERIAL_ID
+      LEFT JOIN SBM_BOM_TYPE T2 ON T2.OBJID = T.BOM_TYPE
+      LEFT JOIN SBM_MATERIAL_MINOR_TYPE T3 ON T3.OBJID = T1.MINOR_TYPE_ID
+      WHERE MATERIAL_PARENT_ID=#MaterialId# AND T.DELETE_FLAG=0 AND 
+      T.BOM_TYPE=#Bom_type# AND T.BOM_VERSION=#Bom_version#
+      ]]>
+    </select>
+    
+
+    <select id="GetPlanDetailDeteleFlag" parameterClass="map" resultClass="Row">
+      select * from hpp_semis_production c
+      where c.plan_detail_id in (
+      select b.objid from hpp_plan_detail b
+      where b.plan_id in (
+      select a.objid from hpp_plan a
+      where 1=1
+      <dynamic>
+        <isNotNull property="plandate" prepend="AND">
+          a.PLAN_DATE=#plandate#
+        </isNotNull>
+        <isNotEmpty property="equipId" prepend="AND">
+          a.EQUIP_ID=#equipId#
+        </isNotEmpty>
+        )
+        <isNotEmpty property="materialId" prepend="AND">
+          b.MATERIAL_ID=#materialId#
+        </isNotEmpty>
+        <isNotEmpty property="bomId" prepend="AND">
+          b.BOM_ID=#bomId#
+        </isNotEmpty>
+        <isNotEmpty property="techId" prepend="AND">
+          b.TECH_ID=#techId#
+        </isNotEmpty>
+        )
+      </dynamic>
+    </select>
+
+    <select id="getProductionVer" parameterClass="map" resultClass="Row">
+      select distinct a.production_ver,c.bom_version from sbm_material_productionver a
+      left join sbm_material b on a.sap_code = b.sap_code and b.delete_flag = 0
+      left join sbm_bom_data c on c.objid = #BomId#
+      where b.objid = #MaterialId# and a.delete_flag = 0
+    </select>
+
+    <select id="getMaterialStatus" parameterClass="map" resultClass="Row">
+      SELECT * FROM sbm_material WHERE objid = #MaterialId#
+    </select>
+
+    <select id="getPlanAll" parameterClass="map" resultClass="Row">
+      select distinct b.material_id,b.bom_id
+      from hpp_plan a
+      left join hpp_plan_detail b on a.objid = b.plan_id
+      where a.plan_date = to_date(#planDate#,'yyyy-mm-dd')
+    </select>
+    
+    <select id="getMaterialCheck" parameterClass="map" resultClass="Row">
+      select b.minor_type_name,a.* from sbm_material a
+      left join sbm_material_minor_type  b on a.minor_type_id = b.objid 
+      where a.major_type_id = 31 and b.delete_flag = 0
+      and (
+           (b.erp_code like '%301012%' and a.sap_code like '301%')
+        or (b.erp_code like '%301015%' and a.sap_code like '301%')
+        or (b.erp_code like '%302012%' and a.sap_code like '302%')
+      )
+      and a.objid = #MaterialId#
+    </select>
+
+    <select id="YZBomAndMater" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       select to_nchar(greentyre_version) greentyre_version from (select distinct to_number(greentyre_version) greentyre_version from sbm_bom_data where material_parent_id = 
+(select material_parent_id from sbm_bom_data  where objid = #bomId#) and delete_flag = 0 
+and not regexp_like(greentyre_version,'[a-zA-Z]') and greentyre_version is not null 
+order by greentyre_version desc ) where rownum = 1
+union all
+select greentyre_version from sbm_bom_data  where objid = #bomId#
+union all
+select  sap_code  from  sbm_material where objid = #materialId#
+union all
+select  equip_name  from sbe_equip where objid = #equipId#
+      ]]>
+    </select>
+
+    <select id="GetHppPlanDet" parameterClass="map" resultClass="Row">
+      <![CDATA[
+SELECT  A.BOM_ID,A.MATERIAL_ID,B.EQUIP_ID,T5.MAJOR_TYPE_NAME AS PROCEDURE_NAME,T7.EQUIP_NAME, T6.MATERIAL_NAME 
+FROM  HPP_PLAN_DETAIL A
+INNER JOIN HPP_PLAN B ON A.PLAN_ID = B.OBJID and B.DELETE_FLAG = 0 AND B.PLAN_DATE = to_date(#Plandate#,'yyyy-MM-dd')
+INNER JOIN SBE_EQUIP T7 ON B.EQUIP_ID=T7.OBJID
+LEFT JOIN SBE_EQUIP_MAJOR_TYPE T5 ON T7.MAJOR_TYPE_ID=T5.OBJID
+LEFT JOIN SBM_MATERIAL T6 ON A.MATERIAL_ID = T6.OBJID
+where A.DELETE_FLAG = 0
+      ]]>
+    </select>
+
+    <select id="GetPlanNoTechInfo" parameterClass="map" resultClass="Row">
+      SELECT distinct T8.material_name mater
+      FROM HPP_PLAN T1
+      INNER JOIN HPP_PLAN_DETAIL T2 ON T1.OBJID=T2.PLAN_ID
+      INNER JOIN SBE_EQUIP T7 ON T1.EQUIP_ID=T7.OBJID
+      left join sbm_material t8 on t8.objid = t2.material_id
+      where  not exists ( select *  from  plm_half_main x where x.assem_sapmat = t8.sap_code||'_' and x.delete_flag = 0)
+      <dynamic>
+        <isNotNull property="where.PlanDate" prepend="AND">
+          <![CDATA[t1.PLAN_DATE = to_date(#where.PlanDate#,'yyyy-MM-dd')]]>
+        </isNotNull>
+        <isNotNull property="where.MajorTypeId" prepend="AND">
+          <![CDATA[t7.MAJOR_TYPE_ID = #where.MajorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.mater" prepend="AND">
+          <![CDATA[T8.material_name like '%' || #where.mater# || '%']]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    
+  </statements>
+</sqlMap>

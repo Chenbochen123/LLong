@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudSbeEquipStopReason" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*, T2.USER_NAME RECORD_USER_NAME, T3.MAJOR_TYPE_NAME EQUIP_MAJOR_TYPE_NAME
+        FROM SBE_EQUIP_STOP_REASON T1 LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+        LEFT JOIN SBE_EQUIP_MAJOR_TYPE T3 ON T1.EQUIP_MAJOR_TYPE_ID = T3.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_STOP_REASON_NAME" prepend="AND">
+          <![CDATA[T1.EQUIP_STOP_REASON_NAME LIKE '%' || #where.EQUIP_STOP_REASON_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_MAJOR_TYPE_ID" prepend="AND">
+          <![CDATA[T1.EQUIP_MAJOR_TYPE_ID = #where.EQUIP_MAJOR_TYPE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.EQUIP_MAJOR_TYPE_ID, T1.SEQ_INDEX
+      </isNull>
+    </select>
+    <select id="Select+Update@CrudSbeEquipStopReason" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM SBE_EQUIP_STOP_REASON ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询设备大类信息，ID值固定为GetComboBoxData@Select@CrudSbeEquipStopReason@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSbeEquipStopReason@EQUIP_MAJOR_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey, MAJOR_TYPE_NAME ssValue from SBE_EQUIP_MAJOR_TYPE where DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

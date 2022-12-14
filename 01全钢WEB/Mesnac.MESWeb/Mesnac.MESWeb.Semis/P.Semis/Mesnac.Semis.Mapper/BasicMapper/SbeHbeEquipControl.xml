@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.SbeHbeEquipControl"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SbeHbeEquipControl" type="Mesnac.Semis.Entity.BasicEntity.SbeHbeEquipControl, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SbeHbeEquipControl" class="SbeHbeEquipControl">
+    <result property="Equipid" column="EQUIPID"/>
+    <result property="Up" column="UP"/>
+    <result property="Middle" column="MIDDLE"/>
+    <result property="Down" column="DOWN"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SbeHbeEquipControl" class="SbeHbeEquipControl">
+    <parameter property="Equipid" column="Equipid"/>
+    <parameter property="Up" column="Up"/>
+    <parameter property="Middle" column="Middle"/>
+    <parameter property="Down" column="Down"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_HBE_EQUIP_CONTROL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.Equipid" prepend="AND">
+          <![CDATA[EQUIPID = #where.Equipid#]]>
+        </isNotNull>
+        <isNotNull property="where.Up" prepend="AND">
+          <![CDATA[UP = #where.Up#]]>
+        </isNotNull>
+        <isNotNull property="where.Middle" prepend="AND">
+          <![CDATA[MIDDLE = #where.Middle#]]>
+        </isNotNull>
+        <isNotNull property="where.Down" prepend="AND">
+          <![CDATA[DOWN = #where.Down#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (EQUIPID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SBE_HBE_EQUIP_CONTROL]]>
+       <dynamic prepend="(EQUIPID,">
+        <isNotNull property="Up" prepend=",">UP</isNotNull>
+        <isNotNull property="Middle" prepend=",">MIDDLE</isNotNull>
+        <isNotNull property="Down" prepend=",">DOWN</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="Equipid" prepend=",">#Equipid#</isNotNull>
+        <isNull property="Equipid" prepend=",">SEQ_SBE_HBE_EQUIP_CONTROL.NEXTVAL</isNull>
+        <isNotNull property="Up" prepend=",">#Up#</isNotNull>
+        <isNotNull property="Middle" prepend=",">#Middle#</isNotNull>
+        <isNotNull property="Down" prepend=",">#Down#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SBE_HBE_EQUIP_CONTROL
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Up"  prepend=",">
+          UP = #update.Up#
+        </isNotNull>
+        <isNotNull  property="update.Middle"  prepend=",">
+          MIDDLE = #update.Middle#
+        </isNotNull>
+        <isNotNull  property="update.Down"  prepend=",">
+          DOWN = #update.Down#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SBE_HBE_EQUIP_CONTROL
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SbeHbeEquipControl">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SbeHbeEquipControl">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(EQUIPID)
+      </isNotPropertyAvailable>
+      FROM SBE_HBE_EQUIP_CONTROL
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SBE_HBE_EQUIP_CONTROL
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SbeHbeEquipControl" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SBE_HBE_EQUIP_CONTROL
+    </statement>
+  </statements>
+</sqlMap>

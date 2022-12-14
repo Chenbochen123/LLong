@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudSebEquipStore" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT T1.*
+      , T2.USER_NAME RECORD_USER_NAME
+      , T3.STORE_NAME, T3.STORE_CODE
+      , T4.MINOR_TYPE_NAME
+      , T5.MAJOR_TYPE_NAME 
+      FROM SEB_EQUIP_STORE T1 
+      LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+      LEFT JOIN SEB_STORE T3 ON T1.STORE_ID = T3.OBJID 
+      LEFT JOIN SBE_EQUIP_MINOR_TYPE T4 ON T1.MINOR_TYPE_ID = T4.OBJID 
+      LEFT JOIN SBE_EQUIP_MAJOR_TYPE T5 ON T1.MAJOR_TYPE_ID = T5.OBJID  
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreId" prepend="AND">
+          <![CDATA[T1.STORE_ID = #where.StoreId#]]>
+        </isNotNull>
+        <isNotNull property="where.MajorTypeId" prepend="AND">
+          <![CDATA[T1.MAJOR_TYPE_ID = #where.MajorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.MinorTypeId" prepend="AND">
+          <![CDATA[T1.MINOR_TYPE_ID = #where.MinorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.OBJID DESC
+      </isNull>
+    </select>
+    <select id="Select+Update@CrudSebEquipStore" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT T1.*, T2.STORE_NAME STORE_ID_TriggerField FROM SEB_EQUIP_STORE T1 LEFT JOIN SEB_STORE T2 ON T1.STORE_ID = T2.OBJID ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T1.OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询设备大类信息，ID值固定为GetComboBoxData@Select@CrudSebEquipStore@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSebEquipStore@MajorTypeId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey,t1.MAJOR_TYPE_NAME ssValue from SBE_EQUIP_MAJOR_TYPE t1 where t1.DELETE_FLAG = '0'
+        order by t1.OBJID
+     ]]>
+    </select>
+
+    <!--查询设备细类信息，ID值固定为GetComboBoxData@Select@CrudSebEquipStore@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSebEquipStore@MinorTypeId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey,t1.MINOR_TYPE_NAME ssValue from SBE_EQUIP_MINOR_TYPE t1 where t1.DELETE_FLAG = '0'
+        order by t1.OBJID
+     ]]>
+    </select>
+
+    <!--查询设备大类信息，ID值固定为GetComboBoxData@Select@CrudSebEquipStore@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSebEquipStore@MAJOR_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey,t1.MAJOR_TYPE_NAME ssValue from SBE_EQUIP_MAJOR_TYPE t1 where t1.DELETE_FLAG = '0'
+        order by t1.OBJID
+     ]]>
+    </select>
+
+    <!--查询设备细类信息，ID值固定为GetComboBoxData@Select@CrudSebEquipStore@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudSebEquipStore@MINOR_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey,t1.MINOR_TYPE_NAME ssValue from SBE_EQUIP_MINOR_TYPE t1 where t1.DELETE_FLAG = '0'
+        order by t1.OBJID
+     ]]>
+    </select>
+
+  </statements>
+</sqlMap>

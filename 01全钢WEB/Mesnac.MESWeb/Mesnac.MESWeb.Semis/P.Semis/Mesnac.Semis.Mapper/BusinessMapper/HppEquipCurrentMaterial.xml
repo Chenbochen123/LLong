@@ -1,0 +1,542 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HppEquipCurrentMaterial"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_EQUIP_CURRENT_MATERIAL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.Position" prepend="AND">
+          <![CDATA[POSITION = #where.Position#]]>
+        </isNotNull>
+        <isNotNull property="where.ToolingId" prepend="AND">
+          <![CDATA[TOOLING_ID = #where.ToolingId#]]>
+        </isNotNull>
+        <isNotNull property="where.CardNo" prepend="AND">
+          <![CDATA[CARD_NO = #where.CardNo#]]>
+        </isNotNull>
+        <isNotNull property="where.SemisMinorTypeId" prepend="AND">
+          <![CDATA[SEMIS_MINOR_TYPE_ID = #where.SemisMinorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetSemisCard" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select t.card_no , t1.left_qty from Hpp_Equip_Current_Material t
+        inner join  HPP_SEMIS_PRODUCTION t1 on t.card_no = t1.card_no
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="EquipID" prepend="AND">
+           <![CDATA[T.EQUIP_ID=#EquipID#]]>
+         </isNotNull>
+         </dynamic>
+       </select>
+     <select id="GetRubberCard" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select t.card_no , t1.left_qty from Hpp_Equip_Current_Material t
+        inner join  HPP_RUBBER_PRODUCTION t1 on t.card_no = t1.barcode
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="EquipID" prepend="AND">
+           <![CDATA[T.EQUIP_ID=#EquipID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetSemisAndRubberCardInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select t.card_no , to_char(t1.left_qty) left_qty from Hpp_Equip_Current_Material t
+        inner join  HPP_SEMIS_PRODUCTION t1 on t.card_no = t1.card_no
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="EquipID" prepend="AND">
+           <![CDATA[T.EQUIP_ID=#EquipID#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+       UNION ALL
+        select t.card_no , to_char(t1.left_qty) left_qty from Hpp_Equip_Current_Material t
+        inner join  HPP_RUBBER_PRODUCTION t1 on t.card_no = t1.barcode
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="EquipID" prepend="AND">
+           <![CDATA[T.EQUIP_ID=#EquipID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <!--半制品施工表start-->
+     <select id="GetMaterShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[ select distinct a.objid,a.material_name,b.greentyre_version from  sbm_material a
+inner join sbm_bom_data b on a.objid = b.material_parent_id and b.delete_flag = 0
+where a.minor_type_id = #type# and a.delete_flag = 0 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="mater" prepend="AND">
+           <![CDATA[a.material_name  LIKE '%'||#mater#||'%']]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+       order by a.material_name
+       ]]>
+     </select>
+     <select id="GetTQDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+ select a.material_parent_id tqmater_id,max(c.sap_code) 成品钢丝圈sap,max(b.sap_code) 全钢三角胶sap  from sbm_bom_data a 
+left join sbm_material b on b.objid=a.material_id and a.material_type_name ='全钢三角胶'  
+left join sbm_material c on c.objid=a.material_id and a.material_type_name ='全钢成品钢丝圈'
+left join sbm_material d on d.objid = a.material_parent_id
+where d.sap_code = #MATERIAL_NAME# and a.delete_flag=0 and a.greentyre_version = #VERSION#
+group by a.material_parent_id
+       ]]>
+     </select>
+     <select id="GetTQDataShigongAll" parameterClass="map" resultClass="Row">
+       <![CDATA[  select  substr(y.material_name,20,10) 胎圈代码,max(to_char(y1.record_time,'yyyy-MM-dd')) 日期,#VERSION# 版本,y.sap_code SAP品号,
+ y4.sap_code 钢丝圈包布sap,
+ max(decode(y2.parmname,'部件代码',y2.vlues,null)) 三角胶代码, max(decode(y1.parmname,'钢丝圈内直径mm',y1.vlues,null)) 钢丝圈内径,
+  max(decode(y1.parmname,'钢丝规格',y1.vlues,null)) 钢丝直径, max(decode(y5.parmname,'米重',y1.vlues,null)) 钢丝包布米重,
+  max(decode(y1.parmname,'钢丝包布长度',y1.vlues,null)) 钢丝包布长度mm,  max(decode(y1.parmname,'钢丝圈重量（单个）kg',y1.vlues,null)) 钢丝圈重量,
+   max(decode(y2.parmname,'上三角胶重量kg/条',y2.vlues,null)) 上三角胶重量, max(decode(y2.parmname,'下三角胶重量kg/条',y2.vlues,null)) 下三角胶重量,
+    max(decode(y2.parmname,'型胶重量kg/条',y2.vlues,null)) 型胶重量, max(decode(y2.parmname,'胶片1重量kg/条',y2.vlues,null)) 胶片1重量,
+  max(decode(y2.parmname,'胶片2重量kg/条',y2.vlues,null)) 胶片2重量,max(decode(y2.parmname,'钢丝圈配合底座宽度',y2.vlues,null)) 三角胶凹槽内宽,
+  max(decode(y1.parmname,'钢丝圈缠绕方式',y1.vlues,null)) 排列方式, max(decode(y2.parmname,'口型板号',y2.vlues,null)) 三角胶口型板号,
+   max(decode(y2.parmname,'三角胶高度mm',y2.vlues,null)) 三角胶高度, max(decode(y2.parmname,'1##挤出机喂料种类',y2.vlues,null)) 上三角胶胶料
+   , max(decode(y2.parmname,'2##挤出机喂料种类',y2.vlues,null)) 下三角胶胶料, max(decode(y2.parmname,'3##挤出机喂料种类',y2.vlues,null)) 型胶胶料
+   , max(decode(y2.parmname,'成型长度',y2.vlues,null)) 三角胶使用长度
+    , max(decode(y2.parmname,'胶片规格',y2.vlues,null)) 胶片1代码
+     , max(decode(y2.parmname,'胶片2代码',y2.vlues,null)) 胶片2代码
+  , max(decode(y2.parmname,'三角胶宽度mm',y2.vlues,null)) 三角胶全宽, max(decode(y2.parmname,'三角胶米重kg/m',y2.vlues,null)) 三角胶米重
+ , max(decode(y2.parmname,'三角胶长度mm',y2.vlues,null)) 三角胶长度,yy1.user_name 制表人,yy2.user_name 校对人,yy3.user_name 审核人,yy4.user_name 批准人
+ from sbm_material y
+ left join plm_half_main y1 on y1.assem_sapmat = #GSQSap#||'_' and  y1.delete_flag = 0  
+ left join plm_half_main y2 on y2.assem_sapmat = #SJJSap#||'_' and  y2.delete_flag = 0 
+ left join sbm_bom_data y3 on y3.material_parent_id = y1.objid and y3.delete_flag =0 and y3.greentyre_version = #VERSION# and y3.material_type_name = '全钢钢丝圈包布'
+ left join sbm_material y4 on y4.objid = y3.material_id
+ left join plm_half_main y5 on y5.assem_sapmat = y4.sap_code||'_' and  y5.delete_flag = 0  
+left join sbe_shigong_user yy on yy.item = '热帖一线'
+left join ssb_user yy1 on yy.zb_workid = yy1.work_barcode
+left join ssb_user yy2 on yy.jd_workid = yy2.work_barcode
+left join ssb_user yy3 on yy.sh_workid = yy3.work_barcode
+left join ssb_user yy4 on yy.pz_workid = yy4.work_barcode
+ where y.objid = #TQMaterid#
+ group by y.material_name,y1.process_version,y.sap_code,y1.process_version,y2.process_version,yy1.user_name,yy2.user_name,yy3.user_name,yy4.user_name,y4.sap_code
+       ]]>
+     </select>
+
+     <select id="GetNLBBDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[
+ select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'大卷规格',vlues,null)) 帘布代码,max(decode(parmname,'二次分裁宽度',vlues,null)) 二次分裁宽度,
+max(decode(parmname,'二次分裁宽度2',vlues,null)) 二次分裁宽度2,max(decode(parmname,'双尼龙包布复合形式',vlues,null)) 双尼龙包布复合形式,
+max(decode(parmname,'胶片形式',vlues,null)) 胶片形式,max(decode(parmname,'裁断角度',vlues,null)) 裁断角度,
+max(decode(parmname,'胶片代码',vlues,null)) 胶片代码,max(decode(parmname,'尼龙包布复合差级mm',vlues,null)) 尼龙包布复合差级,
+y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '尼龙分裁一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+
+     <select id="GetShigongUserInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[  select  a.item,b.user_name zbuser,c.user_name jduser,d.user_name shuser,e.user_name pzuser 
+                 from  sbe_shigong_user a
+                left join ssb_user b on b.work_barcode = a.zb_workid
+                left join ssb_user c on c.work_barcode = a.jd_workid
+                left join ssb_user d on d.work_barcode = a.sh_workid
+                left join ssb_user e on e.work_barcode = a.pz_workid
+       ]]>
+     </select>
+
+     <select id="GetShiGVersion" parameterClass="map" resultClass="Row">
+       <![CDATA[  select greentyre_version  from  sbm_bom_data where objid = (select bom_id from hpp_plan_detail where objid = #PlanDetailId#)
+       ]]>
+     </select>
+
+     <select id="GetTTDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[ select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'大卷规格',vlues,null)) 帘布代码,max(decode(parmname,'裁断宽度',vlues,null)) 宽度
+,max(decode(parmname,'裁断角度',vlues,null)) 裁断角度,max(decode(parmname,'胶片1代码',vlues,null)) 隔离胶片A胶片代码
+,max(decode(parmname,'胶片1宽度',vlues,null)) 隔离胶片A胶片宽度,max(decode(parmname,'胶片1厚度',vlues,null)) 隔离胶片A胶片厚度
+,max(decode(parmname,'胶片1贴合位置',vlues,null)) 贴合定位A,max(decode(parmname,'胶片2代码',vlues,null)) 隔离胶片B胶片代码
+,max(decode(parmname,'胶片2宽度',vlues,null)) 隔离胶片B胶片宽度,max(decode(parmname,'胶片2厚度',vlues,null)) 隔离胶片B胶片厚度
+,max(decode(parmname,'胶片2贴合位置',vlues,null)) 贴合定位B,max(decode(parmname,'包边胶片',vlues,null)) 包边胶片,
+y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '90度直裁一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+     <select id="GetDJDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[  select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'口型板号',vlues,null)) 口型板号
+,max(decode(parmname,'施工显示胶料1',vlues,null)) 垫胶胶料代号
+,max(decode(parmname,'后米重总kg/m',vlues,null)) 垫胶米重
+,y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '复合一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+     <select id="GetCPGSQDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[  
+ select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'钢丝圈内直径mm',vlues,null)) 标定内径
+,max(decode(parmname,'钢丝圈底部与水平面角度',vlues,null)) 钢丝圈底部与水平面角度
+,max(decode(parmname,'钢丝规格',vlues,null)) 钢丝直径
+,max(decode(parmname,'钢丝圈缠绕方式',vlues,null)) 钢丝排列
+,max(decode(parmname,'钢丝圈胶料代号',vlues,null)) 钢丝圈覆胶胶料代号
+,max(decode(parmname,'钢丝包布缠绕层数',vlues,null)) 钢丝圈包布缠绕层数
+,max(decode(parmname,'钢丝包布代号',vlues,null)) 钢丝圈包布或包胶代号
+,max(decode(parmname,'包布长度mm',vlues,null)) 包胶长度
+,max(decode(parmname,'钢丝圈重量（单个）kg',vlues,null)) 钢丝圈重
+,max(decode(parmname,'缠绕包布后钢丝圈半硫化类别',vlues,null)) 缠绕包布后钢丝圈半硫化类别
+,max(decode(parmname,'钢丝圈宽度mm',vlues,null)) 成品钢丝圈总宽
+,max(decode(parmname,'钢丝圈厚度mm',vlues,null)) 成品钢丝圈总厚
+,max(decode(parmname,'单根钢丝覆胶后直径',vlues,null)) 单根钢丝覆胶后直径
+,y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '钢丝圈一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+     <select id="GetDSCDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[  
+ select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'帘线根数',vlues,null)) 帘布压延锭子个数
+,max(decode(parmname,'零度带束层厚度',vlues,null)) 零度带束层厚度
+,max(decode(parmname,'零度带束层宽度',vlues,null)) 零度带束层宽度
+,max(decode(parmname,'原线规格',vlues,null)) 帘线规格
+,max(decode(parmname,'米重kg/m',vlues,null)) 米重
+,max(decode(parmname,'胶料代号',vlues,null)) 胶料代号
+,y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '零度一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+     <select id="GetDSCDataShigong2" parameterClass="map" resultClass="Row">
+       <![CDATA[ select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'大卷规格',vlues,null)) 大卷规格
+,max(decode(parmname,'裁断宽度',vlues,null)) 裁断宽度
+,max(decode(parmname,'裁断角度',vlues,null)) 裁断角度
+,max(decode(parmname,'胶片1代码',vlues,null)) 胶片1代码
+,max(decode(parmname,'胶片2代码',vlues,null)) 胶片2代码
+,max(decode(parmname,'型胶代号',vlues,null)) 型胶代号
+,max(decode(parmname,'贴合方式',vlues,null)) 贴合方式
+,y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '15度斜裁一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+     <select id="GetSJJDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[  
+ select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'口型板号',vlues,null)) 口型板编号
+,max(decode(parmname,'1##挤出机喂料种类',vlues,null)) 上三角胶胶料代号
+,max(decode(parmname,'2##挤出机喂料种类',vlues,null)) 下三角胶胶料代号
+,max(decode(parmname,'胶片规格',vlues,null)) 胶片1代号
+,max(decode(parmname,'胶片2代码',vlues,null)) 胶片2代码
+,max(decode(parmname,'3##挤出机喂料种类',vlues,null)) 型胶胶料代码
+,max(decode(parmname,'裁断长度',vlues,null)) 裁断长度
+,max(decode(parmname,'成型长度',vlues,null)) 成型长度
+,max(decode(parmname,'上三角胶重量kg/m',vlues,null)) 上三角胶重量
+,max(decode(parmname,'下三角胶重量kg/m',vlues,null)) 下三角胶重量
+,max(decode(parmname,'型胶重量kg/m',vlues,null)) 型胶重量
+,max(decode(parmname,'胶片1重量kg/m',vlues,null)) 胶片1重量
+,max(decode(parmname,'胶片2重量kg/m',vlues,null)) 胶片2重量
+,y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '复合一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+     
+     <select id="GetTCDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[  
+ select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'口型板号',vlues,null)) 口型板编号
+,max(decode(parmname,'施工显示胶料1',vlues,null)) 胎侧胶胶料代号
+,max(decode(parmname,'施工显示胶料2',vlues,null)) 耐磨胶胶料代号
+,max(decode(parmname,'胶片规格',vlues,null)) 胶片1代号
+,max(decode(parmname,'胶片2代码',vlues,null)) 胶片2代号
+,max(decode(parmname,'施工显示胶料3',vlues,null)) 型胶胶料代号
+,max(decode(parmname,'胎侧胶重量kg/m',vlues,null)) 胎侧胶米重
+,max(decode(parmname,'耐磨胶重量kg/m',vlues,null)) 耐磨胶米重
+,max(decode(parmname,'胶片1重量kg/m',vlues,null)) 胶片1米重
+,max(decode(parmname,'胶片2重量kg/m',vlues,null)) 胶片2米重
+,max(decode(parmname,'型胶重量kg/m',vlues,null)) 型胶米重
+,max(decode(parmname,'后米重总kg/m',vlues,null)) 胎侧米重
+,y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '复合一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+     <select id="GetTMDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[  
+ select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'口型板号',vlues,null)) 口型板编号
+,max(decode(parmname,'预口型号',vlues,null)) 预口型编号
+,max(decode(parmname,'施工显示胶料1',vlues,null)) 胎冠胶胶料代号
+,max(decode(parmname,'施工显示胶料2',vlues,null)) 基部胶胶料代号
+,max(decode(parmname,'施工显示胶料3',vlues,null)) 冠下胶片胶料代号
+,max(decode(parmname,'成型长度',vlues,null)) 成型长度
+,max(decode(parmname,'胶料长度',vlues,null)) 胶料长度
+,max(decode(parmname,'胎冠胶重量kg/m',vlues,null)) 胎冠胶重量
+,max(decode(parmname,'全钢基部胶重量kg/m',vlues,null)) 基部胶重量
+,max(decode(parmname,'全钢冠下胶片重量kg/m',vlues,null)) 冠下胶片重量
+,max(decode(parmname,'胎面标示线',vlues,null)) 标示线
+,y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '复合一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+     <select id="GetXJDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[  
+ select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'施工显示胶料1',vlues,null)) 胶料代号
+,max(decode(parmname,'成型长度',vlues,null)) 成型长度
+,max(decode(parmname,'胶料长度',vlues,null)) 胶料长度
+,max(decode(parmname,'单条称重kg',vlues,null)) 重量
+,max(decode(parmname,'型胶重量kg/m',vlues,null)) 米重
+,max(decode(parmname,'口型板号',vlues,null)) 口型板编号
+,y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '15度裁断一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+     <select id="GetYYJPDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'2##挤出机喂胶种类',vlues,null)) 喂胶种类
+,max(decode(parmname,'胶片宽度(mm)',vlues,null)) 胶片宽度
+,max(decode(parmname,'米重',vlues,null)) 米重
+,max(decode(parmname,'胶片厚度',vlues,null)) 胶片厚度
+,y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '薄胶片一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+     <select id="GetGSBBDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[ select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'大卷规格',vlues,null)) 大卷规格
+,max(decode(parmname,'裁断宽度',vlues,null)) 裁断宽度
+,max(decode(parmname,'裁断角度',vlues,null)) 裁断角度
+,max(decode(parmname,'胶片1代码',vlues,null)) 胶片代码
+,max(decode(parmname,'钢丝包布包边形式',vlues,null)) 钢丝包布包边形式
+,max(decode(parmname,'钢丝包布贴合方向',vlues,null)) 钢丝包布贴合方向
+,y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '15度裁断一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+     <select id="GetGSQBBShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[ select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'大卷规格',vlues,null)) 大卷规格
+,max(decode(parmname,'裁断角度',vlues,null)) 裁断角度
+,max(decode(parmname,'裁断宽度',vlues,null)) 裁断宽度
+,max(decode(parmname,'米重kg/m',vlues,null)) 米重
+,y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '钢丝圈一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+     <select id="GetNCCDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[ select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'大卷规格',vlues,null)) 大卷规格
+,max(decode(parmname,'裁断角度',vlues,null)) 裁断角度
+,max(decode(parmname,'裁断宽度',vlues,null)) 裁断宽度
+,max(decode(parmname,'米重kg/m',vlues,null)) 米重
+,y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '内衬一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+     <select id="GetCDJPDataShigong" parameterClass="map" resultClass="Row">
+       <![CDATA[ select to_char(mtime,'yyyy-MM-dd') mtime,#VERSION# 版本,max(decode(parmname,'部件代码',vlues,null)) 复合件代码,#MATERIAL_NAME# SAP品号
+,max(decode(parmname,'大卷规格',vlues,null)) 大卷规格
+,max(decode(parmname,'裁断角度',vlues,null)) 裁断角度
+,max(decode(parmname,'裁断宽度',vlues,null)) 裁断宽度
+,max(decode(parmname,'米重kg/m',vlues,null)) 米重
+,y1.user_name 制表人,y2.user_name 校对人,y3.user_name 审核人,y4.user_name 批准人
+ from (
+   select assem_name,parmname,vlues,max(record_time) mtime,process_version from plm_half_main where assem_sapmat = #MATERIAL_NAME#||'_' and  delete_flag = 0  
+group by assem_name,parmname,vlues,process_version
+) x 
+left join sbe_shigong_user y on y.item = '多刀一线'
+left join ssb_user y1 on y.zb_workid = y1.work_barcode
+left join ssb_user y2 on y.jd_workid = y2.work_barcode
+left join ssb_user y3 on y.sh_workid = y3.work_barcode
+left join ssb_user y4 on y.pz_workid = y4.work_barcode
+ group by mtime,process_version,y1.user_name,y2.user_name,y3.user_name,y4.user_name
+       ]]>
+     </select>
+
+     <!--半制品施工表end-->
+     
+     
+  </statements>
+</sqlMap>

@@ -1,0 +1,388 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BFE0F965-091F-4D17-9564-30DC6157347E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Storage</RootNamespace>
+    <AssemblyName>Mesnac.Storage</AssemblyName>
+    <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PlatformFamilyName>WindowsCE</PlatformFamilyName>
+    <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
+    <OSVersion>5.0</OSVersion>
+    <DeployDirSuffix>Mesnac.Storage</DeployDirSuffix>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <NativePlatformName>Windows CE</NativePlatformName>
+    <FormFactorID>
+    </FormFactorID>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataGrid" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FrmAddInLoadDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddInLoadDetail.Designer.cs">
+      <DependentUpon>FrmAddInLoadDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddInStockDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddInStockDetail.Designer.cs">
+      <DependentUpon>FrmAddInStockDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddInStockDetail2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddInStockDetail2.Designer.cs">
+      <DependentUpon>FrmAddInStockDetail2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddInventorySummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddInventorySummary.Designer.cs">
+      <DependentUpon>FrmAddInventorySummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddOutReturnDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddOutReturnDetail.designer.cs">
+      <DependentUpon>FrmAddOutReturnDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddOutStockDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddOutStockDetail.Designer.cs">
+      <DependentUpon>FrmAddOutStockDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddReturnStockDetail2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddReturnStockDetail2.Designer.cs">
+      <DependentUpon>FrmAddReturnStockDetail2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAddTransferDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddTransferDetail.Designer.cs">
+      <DependentUpon>FrmAddTransferDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmChangeMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmChangeMaterial.Designer.cs">
+      <DependentUpon>FrmChangeMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmChangeMaterialDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmChangeMaterialDetail.Designer.cs">
+      <DependentUpon>FrmChangeMaterialDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSearchOutReturnBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSearchOutReturnBill.Designer.cs">
+      <DependentUpon>FrmSearchOutReturnBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSearchOutStockBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSearchOutStockBill.Designer.cs">
+      <DependentUpon>FrmSearchOutStockBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSearchOutStockMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSearchOutStockMain.Designer.cs">
+      <DependentUpon>FrmSearchOutStockMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSearchTransferBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSearchTransferBill.Designer.cs">
+      <DependentUpon>FrmSearchTransferBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSearchTransferMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSearchTransferMain.Designer.cs">
+      <DependentUpon>FrmSearchTransferMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmShift.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShift.designer.cs">
+      <DependentUpon>FrmShift.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSubmitOutReturnBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSubmitOutReturnBill.Designer.cs">
+      <DependentUpon>FrmSubmitOutReturnBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSubmitOutStockBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSubmitOutStockBill.Designer.cs">
+      <DependentUpon>FrmSubmitOutStockBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSubmitTransferBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSubmitTransferBill.Designer.cs">
+      <DependentUpon>FrmSubmitTransferBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmViewChangeMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmViewChangeMaterial.Designer.cs">
+      <DependentUpon>FrmViewChangeMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmViewInLoadBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmViewInLoadBill.Designer.cs">
+      <DependentUpon>FrmViewInLoadBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmViewInLoadDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmViewInLoadDetail.Designer.cs">
+      <DependentUpon>FrmViewInLoadDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmViewInStockBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmViewInStockBill.Designer.cs">
+      <DependentUpon>FrmViewInStockBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmViewInStockDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmViewInStockDetail.Designer.cs">
+      <DependentUpon>FrmViewInStockDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmViewOutStockMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmViewOutStockMain.Designer.cs">
+      <DependentUpon>FrmViewOutStockMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmViewReturnStockBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmViewReturnStockBill.Designer.cs">
+      <DependentUpon>FrmViewReturnStockBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmViewReturnStockDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmViewReturnStockDetail.Designer.cs">
+      <DependentUpon>FrmViewReturnStockDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmViewTransferMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmViewTransferMain.Designer.cs">
+      <DependentUpon>FrmViewTransferMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FrmAddInStockDetailExp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAddInStockDetailExp.Designer.cs">
+      <DependentUpon>FrmAddInStockDetailExp.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mesnac.Framework\Mesnac.Framework.csproj">
+      <Project>{82D95D33-9473-4246-8C99-C58E6A685B0F}</Project>
+      <Name>Mesnac.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Scanner\Mesnac.Scanner.csproj">
+      <Project>{9FEDCB60-B5DC-4F26-A1D3-4FFAA012EAB2}</Project>
+      <Name>Mesnac.Scanner</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Storage.WebService\Mesnac.Storage.WebService.csproj">
+      <Project>{75996A0E-E638-44C2-95FF-0C192309B971}</Project>
+      <Name>Mesnac.Storage.WebService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.WebService\Mesnac.WebService.csproj">
+      <Project>{60859A6C-5977-440E-BE59-A40B5B49F4DE}</Project>
+      <Name>Mesnac.WebService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Windows\Mesnac.Windows.csproj">
+      <Project>{1F4959E8-BFE7-48EB-8D3D-887303A6E838}</Project>
+      <Name>Mesnac.Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FrmAddInLoadDetail.resx">
+      <DependentUpon>FrmAddInLoadDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddInStockDetail.resx">
+      <DependentUpon>FrmAddInStockDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddInStockDetail2.resx">
+      <DependentUpon>FrmAddInStockDetail2.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddInventorySummary.resx">
+      <DependentUpon>FrmAddInventorySummary.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddOutStockDetail.resx">
+      <DependentUpon>FrmAddOutStockDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddReturnStockDetail2.resx">
+      <DependentUpon>FrmAddReturnStockDetail2.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddTransferDetail.resx">
+      <DependentUpon>FrmAddTransferDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmChangeMaterial.resx">
+      <DependentUpon>FrmChangeMaterial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmChangeMaterialDetail.resx">
+      <DependentUpon>FrmChangeMaterialDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSearchOutReturnBill.resx">
+      <DependentUpon>FrmSearchOutReturnBill.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSearchOutStockBill.resx">
+      <DependentUpon>FrmSearchOutStockBill.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSearchOutStockMain.resx">
+      <DependentUpon>FrmSearchOutStockMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSearchTransferBill.resx">
+      <DependentUpon>FrmSearchTransferBill.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSearchTransferMain.resx">
+      <DependentUpon>FrmSearchTransferMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShift.resx">
+      <DependentUpon>FrmShift.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSubmitOutReturnBill.resx">
+      <DependentUpon>FrmSubmitOutReturnBill.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSubmitOutStockBill.resx">
+      <DependentUpon>FrmSubmitOutStockBill.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSubmitTransferBill.resx">
+      <DependentUpon>FrmSubmitTransferBill.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmViewChangeMaterial.resx">
+      <DependentUpon>FrmViewChangeMaterial.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmViewInLoadBill.resx">
+      <DependentUpon>FrmViewInLoadBill.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmViewInLoadDetail.resx">
+      <DependentUpon>FrmViewInLoadDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmViewInStockBill.resx">
+      <DependentUpon>FrmViewInStockBill.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmViewInStockDetail.resx">
+      <DependentUpon>FrmViewInStockDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmViewOutStockMain.resx">
+      <DependentUpon>FrmViewOutStockMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmViewReturnStockBill.resx">
+      <DependentUpon>FrmViewReturnStockBill.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmViewReturnStockDetail.resx">
+      <DependentUpon>FrmViewReturnStockDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmViewTransferMain.resx">
+      <DependentUpon>FrmViewTransferMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAddInStockDetailExp.resx">
+      <DependentUpon>FrmAddInStockDetailExp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}">
+        <HostingProcess disable="1" />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(TargetPath)" /S/Y "$(SolutionDir)bin\"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

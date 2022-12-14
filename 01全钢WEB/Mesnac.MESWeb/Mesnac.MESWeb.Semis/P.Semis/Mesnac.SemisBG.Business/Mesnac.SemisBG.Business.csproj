@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{913F2B77-81A8-44F1-B585-BCF97E7AA26C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.SemisBG.Business</RootNamespace>
+    <AssemblyName>Mesnac.SemisBG.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\@packages\MyBatis\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\@packages\MyBatis\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.DbAccess">
+      <HintPath>..\..\@packages\Frame\Mesnac.DbAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.Common">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.DataMapper">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implements\HppInStockDetailManager.cs" />
+    <Compile Include="Implements\HppOutStockDetailManager.cs" />
+    <Compile Include="Implements\HppRubberProductionManager.cs" />
+    <Compile Include="Implements\HppSemisProductionManager.cs" />
+    <Compile Include="Implements\HppStorageDetailManager.cs" />
+    <Compile Include="Implements\HppStoreManager.cs" />
+    <Compile Include="Implements\HppStorePlaceManager.cs" />
+    <Compile Include="Implements\SbmBomDataManager.cs" />
+    <Compile Include="Implements\SbmBomManager.cs" />
+    <Compile Include="Implements\SbmLockRecordManager.cs" />
+    <Compile Include="Interface\IHppInStockDetailManager.cs" />
+    <Compile Include="Interface\IHppOutStockDetailManager.cs" />
+    <Compile Include="Interface\IHppRubberProductionManager.cs" />
+    <Compile Include="Interface\IHppSemisProductionManager.cs" />
+    <Compile Include="Interface\IHppStorageDetailManager.cs" />
+    <Compile Include="Interface\IHppStoreManager.cs" />
+    <Compile Include="Interface\IHppStorePlaceManager.cs" />
+    <Compile Include="Interface\ISbmBomDataManager.cs" />
+    <Compile Include="Interface\ISbmBomManager.cs" />
+    <Compile Include="Interface\ISbmLockRecordManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Frame\Mesnac.DbAccess\Mesnac.DbAccess.csproj">
+      <Project>{60b919c5-c601-4999-a531-439042d59746}</Project>
+      <Name>Mesnac.DbAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.SemisBG.Data\Mesnac.SemisBG.Data.csproj">
+      <Project>{be235b5e-90a4-4b0a-8e46-85f1d33f893a}</Project>
+      <Name>Mesnac.SemisBG.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.SemisBG.Entity\Mesnac.SemisBG.Entity.csproj">
+      <Project>{3a089696-cfcb-4eb7-bb2b-fe972cc2c274}</Project>
+      <Name>Mesnac.SemisBG.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

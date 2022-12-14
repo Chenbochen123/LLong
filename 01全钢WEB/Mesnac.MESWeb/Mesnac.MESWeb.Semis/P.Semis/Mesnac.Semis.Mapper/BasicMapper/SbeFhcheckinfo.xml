@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.SbeFhcheckinfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SbeFhcheckinfo" type="Mesnac.Semis.Entity.BasicEntity.SbeFhcheckinfo, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SbeFhcheckinfo" class="SbeFhcheckinfo">
+    <result property="ObjId" column="OBJID"/>
+    <result property="EquipName" column="EQUIP_NAME"/>
+    <result property="ScaleName" column="SCALE_NAME"/>
+    <result property="StandWeight" column="STAND_WEIGHT"/>
+    <result property="RealWeight" column="REAL_WEIGHT"/>
+    <result property="AllowError" column="ALLOW_ERROR"/>
+    <result property="RealError" column="REAL_ERROR"/>
+    <result property="PlanDate" column="PLAN_DATE"/>
+    <result property="PlanShift" column="PLAN_SHIFT"/>
+    <result property="Amount" column="AMOUNT"/>
+    <result property="Dummy1" column="DUMMY_1"/>
+    <result property="Dummy2" column="DUMMY_2"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SbeFhcheckinfo" class="SbeFhcheckinfo">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="EquipName" column="EquipName"/>
+    <parameter property="ScaleName" column="ScaleName"/>
+    <parameter property="StandWeight" column="StandWeight"/>
+    <parameter property="RealWeight" column="RealWeight"/>
+    <parameter property="AllowError" column="AllowError"/>
+    <parameter property="RealError" column="RealError"/>
+    <parameter property="PlanDate" column="PlanDate"/>
+    <parameter property="PlanShift" column="PlanShift"/>
+    <parameter property="Amount" column="Amount"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_FHCHECKINFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[EQUIP_NAME = #where.EquipName#]]>
+        </isNotNull>
+        <isNotNull property="where.ScaleName" prepend="AND">
+          <![CDATA[SCALE_NAME = #where.ScaleName#]]>
+        </isNotNull>
+        <isNotNull property="where.StandWeight" prepend="AND">
+          <![CDATA[STAND_WEIGHT = #where.StandWeight#]]>
+        </isNotNull>
+        <isNotNull property="where.RealWeight" prepend="AND">
+          <![CDATA[REAL_WEIGHT = #where.RealWeight#]]>
+        </isNotNull>
+        <isNotNull property="where.AllowError" prepend="AND">
+          <![CDATA[ALLOW_ERROR = #where.AllowError#]]>
+        </isNotNull>
+        <isNotNull property="where.RealError" prepend="AND">
+          <![CDATA[REAL_ERROR = #where.RealError#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDate" prepend="AND">
+          <![CDATA[PLAN_DATE = #where.PlanDate#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanShift" prepend="AND">
+          <![CDATA[PLAN_SHIFT = #where.PlanShift#]]>
+        </isNotNull>
+        <isNotNull property="where.Amount" prepend="AND">
+          <![CDATA[AMOUNT = #where.Amount#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SBE_FHCHECKINFO]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="EquipName" prepend=",">EQUIP_NAME</isNotNull>
+        <isNotNull property="ScaleName" prepend=",">SCALE_NAME</isNotNull>
+        <isNotNull property="StandWeight" prepend=",">STAND_WEIGHT</isNotNull>
+        <isNotNull property="RealWeight" prepend=",">REAL_WEIGHT</isNotNull>
+        <isNotNull property="AllowError" prepend=",">ALLOW_ERROR</isNotNull>
+        <isNotNull property="RealError" prepend=",">REAL_ERROR</isNotNull>
+        <isNotNull property="PlanDate" prepend=",">PLAN_DATE</isNotNull>
+        <isNotNull property="PlanShift" prepend=",">PLAN_SHIFT</isNotNull>
+        <isNotNull property="Amount" prepend=",">AMOUNT</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY_1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY_2</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SBE_FHCHECKINFO.NEXTVAL</isNull>
+        <isNotNull property="EquipName" prepend=",">#EquipName#</isNotNull>
+        <isNotNull property="ScaleName" prepend=",">#ScaleName#</isNotNull>
+        <isNotNull property="StandWeight" prepend=",">#StandWeight#</isNotNull>
+        <isNotNull property="RealWeight" prepend=",">#RealWeight#</isNotNull>
+        <isNotNull property="AllowError" prepend=",">#AllowError#</isNotNull>
+        <isNotNull property="RealError" prepend=",">#RealError#</isNotNull>
+        <isNotNull property="PlanDate" prepend=",">#PlanDate#</isNotNull>
+        <isNotNull property="PlanShift" prepend=",">#PlanShift#</isNotNull>
+        <isNotNull property="Amount" prepend=",">#Amount#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SBE_FHCHECKINFO
+       <dynamic prepend="SET">
+        <isNotNull  property="update.EquipName"  prepend=",">
+          EQUIP_NAME = #update.EquipName#
+        </isNotNull>
+        <isNotNull  property="update.ScaleName"  prepend=",">
+          SCALE_NAME = #update.ScaleName#
+        </isNotNull>
+        <isNotNull  property="update.StandWeight"  prepend=",">
+          STAND_WEIGHT = #update.StandWeight#
+        </isNotNull>
+        <isNotNull  property="update.RealWeight"  prepend=",">
+          REAL_WEIGHT = #update.RealWeight#
+        </isNotNull>
+        <isNotNull  property="update.AllowError"  prepend=",">
+          ALLOW_ERROR = #update.AllowError#
+        </isNotNull>
+        <isNotNull  property="update.RealError"  prepend=",">
+          REAL_ERROR = #update.RealError#
+        </isNotNull>
+        <isNotNull  property="update.PlanDate"  prepend=",">
+          PLAN_DATE = #update.PlanDate#
+        </isNotNull>
+        <isNotNull  property="update.PlanShift"  prepend=",">
+          PLAN_SHIFT = #update.PlanShift#
+        </isNotNull>
+        <isNotNull  property="update.Amount"  prepend=",">
+          AMOUNT = #update.Amount#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY_1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY_2 = #update.Dummy2#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SBE_FHCHECKINFO
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SbeFhcheckinfo">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SbeFhcheckinfo">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SBE_FHCHECKINFO
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SBE_FHCHECKINFO
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SbeFhcheckinfo" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SBE_FHCHECKINFO
+    </statement>
+  </statements>
+</sqlMap>

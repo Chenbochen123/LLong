@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Interface.Mapper.BusinessMapper.CptCuringTechParmData"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CPT_CURING_TECH_PARM_DATA ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.PdmCode" prepend="AND">
+          <![CDATA[PDM_CODE = #where.PdmCode#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmGroupId" prepend="AND">
+          <![CDATA[PARM_GROUP_ID = #where.ParmGroupId#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmTypeId" prepend="AND">
+          <![CDATA[PARM_TYPE_ID = #where.ParmTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmInfoId" prepend="AND">
+          <![CDATA[PARM_INFO_ID = #where.ParmInfoId#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmValue" prepend="AND">
+          <![CDATA[PARM_VALUE = #where.ParmValue#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmValueMax" prepend="AND">
+          <![CDATA[PARM_VALUE_MAX = #where.ParmValueMax#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmValueMin" prepend="AND">
+          <![CDATA[PARM_VALUE_MIN = #where.ParmValueMin#]]>
+        </isNotNull>
+        <isNotNull property="where.PdmVersion" prepend="AND">
+          <![CDATA[PDM_VERSION = #where.PdmVersion#]]>
+        </isNotNull>
+        <isNotNull property="where.Lastmodifier" prepend="AND">
+          <![CDATA[LASTMODIFIER = #where.Lastmodifier#]]>
+        </isNotNull>
+        <isNotNull property="where.LastmodifyDate" prepend="AND">
+          <![CDATA[LASTMODIFY_DATE = #where.LastmodifyDate#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ParmCombine" prepend="AND">
+          <![CDATA[PARM_COMBINE = #where.ParmCombine#]]>
+        </isNotNull>
+        <isNotNull property="where.Objectcode" prepend="AND">
+          <![CDATA[OBJECTCODE = #where.Objectcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Parmtypecode" prepend="AND">
+          <![CDATA[PARMTYPECODE = #where.Parmtypecode#]]>
+        </isNotNull>
+        <isNotNull property="where.Parmcode" prepend="AND">
+          <![CDATA[PARMCODE = #where.Parmcode#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <!--获取id-->
+     <select id="GetVulId" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select max(OBJID) from cpt_curing_tech_parm_data
+       ]]>
+     </select>
+
+     <!--获取参数类型-->
+     <select id="GetType" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select objid from cpt_curing_tech_parm_type where 1=1
+       ]]>
+       <!--<isNotNull property="PARM_TYPE_NAME" prepend="AND">
+         <![CDATA[PARM_TYPE_NAME like #PARM_TYPE_NAME# ]]>
+       </isNotNull>-->
+       <isNotNull property="PARM_TYPE_NAME" prepend="AND">
+         <![CDATA[instr(PARM_TYPE_NAME, trim( #PARM_TYPE_NAME# )) > 0 ]]>
+       </isNotNull>
+     </select>
+
+     <!--查询具体参数id-->
+     <select id="GetCptInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select objid from cpt_curing_tech_parm_info where 1=1
+       ]]>
+       <isNotNull property="PARM_NAME" prepend="AND">
+         <![CDATA[PARM_NAME=#PARM_NAME#]]>
+       </isNotNull>
+     </select>
+
+     <!--色标线查询-->
+     <select id="GetParmInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select TECH_COLOR_CODE from cpt_curing_tech_parm_color
+        where 1=1 
+       ]]>
+       <isNotNull property="TECH_COLOR_NAME" prepend="AND">
+         <![CDATA[TECH_COLOR_NAME=#TECH_COLOR_NAME#]]>
+       </isNotNull>
+     </select>
+
+     <!--更新delete字段-->
+     <update id="UpdateColourDeleteFlag" parameterClass="map">
+       <![CDATA[
+        update cpt_curing_tech_parm_data set DELETE_FLAG = 1 where OBJID in (select t1.OBJID from cpt_curing_tech_parm_data t1
+                                                                             left join cpt_curing_tech_parm_info t2 on t1.parm_info_id =t2.objid
+                                                                             where t1.DELETE_FLAG=0 and t2.parm_name like '%色标%'
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="OBJECTCODE" prepend="AND">
+           <![CDATA[OBJECTCODE=#OBJECTCODE#]]>
+         </isNotNull>
+         <isNotNull property="PARMTYPECODE" prepend="AND">
+           <![CDATA[PARMTYPECODE=#PARMTYPECODE#)]]>
+         </isNotNull>
+       </dynamic>
+     </update>
+  </statements>
+</sqlMap>

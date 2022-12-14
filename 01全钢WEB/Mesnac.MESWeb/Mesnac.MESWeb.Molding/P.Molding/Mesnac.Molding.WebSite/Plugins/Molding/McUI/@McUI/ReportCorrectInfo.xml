@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="EQUIP_NAME" Value="机台名称"></Caption>
+    <Caption Name="CORRECT_TIME" Value="校秤时间"></Caption>
+    <Caption Name="FM_WEIGHT1" Value="砝码重量10kg"></Caption>
+    <Caption Name="FM_WEIGHT2" Value="砝码重量20kg"></Caption>
+    <Caption Name="FM_WEIGHT3" Value="砝码重量50kg"></Caption>
+    <Caption Name="REAL_WEIGHT1" Value="实测重量1"></Caption>
+    <Caption Name="REAL_WEIGHT2" Value="实测重量2"></Caption>
+    <Caption Name="REAL_WEIGHT3" Value="实测重量3"></Caption>
+    <Caption Name="WC1" Value="误差1"></Caption>
+    <Caption Name="WC2" Value="误差2"></Caption>
+    <Caption Name="WC3" Value="误差3"></Caption>
+    <Caption Name="USER_NAME" Value="校秤人"></Caption>
+    <Caption Name="FLAG" Value="标志"></Caption>
+    <Caption Name="BEGIN_DATE" Value="开始日期"></Caption>
+    <Caption Name="END_DATE" Value="结束日期"></Caption>
+    <Caption Name="WCHA" Value="允许误差(kg)"></Caption>
+  </Captions>
+  <WebPage Title="校秤信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Molding/McUI/@McUI/ReportCorrectInfo.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="BPM_CORRECT_INFO">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="EQUIP_NAME"></ParamField>
+        <ParamField FieldName="BEGIN_DATE" Type="DateBox"></ParamField>
+        <ParamField FieldName="END_DATE" Type="DateBox"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid>
+      <GridColumns>
+        <GridColumn ColumnName="EQUIP_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="CORRECT_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="160"></GridColumn>
+        <GridColumn ColumnName="FM_WEIGHT1" Width="100"></GridColumn>
+        <GridColumn ColumnName="REAL_WEIGHT1" Width="80"></GridColumn>
+        <GridColumn ColumnName="WC1" Width="80"></GridColumn>
+        <GridColumn ColumnName="FM_WEIGHT2" Width="100"></GridColumn>
+        <GridColumn ColumnName="REAL_WEIGHT2" Width="80"></GridColumn>
+        <GridColumn ColumnName="WC2" Width="80"></GridColumn>
+        <GridColumn ColumnName="FM_WEIGHT3" Width="100"></GridColumn>
+        <GridColumn ColumnName="REAL_WEIGHT3" Width="80"></GridColumn>
+        <GridColumn ColumnName="WC3" Width="80"></GridColumn>
+        <!--<GridColumn ColumnName="USER_NAME" Width="80"></GridColumn>-->
+        <GridColumn ColumnName="WCHA" Width="80"></GridColumn>
+        <GridColumn ColumnName="FLAG" Width="80"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

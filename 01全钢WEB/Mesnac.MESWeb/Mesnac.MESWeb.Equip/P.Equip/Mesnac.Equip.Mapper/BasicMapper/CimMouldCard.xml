@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Equip.Mapper.BasicMapper.CimMouldCard"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CimMouldCard" type="Mesnac.Equip.Entity.BasicEntity.CimMouldCard, Mesnac.Equip.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CimMouldCard" class="CimMouldCard">
+    <result property="ObjId" column="OBJID"/>
+    <result property="SizeId" column="SIZE_ID"/>
+    <result property="PatternId" column="PATTERN_ID"/>
+    <result property="Product" column="PRODUCT"/>
+    <result property="BrandId" column="BRAND_ID"/>
+    <result property="SecPattern" column="SEC_PATTERN"/>
+    <result property="SecBrand" column="SEC_BRAND"/>
+    <result property="BaupFlag" column="BAUP_FLAG"/>
+    <result property="BaupTime" column="BAUP_TIME"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="Dummy1" column="DUMMY_1"/>
+    <result property="Dummy2" column="DUMMY_2"/>
+    <result property="Dummy3" column="DUMMY_3"/>
+    <result property="Dummy4" column="DUMMY_4"/>
+    <result property="LoadIndexId" column="LOAD_INDEX_ID"/>
+    <result property="PlyratingId" column="PLYRATING_ID"/>
+    <result property="Remark" column="REMARK"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CimMouldCard" class="CimMouldCard">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="SizeId" column="SizeId"/>
+    <parameter property="PatternId" column="PatternId"/>
+    <parameter property="Product" column="Product"/>
+    <parameter property="BrandId" column="BrandId"/>
+    <parameter property="SecPattern" column="SecPattern"/>
+    <parameter property="SecBrand" column="SecBrand"/>
+    <parameter property="BaupFlag" column="BaupFlag"/>
+    <parameter property="BaupTime" column="BaupTime"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="LoadIndexId" column="LoadIndexId"/>
+    <parameter property="PlyratingId" column="PlyratingId"/>
+    <parameter property="Remark" column="Remark"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CIM_MOULD_CARD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeId" prepend="AND">
+          <![CDATA[SIZE_ID = #where.SizeId#]]>
+        </isNotNull>
+        <isNotNull property="where.PatternId" prepend="AND">
+          <![CDATA[PATTERN_ID = #where.PatternId#]]>
+        </isNotNull>
+        <isNotNull property="where.Product" prepend="AND">
+          <![CDATA[PRODUCT = #where.Product#]]>
+        </isNotNull>
+        <isNotNull property="where.BrandId" prepend="AND">
+          <![CDATA[BRAND_ID = #where.BrandId#]]>
+        </isNotNull>
+        <isNotNull property="where.SecPattern" prepend="AND">
+          <![CDATA[SEC_PATTERN = #where.SecPattern#]]>
+        </isNotNull>
+        <isNotNull property="where.SecBrand" prepend="AND">
+          <![CDATA[SEC_BRAND = #where.SecBrand#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupFlag" prepend="AND">
+          <![CDATA[BAUP_FLAG = #where.BaupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupTime" prepend="AND">
+          <![CDATA[BAUP_TIME = #where.BaupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.LoadIndexId" prepend="AND">
+          <![CDATA[LOAD_INDEX_ID = #where.LoadIndexId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlyratingId" prepend="AND">
+          <![CDATA[PLYRATING_ID = #where.PlyratingId#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CIM_MOULD_CARD]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="SizeId" prepend=",">SIZE_ID</isNotNull>
+        <isNotNull property="PatternId" prepend=",">PATTERN_ID</isNotNull>
+        <isNotNull property="Product" prepend=",">PRODUCT</isNotNull>
+        <isNotNull property="BrandId" prepend=",">BRAND_ID</isNotNull>
+        <isNotNull property="SecPattern" prepend=",">SEC_PATTERN</isNotNull>
+        <isNotNull property="SecBrand" prepend=",">SEC_BRAND</isNotNull>
+        <isNotNull property="BaupFlag" prepend=",">BAUP_FLAG</isNotNull>
+        <isNotNull property="BaupTime" prepend=",">BAUP_TIME</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY_1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY_2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY_3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY_4</isNotNull>
+        <isNotNull property="LoadIndexId" prepend=",">LOAD_INDEX_ID</isNotNull>
+        <isNotNull property="PlyratingId" prepend=",">PLYRATING_ID</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_CIM_MOULD_CARD.NEXTVAL</isNull>
+        <isNotNull property="SizeId" prepend=",">#SizeId#</isNotNull>
+        <isNotNull property="PatternId" prepend=",">#PatternId#</isNotNull>
+        <isNotNull property="Product" prepend=",">#Product#</isNotNull>
+        <isNotNull property="BrandId" prepend=",">#BrandId#</isNotNull>
+        <isNotNull property="SecPattern" prepend=",">#SecPattern#</isNotNull>
+        <isNotNull property="SecBrand" prepend=",">#SecBrand#</isNotNull>
+        <isNotNull property="BaupFlag" prepend=",">#BaupFlag#</isNotNull>
+        <isNotNull property="BaupTime" prepend=",">#BaupTime#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="LoadIndexId" prepend=",">#LoadIndexId#</isNotNull>
+        <isNotNull property="PlyratingId" prepend=",">#PlyratingId#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CIM_MOULD_CARD
+       <dynamic prepend="SET">
+        <isNotNull  property="update.SizeId"  prepend=",">
+          SIZE_ID = #update.SizeId#
+        </isNotNull>
+        <isNotNull  property="update.PatternId"  prepend=",">
+          PATTERN_ID = #update.PatternId#
+        </isNotNull>
+        <isNotNull  property="update.Product"  prepend=",">
+          PRODUCT = #update.Product#
+        </isNotNull>
+        <isNotNull  property="update.BrandId"  prepend=",">
+          BRAND_ID = #update.BrandId#
+        </isNotNull>
+        <isNotNull  property="update.SecPattern"  prepend=",">
+          SEC_PATTERN = #update.SecPattern#
+        </isNotNull>
+        <isNotNull  property="update.SecBrand"  prepend=",">
+          SEC_BRAND = #update.SecBrand#
+        </isNotNull>
+        <isNotNull  property="update.BaupFlag"  prepend=",">
+          BAUP_FLAG = #update.BaupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BaupTime"  prepend=",">
+          BAUP_TIME = #update.BaupTime#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY_1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY_2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY_3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY_4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.LoadIndexId"  prepend=",">
+          LOAD_INDEX_ID = #update.LoadIndexId#
+        </isNotNull>
+        <isNotNull  property="update.PlyratingId"  prepend=",">
+          PLYRATING_ID = #update.PlyratingId#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CIM_MOULD_CARD
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CimMouldCard">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CimMouldCard">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CIM_MOULD_CARD
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CIM_MOULD_CARD
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CimMouldCard" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CIM_MOULD_CARD
+    </statement>
+  </statements>
+</sqlMap>

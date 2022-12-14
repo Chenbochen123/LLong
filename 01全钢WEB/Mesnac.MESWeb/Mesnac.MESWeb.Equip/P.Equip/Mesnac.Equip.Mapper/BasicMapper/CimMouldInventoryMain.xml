@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Equip.Mapper.BasicMapper.CimMouldInventoryMain"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CimMouldInventoryMain" type="Mesnac.Equip.Entity.BasicEntity.CimMouldInventoryMain, Mesnac.Equip.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CimMouldInventoryMain" class="CimMouldInventoryMain">
+    <result property="ObjId" column="OBJID"/>
+    <result property="BillId" column="BILL_ID"/>
+    <result property="BillType" column="BILL_TYPE"/>
+    <result property="BillState" column="BILL_STATE"/>
+    <result property="Amount" column="AMOUNT"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="WorkshopId" column="WORKSHOP_ID"/>
+    <result property="BaupFlag" column="BAUP_FLAG"/>
+    <result property="BaupTime" column="BAUP_TIME"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CimMouldInventoryMain" class="CimMouldInventoryMain">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="BillId" column="BillId"/>
+    <parameter property="BillType" column="BillType"/>
+    <parameter property="BillState" column="BillState"/>
+    <parameter property="Amount" column="Amount"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="WorkshopId" column="WorkshopId"/>
+    <parameter property="BaupFlag" column="BaupFlag"/>
+    <parameter property="BaupTime" column="BaupTime"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CIM_MOULD_INVENTORY_MAIN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.BillId" prepend="AND">
+          <![CDATA[BILL_ID = #where.BillId#]]>
+        </isNotNull>
+        <isNotNull property="where.BillType" prepend="AND">
+          <![CDATA[BILL_TYPE = #where.BillType#]]>
+        </isNotNull>
+        <isNotNull property="where.BillState" prepend="AND">
+          <![CDATA[BILL_STATE = #where.BillState#]]>
+        </isNotNull>
+        <isNotNull property="where.Amount" prepend="AND">
+          <![CDATA[AMOUNT = #where.Amount#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupFlag" prepend="AND">
+          <![CDATA[BAUP_FLAG = #where.BaupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupTime" prepend="AND">
+          <![CDATA[BAUP_TIME = #where.BaupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CIM_MOULD_INVENTORY_MAIN]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="BillId" prepend=",">BILL_ID</isNotNull>
+        <isNotNull property="BillType" prepend=",">BILL_TYPE</isNotNull>
+        <isNotNull property="BillState" prepend=",">BILL_STATE</isNotNull>
+        <isNotNull property="Amount" prepend=",">AMOUNT</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">WORKSHOP_ID</isNotNull>
+        <isNotNull property="BaupFlag" prepend=",">BAUP_FLAG</isNotNull>
+        <isNotNull property="BaupTime" prepend=",">BAUP_TIME</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_CIM_MOULD_INVENTORY_MAIN.NEXTVAL</isNull>
+        <isNotNull property="BillId" prepend=",">#BillId#</isNotNull>
+        <isNotNull property="BillType" prepend=",">#BillType#</isNotNull>
+        <isNotNull property="BillState" prepend=",">#BillState#</isNotNull>
+        <isNotNull property="Amount" prepend=",">#Amount#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">#WorkshopId#</isNotNull>
+        <isNotNull property="BaupFlag" prepend=",">#BaupFlag#</isNotNull>
+        <isNotNull property="BaupTime" prepend=",">#BaupTime#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CIM_MOULD_INVENTORY_MAIN
+       <dynamic prepend="SET">
+        <isNotNull  property="update.BillId"  prepend=",">
+          BILL_ID = #update.BillId#
+        </isNotNull>
+        <isNotNull  property="update.BillType"  prepend=",">
+          BILL_TYPE = #update.BillType#
+        </isNotNull>
+        <isNotNull  property="update.BillState"  prepend=",">
+          BILL_STATE = #update.BillState#
+        </isNotNull>
+        <isNotNull  property="update.Amount"  prepend=",">
+          AMOUNT = #update.Amount#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.WorkshopId"  prepend=",">
+          WORKSHOP_ID = #update.WorkshopId#
+        </isNotNull>
+        <isNotNull  property="update.BaupFlag"  prepend=",">
+          BAUP_FLAG = #update.BaupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BaupTime"  prepend=",">
+          BAUP_TIME = #update.BaupTime#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CIM_MOULD_INVENTORY_MAIN
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CimMouldInventoryMain">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CimMouldInventoryMain">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CIM_MOULD_INVENTORY_MAIN
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CIM_MOULD_INVENTORY_MAIN
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CimMouldInventoryMain" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CIM_MOULD_INVENTORY_MAIN
+    </statement>
+  </statements>
+</sqlMap>

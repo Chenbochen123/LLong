@@ -1,0 +1,4450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetShiftTable">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetShiftTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShiftTableResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSysDateTime">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSysDateTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSysDateTimeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClassTable">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetClassTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClassTableResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEquipTable">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetEquipTableResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEquipTableResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcSaveQualityShiftInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PlanDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ShiftID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ClassID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="WorkerID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcSaveQualityShiftInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcSaveQualityShiftInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllDefectInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WorkProcessID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteFlag" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllDefectInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllDefectInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDefectObjIDByCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="defectCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="workProcessID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDefectObjIDByCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDefectObjIDByCodeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetQualityLevel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WorkProcessID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteFlag" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetQualityLevelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetQualityLevelResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CuringQualityLevel">
+        <s:complexType />
+      </s:element>
+      <s:element name="CuringQualityLevelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CuringQualityLevelResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRePeatInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteFlag" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRePeatInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRePeatInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CuringGetProdInfoByTyreNo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CuringGetProdInfoByTyreNoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CuringGetProdInfoByTyreNoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcQmtGetTyreFCheckValidateInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNoOrGreenTyreNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="BarcodeTypeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FCheckTypeID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="RecorderID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcQmtGetTyreFCheckValidateInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcQmtGetTyreFCheckValidateInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcQmtGetTyreFCheckValidateInfoNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNoOrGreenTyreNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="BarcodeTypeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FCheckTypeID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="RecorderID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcQmtGetTyreFCheckValidateInfoNewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcQmtGetTyreFCheckValidateInfoNewResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDutyByDefectID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DefectID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDutyByDefectIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDutyByDefectIDResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcSaveTyreFcheckInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNoOrGreenTyreNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="BarcodeTypeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ShiftID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ClassID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="RecorderID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="GradeID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="DefectIDs" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UpOrDowns" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DefectNames" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="RepairFlag" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remark" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsFirst" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsRecheck" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsLeader" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsLast" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ShiftNo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Duty1" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Duty2" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Duty3" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcSaveTyreFcheckInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcSaveTyreFcheckInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCuringDegradeInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tyreNoOrGreenTyreNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="barcodeTypeID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCuringDegradeInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCuringDegradeInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckDegradeConfirmInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tyreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="greenTyreNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckDegradeConfirmInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckDegradeConfirmInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveTyreDegradeConfirmInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tyreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="greenTyreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="materialID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="confirmDegardeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shiftID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="classID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gradeID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="degradeReason" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="newFlag" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="deleteFlag" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveTyreDegradeConfirmInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveTyreDegradeConfirmInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveRepairRecord">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tyreNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="barcodeTypeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="shiftID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="classID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="materialID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="repeatID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="repairPartID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="repairResultID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveRepairRecordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveRepairRecordResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFcheckInfoForRepair">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tyreNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="barcodeTypeID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFcheckInfoForRepairResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFcheckInfoForRepairResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllRepairPart">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllRepairPartResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllRepairPartResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllRepairResult">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllRepairResultResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllRepairResultResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckBadTyreInfor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="scanBarcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="operId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckBadTyreInforResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckBadTyreInforResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveExpTab">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tyreNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="barcodeType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="isExp" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveExpTabResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveExpTabResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTyreExpInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tyreNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTyreExpInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTyreExpInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CuringProcSaveTyreFcheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GreentyreNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="gradeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="shiftID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="classID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="defectID2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="defectID3" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CuringProcSaveTyreFcheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CuringProcSaveTyreFcheckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CuringProcSaveTyreFcheckNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GreentyreNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="gradeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="shiftID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="classID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="defectID2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="defectID3" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ShiftDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CuringProcSaveTyreFcheckNewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CuringProcSaveTyreFcheckNewResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCuringCheckNum">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ShiftDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ShiftID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClassID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCuringCheckNumResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCuringCheckNumResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcQmtGetTyreFCheckValidateInfo1">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNoOrGreenTyreNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcQmtGetTyreFCheckValidateInfo1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcQmtGetTyreFCheckValidateInfo1Result">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllDefectInfo1">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="WorkProcessID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteFlag" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllDefectInfo1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllDefectInfo1Result">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QualityGradeInit">
+        <s:complexType />
+      </s:element>
+      <s:element name="QualityGradeInitResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QualityGradeInitResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcGetTyreArtificialCheckInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNoOrGreenTyreNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcGetTyreArtificialCheckInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcGetTyreArtificialCheckInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveArtificialCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GreentyreNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="gradeID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="materialName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="shiftID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="classID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveArtificialCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveArtificialCheckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QualityFQBGradeInit">
+        <s:complexType />
+      </s:element>
+      <s:element name="QualityFQBGradeInitResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QualityFQBGradeInitResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcGetFQBTyreArtificialCheckInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNoOrGreenTyreNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcGetFQBTyreArtificialCheckInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProcGetFQBTyreArtificialCheckInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FQBSaveArtificialCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GreentyreNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="gradeID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="materialName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="shiftID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="classID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FQBSaveArtificialCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FQBSaveArtificialCheckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCuringEquipInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EquipCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCuringEquipInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCuringEquipInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFcheckDefectInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetFcheckDefectInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFcheckDefectInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitCuringEquipStopControl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EquipCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Stop_Flag" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitCuringEquipStopControlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitCuringEquipStopControlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreatToWMSRecordQG">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreatToWMSRecordQGResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreatToWMSRecordQGResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTyreNoWMSRecordQG">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTyreNoWMSRecordQGResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTyreNoWMSRecordQGResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTyreNoWMSRecordTestFlagQG">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTyreNoWMSRecordTestFlagQGResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTyreNoWMSRecordTestFlagQGResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTyreNoWMSRecordTestFlagQG">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TestFlag" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateTyreNoWMSRecordTestFlagQGResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateTyreNoWMSRecordTestFlagQGResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBarcodeInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBarcodeInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBarcodeInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BadInStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNos" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BadInStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BadInStoreResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelBInStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNos" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelBInStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DelBInStoreResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertSbeRbRecord">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BCName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertSbeRbRecordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsertSbeRbRecordResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRBGradeInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRBGradeInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRBGradeInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OnlyUpwms">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OnlyUpwmsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OnlyUpwmsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateFqfCppFX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TyreNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateFqfCppFXResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DataTable" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetShiftTableSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShiftTable" />
+  </wsdl:message>
+  <wsdl:message name="GetShiftTableSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShiftTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSysDateTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSysDateTime" />
+  </wsdl:message>
+  <wsdl:message name="GetSysDateTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSysDateTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetClassTableSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClassTable" />
+  </wsdl:message>
+  <wsdl:message name="GetClassTableSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClassTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEquipTable" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEquipTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcSaveQualityShiftInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcSaveQualityShiftInfo" />
+  </wsdl:message>
+  <wsdl:message name="ProcSaveQualityShiftInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcSaveQualityShiftInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDefectInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllDefectInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDefectInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllDefectInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectObjIDByCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDefectObjIDByCode" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectObjIDByCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDefectObjIDByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetQualityLevelSoapIn">
+    <wsdl:part name="parameters" element="tns:GetQualityLevel" />
+  </wsdl:message>
+  <wsdl:message name="GetQualityLevelSoapOut">
+    <wsdl:part name="parameters" element="tns:GetQualityLevelResponse" />
+  </wsdl:message>
+  <wsdl:message name="CuringQualityLevelSoapIn">
+    <wsdl:part name="parameters" element="tns:CuringQualityLevel" />
+  </wsdl:message>
+  <wsdl:message name="CuringQualityLevelSoapOut">
+    <wsdl:part name="parameters" element="tns:CuringQualityLevelResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRePeatInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRePeatInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetRePeatInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRePeatInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="CuringGetProdInfoByTyreNoSoapIn">
+    <wsdl:part name="parameters" element="tns:CuringGetProdInfoByTyreNo" />
+  </wsdl:message>
+  <wsdl:message name="CuringGetProdInfoByTyreNoSoapOut">
+    <wsdl:part name="parameters" element="tns:CuringGetProdInfoByTyreNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcQmtGetTyreFCheckValidateInfo" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcQmtGetTyreFCheckValidateInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfoNewSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcQmtGetTyreFCheckValidateInfoNew" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfoNewSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcQmtGetTyreFCheckValidateInfoNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDutyByDefectIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDutyByDefectID" />
+  </wsdl:message>
+  <wsdl:message name="GetDutyByDefectIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDutyByDefectIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcSaveTyreFcheckInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcSaveTyreFcheckInfo" />
+  </wsdl:message>
+  <wsdl:message name="ProcSaveTyreFcheckInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcSaveTyreFcheckInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringDegradeInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCuringDegradeInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringDegradeInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCuringDegradeInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckDegradeConfirmInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckDegradeConfirmInfo" />
+  </wsdl:message>
+  <wsdl:message name="CheckDegradeConfirmInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckDegradeConfirmInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveTyreDegradeConfirmInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveTyreDegradeConfirmInfo" />
+  </wsdl:message>
+  <wsdl:message name="SaveTyreDegradeConfirmInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveTyreDegradeConfirmInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveRepairRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveRepairRecord" />
+  </wsdl:message>
+  <wsdl:message name="SaveRepairRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveRepairRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFcheckInfoForRepairSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFcheckInfoForRepair" />
+  </wsdl:message>
+  <wsdl:message name="GetFcheckInfoForRepairSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFcheckInfoForRepairResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRepairPartSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllRepairPart" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRepairPartSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllRepairPartResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRepairResultSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllRepairResult" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRepairResultSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllRepairResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckBadTyreInforSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckBadTyreInfor" />
+  </wsdl:message>
+  <wsdl:message name="CheckBadTyreInforSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckBadTyreInforResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveExpTabSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveExpTab" />
+  </wsdl:message>
+  <wsdl:message name="SaveExpTabSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveExpTabResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreExpInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTyreExpInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreExpInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTyreExpInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="CuringProcSaveTyreFcheckSoapIn">
+    <wsdl:part name="parameters" element="tns:CuringProcSaveTyreFcheck" />
+  </wsdl:message>
+  <wsdl:message name="CuringProcSaveTyreFcheckSoapOut">
+    <wsdl:part name="parameters" element="tns:CuringProcSaveTyreFcheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="CuringProcSaveTyreFcheckNewSoapIn">
+    <wsdl:part name="parameters" element="tns:CuringProcSaveTyreFcheckNew" />
+  </wsdl:message>
+  <wsdl:message name="CuringProcSaveTyreFcheckNewSoapOut">
+    <wsdl:part name="parameters" element="tns:CuringProcSaveTyreFcheckNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringCheckNumSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCuringCheckNum" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringCheckNumSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCuringCheckNumResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfo1SoapIn">
+    <wsdl:part name="parameters" element="tns:ProcQmtGetTyreFCheckValidateInfo1" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfo1SoapOut">
+    <wsdl:part name="parameters" element="tns:ProcQmtGetTyreFCheckValidateInfo1Response" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDefectInfo1SoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllDefectInfo1" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDefectInfo1SoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllDefectInfo1Response" />
+  </wsdl:message>
+  <wsdl:message name="QualityGradeInitSoapIn">
+    <wsdl:part name="parameters" element="tns:QualityGradeInit" />
+  </wsdl:message>
+  <wsdl:message name="QualityGradeInitSoapOut">
+    <wsdl:part name="parameters" element="tns:QualityGradeInitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcGetTyreArtificialCheckInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcGetTyreArtificialCheckInfo" />
+  </wsdl:message>
+  <wsdl:message name="ProcGetTyreArtificialCheckInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcGetTyreArtificialCheckInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveArtificialCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveArtificialCheck" />
+  </wsdl:message>
+  <wsdl:message name="SaveArtificialCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveArtificialCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="QualityFQBGradeInitSoapIn">
+    <wsdl:part name="parameters" element="tns:QualityFQBGradeInit" />
+  </wsdl:message>
+  <wsdl:message name="QualityFQBGradeInitSoapOut">
+    <wsdl:part name="parameters" element="tns:QualityFQBGradeInitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcGetFQBTyreArtificialCheckInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcGetFQBTyreArtificialCheckInfo" />
+  </wsdl:message>
+  <wsdl:message name="ProcGetFQBTyreArtificialCheckInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcGetFQBTyreArtificialCheckInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="FQBSaveArtificialCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:FQBSaveArtificialCheck" />
+  </wsdl:message>
+  <wsdl:message name="FQBSaveArtificialCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:FQBSaveArtificialCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringEquipInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCuringEquipInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringEquipInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCuringEquipInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFcheckDefectInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFcheckDefectInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetFcheckDefectInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFcheckDefectInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitCuringEquipStopControlSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitCuringEquipStopControl" />
+  </wsdl:message>
+  <wsdl:message name="SubmitCuringEquipStopControlSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitCuringEquipStopControlResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreatToWMSRecordQGSoapIn">
+    <wsdl:part name="parameters" element="tns:CreatToWMSRecordQG" />
+  </wsdl:message>
+  <wsdl:message name="CreatToWMSRecordQGSoapOut">
+    <wsdl:part name="parameters" element="tns:CreatToWMSRecordQGResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreNoWMSRecordQGSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTyreNoWMSRecordQG" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreNoWMSRecordQGSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTyreNoWMSRecordQGResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreNoWMSRecordTestFlagQGSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTyreNoWMSRecordTestFlagQG" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreNoWMSRecordTestFlagQGSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTyreNoWMSRecordTestFlagQGResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTyreNoWMSRecordTestFlagQGSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateTyreNoWMSRecordTestFlagQG" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTyreNoWMSRecordTestFlagQGSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateTyreNoWMSRecordTestFlagQGResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBarcodeInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBarcodeInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetBarcodeInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBarcodeInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="BadInStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:BadInStore" />
+  </wsdl:message>
+  <wsdl:message name="BadInStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:BadInStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="DelBInStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:DelBInStore" />
+  </wsdl:message>
+  <wsdl:message name="DelBInStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:DelBInStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertSbeRbRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertSbeRbRecord" />
+  </wsdl:message>
+  <wsdl:message name="InsertSbeRbRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertSbeRbRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRBGradeInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRBGradeInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetRBGradeInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRBGradeInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="OnlyUpwmsSoapIn">
+    <wsdl:part name="parameters" element="tns:OnlyUpwms" />
+  </wsdl:message>
+  <wsdl:message name="OnlyUpwmsSoapOut">
+    <wsdl:part name="parameters" element="tns:OnlyUpwmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFqfCppFXSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateFqfCppFX" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFqfCppFXSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateFqfCppFXResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetShiftTableHttpGetIn" />
+  <wsdl:message name="GetShiftTableHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetSysDateTimeHttpGetIn" />
+  <wsdl:message name="GetSysDateTimeHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetClassTableHttpGetIn" />
+  <wsdl:message name="GetClassTableHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableHttpGetIn" />
+  <wsdl:message name="GetEquipTableHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ProcSaveQualityShiftInfoHttpGetIn">
+    <wsdl:part name="PlanDate" type="s:string" />
+    <wsdl:part name="ShiftID" type="s:string" />
+    <wsdl:part name="ClassID" type="s:string" />
+    <wsdl:part name="WorkerID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcSaveQualityShiftInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDefectInfoHttpGetIn">
+    <wsdl:part name="WorkProcessID" type="s:string" />
+    <wsdl:part name="DeleteFlag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDefectInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectObjIDByCodeHttpGetIn">
+    <wsdl:part name="defectCode" type="s:string" />
+    <wsdl:part name="workProcessID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectObjIDByCodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetQualityLevelHttpGetIn">
+    <wsdl:part name="WorkProcessID" type="s:string" />
+    <wsdl:part name="DeleteFlag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetQualityLevelHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="CuringQualityLevelHttpGetIn" />
+  <wsdl:message name="CuringQualityLevelHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetRePeatInfoHttpGetIn">
+    <wsdl:part name="DeleteFlag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRePeatInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="CuringGetProdInfoByTyreNoHttpGetIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CuringGetProdInfoByTyreNoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfoHttpGetIn">
+    <wsdl:part name="TyreNoOrGreenTyreNo" type="s:string" />
+    <wsdl:part name="BarcodeTypeID" type="s:string" />
+    <wsdl:part name="FCheckTypeID" type="s:string" />
+    <wsdl:part name="RecorderID" type="s:string" />
+    <wsdl:part name="DeviceID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfoNewHttpGetIn">
+    <wsdl:part name="TyreNoOrGreenTyreNo" type="s:string" />
+    <wsdl:part name="BarcodeTypeID" type="s:string" />
+    <wsdl:part name="FCheckTypeID" type="s:string" />
+    <wsdl:part name="RecorderID" type="s:string" />
+    <wsdl:part name="DeviceID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfoNewHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetDutyByDefectIDHttpGetIn">
+    <wsdl:part name="DefectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDutyByDefectIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ProcSaveTyreFcheckInfoHttpGetIn">
+    <wsdl:part name="TyreNoOrGreenTyreNo" type="s:string" />
+    <wsdl:part name="BarcodeTypeID" type="s:string" />
+    <wsdl:part name="DeviceID" type="s:string" />
+    <wsdl:part name="ShiftID" type="s:string" />
+    <wsdl:part name="ClassID" type="s:string" />
+    <wsdl:part name="RecorderID" type="s:string" />
+    <wsdl:part name="GradeID" type="s:string" />
+    <wsdl:part name="DefectIDs" type="s:string" />
+    <wsdl:part name="UpOrDowns" type="s:string" />
+    <wsdl:part name="DefectNames" type="s:string" />
+    <wsdl:part name="RepairFlag" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="IsFirst" type="s:string" />
+    <wsdl:part name="IsRecheck" type="s:string" />
+    <wsdl:part name="IsLeader" type="s:string" />
+    <wsdl:part name="IsLast" type="s:string" />
+    <wsdl:part name="ShiftNo" type="s:string" />
+    <wsdl:part name="Duty1" type="s:string" />
+    <wsdl:part name="Duty2" type="s:string" />
+    <wsdl:part name="Duty3" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcSaveTyreFcheckInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringDegradeInfoHttpGetIn">
+    <wsdl:part name="tyreNoOrGreenTyreNo" type="s:string" />
+    <wsdl:part name="barcodeTypeID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringDegradeInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="CheckDegradeConfirmInfoHttpGetIn">
+    <wsdl:part name="tyreNo" type="s:string" />
+    <wsdl:part name="greenTyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckDegradeConfirmInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="SaveTyreDegradeConfirmInfoHttpGetIn">
+    <wsdl:part name="tyreNo" type="s:string" />
+    <wsdl:part name="greenTyreNo" type="s:string" />
+    <wsdl:part name="materialID" type="s:string" />
+    <wsdl:part name="confirmDegardeID" type="s:string" />
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="classID" type="s:string" />
+    <wsdl:part name="userID" type="s:string" />
+    <wsdl:part name="gradeID" type="s:string" />
+    <wsdl:part name="degradeReason" type="s:string" />
+    <wsdl:part name="newFlag" type="s:string" />
+    <wsdl:part name="deleteFlag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveTyreDegradeConfirmInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveRepairRecordHttpGetIn">
+    <wsdl:part name="tyreNo" type="s:string" />
+    <wsdl:part name="barcodeTypeID" type="s:string" />
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="classID" type="s:string" />
+    <wsdl:part name="materialID" type="s:string" />
+    <wsdl:part name="userID" type="s:string" />
+    <wsdl:part name="repeatID" type="s:string" />
+    <wsdl:part name="repairPartID" type="s:string" />
+    <wsdl:part name="repairResultID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveRepairRecordHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFcheckInfoForRepairHttpGetIn">
+    <wsdl:part name="tyreNo" type="s:string" />
+    <wsdl:part name="barcodeTypeID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFcheckInfoForRepairHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRepairPartHttpGetIn" />
+  <wsdl:message name="GetAllRepairPartHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRepairResultHttpGetIn" />
+  <wsdl:message name="GetAllRepairResultHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="CheckBadTyreInforHttpGetIn">
+    <wsdl:part name="scanBarcode" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckBadTyreInforHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="SaveExpTabHttpGetIn">
+    <wsdl:part name="tyreNo" type="s:string" />
+    <wsdl:part name="barcodeType" type="s:string" />
+    <wsdl:part name="isExp" type="s:string" />
+    <wsdl:part name="user" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveExpTabHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreExpInfoHttpGetIn">
+    <wsdl:part name="tyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreExpInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="CuringProcSaveTyreFcheckHttpGetIn">
+    <wsdl:part name="GreentyreNo" type="s:string" />
+    <wsdl:part name="gradeID" type="s:string" />
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="classID" type="s:string" />
+    <wsdl:part name="defectID2" type="s:string" />
+    <wsdl:part name="defectID3" type="s:string" />
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CuringProcSaveTyreFcheckHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CuringProcSaveTyreFcheckNewHttpGetIn">
+    <wsdl:part name="GreentyreNo" type="s:string" />
+    <wsdl:part name="gradeID" type="s:string" />
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="classID" type="s:string" />
+    <wsdl:part name="defectID2" type="s:string" />
+    <wsdl:part name="defectID3" type="s:string" />
+    <wsdl:part name="userID" type="s:string" />
+    <wsdl:part name="ShiftDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CuringProcSaveTyreFcheckNewHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringCheckNumHttpGetIn">
+    <wsdl:part name="ShiftDate" type="s:string" />
+    <wsdl:part name="ShiftID" type="s:string" />
+    <wsdl:part name="ClassID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringCheckNumHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfo1HttpGetIn">
+    <wsdl:part name="TyreNoOrGreenTyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfo1HttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDefectInfo1HttpGetIn">
+    <wsdl:part name="WorkProcessID" type="s:string" />
+    <wsdl:part name="DeleteFlag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDefectInfo1HttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="QualityGradeInitHttpGetIn" />
+  <wsdl:message name="QualityGradeInitHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ProcGetTyreArtificialCheckInfoHttpGetIn">
+    <wsdl:part name="TyreNoOrGreenTyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcGetTyreArtificialCheckInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="SaveArtificialCheckHttpGetIn">
+    <wsdl:part name="GreentyreNo" type="s:string" />
+    <wsdl:part name="gradeID" type="s:string" />
+    <wsdl:part name="materialName" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="classID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveArtificialCheckHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="QualityFQBGradeInitHttpGetIn" />
+  <wsdl:message name="QualityFQBGradeInitHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ProcGetFQBTyreArtificialCheckInfoHttpGetIn">
+    <wsdl:part name="TyreNoOrGreenTyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcGetFQBTyreArtificialCheckInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="FQBSaveArtificialCheckHttpGetIn">
+    <wsdl:part name="GreentyreNo" type="s:string" />
+    <wsdl:part name="gradeID" type="s:string" />
+    <wsdl:part name="materialName" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="classID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FQBSaveArtificialCheckHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringEquipInfoHttpGetIn">
+    <wsdl:part name="EquipCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringEquipInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetFcheckDefectInfoHttpGetIn" />
+  <wsdl:message name="GetFcheckDefectInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="SubmitCuringEquipStopControlHttpGetIn">
+    <wsdl:part name="EquipCode" type="s:string" />
+    <wsdl:part name="Stop_Flag" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitCuringEquipStopControlHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CreatToWMSRecordQGHttpGetIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreatToWMSRecordQGHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreNoWMSRecordQGHttpGetIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreNoWMSRecordQGHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreNoWMSRecordTestFlagQGHttpGetIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreNoWMSRecordTestFlagQGHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTyreNoWMSRecordTestFlagQGHttpGetIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+    <wsdl:part name="TestFlag" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTyreNoWMSRecordTestFlagQGHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBarcodeInfoHttpGetIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBarcodeInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="BadInStoreHttpGetIn">
+    <wsdl:part name="TyreNos" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BadInStoreHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DelBInStoreHttpGetIn">
+    <wsdl:part name="TyreNos" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DelBInStoreHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertSbeRbRecordHttpGetIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+    <wsdl:part name="BCName" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertSbeRbRecordHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRBGradeInfoHttpGetIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRBGradeInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="OnlyUpwmsHttpGetIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OnlyUpwmsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFqfCppFXHttpGetIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFqfCppFXHttpGetOut" />
+  <wsdl:message name="GetShiftTableHttpPostIn" />
+  <wsdl:message name="GetShiftTableHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetSysDateTimeHttpPostIn" />
+  <wsdl:message name="GetSysDateTimeHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetClassTableHttpPostIn" />
+  <wsdl:message name="GetClassTableHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetEquipTableHttpPostIn" />
+  <wsdl:message name="GetEquipTableHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ProcSaveQualityShiftInfoHttpPostIn">
+    <wsdl:part name="PlanDate" type="s:string" />
+    <wsdl:part name="ShiftID" type="s:string" />
+    <wsdl:part name="ClassID" type="s:string" />
+    <wsdl:part name="WorkerID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcSaveQualityShiftInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDefectInfoHttpPostIn">
+    <wsdl:part name="WorkProcessID" type="s:string" />
+    <wsdl:part name="DeleteFlag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDefectInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectObjIDByCodeHttpPostIn">
+    <wsdl:part name="defectCode" type="s:string" />
+    <wsdl:part name="workProcessID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDefectObjIDByCodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetQualityLevelHttpPostIn">
+    <wsdl:part name="WorkProcessID" type="s:string" />
+    <wsdl:part name="DeleteFlag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetQualityLevelHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="CuringQualityLevelHttpPostIn" />
+  <wsdl:message name="CuringQualityLevelHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetRePeatInfoHttpPostIn">
+    <wsdl:part name="DeleteFlag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRePeatInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="CuringGetProdInfoByTyreNoHttpPostIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CuringGetProdInfoByTyreNoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfoHttpPostIn">
+    <wsdl:part name="TyreNoOrGreenTyreNo" type="s:string" />
+    <wsdl:part name="BarcodeTypeID" type="s:string" />
+    <wsdl:part name="FCheckTypeID" type="s:string" />
+    <wsdl:part name="RecorderID" type="s:string" />
+    <wsdl:part name="DeviceID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfoNewHttpPostIn">
+    <wsdl:part name="TyreNoOrGreenTyreNo" type="s:string" />
+    <wsdl:part name="BarcodeTypeID" type="s:string" />
+    <wsdl:part name="FCheckTypeID" type="s:string" />
+    <wsdl:part name="RecorderID" type="s:string" />
+    <wsdl:part name="DeviceID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfoNewHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetDutyByDefectIDHttpPostIn">
+    <wsdl:part name="DefectID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDutyByDefectIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ProcSaveTyreFcheckInfoHttpPostIn">
+    <wsdl:part name="TyreNoOrGreenTyreNo" type="s:string" />
+    <wsdl:part name="BarcodeTypeID" type="s:string" />
+    <wsdl:part name="DeviceID" type="s:string" />
+    <wsdl:part name="ShiftID" type="s:string" />
+    <wsdl:part name="ClassID" type="s:string" />
+    <wsdl:part name="RecorderID" type="s:string" />
+    <wsdl:part name="GradeID" type="s:string" />
+    <wsdl:part name="DefectIDs" type="s:string" />
+    <wsdl:part name="UpOrDowns" type="s:string" />
+    <wsdl:part name="DefectNames" type="s:string" />
+    <wsdl:part name="RepairFlag" type="s:string" />
+    <wsdl:part name="Remark" type="s:string" />
+    <wsdl:part name="IsFirst" type="s:string" />
+    <wsdl:part name="IsRecheck" type="s:string" />
+    <wsdl:part name="IsLeader" type="s:string" />
+    <wsdl:part name="IsLast" type="s:string" />
+    <wsdl:part name="ShiftNo" type="s:string" />
+    <wsdl:part name="Duty1" type="s:string" />
+    <wsdl:part name="Duty2" type="s:string" />
+    <wsdl:part name="Duty3" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcSaveTyreFcheckInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringDegradeInfoHttpPostIn">
+    <wsdl:part name="tyreNoOrGreenTyreNo" type="s:string" />
+    <wsdl:part name="barcodeTypeID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringDegradeInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="CheckDegradeConfirmInfoHttpPostIn">
+    <wsdl:part name="tyreNo" type="s:string" />
+    <wsdl:part name="greenTyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckDegradeConfirmInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="SaveTyreDegradeConfirmInfoHttpPostIn">
+    <wsdl:part name="tyreNo" type="s:string" />
+    <wsdl:part name="greenTyreNo" type="s:string" />
+    <wsdl:part name="materialID" type="s:string" />
+    <wsdl:part name="confirmDegardeID" type="s:string" />
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="classID" type="s:string" />
+    <wsdl:part name="userID" type="s:string" />
+    <wsdl:part name="gradeID" type="s:string" />
+    <wsdl:part name="degradeReason" type="s:string" />
+    <wsdl:part name="newFlag" type="s:string" />
+    <wsdl:part name="deleteFlag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveTyreDegradeConfirmInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveRepairRecordHttpPostIn">
+    <wsdl:part name="tyreNo" type="s:string" />
+    <wsdl:part name="barcodeTypeID" type="s:string" />
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="classID" type="s:string" />
+    <wsdl:part name="materialID" type="s:string" />
+    <wsdl:part name="userID" type="s:string" />
+    <wsdl:part name="repeatID" type="s:string" />
+    <wsdl:part name="repairPartID" type="s:string" />
+    <wsdl:part name="repairResultID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveRepairRecordHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFcheckInfoForRepairHttpPostIn">
+    <wsdl:part name="tyreNo" type="s:string" />
+    <wsdl:part name="barcodeTypeID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetFcheckInfoForRepairHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRepairPartHttpPostIn" />
+  <wsdl:message name="GetAllRepairPartHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRepairResultHttpPostIn" />
+  <wsdl:message name="GetAllRepairResultHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="CheckBadTyreInforHttpPostIn">
+    <wsdl:part name="scanBarcode" type="s:string" />
+    <wsdl:part name="operId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckBadTyreInforHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="SaveExpTabHttpPostIn">
+    <wsdl:part name="tyreNo" type="s:string" />
+    <wsdl:part name="barcodeType" type="s:string" />
+    <wsdl:part name="isExp" type="s:string" />
+    <wsdl:part name="user" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveExpTabHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreExpInfoHttpPostIn">
+    <wsdl:part name="tyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreExpInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="CuringProcSaveTyreFcheckHttpPostIn">
+    <wsdl:part name="GreentyreNo" type="s:string" />
+    <wsdl:part name="gradeID" type="s:string" />
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="classID" type="s:string" />
+    <wsdl:part name="defectID2" type="s:string" />
+    <wsdl:part name="defectID3" type="s:string" />
+    <wsdl:part name="userID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CuringProcSaveTyreFcheckHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CuringProcSaveTyreFcheckNewHttpPostIn">
+    <wsdl:part name="GreentyreNo" type="s:string" />
+    <wsdl:part name="gradeID" type="s:string" />
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="classID" type="s:string" />
+    <wsdl:part name="defectID2" type="s:string" />
+    <wsdl:part name="defectID3" type="s:string" />
+    <wsdl:part name="userID" type="s:string" />
+    <wsdl:part name="ShiftDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CuringProcSaveTyreFcheckNewHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringCheckNumHttpPostIn">
+    <wsdl:part name="ShiftDate" type="s:string" />
+    <wsdl:part name="ShiftID" type="s:string" />
+    <wsdl:part name="ClassID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringCheckNumHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfo1HttpPostIn">
+    <wsdl:part name="TyreNoOrGreenTyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcQmtGetTyreFCheckValidateInfo1HttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDefectInfo1HttpPostIn">
+    <wsdl:part name="WorkProcessID" type="s:string" />
+    <wsdl:part name="DeleteFlag" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDefectInfo1HttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="QualityGradeInitHttpPostIn" />
+  <wsdl:message name="QualityGradeInitHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ProcGetTyreArtificialCheckInfoHttpPostIn">
+    <wsdl:part name="TyreNoOrGreenTyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcGetTyreArtificialCheckInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="SaveArtificialCheckHttpPostIn">
+    <wsdl:part name="GreentyreNo" type="s:string" />
+    <wsdl:part name="gradeID" type="s:string" />
+    <wsdl:part name="materialName" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="classID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SaveArtificialCheckHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="QualityFQBGradeInitHttpPostIn" />
+  <wsdl:message name="QualityFQBGradeInitHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="ProcGetFQBTyreArtificialCheckInfoHttpPostIn">
+    <wsdl:part name="TyreNoOrGreenTyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ProcGetFQBTyreArtificialCheckInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="FQBSaveArtificialCheckHttpPostIn">
+    <wsdl:part name="GreentyreNo" type="s:string" />
+    <wsdl:part name="gradeID" type="s:string" />
+    <wsdl:part name="materialName" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+    <wsdl:part name="shiftID" type="s:string" />
+    <wsdl:part name="classID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="FQBSaveArtificialCheckHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringEquipInfoHttpPostIn">
+    <wsdl:part name="EquipCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCuringEquipInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetFcheckDefectInfoHttpPostIn" />
+  <wsdl:message name="GetFcheckDefectInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="SubmitCuringEquipStopControlHttpPostIn">
+    <wsdl:part name="EquipCode" type="s:string" />
+    <wsdl:part name="Stop_Flag" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SubmitCuringEquipStopControlHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CreatToWMSRecordQGHttpPostIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreatToWMSRecordQGHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreNoWMSRecordQGHttpPostIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreNoWMSRecordQGHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreNoWMSRecordTestFlagQGHttpPostIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTyreNoWMSRecordTestFlagQGHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTyreNoWMSRecordTestFlagQGHttpPostIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+    <wsdl:part name="TestFlag" type="s:string" />
+    <wsdl:part name="UserID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateTyreNoWMSRecordTestFlagQGHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBarcodeInfoHttpPostIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBarcodeInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="BadInStoreHttpPostIn">
+    <wsdl:part name="TyreNos" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="BadInStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DelBInStoreHttpPostIn">
+    <wsdl:part name="TyreNos" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DelBInStoreHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertSbeRbRecordHttpPostIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+    <wsdl:part name="BCName" type="s:string" />
+    <wsdl:part name="userid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertSbeRbRecordHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRBGradeInfoHttpPostIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRBGradeInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="OnlyUpwmsHttpPostIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OnlyUpwmsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFqfCppFXHttpPostIn">
+    <wsdl:part name="TyreNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFqfCppFXHttpPostOut" />
+  <wsdl:portType name="QualityServiceSoap">
+    <wsdl:operation name="GetShiftTable">
+      <wsdl:input message="tns:GetShiftTableSoapIn" />
+      <wsdl:output message="tns:GetShiftTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSysDateTime">
+      <wsdl:input message="tns:GetSysDateTimeSoapIn" />
+      <wsdl:output message="tns:GetSysDateTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClassTable">
+      <wsdl:input message="tns:GetClassTableSoapIn" />
+      <wsdl:output message="tns:GetClassTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <wsdl:input message="tns:GetEquipTableSoapIn" />
+      <wsdl:output message="tns:GetEquipTableSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveQualityShiftInfo">
+      <wsdl:input message="tns:ProcSaveQualityShiftInfoSoapIn" />
+      <wsdl:output message="tns:ProcSaveQualityShiftInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo">
+      <wsdl:input message="tns:GetAllDefectInfoSoapIn" />
+      <wsdl:output message="tns:GetAllDefectInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectObjIDByCode">
+      <wsdl:input message="tns:GetDefectObjIDByCodeSoapIn" />
+      <wsdl:output message="tns:GetDefectObjIDByCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQualityLevel">
+      <wsdl:input message="tns:GetQualityLevelSoapIn" />
+      <wsdl:output message="tns:GetQualityLevelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CuringQualityLevel">
+      <wsdl:input message="tns:CuringQualityLevelSoapIn" />
+      <wsdl:output message="tns:CuringQualityLevelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRePeatInfo">
+      <wsdl:input message="tns:GetRePeatInfoSoapIn" />
+      <wsdl:output message="tns:GetRePeatInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CuringGetProdInfoByTyreNo">
+      <wsdl:input message="tns:CuringGetProdInfoByTyreNoSoapIn" />
+      <wsdl:output message="tns:CuringGetProdInfoByTyreNoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo">
+      <wsdl:input message="tns:ProcQmtGetTyreFCheckValidateInfoSoapIn" />
+      <wsdl:output message="tns:ProcQmtGetTyreFCheckValidateInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfoNew">
+      <wsdl:input message="tns:ProcQmtGetTyreFCheckValidateInfoNewSoapIn" />
+      <wsdl:output message="tns:ProcQmtGetTyreFCheckValidateInfoNewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDutyByDefectID">
+      <wsdl:input message="tns:GetDutyByDefectIDSoapIn" />
+      <wsdl:output message="tns:GetDutyByDefectIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveTyreFcheckInfo">
+      <wsdl:input message="tns:ProcSaveTyreFcheckInfoSoapIn" />
+      <wsdl:output message="tns:ProcSaveTyreFcheckInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringDegradeInfo">
+      <wsdl:input message="tns:GetCuringDegradeInfoSoapIn" />
+      <wsdl:output message="tns:GetCuringDegradeInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckDegradeConfirmInfo">
+      <wsdl:input message="tns:CheckDegradeConfirmInfoSoapIn" />
+      <wsdl:output message="tns:CheckDegradeConfirmInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveTyreDegradeConfirmInfo">
+      <wsdl:input message="tns:SaveTyreDegradeConfirmInfoSoapIn" />
+      <wsdl:output message="tns:SaveTyreDegradeConfirmInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveRepairRecord">
+      <wsdl:input message="tns:SaveRepairRecordSoapIn" />
+      <wsdl:output message="tns:SaveRepairRecordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckInfoForRepair">
+      <wsdl:input message="tns:GetFcheckInfoForRepairSoapIn" />
+      <wsdl:output message="tns:GetFcheckInfoForRepairSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairPart">
+      <wsdl:input message="tns:GetAllRepairPartSoapIn" />
+      <wsdl:output message="tns:GetAllRepairPartSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairResult">
+      <wsdl:input message="tns:GetAllRepairResultSoapIn" />
+      <wsdl:output message="tns:GetAllRepairResultSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckBadTyreInfor">
+      <wsdl:input message="tns:CheckBadTyreInforSoapIn" />
+      <wsdl:output message="tns:CheckBadTyreInforSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveExpTab">
+      <wsdl:input message="tns:SaveExpTabSoapIn" />
+      <wsdl:output message="tns:SaveExpTabSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreExpInfo">
+      <wsdl:input message="tns:GetTyreExpInfoSoapIn" />
+      <wsdl:output message="tns:GetTyreExpInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheck">
+      <wsdl:input message="tns:CuringProcSaveTyreFcheckSoapIn" />
+      <wsdl:output message="tns:CuringProcSaveTyreFcheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheckNew">
+      <wsdl:input message="tns:CuringProcSaveTyreFcheckNewSoapIn" />
+      <wsdl:output message="tns:CuringProcSaveTyreFcheckNewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringCheckNum">
+      <wsdl:input message="tns:GetCuringCheckNumSoapIn" />
+      <wsdl:output message="tns:GetCuringCheckNumSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo1">
+      <wsdl:input message="tns:ProcQmtGetTyreFCheckValidateInfo1SoapIn" />
+      <wsdl:output message="tns:ProcQmtGetTyreFCheckValidateInfo1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo1">
+      <wsdl:input message="tns:GetAllDefectInfo1SoapIn" />
+      <wsdl:output message="tns:GetAllDefectInfo1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QualityGradeInit">
+      <wsdl:input message="tns:QualityGradeInitSoapIn" />
+      <wsdl:output message="tns:QualityGradeInitSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetTyreArtificialCheckInfo">
+      <wsdl:input message="tns:ProcGetTyreArtificialCheckInfoSoapIn" />
+      <wsdl:output message="tns:ProcGetTyreArtificialCheckInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveArtificialCheck">
+      <wsdl:input message="tns:SaveArtificialCheckSoapIn" />
+      <wsdl:output message="tns:SaveArtificialCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QualityFQBGradeInit">
+      <wsdl:input message="tns:QualityFQBGradeInitSoapIn" />
+      <wsdl:output message="tns:QualityFQBGradeInitSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetFQBTyreArtificialCheckInfo">
+      <wsdl:input message="tns:ProcGetFQBTyreArtificialCheckInfoSoapIn" />
+      <wsdl:output message="tns:ProcGetFQBTyreArtificialCheckInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FQBSaveArtificialCheck">
+      <wsdl:input message="tns:FQBSaveArtificialCheckSoapIn" />
+      <wsdl:output message="tns:FQBSaveArtificialCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringEquipInfo">
+      <wsdl:input message="tns:GetCuringEquipInfoSoapIn" />
+      <wsdl:output message="tns:GetCuringEquipInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckDefectInfo">
+      <wsdl:input message="tns:GetFcheckDefectInfoSoapIn" />
+      <wsdl:output message="tns:GetFcheckDefectInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitCuringEquipStopControl">
+      <wsdl:input message="tns:SubmitCuringEquipStopControlSoapIn" />
+      <wsdl:output message="tns:SubmitCuringEquipStopControlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatToWMSRecordQG">
+      <wsdl:input message="tns:CreatToWMSRecordQGSoapIn" />
+      <wsdl:output message="tns:CreatToWMSRecordQGSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordQG">
+      <wsdl:input message="tns:GetTyreNoWMSRecordQGSoapIn" />
+      <wsdl:output message="tns:GetTyreNoWMSRecordQGSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordTestFlagQG">
+      <wsdl:input message="tns:GetTyreNoWMSRecordTestFlagQGSoapIn" />
+      <wsdl:output message="tns:GetTyreNoWMSRecordTestFlagQGSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTyreNoWMSRecordTestFlagQG">
+      <wsdl:input message="tns:UpdateTyreNoWMSRecordTestFlagQGSoapIn" />
+      <wsdl:output message="tns:UpdateTyreNoWMSRecordTestFlagQGSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBarcodeInfo">
+      <wsdl:input message="tns:GetBarcodeInfoSoapIn" />
+      <wsdl:output message="tns:GetBarcodeInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BadInStore">
+      <wsdl:input message="tns:BadInStoreSoapIn" />
+      <wsdl:output message="tns:BadInStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelBInStore">
+      <wsdl:input message="tns:DelBInStoreSoapIn" />
+      <wsdl:output message="tns:DelBInStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeRbRecord">
+      <wsdl:input message="tns:InsertSbeRbRecordSoapIn" />
+      <wsdl:output message="tns:InsertSbeRbRecordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRBGradeInfo">
+      <wsdl:input message="tns:GetRBGradeInfoSoapIn" />
+      <wsdl:output message="tns:GetRBGradeInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OnlyUpwms">
+      <wsdl:input message="tns:OnlyUpwmsSoapIn" />
+      <wsdl:output message="tns:OnlyUpwmsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFqfCppFX">
+      <wsdl:input message="tns:UpdateFqfCppFXSoapIn" />
+      <wsdl:output message="tns:UpdateFqfCppFXSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="QualityServiceHttpGet">
+    <wsdl:operation name="GetShiftTable">
+      <wsdl:input message="tns:GetShiftTableHttpGetIn" />
+      <wsdl:output message="tns:GetShiftTableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSysDateTime">
+      <wsdl:input message="tns:GetSysDateTimeHttpGetIn" />
+      <wsdl:output message="tns:GetSysDateTimeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClassTable">
+      <wsdl:input message="tns:GetClassTableHttpGetIn" />
+      <wsdl:output message="tns:GetClassTableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <wsdl:input message="tns:GetEquipTableHttpGetIn" />
+      <wsdl:output message="tns:GetEquipTableHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveQualityShiftInfo">
+      <wsdl:input message="tns:ProcSaveQualityShiftInfoHttpGetIn" />
+      <wsdl:output message="tns:ProcSaveQualityShiftInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo">
+      <wsdl:input message="tns:GetAllDefectInfoHttpGetIn" />
+      <wsdl:output message="tns:GetAllDefectInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectObjIDByCode">
+      <wsdl:input message="tns:GetDefectObjIDByCodeHttpGetIn" />
+      <wsdl:output message="tns:GetDefectObjIDByCodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQualityLevel">
+      <wsdl:input message="tns:GetQualityLevelHttpGetIn" />
+      <wsdl:output message="tns:GetQualityLevelHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CuringQualityLevel">
+      <wsdl:input message="tns:CuringQualityLevelHttpGetIn" />
+      <wsdl:output message="tns:CuringQualityLevelHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRePeatInfo">
+      <wsdl:input message="tns:GetRePeatInfoHttpGetIn" />
+      <wsdl:output message="tns:GetRePeatInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CuringGetProdInfoByTyreNo">
+      <wsdl:input message="tns:CuringGetProdInfoByTyreNoHttpGetIn" />
+      <wsdl:output message="tns:CuringGetProdInfoByTyreNoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo">
+      <wsdl:input message="tns:ProcQmtGetTyreFCheckValidateInfoHttpGetIn" />
+      <wsdl:output message="tns:ProcQmtGetTyreFCheckValidateInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfoNew">
+      <wsdl:input message="tns:ProcQmtGetTyreFCheckValidateInfoNewHttpGetIn" />
+      <wsdl:output message="tns:ProcQmtGetTyreFCheckValidateInfoNewHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDutyByDefectID">
+      <wsdl:input message="tns:GetDutyByDefectIDHttpGetIn" />
+      <wsdl:output message="tns:GetDutyByDefectIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveTyreFcheckInfo">
+      <wsdl:input message="tns:ProcSaveTyreFcheckInfoHttpGetIn" />
+      <wsdl:output message="tns:ProcSaveTyreFcheckInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringDegradeInfo">
+      <wsdl:input message="tns:GetCuringDegradeInfoHttpGetIn" />
+      <wsdl:output message="tns:GetCuringDegradeInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckDegradeConfirmInfo">
+      <wsdl:input message="tns:CheckDegradeConfirmInfoHttpGetIn" />
+      <wsdl:output message="tns:CheckDegradeConfirmInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveTyreDegradeConfirmInfo">
+      <wsdl:input message="tns:SaveTyreDegradeConfirmInfoHttpGetIn" />
+      <wsdl:output message="tns:SaveTyreDegradeConfirmInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveRepairRecord">
+      <wsdl:input message="tns:SaveRepairRecordHttpGetIn" />
+      <wsdl:output message="tns:SaveRepairRecordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckInfoForRepair">
+      <wsdl:input message="tns:GetFcheckInfoForRepairHttpGetIn" />
+      <wsdl:output message="tns:GetFcheckInfoForRepairHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairPart">
+      <wsdl:input message="tns:GetAllRepairPartHttpGetIn" />
+      <wsdl:output message="tns:GetAllRepairPartHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairResult">
+      <wsdl:input message="tns:GetAllRepairResultHttpGetIn" />
+      <wsdl:output message="tns:GetAllRepairResultHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckBadTyreInfor">
+      <wsdl:input message="tns:CheckBadTyreInforHttpGetIn" />
+      <wsdl:output message="tns:CheckBadTyreInforHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveExpTab">
+      <wsdl:input message="tns:SaveExpTabHttpGetIn" />
+      <wsdl:output message="tns:SaveExpTabHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreExpInfo">
+      <wsdl:input message="tns:GetTyreExpInfoHttpGetIn" />
+      <wsdl:output message="tns:GetTyreExpInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheck">
+      <wsdl:input message="tns:CuringProcSaveTyreFcheckHttpGetIn" />
+      <wsdl:output message="tns:CuringProcSaveTyreFcheckHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheckNew">
+      <wsdl:input message="tns:CuringProcSaveTyreFcheckNewHttpGetIn" />
+      <wsdl:output message="tns:CuringProcSaveTyreFcheckNewHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringCheckNum">
+      <wsdl:input message="tns:GetCuringCheckNumHttpGetIn" />
+      <wsdl:output message="tns:GetCuringCheckNumHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo1">
+      <wsdl:input message="tns:ProcQmtGetTyreFCheckValidateInfo1HttpGetIn" />
+      <wsdl:output message="tns:ProcQmtGetTyreFCheckValidateInfo1HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo1">
+      <wsdl:input message="tns:GetAllDefectInfo1HttpGetIn" />
+      <wsdl:output message="tns:GetAllDefectInfo1HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QualityGradeInit">
+      <wsdl:input message="tns:QualityGradeInitHttpGetIn" />
+      <wsdl:output message="tns:QualityGradeInitHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetTyreArtificialCheckInfo">
+      <wsdl:input message="tns:ProcGetTyreArtificialCheckInfoHttpGetIn" />
+      <wsdl:output message="tns:ProcGetTyreArtificialCheckInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveArtificialCheck">
+      <wsdl:input message="tns:SaveArtificialCheckHttpGetIn" />
+      <wsdl:output message="tns:SaveArtificialCheckHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QualityFQBGradeInit">
+      <wsdl:input message="tns:QualityFQBGradeInitHttpGetIn" />
+      <wsdl:output message="tns:QualityFQBGradeInitHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetFQBTyreArtificialCheckInfo">
+      <wsdl:input message="tns:ProcGetFQBTyreArtificialCheckInfoHttpGetIn" />
+      <wsdl:output message="tns:ProcGetFQBTyreArtificialCheckInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FQBSaveArtificialCheck">
+      <wsdl:input message="tns:FQBSaveArtificialCheckHttpGetIn" />
+      <wsdl:output message="tns:FQBSaveArtificialCheckHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringEquipInfo">
+      <wsdl:input message="tns:GetCuringEquipInfoHttpGetIn" />
+      <wsdl:output message="tns:GetCuringEquipInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckDefectInfo">
+      <wsdl:input message="tns:GetFcheckDefectInfoHttpGetIn" />
+      <wsdl:output message="tns:GetFcheckDefectInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitCuringEquipStopControl">
+      <wsdl:input message="tns:SubmitCuringEquipStopControlHttpGetIn" />
+      <wsdl:output message="tns:SubmitCuringEquipStopControlHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatToWMSRecordQG">
+      <wsdl:input message="tns:CreatToWMSRecordQGHttpGetIn" />
+      <wsdl:output message="tns:CreatToWMSRecordQGHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordQG">
+      <wsdl:input message="tns:GetTyreNoWMSRecordQGHttpGetIn" />
+      <wsdl:output message="tns:GetTyreNoWMSRecordQGHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordTestFlagQG">
+      <wsdl:input message="tns:GetTyreNoWMSRecordTestFlagQGHttpGetIn" />
+      <wsdl:output message="tns:GetTyreNoWMSRecordTestFlagQGHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTyreNoWMSRecordTestFlagQG">
+      <wsdl:input message="tns:UpdateTyreNoWMSRecordTestFlagQGHttpGetIn" />
+      <wsdl:output message="tns:UpdateTyreNoWMSRecordTestFlagQGHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBarcodeInfo">
+      <wsdl:input message="tns:GetBarcodeInfoHttpGetIn" />
+      <wsdl:output message="tns:GetBarcodeInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BadInStore">
+      <wsdl:input message="tns:BadInStoreHttpGetIn" />
+      <wsdl:output message="tns:BadInStoreHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelBInStore">
+      <wsdl:input message="tns:DelBInStoreHttpGetIn" />
+      <wsdl:output message="tns:DelBInStoreHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeRbRecord">
+      <wsdl:input message="tns:InsertSbeRbRecordHttpGetIn" />
+      <wsdl:output message="tns:InsertSbeRbRecordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRBGradeInfo">
+      <wsdl:input message="tns:GetRBGradeInfoHttpGetIn" />
+      <wsdl:output message="tns:GetRBGradeInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OnlyUpwms">
+      <wsdl:input message="tns:OnlyUpwmsHttpGetIn" />
+      <wsdl:output message="tns:OnlyUpwmsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFqfCppFX">
+      <wsdl:input message="tns:UpdateFqfCppFXHttpGetIn" />
+      <wsdl:output message="tns:UpdateFqfCppFXHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="QualityServiceHttpPost">
+    <wsdl:operation name="GetShiftTable">
+      <wsdl:input message="tns:GetShiftTableHttpPostIn" />
+      <wsdl:output message="tns:GetShiftTableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSysDateTime">
+      <wsdl:input message="tns:GetSysDateTimeHttpPostIn" />
+      <wsdl:output message="tns:GetSysDateTimeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClassTable">
+      <wsdl:input message="tns:GetClassTableHttpPostIn" />
+      <wsdl:output message="tns:GetClassTableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <wsdl:input message="tns:GetEquipTableHttpPostIn" />
+      <wsdl:output message="tns:GetEquipTableHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveQualityShiftInfo">
+      <wsdl:input message="tns:ProcSaveQualityShiftInfoHttpPostIn" />
+      <wsdl:output message="tns:ProcSaveQualityShiftInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo">
+      <wsdl:input message="tns:GetAllDefectInfoHttpPostIn" />
+      <wsdl:output message="tns:GetAllDefectInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectObjIDByCode">
+      <wsdl:input message="tns:GetDefectObjIDByCodeHttpPostIn" />
+      <wsdl:output message="tns:GetDefectObjIDByCodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQualityLevel">
+      <wsdl:input message="tns:GetQualityLevelHttpPostIn" />
+      <wsdl:output message="tns:GetQualityLevelHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CuringQualityLevel">
+      <wsdl:input message="tns:CuringQualityLevelHttpPostIn" />
+      <wsdl:output message="tns:CuringQualityLevelHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRePeatInfo">
+      <wsdl:input message="tns:GetRePeatInfoHttpPostIn" />
+      <wsdl:output message="tns:GetRePeatInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CuringGetProdInfoByTyreNo">
+      <wsdl:input message="tns:CuringGetProdInfoByTyreNoHttpPostIn" />
+      <wsdl:output message="tns:CuringGetProdInfoByTyreNoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo">
+      <wsdl:input message="tns:ProcQmtGetTyreFCheckValidateInfoHttpPostIn" />
+      <wsdl:output message="tns:ProcQmtGetTyreFCheckValidateInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfoNew">
+      <wsdl:input message="tns:ProcQmtGetTyreFCheckValidateInfoNewHttpPostIn" />
+      <wsdl:output message="tns:ProcQmtGetTyreFCheckValidateInfoNewHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDutyByDefectID">
+      <wsdl:input message="tns:GetDutyByDefectIDHttpPostIn" />
+      <wsdl:output message="tns:GetDutyByDefectIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveTyreFcheckInfo">
+      <wsdl:input message="tns:ProcSaveTyreFcheckInfoHttpPostIn" />
+      <wsdl:output message="tns:ProcSaveTyreFcheckInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringDegradeInfo">
+      <wsdl:input message="tns:GetCuringDegradeInfoHttpPostIn" />
+      <wsdl:output message="tns:GetCuringDegradeInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckDegradeConfirmInfo">
+      <wsdl:input message="tns:CheckDegradeConfirmInfoHttpPostIn" />
+      <wsdl:output message="tns:CheckDegradeConfirmInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveTyreDegradeConfirmInfo">
+      <wsdl:input message="tns:SaveTyreDegradeConfirmInfoHttpPostIn" />
+      <wsdl:output message="tns:SaveTyreDegradeConfirmInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveRepairRecord">
+      <wsdl:input message="tns:SaveRepairRecordHttpPostIn" />
+      <wsdl:output message="tns:SaveRepairRecordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckInfoForRepair">
+      <wsdl:input message="tns:GetFcheckInfoForRepairHttpPostIn" />
+      <wsdl:output message="tns:GetFcheckInfoForRepairHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairPart">
+      <wsdl:input message="tns:GetAllRepairPartHttpPostIn" />
+      <wsdl:output message="tns:GetAllRepairPartHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairResult">
+      <wsdl:input message="tns:GetAllRepairResultHttpPostIn" />
+      <wsdl:output message="tns:GetAllRepairResultHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckBadTyreInfor">
+      <wsdl:input message="tns:CheckBadTyreInforHttpPostIn" />
+      <wsdl:output message="tns:CheckBadTyreInforHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveExpTab">
+      <wsdl:input message="tns:SaveExpTabHttpPostIn" />
+      <wsdl:output message="tns:SaveExpTabHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreExpInfo">
+      <wsdl:input message="tns:GetTyreExpInfoHttpPostIn" />
+      <wsdl:output message="tns:GetTyreExpInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheck">
+      <wsdl:input message="tns:CuringProcSaveTyreFcheckHttpPostIn" />
+      <wsdl:output message="tns:CuringProcSaveTyreFcheckHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheckNew">
+      <wsdl:input message="tns:CuringProcSaveTyreFcheckNewHttpPostIn" />
+      <wsdl:output message="tns:CuringProcSaveTyreFcheckNewHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringCheckNum">
+      <wsdl:input message="tns:GetCuringCheckNumHttpPostIn" />
+      <wsdl:output message="tns:GetCuringCheckNumHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo1">
+      <wsdl:input message="tns:ProcQmtGetTyreFCheckValidateInfo1HttpPostIn" />
+      <wsdl:output message="tns:ProcQmtGetTyreFCheckValidateInfo1HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo1">
+      <wsdl:input message="tns:GetAllDefectInfo1HttpPostIn" />
+      <wsdl:output message="tns:GetAllDefectInfo1HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QualityGradeInit">
+      <wsdl:input message="tns:QualityGradeInitHttpPostIn" />
+      <wsdl:output message="tns:QualityGradeInitHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetTyreArtificialCheckInfo">
+      <wsdl:input message="tns:ProcGetTyreArtificialCheckInfoHttpPostIn" />
+      <wsdl:output message="tns:ProcGetTyreArtificialCheckInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveArtificialCheck">
+      <wsdl:input message="tns:SaveArtificialCheckHttpPostIn" />
+      <wsdl:output message="tns:SaveArtificialCheckHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QualityFQBGradeInit">
+      <wsdl:input message="tns:QualityFQBGradeInitHttpPostIn" />
+      <wsdl:output message="tns:QualityFQBGradeInitHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetFQBTyreArtificialCheckInfo">
+      <wsdl:input message="tns:ProcGetFQBTyreArtificialCheckInfoHttpPostIn" />
+      <wsdl:output message="tns:ProcGetFQBTyreArtificialCheckInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FQBSaveArtificialCheck">
+      <wsdl:input message="tns:FQBSaveArtificialCheckHttpPostIn" />
+      <wsdl:output message="tns:FQBSaveArtificialCheckHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringEquipInfo">
+      <wsdl:input message="tns:GetCuringEquipInfoHttpPostIn" />
+      <wsdl:output message="tns:GetCuringEquipInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckDefectInfo">
+      <wsdl:input message="tns:GetFcheckDefectInfoHttpPostIn" />
+      <wsdl:output message="tns:GetFcheckDefectInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitCuringEquipStopControl">
+      <wsdl:input message="tns:SubmitCuringEquipStopControlHttpPostIn" />
+      <wsdl:output message="tns:SubmitCuringEquipStopControlHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreatToWMSRecordQG">
+      <wsdl:input message="tns:CreatToWMSRecordQGHttpPostIn" />
+      <wsdl:output message="tns:CreatToWMSRecordQGHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordQG">
+      <wsdl:input message="tns:GetTyreNoWMSRecordQGHttpPostIn" />
+      <wsdl:output message="tns:GetTyreNoWMSRecordQGHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordTestFlagQG">
+      <wsdl:input message="tns:GetTyreNoWMSRecordTestFlagQGHttpPostIn" />
+      <wsdl:output message="tns:GetTyreNoWMSRecordTestFlagQGHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTyreNoWMSRecordTestFlagQG">
+      <wsdl:input message="tns:UpdateTyreNoWMSRecordTestFlagQGHttpPostIn" />
+      <wsdl:output message="tns:UpdateTyreNoWMSRecordTestFlagQGHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBarcodeInfo">
+      <wsdl:input message="tns:GetBarcodeInfoHttpPostIn" />
+      <wsdl:output message="tns:GetBarcodeInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BadInStore">
+      <wsdl:input message="tns:BadInStoreHttpPostIn" />
+      <wsdl:output message="tns:BadInStoreHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelBInStore">
+      <wsdl:input message="tns:DelBInStoreHttpPostIn" />
+      <wsdl:output message="tns:DelBInStoreHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeRbRecord">
+      <wsdl:input message="tns:InsertSbeRbRecordHttpPostIn" />
+      <wsdl:output message="tns:InsertSbeRbRecordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRBGradeInfo">
+      <wsdl:input message="tns:GetRBGradeInfoHttpPostIn" />
+      <wsdl:output message="tns:GetRBGradeInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OnlyUpwms">
+      <wsdl:input message="tns:OnlyUpwmsHttpPostIn" />
+      <wsdl:output message="tns:OnlyUpwmsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFqfCppFX">
+      <wsdl:input message="tns:UpdateFqfCppFXHttpPostIn" />
+      <wsdl:output message="tns:UpdateFqfCppFXHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="QualityServiceSoap" type="tns:QualityServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetShiftTable">
+      <soap:operation soapAction="http://tempuri.org/GetShiftTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysDateTime">
+      <soap:operation soapAction="http://tempuri.org/GetSysDateTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClassTable">
+      <soap:operation soapAction="http://tempuri.org/GetClassTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <soap:operation soapAction="http://tempuri.org/GetEquipTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveQualityShiftInfo">
+      <soap:operation soapAction="http://tempuri.org/ProcSaveQualityShiftInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo">
+      <soap:operation soapAction="http://tempuri.org/GetAllDefectInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectObjIDByCode">
+      <soap:operation soapAction="http://tempuri.org/GetDefectObjIDByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQualityLevel">
+      <soap:operation soapAction="http://tempuri.org/GetQualityLevel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringQualityLevel">
+      <soap:operation soapAction="http://tempuri.org/CuringQualityLevel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRePeatInfo">
+      <soap:operation soapAction="http://tempuri.org/GetRePeatInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringGetProdInfoByTyreNo">
+      <soap:operation soapAction="http://tempuri.org/CuringGetProdInfoByTyreNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo">
+      <soap:operation soapAction="http://tempuri.org/ProcQmtGetTyreFCheckValidateInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfoNew">
+      <soap:operation soapAction="http://tempuri.org/ProcQmtGetTyreFCheckValidateInfoNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDutyByDefectID">
+      <soap:operation soapAction="http://tempuri.org/GetDutyByDefectID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveTyreFcheckInfo">
+      <soap:operation soapAction="http://tempuri.org/ProcSaveTyreFcheckInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringDegradeInfo">
+      <soap:operation soapAction="http://tempuri.org/GetCuringDegradeInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckDegradeConfirmInfo">
+      <soap:operation soapAction="http://tempuri.org/CheckDegradeConfirmInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveTyreDegradeConfirmInfo">
+      <soap:operation soapAction="http://tempuri.org/SaveTyreDegradeConfirmInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveRepairRecord">
+      <soap:operation soapAction="http://tempuri.org/SaveRepairRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckInfoForRepair">
+      <soap:operation soapAction="http://tempuri.org/GetFcheckInfoForRepair" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairPart">
+      <soap:operation soapAction="http://tempuri.org/GetAllRepairPart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairResult">
+      <soap:operation soapAction="http://tempuri.org/GetAllRepairResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckBadTyreInfor">
+      <soap:operation soapAction="http://tempuri.org/CheckBadTyreInfor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveExpTab">
+      <soap:operation soapAction="http://tempuri.org/SaveExpTab" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreExpInfo">
+      <soap:operation soapAction="http://tempuri.org/GetTyreExpInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheck">
+      <soap:operation soapAction="http://tempuri.org/CuringProcSaveTyreFcheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheckNew">
+      <soap:operation soapAction="http://tempuri.org/CuringProcSaveTyreFcheckNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringCheckNum">
+      <soap:operation soapAction="http://tempuri.org/GetCuringCheckNum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo1">
+      <soap:operation soapAction="http://tempuri.org/ProcQmtGetTyreFCheckValidateInfo1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo1">
+      <soap:operation soapAction="http://tempuri.org/GetAllDefectInfo1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QualityGradeInit">
+      <soap:operation soapAction="http://tempuri.org/QualityGradeInit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetTyreArtificialCheckInfo">
+      <soap:operation soapAction="http://tempuri.org/ProcGetTyreArtificialCheckInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveArtificialCheck">
+      <soap:operation soapAction="http://tempuri.org/SaveArtificialCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QualityFQBGradeInit">
+      <soap:operation soapAction="http://tempuri.org/QualityFQBGradeInit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetFQBTyreArtificialCheckInfo">
+      <soap:operation soapAction="http://tempuri.org/ProcGetFQBTyreArtificialCheckInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FQBSaveArtificialCheck">
+      <soap:operation soapAction="http://tempuri.org/FQBSaveArtificialCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringEquipInfo">
+      <soap:operation soapAction="http://tempuri.org/GetCuringEquipInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckDefectInfo">
+      <soap:operation soapAction="http://tempuri.org/GetFcheckDefectInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitCuringEquipStopControl">
+      <soap:operation soapAction="http://tempuri.org/SubmitCuringEquipStopControl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatToWMSRecordQG">
+      <soap:operation soapAction="http://tempuri.org/CreatToWMSRecordQG" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordQG">
+      <soap:operation soapAction="http://tempuri.org/GetTyreNoWMSRecordQG" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordTestFlagQG">
+      <soap:operation soapAction="http://tempuri.org/GetTyreNoWMSRecordTestFlagQG" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTyreNoWMSRecordTestFlagQG">
+      <soap:operation soapAction="http://tempuri.org/UpdateTyreNoWMSRecordTestFlagQG" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBarcodeInfo">
+      <soap:operation soapAction="http://tempuri.org/GetBarcodeInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BadInStore">
+      <soap:operation soapAction="http://tempuri.org/BadInStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelBInStore">
+      <soap:operation soapAction="http://tempuri.org/DelBInStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeRbRecord">
+      <soap:operation soapAction="http://tempuri.org/InsertSbeRbRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRBGradeInfo">
+      <soap:operation soapAction="http://tempuri.org/GetRBGradeInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnlyUpwms">
+      <soap:operation soapAction="http://tempuri.org/OnlyUpwms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFqfCppFX">
+      <soap:operation soapAction="http://tempuri.org/UpdateFqfCppFX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="QualityServiceSoap12" type="tns:QualityServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetShiftTable">
+      <soap12:operation soapAction="http://tempuri.org/GetShiftTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysDateTime">
+      <soap12:operation soapAction="http://tempuri.org/GetSysDateTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClassTable">
+      <soap12:operation soapAction="http://tempuri.org/GetClassTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <soap12:operation soapAction="http://tempuri.org/GetEquipTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveQualityShiftInfo">
+      <soap12:operation soapAction="http://tempuri.org/ProcSaveQualityShiftInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetAllDefectInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectObjIDByCode">
+      <soap12:operation soapAction="http://tempuri.org/GetDefectObjIDByCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQualityLevel">
+      <soap12:operation soapAction="http://tempuri.org/GetQualityLevel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringQualityLevel">
+      <soap12:operation soapAction="http://tempuri.org/CuringQualityLevel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRePeatInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetRePeatInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringGetProdInfoByTyreNo">
+      <soap12:operation soapAction="http://tempuri.org/CuringGetProdInfoByTyreNo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo">
+      <soap12:operation soapAction="http://tempuri.org/ProcQmtGetTyreFCheckValidateInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfoNew">
+      <soap12:operation soapAction="http://tempuri.org/ProcQmtGetTyreFCheckValidateInfoNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDutyByDefectID">
+      <soap12:operation soapAction="http://tempuri.org/GetDutyByDefectID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveTyreFcheckInfo">
+      <soap12:operation soapAction="http://tempuri.org/ProcSaveTyreFcheckInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringDegradeInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetCuringDegradeInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckDegradeConfirmInfo">
+      <soap12:operation soapAction="http://tempuri.org/CheckDegradeConfirmInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveTyreDegradeConfirmInfo">
+      <soap12:operation soapAction="http://tempuri.org/SaveTyreDegradeConfirmInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveRepairRecord">
+      <soap12:operation soapAction="http://tempuri.org/SaveRepairRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckInfoForRepair">
+      <soap12:operation soapAction="http://tempuri.org/GetFcheckInfoForRepair" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairPart">
+      <soap12:operation soapAction="http://tempuri.org/GetAllRepairPart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairResult">
+      <soap12:operation soapAction="http://tempuri.org/GetAllRepairResult" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckBadTyreInfor">
+      <soap12:operation soapAction="http://tempuri.org/CheckBadTyreInfor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveExpTab">
+      <soap12:operation soapAction="http://tempuri.org/SaveExpTab" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreExpInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetTyreExpInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheck">
+      <soap12:operation soapAction="http://tempuri.org/CuringProcSaveTyreFcheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheckNew">
+      <soap12:operation soapAction="http://tempuri.org/CuringProcSaveTyreFcheckNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringCheckNum">
+      <soap12:operation soapAction="http://tempuri.org/GetCuringCheckNum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo1">
+      <soap12:operation soapAction="http://tempuri.org/ProcQmtGetTyreFCheckValidateInfo1" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo1">
+      <soap12:operation soapAction="http://tempuri.org/GetAllDefectInfo1" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QualityGradeInit">
+      <soap12:operation soapAction="http://tempuri.org/QualityGradeInit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetTyreArtificialCheckInfo">
+      <soap12:operation soapAction="http://tempuri.org/ProcGetTyreArtificialCheckInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveArtificialCheck">
+      <soap12:operation soapAction="http://tempuri.org/SaveArtificialCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QualityFQBGradeInit">
+      <soap12:operation soapAction="http://tempuri.org/QualityFQBGradeInit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetFQBTyreArtificialCheckInfo">
+      <soap12:operation soapAction="http://tempuri.org/ProcGetFQBTyreArtificialCheckInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FQBSaveArtificialCheck">
+      <soap12:operation soapAction="http://tempuri.org/FQBSaveArtificialCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringEquipInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetCuringEquipInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckDefectInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetFcheckDefectInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitCuringEquipStopControl">
+      <soap12:operation soapAction="http://tempuri.org/SubmitCuringEquipStopControl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatToWMSRecordQG">
+      <soap12:operation soapAction="http://tempuri.org/CreatToWMSRecordQG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordQG">
+      <soap12:operation soapAction="http://tempuri.org/GetTyreNoWMSRecordQG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordTestFlagQG">
+      <soap12:operation soapAction="http://tempuri.org/GetTyreNoWMSRecordTestFlagQG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTyreNoWMSRecordTestFlagQG">
+      <soap12:operation soapAction="http://tempuri.org/UpdateTyreNoWMSRecordTestFlagQG" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBarcodeInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetBarcodeInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BadInStore">
+      <soap12:operation soapAction="http://tempuri.org/BadInStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelBInStore">
+      <soap12:operation soapAction="http://tempuri.org/DelBInStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeRbRecord">
+      <soap12:operation soapAction="http://tempuri.org/InsertSbeRbRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRBGradeInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetRBGradeInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnlyUpwms">
+      <soap12:operation soapAction="http://tempuri.org/OnlyUpwms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFqfCppFX">
+      <soap12:operation soapAction="http://tempuri.org/UpdateFqfCppFX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="QualityServiceHttpGet" type="tns:QualityServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetShiftTable">
+      <http:operation location="/GetShiftTable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysDateTime">
+      <http:operation location="/GetSysDateTime" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClassTable">
+      <http:operation location="/GetClassTable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <http:operation location="/GetEquipTable" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveQualityShiftInfo">
+      <http:operation location="/ProcSaveQualityShiftInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo">
+      <http:operation location="/GetAllDefectInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectObjIDByCode">
+      <http:operation location="/GetDefectObjIDByCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQualityLevel">
+      <http:operation location="/GetQualityLevel" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringQualityLevel">
+      <http:operation location="/CuringQualityLevel" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRePeatInfo">
+      <http:operation location="/GetRePeatInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringGetProdInfoByTyreNo">
+      <http:operation location="/CuringGetProdInfoByTyreNo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo">
+      <http:operation location="/ProcQmtGetTyreFCheckValidateInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfoNew">
+      <http:operation location="/ProcQmtGetTyreFCheckValidateInfoNew" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDutyByDefectID">
+      <http:operation location="/GetDutyByDefectID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveTyreFcheckInfo">
+      <http:operation location="/ProcSaveTyreFcheckInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringDegradeInfo">
+      <http:operation location="/GetCuringDegradeInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckDegradeConfirmInfo">
+      <http:operation location="/CheckDegradeConfirmInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveTyreDegradeConfirmInfo">
+      <http:operation location="/SaveTyreDegradeConfirmInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveRepairRecord">
+      <http:operation location="/SaveRepairRecord" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckInfoForRepair">
+      <http:operation location="/GetFcheckInfoForRepair" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairPart">
+      <http:operation location="/GetAllRepairPart" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairResult">
+      <http:operation location="/GetAllRepairResult" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckBadTyreInfor">
+      <http:operation location="/CheckBadTyreInfor" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveExpTab">
+      <http:operation location="/SaveExpTab" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreExpInfo">
+      <http:operation location="/GetTyreExpInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheck">
+      <http:operation location="/CuringProcSaveTyreFcheck" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheckNew">
+      <http:operation location="/CuringProcSaveTyreFcheckNew" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringCheckNum">
+      <http:operation location="/GetCuringCheckNum" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo1">
+      <http:operation location="/ProcQmtGetTyreFCheckValidateInfo1" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo1">
+      <http:operation location="/GetAllDefectInfo1" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QualityGradeInit">
+      <http:operation location="/QualityGradeInit" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetTyreArtificialCheckInfo">
+      <http:operation location="/ProcGetTyreArtificialCheckInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveArtificialCheck">
+      <http:operation location="/SaveArtificialCheck" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QualityFQBGradeInit">
+      <http:operation location="/QualityFQBGradeInit" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetFQBTyreArtificialCheckInfo">
+      <http:operation location="/ProcGetFQBTyreArtificialCheckInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FQBSaveArtificialCheck">
+      <http:operation location="/FQBSaveArtificialCheck" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringEquipInfo">
+      <http:operation location="/GetCuringEquipInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckDefectInfo">
+      <http:operation location="/GetFcheckDefectInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitCuringEquipStopControl">
+      <http:operation location="/SubmitCuringEquipStopControl" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatToWMSRecordQG">
+      <http:operation location="/CreatToWMSRecordQG" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordQG">
+      <http:operation location="/GetTyreNoWMSRecordQG" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordTestFlagQG">
+      <http:operation location="/GetTyreNoWMSRecordTestFlagQG" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTyreNoWMSRecordTestFlagQG">
+      <http:operation location="/UpdateTyreNoWMSRecordTestFlagQG" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBarcodeInfo">
+      <http:operation location="/GetBarcodeInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BadInStore">
+      <http:operation location="/BadInStore" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelBInStore">
+      <http:operation location="/DelBInStore" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeRbRecord">
+      <http:operation location="/InsertSbeRbRecord" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRBGradeInfo">
+      <http:operation location="/GetRBGradeInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnlyUpwms">
+      <http:operation location="/OnlyUpwms" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFqfCppFX">
+      <http:operation location="/UpdateFqfCppFX" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="QualityServiceHttpPost" type="tns:QualityServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetShiftTable">
+      <http:operation location="/GetShiftTable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysDateTime">
+      <http:operation location="/GetSysDateTime" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClassTable">
+      <http:operation location="/GetClassTable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEquipTable">
+      <http:operation location="/GetEquipTable" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveQualityShiftInfo">
+      <http:operation location="/ProcSaveQualityShiftInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo">
+      <http:operation location="/GetAllDefectInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefectObjIDByCode">
+      <http:operation location="/GetDefectObjIDByCode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQualityLevel">
+      <http:operation location="/GetQualityLevel" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringQualityLevel">
+      <http:operation location="/CuringQualityLevel" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRePeatInfo">
+      <http:operation location="/GetRePeatInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringGetProdInfoByTyreNo">
+      <http:operation location="/CuringGetProdInfoByTyreNo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo">
+      <http:operation location="/ProcQmtGetTyreFCheckValidateInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfoNew">
+      <http:operation location="/ProcQmtGetTyreFCheckValidateInfoNew" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDutyByDefectID">
+      <http:operation location="/GetDutyByDefectID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcSaveTyreFcheckInfo">
+      <http:operation location="/ProcSaveTyreFcheckInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringDegradeInfo">
+      <http:operation location="/GetCuringDegradeInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckDegradeConfirmInfo">
+      <http:operation location="/CheckDegradeConfirmInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveTyreDegradeConfirmInfo">
+      <http:operation location="/SaveTyreDegradeConfirmInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveRepairRecord">
+      <http:operation location="/SaveRepairRecord" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckInfoForRepair">
+      <http:operation location="/GetFcheckInfoForRepair" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairPart">
+      <http:operation location="/GetAllRepairPart" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRepairResult">
+      <http:operation location="/GetAllRepairResult" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckBadTyreInfor">
+      <http:operation location="/CheckBadTyreInfor" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveExpTab">
+      <http:operation location="/SaveExpTab" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreExpInfo">
+      <http:operation location="/GetTyreExpInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheck">
+      <http:operation location="/CuringProcSaveTyreFcheck" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CuringProcSaveTyreFcheckNew">
+      <http:operation location="/CuringProcSaveTyreFcheckNew" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringCheckNum">
+      <http:operation location="/GetCuringCheckNum" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcQmtGetTyreFCheckValidateInfo1">
+      <http:operation location="/ProcQmtGetTyreFCheckValidateInfo1" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDefectInfo1">
+      <http:operation location="/GetAllDefectInfo1" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QualityGradeInit">
+      <http:operation location="/QualityGradeInit" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetTyreArtificialCheckInfo">
+      <http:operation location="/ProcGetTyreArtificialCheckInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveArtificialCheck">
+      <http:operation location="/SaveArtificialCheck" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QualityFQBGradeInit">
+      <http:operation location="/QualityFQBGradeInit" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcGetFQBTyreArtificialCheckInfo">
+      <http:operation location="/ProcGetFQBTyreArtificialCheckInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FQBSaveArtificialCheck">
+      <http:operation location="/FQBSaveArtificialCheck" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCuringEquipInfo">
+      <http:operation location="/GetCuringEquipInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFcheckDefectInfo">
+      <http:operation location="/GetFcheckDefectInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitCuringEquipStopControl">
+      <http:operation location="/SubmitCuringEquipStopControl" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreatToWMSRecordQG">
+      <http:operation location="/CreatToWMSRecordQG" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordQG">
+      <http:operation location="/GetTyreNoWMSRecordQG" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTyreNoWMSRecordTestFlagQG">
+      <http:operation location="/GetTyreNoWMSRecordTestFlagQG" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTyreNoWMSRecordTestFlagQG">
+      <http:operation location="/UpdateTyreNoWMSRecordTestFlagQG" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBarcodeInfo">
+      <http:operation location="/GetBarcodeInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BadInStore">
+      <http:operation location="/BadInStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelBInStore">
+      <http:operation location="/DelBInStore" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertSbeRbRecord">
+      <http:operation location="/InsertSbeRbRecord" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRBGradeInfo">
+      <http:operation location="/GetRBGradeInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnlyUpwms">
+      <http:operation location="/OnlyUpwms" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFqfCppFX">
+      <http:operation location="/UpdateFqfCppFX" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="QualityService">
+    <wsdl:port name="QualityServiceSoap" binding="tns:QualityServiceSoap">
+      <soap:address location="http://localhost:8099/Quality/QualityService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="QualityServiceSoap12" binding="tns:QualityServiceSoap12">
+      <soap12:address location="http://localhost:8099/Quality/QualityService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="QualityServiceHttpGet" binding="tns:QualityServiceHttpGet">
+      <http:address location="http://localhost:8099/Quality/QualityService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="QualityServiceHttpPost" binding="tns:QualityServiceHttpPost">
+      <http:address location="http://localhost:8099/Quality/QualityService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

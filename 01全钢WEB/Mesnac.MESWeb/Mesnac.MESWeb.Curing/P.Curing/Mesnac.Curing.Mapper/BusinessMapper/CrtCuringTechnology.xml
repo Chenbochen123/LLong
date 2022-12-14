@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CrtCuringTechnology"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_CURING_TECHNOLOGY ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+    <!--查询-->
+    <select id="Select@CrtCuringTechnology" parameterClass="map" resultClass="row">
+      <![CDATA[
+       SELECT T1.*
+       , T2.USER_NAME RECORD_USER_NAME, T3.SHOW_NAME TECHNOLOGY_TYPE_CAPTION, T4.MINOR_TYPE_NAME
+       , T5.MATERIAL_NAME BUILDING_MATERIAL_NAME
+       , T6.SHOW_NAME STATE_CAPTION, T7.SHOW_NAME AUDIT_STATE_CAPTION
+       , T11.SHOW_NAME SUBMIT_STATE_CAPTION, T12.SHOW_NAME SEND_STATE_CAPTION       
+       , T8.BLADDER_TENSILE_HEIGHT_SET, T8.BLADDER_TENSILE_HEIGHT_TOL
+       , T8.COPPER_TENSILE_HEIGHT_SET,T8.COPPER_TENSILE_HEIGHT_TOL
+       , T8.FIRST_SHAPING_HEIGHT_SET,T8.FIRST_SHAPING_HEIGHT_TOL
+       , T8.SECOND_SHAPING_HEIGHT_SET,T8.SECOND_SHAPING_HEIGHT_TOL
+       , T8.COOPER_SHAPING_HEIGHT_SET,T8.COOPER_SHAPING_HEIGHT_TOL
+       , T8.CLAMPING_PRESS_HIGH,T8.CLAMPING_PRESS_LOW
+       , T8.MANIPULATOR_OPEN_HIGH,T8.MANIPULATOR_OPEN_LOW
+       , T8.FIRST_SHAPING_PRESS_HIGH,T8.FIRST_SHAPING_PRESS_LOW
+       , T8.SECOND_SHAPING_PRESS_HIGH,T8.SECOND_SHAPING_PRESS_LOW
+       , T8.SECOND_SHAPING_TIME_SET
+       , T10.TYPE_NAME BLADDER_TYPE_NAME
+       FROM CRT_CURING_TECHNOLOGY T1 
+       LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+       LEFT JOIN CRT_CURING_TECH_TYPE T3 ON T1.TECHNOLOGY_TYPE = T3.OBJID 
+       LEFT JOIN SBE_EQUIP_MINOR_TYPE T4 ON T1.MAJOR_TYPE_ID = T4.MAJOR_TYPE_ID AND T1.MINOR_TYPE_ID = T4.OBJID 
+       LEFT JOIN SBM_MATERIAL T5 ON T1.BUILDING_MATERIAL_ID = T5.OBJID 
+       LEFT JOIN CRT_CURING_TECH_STATE T6 ON T1.STATE = T6.OBJID 
+       LEFT JOIN CRT_CURING_TECH_AUDIT_STATE T7 ON T1.AUDIT_FLAG = T7.OBJID 
+       LEFT JOIN CRT_CURING_TECH_PARAMS1 T8 ON T1.OBJID = T8.OBJID 
+       LEFT JOIN CRT_CURING_TECH_PARAMS2 T9 ON T1.OBJID = T9.OBJID 
+       LEFT JOIN CBE_BLADDER_TYPE T10 ON T1.BLADDER_TYPE_ID = T10.OBJID 
+       LEFT JOIN CRT_CURING_TECH_SUBMIT_STATE T11 ON T1.SUBMIT_FLAG = T11.OBJID
+       LEFT JOIN CRT_CURING_TECH_SEND_STATE T12 ON T1.SEND_FLAG = T12.OBJID
+       ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.TechnologyCode" prepend="AND">
+          <![CDATA[T1.TECHNOLOGY_CODE LIKE '%' || #where.TechnologyCode# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.TechnologyType" prepend="AND">
+          <![CDATA[T1.TECHNOLOGY_TYPE = #where.TechnologyType#]]>
+        </isNotNull>
+        <isNotNull property="where.MinorTypeId" prepend="AND">
+          <![CDATA[T1.MINOR_TYPE_ID = #where.MinorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.BuildingMaterialId" prepend="AND">
+          <![CDATA[T1.BUILDING_MATERIAL_ID = #where.BuildingMaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.TechSubmitState" prepend="AND">
+          <![CDATA[T1.SUBMIT_FLAG = #where.TechSubmitState#]]>
+        </isNotNull>
+        <isNotNull property="where.TechAuditState" prepend="AND">
+          <![CDATA[T1.AUDIT_FLAG = #where.TechAuditState#]]>
+        </isNotNull>
+        <isNotNull property="where.TechSendState" prepend="AND">
+          <![CDATA[T1.SEND_FLAG = #where.TechSendState#]]>
+        </isNotNull>
+        <isNotNull property="where.TechState" prepend="AND">
+          <![CDATA[T1.STATE = #where.TechState#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[T1.USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+          <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+      
+     <!--获取最新版本工艺信息-->
+      <procedure id="GetTechnologyInfo" parameterClass="map" resultClass="Row">
+        PRO_CRT_CURING_TECH_DATA
+        @{MaterialID,column=MaterialID}
+        @{id,column=id}
+        @{myResult1,column=myResult,direction=Output,dbType=RefCursor}
+      </procedure>
+      <!--<procedure id="GetTechnologyInfo" parameterClass="map" resultClass="Row">
+        PRO_CPP_GETTECHNOLOGYINFO
+        @{MaterialID,column=MaterialID}
+        @{TechnologyType,column=TechnologyType}
+        @{TechVERSION,column=TechVERSION}
+        @{EquipType,column=EquipType}
+        @{myResult1,column=myResult,direction=Output,dbType=RefCursor}
+        @{myResult2,column=myResult,direction=Output,dbType=RefCursor}
+      </procedure>-->
+  </statements>
+</sqlMap>

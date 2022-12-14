@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BusinessMapper.FqxXcheckDetail"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM FQX_XCHECK_DETAIL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Tyrdid" prepend="AND">
+          <![CDATA[TYRDID = #where.Tyrdid#]]>
+        </isNotNull>
+        <isNotNull property="where.Defectid" prepend="AND">
+          <![CDATA[DEFECTID = #where.Defectid#]]>
+        </isNotNull>
+        <isNotNull property="where.Seqid" prepend="AND">
+          <![CDATA[SEQID = #where.Seqid#]]>
+        </isNotNull>
+        <isNotNull property="where.NewFlag" prepend="AND">
+          <![CDATA[NEW_FLAG = #where.NewFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.XcheckId" prepend="AND">
+          <![CDATA[XCHECK_ID = #where.XcheckId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DefectPart" prepend="AND">
+          <![CDATA[DEFECT_PART = #where.DefectPart#]]>
+        </isNotNull>
+        <isNotNull property="where.UpOrDown" prepend="AND">
+          <![CDATA[UP_OR_DOWN = #where.UpOrDown#]]>
+        </isNotNull>
+        <isNotNull property="where.FaultProcedureId" prepend="AND">
+          <![CDATA[FAULT_PROCEDURE_ID = #where.FaultProcedureId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <!--根据查询条件获取质检详情-->
+     <select id="GetPageData@GetXcheckDetailByParams" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select T1.*, T2.DEFECTNAME
+        from FQX_XCHECK_DETAIL T1
+             left join FQD_DEFECT_INFO T2 on T1.DEFECTID = T2.OBJID
+		         left join SSB_USER T3 on T1.RECORD_USERID = T3.OBJID
+        where T1.DELETE_FLAG = '0'
+
+      ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.XcheckID" prepend="AND">
+           <![CDATA[T1.XCHECK_ID = #where.XcheckID#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T1.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <!--插入质检详细数据-->
+     <insert id="InsertDetailInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[INSERT INTO FQX_XCHECK_DETAIL]]>
+       <dynamic prepend="(OBJID,">
+         <isNotNull property="Tyrdid" prepend=",">TYRDID</isNotNull>
+         <isNotNull property="Defectid" prepend=",">DEFECTID</isNotNull>
+         <isNotNull property="Seqid" prepend=",">SEQID</isNotNull>
+         <isNotNull property="NewFlag" prepend=",">NEW_FLAG</isNotNull>
+         <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+         <isNotNull property="WorkshopId" prepend=",">WORKSHOP_ID</isNotNull>
+         <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+         <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+         <isNotNull property="XcheckId" prepend=",">XCHECK_ID</isNotNull>
+         <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+         <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+         <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+         <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+         <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+         <isNotNull property="DefectPart" prepend=",">DEFECT_PART</isNotNull>
+         <isNotNull property="UpOrDown" prepend=",">UP_OR_DOWN</isNotNull>
+         <isNotNull property="FaultProcedureId" prepend=",">FAULT_PROCEDURE_ID</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+         <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+         <isNull property="ObjId" prepend=",">SEQ_FQX_XCHECK_DETAIL.NEXTVAL</isNull>
+         <isNotNull property="Tyrdid" prepend=",">#Tyrdid#</isNotNull>
+         <isNotNull property="Defectid" prepend=",">#Defectid#</isNotNull>
+         <isNotNull property="Seqid" prepend=",">#Seqid#</isNotNull>
+         <isNotNull property="NewFlag" prepend=",">#NewFlag#</isNotNull>
+         <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+         <isNotNull property="WorkshopId" prepend=",">#WorkshopId#</isNotNull>
+         <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+         <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+         <isNotNull property="XcheckId" prepend=",">
+         <![CDATA[(select objid from (select objid from fqx_xcheck_info where seqid=#Seqid# and tyrdid=#Tyrdid# and delete_flag=0 order by record_time desc) where rownum=1)]]>
+         </isNotNull>
+         <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+         <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+         <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+         <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+         <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+         <isNotNull property="DefectPart" prepend=",">#DefectPart#</isNotNull>
+         <isNotNull property="UpOrDown" prepend=",">#UpOrDown#</isNotNull>
+         <isNotNull property="FaultProcedureId" prepend=",">#FaultProcedureId#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+     </insert>
+
+     <select id="GetXcheckDetailInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T0.DEFECTID,T1.DEFECTNAME,T0.DEFECT_PART,T0.UP_OR_DOWN,T2.PROCEDURE_NAME FROM FQX_XCHECK_DETAIL T0
+       LEFT JOIN FQD_DEFECT_INFO T1 ON T1.OBJID = T0.DEFECTID
+       LEFT JOIN SSB_PROCEDURE T2 ON T2.OBJID= T0.FAULT_PROCEDURE_ID
+       WHERE T0.DELETE_FLAG = 0 and t0.new_flag=1
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="OBJID" prepend="AND">
+           <![CDATA[T0.TYRDID=#OBJID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+   </statements>
+</sqlMap>

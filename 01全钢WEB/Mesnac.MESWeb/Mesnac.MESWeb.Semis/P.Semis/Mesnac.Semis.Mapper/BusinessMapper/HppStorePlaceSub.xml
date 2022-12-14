@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HppStorePlaceSub"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_STORE_PLACE_SUB ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceId" prepend="AND">
+          <![CDATA[STORE_PLACE_ID = #where.StorePlaceId#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceSubName" prepend="AND">
+          <![CDATA[STORE_PLACE_SUB_NAME = #where.StorePlaceSubName#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceSubCode" prepend="AND">
+          <![CDATA[STORE_PLACE_SUB_CODE = #where.StorePlaceSubCode#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[BARCODE = #where.Barcode#]]>
+        </isNotNull>
+        <isNotNull property="where.CarBarcode" prepend="AND">
+          <![CDATA[CAR_BARCODE = #where.CarBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.CancelFlag" prepend="AND">
+          <![CDATA[CANCEL_FLAG = #where.CancelFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+     <!--百叶车库位-->
+     <select id="GetStorePlaceSubInfo" parameterClass ="map" resultClass="Row">
+        <![CDATA[
+        SELECT T.*,T2.MATERIAL_ID, T3.SHELF_NO,T3.CARD_NO FROM HPP_STORE_PLACE_SUB T
+        LEFT JOIN HPP_STORE_PLACE T2 ON T.STORE_PLACE_ID=T2.OBJID
+        LEFT JOIN HPP_STORAGE_DETAIL T3 ON T.OBJID=T3.SUB_STORE_PLACE_ID
+       WHERE 1=1 AND T2.SPECIAL_PLACE=1
+       ]]>
+         <dynamic prepend="AND">
+           <isNotNull property="where.EquipType" prepend="AND">
+             <![CDATA[T2.DUMMY_7 = #where.EquipType#]]>
+           </isNotNull>
+           <isNotNull property="where.EquipId" prepend="AND">
+             <![CDATA[T2.DUMMY_8 = #where.EquipId#]]>
+           </isNotNull>
+           <isNotNull property="where.CancelFlag" prepend="AND">
+             <![CDATA[T.CANCEL_FLAG = #where.CancelFlag#]]>
+           </isNotNull>
+         <isNotNull property="where.PositionType" prepend="AND">
+           <![CDATA[T2.POSITION_TYPE = #where.PositionType#]]>
+         </isNotNull>
+         </dynamic>
+     </select>
+
+     <!--百叶车库位-->
+     <select id="GetStorePlaceSubInfoNew" parameterClass ="map" resultClass="Row">
+       <![CDATA[
+        SELECT T.*,T2.MATERIAL_ID, T3.SHELF_NO,T3.CARD_NO FROM HPP_STORE_PLACE_SUB T
+        LEFT JOIN HPP_STORE_PLACE T2 ON T.STORE_PLACE_ID=T2.OBJID
+        LEFT JOIN HPP_STORAGE_DETAIL T3 ON T.OBJID=T3.SUB_STORE_PLACE_ID
+       WHERE 1=1 AND T2.SPECIAL_PLACE=1
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[t.objid = #where.EquipId#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+     <!--工字轮库位-->
+     <select id="GetStorePlaceInfo" parameterClass ="map" resultClass="Row">
+        <![CDATA[
+        SELECT T.OBJID,T.MATERIAL_ID, T.DUMMY_1 STORENUM,T.REMARK,T.STORE_PLACE_NAME,T.STORE_PLACE_CODE,T.DUMMY_8 EQUIP_ID FROM HPP_STORE_PLACE T
+        WHERE 1=1
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.EquipType" prepend="AND">
+           <![CDATA[T.DUMMY_7 = #where.EquipType#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[T.DUMMY_8 = #where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.UserdFlag" prepend="AND">
+           <![CDATA[T.USED_FLAG = #where.UserdFlag#]]>
+         </isNotNull>
+           <isNotNull property="where.PositionType" prepend="AND">
+           <![CDATA[T.POSITION_TYPE = #where.PositionType#]]>
+         </isNotNull>
+       </dynamic>
+      </select>
+
+     <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="SemisGetStorePlaceUsb" parameterClass="map" resultClass="Row">
+       <![CDATA[select objid,store_place_sub_name from hpp_store_place_sub  where store_place_id =#StorePlaceId#]]>
+     </select>
+     
+     <select id="SemisUsbStorePlaceInfo1" parameterClass="map" resultClass="Row">
+       <![CDATA[SELECT OBJID,STORE_PLACE_SUB_NAME FROM HPP_STORE_PLACE_SUB  WHERE STORE_PLACE_ID =#StorePlaceId#]]>
+     </select>
+   </statements>
+</sqlMap>

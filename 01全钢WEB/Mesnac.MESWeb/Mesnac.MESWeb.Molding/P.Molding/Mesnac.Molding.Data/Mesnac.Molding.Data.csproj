@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{88020D7A-9063-4AE4-AA91-364BCD04C71F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Molding.Data</RootNamespace>
+    <AssemblyName>Mesnac.Molding.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\@packages\MyBatis\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\@packages\MyBatis\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.DbAccess">
+      <HintPath>..\..\@packages\Frame\Mesnac.DbAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.Common">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.DataMapper">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Frame\Mesnac.DbAccess\Mesnac.DbAccess.csproj">
+      <Project>{60b919c5-c601-4999-a531-439042d59746}</Project>
+      <Name>Mesnac.DbAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Molding.Entity\Mesnac.Molding.Entity.csproj">
+      <Project>{E62CD168-27B2-4670-B521-1E9F4C3944B8}</Project>
+      <Name>Mesnac.Molding.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implements\BbeEquipControlService.cs" />
+    <Compile Include="Implements\BpmCorrectInfoService.cs" />
+    <Compile Include="Implements\BpmEquipCurrentMaterialService.cs" />
+    <Compile Include="Implements\BpmMoldingBarcodeService.cs" />
+    <Compile Include="Implements\BpmProductionService.cs" />
+    <Compile Include="Implements\BpmShiftDetailService.cs" />
+    <Compile Include="Implements\BpmShiftMasterService.cs" />
+    <Compile Include="Implements\BpmTraceInfoService.cs" />
+    <Compile Include="Implements\BpmWeightInfoService.cs" />
+    <Compile Include="Implements\BppGetMaterPlanService.cs" />
+    <Compile Include="Implements\BppPlanDetailService.cs" />
+    <Compile Include="Implements\BppPlanService.cs" />
+    <Compile Include="Implements\BppPlanStateService.cs" />
+    <Compile Include="Implements\BppPlanTypeService.cs" />
+    <Compile Include="Implements\BppScanLogService.cs" />
+    <Compile Include="Implements\BppToolingPlanImplementService.cs" />
+    <Compile Include="Implements\BppToolingPlanService.cs" />
+    <Compile Include="Implements\BppTraceMoldingInfoService.cs" />
+    <Compile Include="Implements\BptMoldingTechDataService.cs" />
+    <Compile Include="Implements\BptMoldingTechService.cs" />
+    <Compile Include="Implements\BqcDefectService.cs" />
+    <Compile Include="Implements\BqcDegradeInfoService.cs" />
+    <Compile Include="Implements\BqcGradeService.cs" />
+    <Compile Include="Implements\BqcQcrecordService.cs" />
+    <Compile Include="Implements\BqcRepairService.cs" />
+    <Compile Include="Implements\BqcShiftDetailService.cs" />
+    <Compile Include="Implements\BqcShiftMasterService.cs" />
+    <Compile Include="Implements\BslWebserviceLogService.cs" />
+    <Compile Include="Implements\BsmEquipPlaceService.cs" />
+    <Compile Include="Implements\BsmInventoryBillService.cs" />
+    <Compile Include="Implements\BsmInventoryDetailService.cs" />
+    <Compile Include="Implements\BsmMoldingFirstInspectService.cs" />
+    <Compile Include="Implements\BsmReturnStoreDetailService.cs" />
+    <Compile Include="Implements\BsmReturnStoreToolingService.cs" />
+    <Compile Include="Implements\BsmReturnWsDetailService.cs" />
+    <Compile Include="Implements\BsmReturnWsToolingService.cs" />
+    <Compile Include="Implements\BsmScanLogService.cs" />
+    <Compile Include="Implements\BsmStockInDetailService.cs" />
+    <Compile Include="Implements\BsmStockInToolingService.cs" />
+    <Compile Include="Implements\BsmStockOutDetailService.cs" />
+    <Compile Include="Implements\BsmStockOutToolingService.cs" />
+    <Compile Include="Implements\BsmStorageDetailService.cs" />
+    <Compile Include="Implements\BsmStorageMainService.cs" />
+    <Compile Include="Implements\BsmStorageToolingService.cs" />
+    <Compile Include="Implements\BsmStorePlaceService.cs" />
+    <Compile Include="Implements\BsmStoreService.cs" />
+    <Compile Include="Implements\BsmToolingCarService.cs" />
+    <Compile Include="Implements\BsmToolingLoadDetailService.cs" />
+    <Compile Include="Implements\BsmToolingLoadMainService.cs" />
+    <Compile Include="Implements\BsmToolingScanLogService.cs" />
+    <Compile Include="Implements\BsmToolingUnloadRecordService.cs" />
+    <Compile Include="Implements\CsmReturnStoreDetailService.cs" />
+    <Compile Include="Implements\CsmReturnStoreToolingService.cs" />
+    <Compile Include="Implements\CsmReturnWsDetailService.cs" />
+    <Compile Include="Implements\CsmReturnWsToolingService.cs" />
+    <Compile Include="Implements\CsmStockInDetailService.cs" />
+    <Compile Include="Implements\CsmStockInToolingService.cs" />
+    <Compile Include="Implements\CsmStockOutDetailService.cs" />
+    <Compile Include="Implements\CsmStockOutToolingService.cs" />
+    <Compile Include="Implements\CsmStorageDetailService.cs" />
+    <Compile Include="Implements\CsmStorageMainService.cs" />
+    <Compile Include="Implements\CsmStorageToolingService.cs" />
+    <Compile Include="Implements\CsmStorePlaceService.cs" />
+    <Compile Include="Implements\CsmStoreService.cs" />
+    <Compile Include="Implements\HppInStockDetailService.cs" />
+    <Compile Include="Implements\HppOutStockDetailService.cs" />
+    <Compile Include="Implements\HppPlanDetailService.cs" />
+    <Compile Include="Implements\HppPlanService.cs" />
+    <Compile Include="Implements\HppSemisProductionService.cs" />
+    <Compile Include="Implements\HppStorageDetailService.cs" />
+    <Compile Include="Implements\HsmToolingLoadService.cs" />
+    <Compile Include="Implements\HsmToolingService.cs" />
+    <Compile Include="Implements\HsmToolingTypeService.cs" />
+    <Compile Include="Implements\ItfMesMblpDetailService.cs" />
+    <Compile Include="Implements\ItfMesMblpService.cs" />
+    <Compile Include="Implements\ItfMesMproductionDetailService.cs" />
+    <Compile Include="Implements\ItfMesMproductionService.cs" />
+    <Compile Include="Implements\ItfSapProductionHeadService.cs" />
+    <Compile Include="Implements\ItfSapProductionRecordsService.cs" />
+    <Compile Include="Implements\SbeControlRecordService.cs" />
+    <Compile Include="Implements\SbeEquipInspectionPlanService.cs" />
+    <Compile Include="Implements\SbeEquipRepairPlanService.cs" />
+    <Compile Include="Implements\SbeEquipService.cs" />
+    <Compile Include="Implements\SbeInventoryRecordService.cs" />
+    <Compile Include="Implements\SbeMoulddrumRecordService.cs" />
+    <Compile Include="Implements\SbeMoulddrumService.cs" />
+    <Compile Include="Implements\SbeSmsequipalarmService.cs" />
+    <Compile Include="Implements\SbeStoprecordService.cs" />
+    <Compile Include="Implements\SbeWeightunlockService.cs" />
+    <Compile Include="Implements\SbmBomService.cs" />
+    <Compile Include="Implements\SbmMaterialInfoService.cs" />
+    <Compile Include="Implements\SbmMaterialMinorTypeService.cs" />
+    <Compile Include="Implements\SbmMaterialService.cs" />
+    <Compile Include="Implements\SeeEquipStopRecordService.cs" />
+    <Compile Include="Implements\SppOldMaterialnameService.cs" />
+    <Compile Include="Implements\SppToolingStateDetailService.cs" />
+    <Compile Include="Implements\SppToolingStateMainService.cs" />
+    <Compile Include="Implements\SppTyreStateService.cs" />
+    <Compile Include="Implements\SsbClassService.cs" />
+    <Compile Include="Implements\SsbConfigService.cs" />
+    <Compile Include="Implements\SsbDeptService.cs" />
+    <Compile Include="Implements\SsbShiftService.cs" />
+    <Compile Include="Implements\SsbUserService.cs" />
+    <Compile Include="Implements\VBbmMaterialService.cs" />
+    <Compile Include="Implements\VBptMoldingTechService.cs" />
+    <Compile Include="Interface\IBbeEquipControlService.cs" />
+    <Compile Include="Interface\IBpmCorrectInfoService.cs" />
+    <Compile Include="Interface\IBpmEquipCurrentMaterialService.cs" />
+    <Compile Include="Interface\IBpmMoldingBarcodeService.cs" />
+    <Compile Include="Interface\IBpmProductionService.cs" />
+    <Compile Include="Interface\IBpmShiftDetailService.cs" />
+    <Compile Include="Interface\IBpmShiftMasterService.cs" />
+    <Compile Include="Interface\IBpmTraceInfoService.cs" />
+    <Compile Include="Interface\IBpmWeightInfoService.cs" />
+    <Compile Include="Interface\IBppGetMaterPlanService.cs" />
+    <Compile Include="Interface\IBppPlanDetailService.cs" />
+    <Compile Include="Interface\IBppPlanService.cs" />
+    <Compile Include="Interface\IBppPlanStateService.cs" />
+    <Compile Include="Interface\IBppPlanTypeService.cs" />
+    <Compile Include="Interface\IBppScanLogService.cs" />
+    <Compile Include="Interface\IBppToolingPlanImplementService.cs" />
+    <Compile Include="Interface\IBppToolingPlanService.cs" />
+    <Compile Include="Interface\IBppTraceMoldingInfoService.cs" />
+    <Compile Include="Interface\IBptMoldingTechDataService.cs" />
+    <Compile Include="Interface\IBptMoldingTechService.cs" />
+    <Compile Include="Interface\IBqcDefectService.cs" />
+    <Compile Include="Interface\IBqcDegradeInfoService.cs" />
+    <Compile Include="Interface\IBqcGradeService.cs" />
+    <Compile Include="Interface\IBqcQcrecordService.cs" />
+    <Compile Include="Interface\IBqcRepairService.cs" />
+    <Compile Include="Interface\IBqcShiftDetailService.cs" />
+    <Compile Include="Interface\IBqcShiftMasterService.cs" />
+    <Compile Include="Interface\IBslWebserviceLogService.cs" />
+    <Compile Include="Interface\IBsmEquipPlaceService.cs" />
+    <Compile Include="Interface\IBsmInventoryBillService.cs" />
+    <Compile Include="Interface\IBsmInventoryDetailService.cs" />
+    <Compile Include="Interface\IBsmMoldingFirstInspectService.cs" />
+    <Compile Include="Interface\IBsmReturnStoreDetailService.cs" />
+    <Compile Include="Interface\IBsmReturnStoreToolingService.cs" />
+    <Compile Include="Interface\IBsmReturnWsDetailService.cs" />
+    <Compile Include="Interface\IBsmReturnWsToolingService.cs" />
+    <Compile Include="Interface\IBsmScanLogService.cs" />
+    <Compile Include="Interface\IBsmStockInDetailService.cs" />
+    <Compile Include="Interface\IBsmStockInToolingService.cs" />
+    <Compile Include="Interface\IBsmStockOutDetailService.cs" />
+    <Compile Include="Interface\IBsmStockOutToolingService.cs" />
+    <Compile Include="Interface\IBsmStorageDetailService.cs" />
+    <Compile Include="Interface\IBsmStorageMainService.cs" />
+    <Compile Include="Interface\IBsmStorageToolingService.cs" />
+    <Compile Include="Interface\IBsmStorePlaceService.cs" />
+    <Compile Include="Interface\IBsmStoreService.cs" />
+    <Compile Include="Interface\IBsmToolingCarService.cs" />
+    <Compile Include="Interface\IBsmToolingLoadDetailService.cs" />
+    <Compile Include="Interface\IBsmToolingLoadMainService.cs" />
+    <Compile Include="Interface\IBsmToolingScanLogService.cs" />
+    <Compile Include="Interface\IBsmToolingUnloadRecordService.cs" />
+    <Compile Include="Interface\ICsmReturnStoreDetailService.cs" />
+    <Compile Include="Interface\ICsmReturnStoreToolingService.cs" />
+    <Compile Include="Interface\ICsmReturnWsDetailService.cs" />
+    <Compile Include="Interface\ICsmReturnWsToolingService.cs" />
+    <Compile Include="Interface\ICsmStockInDetailService.cs" />
+    <Compile Include="Interface\ICsmStockInToolingService.cs" />
+    <Compile Include="Interface\ICsmStockOutDetailService.cs" />
+    <Compile Include="Interface\ICsmStockOutToolingService.cs" />
+    <Compile Include="Interface\ICsmStorageDetailService.cs" />
+    <Compile Include="Interface\ICsmStorageMainService.cs" />
+    <Compile Include="Interface\ICsmStorageToolingService.cs" />
+    <Compile Include="Interface\ICsmStorePlaceService.cs" />
+    <Compile Include="Interface\ICsmStoreService.cs" />
+    <Compile Include="Interface\IHppInStockDetailService.cs" />
+    <Compile Include="Interface\IHppOutStockDetailService.cs" />
+    <Compile Include="Interface\IHppPlanDetailService.cs" />
+    <Compile Include="Interface\IHppPlanService.cs" />
+    <Compile Include="Interface\IHppSemisProductionService.cs" />
+    <Compile Include="Interface\IHppStorageDetailService.cs" />
+    <Compile Include="Interface\IHsmToolingLoadService.cs" />
+    <Compile Include="Interface\IHsmToolingService.cs" />
+    <Compile Include="Interface\IHsmToolingTypeService.cs" />
+    <Compile Include="Interface\IItfMesMblpDetailService.cs" />
+    <Compile Include="Interface\IItfMesMblpService.cs" />
+    <Compile Include="Interface\IItfMesMproductionDetailService.cs" />
+    <Compile Include="Interface\IItfMesMproductionService.cs" />
+    <Compile Include="Interface\IItfSapProductionHeadService.cs" />
+    <Compile Include="Interface\IItfSapProductionRecordsService.cs" />
+    <Compile Include="Interface\ISbeControlRecordService.cs" />
+    <Compile Include="Interface\ISbeEquipInspectionPlanService.cs" />
+    <Compile Include="Interface\ISbeEquipRepairPlanService.cs" />
+    <Compile Include="Interface\ISbeEquipService.cs" />
+    <Compile Include="Interface\ISbeInventoryRecordService.cs" />
+    <Compile Include="Interface\ISbeMoulddrumRecordService.cs" />
+    <Compile Include="Interface\ISbeMoulddrumService.cs" />
+    <Compile Include="Interface\ISbeSmsequipalarmService.cs" />
+    <Compile Include="Interface\ISbeStoprecordService.cs" />
+    <Compile Include="Interface\ISbeWeightunlockService.cs" />
+    <Compile Include="Interface\ISbmBomService.cs" />
+    <Compile Include="Interface\ISbmMaterialInfoService.cs" />
+    <Compile Include="Interface\ISbmMaterialMinorTypeService.cs" />
+    <Compile Include="Interface\ISbmMaterialService.cs" />
+    <Compile Include="Interface\ISeeEquipStopRecordService.cs" />
+    <Compile Include="Interface\ISppOldMaterialnameService.cs" />
+    <Compile Include="Interface\ISppToolingStateDetailService.cs" />
+    <Compile Include="Interface\ISppToolingStateMainService.cs" />
+    <Compile Include="Interface\ISppTyreStateService.cs" />
+    <Compile Include="Interface\ISsbClassService.cs" />
+    <Compile Include="Interface\ISsbConfigService.cs" />
+    <Compile Include="Interface\ISsbDeptService.cs" />
+    <Compile Include="Interface\ISsbShiftService.cs" />
+    <Compile Include="Interface\ISsbUserService.cs" />
+    <Compile Include="Interface\IVBbmMaterialService.cs" />
+    <Compile Include="Interface\IVBptMoldingTechService.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

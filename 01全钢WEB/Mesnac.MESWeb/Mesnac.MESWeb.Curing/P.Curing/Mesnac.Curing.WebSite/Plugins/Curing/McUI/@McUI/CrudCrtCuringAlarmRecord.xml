@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="BeginTime" Value="报警开始时间"></Caption>
+    <Caption Name="EndTime" Value="报警结束时间"></Caption>
+    <Caption Name="ALARM_BEGIN_TIME" Value="报警开始时间"></Caption>
+    <Caption Name="ALARM_END_TIME" Value="报警时间"></Caption>
+    <Caption Name="EQUIP_ID" Value="机台名称"></Caption>
+    <Caption Name="EquipName" Value="机台名称"></Caption>
+    <Caption Name="EQUIP_NAME" Value="机台名称"></Caption>
+    <Caption Name="ALARM_ITEM_ID" Value="报警原因"></Caption>
+    <Caption Name="AlarmItemName" Value="报警原因"></Caption>
+    <Caption Name="ALARM_ITEM_NAME" Value="报警原因"></Caption>
+    <Caption Name="AlarmReason" Value="报警原因"></Caption>
+    <Caption Name="ALARM_REASON" Value="报警原因"></Caption>
+    <Caption Name="MAX_VALUE" Value="最大值"></Caption>
+    <Caption Name="MIN_VALUE" Value="最小值"></Caption>
+    <Caption Name="SET_VALUE" Value="设定值"></Caption>
+    <Caption Name="CURING_STEP" Value="硫化步序"></Caption>
+    <Caption Name="TyreNo" Value="报警胎号"></Caption>
+    <Caption Name="TYRE_NO" Value="报警胎号"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="规格"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+    <Caption Name="EQUIP_POSITION" Value="左右模"></Caption>
+
+  </Captions>
+  <WebPage Title="硫化报警信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Curing/McUI/@McUI/CrudCrtCuringAlarmRecord.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="CRT_CURING_ALARM_RECORD">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_CRT_CURING_ALARM_RECORD"></SeqField>
+    </SeqFields>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="BeginTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EndTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="ALARM_ITEM_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="CURING_STEP"  Nullable="true"></ParamField>
+        <ParamField FieldName="TyreNo" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_ID" Type="SearchBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid>
+      <GridColumns>
+        <GridColumn ColumnName="ALARM_END_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="EQUIP_NAME"></GridColumn>
+        <GridColumn ColumnName="EQUIP_POSITION"></GridColumn>
+        <GridColumn ColumnName="TYRE_NO"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME"></GridColumn>
+        <GridColumn ColumnName="CURING_STEP"></GridColumn>
+        <GridColumn ColumnName="ALARM_ITEM_NAME"></GridColumn>
+        <GridColumn ColumnName="MAX_VALUE"></GridColumn>
+        <GridColumn ColumnName="MIN_VALUE"></GridColumn>
+        <GridColumn ColumnName="SET_VALUE"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+    <MainDetail>
+      <ParamFields>
+        <ParamField FieldName="ALARM_END_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EQUIP_NAME"></ParamField>
+        <ParamField FieldName="TYRE_NO"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="CURING_STEP"></ParamField>
+        <ParamField FieldName="ALARM_ITEM_NAME"></ParamField>
+        <ParamField FieldName="MAX_VALUE"></ParamField>
+        <ParamField FieldName="MIN_VALUE"></ParamField>
+        <ParamField FieldName="SET_VALUE"></ParamField>
+        <ParamField FieldName="RECORD_USER_NAME"></ParamField>
+        <ParamField FieldName="RECORD_TIME" Type="DateTimeBox"></ParamField>
+      </ParamFields>
+    </MainDetail>
+  </Select>
+</UiConfig>

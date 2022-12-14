@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Storage.Mapper.BusinessMapper.PsmOutStockBill"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSM_OUT_STOCK_BILL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.SRFlag" prepend="AND">
+          <![CDATA[S_R_FLAG = #where.SRFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.DocDate" prepend="AND">
+          <![CDATA[DOC_DATE = #where.DocDate#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomerId" prepend="AND">
+          <![CDATA[CUSTOMER_ID = #where.CustomerId#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.BillCode" prepend="AND">
+          <![CDATA[BILL_CODE = #where.BillCode#]]>
+        </isNotNull>
+        <isNotNull property="where.OutDate" prepend="AND">
+          <![CDATA[OUT_DATE = #where.OutDate#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateUserId" prepend="AND">
+          <![CDATA[UPDATE_USER_ID = #where.UpdateUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmTime" prepend="AND">
+          <![CDATA[AFFIRM_TIME = #where.AffirmTime#]]>
+        </isNotNull>
+        <isNotNull property="where.AffirmUserId" prepend="AND">
+          <![CDATA[AFFIRM_USER_ID = #where.AffirmUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.BillState" prepend="AND">
+          <![CDATA[BILL_STATE = #where.BillState#]]>
+        </isNotNull>
+        <isNotNull property="where.InterfaceUpdateTime" prepend="AND">
+          <![CDATA[INTERFACE_UPDATE_TIME = #where.InterfaceUpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomerObjid" prepend="AND">
+          <![CDATA[CUSTOMER_OBJID = #where.CustomerObjid#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.SNNo" prepend="AND">
+          <![CDATA[S_N_NO = #where.SNNo#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+    <!--查询出货单(打印)-->
+    <select id="Select@OutStockBillPrint" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      SELECT B.*
+      , CASE B.BILL_STATE WHEN 0 THEN '未确认' WHEN 1 THEN '已确认' ELSE '' END BILL_STATE_CAPTION
+      , C.CUSTOME_NAME CUSTOMER_NAME
+      , UA.USER_NAME AFFIRM_USER_NAME
+      , (SELECT SUM(PLAN_AMOUNT) FROM PSM_OUT_STOCK_MAIN M WHERE B.OBJID = M.BILL_ID AND M.DELETE_FLAG = 0) PLAN_AMOUNT
+      , (SELECT SUM(OUT_AMOUNT) FROM PSM_OUT_STOCK_MAIN M WHERE B.OBJID = M.BILL_ID AND M.DELETE_FLAG = 0) OUT_AMOUNT
+      FROM PSM_OUT_STOCK_BILL B
+      LEFT JOIN PSB_CUSTOMER C ON B.CUSTOMER_OBJID = C.OBJID AND C.DELETE_FLAG = 0
+      LEFT JOIN SSB_USER UA ON B.AFFIRM_USER_ID = UA.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[B.DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.SNNo" prepend="AND">
+          <![CDATA[B.S_N_NO = #where.SNNo#]]>
+        </isNotNull>
+        <isNull property="where.SNNo">
+          <isNotNull property="where.TyreNo" prepend="AND">
+            <![CDATA[
+            EXISTS (
+              SELECT * 
+              FROM PSM_OUT_STOCK_DETAIL D 
+              WHERE B.OBJID = D.BILL_ID
+              AND D.DELETE_FLAG = 0 
+              AND D.TYRE_NO = #where.TyreNo#
+            )
+            ]]>
+          </isNotNull>
+          <isNull property="where.TyreNo">
+            <isNotNull property="where.GreenTyreNo" prepend="AND">
+              <![CDATA[
+              EXISTS (
+                SELECT * 
+                FROM PSM_OUT_STOCK_DETAIL D 
+                WHERE B.OBJID = D.BILL_ID
+                AND D.DELETE_FLAG = 0 
+                AND D.GREEN_TYRE_NO = #where.GreenTyreNo#
+              )
+              ]]>
+            </isNotNull>
+            <isNull property="where.GreenTyreNo">
+              <isNotNull property="where.DocDate" prepend="AND">
+                <![CDATA[B.DOC_DATE = #where.DocDate#]]>
+              </isNotNull>
+              <isNotNull property="where.CustomerName" prepend="AND">
+                <![CDATA[C.CUSTOMER_NAME LIKE '%' || #where.CustomerName# || '%']]>
+              </isNotNull>
+            </isNull>
+          </isNull>
+        </isNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+
+    <!--查看出货单(打印)-->
+    <select id="View@OutStockBillPrint" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      SELECT B.S_N_NO, B.DUMMY_2, B.DUMMY_1, B.OUT_DATE
+      , C.CUSTOME_NAME CUSTOMER_NAME
+      FROM PSM_OUT_STOCK_BILL B
+      LEFT JOIN PSB_CUSTOMER C ON B.CUSTOMER_OBJID = C.OBJID AND C.DELETE_FLAG = 0
+      ]]>
+      <![CDATA[
+      WHERE B.OBJID = #ObjId#
+      ]]>
+    </select>
+
+    <!--查找出货汇总-->
+    <select id="Select@OutStockMainPrint" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      SELECT MM.MATERIAL_CODE, M.OUT_AMOUNT MAIN_AMOUNT
+      FROM PSM_OUT_STOCK_MAIN M
+      LEFT JOIN SBM_MATERIAL MM ON M.MATERIAL_ID = MM.OBJID AND M.DELETE_FLAG = 0
+      ]]>
+      <![CDATA[
+      WHERE M.BILL_ID = #BillId#
+      AND M.DELETE_FLAG = 0
+      ]]>
+    </select>
+
+    <!--查找出货明细-->
+    <select id="Select@OutStockDetailPrint" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       SELECT A.TYRE_NO,A.MATERIAL_CODE,B.MAIN_AMOUNT FROM ( SELECT D.TYRE_NO, MM.MATERIAL_CODE
+      FROM PSM_OUT_STOCK_DETAIL D
+      JOIN PSM_OUT_STOCK_MAIN M ON D.MAIN_ID = M.OBJID
+      LEFT JOIN SBM_MATERIAL MM ON M.MATERIAL_ID = MM.OBJID AND M.DELETE_FLAG = 0
+      ]]>
+      <![CDATA[
+      WHERE M.BILL_ID = #BillId#
+      AND M.DELETE_FLAG = 0
+      AND D.DELETE_FLAG = 0
+      ) a
+      left join 
+      (
+      select t.material_code,sum(m.out_amount) main_amount from PSM_OUT_STOCK_MAIN M 
+      left join sbm_material t on t.objid = M.Material_Id
+       where M.BILL_ID =#BillId#
+      group by t.material_code)b on b.material_code=a.material_code
+      ]]>
+    </select>
+    <select id="GetOutBillInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        SELECT * FROM ( 
+        SELECT * FROM ( 
+        SELECT 
+        T1.S_N_NO
+        ,TO_DATE(T1.DOC_DATE, 'YYYYMMDD') DOC_DATE_SHOW
+        ,T1.CUSTOMER_ID
+        ,T4.CUSTOME_NAME CUSTOMER_NAME
+        , (SELECT SUM(M.PLAN_AMOUNT) FROM PSM_OUT_STOCK_MAIN M WHERE M.DELETE_FLAG = 0 AND M.BILL_ID = T1.OBJID) PLAN_AMOUNT
+        , (SELECT SUM(M.OUT_AMOUNT) FROM PSM_OUT_STOCK_MAIN M WHERE M.DELETE_FLAG = 0 AND M.BILL_ID = T1.OBJID) OUT_AMOUNT
+        , T1.RECORD_TIME
+        , CASE T1.BILL_STATE WHEN 0 THEN '未确认' WHEN 1 THEN '已确认' ELSE '' END BILL_STATE_CAPTION
+        , T1.AFFIRM_TIME
+        , T8.USER_NAME AFFIRM_USER_NAME
+        FROM PSM_OUT_STOCK_BILL T1
+        LEFT JOIN PSB_CUSTOMER T4 ON T1.CUSTOMER_OBJID = T4.OBJID
+        LEFT JOIN SSB_USER T8 ON T1.AFFIRM_USER_ID = T8.OBJID
+        WHERE T1.DELETE_FLAG = 0)
+        UNION ALL
+        SELECT * FROM ( 
+        SELECT 
+        T1.RESER_NO S_N_NO
+        ,TO_DATE(T1.DEMONDS_DATE, 'YYYYMMDD') DOC_DATE_SHOW
+        ,T1.STOR_LOC_TO  CUSTOMER_ID
+        ,T1.STOR_LOC_TO CUSTOMER_NAME
+        , (SELECT SUM(M.PLAN_AMOUNT) FROM psm_transfer_main M WHERE M.DELETE_FLAG = 0 AND M.BILL_ID = T1.OBJID) PLAN_AMOUNT
+        , (SELECT SUM(M.TRANSFER_AMOUNT) FROM psm_transfer_main M WHERE M.DELETE_FLAG = 0 AND M.BILL_ID = T1.OBJID) OUT_AMOUNT
+        , T1.RECORD_TIME
+        , CASE T1.BILL_STATE WHEN 0 THEN '未确认' WHEN 1 THEN '已确认' ELSE '' END BILL_STATE_CAPTION
+        , T1.AFFIRM_TIME
+        , T8.USER_NAME AFFIRM_USER_NAME
+        FROM psm_transfer_bill T1
+        LEFT JOIN SSB_USER T8 ON T1.AFFIRM_USER_ID = T8.OBJID
+        WHERE T1.DELETE_FLAG = 0)) T
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.SNNo" prepend="AND">
+          <![CDATA[T.S_N_NO in ($where.SNNo$)]]>
+        </isNotNull>
+        <isNull property="where.SNNo">
+          <isNotNull property="where.BeginDate" prepend="AND">
+            <![CDATA[T.DOC_DATE_SHOW >= #where.BeginDate#]]>
+          </isNotNull>
+          <isNotNull property="where.EndDate" prepend="AND">
+            <![CDATA[T.DOC_DATE_SHOW <= #where.EndDate#]]>
+          </isNotNull>
+          <isNotNull property="where.ConfirmBeginDate" prepend="AND">
+            <![CDATA[T.AFFIRM_TIME >= #where.ConfirmBeginDate#]]>
+          </isNotNull>
+          <isNotNull property="where.ConfirmEndDate" prepend="AND">
+            <![CDATA[T.AFFIRM_TIME <= #where.ConfirmEndDate#]]>
+          </isNotNull>
+          <isNotNull property="where.CustomerId" prepend="AND">
+            <![CDATA[T.CUSTOMER_ID = #where.CustomerId#]]>
+          </isNotNull>
+          <isNotNull property="where.BillState" prepend="AND">
+            <![CDATA[T.BILL_STATE = #where.BillState#]]>
+          </isNotNull>
+          <isNotNull property="where.CustomerName" prepend="AND">
+            <![CDATA[T.CUSTOME_NAME like '%' || #where.CustomerName# || '%']]>
+          </isNotNull>
+          <isNotNull property="where.AffirmUserName" prepend="AND">
+            <![CDATA[T.USER_NAME like '%' || #where.AffirmUserName# || '%']]>
+          </isNotNull>
+        </isNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+
+        ORDER BY $OrderString$
+
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+
+        ORDER BY T.DOC_DATE_SHOW, T.S_N_NO, T.CUSTOMER_NAME
+
+      </isNull>
+    </select>
+    <select id="GetOutBillDetail" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        SELECT * FROM ( 
+        SELECT * FROM ( 
+       
+        SELECT 
+        T9.TYRE_NO
+        , T3.S_N_NO
+        , TO_DATE(T3.DOC_DATE, 'YYYYMMDD') DOC_DATE_SHOW
+        , T3.CUSTOMER_ID
+        , T4.CUSTOME_NAME CUSTOMER_NAME
+        , T1.LINE_ITEM_NO
+        , T1.STORAGE_LOC
+        , T5.MATERIAL_NAME
+        , CASE T9.CHECK_GRADE_CODE WHEN 1 THEN '合格品' WHEN 2 THEN '次品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' WHEN 9 THEN '试验胎' ELSE '无品级' END CHECK_GRADE_NAME 
+        , T1.PLAN_AMOUNT
+        , T1.OUT_AMOUNT
+        , T9.RECORD_TIME
+        , CASE T9.DETAIL_STATE WHEN 0 THEN '未确认' WHEN 1 THEN '已确认' ELSE '' END DETAIL_STATE_CAPTION
+        , T1.AFFIRM_TIME
+        , T8.USER_NAME AFFIRM_USER_NAME
+        FROM PSM_OUT_STOCK_MAIN T1
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        INNER JOIN PSM_OUT_STOCK_BILL T3 ON T1.BILL_ID = T3.OBJID
+        LEFT JOIN PSB_CUSTOMER T4 ON T3.CUSTOMER_OBJID = T4.OBJID
+        LEFT JOIN SBM_MATERIAL T5 ON T1.MATERIAL_ID = T5.OBJID
+        LEFT JOIN SSB_USER T8 ON T1.AFFIRM_USER_ID = T8.OBJID
+        LEFT JOIN PSM_OUT_STOCK_DETAIL T9 ON T9.BILL_ID = T1.BILL_ID AND T9.MAIN_ID = T1.OBJID   
+        WHERE T1.DELETE_FLAG=0 AND T3.DELETE_FLAG=0 AND T9.DELETE_FLAG=0)
+        
+        UNION ALL
+        
+        SELECT * FROM ( 
+        SELECT 
+        T9.TYRE_NO
+        , T3.RESER_NO  S_N_NO
+        , TO_DATE(T3.DEMONDS_DATE, 'YYYYMMDD') DOC_DATE_SHOW
+        , T3.STOR_LOC_TO  CUSTOMER_ID
+        , T3.STOR_LOC_TO CUSTOMER_NAME
+        , T1.RESER_ITEM  LINE_ITEM_NO
+        , T1.STOR_LOC_FROM  STORAGE_LOC
+        , T5.MATERIAL_NAME
+        , CASE T9.CHECK_GRADE_CODE WHEN 1 THEN '合格品' WHEN 2 THEN '次品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' WHEN 9 THEN '试验胎' ELSE '无品级' END CHECK_GRADE_NAME 
+        , T1.PLAN_AMOUNT
+        , T1.TRANSFER_AMOUNT
+        , T9.RECORD_TIME
+        , CASE T9.DETAIL_STATE WHEN 0 THEN '未确认' WHEN 1 THEN '已确认' ELSE '' END DETAIL_STATE_CAPTION
+        , T1.AFFIRM_TIME
+        , T8.USER_NAME AFFIRM_USER_NAME
+        FROM psm_transfer_main T1
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        INNER JOIN psm_transfer_bill T3 ON T1.BILL_ID = T3.OBJID
+        LEFT JOIN SBM_MATERIAL T5 ON T1.MATERIAL_ID = T5.OBJID
+        LEFT JOIN SSB_USER T8 ON T1.AFFIRM_USER_ID = T8.OBJID
+        LEFT JOIN psm_transfer_detail T9 ON T9.BILL_ID = T1.BILL_ID AND T9.MAIN_ID = T1.OBJID   
+        WHERE T1.DELETE_FLAG=0 AND T3.DELETE_FLAG=0 AND T9.DELETE_FLAG=0) ) T
+        
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.SNNo" prepend="AND">
+          <![CDATA[T.s_n_no IN ($where.SNNo$)           ]]>
+        </isNotNull>
+        <isNull property="where.SNNo">
+          <isNotNull property="where.BeginDate" prepend="AND">
+            <![CDATA[T.DOC_DATE_SHOW >= #where.BeginDate#]]>
+          </isNotNull>
+          <isNotNull property="where.EndDate" prepend="AND">
+            <![CDATA[T.DOC_DATE_SHOW <= #where.EndDate#]]>
+          </isNotNull>
+          <isNotNull property="where.ConfirmBeginDate" prepend="AND">
+            <![CDATA[T.AFFIRM_TIME >= #where.ConfirmBeginDate#]]>
+          </isNotNull>
+          <isNotNull property="where.ConfirmEndDate" prepend="AND">
+            <![CDATA[T.AFFIRM_TIME <= #where.ConfirmEndDate#]]>
+          </isNotNull>
+          <isNotNull property="where.CustomerId" prepend="AND">
+            <![CDATA[T.CUSTOMER_ID = #where.CustomerId#]]>
+          </isNotNull>
+          <isNotNull property="where.BillState" prepend="AND">
+            <![CDATA[T.BILL_STATE = #where.BillState#]]>
+          </isNotNull>
+          <isNotNull property="where.CustomerName" prepend="AND">
+            <![CDATA[T.CUSTOMER_NAME like '%' || #where.CustomerName# || '%']]>
+          </isNotNull>
+          <isNotNull property="where.AffirmUserName" prepend="AND">
+            <![CDATA[T.USER_NAME like '%' || #where.AffirmUserName# || '%']]>
+          </isNotNull>
+        </isNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+
+        ORDER BY $OrderString$
+
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+
+        ORDER BY T.DOC_DATE_SHOW, T.S_N_NO, T.CUSTOMER_NAME, T.LINE_ITEM_NO
+
+      </isNull>
+    </select>
+
+    <!--汇总上传SAP数据方法 修改批次-->
+    <select id="GetUpdateBatchInfoForSAP" parameterClass="map" resultClass="Row">
+      <![CDATA[
+            select b.line_item_no,e.material_short MaterialCode,b.plant,b.storage_loc,count(c.tyre_no) qty,
+case when nvl(d.ufrank,2)=1 then c.DETAIL_BATCH || 'A+1'
+     when nvl(d.ufrank,2)=2 then c.DETAIL_BATCH || 'A'
+     when nvl(d.ufrank,2)=3 then c.DETAIL_BATCH || 'A0'
+     ELSE '1111C' END FULL_BATCH
+from Psm_Out_Stock_Bill a 
+left join Psm_Out_Stock_Main b on a.objid = b.bill_id and b.delete_flag = 0
+left join Psm_Out_Stock_Detail c on a.objid = c.bill_id and c.delete_flag = 0 and b.objid = c.main_id
+left join fqb_balance_info d on c.tyre_no = d.tyre_id
+left join sbm_material e on b.material_id = e.objid
+where a.objid = #objid#
+group by b.line_item_no,e.material_short ,b.plant,b.storage_loc,
+case when nvl(d.ufrank,2)=1 then c.DETAIL_BATCH || 'A+1'
+     when nvl(d.ufrank,2)=2 then c.DETAIL_BATCH || 'A'
+     when nvl(d.ufrank,2)=3 then c.DETAIL_BATCH || 'A0'
+     ELSE '1111C' END 
+       ]]>
+    </select>
+    
+  </statements>
+</sqlMap>

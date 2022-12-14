@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.BsmEquipPlace"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BSM_EQUIP_PLACE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceId" prepend="AND">
+          <![CDATA[STORE_PLACE_ID = #where.StorePlaceId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaxAmount" prepend="AND">
+          <![CDATA[MAX_AMOUNT = #where.MaxAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateId" prepend="AND">
+          <![CDATA[UPDATE_ID = #where.UpdateId#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY6 = #where.Dummy6#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <select id="GetEquipPlaceInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       select t1.store_place_name,t1.material_id,t2.material_name,t.* from (select * from (select t.store_place_id,
+        case sum(decode(t.equip_id, '167', t.equip_id,0)) when 0 then 0 else 1 end as "01成型机",
+        case sum(decode(t.equip_id, '168', t.equip_id,0)) when 0 then 0 else 1 end as "02成型机",
+        case sum(decode(t.equip_id, '169', t.equip_id,0)) when 0 then 0 else 1 end as "03成型机",
+        case sum(decode(t.equip_id, '170', t.equip_id,0)) when 0 then 0 else 1 end as "04成型机",
+        case sum(decode(t.equip_id, '171', t.equip_id,0)) when 0 then 0 else 1 end as "05成型机",
+        case sum(decode(t.equip_id, '172', t.equip_id,0)) when 0 then 0 else 1 end as "06成型机",
+        case sum(decode(t.equip_id, '173', t.equip_id,0)) when 0 then 0 else 1 end as "07成型机",
+        case sum(decode(t.equip_id, '174', t.equip_id,0)) when 0 then 0 else 1 end as "08成型机",
+        case sum(decode(t.equip_id, '176', t.equip_id,0)) when 0 then 0 else 1 end as "09成型机",
+        case sum(decode(t.equip_id, '178', t.equip_id,0)) when 0 then 0 else 1 end as "10成型机",
+        case sum(decode(t.equip_id, '180', t.equip_id,0)) when 0 then 0 else 1 end as "11成型机",
+        case sum(decode(t.equip_id, '182', t.equip_id,0)) when 0 then 0 else 1 end as "12成型机",
+        case sum(decode(t.equip_id, '184', t.equip_id,0)) when 0 then 0 else 1 end as "13成型机",
+        case sum(decode(t.equip_id, '186', t.equip_id,0)) when 0 then 0 else 1 end as "14成型机",
+        case sum(decode(t.equip_id, '188', t.equip_id,0)) when 0 then 0 else 1 end as "15成型机",
+        case sum(decode(t.equip_id, '190', t.equip_id,0)) when 0 then 0 else 1 end as "16成型机",
+        case sum(decode(t.equip_id, '192', t.equip_id,0)) when 0 then 0 else 1 end as "17成型机",
+        case sum(decode(t.equip_id, '194', t.equip_id,0)) when 0 then 0 else 1 end as "18成型机",
+        case sum(decode(t.equip_id, '196', t.equip_id,0)) when 0 then 0 else 1 end as "19成型机",
+        case sum(decode(t.equip_id, '198', t.equip_id,0)) when 0 then 0 else 1 end as "20成型机",
+        case sum(decode(t.equip_id, '200', t.equip_id,0)) when 0 then 0 else 1 end as "21成型机",
+        case sum(decode(t.equip_id, '202', t.equip_id,0)) when 0 then 0 else 1 end as "22成型机",
+        case sum(decode(t.equip_id, '204', t.equip_id,0)) when 0 then 0 else 1 end as "23成型机",
+        case sum(decode(t.equip_id, '206', t.equip_id,0)) when 0 then 0 else 1 end as "24成型机",
+        case sum(decode(t.equip_id, '208', t.equip_id,0)) when 0 then 0 else 1 end as "25成型机",
+        case sum(decode(t.equip_id, '210', t.equip_id,0)) when 0 then 0 else 1 end as "26成型机"
+        from bsm_equip_place t where t.delete_flag=0
+        group by store_place_id
+        order by store_place_id)
+        union all 
+        select objid,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 from bsm_store_place a
+        where not exists(select 1 from bsm_equip_place b where b.store_place_id=a.objid ) and a.delete_flag=0)t 
+        left join bsm_store_place t1 on t1.objid = t.store_place_id
+        left join sbm_material t2 on t2.objid = t1.material_id
+        ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.STORE_PLACE_ID" prepend="AND">
+          <![CDATA[t.store_place_id=#where.STORE_PLACE_ID# ]]>
+        </isNotNull>
+      </dynamic>
+      <dynamic prepend="ORDER BY">
+       <![CDATA[t1.store_place_name]]>
+    </dynamic>
+    </select>
+    <select id="GetCurrentEquipPlace" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      SELECT T1.EQUIP_NAME,T2.MATERIAL_ID,T3.MATERIAL_NAME FROM BSM_EQUIP_PLACE T
+      LEFT JOIN SBE_EQUIP T1 ON T1.OBJID = T.EQUIP_ID
+      LEFT JOIN BSM_STORE_PLACE T2 ON T2.OBJID = T.STORE_PLACE_ID
+      LEFT JOIN SBM_MATERIAL T3 ON T3.OBJID = T2.MATERIAL_ID
+      WHERE T.DELETE_FLAG=0
+      ]]>
+      <isNotNull property="StorePlaceId" prepend="AND">
+        <![CDATA[T.STORE_PLACE_ID=#StorePlaceId#]]>
+      </isNotNull>
+    </select>
+    <insert id="InsertEquipPlaceInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      insert into bsm_equip_place (objid,delete_flag,factory_id,equip_id,store_place_id,update_id,dummy1)
+      values(seq_bsm_equip_place.nextval,0,1,(select objid from sbe_equip where major_type_id =41 
+      and equip_name like '%'||#EquipName# ||'%'),#StorePlaceId#,#UserId#,'2')
+      ]]>
+    </insert>
+    <delete id="DeleteEquipPlaceInfo" parameterClass="map">
+      <![CDATA[
+      delete from bsm_equip_place where store_place_id=#StorePlaceId# and equip_id = (select objid from sbe_equip where major_type_id =41 
+      and equip_name like '%'||#EquipName# ||'%')
+      ]]>
+    </delete>
+  </statements>
+</sqlMap>

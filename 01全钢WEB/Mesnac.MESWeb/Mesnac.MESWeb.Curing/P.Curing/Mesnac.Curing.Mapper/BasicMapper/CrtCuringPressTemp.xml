@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CrtCuringPressTemp"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CrtCuringPressTemp" type="Mesnac.Curing.Entity.BasicEntity.CrtCuringPressTemp, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CrtCuringPressTemp" class="CrtCuringPressTemp">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="OperId" column="OPER_ID"/>
+    <result property="LeftPlateTemp" column="LEFT_PLATE_TEMP"/>
+    <result property="RightPlateTemp" column="RIGHT_PLATE_TEMP"/>
+    <result property="LeftModelTemp" column="LEFT_MODEL_TEMP"/>
+    <result property="RightModelTemp" column="RIGHT_MODEL_TEMP"/>
+    <result property="LeftInnerTemp" column="LEFT_INNER_TEMP"/>
+    <result property="RightInnerTemp" column="RIGHT_INNER_TEMP"/>
+    <result property="LeftInnerPress" column="LEFT_INNER_PRESS"/>
+    <result property="RightInnerPress" column="RIGHT_INNER_PRESS"/>
+    <result property="LeftAlarmNo" column="LEFT_ALARM_NO"/>
+    <result property="RightAlarmNo" column="RIGHT_ALARM_NO"/>
+    <result property="TpAdd1" column="TP_ADD_1"/>
+    <result property="TpAdd2" column="TP_ADD_2"/>
+    <result property="TpAdd3" column="TP_ADD_3"/>
+    <result property="TpAdd4" column="TP_ADD_4"/>
+    <result property="SaveInterval" column="SAVE_INTERVAL"/>
+    <result property="LeftTyreNo" column="LEFT_TYRE_NO"/>
+    <result property="RightTyreNo" column="RIGHT_TYRE_NO"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CrtCuringPressTemp" class="CrtCuringPressTemp">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="OperId" column="OperId"/>
+    <parameter property="LeftPlateTemp" column="LeftPlateTemp"/>
+    <parameter property="RightPlateTemp" column="RightPlateTemp"/>
+    <parameter property="LeftModelTemp" column="LeftModelTemp"/>
+    <parameter property="RightModelTemp" column="RightModelTemp"/>
+    <parameter property="LeftInnerTemp" column="LeftInnerTemp"/>
+    <parameter property="RightInnerTemp" column="RightInnerTemp"/>
+    <parameter property="LeftInnerPress" column="LeftInnerPress"/>
+    <parameter property="RightInnerPress" column="RightInnerPress"/>
+    <parameter property="LeftAlarmNo" column="LeftAlarmNo"/>
+    <parameter property="RightAlarmNo" column="RightAlarmNo"/>
+    <parameter property="TpAdd1" column="TpAdd1"/>
+    <parameter property="TpAdd2" column="TpAdd2"/>
+    <parameter property="TpAdd3" column="TpAdd3"/>
+    <parameter property="TpAdd4" column="TpAdd4"/>
+    <parameter property="SaveInterval" column="SaveInterval"/>
+    <parameter property="LeftTyreNo" column="LeftTyreNo"/>
+    <parameter property="RightTyreNo" column="RightTyreNo"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_CURING_PRESS_TEMP ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.OperId" prepend="AND">
+          <![CDATA[OPER_ID = #where.OperId#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftPlateTemp" prepend="AND">
+          <![CDATA[LEFT_PLATE_TEMP = #where.LeftPlateTemp#]]>
+        </isNotNull>
+        <isNotNull property="where.RightPlateTemp" prepend="AND">
+          <![CDATA[RIGHT_PLATE_TEMP = #where.RightPlateTemp#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftModelTemp" prepend="AND">
+          <![CDATA[LEFT_MODEL_TEMP = #where.LeftModelTemp#]]>
+        </isNotNull>
+        <isNotNull property="where.RightModelTemp" prepend="AND">
+          <![CDATA[RIGHT_MODEL_TEMP = #where.RightModelTemp#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftInnerTemp" prepend="AND">
+          <![CDATA[LEFT_INNER_TEMP = #where.LeftInnerTemp#]]>
+        </isNotNull>
+        <isNotNull property="where.RightInnerTemp" prepend="AND">
+          <![CDATA[RIGHT_INNER_TEMP = #where.RightInnerTemp#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftInnerPress" prepend="AND">
+          <![CDATA[LEFT_INNER_PRESS = #where.LeftInnerPress#]]>
+        </isNotNull>
+        <isNotNull property="where.RightInnerPress" prepend="AND">
+          <![CDATA[RIGHT_INNER_PRESS = #where.RightInnerPress#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftAlarmNo" prepend="AND">
+          <![CDATA[LEFT_ALARM_NO = #where.LeftAlarmNo#]]>
+        </isNotNull>
+        <isNotNull property="where.RightAlarmNo" prepend="AND">
+          <![CDATA[RIGHT_ALARM_NO = #where.RightAlarmNo#]]>
+        </isNotNull>
+        <isNotNull property="where.TpAdd1" prepend="AND">
+          <![CDATA[TP_ADD_1 = #where.TpAdd1#]]>
+        </isNotNull>
+        <isNotNull property="where.TpAdd2" prepend="AND">
+          <![CDATA[TP_ADD_2 = #where.TpAdd2#]]>
+        </isNotNull>
+        <isNotNull property="where.TpAdd3" prepend="AND">
+          <![CDATA[TP_ADD_3 = #where.TpAdd3#]]>
+        </isNotNull>
+        <isNotNull property="where.TpAdd4" prepend="AND">
+          <![CDATA[TP_ADD_4 = #where.TpAdd4#]]>
+        </isNotNull>
+        <isNotNull property="where.SaveInterval" prepend="AND">
+          <![CDATA[SAVE_INTERVAL = #where.SaveInterval#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftTyreNo" prepend="AND">
+          <![CDATA[LEFT_TYRE_NO = #where.LeftTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.RightTyreNo" prepend="AND">
+          <![CDATA[RIGHT_TYRE_NO = #where.RightTyreNo#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CRT_CURING_PRESS_TEMP]]>
+       <dynamic prepend="(">
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="OperId" prepend=",">OPER_ID</isNotNull>
+        <isNotNull property="LeftPlateTemp" prepend=",">LEFT_PLATE_TEMP</isNotNull>
+        <isNotNull property="RightPlateTemp" prepend=",">RIGHT_PLATE_TEMP</isNotNull>
+        <isNotNull property="LeftModelTemp" prepend=",">LEFT_MODEL_TEMP</isNotNull>
+        <isNotNull property="RightModelTemp" prepend=",">RIGHT_MODEL_TEMP</isNotNull>
+        <isNotNull property="LeftInnerTemp" prepend=",">LEFT_INNER_TEMP</isNotNull>
+        <isNotNull property="RightInnerTemp" prepend=",">RIGHT_INNER_TEMP</isNotNull>
+        <isNotNull property="LeftInnerPress" prepend=",">LEFT_INNER_PRESS</isNotNull>
+        <isNotNull property="RightInnerPress" prepend=",">RIGHT_INNER_PRESS</isNotNull>
+        <isNotNull property="LeftAlarmNo" prepend=",">LEFT_ALARM_NO</isNotNull>
+        <isNotNull property="RightAlarmNo" prepend=",">RIGHT_ALARM_NO</isNotNull>
+        <isNotNull property="TpAdd1" prepend=",">TP_ADD_1</isNotNull>
+        <isNotNull property="TpAdd2" prepend=",">TP_ADD_2</isNotNull>
+        <isNotNull property="TpAdd3" prepend=",">TP_ADD_3</isNotNull>
+        <isNotNull property="TpAdd4" prepend=",">TP_ADD_4</isNotNull>
+        <isNotNull property="SaveInterval" prepend=",">SAVE_INTERVAL</isNotNull>
+        <isNotNull property="LeftTyreNo" prepend=",">LEFT_TYRE_NO</isNotNull>
+        <isNotNull property="RightTyreNo" prepend=",">RIGHT_TYRE_NO</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="OperId" prepend=",">#OperId#</isNotNull>
+        <isNotNull property="LeftPlateTemp" prepend=",">#LeftPlateTemp#</isNotNull>
+        <isNotNull property="RightPlateTemp" prepend=",">#RightPlateTemp#</isNotNull>
+        <isNotNull property="LeftModelTemp" prepend=",">#LeftModelTemp#</isNotNull>
+        <isNotNull property="RightModelTemp" prepend=",">#RightModelTemp#</isNotNull>
+        <isNotNull property="LeftInnerTemp" prepend=",">#LeftInnerTemp#</isNotNull>
+        <isNotNull property="RightInnerTemp" prepend=",">#RightInnerTemp#</isNotNull>
+        <isNotNull property="LeftInnerPress" prepend=",">#LeftInnerPress#</isNotNull>
+        <isNotNull property="RightInnerPress" prepend=",">#RightInnerPress#</isNotNull>
+        <isNotNull property="LeftAlarmNo" prepend=",">#LeftAlarmNo#</isNotNull>
+        <isNotNull property="RightAlarmNo" prepend=",">#RightAlarmNo#</isNotNull>
+        <isNotNull property="TpAdd1" prepend=",">#TpAdd1#</isNotNull>
+        <isNotNull property="TpAdd2" prepend=",">#TpAdd2#</isNotNull>
+        <isNotNull property="TpAdd3" prepend=",">#TpAdd3#</isNotNull>
+        <isNotNull property="TpAdd4" prepend=",">#TpAdd4#</isNotNull>
+        <isNotNull property="SaveInterval" prepend=",">#SaveInterval#</isNotNull>
+        <isNotNull property="LeftTyreNo" prepend=",">#LeftTyreNo#</isNotNull>
+        <isNotNull property="RightTyreNo" prepend=",">#RightTyreNo#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CRT_CURING_PRESS_TEMP
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.OperId"  prepend=",">
+          OPER_ID = #update.OperId#
+        </isNotNull>
+        <isNotNull  property="update.LeftPlateTemp"  prepend=",">
+          LEFT_PLATE_TEMP = #update.LeftPlateTemp#
+        </isNotNull>
+        <isNotNull  property="update.RightPlateTemp"  prepend=",">
+          RIGHT_PLATE_TEMP = #update.RightPlateTemp#
+        </isNotNull>
+        <isNotNull  property="update.LeftModelTemp"  prepend=",">
+          LEFT_MODEL_TEMP = #update.LeftModelTemp#
+        </isNotNull>
+        <isNotNull  property="update.RightModelTemp"  prepend=",">
+          RIGHT_MODEL_TEMP = #update.RightModelTemp#
+        </isNotNull>
+        <isNotNull  property="update.LeftInnerTemp"  prepend=",">
+          LEFT_INNER_TEMP = #update.LeftInnerTemp#
+        </isNotNull>
+        <isNotNull  property="update.RightInnerTemp"  prepend=",">
+          RIGHT_INNER_TEMP = #update.RightInnerTemp#
+        </isNotNull>
+        <isNotNull  property="update.LeftInnerPress"  prepend=",">
+          LEFT_INNER_PRESS = #update.LeftInnerPress#
+        </isNotNull>
+        <isNotNull  property="update.RightInnerPress"  prepend=",">
+          RIGHT_INNER_PRESS = #update.RightInnerPress#
+        </isNotNull>
+        <isNotNull  property="update.LeftAlarmNo"  prepend=",">
+          LEFT_ALARM_NO = #update.LeftAlarmNo#
+        </isNotNull>
+        <isNotNull  property="update.RightAlarmNo"  prepend=",">
+          RIGHT_ALARM_NO = #update.RightAlarmNo#
+        </isNotNull>
+        <isNotNull  property="update.TpAdd1"  prepend=",">
+          TP_ADD_1 = #update.TpAdd1#
+        </isNotNull>
+        <isNotNull  property="update.TpAdd2"  prepend=",">
+          TP_ADD_2 = #update.TpAdd2#
+        </isNotNull>
+        <isNotNull  property="update.TpAdd3"  prepend=",">
+          TP_ADD_3 = #update.TpAdd3#
+        </isNotNull>
+        <isNotNull  property="update.TpAdd4"  prepend=",">
+          TP_ADD_4 = #update.TpAdd4#
+        </isNotNull>
+        <isNotNull  property="update.SaveInterval"  prepend=",">
+          SAVE_INTERVAL = #update.SaveInterval#
+        </isNotNull>
+        <isNotNull  property="update.LeftTyreNo"  prepend=",">
+          LEFT_TYRE_NO = #update.LeftTyreNo#
+        </isNotNull>
+        <isNotNull  property="update.RightTyreNo"  prepend=",">
+          RIGHT_TYRE_NO = #update.RightTyreNo#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CRT_CURING_PRESS_TEMP
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CrtCuringPressTemp">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CrtCuringPressTemp">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CRT_CURING_PRESS_TEMP
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CRT_CURING_PRESS_TEMP
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CrtCuringPressTemp" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CRT_CURING_PRESS_TEMP
+    </statement>
+  </statements>
+</sqlMap>

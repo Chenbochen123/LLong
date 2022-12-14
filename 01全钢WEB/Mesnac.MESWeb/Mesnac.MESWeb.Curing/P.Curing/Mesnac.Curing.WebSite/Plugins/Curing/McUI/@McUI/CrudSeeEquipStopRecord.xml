@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="equip_id" Value="机台名称"></Caption>
+    <Caption Name="equip_code" Value="机台名称"></Caption>
+    <Caption Name="BeginTime" Value="开始日期"></Caption>
+    <Caption Name="EndTime" Value="结束日期"></Caption>
+    <Caption Name="STOPREASONID" Value="停机原因"></Caption>
+    <Caption Name="STOPTYPID" Value="停机类型"></Caption>
+    <Caption Name="STOP_BEGIN_TIME" Value="开始时间"></Caption>
+    <Caption Name="STOP_END_TIME" Value="结束时间"></Caption>
+    <Caption Name="REMARK" Value="说明"></Caption>
+    <Caption Name="EQUIP_STOP_TYPE_NAME" Value="停机类型"></Caption>
+    <Caption Name="SHIFT" Value="班次"></Caption>
+    <Caption Name="EQUIP_STOP_REASON_NAME" Value="停机原因"></Caption>
+    <Caption Name="ROUNDSECEND" Value="耗时(秒)"></Caption>
+    <Caption Name="USER_NAME" Value="硫化主机手"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="物料规格"></Caption>
+  </Captions>
+  <WebPage Title="停机记录查询">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Curing/McUI/@McUI/CrudSeeEquipStopRecord.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="SEE_EQUIP_STOP_RECORD">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_SEE_EQUIP_STOP_RECORD"></SeqField>
+    </SeqFields>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="equip_id" Type="SearchBox" Nullable="true"></ParamField>
+        <ParamField FieldName="BeginTime" Type="DateTimeBox" Nullable="true"></ParamField>
+        <ParamField FieldName="EndTime" Type="DateTimeBox" Nullable="true"></ParamField>
+        <ParamField FieldName="STOPREASONID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="STOPTYPID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="SHIFT" Type="ComboBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid>
+      <GridColumns>
+        <GridColumn ColumnName="EQUIP_CODE"></GridColumn>
+        <GridColumn ColumnName="EQUIP_STOP_TYPE_NAME"></GridColumn>
+        <GridColumn ColumnName="EQUIP_STOP_REASON_NAME"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME"></GridColumn>
+        <GridColumn ColumnName="USER_NAME"></GridColumn>
+        <GridColumn ColumnName="STOP_BEGIN_TIME"></GridColumn>
+        <GridColumn ColumnName="STOP_END_TIME"></GridColumn>
+        <GridColumn ColumnName="ROUNDSECEND"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Interface.Mapper.BusinessMapper.PsmMesStorageQty"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSM_MES_STORAGE_QTY ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDate" prepend="AND">
+          <![CDATA[SHIFT_DATE = #where.ShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.MesQty" prepend="AND">
+          <![CDATA[MES_QTY = #where.MesQty#]]>
+        </isNotNull>
+        <isNotNull property="where.Qty" prepend="AND">
+          <![CDATA[QTY = #where.Qty#]]>
+        </isNotNull>
+        <isNotNull property="where.DocDate" prepend="AND">
+          <![CDATA[DOC_DATE = #where.DocDate#]]>
+        </isNotNull>
+        <isNotNull property="where.PostDate" prepend="AND">
+          <![CDATA[POST_DATE = #where.PostDate#]]>
+        </isNotNull>
+        <isNotNull property="where.HeadTxt" prepend="AND">
+          <![CDATA[HEAD_TXT = #where.HeadTxt#]]>
+        </isNotNull>
+        <isNotNull property="where.PlantFrom" prepend="AND">
+          <![CDATA[PLANT_FROM = #where.PlantFrom#]]>
+        </isNotNull>
+        <isNotNull property="where.Storageloc" prepend="AND">
+          <![CDATA[STORAGELOC = #where.Storageloc#]]>
+        </isNotNull>
+        <isNotNull property="where.Batch" prepend="AND">
+          <![CDATA[BATCH = #where.Batch#]]>
+        </isNotNull>
+        <isNotNull property="where.RecPlant" prepend="AND">
+          <![CDATA[REC_PLANT = #where.RecPlant#]]>
+        </isNotNull>
+        <isNotNull property="where.RecStoloc" prepend="AND">
+          <![CDATA[REC_STOLOC = #where.RecStoloc#]]>
+        </isNotNull>
+        <isNotNull property="where.RecBatch" prepend="AND">
+          <![CDATA[REC_BATCH = #where.RecBatch#]]>
+        </isNotNull>
+        <isNotNull property="where.Reciever" prepend="AND">
+          <![CDATA[RECIEVER = #where.Reciever#]]>
+        </isNotNull>
+        <isNotNull property="where.StateFlag" prepend="AND">
+          <![CDATA[STATE_FLAG = #where.StateFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.SuccessFlag" prepend="AND">
+          <![CDATA[SUCCESS_FLAG = #where.SuccessFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ReturnMsg" prepend="AND">
+          <![CDATA[RETURN_MSG = #where.ReturnMsg#]]>
+        </isNotNull>
+        <isNotNull property="where.MovType" prepend="AND">
+          <![CDATA[MOV_TYPE = #where.MovType#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <update id="UpdateStorageSuccessFlag" parameterClass="map">
+       <![CDATA[
+       UPDATE PSM_MES_STORAGE_QTY T SET T.SUCCESS_FLAG = #SuccessFlag#
+       WHERE T.OBJID IN 
+       (SELECT DETAIL_ID FROM PSM_SAP_IN_RECORDS T1 
+        LEFT JOIN PSM_SAP_IN_HEAD T2 ON T2.OBJID =T1.HEAD_ID
+        WHERE T2.BUSID=#BusID#
+       )
+       ]]>
+     </update>
+     <update id="UpdateStorageHeadSuccessFlag" parameterClass="map">
+       <![CDATA[
+       UPDATE PSM_SAP_IN_HEAD T SET T.SUCCESS_FLAG = #SuccessFlag#,T.RETURN_MSG = #ReturnMsg#
+       WHERE T.BUSID=#BusID#
+       ]]>
+     </update>
+  </statements>
+</sqlMap>

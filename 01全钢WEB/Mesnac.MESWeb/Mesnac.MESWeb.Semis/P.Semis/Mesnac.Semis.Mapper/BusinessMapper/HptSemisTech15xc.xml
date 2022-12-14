@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HptSemisTech15xc"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPT_SEMIS_TECH_15XC ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.Sideawidth" prepend="AND">
+          <![CDATA[SIDEAWIDTH = #where.Sideawidth#]]>
+        </isNotNull>
+        <isNotNull property="where.Sidebwidth" prepend="AND">
+          <![CDATA[SIDEBWIDTH = #where.Sidebwidth#]]>
+        </isNotNull>
+        <isNotNull property="where.Sideawidthcpk" prepend="AND">
+          <![CDATA[SIDEAWIDTHCPK = #where.Sideawidthcpk#]]>
+        </isNotNull>
+        <isNotNull property="where.Sidebwidthcpk" prepend="AND">
+          <![CDATA[SIDEBWIDTHCPK = #where.Sidebwidthcpk#]]>
+        </isNotNull>
+        <isNotNull property="where.Param5" prepend="AND">
+          <![CDATA[PARAM5 = #where.Param5#]]>
+        </isNotNull>
+        <isNotNull property="where.Param6" prepend="AND">
+          <![CDATA[PARAM6 = #where.Param6#]]>
+        </isNotNull>
+        <isNotNull property="where.Param7" prepend="AND">
+          <![CDATA[PARAM7 = #where.Param7#]]>
+        </isNotNull>
+        <isNotNull property="where.Param8" prepend="AND">
+          <![CDATA[PARAM8 = #where.Param8#]]>
+        </isNotNull>
+        <isNotNull property="where.Param9" prepend="AND">
+          <![CDATA[PARAM9 = #where.Param9#]]>
+        </isNotNull>
+        <isNotNull property="where.Param10" prepend="AND">
+          <![CDATA[PARAM10 = #where.Param10#]]>
+        </isNotNull>
+        <isNotNull property="where.Param11" prepend="AND">
+          <![CDATA[PARAM11 = #where.Param11#]]>
+        </isNotNull>
+        <isNotNull property="where.Param12" prepend="AND">
+          <![CDATA[PARAM12 = #where.Param12#]]>
+        </isNotNull>
+        <isNotNull property="where.Param13" prepend="AND">
+          <![CDATA[PARAM13 = #where.Param13#]]>
+        </isNotNull>
+        <isNotNull property="where.Param14" prepend="AND">
+          <![CDATA[PARAM14 = #where.Param14#]]>
+        </isNotNull>
+        <isNotNull property="where.Param15" prepend="AND">
+          <![CDATA[PARAM15 = #where.Param15#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CrtCuringTechStep"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_CURING_TECH_STEP ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.TechnologyId" prepend="AND">
+          <![CDATA[TECHNOLOGY_ID = #where.TechnologyId#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringStep" prepend="AND">
+          <![CDATA[CURING_STEP = #where.CuringStep#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringTime" prepend="AND">
+          <![CDATA[CURING_TIME = #where.CuringTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CuringValve" prepend="AND">
+          <![CDATA[CURING_VALVE = #where.CuringValve#]]>
+        </isNotNull>
+        <isNotNull property="where.Guid" prepend="AND">
+          <![CDATA[GUID = #where.Guid#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+    <!--查询-->
+    <select id="Select@CrtCuringTechStep" parameterClass="map" resultClass="row">
+      <![CDATA[
+       SELECT T1.* 
+       , SUBSTR(T1.CURING_VALVE, 1, 1) VALVE_STATE_1 
+       , SUBSTR(T1.CURING_VALVE, 2, 1) VALVE_STATE_2 
+       , SUBSTR(T1.CURING_VALVE, 3, 1) VALVE_STATE_3 
+       , SUBSTR(T1.CURING_VALVE, 4, 1) VALVE_STATE_4 
+       , SUBSTR(T1.CURING_VALVE, 5, 1) VALVE_STATE_5 
+       , SUBSTR(T1.CURING_VALVE, 6, 1) VALVE_STATE_6 
+       , SUBSTR(T1.CURING_VALVE, 7, 1) VALVE_STATE_7 
+       , SUBSTR(T1.CURING_VALVE, 8, 1) VALVE_STATE_8 
+       , SUBSTR(T1.CURING_VALVE, 9, 1) VALVE_STATE_9 
+       , SUBSTR(T1.CURING_VALVE, 10, 1) VALVE_STATE_10 
+       , SUBSTR(T1.CURING_VALVE, 11, 1) VALVE_STATE_11 
+       , SUBSTR(T1.CURING_VALVE, 12, 1) VALVE_STATE_12 
+       , SUBSTR(T1.CURING_VALVE, 13, 1) VALVE_STATE_13 
+       , SUBSTR(T1.CURING_VALVE, 14, 1) VALVE_STATE_14 
+       , SUBSTR(T1.CURING_VALVE, 15, 1) VALVE_STATE_15 
+       , SUBSTR(T1.CURING_VALVE, 16, 1) VALVE_STATE_16 
+       , T2.USER_NAME RECORD_USER_NAME 
+       FROM CRT_CURING_TECH_STEP T1 
+       LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+       ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.TechnologyId" prepend="AND">
+          <![CDATA[T1.TECHNOLOGY_ID = #where.TechnologyId#]]>
+        </isNotNull>
+        <isNotNull property="where.Guid" prepend="AND">
+          <![CDATA[T1.GUID = #where.Guid#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+
+    <statement id="Copy@CrtCuringTechStep" parameterClass="map" resultClass="int">
+      insert into CRT_CURING_TECH_STEP (RECORD_USER_ID, RECORD_TIME, DELETE_FLAG, GUID, CURING_STEP, CURING_TIME, CURING_VALVE, CURING_TIME_TYPE) 
+      select #RecordUserId#, sysdate, 0, #Guid#, CURING_STEP, CURING_TIME, CURING_VALVE, CURING_TIME_TYPE 
+      from CRT_CURING_TECH_STEP 
+      where DELETE_FLAG = 0 
+      and TECHNOLOGY_ID = #TechnologyId# 
+    </statement>
+  </statements>
+</sqlMap>

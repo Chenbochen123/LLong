@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Equip.Mapper.BusinessMapper.CimMouldInfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CIM_MOULD_INFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.MouldName" prepend="AND">
+          <![CDATA[MOULD_NAME = #where.MouldName#]]>
+        </isNotNull>
+        <isNotNull property="where.StreamState" prepend="AND">
+          <![CDATA[STREAM_STATE = #where.StreamState#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedNum" prepend="AND">
+          <![CDATA[USED_NUM = #where.UsedNum#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkProcessId" prepend="AND">
+          <![CDATA[WORK_PROCESS_ID = #where.WorkProcessId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupFlag" prepend="AND">
+          <![CDATA[BAUP_FLAG = #where.BaupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupTime" prepend="AND">
+          <![CDATA[BAUP_TIME = #where.BaupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialCode" prepend="AND">
+          <![CDATA[MATERIAL_CODE = #where.MaterialCode#]]>
+        </isNotNull>
+        <isNotNull property="where.Plates" prepend="AND">
+          <![CDATA[PLATES = #where.Plates#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.MouldLevel" prepend="AND">
+          <![CDATA[MOULD_LEVEL = #where.MouldLevel#]]>
+        </isNotNull>
+        <isNotNull property="where.Loading1" prepend="AND">
+          <![CDATA[LOADING1 = #where.Loading1#]]>
+        </isNotNull>
+        <isNotNull property="where.Pressure1" prepend="AND">
+          <![CDATA[PRESSURE1 = #where.Pressure1#]]>
+        </isNotNull>
+        <isNotNull property="where.SpeedLevel" prepend="AND">
+          <![CDATA[SPEED_LEVEL = #where.SpeedLevel#]]>
+        </isNotNull>
+        <isNotNull property="where.LevelCode" prepend="AND">
+          <![CDATA[LEVEL_CODE = #where.LevelCode#]]>
+        </isNotNull>
+        <isNotNull property="where.LoadIndex" prepend="AND">
+          <![CDATA[LOAD_INDEX = #where.LoadIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.NoiseNo" prepend="AND">
+          <![CDATA[NOISE_NO = #where.NoiseNo#]]>
+        </isNotNull>
+        <isNotNull property="where.Ccc" prepend="AND">
+          <![CDATA[CCC = #where.Ccc#]]>
+        </isNotNull>
+        <isNotNull property="where.Ece" prepend="AND">
+          <![CDATA[ECE = #where.Ece#]]>
+        </isNotNull>
+        <isNotNull property="where.Product" prepend="AND">
+          <![CDATA[PRODUCT = #where.Product#]]>
+        </isNotNull>
+        <isNotNull property="where.Dot" prepend="AND">
+          <![CDATA[DOT = #where.Dot#]]>
+        </isNotNull>
+        <isNotNull property="where.UseDate" prepend="AND">
+          <![CDATA[USE_DATE = #where.UseDate#]]>
+        </isNotNull>
+        <isNotNull property="where.Loading2" prepend="AND">
+          <![CDATA[LOADING2 = #where.Loading2#]]>
+        </isNotNull>
+        <isNotNull property="where.Pressure2" prepend="AND">
+          <![CDATA[PRESSURE2 = #where.Pressure2#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+     <select id="GetMouldErrorNumber" parameterClass="map" resultClass="Row">
+       <![CDATA[
+          SELECT T.OBJID,T.MOULD_TYPE,T.UP_NUMBER,T.ERROR_NUMBER,T1.USER_NAME RECORD_USER_NAME,T.RECORD_TIME,T.REMARK FROM MOULD_ERRORNUMBER T
+LEFT JOIN SSB_USER T1 ON T.RECORD_USER_ID =  T1.OBJID WHERE T.DELETE_FLAG = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.TypeName" prepend="AND">
+           <![CDATA[T.MOULD_TYPE=#where.TypeName#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        ORDER BY T.OBJID
+       ]]>
+     </select>
+     
+     
+     <select id="GetMouldInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T4.SIZE_NAME,T3.PATTERN_NAME,T2.BRAND_NAME,T.* FROM CIM_MOULD_INFO T 
+        LEFT JOIN CBM_BRAND T2 ON T.BRAND_ID=T2.OBJID
+        LEFT JOIN CBM_PATTERN T3 ON T.PATTERN_ID=T3.OBJID
+        LEFT JOIN CBM_SIZE T4 ON T.SIZE_ID=T4.OBJID WHERE 1=1
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="MouldBarcode" prepend="AND">
+           <![CDATA[T.MOULD_BARCODE=#MouldBarcode#]]>
+         </isNotNull>
+         <isNotNull property="Plates" prepend="AND">
+           <![CDATA[t.PLATES=#Plates#]]>
+         </isNotNull>
+       </dynamic>
+         <isNotNull property="OrderString" prepend="">
+           ORDER BY T.USE_DATE
+         </isNotNull>
+     </select>
+
+     <select id="GetMouldStorageInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T1.SIZE_NAME,T2.PATTERN_NAME,T3.BRAND_NAME,T4.PLYRATING_NAME,T5.LOAD_INDEX_NAME
+        , T6.SPEED_LEVEL_NAME,T7.USER_NAME,T8.STORE_NAME,T9.STORE_PLACE_NAME,T10.SUB_STORE_PLACE_NAME
+        , CASE T.STREAM_STATE WHEN 0 THEN '在库' ELSE '出库' END  STOCK_STATE
+        , T.* 
+        FROM CIM_MOULD_INFO T 
+        LEFT JOIN CBM_SIZE T1 ON T.SIZE_ID = T1.OBJID
+        LEFT JOIN CBM_PATTERN T2 ON T.PATTERN_ID = T2.OBJID
+        LEFT JOIN CBM_BRAND T3 ON T.BRAND_ID = T3.OBJID
+        LEFT JOIN CBM_PLYRATING T4 ON T.DUMMY_1 = T4.OBJID
+        LEFT JOIN CBM_LOAD_INDEX T5 ON T.DUMMY_2 = T5.OBJID
+        LEFT JOIN CBM_SPEED_LEVEL T6 ON T.DUMMY_3 = T6.OBJID
+        LEFT JOIN SSB_USER T7 ON T.RECORD_USER_ID = T7.OBJID
+        LEFT JOIN SEB_STORE T8 ON T.STORE_ID = T8.OBJID
+        LEFT JOIN SEB_STORE_PLACE T9 ON T.STORE_PLACE_ID = T9.OBJID
+        LEFT JOIN SEB_SUB_STORE_PLACE T10 ON T.STORE_PLACE_ID_SUB = T10.OBJID
+        WHERE 1=1 AND T.DELETE_FLAG = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.MouldName" prepend="AND">
+           <![CDATA[T.MOULD_NAME=#where.MouldName#]]>
+         </isNotNull>
+         <isNotNull property="where.mouldcode" prepend="AND">
+           <![CDATA[T.MOULD_code like '%' ||  #where.mouldcode# || '%']]>
+         </isNotNull>
+         <isNotNull property="where.StoreID" prepend="AND">
+           <![CDATA[T8.OBJID=#where.StoreID#]]>
+         </isNotNull>
+         <isNotNull property="where.StorePlaceID" prepend="AND">
+           <![CDATA[T9.OBJID=#where.StorePlaceID#]]>
+         </isNotNull>
+         <isNotNull property="where.StorePlaceSubID" prepend="AND">
+           <![CDATA[T10.OBJID=#where.StorePlaceSubID#]]>
+         </isNotNull>
+         <isNotNull property="where.sizename" prepend="AND">
+           <![CDATA[T1.size_name like '%' ||  #where.sizename# || '%']]>
+         </isNotNull>
+         <isNotNull property="where.patternname" prepend="AND">
+           <![CDATA[T2.pattern_name like '%' ||  #where.patternname# || '%']]>
+         </isNotNull>
+         <isNotNull property="where.TypeName" prepend="AND">
+           <![CDATA[T.IN_TYPE like '%' ||  #where.TypeName# || '%']]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        ORDER BY T.MOULD_NAME
+       ]]>
+     </select>
+
+     <select id="GetMJNewID" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select max(MOULD_BARCODE) ID from CIM_MOULD_INFO
+       ]]>
+     </select>
+     
+     <select id="GetMouldSizeInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT * FROM CBM_SIZE WHERE 1=1 AND DELETE_FLAG = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="SizeName" prepend="AND">
+           <![CDATA[SIZE_NAME like '%$SizeName%']]>
+         </isNotNull>
+         <isNotNull property="Remark" prepend="AND">
+           <![CDATA[REMARK like '%$Remark%']]>
+         </isNotNull>
+         <isNotNull property="Objid" prepend="AND">
+           <![CDATA[OBJID=#Objid#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        ORDER BY SIZE_NAME
+       ]]>
+     </select>
+     <select id="GetMouldPatternInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT * FROM CBM_PATTERN WHERE 1=1 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="PatternName" prepend="AND">
+           <![CDATA[PATTERN_NAME like '%PatternName%']]>
+         </isNotNull>
+         <isNotNull property="Remark" prepend="AND">
+           <![CDATA[REMARK like '%$Remark%']]>
+         </isNotNull>
+         <isNotNull property="Objid" prepend="AND">
+           <![CDATA[OBJID=#Objid#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        ORDER BY PATTERN_NAME
+       ]]>
+     </select>
+
+     <select id="GetMouldStorageInfoNew" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select B.STORE_NAME,C.STORE_PLACE_NAME,D.SUB_STORE_PLACE_NAME,a.* from cim_mould_info a
+        LEFT JOIN SEB_STORE B ON A.STORE_ID = B.OBJID
+        LEFT JOIN SEB_STORE_PLACE C ON A.STORE_PLACE_ID = C.OBJID
+        LEFT JOIN SEB_SUB_STORE_PLACE D ON A.STORE_PLACE_ID_SUB = D.OBJID
+        where 1=1 and a.delete_flag = 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="MouldName" prepend="AND">
+           <![CDATA[a.MOULD_NAME = #MouldName# ]]>
+         </isNotNull>
+         <isNotNull property="SizeID" prepend="AND">
+           <![CDATA[a.size_id = #SizeID# ]]>
+         </isNotNull>
+         <isNotNull property="PatternID" prepend="AND">
+           <![CDATA[a.pattern_id = #PatternID# ]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetClearMouldRecord" parameterClass="map" resultClass="Row">
+       <![CDATA[
+     SELECT A.*,B.USER_NAME,BB.USER_NAME USER_NAME2,C.IN_TYPE,CASE E.BAUP_FLAG WHEN 1 THEN '左模' WHEN 2 THEN '右模' END BAUP_FLAG,F.EQUIP_NAME,
+  G.USER_NAME OKUSER,CASE WHEN A.OK_FLAG = 1 THEN '合格' when A.OK_FLAG is null then ''  ELSE '不合格' END OKFLAG,
+  CASE WHEN A.MOULDFLAG = 1 THEN '激光洗模    '  when A.MOULDFLAG is null then ''  ELSE '喷砂洗模' END MOULDFLAGNAME,H.ERROR_NUMBER,H.UP_NUMBER,
+  CASE WHEN A.DUMMY1 = 1 AND A.OK_FLAG = 0 THEN K.REALNUM WHEN  A.DUMMY1 = 1 AND A.OK_FLAG IS NULL THEN K.REALNUM ELSE A.REALNUM END REALNUMS
+   FROM SBE_CLEARMOULD  A
+        LEFT JOIN SSB_USER B ON B.OBJID = A.RECORD_USERID
+        LEFT JOIN SSB_USER BB ON BB.OBJID = A.DUMMY2
+        LEFT JOIN CIM_MOULD_INFO C ON C.MOULD_CODE = A.MOULDNAME and c.delete_flag=0
+        LEFT JOIN cim_mould_equip E ON E.MOULD_ID = C.OBJID AND E.DELETE_FLAG=0
+        LEFT JOIN SBE_EQUIP F ON F.OBJID = E.EQUIP_ID
+        LEFT JOIN SSB_USER G ON G.OBJID = A.OK_USERID
+        LEFT JOIN MOULD_ERRORNUMBER H ON C.IN_TYPE = H.MOULD_TYPE
+        LEFT JOIN (SELECT  J.*  FROM(SELECT I.OBJID,I.MOULDNAME,I.REALNUM,I.RECORD_TIME,I.DUMMY1,I.OK_FLAG,I.MOULDFLAG,
+        ROW_NUMBER() OVER(PARTITION BY I.MOULDNAME ORDER BY I.RECORD_TIME DESC) RNO,ROWNUM FROM SBE_CLEARMOULD I
+        WHERE I.DUMMY1 = 0) J WHERE J.RNO = 1 ORDER BY J.RECORD_TIME DESC) K ON A.MOULDNAME = K.MOULDNAME
+        WHERE 1=1 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.begintime" prepend="AND">
+           <![CDATA[A.RECORD_TIME >=to_date(#where.begintime#,'yyyy-MM-dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.endtime" prepend="AND">
+           <![CDATA[A.RECORD_TIME <=to_date(#where.endtime# ,'yyyy-MM-dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.MouldName" prepend="AND">
+           <![CDATA[A.MOULDNAME=#where.MouldName#]]>
+         </isNotNull>
+         <isNotNull property="where.RealNum" prepend="AND">
+           <![CDATA[A.RealNum>=#where.RealNum#]]>
+         </isNotNull>
+         <isNotNull property="where.New1" prepend="AND">
+           <![CDATA[A.dummy1=1]]>
+         </isNotNull>
+         <isNotNull property="where.New2" prepend="AND">
+           <![CDATA[A.dummy1<>1]]>
+         </isNotNull>
+         <isNotNull property="where.MouldFlag" prepend="AND">
+           <![CDATA[A.MOULDFLAG = #where.MouldFlag#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        ORDER BY A.RECORD_TIME DESC
+       ]]>
+     </select>
+     
+  </statements>
+</sqlMap>

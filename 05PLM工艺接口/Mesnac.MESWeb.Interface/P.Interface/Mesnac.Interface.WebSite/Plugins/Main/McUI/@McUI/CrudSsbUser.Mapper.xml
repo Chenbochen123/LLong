@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudSsbUser" parameterClass="int" resultClass="row">
+      <![CDATA[
+          SELECT T1.OBJID ,T1.USER_NAME ,T1.REAL_NAME ,T2.SEX_NAME AS SEX ,T1.TELEPHONE ,T1.WORK_BARCODE 
+            ,T3.DEPT_NAME AS DEPT_ID ,T4.WORK_NAME AS WORK_ID ,T5.SHIFT_NAME AS SHIFT_ID ,T6.CLASS_NAME AS CLASS_ID 
+            ,T7.WORKSHOP_NAME AS WORKSHOP_ID ,T8.YES_NO_NAME AS IS_EMPLOYEE  FROM SSB_USER T1 
+            LEFT JOIN SSB_SEX       T2 ON T1.SEX = T2.OBJID
+            LEFT JOIN SSB_DEPT      T3 ON T1.DEPT_ID = T3.OBJID
+            LEFT JOIN SSB_WORK      T4 ON T1.WORK_ID = T4.OBJID
+            LEFT JOIN SSB_SHIFT     T5 ON T1.SHIFT_ID = T5.OBJID
+            LEFT JOIN SSB_CLASS     T6 ON T1.CLASS_ID = T6.OBJID
+            LEFT JOIN SSB_WORKSHOP  T7 ON T1.WORKSHOP_ID = T7.OBJID
+            LEFT JOIN SSB_YES_NO    T8 ON T1.IS_EMPLOYEE = T8.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.USER_NAME" prepend="AND">
+          T1.USER_NAME  like '%'||#where.USER_NAME#||'%'
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+        <isNotNull property="where.REMARK" prepend="AND">
+          <![CDATA[T1.REMARK = #where.REMARK#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    <select id="Select+Update@CrudSsbUser" parameterClass="int" resultClass="row">
+      <![CDATA[SELECT * FROM SSB_USER ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询性别信息-->
+    <select id="GetComboBoxData@Select@CrudSsbUser@SEX" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,SEX_NAME ssValue from SSB_SEX where DELETE_FLAG = '0' order by OBJID
+     ]]>
+    </select>
+    <!--查询部门信息-->
+    <select id="GetComboBoxData@Select@CrudSsbUser@DEPT_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,DEPT_NAME ssValue from SSB_DEPT where DELETE_FLAG = '0' order by OBJID
+     ]]>
+    </select>
+    <!--查询岗位信息-->
+    <select id="GetComboBoxData@Select@CrudSsbUser@WORK_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,WORK_NAME ssValue from SSB_WORK where DELETE_FLAG = '0' order by OBJID
+     ]]>
+    </select>
+    <!--查询班次信息-->
+    <select id="GetComboBoxData@Select@CrudSsbUser@SHIFT_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,SHIFT_NAME ssValue from SSB_SHIFT where DELETE_FLAG = '0' order by OBJID
+     ]]>
+    </select>
+    <!--查询班组信息-->
+    <select id="GetComboBoxData@Select@CrudSsbUser@CLASS_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,CLASS_NAME ssValue from SSB_CLASS where DELETE_FLAG = '0' order by OBJID
+     ]]>
+    </select>
+    <!--查询车间信息-->
+    <select id="GetComboBoxData@Select@CrudSsbUser@WORKSHOP_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,WORKSHOP_NAME ssValue from SSB_WORKSHOP where DELETE_FLAG = '0' order by OBJID
+     ]]>
+    </select>
+    <!--查询是否信息-->
+    <select id="GetComboBoxData@Select@CrudSsbUser@IS_EMPLOYEE" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,YES_NO_NAME ssValue from SSB_YES_NO where DELETE_FLAG = '0' order by OBJID
+     ]]>
+    </select>
+
+  </statements>
+</sqlMap>

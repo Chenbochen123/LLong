@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BasicMapper.VBbmMaterial"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="VBbmMaterial" type="Mesnac.Molding.Entity.BasicEntity.VBbmMaterial, Mesnac.Molding.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_VBbmMaterial" class="VBbmMaterial">
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="MaterialName" column="MATERIAL_NAME"/>
+    <result property="MaterialCode" column="MATERIAL_CODE"/>
+    <result property="MajorTypeId" column="MAJOR_TYPE_ID"/>
+    <result property="MinorTypeId" column="MINOR_TYPE_ID"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="MaterialId" column="MATERIAL_ID"/>
+    <result property="SizeId" column="SIZE_ID"/>
+    <result property="PlyratingId" column="PLYRATING_ID"/>
+    <result property="PatternId" column="PATTERN_ID"/>
+    <result property="LoadIndexId" column="LOAD_INDEX_ID"/>
+    <result property="SpeedLevelId" column="SPEED_LEVEL_ID"/>
+    <result property="StandardId" column="STANDARD_ID"/>
+    <result property="AttributeId" column="ATTRIBUTE_ID"/>
+    <result property="MaxStockAmount" column="MAX_STOCK_AMOUNT"/>
+    <result property="MinStockAmount" column="MIN_STOCK_AMOUNT"/>
+    <result property="StandardStockAmount" column="STANDARD_STOCK_AMOUNT"/>
+    <result property="MaxStockTime" column="MAX_STOCK_TIME"/>
+    <result property="MinStockTime" column="MIN_STOCK_TIME"/>
+    <result property="StandardWeight" column="STANDARD_WEIGHT"/>
+    <result property="WeightTolerance" column="WEIGHT_TOLERANCE"/>
+    <result property="SpellCode" column="SPELL_CODE"/>
+    <result property="UsedFlag" column="USED_FLAG"/>
+    <result property="VoiceFilePath" column="VOICE_FILE_PATH"/>
+    <result property="SapCode" column="SAP_CODE"/>
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_VBbmMaterial" class="VBbmMaterial">
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="MaterialName" column="MaterialName"/>
+    <parameter property="MaterialCode" column="MaterialCode"/>
+    <parameter property="MajorTypeId" column="MajorTypeId"/>
+    <parameter property="MinorTypeId" column="MinorTypeId"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="MaterialId" column="MaterialId"/>
+    <parameter property="SizeId" column="SizeId"/>
+    <parameter property="PlyratingId" column="PlyratingId"/>
+    <parameter property="PatternId" column="PatternId"/>
+    <parameter property="LoadIndexId" column="LoadIndexId"/>
+    <parameter property="SpeedLevelId" column="SpeedLevelId"/>
+    <parameter property="StandardId" column="StandardId"/>
+    <parameter property="AttributeId" column="AttributeId"/>
+    <parameter property="MaxStockAmount" column="MaxStockAmount"/>
+    <parameter property="MinStockAmount" column="MinStockAmount"/>
+    <parameter property="StandardStockAmount" column="StandardStockAmount"/>
+    <parameter property="MaxStockTime" column="MaxStockTime"/>
+    <parameter property="MinStockTime" column="MinStockTime"/>
+    <parameter property="StandardWeight" column="StandardWeight"/>
+    <parameter property="WeightTolerance" column="WeightTolerance"/>
+    <parameter property="SpellCode" column="SpellCode"/>
+    <parameter property="UsedFlag" column="UsedFlag"/>
+    <parameter property="VoiceFilePath" column="VoiceFilePath"/>
+    <parameter property="SapCode" column="SapCode"/>
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM V_BBM_MATERIAL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[MATERIAL_NAME = #where.MaterialName#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialCode" prepend="AND">
+          <![CDATA[MATERIAL_CODE = #where.MaterialCode#]]>
+        </isNotNull>
+        <isNotNull property="where.MajorTypeId" prepend="AND">
+          <![CDATA[MAJOR_TYPE_ID = #where.MajorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.MinorTypeId" prepend="AND">
+          <![CDATA[MINOR_TYPE_ID = #where.MinorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.SizeId" prepend="AND">
+          <![CDATA[SIZE_ID = #where.SizeId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlyratingId" prepend="AND">
+          <![CDATA[PLYRATING_ID = #where.PlyratingId#]]>
+        </isNotNull>
+        <isNotNull property="where.PatternId" prepend="AND">
+          <![CDATA[PATTERN_ID = #where.PatternId#]]>
+        </isNotNull>
+        <isNotNull property="where.LoadIndexId" prepend="AND">
+          <![CDATA[LOAD_INDEX_ID = #where.LoadIndexId#]]>
+        </isNotNull>
+        <isNotNull property="where.SpeedLevelId" prepend="AND">
+          <![CDATA[SPEED_LEVEL_ID = #where.SpeedLevelId#]]>
+        </isNotNull>
+        <isNotNull property="where.StandardId" prepend="AND">
+          <![CDATA[STANDARD_ID = #where.StandardId#]]>
+        </isNotNull>
+        <isNotNull property="where.AttributeId" prepend="AND">
+          <![CDATA[ATTRIBUTE_ID = #where.AttributeId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaxStockAmount" prepend="AND">
+          <![CDATA[MAX_STOCK_AMOUNT = #where.MaxStockAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.MinStockAmount" prepend="AND">
+          <![CDATA[MIN_STOCK_AMOUNT = #where.MinStockAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.StandardStockAmount" prepend="AND">
+          <![CDATA[STANDARD_STOCK_AMOUNT = #where.StandardStockAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.MaxStockTime" prepend="AND">
+          <![CDATA[MAX_STOCK_TIME = #where.MaxStockTime#]]>
+        </isNotNull>
+        <isNotNull property="where.MinStockTime" prepend="AND">
+          <![CDATA[MIN_STOCK_TIME = #where.MinStockTime#]]>
+        </isNotNull>
+        <isNotNull property="where.StandardWeight" prepend="AND">
+          <![CDATA[STANDARD_WEIGHT = #where.StandardWeight#]]>
+        </isNotNull>
+        <isNotNull property="where.WeightTolerance" prepend="AND">
+          <![CDATA[WEIGHT_TOLERANCE = #where.WeightTolerance#]]>
+        </isNotNull>
+        <isNotNull property="where.SpellCode" prepend="AND">
+          <![CDATA[SPELL_CODE = #where.SpellCode#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.VoiceFilePath" prepend="AND">
+          <![CDATA[VOICE_FILE_PATH = #where.VoiceFilePath#]]>
+        </isNotNull>
+        <isNotNull property="where.SapCode" prepend="AND">
+          <![CDATA[SAP_CODE = #where.SapCode#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE ( = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO V_BBM_MATERIAL]]>
+       <dynamic prepend="(">
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="MaterialName" prepend=",">MATERIAL_NAME</isNotNull>
+        <isNotNull property="MaterialCode" prepend=",">MATERIAL_CODE</isNotNull>
+        <isNotNull property="MajorTypeId" prepend=",">MAJOR_TYPE_ID</isNotNull>
+        <isNotNull property="MinorTypeId" prepend=",">MINOR_TYPE_ID</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">MATERIAL_ID</isNotNull>
+        <isNotNull property="SizeId" prepend=",">SIZE_ID</isNotNull>
+        <isNotNull property="PlyratingId" prepend=",">PLYRATING_ID</isNotNull>
+        <isNotNull property="PatternId" prepend=",">PATTERN_ID</isNotNull>
+        <isNotNull property="LoadIndexId" prepend=",">LOAD_INDEX_ID</isNotNull>
+        <isNotNull property="SpeedLevelId" prepend=",">SPEED_LEVEL_ID</isNotNull>
+        <isNotNull property="StandardId" prepend=",">STANDARD_ID</isNotNull>
+        <isNotNull property="AttributeId" prepend=",">ATTRIBUTE_ID</isNotNull>
+        <isNotNull property="MaxStockAmount" prepend=",">MAX_STOCK_AMOUNT</isNotNull>
+        <isNotNull property="MinStockAmount" prepend=",">MIN_STOCK_AMOUNT</isNotNull>
+        <isNotNull property="StandardStockAmount" prepend=",">STANDARD_STOCK_AMOUNT</isNotNull>
+        <isNotNull property="MaxStockTime" prepend=",">MAX_STOCK_TIME</isNotNull>
+        <isNotNull property="MinStockTime" prepend=",">MIN_STOCK_TIME</isNotNull>
+        <isNotNull property="StandardWeight" prepend=",">STANDARD_WEIGHT</isNotNull>
+        <isNotNull property="WeightTolerance" prepend=",">WEIGHT_TOLERANCE</isNotNull>
+        <isNotNull property="SpellCode" prepend=",">SPELL_CODE</isNotNull>
+        <isNotNull property="UsedFlag" prepend=",">USED_FLAG</isNotNull>
+        <isNotNull property="VoiceFilePath" prepend=",">VOICE_FILE_PATH</isNotNull>
+        <isNotNull property="SapCode" prepend=",">SAP_CODE</isNotNull>
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="MaterialName" prepend=",">#MaterialName#</isNotNull>
+        <isNotNull property="MaterialCode" prepend=",">#MaterialCode#</isNotNull>
+        <isNotNull property="MajorTypeId" prepend=",">#MajorTypeId#</isNotNull>
+        <isNotNull property="MinorTypeId" prepend=",">#MinorTypeId#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">#MaterialId#</isNotNull>
+        <isNotNull property="SizeId" prepend=",">#SizeId#</isNotNull>
+        <isNotNull property="PlyratingId" prepend=",">#PlyratingId#</isNotNull>
+        <isNotNull property="PatternId" prepend=",">#PatternId#</isNotNull>
+        <isNotNull property="LoadIndexId" prepend=",">#LoadIndexId#</isNotNull>
+        <isNotNull property="SpeedLevelId" prepend=",">#SpeedLevelId#</isNotNull>
+        <isNotNull property="StandardId" prepend=",">#StandardId#</isNotNull>
+        <isNotNull property="AttributeId" prepend=",">#AttributeId#</isNotNull>
+        <isNotNull property="MaxStockAmount" prepend=",">#MaxStockAmount#</isNotNull>
+        <isNotNull property="MinStockAmount" prepend=",">#MinStockAmount#</isNotNull>
+        <isNotNull property="StandardStockAmount" prepend=",">#StandardStockAmount#</isNotNull>
+        <isNotNull property="MaxStockTime" prepend=",">#MaxStockTime#</isNotNull>
+        <isNotNull property="MinStockTime" prepend=",">#MinStockTime#</isNotNull>
+        <isNotNull property="StandardWeight" prepend=",">#StandardWeight#</isNotNull>
+        <isNotNull property="WeightTolerance" prepend=",">#WeightTolerance#</isNotNull>
+        <isNotNull property="SpellCode" prepend=",">#SpellCode#</isNotNull>
+        <isNotNull property="UsedFlag" prepend=",">#UsedFlag#</isNotNull>
+        <isNotNull property="VoiceFilePath" prepend=",">#VoiceFilePath#</isNotNull>
+        <isNotNull property="SapCode" prepend=",">#SapCode#</isNotNull>
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE V_BBM_MATERIAL
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.MaterialName"  prepend=",">
+          MATERIAL_NAME = #update.MaterialName#
+        </isNotNull>
+        <isNotNull  property="update.MaterialCode"  prepend=",">
+          MATERIAL_CODE = #update.MaterialCode#
+        </isNotNull>
+        <isNotNull  property="update.MajorTypeId"  prepend=",">
+          MAJOR_TYPE_ID = #update.MajorTypeId#
+        </isNotNull>
+        <isNotNull  property="update.MinorTypeId"  prepend=",">
+          MINOR_TYPE_ID = #update.MinorTypeId#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.MaterialId"  prepend=",">
+          MATERIAL_ID = #update.MaterialId#
+        </isNotNull>
+        <isNotNull  property="update.SizeId"  prepend=",">
+          SIZE_ID = #update.SizeId#
+        </isNotNull>
+        <isNotNull  property="update.PlyratingId"  prepend=",">
+          PLYRATING_ID = #update.PlyratingId#
+        </isNotNull>
+        <isNotNull  property="update.PatternId"  prepend=",">
+          PATTERN_ID = #update.PatternId#
+        </isNotNull>
+        <isNotNull  property="update.LoadIndexId"  prepend=",">
+          LOAD_INDEX_ID = #update.LoadIndexId#
+        </isNotNull>
+        <isNotNull  property="update.SpeedLevelId"  prepend=",">
+          SPEED_LEVEL_ID = #update.SpeedLevelId#
+        </isNotNull>
+        <isNotNull  property="update.StandardId"  prepend=",">
+          STANDARD_ID = #update.StandardId#
+        </isNotNull>
+        <isNotNull  property="update.AttributeId"  prepend=",">
+          ATTRIBUTE_ID = #update.AttributeId#
+        </isNotNull>
+        <isNotNull  property="update.MaxStockAmount"  prepend=",">
+          MAX_STOCK_AMOUNT = #update.MaxStockAmount#
+        </isNotNull>
+        <isNotNull  property="update.MinStockAmount"  prepend=",">
+          MIN_STOCK_AMOUNT = #update.MinStockAmount#
+        </isNotNull>
+        <isNotNull  property="update.StandardStockAmount"  prepend=",">
+          STANDARD_STOCK_AMOUNT = #update.StandardStockAmount#
+        </isNotNull>
+        <isNotNull  property="update.MaxStockTime"  prepend=",">
+          MAX_STOCK_TIME = #update.MaxStockTime#
+        </isNotNull>
+        <isNotNull  property="update.MinStockTime"  prepend=",">
+          MIN_STOCK_TIME = #update.MinStockTime#
+        </isNotNull>
+        <isNotNull  property="update.StandardWeight"  prepend=",">
+          STANDARD_WEIGHT = #update.StandardWeight#
+        </isNotNull>
+        <isNotNull  property="update.WeightTolerance"  prepend=",">
+          WEIGHT_TOLERANCE = #update.WeightTolerance#
+        </isNotNull>
+        <isNotNull  property="update.SpellCode"  prepend=",">
+          SPELL_CODE = #update.SpellCode#
+        </isNotNull>
+        <isNotNull  property="update.UsedFlag"  prepend=",">
+          USED_FLAG = #update.UsedFlag#
+        </isNotNull>
+        <isNotNull  property="update.VoiceFilePath"  prepend=",">
+          VOICE_FILE_PATH = #update.VoiceFilePath#
+        </isNotNull>
+        <isNotNull  property="update.SapCode"  prepend=",">
+          SAP_CODE = #update.SapCode#
+        </isNotNull>
+        <isNotNull  property="update.ObjId"  prepend=",">
+          OBJID = #update.ObjId#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM V_BBM_MATERIAL
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_VBbmMaterial">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_VBbmMaterial">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max()
+      </isNotPropertyAvailable>
+      FROM V_BBM_MATERIAL
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM V_BBM_MATERIAL
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_VBbmMaterial" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE V_BBM_MATERIAL
+    </statement>
+  </statements>
+</sqlMap>

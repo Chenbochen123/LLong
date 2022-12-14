@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="CARD_NO" Value="流水卡号"></Caption>
+    <Caption Name="SHIFT_MASTER_ID" Value="接班信息"></Caption>
+    <Caption Name="MATERIAL_ID" Value="物料信息"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="物料名称"></Caption>
+    <Caption Name="MATERIAL_CODE" Value="物料代号"></Caption>
+    <Caption Name="PLAN_ID" Value="计划编号"></Caption>
+    <Caption Name="PLAN_DETAIL_ID" Value="生产计划"></Caption>
+    <Caption Name="SHIFT_DATE" Value="接班日期"></Caption>
+    <Caption Name="PLAN_DATE" Value="计划日期"></Caption>
+    <Caption Name="BEGIN_TIME" Value="开始时间"></Caption>
+    <Caption Name="END_TIME" Value="结束时间"></Caption>
+    <Caption Name="BEGIN_DATE" Value="开始日期"></Caption>
+    <Caption Name="END_DATE" Value="结束日期"></Caption>
+    <Caption Name="EQUIP_ID" Value="设备信息"></Caption>
+    <Caption Name="EQUIP_NAME" Value="设备名称"></Caption>
+    <Caption Name="PLAN_SHIFT_ID" Value="计划班次"></Caption>
+    <Caption Name="PLAN_SHIFT_NAME" Value="计划班次"></Caption>
+    <Caption Name="SHIFT_ID" Value="接班班次"></Caption>
+    <Caption Name="SHIFT_NAME" Value="接班班次"></Caption>
+    <Caption Name="CLASS_ID" Value="接班班组"></Caption>
+    <Caption Name="CLASS_NAME" Value="接班班组"></Caption>
+    <Caption Name="UNIT_ID" Value="单位"></Caption>
+    <Caption Name="UNIT_NAME" Value="单位"></Caption>
+    <Caption Name="QTY" Value="数量"></Caption>
+    <Caption Name="SHELF_NO" Value="工装架子号"></Caption>
+    <Caption Name="IS_ALARM" Value="是否报警"></Caption>
+    <Caption Name="IS_ALARM_CAPTION" Value="是否报警"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+    <Caption Name="SearchType" Value="查询类型"></Caption>
+    <Caption Name="MINOR_TYPE_NAME" Value="机台类别"></Caption>
+    <Caption Name="SHIFT_EQUIP_NAME" Value="接班设备"></Caption>
+    <Caption Name="OLD_MATERIAL_NAME" Value="原物料名称"></Caption>
+  </Captions>
+  <WebPage Title="半制品生产信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Semis/McUI/@McUI/CrudHppSemisProduction.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="HPP_SEMIS_PRODUCTION">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+   
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ExcuteCommands>
+      <Command FileName="Mesnac.Semis.McUI.dll" ClassName="Mesnac.Semis.McUI.SemisProduction.Insert"></Command>
+    </ExcuteCommands>
+    <VerifyCommands>
+      <Command FileName="Mesnac.Semis.McUI.dll" ClassName="Mesnac.Semis.McUI.SemisProduction.Verify"></Command>
+    </VerifyCommands>
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="CARD_NO"></ParamField>
+        <ParamField FieldName="BEGIN_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="END_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="PLAN_DETAIL_ID" Type="SearchBox"></ParamField>
+        <ParamField FieldName="PLAN_DATE" Type="DateBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="PLAN_SHIFT_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_NAME" Type="TextBox" ReadOnly="true" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME" Type="TextBox" ReadOnly="true" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_ID" Type="TextBox" IsShow="false" ReadOnly="true" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_ID" Type="TextBox" IsShow="false" ReadOnly="true" Nullable="true"></ParamField>
+        <ParamField FieldName="SHIFT_MASTER_ID" Type="SearchBox"></ParamField>
+        <ParamField FieldName="SHIFT_DATE" Type="DateBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="SHIFT_ID" Type="ComboBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="CLASS_ID" Type="ComboBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="PLAN_ID" ReadOnly="true" IsShow="false" Nullable="true"></ParamField>
+        <ParamField FieldName="SHIFT_EQUIP_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true" Caption="接班设备"></ParamField>
+        <ParamField FieldName="QTY"></ParamField>
+        <ParamField FieldName="SHELF_NO"></ParamField>
+        <ParamField FieldName="UNIT_ID" Type="ComboBox"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ExcuteCommands>
+      <Command FileName="Mesnac.Semis.McUI.dll" ClassName="Mesnac.Semis.McUI.SemisProduction.Update"></Command>
+    </ExcuteCommands>
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="CARD_NO"></ParamField>
+        <ParamField FieldName="BEGIN_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="END_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="PLAN_DETAIL_ID" Type="SearchBox"></ParamField>
+        <ParamField FieldName="PLAN_DATE" Type="DateBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="PLAN_SHIFT_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_NAME" Type="TextBox" ReadOnly="true" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME" Type="TextBox" ReadOnly="true" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_ID" Type="TextBox" IsShow="false" ReadOnly="true" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_ID" Type="TextBox" IsShow="false" ReadOnly="true" Nullable="true"></ParamField>
+        <ParamField FieldName="SHIFT_MASTER_ID" Type="SearchBox"></ParamField>
+        <ParamField FieldName="SHIFT_DATE" Type="DateBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="SHIFT_ID" Type="ComboBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="CLASS_ID" Type="ComboBox" ReadOnly="true" IsShow="true" Nullable="true"></ParamField>
+        <ParamField FieldName="PLAN_ID" ReadOnly="true" IsShow="false" Nullable="true"></ParamField>
+        <ParamField FieldName="SHIFT_EQUIP_NAME" Type="TextBox" ReadOnly="true" IsShow="true" Nullable="true" Caption="接班设备"></ParamField>
+        <ParamField FieldName="QTY"></ParamField>
+        <ParamField FieldName="SHELF_NO"></ParamField>
+        <ParamField FieldName="UNIT_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="OBJID" ReadOnly="true" IsShow="false" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="SearchType" Type="ComboBox"></ParamField>
+        <ParamField FieldName="BEGIN_TIME" Type="DateTimeBox" IsShow="true"></ParamField>
+        <ParamField FieldName="END_TIME" Type="DateTimeBox" IsShow="true"></ParamField>
+        <ParamField FieldName="SHIFT_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="BEGIN_DATE" Type="DateBox"></ParamField>
+        <ParamField FieldName="END_DATE" Type="DateBox"></ParamField>
+        <ParamField FieldName="CARD_NO"></ParamField>
+        <ParamField FieldName="SHELF_NO"></ParamField>
+        <ParamField FieldName="EQUIP_NAME"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="MATERIAL_CODE"></ParamField>
+        <ParamField FieldName="OLD_MATERIAL_NAME"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="T.OBJID" PageSize="20">
+      <GridColumns>
+        <GridColumn ColumnName="CARD_NO" Width="100"></GridColumn>
+        <GridColumn ColumnName="PLAN_DATE" ColumnType="Date" ColumnFormt="yyyy-MM-dd" IsShow="true" Width="100"></GridColumn>
+        <GridColumn ColumnName="PLAN_SHIFT_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="SHELF_NO" Width="100"></GridColumn>
+        <GridColumn ColumnName="MINOR_TYPE_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="EQUIP_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="160"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_CODE" Width="100"></GridColumn>
+        <GridColumn ColumnName="QTY" Width="100"></GridColumn>
+        <GridColumn ColumnName="UNIT_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="BEGIN_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="160"></GridColumn>
+        <GridColumn ColumnName="END_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="160"></GridColumn>
+        <GridColumn ColumnName="SHIFT_DATE" ColumnType="Date" ColumnFormt="yyyy-MM-dd" Width="160"></GridColumn>
+        <GridColumn ColumnName="SHIFT_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="CLASS_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="IS_ALARM_CAPTION" Width="100" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="160"></GridColumn>
+        <GridColumn ColumnName="REMARK" Width="100"></GridColumn>
+        <GridColumn ColumnName="OLD_MATERIAL_NAME" Width="160"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

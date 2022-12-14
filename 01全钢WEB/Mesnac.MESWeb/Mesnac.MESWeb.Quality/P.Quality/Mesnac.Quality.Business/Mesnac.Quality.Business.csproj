@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0600367B-36FC-4A1E-9E52-E46545599725}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Quality.Business</RootNamespace>
+    <AssemblyName>Mesnac.Quality.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\@packages\MyBatis\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\@packages\MyBatis\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.DbAccess">
+      <HintPath>..\..\@packages\Frame\Mesnac.DbAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.Common">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.DataMapper">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implements\BpmProductionManager.cs" />
+    <Compile Include="Implements\BppPlanManager.cs" />
+    <Compile Include="Implements\CppCuringDegradeManager.cs" />
+    <Compile Include="Implements\CppCuringPlanDetailManager.cs" />
+    <Compile Include="Implements\CppCuringPlanManager.cs" />
+    <Compile Include="Implements\CppCuringProductionManager.cs" />
+    <Compile Include="Implements\CppFcheckControlStopManager.cs" />
+    <Compile Include="Implements\CppTraceCuringInfoManager.cs" />
+    <Compile Include="Implements\CqcQcrecordManager.cs" />
+    <Compile Include="Implements\FqaArtificialcheckInfoManager.cs" />
+    <Compile Include="Implements\FqbArtificialcheckInfoManager.cs" />
+    <Compile Include="Implements\FqbBalanceInfo3Manager.cs" />
+    <Compile Include="Implements\FqbBalanceInfoManager.cs" />
+    <Compile Include="Implements\FqbQualityStandardManager.cs" />
+    <Compile Include="Implements\FqbScanRecordsManager.cs" />
+    <Compile Include="Implements\FqbStandardDetailManager.cs" />
+    <Compile Include="Implements\FqcChangegradeInfoManager.cs" />
+    <Compile Include="Implements\FqdDefectInfoManager.cs" />
+    <Compile Include="Implements\FqdDegradeConfirmManager.cs" />
+    <Compile Include="Implements\FqdDegradeReasonsManager.cs" />
+    <Compile Include="Implements\FqfFcheckDetailManager.cs" />
+    <Compile Include="Implements\FqfFcheckInfoManager.cs" />
+    <Compile Include="Implements\FqfFcheckShiftDetailManager.cs" />
+    <Compile Include="Implements\FqfFcheckShiftMasterManager.cs" />
+    <Compile Include="Implements\FqgGradeInfoManager.cs" />
+    <Compile Include="Implements\FqrBadScanLogManager.cs" />
+    <Compile Include="Implements\FqrRepairPartManager.cs" />
+    <Compile Include="Implements\FqrRepairRecordsManager.cs" />
+    <Compile Include="Implements\FqrRepairResultManager.cs" />
+    <Compile Include="Implements\FqrRepeatManager.cs" />
+    <Compile Include="Implements\FqxRadiusInfoManager.cs" />
+    <Compile Include="Implements\FqxXcheckDetailManager.cs" />
+    <Compile Include="Implements\FqxXcheckInfoManager.cs" />
+    <Compile Include="Implements\FqxXscanRecordsManager.cs" />
+    <Compile Include="Implements\SbeStoprecordManager.cs" />
+    <Compile Include="Implements\SbeUniformityManager.cs" />
+    <Compile Include="Implements\SppTyreStateManager.cs" />
+    <Compile Include="Implements\SppTyreTypeManager.cs" />
+    <Compile Include="Implements\SsbProcedureManager.cs" />
+    <Compile Include="Implements\VCbmMaterialManager.cs" />
+    <Compile Include="Interface\IBpmProductionManager.cs" />
+    <Compile Include="Interface\IBppPlanManager.cs" />
+    <Compile Include="Interface\ICppCuringDegradeManager.cs" />
+    <Compile Include="Interface\ICppCuringPlanDetailManager.cs" />
+    <Compile Include="Interface\ICppCuringPlanManager.cs" />
+    <Compile Include="Interface\ICppCuringProductionManager.cs" />
+    <Compile Include="Interface\ICppFcheckControlStopManager.cs" />
+    <Compile Include="Interface\ICppTraceCuringInfoManager.cs" />
+    <Compile Include="Interface\ICqcQcrecordManager.cs" />
+    <Compile Include="Interface\IFqaArtificialcheckInfoManager.cs" />
+    <Compile Include="Interface\IFqbArtificialcheckInfoManager.cs" />
+    <Compile Include="Interface\IFqbBalanceInfo3Manager.cs" />
+    <Compile Include="Interface\IFqbBalanceInfoManager.cs" />
+    <Compile Include="Interface\IFqbQualityStandardManager.cs" />
+    <Compile Include="Interface\IFqbScanRecordsManager.cs" />
+    <Compile Include="Interface\IFqbStandardDetailManager.cs" />
+    <Compile Include="Interface\IFqcChangegradeInfoManager.cs" />
+    <Compile Include="Interface\IFqdDefectInfoManager.cs" />
+    <Compile Include="Interface\IFqdDegradeConfirmManager.cs" />
+    <Compile Include="Interface\IFqdDegradeReasonsManager.cs" />
+    <Compile Include="Interface\IFqfFcheckDetailManager.cs" />
+    <Compile Include="Interface\IFqfFcheckInfoManager.cs" />
+    <Compile Include="Interface\IFqfFcheckShiftDetailManager.cs" />
+    <Compile Include="Interface\IFqfFcheckShiftMasterManager.cs" />
+    <Compile Include="Interface\IFqgGradeInfoManager.cs" />
+    <Compile Include="Interface\IFqrBadScanLogManager.cs" />
+    <Compile Include="Interface\IFqrRepairPartManager.cs" />
+    <Compile Include="Interface\IFqrRepairRecordsManager.cs" />
+    <Compile Include="Interface\IFqrRepairResultManager.cs" />
+    <Compile Include="Interface\IFqrRepeatManager.cs" />
+    <Compile Include="Interface\IFqxRadiusInfoManager.cs" />
+    <Compile Include="Interface\IFqxXcheckDetailManager.cs" />
+    <Compile Include="Interface\IFqxXcheckInfoManager.cs" />
+    <Compile Include="Interface\IFqxXscanRecordsManager.cs" />
+    <Compile Include="Interface\ISbeStoprecordManager.cs" />
+    <Compile Include="Interface\ISbeUniformityManager.cs" />
+    <Compile Include="Interface\ISppTyreStateManager.cs" />
+    <Compile Include="Interface\ISppTyreTypeManager.cs" />
+    <Compile Include="Interface\ISsbProcedureManager.cs" />
+    <Compile Include="Interface\IVCbmMaterialManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Frame\Mesnac.DbAccess\Mesnac.DbAccess.csproj">
+      <Project>{60b919c5-c601-4999-a531-439042d59746}</Project>
+      <Name>Mesnac.DbAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Quality.Data\Mesnac.Quality.Data.csproj">
+      <Project>{8D9492A4-B63F-42F0-80C1-21A95FABB4DE}</Project>
+      <Name>Mesnac.Quality.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Quality.Entity\Mesnac.Quality.Entity.csproj">
+      <Project>{1819FED2-BB2F-4105-B5C3-B4F485D58F1D}</Project>
+      <Name>Mesnac.Quality.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

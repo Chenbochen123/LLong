@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportMouldEquipAccount" parameterClass="map" resultClass="row">
+    <![CDATA[
+      SELECT B.MOULD_CODE,B.MOULD_NAME,C.SIZE_NAME,D.PATTERN_NAME,E.USER_NAME,F.EQUIP_NAME,
+     CASE A.BAUP_FLAG WHEN 1 THEN '左模' ELSE '右模' END LR,G.MAXNUM,G.REALNUM,
+     A.*,H.MOULD_TYPE,H.UP_NUMBER FROM CIM_MOULD_EQUIP A
+     LEFT JOIN CIM_MOULD_INFO B ON A.MOULD_ID = B.OBJID
+     LEFT JOIN CBM_SIZE C ON B.SIZE_ID = C.OBJID
+     LEFT JOIN CBM_PATTERN D ON B.PATTERN_ID = D.OBJID
+     LEFT JOIN SSB_USER E ON A.RECORD_USER_ID = E.OBJID 
+     LEFT JOIN SBE_EQUIP F ON A.EQUIP_ID = F.OBJID 
+     LEFT JOIN sbe_clearmould G ON G.MOULDNAME = B.MOULD_CODE and G.dummy1=1
+     left join mould_errornumber h on b.in_type = h.mould_type
+     WHERE  1=1 
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="where.OBJID" prepend="AND">
+        <![CDATA[A.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+        <![CDATA[A.EQUIP_ID = #where.EQUIP_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.MOULD_NAME" prepend="AND">
+          <![CDATA[B.MOULD_NAME LIKE '%' || #where.MOULD_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.PATTERN_NAME" prepend="AND">
+          <![CDATA[D.PATTERN_NAME LIKE '%' || #where.PATTERN_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.SIZE_NAME" prepend="AND">
+          <![CDATA[C.SIZE_NAME LIKE '%' || #where.SIZE_NAME# || '%']]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+        ORDER BY F.EQUIP_NAME,A.BAUP_FLAG
+        ]]>
+    </select>
+    <select id="Select+Update@ReportMouldEquipAccount" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM CIM_MOULD_EQUIP ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+    
+    
+    <!--查询模具库存，ID值固定为GetComboBoxData@Select@ReportMouldStorageAccount@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportMouldEquipAccount@EQUIP_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+       SELECT T1.OBJID SSKEY,T1.EQUIP_NAME SSVALUE FROM SBE_EQUIP T1 WHERE T1.MAJOR_TYPE_ID=51 AND T1.DELETE_FLAG = '0'
+        ORDER BY T1.EQUIP_CODE
+     ]]>
+    </select>
+  </statements>
+  
+</sqlMap>

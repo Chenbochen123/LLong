@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="SUB_STORE_PLACE_CODE" Value="子库位编号"></Caption>
+    <Caption Name="SUB_STORE_PLACE_NAME" Value="子库位名称"></Caption>
+    
+    <Caption Name="STORE_ID" Value="库房名称"></Caption>
+    <Caption Name="STORE_NAME" Value="库房名称"></Caption>
+    <Caption Name="STORE_PLACE_NAME" Value="库位名称"></Caption>
+    <Caption Name="STORE_PLACE_ID" Value="库位编号"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+  </Captions>
+  <WebPage Title="子库位信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Equip/McUI/@McUI/CrudSebSubStorePlace.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="SEB_SUB_STORE_PLACE">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_SEB_SUB_STORE_PLACE"></SeqField>
+    </SeqFields>
+    <Uniques>
+      <Unique Fields="SUB_STORE_PLACE_NAME"></Unique>
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <!--<ExcuteCommands>
+      <Command FileName="Mesnac.Curing.McUI.dll" ClassName="Mesnac.Curing.McUI.CuringProduction.Insert"></Command>
+    </ExcuteCommands>
+    <VerifyCommands>
+      <Command FileName="Mesnac.Curing.McUI.dll" ClassName="Mesnac.Curing.McUI.CuringProduction.VerifyInsert"></Command>
+    </VerifyCommands>-->
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="STORE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="STORE_PLACE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="SUB_STORE_PLACE_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="SUB_STORE_PLACE_NAME"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="STORE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="STORE_PLACE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="SUB_STORE_PLACE_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="SUB_STORE_PLACE_NAME"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="SUB_STORE_PLACE_CODE"></ParamField>
+        <ParamField FieldName="SUB_STORE_PLACE_NAME"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="STORE_NAME"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE_NAME"></GridColumn>
+        <GridColumn ColumnName="SUB_STORE_PLACE_CODE"></GridColumn>
+        <GridColumn ColumnName="SUB_STORE_PLACE_NAME"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

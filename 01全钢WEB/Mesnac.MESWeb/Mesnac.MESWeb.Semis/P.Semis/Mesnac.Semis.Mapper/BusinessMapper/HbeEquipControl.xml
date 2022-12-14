@@ -1,0 +1,1189 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HbeEquipControl"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HBE_EQUIP_CONTROL ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.IsControl" prepend="AND">
+          <![CDATA[IS_CONTROL = #where.IsControl#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+     <select id="SelectCrudHppBadGradeInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+           select * from HPP_BADGRADEINFO
+      ]]>
+       <dynamic  prepend="WHERE">
+         <isNotNull property="where.Flag" prepend="AND">
+           <![CDATA[FLAG = #where.Flag#]]>
+         </isNotNull>
+         <isNotNull property="where.Name" prepend="AND">
+           <![CDATA[Name = #where.Name#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     
+     <select id="GetEquipMinorTypeInit" parameterClass="map" resultClass="Row">
+      <![CDATA[select t.objid,t.minor_type_name  from sbe_equip_minor_type t where t.major_type_id in (31,32,22,33,34,35) order by t.minor_type_name ]]>
+     </select>
+      <select id="GetDeControlReason" parameterClass="map" resultClass="Row">
+      <![CDATA[select OBJID,DECONTROL_REASON from SSB_DECONTROL_REASON where DELETE_FLAG='0' ]]>
+     </select>
+     <select id="GetEquipControlInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      select equip_id as OBJID,equip_name,max(a) 混炼胶 ,max(b) 隔离胶片 ,max(c) 填充胶片,max(d) 胶芯,max(e) 成品钢丝圈 ,max(f) 钢丝帘线,
+       max(i) 钢丝圈,max(g) 钢丝圈包布 ,max(k) 全钢压延胶片,max(l) 覆胶帘子线,max(m) 刚压大卷 ,max(n) 覆胶帘子布,max(o) 包边胶片,max(q) 产出,max(r) 钢丝,max(s) 超产,max(y) 口型板 from (
+       select p.equip_id,p1.equip_name,
+       case to_char(p2.minor_type_name) when '混炼胶' then p.is_control else null end a,
+       case to_char(p2.minor_type_name) when '隔离胶片' then p.is_control else null end b,
+       case to_char(p2.minor_type_name) when '填充胶片' then p.is_control  else null end c,
+       case to_char(p2.minor_type_name) when '胶芯' then p.is_control  else null end d,
+       case to_char(p2.minor_type_name) when '成品钢丝圈' then p.is_control else null end e,
+       case to_char(p2.minor_type_name) when '钢丝帘线' then p.is_control else null end f,
+       case to_char(p2.minor_type_name) when '钢丝圈' then p.is_control else null end i,
+       case to_char(p2.minor_type_name) when '钢丝圈包布' then p.is_control else null end g,         
+       case to_char(p2.minor_type_name) when '全钢压延胶片' then p.is_control else null end k,
+       case to_char(p2.minor_type_name) when '覆胶帘子线' then p.is_control else null end l,        
+       case to_char(p2.minor_type_name) when '钢压大卷' then p.is_control else null end m,
+       case to_char(p2.minor_type_name) when '覆胶帘子布' then p.is_control else null end n,        
+       case to_char(p2.minor_type_name) when '包边胶片' then p.is_control else null end o 
+       ,case to_char(p2.minor_type_name) when '产出' then p.is_control else null end q 
+       ,case to_char(p2.minor_type_name) when '钢丝' then p.is_control else null end r
+       ,case to_char(p2.minor_type_name) when '超产' then p.is_control else null end s 
+       ,case to_char(p2.minor_type_name) when '口型板' then p.is_control else null end y 
+       from  hbe_equip_control p 
+       left join sbe_equip p1 on p.equip_id = p1.objid
+       left join sbm_material_minor_type p2 on p.dummy1 = p2.objid  
+          ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.EquipMainerType" prepend="AND">
+           <![CDATA[ P1.MINOR_TYPE_ID = #where.EquipMainerType# ]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ ) group by equip_id,equip_name]]>
+       
+       <dynamic prepend="ORDER BY">
+         <![CDATA[EQUIP_NAME ]]>
+       </dynamic>
+     </select>
+   
+    <select id="GetSemisEquipControlInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[select t.equip_id , t1.equip_name ,t.dummy1 ,t2.minor_type_name ,t.is_control
+                from hbe_equip_control t
+                left join sbe_equip t1 on t.equip_id = t1.objid
+                left join sbm_material_minor_type t2 on t.dummy1 = t2.objid  ]]>
+      <dynamic prepend="WHERE">
+         <isNotNull property="EquipId" prepend="AND">
+           <![CDATA[t.equip_id = #EquipId# ]]>
+         </isNotNull>
+       </dynamic>
+    </select>
+     <select id="GetEquipName" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T0.*,T1.EQUIP_CODE,T1.EQUIP_NAME FROM hbe_equip_control T0
+       LEFT JOIN SBE_EQUIP T1 ON T1.OBJID = T0.EQUIP_ID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="OBJID" prepend="AND">
+           <![CDATA[T1.objid = #OBJID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetHppGetMaterToSapInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[select distinct a.*,b.material_name from hpp_GetMatertosap a
+left join sbm_material b on b.sap_code = substr(a.materialcode,0,9) and b.delete_flag = 0
+where 1=1 
+       ]]>
+       <isNotNull property="where.ShiftDate" prepend="AND">
+         <![CDATA[ dtsend < #where.ShiftDateEnd# and dtsend > #where.ShiftDate#]]>
+       </isNotNull>
+       <isNotNull property="where.Type" prepend="AND">
+         <![CDATA[ a.mstyp =  #where.Type#]]>
+       </isNotNull>
+       <![CDATA[order by busid ]]>
+     </select>
+
+     <!--工资核算模块begin-->
+     <!--岗位管理-->
+     <select id="GetWagesWork" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select  A.*,B.USER_NAME  from  wages_work A
+         LEFT JOIN SSB_USER B ON B.OBJID = A.RECORD_USERID
+         where 1=1
+      ]]>
+       <isNotNull property="OBJID" prepend="AND">
+         <![CDATA[A.OBJID = #OBJID#]]>
+       </isNotNull>
+       <isNotNull property="where.delete_flag" prepend="AND">
+         <![CDATA[A.delete_flag = #where.delete_flag#]]>
+       </isNotNull>
+       <isNotNull property="where.EquipName" prepend="AND">
+         <![CDATA[A.Equip_Name = #where.EquipName#]]>
+       </isNotNull>
+       <isNotNull property="where.WorkCode" prepend="AND">
+         <![CDATA[A.Work_Code like '%' || #where.WorkCode# || '%']]>
+       </isNotNull>
+       <isNotNull property="where.WorkName" prepend="AND">
+         <![CDATA[A.Work_Name like '%' || #where.WorkName# || '%']]>
+       </isNotNull>
+       <![CDATA[ order by a.RECORD_TIME]]>
+     </select>
+     
+     <select id="GetWagesWorkEquip" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select distinct Equip_Name from wages_work where   delete_flag = 0 order by Equip_Name
+      ]]>
+     </select>
+	   <select id="GetWagesWorkType" parameterClass="map" resultClass="Row">
+		   <![CDATA[
+         select distinct minor_type_name from sbm_material_minor_type where   delete_flag = 0  and major_type_id = 31
+      ]]>
+	   </select>
+	   <select id="GetWagesWorkBom" parameterClass="map" resultClass="Row">
+		   <![CDATA[
+         select distinct material_type from wages_plan where   delete_flag = 0 
+      ]]>
+	   </select>
+     <insert id="InsertWagesWork" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+      insert into wages_work(objid,work_code,equip_name,user_count,work_name,standard_wages,skill_base,bonus_base,remark,record_time,record_userid)
+     values(seq_wages_work.nextval,#workCode#,#equipName#,#userCount#,#workName#,#standardWages#,#skill#,#bonusBase#,#remark#,sysdate,#userid#)
+      ]]>
+     </insert>
+     
+     <update id="UpdateWagesWork" parameterClass="map" >
+       <![CDATA[ 
+    update wages_work set work_code = #workCode#,equip_name= #equipName#,user_count= #userCount# ,work_name= #workName# ,standard_wages= #standardWages# 
+    ,skill_base= #skill# ,bonus_base= #bonusBase# ,remark= #remark# ,record_time= sysdate ,record_userid= #userid#   where  objid = #objid#
+      ]]>
+     </update>
+     <update id="deleteWagesWork" parameterClass="map" >
+       <![CDATA[ 
+    update wages_work set delete_flag = 1   where  objid = #objid#
+      ]]>
+     </update>
+     <update id="RecoverWagesWork" parameterClass="map" >
+       <![CDATA[ 
+    update wages_work set delete_flag = 0   where  objid = #objid#
+      ]]>
+     </update>
+     <!--人员管理-->
+     <select id="GetWagesUser" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select  A.*,B.USER_NAME USER_NAME2  from  wages_user A
+         LEFT JOIN SSB_USER B ON B.OBJID = A.RECORD_USERID
+         where 1=1
+      ]]>
+       <isNotNull property="OBJID" prepend="AND">
+         <![CDATA[A.OBJID = #OBJID#]]>
+       </isNotNull>
+       <isNotNull property="where.delete_flag" prepend="AND">
+         <![CDATA[A.delete_flag = #where.delete_flag#]]>
+       </isNotNull>
+       <isNotNull property="where.EquipName" prepend="AND">
+         <![CDATA[A.Equip_Name = #where.EquipName#]]>
+       </isNotNull>
+       <isNotNull property="where.UserCode" prepend="AND">
+         <![CDATA[A.user_Code like '%' ||#where.UserCode#|| '%']]>
+       </isNotNull>
+       <isNotNull property="where.UserName" prepend="AND">
+         <![CDATA[A.user_Name  like '%' || #where.UserName# || '%']]>
+       </isNotNull>
+       <isNotNull property="where.WorkName" prepend="AND">
+         <![CDATA[A.work_Name = #where.WorkName#]]>
+       </isNotNull>
+       <![CDATA[ order by a.RECORD_TIME]]>
+     </select>
+
+     <insert id="InsertWagesUser" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+      insert into wages_user(objid,user_code,equip_name,user_name,work_name,skill_grade,class,remark,record_time,record_userid,STANDRAD_WAGES,valid_date)
+     values(seq_wages_user.nextval,#userCode#,#equipName#,#username#,#workName#,#skillGrade#,#Class#,#remark#,sysdate,#userid#,#standWages#,to_date(#ValidDate#,'yyyy-MM-dd'))
+      ]]>
+     </insert>
+     <select id="GetWagesUsCF" parameterClass="map" resultClass="Row">
+       <![CDATA[
+          select  *  from  wages_user where user_name = #username# and valid_date = to_date(#ValidDate#,'yyyy-MM-dd') and delete_flag = 0
+      ]]>
+     </select>
+     
+     <select id="GetWagesUserEquip" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select distinct Equip_Name from wages_user where delete_flag = 0 order by Equip_Name
+      ]]>
+     </select>
+     
+     <select id="GetWagesUserWork" parameterClass="map" resultClass="Row">
+       <![CDATA[select distinct work_name from wages_user where delete_flag = 0
+      ]]>
+     </select>
+
+     <update id="UpdateWagesUser" parameterClass="map" >
+       <![CDATA[   update wages_user set user_code = #usercode#,equip_name= #equipName#,user_name= #username# ,work_name= #workName# ,skill_grade= #skill# 
+    ,class= #classid# ,remark= #remark# ,record_time= sysdate ,record_userid= #userid#   where  objid = #objid#
+      ]]>
+     </update>
+     <update id="deleteWagesUser" parameterClass="map" >
+       <![CDATA[ 
+    update wages_user set delete_flag = 1   where  objid = #objid#
+      ]]>
+     </update>
+     <update id="RecoverWagesUser" parameterClass="map" >
+       <![CDATA[ 
+    update wages_user set delete_flag = 0   where  objid = #objid#
+      ]]>
+     </update>
+
+     <!--人员出勤管理-->
+     <select id="GetWagesOnduty" parameterClass="map" resultClass="Row">
+       <![CDATA[
+  select distinct  A.OBJID,A.WORK_DATE,A.EQUIP_NAME,A.USER_CODE,B.USER_NAME,A.WORK_CODE,C.WORK_NAME,ONDUTY_DAY,ONDUTY_HOUR,A.CLASS,A.REMARK,D.USER_NAME RECORD_USERNAME,
+  A.RECORD_TIME,a.delete_flag from  wages_onduty a
+LEFT JOIN WAGES_USER B ON B.USER_CODE = A.USER_CODE AND B.DELETE_FLAG = 0
+LEFT JOIN WAGES_WORK C  ON C.WORK_CODE=A.WORK_CODE AND C.DELETE_FLAG = 0
+LEFT JOIN SSB_USER D ON D.OBJID = A.RECORD_USERID
+WHERE 1=1 
+      ]]>
+       <isNotNull property="OBJID" prepend="AND">
+         <![CDATA[A.OBJID = #OBJID#]]>
+       </isNotNull>
+       <isNotNull property="where.delete_flag" prepend="AND">
+         <![CDATA[A.delete_flag = #where.delete_flag#]]>
+       </isNotNull>
+       <isNotNull property="where.begintime" prepend="AND">
+         <![CDATA[A.work_date >= to_date(#where.begintime#,'yyyy-MM-dd')]]>
+       </isNotNull>
+       <isNotNull property="where.enddate" prepend="AND">
+         <![CDATA[A.work_date <= to_date(#where.enddate#,'yyyy-MM-dd')]]>
+       </isNotNull>
+       <isNotNull property="where.ClassName" prepend="AND">
+         <![CDATA[A.class = #where.ClassName#]]>
+       </isNotNull>
+       <isNotNull property="where.EquipName" prepend="AND">
+         <![CDATA[A.Equip_Name = #where.EquipName#]]>
+       </isNotNull>
+       <isNotNull property="where.WorkCode" prepend="AND">
+         <![CDATA[A.Work_Code like '%'|| #where.WorkCode# || '%']]>
+       </isNotNull>
+       <isNotNull property="where.WorkName" prepend="AND">
+         <![CDATA[c.Work_name like '%'|| #where.WorkName# || '%']]>
+       </isNotNull>
+       <isNotNull property="where.UserCode" prepend="AND">
+         <![CDATA[A.User_Code like '%'|| #where.UserCode# || '%']]>
+       </isNotNull>
+       <isNotNull property="where.UserName" prepend="AND">
+         <![CDATA[b.User_Name like '%'|| #where.UserName# || '%']]>
+       </isNotNull>
+       <![CDATA[ order by a.work_date]]>
+     </select>
+
+		 <select id="SelectHppBadRecord" parameterClass="map" resultClass="Row">
+			 <![CDATA[
+              select T.*,case when t.xrxc = 0 then '是' else '否' end xrxcname,
+                     T1.USER_NAME RETURN_USERNAME,
+                     T2.USER_NAME CHECK_USERNAME,
+                     T3.USER_NAME PD_USERNAME,
+                     T4.USER_NAME CL_USERNAME,
+                     T5.USER_NAME CONFIRM_USERNAME,
+                     T6.USER_NAME FINALQR_USERNAME,
+                     T7.USER_NAME XRXCUSERNAME,
+                     T8.END_TIME,
+                     T9.MATERIAL_NAME,t11.store_place_name
+              FROM HPP_BADRECORD T
+                       LEFT JOIN SSB_USER T1 ON T1.OBJID = T.RETURN_USERID
+                       LEFT JOIN SSB_USER T2 ON T2.OBJID = T.CHECK_USERID
+                       LEFT JOIN SSB_USER T3 ON T3.OBJID = T.PD_USERID
+                       LEFT JOIN SSB_USER T4 ON T4.OBJID = T.CL_USERID
+                       LEFT JOIN SSB_USER T5 ON T5.OBJID = T.CONFIRM_USERID
+                       LEFT JOIN SSB_USER T6 ON T6.OBJID = T.FINALQR_USERID
+                       LEFT JOIN SSB_USER T7 ON T7.OBJID = T.XRXCUSERID
+                       LEFT JOIN HPP_SEMIS_PRODUCTION T8 ON T8.CARD_NO = T.BARCODE AND T8.DELETE_FLAG = 0
+                       LEFT JOIN SBM_MATERIAL T9 ON T9.OBJID = T8.MATERIAL_ID
+                       left join hpp_storage_detail t10 on t10.card_no = t.barcode and t10.delete_flag = 0
+                       left join hpp_store_place t11 on t11.objid = t10.store_place_id
+							WHERE 1=1
+       ]]>
+			 <dynamic prepend="AND">
+				 <isNotNull property="where.BeginTime" prepend="AND">
+					 <![CDATA[T8.END_TIME>=#where.BeginTime#]]>
+				 </isNotNull>
+				 <isNotNull property="where.EndTime" prepend="AND">
+					 <![CDATA[T8.END_TIME<=#where.EndTime#]]>
+				 </isNotNull>
+				 <isNotNull property="where.CardNo" prepend="AND">
+					 <![CDATA[T.BARCODE LIKE '%'||#where.CardNo#||'%']]>
+				 </isNotNull>
+				 <isNotNull property="where.MaterName" prepend="AND">
+					 <![CDATA[T9.MATERIAL_NAME LIKE '%'||#where.MaterName#||'%']]>
+				 </isNotNull>
+				 <isNotNull property="where.Grade" prepend="AND">
+					 <![CDATA[T.CL_GRADE LIKE '%'||#where.Grade#||'%']]>
+				 </isNotNull>
+			 </dynamic>
+			 <![CDATA[
+      ORDER BY T.RECORD_TIME DESC
+      ]]>
+		 </select>
+     <select id="GetOnDutyinfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+ select to_char(user_code) from wages_user where user_name =#userName#  and delete_flag = 0 and rownum < 2
+union all
+select to_char(work_code) from wages_work where work_name = #workName#  and delete_flag = 0 and rownum < 2
+      ]]>
+     </select>
+
+     <insert id="InsertWagesOnDuty" parameterClass="map" resultClass="Row">
+       <![CDATA[ insert into wages_onduty(objid,equip_name,user_code,work_code,onduty_day,onduty_hour,class,remark,work_date,record_time,record_userid)
+              values(seq_wages_onduty.nextval,#equipName#,#userCode#,#workCode#,#OndutyDay#,#OndutyHour#,#classname#,#remark#,to_date(#workDate#,'yyyy-MM-dd'),sysdate,#userid#)
+      ]]>
+     </insert>
+
+     <update id="UpdateWagesOnDuty" parameterClass="map" >
+       <![CDATA[   update wages_onduty set equip_name = #equipName#,user_code= #userCode#,work_code= #workCode# ,onduty_day= #OndutyDay# ,onduty_hour= #OndutyHour# 
+    ,class= #classname# ,remark= #remark# ,work_date =to_date(#workDate#,'yyyy-MM-dd') ,record_time= sysdate ,record_userid= #userid#   where  objid = #objid#
+      ]]>
+     </update>
+     <update id="deleteWagesOnDuty" parameterClass="map" >
+       <![CDATA[ 
+    update wages_onduty set delete_flag = 1   where  objid = #objid#
+      ]]>
+     </update>
+     <update id="RecoverWagesOnDuty" parameterClass="map" >
+       <![CDATA[ 
+    update wages_onduty set delete_flag = 0   where  objid = #objid#
+      ]]>
+     </update>
+     <!--定额计划-->
+     <select id="GetWagesPlan" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select  A.*,B.MATERIAL_NAME,c.minor_type_name,D.USER_NAME  from wages_plan A
+LEFT JOIN SBM_MATERIAL B ON B.SAP_CODE=A.MATERIAL_SAP AND B.DELETE_FLAG = 0
+LEFT JOIN SBM_MATERIAL_MINOR_TYPE C ON C.OBJID = B.MINOR_TYPE_ID AND C.DELETE_FLAG = 0
+LEFT JOIN SSB_USER D ON D.OBJID = A.RECORD_USERID
+         where 1=1
+      ]]>
+       <isNotNull property="OBJID" prepend="AND">
+         <![CDATA[A.OBJID = #OBJID#]]>
+       </isNotNull>
+       <isNotNull property="where.delete_flag" prepend="AND">
+         <![CDATA[A.delete_flag = #where.delete_flag#]]>
+       </isNotNull>
+       <isNotNull property="where.EquipName" prepend="AND">
+         <![CDATA[A.Equip_Name = #where.EquipName#]]>
+       </isNotNull>
+       <isNotNull property="where.Matermin" prepend="AND">
+         <![CDATA[c.minor_type_name = #where.Matermin#]]>
+       </isNotNull>
+       <isNotNull property="where.Matersap" prepend="AND">
+         <![CDATA[A.MATERIAL_SAP like '%' ||#where.Matersap# || '%']]>
+       </isNotNull>
+       <isNotNull property="where.Standard" prepend="AND">
+         <![CDATA[A.STANDARD_INFO  like '%' ||#where.Standard# || '%']]>
+       </isNotNull>
+       <![CDATA[ order by a.RECORD_TIME]]>
+     </select>
+
+     <select id="GetWagesPlanEquip" parameterClass="map" resultClass="Row">
+       <![CDATA[
+          select distinct Equip_Name from wages_plan where delete_flag = 0 order by Equip_Name
+      ]]>
+     </select>
+     <select id="GetWagesPlanMater" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select distinct minor_type_name from wages_plan a
+         left join sbm_material b on b.sap_code = a.material_sap and b.delete_flag = 0
+         left join sbm_material_minor_type c on c.objid = b.minor_type_id and c.delete_flag = 0
+          where a.delete_flag = 0
+      ]]>
+     </select>
+
+     <insert id="InsertWagesPlan" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        insert into wages_plan(objid,equip_name,material_sap,material_type,standard_info,remark,record_time,record_userid)
+     values(seq_wages_plan.nextval,#equipName#,#matersap#,#matertype#,#standard#,#remark#,sysdate,#userid#)
+      ]]>
+     </insert>
+
+     <update id="UpdateWagesPlan" parameterClass="map" >
+       <![CDATA[ update wages_plan set equip_name = #equipName#,material_sap= #matersap#,material_type= #matertype# 
+       ,standard_info= #standard#,remark= #remark# ,record_time= sysdate ,record_userid= #userid#   where  objid = #objid#
+      ]]>
+     </update>
+     <update id="deleteWagesPlan" parameterClass="map" >
+       <![CDATA[ 
+    update wages_plan set delete_flag = 1   where  objid = #objid#
+      ]]>
+     </update>
+     <update id="deletePLWagesPlan" parameterClass="map" >
+       <![CDATA[ 
+    update wages_plan set delete_flag = 1   where  objid in ($objid$)
+      ]]>
+     </update>
+     <update id="RecoverWagesPlan" parameterClass="map" >
+       <![CDATA[ 
+    update wages_plan set delete_flag = 0   where  objid = #objid#
+      ]]>
+     </update>
+     <!--清理耗时-->
+     <select id="GetWagesClean" parameterClass="map" resultClass="Row">
+       <![CDATA[
+           select  a.*,c.user_name user_name2,round((clean_count*clean_time)/60,2) Totaluser,round((d.AmountTime)/60,2) TotalEquip  from wages_clean a
+      left join ssb_user c on c.objid=a.record_userid 
+   left join (select  clean_date,equip_name,shift,sum(clean_count*clean_time) AmountTime from wages_clean
+     where delete_flag = 0 group by clean_date,equip_name,shift) d on d.clean_date = a.clean_date and d.equip_name = a.equip_name and d.shift = a.shift
+         where 1=1
+      ]]>
+       <isNotNull property="OBJID" prepend="AND">
+         <![CDATA[A.OBJID = #OBJID#]]>
+       </isNotNull>
+       <isNotNull property="where.delete_flag" prepend="AND">
+         <![CDATA[A.delete_flag = #where.delete_flag#]]>
+       </isNotNull>
+       <isNotNull property="where.begintime" prepend="AND">
+         <![CDATA[A.clean_date >= to_date(#where.begintime#,'yyyy-MM-dd')]]>
+       </isNotNull>
+       <isNotNull property="where.enddate" prepend="AND">
+         <![CDATA[A.clean_date <= to_date(#where.enddate#,'yyyy-MM-dd')]]>
+       </isNotNull>
+       <isNotNull property="where.EquipName" prepend="AND">
+         <![CDATA[A.Equip_Name = #where.EquipName#]]>
+       </isNotNull>
+       <isNotNull property="where.UserName" prepend="AND">
+         <![CDATA[A.CLEAN_USER like '%'|| #where.UserName# ||'%']]>
+       </isNotNull>
+       <isNotNull property="where.reason" prepend="AND">
+         <![CDATA[A.reason = #where.reason#]]>
+       </isNotNull>
+       <isNotNull property="where.cls" prepend="AND">
+         <![CDATA[A.SHIFT = #where.cls#]]>
+       </isNotNull>
+       <![CDATA[ order by a.clean_date]]>
+     </select>
+
+
+     <select id="GetWagesCleanEquip" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select distinct Equip_Name from wages_clean where delete_flag = 0 and equip_name is not null order by Equip_Name
+      ]]>
+     </select>
+
+
+     <select id="GetWagesCleanReason" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select distinct reason from wages_clean
+      ]]>
+     </select>
+
+     <insert id="InsertWagesClean" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+    insert into wages_clean(objid,clean_date,clean_user,equip_name,shift,clean_count,clean_time,reason,remark,record_time,record_userid)
+    values(seq_wages_clean.nextval,to_date(#Cleandate#,'yyyy-MM-dd'),#cleanuser#,#equipname#,#shift#,#Cleancount#,#Cleantime#,#Reason#,#remark#,sysdate,#userid#)
+      
+      ]]>
+     </insert>
+
+     <update id="UpdateWagesClean" parameterClass="map" >
+       <![CDATA[ update wages_clean set clean_date = to_date(#cleandate#,'yyyy-MM-dd'),clean_user= #cleanuser#,equip_name= #equipname# ,shift= #shift# ,clean_count= #CleanCount# 
+    ,clean_time= #CleanTime# ,reason= #Reason#,remark= #remark# ,record_time= sysdate ,record_userid= #userid#   where  objid = #objid#
+      ]]>
+     </update>
+     <update id="deleteWagesClean" parameterClass="map" >
+       <![CDATA[ 
+    update wages_clean set delete_flag = 1   where  objid = #objid#
+      ]]>
+     </update>
+     <update id="RecoverWagesClean" parameterClass="map" >
+       <![CDATA[ 
+    update wages_clean set delete_flag = 0   where  objid = #objid#
+      ]]>
+     </update>
+
+     <!--产线实际出勤-->
+     <select id="GetWagesEquipOnDutyInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select  a.work_date,a.class,equip_name,trunc(sum(onduty_hour)/max(a.onduty_hour),2) realnum,max(a.remark) remark  from  wages_onduty a
+       where a.delete_flag = 0 
+      ]]>
+       <isNotNull property="where.begintime" prepend="AND">
+         <![CDATA[A.work_date >= to_date(#where.begintime#,'yyyy-MM-dd')]]>
+       </isNotNull>
+       <isNotNull property="where.enddate" prepend="AND">
+         <![CDATA[A.work_date <= to_date(#where.enddate#,'yyyy-MM-dd')]]>
+       </isNotNull>
+       <isNotNull property="where.EquipName" prepend="AND">
+         <![CDATA[A.Equip_Name = #where.EquipName#]]>
+       </isNotNull>
+       <isNotNull property="where.class" prepend="AND">
+         <![CDATA[a.class = #where.class#]]>
+       </isNotNull>
+       <![CDATA[ group by  a.work_date,a.class,equip_name
+order by a.work_date,a.class,a.equip_name]]>
+     </select>
+     <!--产线实际出勤模块end-->
+
+     <!--返回胶明细-->
+     <select id="GetWagesReturnRubber" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select  A.*,B.MATERIAL_NAME,c.minor_type_name,D.USER_NAME RE_USERNAME  from wages_returnrubber A
+LEFT JOIN SBM_MATERIAL B ON B.SAP_CODE=A.MATERIAL_SAP AND B.DELETE_FLAG = 0
+LEFT JOIN SBM_MATERIAL_MINOR_TYPE C ON C.OBJID = B.MINOR_TYPE_ID AND C.DELETE_FLAG = 0
+LEFT JOIN SSB_USER D ON D.OBJID = A.RECORD_USERID
+         where 1=1
+      ]]>
+       <isNotNull property="OBJID" prepend="AND">
+         <![CDATA[A.OBJID = #OBJID#]]>
+       </isNotNull>
+       <isNotNull property="where.delete_flag" prepend="AND">
+         <![CDATA[A.delete_flag = #where.delete_flag#]]>
+       </isNotNull>
+       <isNotNull property="where.begintime" prepend="AND">
+         <![CDATA[A.RETURN_DATE >= to_date(#where.begintime#,'yyyy-MM-dd')]]>
+       </isNotNull>
+       <isNotNull property="where.enddate" prepend="AND">
+         <![CDATA[A.RETURN_DATE <= to_date(#where.enddate#,'yyyy-MM-dd')]]>
+       </isNotNull>
+       <isNotNull property="where.EquipName" prepend="AND">
+         <![CDATA[A.Equip_Name = #where.EquipName#]]>
+       </isNotNull>
+       <isNotNull property="where.Matersap" prepend="AND">
+         <![CDATA[A.MATERIAL_SAP like '%' ||#where.Matersap# || '%']]>
+       </isNotNull>
+       <isNotNull property="where.class" prepend="AND">
+         <![CDATA[A.class = #where.class#]]>
+       </isNotNull>
+       <isNotNull property="where.reason" prepend="AND">
+         <![CDATA[A.RETURN_REASON = #where.reason#]]>
+       </isNotNull>
+       <![CDATA[ order by a.RECORD_TIME]]>
+     </select>
+
+     <insert id="InsertWagesReturnRubber" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+          INSERT INTO WAGES_RETURNRUBBER(OBJID,RETURN_DATE,EQUIP_NAME,USER_NAME,CLASS,MATERIAL_SAP,MATER_TYPE,WEIGHT,RETURN_REASON,CONFIRM_USER,REMARK,RECORD_TIME,RECORD_USERID)
+     VALUES(SEQ_WAGES_RETURNRUBBER.Nextval,to_date(#workDate#,'yyyy-MM-dd'),#equipName#,#userName#,#Class#,#matersap#,#matertype#,#weight#,#reason#,#okUser#,#remark#,sysdate,#userid#)
+      ]]>
+     </insert>
+     <select id="GetWagesXHInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select  material_type  from  wages_plan  where equip_name = #equipName# and material_sap = #matersap#
+      ]]>
+     </select>
+
+     <update id="UpdateWagesReturnRubber" parameterClass="map" >
+       <![CDATA[ update WAGES_RETURNRUBBER set weight = #weight#,return_reason = #reason#,confirm_user = #okuser#,remark = #remark#,record_time=sysdate,record_userid=#userid# where objid = #objid#
+      ]]>
+     </update>
+     <update id="deleteWagesReturnRubber" parameterClass="map" >
+       <![CDATA[ 
+    update WAGES_RETURNRUBBER set delete_flag = 1   where  objid = #objid#
+      ]]>
+     </update>
+     <update id="RecoverWagesReturnRubber" parameterClass="map" >
+       <![CDATA[ 
+    update WAGES_RETURNRUBBER set delete_flag = 0   where  objid = #objid#
+      ]]>
+     </update>
+     <update id="GetWagesReturnRubberReason" parameterClass="map" >
+       <![CDATA[ 
+    select distinct RETURN_REASON from WAGES_RETURNRUBBER
+      ]]>
+     </update>
+     <!--返回胶明细end-->
+
+     <!--定额计划完成率-->
+     <select id="GetWagesPlanFinishRate" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select zz.*,zz.单型号定额完成率1 * 100 || '%' 单型号定额完成率,zz.产线完成率1 * 100 || '%' 产线完成率 from (select  z.实际日期,z.产线,z.班组,z.实际出勤人数,z.物料细类,z.型号,z.清理总耗时,z.实际完成产量,z.定额标准,z.返回胶产量,z.折算定额,z.单型号定额完成率 单型号定额完成率1,sum(z.单型号定额完成率)over(partition by z.实际日期,z.产线,z.班组) + (z.清理总耗时/8) 产线完成率1  from (
+select y.*,case to_number(nvl(y.折算定额,0)) when 0 then 0 else round((to_number(nvl(y.实际完成产量,0)-y.返回胶产量)/to_number(nvl(y.折算定额,0))),3) end 单型号定额完成率 from (
+select x.*,case to_char(nvl(x.物料细类,'无')) when '胎冠' then to_char(round(((to_number(nvl(x.定额标准,0))/6)*to_number(x.实际出勤人数)),3)) 
+when '胎面' then to_char(round(((to_number(nvl(x.定额标准,0))/6)*to_number(x.实际出勤人数)),3))
+when '胶芯' then to_char(round(((to_number(nvl(x.定额标准,0))/7)*to_number(x.实际出勤人数)),3))
+when '垫胶' then to_char(round(((to_number(nvl(x.定额标准,0))/5)*to_number(x.实际出勤人数)),3))
+when '胎侧' then to_char(round(((to_number(nvl(x.定额标准,0))/5)*to_number(x.实际出勤人数)),3)) end 折算定额 from (
+select t1.WORK_DATE 实际日期,T1.EQUIP_NAME 产线,T1.CLASS 班组,T1.REALNUM 实际出勤人数,max(t4.minor_type_name) 物料细类,max(t5.material_type) 型号,
+nvl(round((t6.AmountTime)/60,2),0) 清理总耗时 ,t7.TOTAL_WEIGHT 实际完成产量,t5.standard_info 定额标准,nvl(max(t8.weight),0) 返回胶产量
+from (
+select a.work_date,a.equip_name,a.class,
+trunc(sum(a.onduty_hour)/max(a.onduty_hour),2) realnum,b.objid equipid,c.objid classid
+ from wages_onduty a 
+left join sbe_equip b on b.equip_name = a.equip_name
+left join ssb_class c on c.class_name = a.class
+where a.delete_flag = 0
+group by  a.work_date,a.equip_name,a.class,b.objid,c.objid
+) t1
+left join v_hppproduction t2 on t2.equip_id = t1.equipid and t2.class_id = t1.classid 
+and  t1.work_date = t2.hpp_work_date and t2.delete_flag = 0
+ 
+left join sbm_material t3 on t3.objid = t2.material_id
+left join sbm_material_minor_type t4 on t4.objid =t3.minor_type_id
+left join wages_plan t5  on t5.material_sap = t3.sap_code and t5.equip_name = t1.equip_name and t5.delete_flag = 0
+ left join (select  clean_date,equip_name,shift,sum(clean_count*clean_time) AmountTime from wages_clean
+     where delete_flag = 0 group by clean_date,equip_name,shift) t6 on t6.clean_date = t1.work_date and t6.equip_name = t1.equip_name and t6.shift = t1.class
+left join (
+SELECT  TO_CHAR(BEGIN_TIME,'yyyy-MM-dd') BEGIN_TIME,t9.EQUIP_ID,t9.CLASS_ID,t9.MATERIAL_TYPE,SUM(CASE NVL(t9.singleweight,0) WHEN 0 THEN '' ELSE TO_CHAR(t9.qty*t9.singleweight) END) TOTAL_WEIGHT from( 
+SELECT   A.BEGIN_TIME,A.EQUIP_ID,A.CLASS_ID,D.MATERIAL_TYPE,A.qty,B.singleweight  FROM  hpp_semis_production A
+ LEFT JOIN HPP_SEMIS_MATERIAL_CODE B ON A.MATERIAL_ID = B.material_id and b.delete_flag = 0
+ LEFT JOIN SBM_MATERIAL C ON B.MATERIAL_ID = C.OBJID
+ LEFT JOIN SBE_EQUIP R ON R.OBJID = A.EQUIP_ID AND R.DELETE_FLAG = 0
+ left join wages_plan D  on D.material_sap = C.sap_code and d.delete_flag = 0 AND R.EQUIP_NAME = D.EQUIP_NAME
+ where a.delete_flag = 0 and A.BEGIN_TIME  >= to_date(#where.begindata2#,'yyyy-MM-dd hh24:mi:ss') and  A.BEGIN_TIME  <= to_date(#where.enddate2#,'yyyy-MM-dd hh24:mi:ss')
+ and nvl(a.remark,'X') <> '试制' 
+      ]]>
+		 <isNotNull property="where.spanmonth" prepend="AND">
+			 <![CDATA[
+			  A.OBJID not in(
+ SELECT A.OBJID FROM  hpp_semis_production A
+LEFT JOIN HPP_SEMIS_MATERIAL_CODE B ON A.MATERIAL_ID = B.material_id and b.delete_flag = 0
+LEFT JOIN SBM_MATERIAL C ON B.MATERIAL_ID = C.OBJID
+LEFT JOIN SBE_EQUIP R ON R.OBJID = A.EQUIP_ID AND R.DELETE_FLAG = 0
+left join wages_plan D  on D.material_sap = C.SAP_CODE and d.delete_flag = 0 AND R.EQUIP_NAME = D.EQUIP_NAME
+where a.delete_flag = 0  $where.spanmonth$ )
+
+union all
+
+ SELECT A.BEGIN_TIME + 1,A.EQUIP_ID,A.CLASS_ID,D.MATERIAL_TYPE,A.qty,B.singleweight FROM  hpp_semis_production A
+LEFT JOIN HPP_SEMIS_MATERIAL_CODE B ON A.MATERIAL_ID = B.material_id and b.delete_flag = 0
+LEFT JOIN SBM_MATERIAL C ON B.MATERIAL_ID = C.OBJID
+LEFT JOIN SBE_EQUIP R ON R.OBJID = A.EQUIP_ID AND R.DELETE_FLAG = 0
+left join wages_plan D  on D.material_sap = C.SAP_CODE and d.delete_flag = 0 AND R.EQUIP_NAME = D.EQUIP_NAME
+where a.delete_flag = 0   $where.spanmonth$
+		 ]]>
+		 </isNotNull>
+		 <isNotNull>
+			 <![CDATA[
+ )t9  GROUP BY t9.EQUIP_ID,t9.CLASS_ID,t9.MATERIAL_TYPE,TO_CHAR(BEGIN_TIME,'yyyy-MM-dd')) t7 on t7.BEGIN_TIME = to_char(t1.work_date,'yyyy-MM-dd') and t7.equip_id = t1.equipid
+ and t7.class_id = t1.classid and t7.material_type = t5.material_type 
+ left join (select  return_date,equip_name,class,mater_type,sum(weight) weight from wages_returnrubber
+ where delete_flag = 0 group by return_date,equip_name,class,mater_type)  t8 on t8.return_date = t1.work_date and t8.equip_name = t1.equip_name and t8.class = t1.class 
+  and t8.mater_type = t5.material_type 
+
+where t1.WORK_DATE >=to_date(SUBSTR(#where.begindata1#,1,10),'yyyy-MM-dd') and t1.WORK_DATE <=to_date(SUBSTR(#where.enddate1#,1,10),'yyyy-MM-dd')
+		 ]]>
+		 </isNotNull>
+       <isNotNull property="where.EquipName" prepend="AND">
+         <![CDATA[t1.Equip_Name = #where.EquipName#]]>
+       </isNotNull>
+       <isNotNull property="where.class" prepend="AND">
+         <![CDATA[t1.class = #where.class#]]>
+       </isNotNull>
+       <![CDATA[ group by t1.work_date,t1.equip_name,t1.class,t1.realnum,t1.equipid,t1.classid,t6.AmountTime,t7.TOTAL_WEIGHT,t5.standard_info
+) x
+) y
+) z
+) zz order by 实际日期,产线,班组
+]]>
+
+     </select>
+     <!--定额计划完成率end-->
+	   
+   <select id="GetWagesPiecRate" parameterClass="map" resultClass="Row">
+	    <isNotNull property="where.Istotal">
+			   <![CDATA[
+         select count(work_date) counum,work_date,max(user_name) user_name,class,equip_name,max(work_name) work_name,max(user_count) user_count,sum(onduty_day) onduty_day,sum(onduty_hour) onduty_hour,sum("8点出勤") "8点出勤",sum("12点出勤") "12点出勤",
+max(realnum) realnum,max(Material_Type) Material_Type,max(Minor_Type_Name) Minor_Type_Name,max(新台账重量) 新台账重量,max(STANDARD_INFO) STANDARD_INFO,max(标准岗位工资) 标准岗位工资,max(折算定额) 折算定额,max("换胶料20min/次") "换胶料20min/次",max("换预口型4min/次") "换预口型4min/次",
+max("换口型板2min/次") "换口型板2min/次",max("更换流道20min/次") "更换流道20min/次",max("试制20min/次") "试制20min/次",max(清理总耗时) 清理总耗时,max(Skill_Base) Skill_Base,max(Bonus_Base) Bonus_Base,
+sum(完成工时) 完成工时,max(单型号定额完成率) 单型号定额完成率,max(产线完成率) 产线完成率,max(定额完成率) 定额完成率，max(折合技能工资基础) 折合技能工资基础,max(折合奖金基数) 折合奖金基数,
+sum(实际奖金) 实际奖金,sum(实际技能奖金) 实际技能奖金,sum("8点技能") "8点技能",sum(加班技能) 加班技能,sum("8点奖金") "8点奖金",sum(加班奖金) "加班奖金",sum("8点岗位工资") "8点岗位工资",sum(加班岗位工资)加班岗位工资 
+
+from (
+			   ]]>
+		   </isNotNull>
+	   <![CDATA[
+	 select bb.*,case when bb.定额完成率 is null or bb.work_name = '学徒'or bb.work_name is null then 0 
+when bb.定额完成率 > 1 then trunc(bb.折合奖金基数 + bb.折合奖金基数 * (bb.定额完成率 - 1)*1.5,2) else trunc(bb.折合奖金基数 * bb.定额完成率,2) end 实际奖金,
+ case when bb.折合技能工资基础 is null then 0
+ when bb.定额完成率 > 1 then trunc(bb.折合技能工资基础 + bb.折合技能工资基础 * (bb.定额完成率 - 1)*1.5,2) else trunc(bb.折合技能工资基础 * bb.定额完成率,2) end 实际技能奖金,
+case when  bb.work_name = '学徒'or bb.work_name is null then 0 when bb.定额完成率 >= 1 then  bb.折合技能工资基础 else trunc(bb.折合技能工资基础 * bb.定额完成率,2)end "8点技能",
+case when  bb.work_name = '学徒'or bb.work_name is null then 0 when bb.定额完成率 >= 1 then  trunc(bb.折合技能工资基础 *(bb.定额完成率 - 1)* 1.5,2)  else 0 end 加班技能,
+case when  bb.work_name = '学徒'or bb.work_name is null then 0 when bb.定额完成率 >= 1 then  bb.折合奖金基数 else trunc(bb.折合奖金基数 * bb.定额完成率,2)end "8点奖金",
+case when  bb.work_name = '学徒'or bb.work_name is null then 0 when bb.定额完成率 >= 1 then  trunc(bb.折合奖金基数 *(bb.定额完成率 - 1)* 1.5,2) else 0 end 加班奖金,
+ 
+case when bb.标准岗位工资 = 0  then 0 when  bb.work_name = '学徒' then trunc(（bb.标准岗位工资+30）* bb.标准岗位工资,2) else trunc(bb.标准岗位工资 * bb."8点出勤",2) end "8点岗位工资",
+  
+case when bb.标准岗位工资 = 0 or bb."12点出勤" = 0 then 0 when bb.标准岗位工资 > 0 and bb."12点出勤" > 0 and nvl(bb.产线完成率,0) < 1.5 then 0 else trunc(bb.标准岗位工资 * bb."12点出勤",2) end 加班岗位工资
+from(select aa.*,case when aa."12点出勤" > 0 then nvl(aa.产线完成率,0) when aa."12点出勤" <= 0 then trunc((2/3) * nvl(aa.产线完成率,0),2) end 定额完成率,
+case when  nvl(aa.onduty_day,0) < 1 then trunc(0.5 * aa.Skill_Base,2) else aa.Skill_Base end  折合技能工资基础,
+case when  nvl(aa.onduty_day,0) < 1 then trunc(0.5 * aa.Bonus_Base,2) else aa.Bonus_Base  end 折合奖金基数
+ from (select x.*,max(x.equipcomplete)over(partition by x.work_date,x.Equip_Name,x.class) 产线完成率 from(select z.*,sum(z.单型号定额完成率)over(partition by z.work_date,z.Equip_Name,z.class order by z.material_type)+ (z.清理总耗时/8) as equipcomplete from
+(select y.*,nvl(round(((y.新台账重量/to_number(y.折算定额))*8),3),0) 完成工时,case to_number(nvl(折算定额,0)) when 0 then 0 else round((新台账重量/to_number(折算定额)),3) end 单型号定额完成率 
+from(select to_char(t1.work_date,'yyyy-mm-dd')work_date,t1.user_name,t1.class,t1.Equip_Name,t1.work_name,t1.user_count,t1.onduty_day,t1.onduty_hour,case when  nvl(t1.onduty_hour,0) >= 8 then 1 else nvl(t1.onduty_hour,0)/8 end "8点出勤",
+case when  nvl(t1.onduty_hour,0) >= 12 then 0.5 else 0 end "12点出勤",t1.realnum,t2.material_type,t2.minor_type_name,(t2.total_weight -t2.weight)新台账重量,t2.STANDARD_INFO,t1.标准岗位工资,
+
+decode(case to_char(nvl(t2.Minor_Type_Name,'无')) when '胎冠' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/6)*to_number(t1.realnum)),3))
+when '胎面' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/6)*to_number(t1.realnum)),3))
+when '胶芯' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/7)*to_number(t1.realnum)),3))
+when '垫胶' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/5)*to_number(t1.realnum)),3))
+when '胎侧' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/5)*to_number(t1.realnum)),3)) end ,0,null,
+case to_char(nvl(t2.Minor_Type_Name,'无')) when '胎冠' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/6)*to_number(t1.realnum)),3))
+when '胎面' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/6)*to_number(t1.realnum)),3))
+when '胶芯' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/7)*to_number(t1.realnum)),3))
+when '垫胶' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/5)*to_number(t1.realnum)),3))
+when '胎侧' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/5)*to_number(t1.realnum)),3)) end) 折算定额,t2."换胶料20min/次",t2."换预口型4min/次",t2."换口型板2min/次",
+ t2."更换流道20min/次",t2."试制20min/次",round((t2.AmountTime)/60,2) 清理总耗时,nvl(t1.Skill_Base,0)Skill_Base,nvl(t1.Bonus_Base,0)Bonus_Base
+From 
+(select a.*,row_number()over(partition by a.work_date,a.Equip_Name,a.Class order by a.work_date) as d from v_persononduty a 
+where a.Valid_Date = to_date(#where.vaild#,'yyyy-mm-dd') and a.delete_flag= 0 
+
+	   )t1
+	full join  
+
+(select b.*,
+row_number()over(partition by b.BEGIN_TIME,b.equip_name,b.class_name order by b.BEGIN_TIME) as d 
+
+ from (
+select m.BEGIN_TIME,m.equip_name,m.class_name,m.Material_Type,m.Minor_Type_Name,M.TOTAL_WEIGHT,nvl(N.weight,0)weight,m.STANDARD_INFO,nvl(L.AmountTime,0)AmountTime,
+nvl(O.换胶料,0) "换胶料20min/次",nvl(O.换预口型,0) "换预口型4min/次",nvl(O.换口型板,0) "换口型板2min/次",nvl(O.更换流道,0) "更换流道20min/次",nvl(O.试制,0) "试制20min/次" from (SELECT  to_date(TO_CHAR(BEGIN_TIME,'yyyy-MM-dd'),'yyyy-mm-dd') BEGIN_TIME,equip_name,minor_type_id,minor_type_name,max(standard_info) standard_info,
+class_name,MATERIAL_TYPE,SUM(CASE NVL(singleweight,0) WHEN 0 THEN '' ELSE TO_CHAR(qty * singleweight) END) TOTAL_WEIGHT
+ from(select BEGIN_TIME,EQUIP_ID,CLASS_ID,class_name,MATERIAL_TYPE,minor_type_id,minor_type_name,sap_code, equip_name,qty,singleweight,standard_info from v_equipproduction  where delete_flag = 0  and BEGIN_TIME>= to_date(#where.begindata2#,'yyyy-MM-dd hh24:mi:ss') and BEGIN_TIME <= to_date(#where.enddate2#,'yyyy-MM-dd hh24:mi:ss')
+
+		   ]]>
+	   <isNotEmpty property="where.spanmonth" prepend="AND">
+		   <![CDATA[
+		OBJID  not in (select objid from v_equipproduction where  delete_flag = 0 $where.spanmonth$ )  union all 
+		select BEGIN_TIME + 1,EQUIP_ID,CLASS_ID,class_name,MATERIAL_TYPE,minor_type_id,minor_type_name,sap_code, equip_name,qty,singleweight,standard_info from v_equipproduction  where delete_flag = 0 
+	   $where.spanmonth$
+	   ]]>
+	   </isNotEmpty>
+	  <![CDATA[
+	  )
+GROUP BY equip_name,minor_type_id,minor_type_name,class_name,MATERIAL_TYPE,TO_CHAR(BEGIN_TIME,'yyyy-MM-dd')) m 
+ left join (select  return_date,equip_name,class,mater_type,sum(weight) weight from wages_returnrubber where delete_flag = 0 group by return_date,equip_name,class,mater_type
+) N on N.return_date = m.BEGIN_TIME and N.equip_name = m.Equip_Name and N.class = m.class_name  and N.mater_type = m.MATERIAL_TYPE 
+left join v_equipcleancount O on  O.clean_date =  m.BEGIN_TIME and O.equip_name = m.Equip_Name and O.shift = m.class_name
+left join  (select  clean_date,equip_name,shift,sum(clean_count*clean_time) AmountTime from wages_clean
+ where delete_flag = 0 group by clean_date,equip_name,shift
+) L on  L.clean_date =  m.BEGIN_TIME and L.equip_name = m.Equip_Name and L.shift = m.class_name ) b 
+)  t2
+on t1.d = t2.d and t1.work_date = t2.BEGIN_TIME and t1.class = t2.class_name and t1.Equip_Name = t2.Equip_Name
+)y
+)z
+)x
+)aa
+)bb
+where bb.work_date >= #where.begindate# and  bb.work_date <= #where.enddate#
+		  ]]>
+	    <isNotNull property="where.Equip_name"  prepend="AND">
+		   <![CDATA[
+		   bb.Equip_Name in ($where.Equip_name$)
+	   ]]>
+	   </isNotNull>
+	     <isNotNull property="where.Class"  prepend="AND">
+		   <![CDATA[
+		    bb.class = #where.Class#
+	   ]]>
+	   </isNotNull>
+	   <isNotNull property="where.material_type"  prepend="AND">
+		   <![CDATA[
+		     bb.material_type = #where.material_type#
+		   ]]>
+	   </isNotNull>
+	   <isNotNull property="where.minor_type_name"  prepend="AND">
+		   <![CDATA[
+		     bb.minor_type_name = #where.minor_type_name#
+		   ]]>
+	   </isNotNull>
+	   <isNotNull property="where.Name"  prepend="AND">
+		   <![CDATA[
+		     bb.user_name = #where.Name#
+		   ]]>
+	   </isNotNull>
+	   <![CDATA[
+	
+ order by bb.work_date,bb.equip_name,bb.class,bb.MATERIAL_TYPE,bb.work_name
+	   ]]>
+<isNotNull property="where.Istotal">
+		<![CDATA[
+	 ) group by work_date,equip_name,class
+	 order by work_date,equip_name,class,MATERIAL_TYPE,work_name
+   ]]>
+   
+</isNotNull>
+
+   </select>
+	   <select id="GetWagesPlanFinishRateSUM" parameterClass="map" resultClass="Row">
+		   <![CDATA[
+		   
+select cc.*,(cc."8点技能"+ cc.加班技能+cc."8点奖金"+cc.加班奖金+cc."8点岗位工资"+cc.加班岗位工资) Sumpiece from
+ (select  user_name,max(work_name) work_name,sum(onduty_day) onduty_day,sum("8点出勤") "8点出勤",sum("12点出勤") "12点出勤",sum("8点技能") "8点技能",sum(加班技能) 加班技能
+ ,sum("8点奖金") "8点奖金" ,sum(加班奖金) "加班奖金",sum("8点岗位工资") "8点岗位工资",sum(加班岗位工资)加班岗位工资
+from (
+select bb.*,case when bb.定额完成率 is null or bb.work_name = '学徒'or bb.work_name is null then 0 
+when bb.定额完成率 > 1 then trunc(bb.折合奖金基数 + bb.折合奖金基数 * (bb.定额完成率 - 1)*1.5,2) else trunc(bb.折合奖金基数 * bb.定额完成率,2) end 实际奖金,
+ case when bb.折合技能工资基础 is null then 0
+
+ when bb.定额完成率 > 1 then trunc(bb.折合技能工资基础 + bb.折合技能工资基础 * (bb.定额完成率 - 1)*1.5,2) else trunc(bb.折合技能工资基础 * bb.定额完成率,2) end 实际技能奖金,
+
+case when  bb.work_name = '学徒'or bb.work_name is null then 0 when bb.定额完成率 >= 1 then  bb.折合技能工资基础 else trunc(bb.折合技能工资基础 * bb.定额完成率,2)end "8点技能",
+
+case when  bb.work_name = '学徒'or bb.work_name is null then 0 when bb.定额完成率 >= 1 then  trunc(bb.折合技能工资基础 *(bb.定额完成率 - 1) * 1.5,2)  else 0 end 加班技能,
+
+case when  bb.work_name = '学徒'or bb.work_name is null then 0 when bb.定额完成率 >= 1 then  bb.折合奖金基数 else trunc(bb.折合奖金基数 * bb.定额完成率,2)end "8点奖金",
+
+case when  bb.work_name = '学徒'or bb.work_name is null then 0 when bb.定额完成率 >= 1 then  trunc(bb.折合奖金基数 *(bb.定额完成率 - 1)* 1.5,2) else 0 end 加班奖金,
+
+case when bb.标准岗位工资 = 0  then 0 when  bb.work_name = '学徒' then trunc(（bb.标准岗位工资+30）* bb.标准岗位工资,2) else trunc(bb.标准岗位工资 * bb."8点出勤",2) end "8点岗位工资",
+
+case when bb.标准岗位工资 = 0 or bb."12点出勤" = 0 then 0 when bb.标准岗位工资 > 0 and bb."12点出勤" > 0 and nvl(bb.产线完成率,0) < 1.5 then 0 else trunc(bb.标准岗位工资 * bb."12点出勤",2) end 加班岗位工资
+
+from(select aa.*,case when aa."12点出勤" > 0 then nvl(aa.产线完成率,0) when aa."12点出勤" <= 0 then trunc((2/3) * nvl(aa.产线完成率,0),2) end 定额完成率,
+
+case when  nvl(aa.onduty_day,0) < 1 then trunc(0.5 * aa.Skill_Base,2) else aa.Skill_Base end  折合技能工资基础,
+
+case when  nvl(aa.onduty_day,0) < 1 then trunc(0.5 * aa.Bonus_Base,2) else aa.Bonus_Base  end 折合奖金基数
+
+ from (select x.*,max(x.equipcomplete)over(partition by x.work_date,x.Equip_Name,x.class) 产线完成率 from(select z.*,sum(z.单型号定额完成率)over(partition by z.work_date,z.Equip_Name,z.class order by z.material_type)+ (z.清理总耗时/8) as equipcomplete from
+
+(select y.*,nvl(round(((y.新台账重量/to_number(y.折算定额))*8),3),0) 完成工时,case to_number(nvl(折算定额,0)) when 0 then 0 else round((新台账重量/to_number(折算定额)),3) end 单型号定额完成率 
+
+from(select to_char(t1.work_date,'yyyy-mm-dd')work_date,t1.user_name,t1.class,t1.Equip_Name,t1.work_name,t1.user_count,t1.onduty_day,t1.onduty_hour,case when  nvl(t1.onduty_hour,0) >= 8 then 1 else nvl(t1.onduty_hour,0)/8 end "8点出勤",
+
+case when  nvl(t1.onduty_hour,0) >= 12 then 0.5 else 0 end "12点出勤",t1.realnum,t2.material_type,t2.minor_type_name,(t2.total_weight -t2.weight)新台账重量,t2.STANDARD_INFO,t1.标准岗位工资,
+
+decode(case to_char(nvl(t2.Minor_Type_Name,'无')) when '胎冠' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/6)*to_number(t1.realnum)),3))
+when '胎面' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/6)*to_number(t1.realnum)),3))
+when '胶芯' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/7)*to_number(t1.realnum)),3))
+when '垫胶' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/5)*to_number(t1.realnum)),3))
+when '胎侧' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/5)*to_number(t1.realnum)),3)) end ,0,null,
+case to_char(nvl(t2.Minor_Type_Name,'无')) when '胎冠' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/6)*to_number(t1.realnum)),3))
+when '胎面' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/6)*to_number(t1.realnum)),3))
+when '胶芯' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/7)*to_number(t1.realnum)),3))
+when '垫胶' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/5)*to_number(t1.realnum)),3))
+when '胎侧' then to_char(round(((to_number(nvl(t2.STANDARD_INFO,0))/5)*to_number(t1.realnum)),3)) end)  折算定额,t2."换胶料20min/次",t2."换预口型4min/次",t2."换口型板2min/次",
+
+ t2."更换流道20min/次",t2."试制20min/次",round((t2.AmountTime)/60,2) 清理总耗时,nvl(t1.Skill_Base,0)Skill_Base,nvl(t1.Bonus_Base,0)Bonus_Base
+
+From 
+
+(select a.*,row_number()over(partition by a.work_date,a.Equip_Name,a.Class order by a.work_date) as d from v_persononduty a 
+
+where a.Valid_Date = to_date( #where.vaild# ,'yyyy-mm-dd') and a.delete_flag= 0 
+
+     )t1
+
+  full join  
+
+(select b.*,
+
+row_number()over(partition by b.BEGIN_TIME,b.equip_name,b.class_name order by b.BEGIN_TIME) as d 
+
+ from (
+
+select m.BEGIN_TIME,m.equip_name,m.class_name,m.Material_Type,m.Minor_Type_Name,M.TOTAL_WEIGHT,nvl(N.weight,0)weight,m.STANDARD_INFO,nvl(L.AmountTime,0)AmountTime,
+
+nvl(O.换胶料,0) "换胶料20min/次",nvl(O.换预口型,0) "换预口型4min/次",nvl(O.换口型板,0) "换口型板2min/次",nvl(O.更换流道,0) "更换流道20min/次",nvl(O.试制,0) "试制20min/次" from (SELECT  to_date(TO_CHAR(BEGIN_TIME,'yyyy-MM-dd'),'yyyy-mm-dd') BEGIN_TIME,equip_name,minor_type_id,minor_type_name,max(standard_info) standard_info,
+
+class_name,MATERIAL_TYPE,SUM(CASE NVL(singleweight,0) WHEN 0 THEN '' ELSE TO_CHAR(qty * singleweight) END) TOTAL_WEIGHT
+
+ from(select BEGIN_TIME,EQUIP_ID,CLASS_ID,class_name,MATERIAL_TYPE,minor_type_id,minor_type_name,sap_code, equip_name,qty,singleweight,standard_info from v_equipproduction  where delete_flag = 0  and BEGIN_TIME>= to_date(#where.begindata2# ,'yyyy-MM-dd hh24:mi:ss') and BEGIN_TIME <= to_date(#where.enddate2# ,'yyyy-MM-dd hh24:mi:ss')
+
+  AND OBJID  not in (select objid from v_equipproduction where  delete_flag = 0 $where.spanmonth$ )  union all 
+		select BEGIN_TIME + 1,EQUIP_ID,CLASS_ID,class_name,MATERIAL_TYPE,minor_type_id,minor_type_name,sap_code, equip_name,qty,singleweight,standard_info from v_equipproduction  where delete_flag = 0 
+	   $where.spanmonth$
+    )
+GROUP BY equip_name,minor_type_id,minor_type_name,class_name,MATERIAL_TYPE,TO_CHAR(BEGIN_TIME,'yyyy-MM-dd')) m 
+
+ left join (select  return_date,equip_name,class,mater_type,sum(weight) weight from wages_returnrubber where delete_flag = 0 group by return_date,equip_name,class,mater_type
+
+) N on N.return_date = m.BEGIN_TIME and N.equip_name = m.Equip_Name and N.class = m.class_name  and N.mater_type = m.MATERIAL_TYPE 
+
+left join v_equipcleancount O on  O.clean_date =  m.BEGIN_TIME and O.equip_name = m.Equip_Name and O.shift = m.class_name
+
+left join  (select  clean_date,equip_name,shift,sum(clean_count*clean_time) AmountTime from wages_clean
+
+ where delete_flag = 0 group by clean_date,equip_name,shift
+
+) L on  L.clean_date =  m.BEGIN_TIME and L.equip_name = m.Equip_Name and L.shift = m.class_name ) b  )  t2
+
+on t1.d = t2.d and t1.work_date = t2.BEGIN_TIME and t1.class = t2.class_name and t1.Equip_Name = t2.Equip_Name
+
+)y
+
+)z
+
+)x
+
+)aa
+
+)bb
+where bb.Equip_Name in ('复合一线','复合三线','复合二线','复合四线')  and bb.work_date >= #where.begindata# and  bb.work_date <= #where.enddate#
+
+		   ]]>
+		   <isNotNull   property="where.Name" prepend="AND">
+			<![CDATA[bb.user_name = #where.Name# ]]>   
+		   </isNotNull>
+		   <![CDATA[
+		    order by bb.work_date,bb.equip_name,bb.class,bb.MATERIAL_TYPE,bb.work_name 
+ 
+ ) group by user_name,work_name
+ 
+ )cc
+		   ]]>
+	   </select>
+     <!--工资核算模块end-->
+     
+   
+    <insert id="InsertHppGYCeHou" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+       insert into hpp_gycehou (objid,cjtime,equip_code,class_id,standardtype,top_lefttnss,top_midtnss,top_righttnss,
+bottom_lefttnss,bottom_midtnss,bottom_righttnss,ca_toptnss,cp_toptnss,cpk_toptnss,ca_bottomtnss,cp_bottomtnss,
+cpk_bottomtnss,topqualified,bottomqualified,isqualified,linespeed,top_osmtnss,top_dsmtnss,bottom_osmtnss,
+bottom_dsmtnss,isautocontrol,top_std,top_upoffset,top_belowoffset,top_upmax,top_belowmax,bottom_std,
+bottom_upoffset,bottom_belowoffset,bottom_upmax,bottom_belowmax)
+values(seq_hpp_gycehou.nextval,to_date(#cjtime#,'yyyy-MM-dd hh24:mi:ss'),#equip_code#,#class_id#,#standardtype#,#top_lefttnss#,#top_midtnss#,#top_righttnss#,
+#bottom_lefttnss#,#bottom_midtnss#,#bottom_righttnss#,#ca_toptnss#,#cp_toptnss#,#cpk_toptnss#,#ca_bottomtnss#,#cp_bottomtnss#,
+#cpk_bottomtnss#,#topqualified#,#bottomqualified#,#isqualified#,#linespeed#,#top_osmtnss#,#top_dsmtnss#,#bottom_osmtnss#,
+#bottom_dsmtnss#,#isautocontrol#,#top_std#,#top_upoffset#,#top_belowoffset#,#top_upmax#,#top_belowmax#,#bottom_std#,
+#bottom_upoffset#,#bottom_belowoffset#,#bottom_upmax#,#bottom_belowmax#)
+    ]]>
+     </insert>
+     
+       <insert id="InsertHppLXCeHou" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+ insert into hpp_lxcehou (objid,starttime,profilename,profileltype,intervalwidth,widthtol,areadiff,
+shoulderwidth,shoulderwidthtol,keypoints,totalwidth,shoulderheight,shoulderheighttol,alarmpoints,
+rimheight,rimtol,datetimepicker,ixreference,gjd,specval1,specval2,specval3,specval4,specval5,specval6,specval7,specval8,specval9,specval10,
+bottomheightvals1,bottomheightvals2,bottomheightvals3,bottomheightvals4,bottomheightvals5,bottomheightvals6,bottomheightvals7,bottomheightvals8,
+bottomheightvals9,bottomheightvals10,testresult,banzu)
+values(seq_hpp_lxcehou.nextval,to_date(#StartTime#,'yyyy-MM-dd hh24:mi:ss'),#ProfileName#,#ProfilelType#,#IntervalWidth#,#WidthTol#,#AreaDiff#,
+#ShoulderWidth#,#ShoulderWidthTol#,#KeyPoints#,#TotalWidth#,#ShoulderHeight#,#ShoulderHeightTol#,#AlarmPoints#,
+#RimHeight#,#RimTol#,to_date(#DateTimePicker#,'yyyy-MM-dd hh24:mi:ss'),#IXReference#,#GJD#,#SpecVal1#
+,#SpecVal2#,#SpecVal3#,#SpecVal4#,#SpecVal5#,#SpecVal6#,#SpecVal7#,#SpecVal8#,#SpecVal9#,#SpecVal10#,#BottomHeightVals1#
+,#BottomHeightVals2#,#BottomHeightVals3#,#BottomHeightVals4#,#BottomHeightVals5#,#BottomHeightVals6#,#BottomHeightVals7#,#BottomHeightVals8#
+,#BottomHeightVals9#,#BottomHeightVals10#,#TestResult#,#BanZu#)
+    ]]>
+     </insert>
+
+
+     <insert id="InsertHppFHNCCh" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+    insert  into  HPP_FHNC_CH(OBJID,DTTIME,Equip_Code,SAPCODE,PROFILENAME,PROFILETYPE,BARCODE,SDWIDTHTOL,SDAREASYMTOL,SDAREATOL,SDSHOULDERWIDTH,
+SDSHOULDERWIDTHTOL,KEYPOINTS,MEASUREPOINTS,TOTALAREA,LEFTAREA,RIGHTAREA,TOTALWIDTH,SHOULDERWIDTH,LEFTSHOULDERTHICK,RIGHTSHOULDERTHICK)
+values(seq_hpp_fhnc_ch.nextval,to_date(#DTTIME#,'yyyy-MM-dd hh24:mi:ss'),#EQUIP_CODE#,#SAPCODE#,#PROFILENAME#,#PROFILETYPE#,#BARCODE#,#SDWIDTHTOL#,#SDAREASYMTOL#,#SDAREATOL#,#SDSHOULDERWIDTH#,
+#SDSHOULDERWIDTHTOL#,#KEYPOINTS#,#MEASUREPOINTS#,#TOTALAREA#,#LEFTAREA#,#RIGHTAREA#,#TOTALWIDTH#,#SHOULDERWIDTH#,#LEFTSHOULDERTHICK#,#RIGHTSHOULDERTHICK#)
+    ]]>
+     </insert>
+
+
+     <insert id="InsertHppNCQCh" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+insert into HPP_NCQ_CH(OBJID,EQUIP_CODE,NORMNAME,ENTERTIME,WIDTHST,WIDTHPV,WIDTHQC,LINERAWIDTHST,LINERAWIDTHPV,
+LINERAWIDTHQC,LINERBWIDTHST,LINERBWIDTHPV,LINERBWIDTHQC,SYMMETRYLINERAST,SYMMETRYLINERAPV,SYMMETRYLINERAQC,SYMMETRYLINERBST,
+SYMMETRYLINERBPV,SYMMETRYLINERBQC,SYMMETRYST,SYMMETRYPV,SYMMETRYQC,GOODNESSOFFITST,GOODNESSOFFITPV,GOODNESSOFFITQC,THICKNESSCENTERST,
+THICKNESSCENTERPV,THICKNESSCENTERQC,THICKNESSLEFTST,THICKNESSLEFTPV,THICKNESSLEFTQC,THICKNESSRIGHTST,THICKNESSRIGHTPV,
+THICKNESSRIGHTQC,SINGLETHICKNESSLEFTST,SINGLETHICKNESSLEFTPV,SINGLETHICKNESSLEFTQC,SINGLETHICKNESSRIGHTST,SINGLETHICKNESSRIGHTPV,
+SINGLETHICKNESSRIGHTQC,STRIPAWIDTHST,STRIPAWIDTHPV,STRIPAWIDTHQC,STRIPATHICKNESSST,STRIPATHICKNESSPV,STRIPATHICKNESSQC,STRIPALOCATIONST,
+STRIPALOCATIONPV,STRIPALOCATIONQC,STRIPBWIDTHST,STRIPBWIDTHPV,STRIPBWIDTHQC,STRIPBTHICKNESSST,STRIPBTHICKNESSPV,STRIPBTHICKNESSQC,
+STRIPBLOCATIONST,STRIPBLOCATIONPV,STRIPBLOCATIONQC,AREAST,AREAPV,AREAQC,AREALEFTST,AREALEFTPV,AREALEFTQC,AREARIGHTST,AREARIGHTPV,
+AREARIGHTQC,AREADIFFERENCEST,AREADIFFERENCEPV,AREADIFFERENCEQC,LINERALEFTWIDTHST,LINERALEFTWIDTHPV,LINERALEFTWIDTHQC,LINERARIGHTWIDTHST,
+LINERARIGHTWIDTHPV,LINERARIGHTWIDTHQC,LINERBLEFTWIDTHST,LINERBLEFTWIDTHPV,LINERBLEFTWIDTHQC,LINERBRIGHTWIDTHST,LINERBRIGHTWIDTHPV,
+LINERBRIGHTWIDTHQC,SYMMETRYLEFTST,SYMMETRYLEFTPV,SYMMETRYLEFTQC,SYMMETRYRIGHTST,SYMMETRYRIGHTPV,SYMMETRYRIGHTQC)
+values (seq_HPP_NCQ_CH.Nextval,#EQUIP_CODE#,#NORMNAME#,to_date(#ENTERTIME#,'yyyy-MM-dd hh24:mi:ss'),#WIDTHST#,#WIDTHPV#,#WIDTHQC#,#LINERAWIDTHST#,#LINERAWIDTHPV#,
+#LINERAWIDTHQC#,#LINERBWIDTHST#,#LINERBWIDTHPV#,#LINERBWIDTHQC#,#SYMMETRYLINERAST#,#SYMMETRYLINERAPV#,#SYMMETRYLINERAQC#,#SYMMETRYLINERBST#,
+#SYMMETRYLINERBPV#,#SYMMETRYLINERBQC#,#SYMMETRYST#,#SYMMETRYPV#,#SYMMETRYQC#,#GOODNESSOFFITST#,#GOODNESSOFFITPV#,#GOODNESSOFFITQC#,#THICKNESSCENTERST#,
+#THICKNESSCENTERPV#,#THICKNESSCENTERQC#,#THICKNESSLEFTST#,#THICKNESSLEFTPV#,#THICKNESSLEFTQC#,#THICKNESSRIGHTST#,#THICKNESSRIGHTPV#,
+#THICKNESSRIGHTQC#,#SINGLETHICKNESSLEFTST#,#SINGLETHICKNESSLEFTPV#,#SINGLETHICKNESSLEFTQC#,#SINGLETHICKNESSRIGHTST#,#SINGLETHICKNESSRIGHTPV#,
+#SINGLETHICKNESSRIGHTQC#,#STRIPAWIDTHST#,#STRIPAWIDTHPV#,#STRIPAWIDTHQC#,#STRIPATHICKNESSST#,#STRIPATHICKNESSPV#,#STRIPATHICKNESSQC#,#STRIPALOCATIONST#,
+#STRIPALOCATIONPV#,#STRIPALOCATIONQC#,#STRIPBWIDTHST#,#STRIPBWIDTHPV#,#STRIPBWIDTHQC#,#STRIPBTHICKNESSST#,#STRIPBTHICKNESSPV#,#STRIPBTHICKNESSQC#,
+#STRIPBLOCATIONST#,#STRIPBLOCATIONPV#,#STRIPBLOCATIONQC#,#AREAST#,#AREAPV#,#AREAQC#,#AREALEFTST#,#AREALEFTPV#,#AREALEFTQC#,#AREARIGHTST#,#AREARIGHTPV#,
+#AREARIGHTQC#,#AREADIFFERENCEST#,#AREADIFFERENCEPV#,#AREADIFFERENCEQC#,#LINERALEFTWIDTHST#,#LINERALEFTWIDTHPV#,#LINERALEFTWIDTHQC#,#LINERARIGHTWIDTHST#,
+#LINERARIGHTWIDTHPV#,#LINERARIGHTWIDTHQC#,#LINERBLEFTWIDTHST#,#LINERBLEFTWIDTHPV#,#LINERBLEFTWIDTHQC#,#LINERBRIGHTWIDTHST#,#LINERBRIGHTWIDTHPV#,
+#LINERBRIGHTWIDTHQC#,#SYMMETRYLEFTST#,#SYMMETRYLEFTPV#,#SYMMETRYLEFTQC#,#SYMMETRYRIGHTST#,#SYMMETRYRIGHTPV#,#SYMMETRYRIGHTQC#)
+    ]]>
+     </insert>
+
+     <insert id="InsertHppWHData" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+insert into HPP_WHDATA(OBJID,EQUIP_TYPE,EQUIP_CODE,BARCODE,STARTTIME,PROFILENAME,PROFILETYPE,RIMHEIGHT,RIMTOL
+,TOTALWIDTH,WIDTHTOL,AREADIFF,TEXTNO,SHOULDERWIDTH,SHOULDERWIDTHTOL,SHOULDERHEIGHT,SHOULDERHEIGHTTOL,JIAO,DATETIMEPICKER,
+GJD,RESULTPERCENT,INTERVALWIDTH,IXREFERENCE,SPECVAL1,SPECVAL2,SPECVAL3,SPECVAL4,SPECVAL5,SPECVAL6,SPECVAL7,SPECVAL8,
+SPECVAL9,SPECVAL10,BOTTOMHEIGHTVALS1,BOTTOMHEIGHTVALS2,BOTTOMHEIGHTVALS3,BOTTOMHEIGHTVALS4,BOTTOMHEIGHTVALS5,BOTTOMHEIGHTVALS6
+,BOTTOMHEIGHTVALS7,BOTTOMHEIGHTVALS8,BOTTOMHEIGHTVALS9,BOTTOMHEIGHTVALS10,KEYPOINTS1,KEYPOINTS2,KEYPOINTS3,KEYPOINTS4
+,KEYPOINTS5,KEYPOINTS6,KEYPOINTS7,KEYPOINTS8,KEYPOINTS9,KEYPOINTS10,TESTRESULT,ALARMPOINTS,BANZU)
+values(seq_HPP_WHDATA.Nextval,#EQUIP_TYPE#,#EQUIP_CODE#,#BARCODE#,#STARTTIME#,#PROFILENAME#,#PROFILETYPE#,#RIMHEIGHT#,#RIMTOL#
+,#TOTALWIDTH#,#WIDTHTOL#,#AREADIFF#,#TEXTNO#,#SHOULDERWIDTH#,#SHOULDERWIDTHTOL#,#SHOULDERHEIGHT#,#SHOULDERHEIGHTTOL#,#JIAO#,#DATETIMEPICKER#,
+#GJD#,#RESULTPERCENT#,#INTERVALWIDTH#,#IXREFERENCE#,#SPECVAL1#,#SPECVAL2#,#SPECVAL3#,#SPECVAL4#,#SPECVAL5#,#SPECVAL6#,#SPECVAL7#,#SPECVAL8#,
+#SPECVAL9#,#SPECVAL10#,#BOTTOMHEIGHTVALS1#,#BOTTOMHEIGHTVALS2#,#BOTTOMHEIGHTVALS3#,#BOTTOMHEIGHTVALS4#,#BOTTOMHEIGHTVALS5#,#BOTTOMHEIGHTVALS6#
+,#BOTTOMHEIGHTVALS7#,#BOTTOMHEIGHTVALS8#,#BOTTOMHEIGHTVALS9#,#BOTTOMHEIGHTVALS10#,#KEYPOINTS1#,#KEYPOINTS2#,#KEYPOINTS3#,#KEYPOINTS4#
+,#KEYPOINTS5#,#KEYPOINTS6#,#KEYPOINTS7#,#KEYPOINTS8#,#KEYPOINTS9#,#KEYPOINTS10#,#TESTRESULT#,#ALARMPOINTS#,#BANZU#)
+    ]]>
+     </insert>
+
+     <insert id="InsertHppClearJCJ" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+ insert into hpp_clearjcjinfo(objid,equip_id,jcj_name,last_sap,now_sap,last_materid,now_materid,begin_time,end_time,user_id,upload_time)
+ values(seq_hpp_clearjcjinfo.nextval,#EquipId#,#JCJname#,#LastSap#,#NowSap#,#LastMaterid#,#NowMaterid#,to_date(#BeginTime#,'yyyy-MM-dd hh24:mi:ss'),
+ to_date(#EndTime#,'yyyy-MM-dd hh24:mi:ss'),#Userid#,to_date(#UploadTime#,'yyyy-MM-dd hh24:mi:ss'))
+    ]]>
+     </insert>
+     
+  <select id="GetHppCLearJCJInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+     select distinct a.*,b.equip_name,c.material_name lastmater,c.sap_code lastsap,d.material_name nowmater,d.sap_code nowsap,e.material_name lastrubber
+ ,f.material_name nowrubber,g.user_name  from  hpp_clearjcjinfo a
+ left join sbe_equip b on a.equip_id = b.objid
+ left join sbm_material c on c.objid = a.last_materid
+ left join sbm_material d on d.objid = a.now_materid
+ left join sbm_material e on e.sap_code = a.last_sap
+ left join sbm_material f on f.sap_code = a.now_sap
+ left join ssb_user g on g.objid = a.user_id
+         where 1=1
+      ]]>
+       <isNotNull property="where.begintime" prepend="AND">
+         <![CDATA[A.upload_time >= #where.begintime#]]>
+       </isNotNull>
+       <isNotNull property="where.endtime" prepend="AND">
+         <![CDATA[A.upload_time <= #where.endtime#]]>
+       </isNotNull>
+       <isNotNull property="where.txt_lastmater" prepend="AND">
+         <![CDATA[c.material_name like '%' ||#where.txt_lastmater# || '%']]>
+       </isNotNull>
+       <isNotNull property="where.txt_nowmater" prepend="AND">
+         <![CDATA[d.material_name like '%' ||#where.txt_nowmater# || '%']]>
+       </isNotNull>
+       <isNotNull property="where.txt_equip" prepend="AND">
+         <![CDATA[b.equip_name = #where.txt_equip#]]>
+       </isNotNull>
+       <![CDATA[ order by a.upload_time]]>
+     </select>
+
+     <insert id="InsertHptSemisTechBLH" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+insert into hpt_semis_tech_blh(objid,temp,press,record_time)
+values(seq_hpt_semis_tech_blh.nextval,#TEMP#,#PRESS#,to_date(#RECORD_TIME#,'yyyy-MM-dd hh24:mi:ss'))
+    ]]>
+     </insert>
+
+     <insert id="InsertHpp_GsqTemp" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+insert into Hpp_GsqTemp (objid,Equipcode,Lineid,Testtime,Avgtemp,Yt,Evtemp)
+values(seq_Hpp_GsqTemp.Nextval,#EQUIPCODE#,#LINEID#,#TESTTIME#,#AVGTEMP#,#YT#,#EVTEMP#)
+    ]]>
+     </insert>
+     <insert id="InsertHpp_GsqZJ" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+insert into Hpp_GsqZJ(objid,Equipcode,Lineid,Sampletime,Linevalue,Alarmtype,Specid,Standardvalue,Diffvalue)
+values(seq_Hpp_GsqZJ.nextval,#EQUIPCODE#,#LINEID#,#SAMPLETIME#,#LINEVALUE#,#ALARMTYPE#,#SPECID#,#STANDARDVALUE#,#DIFFVALUE#)
+    ]]>
+     </insert>
+
+     <select id="GetByUserDutyInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+select  procedure,plan_date,b.user_name,b.telephone,b.WORK_BARCODE,a.begin_time,a.end_time  from SBE_DUTY_INFO a
+left join ssb_user b on a.user_id = b.objid
+where a.plan_date = to_date(#Plandate#,'yyyy-MM-dd') 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="procedure" prepend="AND">
+           <![CDATA[a.procedure = #procedure#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <delete id="CleanBarcodeStoreInfo" parameterClass="map" >
+       <![CDATA[
+      delete  from  hpp_storage_detail where card_no = #barcode#
+      ]]>
+     </delete>
+
+     <update id="UpdateHppBadFinalConfirm" parameterClass="map" >
+       <![CDATA[
+update hpp_badrecord set finalqr_time = sysdate , finalqr_userid = #userid# where barcode = #barcode#
+      ]]>
+     </update>
+     <update id="UpdateZJGradeHppBadFinalConfirm" parameterClass="map" >
+       <![CDATA[
+       update HQC_QCRECORD set gradeid = 0 where card_no = #barcode# and new_flag = 1
+      ]]>
+     </update>
+     
+   
+     <select id="GetNoTechMater" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select distinct b.material_name,b.sap_code,a.material_type_name from sbm_bom_data a 
+       inner join sbm_material b on b.objid = a.material_id and b.major_type_id = 31
+       where a.delete_flag = 0 
+       and not exists (select substr(x.assem_sapmat,1,9) from plm_half_main x where substr(x.assem_sapmat,1,9) = b.sap_code and x.delete_flag = 0) 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.Mater" prepend="AND">
+           <![CDATA[b.material_name like '%' || #where.Mater# || '%']]>
+         </isNotNull>
+         <isNotNull property="where.Sap" prepend="AND">
+           <![CDATA[b.sap_code = #where.Sap#]]>
+         </isNotNull>
+         <isNotNull property="where.Type" prepend="AND">
+           <![CDATA[a.material_type_name like '%' || #where.Type# || '%']]>
+         </isNotNull>
+       </dynamic>
+           <![CDATA[order by a.material_type_name]]>
+     </select>
+     
+   </statements>
+</sqlMap>

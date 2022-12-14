@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ActionService>
+    <Design>
+        <Path path="系统初始化">
+            <Action action="0FBEA105660A433FA51DFA014FB7840C" auto="True">
+                <Caption>硫化_Socket接收处理</Caption>
+                <Remark>接收到Socket客户端消息后，进行相应业务处理</Remark>
+            </Action>
+            <Action action="0FBEA105660A433FA51DFA014FB7840B" auto="True">
+                <Caption>硫化配置文件初始化</Caption>
+                <Remark>硫化配置文件初始化</Remark>
+            </Action>
+            <Action action="22003CADB6464E8EA2FAF0230055FDD9" auto="True">
+                <Caption>循环业务</Caption>
+                <Remark>循环业务</Remark>
+            </Action>
+        </Path>
+    </Design>
+    <DesignToRuntime>
+        <Design action="0FBEA105660A433FA51DFA014FB7840C">
+            <Runtime action="84CABE1CA557463FBD9042365BFCDBF2"/>
+        </Design>
+        <Design action="0FBEA105660A433FA51DFA014FB7840B">
+            <Runtime action="84CABE1CA557463FBD9042365BFCDBFB"/>
+        </Design>
+        <Design action="22003CADB6464E8EA2FAF0230055FDD9">
+            <Runtime action="B5EF23B57BDD44E48691BA08D2A4DFBC"/>
+        </Design>
+    </DesignToRuntime>
+    
+    <Runtime>
+      <Import assembly = "Data/Action/SulfGroup/Mesnac.Action.SulfGroup.dll">
+        <Action action="84CABE1CA557463FBD9042365BFCDBF2" class="Mesnac.Action.SulfGroup.Socket.StartReciveProcess"/>
+        <Action action="84CABE1CA557463FBD9042365BFCDBFB" class="Mesnac.Action.SulfGroup.Config.SystemInit"/>
+        <Action action="B5EF23B57BDD44E48691BA08D2A4DFBC" class="Mesnac.Action.SulfGroup.OnLood.OnLoop"/>
+      </Import>
+    </Runtime>
+</ActionService>

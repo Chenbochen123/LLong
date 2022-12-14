@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Main.Mapper.BasicMapper.VSspUserAllAction"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="VSspUserAllAction" type="Mesnac.Main.Entity.BasicEntity.VSspUserAllAction, Mesnac.Main.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_VSspUserAllAction" class="VSspUserAllAction">
+    <result property="UserId" column="USER_ID"/>
+    <result property="ActionId" column="ACTION_ID"/>
+    <result property="M" column="M"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_VSspUserAllAction" class="VSspUserAllAction">
+    <parameter property="UserId" column="UserId"/>
+    <parameter property="ActionId" column="ActionId"/>
+    <parameter property="M" column="M"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM V_SSP_USER_ALL_ACTION ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.UserId" prepend="AND">
+          <![CDATA[USER_ID = #where.UserId#]]>
+        </isNotNull>
+        <isNotNull property="where.ActionId" prepend="AND">
+          <![CDATA[ACTION_ID = #where.ActionId#]]>
+        </isNotNull>
+        <isNotNull property="where.M" prepend="AND">
+          <![CDATA[M = #where.M#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE ( = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO V_SSP_USER_ALL_ACTION]]>
+       <dynamic prepend="(">
+        <isNotNull property="UserId" prepend=",">USER_ID</isNotNull>
+        <isNotNull property="ActionId" prepend=",">ACTION_ID</isNotNull>
+        <isNotNull property="M" prepend=",">M</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="UserId" prepend=",">#UserId#</isNotNull>
+        <isNotNull property="ActionId" prepend=",">#ActionId#</isNotNull>
+        <isNotNull property="M" prepend=",">#M#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE V_SSP_USER_ALL_ACTION
+       <dynamic prepend="SET">
+        <isNotNull  property="update.UserId"  prepend=",">
+          USER_ID = #update.UserId#
+        </isNotNull>
+        <isNotNull  property="update.ActionId"  prepend=",">
+          ACTION_ID = #update.ActionId#
+        </isNotNull>
+        <isNotNull  property="update.M"  prepend=",">
+          M = #update.M#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM V_SSP_USER_ALL_ACTION
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_VSspUserAllAction">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_VSspUserAllAction">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max()
+      </isNotPropertyAvailable>
+      FROM V_SSP_USER_ALL_ACTION
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM V_SSP_USER_ALL_ACTION
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_VSspUserAllAction" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE V_SSP_USER_ALL_ACTION
+    </statement>
+  </statements>
+</sqlMap>

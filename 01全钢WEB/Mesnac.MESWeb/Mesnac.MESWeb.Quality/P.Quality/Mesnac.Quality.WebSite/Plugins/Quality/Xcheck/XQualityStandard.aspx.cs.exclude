@@ -1,0 +1,162 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+
+using Ext.Net;
+using Mesnac.DbAccess;
+using Mesnac.Quality.Business.Implements;
+using Mesnac.Quality.Business.Interface;
+using Mesnac.Quality.Entity.BasicEntity;
+using Mesnac.Main.Business.Implements;
+using Mesnac.Main.Business.Interface;
+using Mesnac.Main.Entity.BasicEntity;
+using Mesnac.Web.UI;
+using Mesnac.Web.UI.Entity;
+
+public partial class Plugins_Quality_XQualityStandard : Mesnac.Web.UI.Page
+{
+    #region 权限定义
+    protected __ _ = new __();
+    public class __ : ___  //必须继承___   //Action不能重复，重复会被覆盖
+    {
+        public __()
+        {
+            查询 = new PageAction() { ActionId = 1, ActionName = "btnSearch" };
+            保存 = new PageAction() { ActionId = 2, ActionName = "btnSave" };
+        }
+        public PageAction 查询 { get; private set; } //必须为 public
+        public PageAction 保存 { get; private set; }
+    }
+    #endregion
+
+    protected IFqbQualityStandardManager fqbQualitystandardInfoManager = new FqbQualityStandardManager();
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (IsPostBack || X.IsAjaxRequest)
+        {
+            return;
+        }
+        fqbQualitystandardInfoManager.InsertByStatement("InitMaterialX", null);
+    }
+
+    #region 分页相关方法
+    [DirectMethod]
+    public object GridPanelBindData(string action, Dictionary<string, object> extraParams)
+    {
+        StoreRequestParameters prms = new StoreRequestParameters(extraParams);
+        PageResult pageParams = new PageResult();
+        pageParams.PageIndex = prms.Page;
+        pageParams.PageSize = prms.Limit;
+
+        pageParams = GetPageResultData(pageParams);
+        DataTable data = pageParams.ResultDataSet.Tables[0];
+
+        int total = pageParams.RecordCount;
+        return new { data, total };
+    }
+
+    private PageResult GetPageResultData(PageResult pageParams)
+    {
+        Dictionary<string, object> dic = new Dictionary<string, object>();
+        var name = tbxName.Text;
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            dic.Add("MATERIAL_NAME", name);
+        }
+        var code = tbxCode.Text;
+        if (!string.IsNullOrWhiteSpace(code))
+        {
+            dic.Add("MATERIAL_CODE", code);
+        }
+        var equip = tbxEquip.Text;
+        if (!string.IsNullOrWhiteSpace(equip))
+        {
+            dic.Add("EQUIP_NAME", equip);
+        }
+        pageParams.ParameterObject = dic;
+        pageParams.StatementId = "RefleshDataX";
+        pageParams = fqbQualitystandardInfoManager.GetPageDataByReader(pageParams);
+        return pageParams;
+    }
+    #endregion
+
+    #region 类型转换
+    private int? StringToNullInt(string str)
+    {
+        int? result = null;
+        if (string.IsNullOrWhiteSpace(str))
+        {
+            return result;
+        }
+        int n = 0;
+        if (int.TryParse(str, out n))
+        {
+            result = n;
+        }
+        return result;
+    }
+    private int? JObjectToNullInt(Newtonsoft.Json.Linq.JObject item, string fieldName)
+    {
+        int? result = null;
+        object obj = null;
+        try
+        {
+            obj = item[fieldName];
+        }
+        catch { }
+        if (obj == null)
+        {
+            return result;
+        }
+        return StringToNullInt(obj.ToString());
+
+    }
+    #endregion
+
+    private string Unescape(string ss)
+    {
+        return System.Text.RegularExpressions.Regex.Unescape(ss);
+    }
+
+    [DirectMethod]
+    public string commandcolumn_direct_saveStandard(string str)
+    {
+        var result = string.Empty;
+        try
+        {
+            #region 数据整理
+            str = Unescape(str).Replace("　", "").Replace("<br>", "");
+            Newtonsoft.Json.Linq.JArray ja = (Newtonsoft.Json.Linq.JArray)Newtonsoft.Json.JsonConvert.DeserializeObject(str);
+            List<FqbQualityStandard> lst = new List<FqbQualityStandard>();
+            foreach (Newtonsoft.Json.Linq.JObject item in ja)
+            {
+                FqbQualityStandard fqb = new FqbQualityStandard();
+                fqb.ObjId = JObjectToNullInt(item, "OBJID");
+                fqb.XstandardId = JObjectToNullInt(item, "XSTANDARD_ID");
+                lst.Add(fqb);
+            }
+            #endregion
+
+            #region 更新数据库
+            foreach (var fqb in lst)
+            {
+                fqbQualitystandardInfoManager.UpdateByStatement("UpdateByObjIdX", fqb);
+            }
+            result = "数据保存成功";
+            return result;
+            #endregion
+        }
+        catch (Exception ex)
+        {
+            result = "数据保存失败！";
+            return result;
+
+        }
+    }
+
+}

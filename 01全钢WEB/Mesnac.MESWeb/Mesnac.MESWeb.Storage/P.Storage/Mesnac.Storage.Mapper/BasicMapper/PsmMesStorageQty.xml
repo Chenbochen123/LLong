@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Storage.Mapper.BasicMapper.PsmMesStorageQty"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="PsmMesStorageQty" type="Mesnac.Storage.Entity.BasicEntity.PsmMesStorageQty, Mesnac.Storage.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_PsmMesStorageQty" class="PsmMesStorageQty">
+    <result property="ObjId" column="OBJID"/>
+    <result property="ShiftDate" column="SHIFT_DATE"/>
+    <result property="ShiftId" column="SHIFT_ID"/>
+    <result property="MaterialId" column="MATERIAL_ID"/>
+    <result property="MesQty" column="MES_QTY"/>
+    <result property="Qty" column="QTY"/>
+    <result property="DocDate" column="DOC_DATE"/>
+    <result property="PostDate" column="POST_DATE"/>
+    <result property="HeadTxt" column="HEAD_TXT"/>
+    <result property="PlantFrom" column="PLANT_FROM"/>
+    <result property="Storageloc" column="STORAGELOC"/>
+    <result property="Batch" column="BATCH"/>
+    <result property="RecPlant" column="REC_PLANT"/>
+    <result property="RecStoloc" column="REC_STOLOC"/>
+    <result property="RecBatch" column="REC_BATCH"/>
+    <result property="Reciever" column="RECIEVER"/>
+    <result property="StateFlag" column="STATE_FLAG"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="SuccessFlag" column="SUCCESS_FLAG"/>
+    <result property="ReturnMsg" column="RETURN_MSG"/>
+    <result property="MovType" column="MOV_TYPE"/>
+    <result property="ClassId" column="CLASS_ID"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_PsmMesStorageQty" class="PsmMesStorageQty">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="ShiftDate" column="ShiftDate"/>
+    <parameter property="ShiftId" column="ShiftId"/>
+    <parameter property="MaterialId" column="MaterialId"/>
+    <parameter property="MesQty" column="MesQty"/>
+    <parameter property="Qty" column="Qty"/>
+    <parameter property="DocDate" column="DocDate"/>
+    <parameter property="PostDate" column="PostDate"/>
+    <parameter property="HeadTxt" column="HeadTxt"/>
+    <parameter property="PlantFrom" column="PlantFrom"/>
+    <parameter property="Storageloc" column="Storageloc"/>
+    <parameter property="Batch" column="Batch"/>
+    <parameter property="RecPlant" column="RecPlant"/>
+    <parameter property="RecStoloc" column="RecStoloc"/>
+    <parameter property="RecBatch" column="RecBatch"/>
+    <parameter property="Reciever" column="Reciever"/>
+    <parameter property="StateFlag" column="StateFlag"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="SuccessFlag" column="SuccessFlag"/>
+    <parameter property="ReturnMsg" column="ReturnMsg"/>
+    <parameter property="MovType" column="MovType"/>
+    <parameter property="ClassId" column="ClassId"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSM_MES_STORAGE_QTY ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDate" prepend="AND">
+          <![CDATA[SHIFT_DATE = #where.ShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.MesQty" prepend="AND">
+          <![CDATA[MES_QTY = #where.MesQty#]]>
+        </isNotNull>
+        <isNotNull property="where.Qty" prepend="AND">
+          <![CDATA[QTY = #where.Qty#]]>
+        </isNotNull>
+        <isNotNull property="where.DocDate" prepend="AND">
+          <![CDATA[DOC_DATE = #where.DocDate#]]>
+        </isNotNull>
+        <isNotNull property="where.PostDate" prepend="AND">
+          <![CDATA[POST_DATE = #where.PostDate#]]>
+        </isNotNull>
+        <isNotNull property="where.HeadTxt" prepend="AND">
+          <![CDATA[HEAD_TXT = #where.HeadTxt#]]>
+        </isNotNull>
+        <isNotNull property="where.PlantFrom" prepend="AND">
+          <![CDATA[PLANT_FROM = #where.PlantFrom#]]>
+        </isNotNull>
+        <isNotNull property="where.Storageloc" prepend="AND">
+          <![CDATA[STORAGELOC = #where.Storageloc#]]>
+        </isNotNull>
+        <isNotNull property="where.Batch" prepend="AND">
+          <![CDATA[BATCH = #where.Batch#]]>
+        </isNotNull>
+        <isNotNull property="where.RecPlant" prepend="AND">
+          <![CDATA[REC_PLANT = #where.RecPlant#]]>
+        </isNotNull>
+        <isNotNull property="where.RecStoloc" prepend="AND">
+          <![CDATA[REC_STOLOC = #where.RecStoloc#]]>
+        </isNotNull>
+        <isNotNull property="where.RecBatch" prepend="AND">
+          <![CDATA[REC_BATCH = #where.RecBatch#]]>
+        </isNotNull>
+        <isNotNull property="where.Reciever" prepend="AND">
+          <![CDATA[RECIEVER = #where.Reciever#]]>
+        </isNotNull>
+        <isNotNull property="where.StateFlag" prepend="AND">
+          <![CDATA[STATE_FLAG = #where.StateFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.SuccessFlag" prepend="AND">
+          <![CDATA[SUCCESS_FLAG = #where.SuccessFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ReturnMsg" prepend="AND">
+          <![CDATA[RETURN_MSG = #where.ReturnMsg#]]>
+        </isNotNull>
+        <isNotNull property="where.MovType" prepend="AND">
+          <![CDATA[MOV_TYPE = #where.MovType#]]>
+        </isNotNull>
+        <isNotNull property="where.ClassId" prepend="AND">
+          <![CDATA[CLASS_ID = #where.ClassId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO PSM_MES_STORAGE_QTY]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="ShiftDate" prepend=",">SHIFT_DATE</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">SHIFT_ID</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">MATERIAL_ID</isNotNull>
+        <isNotNull property="MesQty" prepend=",">MES_QTY</isNotNull>
+        <isNotNull property="Qty" prepend=",">QTY</isNotNull>
+        <isNotNull property="DocDate" prepend=",">DOC_DATE</isNotNull>
+        <isNotNull property="PostDate" prepend=",">POST_DATE</isNotNull>
+        <isNotNull property="HeadTxt" prepend=",">HEAD_TXT</isNotNull>
+        <isNotNull property="PlantFrom" prepend=",">PLANT_FROM</isNotNull>
+        <isNotNull property="Storageloc" prepend=",">STORAGELOC</isNotNull>
+        <isNotNull property="Batch" prepend=",">BATCH</isNotNull>
+        <isNotNull property="RecPlant" prepend=",">REC_PLANT</isNotNull>
+        <isNotNull property="RecStoloc" prepend=",">REC_STOLOC</isNotNull>
+        <isNotNull property="RecBatch" prepend=",">REC_BATCH</isNotNull>
+        <isNotNull property="Reciever" prepend=",">RECIEVER</isNotNull>
+        <isNotNull property="StateFlag" prepend=",">STATE_FLAG</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="SuccessFlag" prepend=",">SUCCESS_FLAG</isNotNull>
+        <isNotNull property="ReturnMsg" prepend=",">RETURN_MSG</isNotNull>
+        <isNotNull property="MovType" prepend=",">MOV_TYPE</isNotNull>
+        <isNotNull property="ClassId" prepend=",">CLASS_ID</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_PSM_MES_STORAGE_QTY.NEXTVAL</isNull>
+        <isNotNull property="ShiftDate" prepend=",">#ShiftDate#</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">#ShiftId#</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">#MaterialId#</isNotNull>
+        <isNotNull property="MesQty" prepend=",">#MesQty#</isNotNull>
+        <isNotNull property="Qty" prepend=",">#Qty#</isNotNull>
+        <isNotNull property="DocDate" prepend=",">#DocDate#</isNotNull>
+        <isNotNull property="PostDate" prepend=",">#PostDate#</isNotNull>
+        <isNotNull property="HeadTxt" prepend=",">#HeadTxt#</isNotNull>
+        <isNotNull property="PlantFrom" prepend=",">#PlantFrom#</isNotNull>
+        <isNotNull property="Storageloc" prepend=",">#Storageloc#</isNotNull>
+        <isNotNull property="Batch" prepend=",">#Batch#</isNotNull>
+        <isNotNull property="RecPlant" prepend=",">#RecPlant#</isNotNull>
+        <isNotNull property="RecStoloc" prepend=",">#RecStoloc#</isNotNull>
+        <isNotNull property="RecBatch" prepend=",">#RecBatch#</isNotNull>
+        <isNotNull property="Reciever" prepend=",">#Reciever#</isNotNull>
+        <isNotNull property="StateFlag" prepend=",">#StateFlag#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="SuccessFlag" prepend=",">#SuccessFlag#</isNotNull>
+        <isNotNull property="ReturnMsg" prepend=",">#ReturnMsg#</isNotNull>
+        <isNotNull property="MovType" prepend=",">#MovType#</isNotNull>
+        <isNotNull property="ClassId" prepend=",">#ClassId#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE PSM_MES_STORAGE_QTY
+       <dynamic prepend="SET">
+        <isNotNull  property="update.ShiftDate"  prepend=",">
+          SHIFT_DATE = #update.ShiftDate#
+        </isNotNull>
+        <isNotNull  property="update.ShiftId"  prepend=",">
+          SHIFT_ID = #update.ShiftId#
+        </isNotNull>
+        <isNotNull  property="update.MaterialId"  prepend=",">
+          MATERIAL_ID = #update.MaterialId#
+        </isNotNull>
+        <isNotNull  property="update.MesQty"  prepend=",">
+          MES_QTY = #update.MesQty#
+        </isNotNull>
+        <isNotNull  property="update.Qty"  prepend=",">
+          QTY = #update.Qty#
+        </isNotNull>
+        <isNotNull  property="update.DocDate"  prepend=",">
+          DOC_DATE = #update.DocDate#
+        </isNotNull>
+        <isNotNull  property="update.PostDate"  prepend=",">
+          POST_DATE = #update.PostDate#
+        </isNotNull>
+        <isNotNull  property="update.HeadTxt"  prepend=",">
+          HEAD_TXT = #update.HeadTxt#
+        </isNotNull>
+        <isNotNull  property="update.PlantFrom"  prepend=",">
+          PLANT_FROM = #update.PlantFrom#
+        </isNotNull>
+        <isNotNull  property="update.Storageloc"  prepend=",">
+          STORAGELOC = #update.Storageloc#
+        </isNotNull>
+        <isNotNull  property="update.Batch"  prepend=",">
+          BATCH = #update.Batch#
+        </isNotNull>
+        <isNotNull  property="update.RecPlant"  prepend=",">
+          REC_PLANT = #update.RecPlant#
+        </isNotNull>
+        <isNotNull  property="update.RecStoloc"  prepend=",">
+          REC_STOLOC = #update.RecStoloc#
+        </isNotNull>
+        <isNotNull  property="update.RecBatch"  prepend=",">
+          REC_BATCH = #update.RecBatch#
+        </isNotNull>
+        <isNotNull  property="update.Reciever"  prepend=",">
+          RECIEVER = #update.Reciever#
+        </isNotNull>
+        <isNotNull  property="update.StateFlag"  prepend=",">
+          STATE_FLAG = #update.StateFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.SuccessFlag"  prepend=",">
+          SUCCESS_FLAG = #update.SuccessFlag#
+        </isNotNull>
+        <isNotNull  property="update.ReturnMsg"  prepend=",">
+          RETURN_MSG = #update.ReturnMsg#
+        </isNotNull>
+        <isNotNull  property="update.MovType"  prepend=",">
+          MOV_TYPE = #update.MovType#
+        </isNotNull>
+        <isNotNull  property="update.ClassId"  prepend=",">
+          CLASS_ID = #update.ClassId#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM PSM_MES_STORAGE_QTY
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_PsmMesStorageQty">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_PsmMesStorageQty">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM PSM_MES_STORAGE_QTY
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM PSM_MES_STORAGE_QTY
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_PsmMesStorageQty" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE PSM_MES_STORAGE_QTY
+    </statement>
+  </statements>
+</sqlMap>

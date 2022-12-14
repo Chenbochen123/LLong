@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportBsmMoldingFirstInspect" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T0.*,T1.EQUIP_NAME,T3.Material_Name,T2.USER_NAME
+        FROM BSM_MOLDING_FIRST_INSPECT T0
+        LEFT JOIN SBE_EQUIP T1 ON T1.OBJID = T0.MACHINEID
+        LEFT JOIN SSB_USER T2 ON T2.OBJID = T0.EMPID1
+        LEFT JOIN V_BBM_MATERIALINFO T3 ON T3.OBJID = T0.CURRENTMATERIALID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T0.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[T0.INSERTTIME >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[T0.INSERTTIME <= #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[T0.EQUIP_ID = #where.EQUIP_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_NAME" prepend="AND">
+          <![CDATA[T1.EQUIP_NAME LIKE '%' || #where.EQUIP_NAME || '%'#]]>
+        </isNotNull>
+        <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+          <![CDATA[T3.MATERIAL_NAME LIKE '%' || #where.MATERIAL_NAME# || '%'#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T0.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    <select id="Select+Update@ReportBsmMoldingFirstInspect" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM BSM_MOLDING_FIRST_INSPECT ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询班次信息，ID值固定为GetComboBoxData@Select@ReportBpmMoldingShiftMaster@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportBsmStockIn@STORE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey,STORE_NAME ssValue FROM BSM_STORE WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询班组信息，ID值固定为GetComboBoxData@Select@ReportBpmMoldingShiftMaster@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportBsmStockIn@STORE_PLACE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey,STORE_PLACE_NAME ssValue FROM BSM_STORE_PLACE WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BasicMapper.FqcChangegradeInfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="FqcChangegradeInfo" type="Mesnac.Quality.Entity.BasicEntity.FqcChangegradeInfo, Mesnac.Quality.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_FqcChangegradeInfo" class="FqcChangegradeInfo">
+    <result property="ObjId" column="OBJID"/>
+    <result property="OldgardeId" column="OLDGARDE_ID"/>
+    <result property="NewgardeId" column="NEWGARDE_ID"/>
+    <result property="WorkProcessId" column="WORK_PROCESS_ID"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="WorkshopId" column="WORKSHOP_ID"/>
+    <result property="BaupFlag" column="BAUP_FLAG"/>
+    <result property="BaupTime" column="BAUP_TIME"/>
+    <result property="RecordUserid" column="RECORD_USERID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="GreenTyreNo" column="GREEN_TYRE_NO"/>
+    <result property="NewFlag" column="NEW_FLAG"/>
+    <result property="NewDefectId" column="NEW_DEFECT_ID"/>
+    <result property="OldDefectId" column="OLD_DEFECT_ID"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_FqcChangegradeInfo" class="FqcChangegradeInfo">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="OldgardeId" column="OldgardeId"/>
+    <parameter property="NewgardeId" column="NewgardeId"/>
+    <parameter property="WorkProcessId" column="WorkProcessId"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="WorkshopId" column="WorkshopId"/>
+    <parameter property="BaupFlag" column="BaupFlag"/>
+    <parameter property="BaupTime" column="BaupTime"/>
+    <parameter property="RecordUserid" column="RecordUserid"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="GreenTyreNo" column="GreenTyreNo"/>
+    <parameter property="NewFlag" column="NewFlag"/>
+    <parameter property="NewDefectId" column="NewDefectId"/>
+    <parameter property="OldDefectId" column="OldDefectId"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM FQC_CHANGEGRADE_INFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.OldgardeId" prepend="AND">
+          <![CDATA[OLDGARDE_ID = #where.OldgardeId#]]>
+        </isNotNull>
+        <isNotNull property="where.NewgardeId" prepend="AND">
+          <![CDATA[NEWGARDE_ID = #where.NewgardeId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkProcessId" prepend="AND">
+          <![CDATA[WORK_PROCESS_ID = #where.WorkProcessId#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupFlag" prepend="AND">
+          <![CDATA[BAUP_FLAG = #where.BaupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupTime" prepend="AND">
+          <![CDATA[BAUP_TIME = #where.BaupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserid" prepend="AND">
+          <![CDATA[RECORD_USERID = #where.RecordUserid#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[GREEN_TYRE_NO = #where.GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="where.NewFlag" prepend="AND">
+          <![CDATA[NEW_FLAG = #where.NewFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.NewDefectId" prepend="AND">
+          <![CDATA[NEW_DEFECT_ID = #where.NewDefectId#]]>
+        </isNotNull>
+        <isNotNull property="where.OldDefectId" prepend="AND">
+          <![CDATA[OLD_DEFECT_ID = #where.OldDefectId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO FQC_CHANGEGRADE_INFO]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="OldgardeId" prepend=",">OLDGARDE_ID</isNotNull>
+        <isNotNull property="NewgardeId" prepend=",">NEWGARDE_ID</isNotNull>
+        <isNotNull property="WorkProcessId" prepend=",">WORK_PROCESS_ID</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">WORKSHOP_ID</isNotNull>
+        <isNotNull property="BaupFlag" prepend=",">BAUP_FLAG</isNotNull>
+        <isNotNull property="BaupTime" prepend=",">BAUP_TIME</isNotNull>
+        <isNotNull property="RecordUserid" prepend=",">RECORD_USERID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="GreenTyreNo" prepend=",">GREEN_TYRE_NO</isNotNull>
+        <isNotNull property="NewFlag" prepend=",">NEW_FLAG</isNotNull>
+        <isNotNull property="NewDefectId" prepend=",">NEW_DEFECT_ID</isNotNull>
+        <isNotNull property="OldDefectId" prepend=",">OLD_DEFECT_ID</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_FQC_CHANGEGRADE_INFO.NEXTVAL</isNull>
+        <isNotNull property="OldgardeId" prepend=",">#OldgardeId#</isNotNull>
+        <isNotNull property="NewgardeId" prepend=",">#NewgardeId#</isNotNull>
+        <isNotNull property="WorkProcessId" prepend=",">#WorkProcessId#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="WorkshopId" prepend=",">#WorkshopId#</isNotNull>
+        <isNotNull property="BaupFlag" prepend=",">#BaupFlag#</isNotNull>
+        <isNotNull property="BaupTime" prepend=",">#BaupTime#</isNotNull>
+        <isNotNull property="RecordUserid" prepend=",">#RecordUserid#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="GreenTyreNo" prepend=",">#GreenTyreNo#</isNotNull>
+        <isNotNull property="NewFlag" prepend=",">#NewFlag#</isNotNull>
+        <isNotNull property="NewDefectId" prepend=",">#NewDefectId#</isNotNull>
+        <isNotNull property="OldDefectId" prepend=",">#OldDefectId#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE FQC_CHANGEGRADE_INFO
+       <dynamic prepend="SET">
+        <isNotNull  property="update.OldgardeId"  prepend=",">
+          OLDGARDE_ID = #update.OldgardeId#
+        </isNotNull>
+        <isNotNull  property="update.NewgardeId"  prepend=",">
+          NEWGARDE_ID = #update.NewgardeId#
+        </isNotNull>
+        <isNotNull  property="update.WorkProcessId"  prepend=",">
+          WORK_PROCESS_ID = #update.WorkProcessId#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.WorkshopId"  prepend=",">
+          WORKSHOP_ID = #update.WorkshopId#
+        </isNotNull>
+        <isNotNull  property="update.BaupFlag"  prepend=",">
+          BAUP_FLAG = #update.BaupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BaupTime"  prepend=",">
+          BAUP_TIME = #update.BaupTime#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserid"  prepend=",">
+          RECORD_USERID = #update.RecordUserid#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.GreenTyreNo"  prepend=",">
+          GREEN_TYRE_NO = #update.GreenTyreNo#
+        </isNotNull>
+        <isNotNull  property="update.NewFlag"  prepend=",">
+          NEW_FLAG = #update.NewFlag#
+        </isNotNull>
+        <isNotNull  property="update.NewDefectId"  prepend=",">
+          NEW_DEFECT_ID = #update.NewDefectId#
+        </isNotNull>
+        <isNotNull  property="update.OldDefectId"  prepend=",">
+          OLD_DEFECT_ID = #update.OldDefectId#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM FQC_CHANGEGRADE_INFO
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_FqcChangegradeInfo">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_FqcChangegradeInfo">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM FQC_CHANGEGRADE_INFO
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM FQC_CHANGEGRADE_INFO
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_FqcChangegradeInfo" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE FQC_CHANGEGRADE_INFO
+    </statement>
+  </statements>
+</sqlMap>

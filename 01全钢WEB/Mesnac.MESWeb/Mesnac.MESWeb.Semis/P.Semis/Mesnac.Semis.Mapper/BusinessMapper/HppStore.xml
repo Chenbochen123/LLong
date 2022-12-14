@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HppStore"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_STORE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreName" prepend="AND">
+          <![CDATA[STORE_NAME = #where.StoreName#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreCode" prepend="AND">
+          <![CDATA[STORE_CODE = #where.StoreCode#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreTypeId" prepend="AND">
+          <![CDATA[STORE_TYPE_ID = #where.StoreTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.SapCode" prepend="AND">
+          <![CDATA[SAP_CODE = #where.SapCode#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreLevel" prepend="AND">
+          <![CDATA[STORE_LEVEL = #where.StoreLevel#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreHigherLevel" prepend="AND">
+          <![CDATA[STORE_HIGHER_LEVEL = #where.StoreHigherLevel#]]>
+        </isNotNull>
+        <isNotNull property="where.Responperson" prepend="AND">
+          <![CDATA[RESPONPERSON = #where.Responperson#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+     
+     <select id="GetPageDataByReader2" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T.*,T2.STORE_NAME HIGHER_STORE_NAME,T3.USER_NAME FROM HPP_STORE T
+        LEFT JOIN HPP_STORE T2 ON T.STORE_HIGHER_LEVEL=T2.STORE_CODE
+        LEFT JOIN SSB_USER T3 ON T.RECORD_USER_ID=T3.OBJID ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.Objid" prepend="AND">
+           <![CDATA[T.OBJID = #where.Objid#]]>
+         </isNotNull>
+         <isNotNull property="where.UsedFlag" prepend="AND">
+           <![CDATA[T.USED_FLAG = #where.UsedFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.StoreTypeId" prepend="AND">
+           <![CDATA[T.STORE_TYPE_ID = #where.StoreTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.StoreCode" prepend="AND">
+           <![CDATA[T.STORE_CODE = #where.StoreCode#]]>
+         </isNotNull>
+         <isNotNull property="where.SapCode" prepend="AND">
+           <![CDATA[T.SAP_CODE = #where.SapCode#]]>
+         </isNotNull>
+         <isNotNull property="where.StoreName" prepend="AND">
+           <![CDATA[T.STORE_NAME = #where.StoreName#]]>
+         </isNotNull>
+         <isNotNull property="where.StoreHigherLevel" prepend="AND">
+           <![CDATA[T.STORE_HIGHER_LEVEL = #where.StoreHigherLevel#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+     <select id="GetBasStorage1" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT MAX(T.STORE_CODE) FROM HPP_STORE T
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="StoreHigherLevel">
+           <![CDATA[STORE_HIGHER_LEVEL=#StoreHigherLevel#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <select id="GetBasStorage2" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT RIGHT('000' + CONVERT(VARCHAR, CONVERT(INT, RIGHT(StorageID, 3)) + 1), 3), LEN(RIGHT('000' + CONVERT(VARCHAR, CONVERT(INT, RIGHT(StorageID, 3)) + 1), 3))/3 FROM BasStorage where ObjID = (select max(ObjID) from BasStorage where StorageLevel = '1')
+       ]]>
+     </select>
+     
+     <!--将这一库位下所有库位置为启用状态-->
+     <update id="UpdateUsedFlag" parameterClass="map" >
+       <![CDATA[ UPDATE HPP_STORE_PLACE T
+       SET　T.USED_FLAG=1
+        WHERE  T.STORE_CODE LIKE #StoreCode# || '%'
+       ]]>
+    </update>
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetSemisStorePlace" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT T1.OBJID FROM HPP_STORE T
+        LEFT JOIN HPP_STORE_PLACE T1 ON T1.STORE_ID = T.OBJID
+         WHERE T.STORE_HIGHER_LEVEL = '0001001'
+       ]]>
+       <isNotNull property="TargetStorage" prepend="AND">
+         <![CDATA[T.DUMMY3=#TargetStorage#]]>
+       </isNotNull>
+     </select>
+     <select id="GetStoreInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+           SELECT DISTINCT(B1.OBJID),B1.STORE_NAME FROM HPP_STORE B1
+             LEFT JOIN  HPP_STORE_PLACE B2 ON B2.STORE_ID = B1.OBJID  WHERE B2.POSITION_TYPE=0  and b1.delete_flag=0 and b1.store_higher_level = '0001005' and b1.objid <> 403 ORDER BY  B1.STORE_NAME ASC
+       ]]>
+
+     </select>
+     <select id="GetStoreInfo1" parameterClass="map" resultClass="Row">
+       <![CDATA[
+          SELECT T1.OBJID,T1.STORE_NAME FROM HPP_STORE_PLACE T LEFT JOIN HPP_STORE T1 ON T1.OBJID = T.STORE_ID
+             WHERE  T.POSITION_TYPE=1 AND T.DUMMY_7<>4101 ORDER BY T.STORE_PLACE_NAME
+       ]]>
+     </select>
+
+     <select id="GetSemisStoreInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+            SELECT DISTINCT(B1.OBJID),B1.STORE_NAME FROM HPP_STORE B1
+              LEFT JOIN  HPP_STORE_PLACE B2 ON B2.STORE_ID = B1.OBJID  WHERE B2.POSITION_TYPE=0  and b1.delete_flag=0   ORDER BY  B1.STORE_NAME ASC
+       ]]>
+     </select>
+     <select id="GetEquipMinorTypeInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+         select t1.OBJID,t1.MINOR_TYPE_NAME from SBE_EQUIP_MINOR_TYPE t1  where t1.DELETE_FLAG = '0' and major_type_id in (21,22,31,32,33,34,35)
+       ]]>
+     </select>
+
+
+     <update id="SetSemisCardNoUsedState" parameterClass="map">
+       <![CDATA[
+       update hpp_semis_production set DUMMY8 = #State#
+       where CARD_NO = #CardNo#
+       ]]>
+     </update>
+
+     <update id="SetSemisCardNoUsedStateRubber" parameterClass="map">
+       <![CDATA[
+       update hpp_rubber_production set  DUMMY_5 = #State#
+       where BARCODE = #CardNo#
+       ]]>
+     </update>
+
+     <select id="GetMoldingEquipStorageInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select rownum - 1 rowno,t2.* from (
+        select a.card_no,a.dummy2 material_id, c.sap_code ,a.record_time instock_time,b.begin_time,b.end_time,d.XRXCControl,d.XRXCTime
+        from hpp_storage_detail a
+        left join hpp_semis_production b on a.card_no = b.card_no and b.delete_flag = 0
+        left join sbm_material c on a.dummy2 = c.objid
+        left join (select max(decode(t.config_key,'SemisEquipStorageXRXCControl',t.config_value)) XRXCControl
+                         ,max(decode(t.config_key,'SemisEquipStorageXRXCTime',t.config_value)) XRXCTime
+                   from ssb_config t
+                   where config_key in ('SemisEquipStorageXRXCControl','SemisEquipStorageXRXCTime')) d on 1=1
+        where 1=1
+        and a.card_no = #CardNo#
+        
+        union all 
+        
+        select t1.* from (
+        select a.card_no,a.dummy2 materID, c.sap_code ,a.record_time instock_time,b.begin_time,b.end_time,d.XRXCControl,d.XRXCTime
+        from hpp_storage_detail a
+        left join hpp_semis_production b on a.card_no = b.card_no and b.delete_flag = 0
+        left join sbm_material c on a.dummy2 = c.objid
+        left join (select max(decode(t.config_key,'SemisEquipStorageXRXCControl',t.config_value)) XRXCControl
+                         ,max(decode(t.config_key,'SemisEquipStorageXRXCTime',t.config_value)) XRXCTime
+                   from ssb_config t
+                    where config_key in ('SemisEquipStorageXRXCControl','SemisEquipStorageXRXCTime')) d on 1=1
+        where 1=1
+        and ((nvl(b.dummy8,'0') in ('0','1') and b.qty = b.left_qty and a.used_flag = 0) or (nvl(b.dummy8,'0') in ('11')))
+        and a.dummy2 = #MaterialID# 
+        and a.store_place_id = (select store_place_id from hpp_storage_detail where card_no = #CardNo# )
+        order by b.end_time
+        ) t1 where rownum <= 1
+        ) t2       
+      ]]>
+     </select>
+
+     
+     <!--这个方法，需要吧rubber表改成semis表-->
+     <select id="GetSemisEquipStorageInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+    
+    select rownum - 1 rowno,t2.* from (
+        select a.card_no,a.dummy2 material_id, c.sap_code ,a.record_time instock_time,b.produce_time,d.XRXCControl,d.XRXCTime
+        from hpp_storage_detail a
+        left join hpp_rubber_production b on a.card_no = b.barcode and b.delete_flag = 0
+        left join sbm_material c on a.dummy2 = c.objid
+        left join (select max(decode(t.config_key,'SemisEquipStorageXRXCControl',t.config_value)) XRXCControl
+                         ,max(decode(t.config_key,'SemisEquipStorageXRXCTime',t.config_value)) XRXCTime
+                   from ssb_config t
+                   where config_key in ('SemisEquipStorageXRXCControl','SemisEquipStorageXRXCTime')) d on 1=1
+        where 1=1
+        and a.card_no =  #CardNo#
+        
+        union all 
+        
+        select t1.* from (
+        select a.card_no,a.dummy2 materID, c.sap_code ,a.record_time instock_time,b.produce_time,d.XRXCControl,d.XRXCTime
+        from hpp_storage_detail a
+        left join hpp_rubber_production b on a.card_no = b.barcode and b.delete_flag = 0
+        left join sbm_material c on a.dummy2 = c.objid
+        left join (select max(decode(t.config_key,'SemisEquipStorageXRXCControl',t.config_value)) XRXCControl
+                         ,max(decode(t.config_key,'SemisEquipStorageXRXCTime',t.config_value)) XRXCTime
+                   from ssb_config t
+                    where config_key in ('SemisEquipStorageXRXCControl','SemisEquipStorageXRXCTime')) d on 1=1
+        where 1=1
+        and ((nvl(b.dummy_5,'0') in ('0','1') and b.qty = b.left_qty and a.used_flag = 0) or (nvl(b.dummy_5,'0') in ('11')))
+        and a.dummy2 = #MaterialID#  
+        and a.store_place_id = (select store_place_id from hpp_storage_detail where card_no = #CardNo# )
+        order by b.produce_time
+        ) t1 where rownum <= 1
+        ) t2       
+      ]]>
+     </select>
+
+     <select id="GetSemisRubberEquipStorageInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+    
+    select rownum - 1 rowno,t2.* from (
+        select a.card_no,a.dummy2 material_id, c.sap_code ,a.record_time instock_time,b.produce_time,d.XRXCControl,d.XRXCTime
+        from hpp_storage_detail a
+        left join hpp_rubber_production b on a.card_no = b.barcode and b.delete_flag = 0
+        left join sbm_material c on a.dummy2 = c.objid
+        left join (select max(decode(t.config_key,'SemisRubberEquipStorageXRXCControl',t.config_value)) XRXCControl
+                         ,max(decode(t.config_key,'SemisRubberEquipStorageXRXCTime',t.config_value)) XRXCTime
+                   from ssb_config t
+                   where config_key in ('SemisRubberEquipStorageXRXCControl','SemisRubberEquipStorageXRXCTime')) d on 1=1
+        where 1=1
+        and a.card_no =  #CardNo#
+        
+        union all 
+        
+        select t1.* from (
+        select a.card_no,a.dummy2 materID, c.sap_code ,a.record_time instock_time,b.produce_time,d.XRXCControl,d.XRXCTime
+        from hpp_storage_detail a
+        left join hpp_rubber_production b on a.card_no = b.barcode and b.delete_flag = 0
+        left join sbm_material c on a.dummy2 = c.objid
+        left join (select max(decode(t.config_key,'SemisRubberEquipStorageXRXCControl',t.config_value)) XRXCControl
+                         ,max(decode(t.config_key,'SemisRubberEquipStorageXRXCTime',t.config_value)) XRXCTime
+                   from ssb_config t
+                    where config_key in ('SemisRubberEquipStorageXRXCControl','SemisRubberEquipStorageXRXCTime')) d on 1=1
+        where 1=1
+        and ((nvl(b.dummy_5,'0') in ('0','1') and b.qty = b.left_qty and a.used_flag = 0) or (nvl(b.dummy_5,'0') in ('11')))
+        and a.dummy2 = #MaterialID#  
+        and a.store_place_id = (select store_place_id from hpp_storage_detail where card_no = #CardNo# )
+        order by b.produce_time
+        ) t1 where rownum <= 1
+        ) t2       
+      ]]>
+     </select>
+
+     <select id="GetSemisRubberEquipStorageInfoYCL" parameterClass="map" resultClass="Row">
+       <![CDATA[
+    
+    select rownum - 1 rowno,t2.* from (
+        select a.card_no,a.dummy2 material_id, c.sap_code ,a.record_time instock_time,b.produce_time,d.XRXCControl,d.XRXCTime
+        from hpp_storage_detail a
+        left join hpp_rubber_production b on a.card_no = b.barcode and b.delete_flag = 0
+        left join sbm_material c on a.dummy2 = c.objid
+        left join (select max(decode(t.config_key,'SemisRubberEquipStorageXRXCControl',t.config_value)) XRXCControl
+                         ,max(decode(t.config_key,'SemisRubberEquipStorageXRXCTime',t.config_value)) XRXCTime
+                   from ssb_config t
+                   where config_key in ('SemisRubberEquipStorageXRXCControl','SemisRubberEquipStorageXRXCTime')) d on 1=1
+        where 1=1
+        and a.card_no =  #CardNo#
+        
+        union all 
+        
+        select t1.* from (
+        select a.card_no,a.dummy2 materID, c.sap_code ,a.record_time instock_time,b.produce_time,d.XRXCControl,d.XRXCTime
+        from hpp_storage_detail a
+        left join hpp_rubber_production b on a.card_no = b.barcode and b.delete_flag = 0
+        left join sbm_material c on a.dummy2 = c.objid
+        left join (select max(decode(t.config_key,'SemisRubberEquipStorageXRXCControl',t.config_value)) XRXCControl
+                         ,max(decode(t.config_key,'SemisRubberEquipStorageXRXCTime',t.config_value)) XRXCTime
+                   from ssb_config t
+                    where config_key in ('SemisRubberEquipStorageXRXCControl','SemisRubberEquipStorageXRXCTime')) d on 1=1
+        where 1=1
+        and ((nvl(b.dummy_5,'0') in ('0','1') and b.qty = b.left_qty and a.used_flag = 0) or (nvl(b.dummy_5,'0') in ('11')))
+        and a.dummy2 = #MaterialID#  
+        and a.store_place_id = (select store_place_id from hpp_storage_detail where card_no = #CardNo# )
+        and a.record_time + 1 <sysdate
+        order by b.produce_time
+        ) t1 where rownum <= 1
+        ) t2       
+      ]]>
+     </select>
+     
+
+     <select id="GetHppKouMould" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       
+ select RFID,KOU_MOULD from hpp_koumould where 1=1 
+      ]]>
+       <isNotNull property="RFID" prepend="AND">
+         <![CDATA[RFID = #RFID#]]>
+       </isNotNull>
+       <![CDATA[order by record_time]]>
+     </select>
+
+
+     <select id="GetGYEquipStorageInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+    
+    select rownum - 1 rowno,t2.* from (
+        select a.card_no,b.material_id, c.sap_code ,a.record_time instock_time,b.end_time PRODUCTION_TIME,d.XRXCControl,d.XRXCTime,B.DUMMY4 QC_DATE
+        from hpp_storage_detail a
+        left join hpp_semis_production b on a.card_no = b.card_no and b.delete_flag = 0
+        left join sbm_material c on b.material_id = c.objid
+        left join (select max(decode(t.config_key,'SemisGYEquipStorageXRXCControl',t.config_value)) XRXCControl
+                         ,max(decode(t.config_key,'SemisGYEquipStorageXRXCTime',t.config_value)) XRXCTime
+                   from ssb_config t
+                   where config_key in ('SemisGYEquipStorageXRXCControl','SemisGYEquipStorageXRXCTime')) d on 1=1
+        where 1=1
+        and a.card_no = #CardNo#
+        
+        union all 
+        
+        select t1.* from (
+        select a.card_no,b.material_id, c.sap_code ,a.record_time instock_time,b.end_time PRODUCTION_TIME,d.XRXCControl,d.XRXCTime,B.DUMMY4 QC_DATE
+        from hpp_storage_detail a
+        left join hpp_semis_production b on a.card_no = b.card_no and b.delete_flag = 0
+        left join sbm_material c on b.material_id = c.objid
+        left join (select max(decode(t.config_key,'SemisGYEquipStorageXRXCControl',t.config_value)) XRXCControl
+                         ,max(decode(t.config_key,'SemisGYEquipStorageXRXCTime',t.config_value)) XRXCTime
+                   from ssb_config t
+                    where config_key in ('SemisGYEquipStorageXRXCControl','SemisGYEquipStorageXRXCTime')) d on 1=1
+       LEFT JOIN HPP_STRIPPING e ON e.BATCH = b.BATCH
+       LEFT JOIN hpp_store_place  G ON G.OBJID = a.STORE_PLACE_ID
+        where  (b.DUMMY8 = '' OR b.DUMMY8 IS NULL OR b.DUMMY8 = '11') AND b.QTY = b.LEFT_QTY and b.dummy4 is not null
+        AND  b.MATERIAL_ID = (SELECT MATERIAL_ID FROM HPP_SEMIS_PRODUCTION WHERE card_no = #CardNo#) 
+       and e.ok_flag = 1 AND G.STORE_PLACE_NAME = ( select b.store_place_name  from hpp_storage_detail a
+         left join hpp_store_place b on a.store_place_id = b.objid
+         where card_no = #CardNo#) AND ( G.STORE_PLACE_NAME LIKE '%15%' OR G.STORE_PLACE_NAME LIKE '%90%')
+        order by B.DUMMY4
+        ) t1 where rownum <= 1
+        ) t2     
+      ]]>
+     </select>
+     
+   
+   </statements>
+</sqlMap>

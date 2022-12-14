@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="物料名称"></Caption>
+    <Caption Name="MATERIAL_CODE" Value="物料代号"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="MAJOR_TYPE_ID" Value="大类名称"></Caption>
+    <Caption Name="BRAND_ID" Value="品牌名称"></Caption>
+    <Caption Name="SIZE_ID" Value="规格名称"></Caption>
+    <Caption Name="PLYRATING_ID" Value="层级名称"></Caption>
+    <Caption Name="PATTERN_ID" Value="花纹名称"></Caption>
+    <Caption Name="LOAD_INDEX_ID" Value="负荷指数名称"></Caption>
+    <Caption Name="SPEED_LEVEL_ID" Value="速度级别名称"></Caption>
+    <Caption Name="STANDARD_ID" Value="标准名称"></Caption>
+    <Caption Name="ATTRIBUTE_ID" Value="属性名称"></Caption>
+    <Caption Name="MAJOR_TYPE_NAME" Value="大类名称"></Caption>
+    <Caption Name="BRAND_NAME" Value="品牌名称"></Caption>
+    <Caption Name="SIZE_NAME" Value="规格名称"></Caption>
+    <Caption Name="PLYRATING_NAME" Value="层级名称"></Caption>
+    <Caption Name="PATTERN_NAME" Value="花纹名称"></Caption>
+    <Caption Name="LOAD_INDEX_NAME" Value="负荷指数名称"></Caption>
+    <Caption Name="SPEED_LEVEL_NAME" Value="速度级别名称"></Caption>
+    <Caption Name="STANDARD_NAME" Value="标准名称"></Caption>
+    <Caption Name="ATTRIBUTE_NAME" Value="属性名称"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+  </Captions>
+  <WebPage Title="成品胎物料信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Curing/McUI/@McUI/CrudVCbmMaterial.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="V_CBM_MATERIAL">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <Uniques>
+      <Unique Fields="MATERIAL_NAME"></Unique>
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel ColumnCount="2" Width="600">
+      <ParamFields>
+        <ParamField FieldName="MAJOR_TYPE_ID" Type="ComboBox" ReadOnly="false" Nullable="false"></ParamField>
+        <ParamField FieldName="BRAND_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="SIZE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="PLYRATING_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="PATTERN_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="LOAD_INDEX_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="SPEED_LEVEL_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="STANDARD_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="ATTRIBUTE_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel ColumnCount="2" Width="600">
+      <ParamFields>
+        <ParamField FieldName="MAJOR_TYPE_ID" Type="ComboBox" ReadOnly="false" Nullable="false"></ParamField>
+        <ParamField FieldName="BRAND_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="SIZE_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="PLYRATING_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="PATTERN_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="LOAD_INDEX_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="SPEED_LEVEL_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="STANDARD_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="ATTRIBUTE_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="MATERIAL_CODE" Nullable="true"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="MATERIAL_CODE"></ParamField>
+        <ParamField FieldName="BRAND_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="SIZE_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="PLYRATING_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="PATTERN_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="LOAD_INDEX_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="SPEED_LEVEL_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="STANDARD_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="ATTRIBUTE_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="T1.OBJID">
+      <GridColumns>
+        <GridColumn ColumnName="MATERIAL_NAME"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_CODE"></GridColumn>
+        <GridColumn ColumnName="BRAND_NAME"></GridColumn>
+        <GridColumn ColumnName="SIZE_NAME"></GridColumn>
+        <GridColumn ColumnName="PLYRATING_NAME"></GridColumn>
+        <GridColumn ColumnName="PATTERN_NAME"></GridColumn>
+        <GridColumn ColumnName="LOAD_INDEX_NAME"></GridColumn>
+        <GridColumn ColumnName="SPEED_LEVEL_NAME"></GridColumn>
+        <GridColumn ColumnName="STANDARD_NAME"></GridColumn>
+        <GridColumn ColumnName="ATTRIBUTE_NAME"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+    <MainDetail>
+      <ParamFields>
+        <ParamField FieldName="MATERIAL_NAME"></ParamField>
+        <ParamField FieldName="MATERIAL_CODE"></ParamField>
+        <ParamField FieldName="BRAND_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="SIZE_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="PLYRATING_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="PATTERN_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="LOAD_INDEX_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="SPEED_LEVEL_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="STANDARD_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="ATTRIBUTE_ID" TYPE="ComboBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </MainDetail>
+  </Select>
+</UiConfig>

@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.BppGetMaterPlan"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BPP_GET_MATER_PLAN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDate" prepend="AND">
+          <![CDATA[SHIFT_DATE = #where.ShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ClassId" prepend="AND">
+          <![CDATA[CLASS_ID = #where.ClassId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.Qty" prepend="AND">
+          <![CDATA[QTY = #where.Qty#]]>
+        </isNotNull>
+        <isNotNull property="where.RealQty" prepend="AND">
+          <![CDATA[REAL_QTY = #where.RealQty#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetGetMaterPlanInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T.MATERIAL_ID,T.QTY,T.REAL_QTY,replace(SUBSTR(T1.MATERIAL_NAME,11),'TBR ','') MATERIAL_NAME
+       ,T2.MINOR_TYPE_NAME FROM BPP_GET_MATER_PLAN T
+       LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID  = T.MATERIAL_ID
+       LEFT JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T1.MINOR_TYPE_ID = T2.OBJID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="EquipId" prepend="AND">
+           <![CDATA[T.EQUIP_ID=#EquipId#]]>
+         </isNotNull>
+         <isNotNull property="ShiftDate" prepend="AND">
+           <![CDATA[T.SHIFT_DATE=#ShiftDate#]]>
+         </isNotNull>
+         <isNotNull property="ShiftId" prepend="AND">
+           <![CDATA[T.SHIFT_ID=#ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="PlanDetailId" prepend="AND">
+           <![CDATA[T.DUMMY_1=#PlanDetailId#]]>
+         </isNotNull>
+       </dynamic>
+       <dynamic prepend="ORDER BY">
+         <![CDATA[T2.MINOR_TYPE_NAME]]>
+       </dynamic>
+     </select>
+     <select id="GetGetMaterPlanNew" parameterClass="map" resultClass="Row">
+       <![CDATA[
+            SELECT T.MATERIAL_ID,T.QTY,sum(t3.left_qty) REAL_QTY,replace(SUBSTR(T1.MATERIAL_NAME,11),'TBR ','') MATERIAL_NAME
+       ,T2.MINOR_TYPE_NAME FROM BPP_GET_MATER_PLAN T
+       LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID  = T.MATERIAL_ID
+       LEFT JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T1.MINOR_TYPE_ID = T2.OBJID
+       left join hpp_storage_detail t4 on t4.dummy2 = t1.objid and t4.delete_flag = 0
+       inner join hpp_semis_production t3 on t3.card_no = t4.card_no and t3.delete_flag = 0 and t3.left_qty >0
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="EquipId" prepend="AND">
+           <![CDATA[T.EQUIP_ID=#EquipId#]]>
+         </isNotNull>
+         <isNotNull property="ShiftDate" prepend="AND">
+           <![CDATA[T.SHIFT_DATE=#ShiftDate#]]>
+         </isNotNull>
+         <isNotNull property="ShiftId" prepend="AND">
+           <![CDATA[T.SHIFT_ID=#ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="PlanDetailId" prepend="AND">
+           <![CDATA[T.DUMMY_1=#PlanDetailId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ group by T.MATERIAL_ID,T.QTY,T2.MINOR_TYPE_NAME，T1.MATERIAL_NAME]]>
+      
+       <dynamic prepend="ORDER BY">
+         <![CDATA[T2.MINOR_TYPE_NAME]]>
+       </dynamic>
+     </select>
+     
+     <insert id="InsertGetMaterPlan" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       INSERT INTO BPP_GET_MATER_PLAN 
+       (OBJID,DELETE_FLAG,SHIFT_ID,SHIFT_DATE,MATERIAL_ID,EQUIP_ID,QTY,REAL_QTY,DUMMY_1)
+        VALUES(SEQ_BPP_GET_MATER_PLAN.NEXTVAL,0,#ShiftId#,#ShiftDate#,#MateiralId#,#EquipId#,#Qty#,0,#PlanDetailId#)
+       ]]>
+     </insert>
+     <update id="UpdateGetMaterPlanQty" parameterClass="map">
+       <![CDATA[
+       UPDATE BPP_GET_MATER_PLAN SET QTY = #Qty#
+       WHERE EQUIP_ID=#EquipId# AND MATERIAL_ID=#MateiralId# AND SHIFT_ID=#ShiftId# AND SHIFT_DATE=#ShiftDate# and DUMMY_1=#PlanDetailId#
+       ]]>
+     </update>
+     <delete id="DeleteGetMaterPlan" parameterClass="map">
+       <![CDATA[
+       DELETE FROM BPP_GET_MATER_PLAN WHERE EQUIP_ID=#EquipId# AND MATERIAL_ID=#MateiralId# AND SHIFT_ID=#ShiftId# AND SHIFT_DATE=#ShiftDate# and DUMMY_1=#PlanDetailId#
+       ]]>
+     </delete>
+     <select id="GetEquipCurrentQty" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT NVL(T.QTY,0)-NVL(T.REAL_QTY,0) LEFT_QTY FROM BPP_GET_MATER_PLAN T
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="EquipId" prepend="AND">
+           <![CDATA[T.EQUIP_ID=#EquipId#]]>
+         </isNotNull>
+         <isNotNull property="ShiftId" prepend="AND">
+           <![CDATA[T.SHIFT_ID=#ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="ShiftDate" prepend="AND">
+           <![CDATA[T.SHIFT_DATE=#ShiftDate#]]>
+         </isNotNull>
+         <isNotNull property="MaterialId" prepend="AND">
+           <![CDATA[T.MATERIAL_ID=#MaterialId#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+  </statements>
+</sqlMap>

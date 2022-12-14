@@ -1,0 +1,2633 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+using Ext.Net;
+using Mesnac.Curing.Business.Interface;
+using Mesnac.Curing.Business.Implements;
+using Mesnac.Curing.Entity.BasicEntity;
+
+using Mesnac.Main.Business.Interface;
+using Mesnac.Main.Business.Implements;
+using Mesnac.Main.Entity.BasicEntity;
+
+using Mesnac.DbAccess;
+using Mesnac.Web.UI;
+using Mesnac.Web.UI.Entity;
+
+public partial class Plugins_Curing_Technology_CuringTechnology : Mesnac.Web.UI.Page
+{
+    #region 权限定义
+    protected __ _ = new __();
+    public class __ : ___  //必须继承___   //Action不能重复，重复会被覆盖
+    {
+        public __()
+        {
+            浏览 = new PageAction() { ActionId = 0, ActionName = "" };
+            查询 = new PageAction() { ActionId = 1, ActionName = "btnSearch,btnView" };
+            添加 = new PageAction() { ActionId = 2, ActionName = "btnSearch,btnView,btnAdd,btnSubmit" };
+            修改 = new PageAction() { ActionId = 3, ActionName = "btnSearch,btnView,btnEdit,btnSubmit" };
+            删除 = new PageAction() { ActionId = 4, ActionName = "btnSearch,btnView,btnDelete" };
+            审核 = new PageAction() { ActionId = 5, ActionName = "btnSearch,btnView,btnAudit" };
+            下发 = new PageAction() { ActionId = 6, ActionName = "btnSearch,btnView,btnSend" };
+            复制 = new PageAction() { ActionId = 7, ActionName = "btnSearch,btnView,btnCopy" };
+        }
+        public PageAction 浏览 { get; private set; } //必须为 public
+        public PageAction 查询 { get; private set; } //必须为 public
+        public PageAction 添加 { get; private set; } //必须为 public
+        public PageAction 修改 { get; private set; } //必须为 public
+        public PageAction 删除 { get; private set; } //必须为 public
+        public PageAction 审核 { get; private set; } //必须为 public
+        public PageAction 下发 { get; private set; } //必须为 public
+        public PageAction 复制 { get; private set; } //必须为 public
+    }
+    #endregion
+
+
+    #region 私有变量
+    private enum enumCommands
+    {
+        Add,
+        Update,
+        View,
+        Audit,
+        Copy,
+    }
+
+    private enum enumCuringTimeTypes
+    {
+        Standard = 0,
+        Winter = 1,
+        Summer = 2,
+    }
+
+    private enum enumEditTypes
+    {
+        Normal,
+        WinterSummer,
+    }
+
+    private enum enumRecordStates
+    {
+        New = 0, // 待提交
+        Submitted = 1, // 待审核
+        Passed = 2, // 待下发
+        Backup = 3, // 已退回
+        Sent = 4, // 已下发
+        Stoped = 5, // 已停用
+    }
+
+    private enum enumSubmitFlags
+    {
+        Waited = 0, // 待提交
+        Submited = 1, // 已提交
+    }
+    private enum enumAuditFlags
+    {
+        Waited = 0, // 待审核
+        Passed = 1, // 已通过
+        NotPassed = 2, // 未通过
+    }
+
+    private enum enumSendFlags
+    {
+        Waited = 0, // 待下发
+        Sent = 1, // 已下发
+    }
+
+    private enum enumUsedFlags
+    {
+        Used = 1, // 正用
+        Stoped = 2, //停用
+        Disabled = 3, //作废
+    }
+
+    private enum enumNeedAudit
+    {
+        Yes,
+        No,
+    }
+
+    private enum enumAllowSelfAudit
+    {
+        Yes,
+        No,
+    }
+
+    private enumEditTypes editType = enumEditTypes.Normal;
+
+    private enumNeedAudit needAudit = enumNeedAudit.Yes;
+
+    private enumAllowSelfAudit allowSelfAudit = enumAllowSelfAudit.No;
+
+    #endregion
+
+    #region 初始化
+    /// <summary>
+    /// 页面加载
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack && !X.IsAjaxRequest)
+        {
+            InitAllowSelfAudit();
+
+            InitEquipMajorType();
+            InitEquipMinorType();
+            InitFactory();
+            InitBuildingMaterial();
+            InitTechnologyType();
+            InitTechSizeLineColor();
+            InitBladderType();
+            InitEditTypes();
+            InitCuringTimeTypes();
+
+            InitShapingHeight();
+            InitShapingPress();
+            InitShapingTime();
+            InitShapingPosition();
+            InitChuckWidth();
+
+            InitAuditUsers();
+
+            InitTechSubmitStates();
+            InitTechAuditStates();
+            InitTechSendStates();
+            InitTechStates();
+
+        }
+    }
+
+    /// <summary>
+    /// 初始化是否允许自己审核
+    /// </summary>
+    private void InitAllowSelfAudit()
+    {
+        ICbhConfigHelperManager manager = new CbhConfigHelperManager();
+        IList<CbhConfigHelper> lst = manager.GetEntityList(new CbhConfigHelper() { DeleteFlag = 0, ConfigName = "CuringTechAllowSelfAudit" });
+        if (lst.Count > 0 && lst[0].ConfigValue == "1")
+        {
+            allowSelfAudit = enumAllowSelfAudit.Yes;
+        }
+        else
+        {
+            allowSelfAudit = enumAllowSelfAudit.No;
+        }
+    }
+
+    /// <summary>
+    /// 初始化设备大类
+    /// </summary>
+    private void InitEquipMajorType()
+    {
+        // 获取设备大类信息
+        ICbhConfigHelperManager cbhConfigHelperManager = new CbhConfigHelperManager();
+        string majorTypeId = cbhConfigHelperManager.GetEntityList(new CbhConfigHelper() { ConfigName = "CuringEquipMajorTypeId" })[0].ConfigValue;
+
+        ISbeEquipMajorTypeManager sbeEquipMajorTypeManager = new SbeEquipMajorTypeManager();
+        IList<SbeEquipMajorType> lst = sbeEquipMajorTypeManager.GetEntityList(new SbeEquipMajorType() { ObjId = Convert.ToInt32(majorTypeId) }, "OBJID");
+
+        cboMainMajorTypeId.Items.Add(new Ext.Net.ListItem() { Text = lst[0].MajorTypeName, Value = lst[0].ObjId.ToString() });
+        cboMainMajorTypeId.Value = majorTypeId;
+    }
+
+    /// <summary>
+    /// 初始化硫化机类型
+    /// </summary>
+    private void InitEquipMinorType()
+    {
+        string majorTypeId = cboMainMajorTypeId.Value.ToString();
+        ISbeEquipMinorTypeManager sbeEquipMinorTypeManager = new SbeEquipMinorTypeManager();
+        IList<SbeEquipMinorType> lst = sbeEquipMinorTypeManager.GetEntityList(new SbeEquipMinorType() { MajorTypeId = Convert.ToInt32(majorTypeId) }, "OBJID");
+
+        foreach (SbeEquipMinorType entity in lst)
+        {
+            cboMainMinorTypeId.Items.Add(new Ext.Net.ListItem() { Text = entity.MinorTypeName, Value = entity.ObjId.ToString() });
+            cboSearchMinorTypeId.Items.Add(new Ext.Net.ListItem() { Text = entity.MinorTypeName, Value = entity.ObjId.ToString() });
+        }
+
+    }
+
+    /// <summary>
+    /// 初始化工厂
+    /// </summary>
+    private void InitFactory()
+    {
+        ISsbFactoryManager manager = new SsbFactoryManager();
+        IList<SsbFactory> lst = manager.GetEntityList(new SsbFactory() { DeleteFlag = 0 }, "OBJID");
+        foreach (SsbFactory entity in lst)
+        {
+            cboMainFactoryId.Items.Add(new Ext.Net.ListItem() { Text = entity.FactoryName, Value = entity.ObjId.ToString() });
+        }
+        if (lst.Count == 1)
+        {
+            cboMainFactoryId.Select(0);
+        }
+    }
+
+    /// <summary>
+    /// 初始化胎胚规格
+    /// </summary>
+    private void InitBuildingMaterial()
+    {
+        ICbhConfigHelperManager managerConfigHelper = new CbhConfigHelperManager();
+        IList<CbhConfigHelper> lstConfigHelper = managerConfigHelper.GetEntityList(new CbhConfigHelper() { DeleteFlag = 0, ConfigName = "BuildingMaterialMajorTypeId" });
+        if (lstConfigHelper.Count == 0)
+        {
+            return;
+        }
+        string buildingMajorTypeId = lstConfigHelper[0].ConfigValue;
+
+        ISbmMaterialManager manager = new SbmMaterialManager();
+        IList<SbmMaterial> lst = manager.GetEntityList(new SbmMaterial() { DeleteFlag = 0, MajorTypeId = Convert.ToInt32(buildingMajorTypeId) }, "MATERIAL_NAME");
+        foreach (SbmMaterial entity in lst)
+        {
+            cboSearchBuildingMaterialId.Items.Add(new Ext.Net.ListItem() { Text = entity.MaterialName, Value = entity.ObjId.ToString() });
+            cboMainBuildingMaterialId.Items.Add(new Ext.Net.ListItem() { Text = entity.MaterialName, Value = entity.ObjId.ToString() });
+        }
+
+    }
+
+    /// <summary>
+    /// 初始化工艺类型
+    /// </summary>
+    private void InitTechnologyType()
+    {
+        ICrtCuringTechTypeManager crtCuringTechTypeManager = new CrtCuringTechTypeManager();
+        IList<CrtCuringTechType> lst3 = crtCuringTechTypeManager.GetEntityList(new CrtCuringTechType() { DeleteFlag = 0 }, "OBJID");
+        foreach (CrtCuringTechType entity in lst3)
+        {
+            cboMainTechnologyType.Items.Add(new Ext.Net.ListItem() { Text = entity.ShowName, Value = entity.ObjId.ToString() });
+            cboSearchTechnologyType.Items.Add(new Ext.Net.ListItem() { Text = entity.ShowName, Value = entity.ObjId.ToString() });
+        }
+    }
+
+    /// <summary>
+    /// 初始化规格标识线
+    /// </summary>
+    private void InitTechSizeLineColor()
+    {
+        ICrtCuringSizeLineColorManager manager = new CrtCuringSizeLineColorManager();
+        IList<CrtCuringSizeLineColor> lst = manager.GetEntityList(new CrtCuringSizeLineColor() { DeleteFlag = 0 }, "OBJID");
+
+        foreach (CrtCuringSizeLineColor entity in lst)
+        {
+            string text = entity.ColorName;
+            string value = entity.ObjId.ToString();
+            cboMainSizeMarkLineD1.AddItem(text, value);
+            cboMainSizeMarkLineD2.AddItem(text, value);
+            cboMainSizeMarkLineD3.AddItem(text, value);
+            cboMainSizeMarkLineD4.AddItem(text, value);
+            cboMainSizeMarkLineD5.AddItem(text, value);
+            cboMainSizeMarkLineM.AddItem(text, value);
+            cboMainSizeMarkLineU1.AddItem(text, value);
+            cboMainSizeMarkLineU2.AddItem(text, value);
+            cboMainSizeMarkLineU3.AddItem(text, value);
+            cboMainSizeMarkLineU4.AddItem(text, value);
+            cboMainSizeMarkLineU5.AddItem(text, value);
+        }
+    }
+
+    /// <summary>
+    /// 初始化胶囊型号 
+    /// </summary>
+    private void InitBladderType()
+    {
+        ICbeBladderTypeManager manager = new CbeBladderTypeManager();
+        IList<CbeBladderType> lst = manager.GetEntityList(new CbeBladderType() { DeleteFlag = 0 }, "OBJID");
+        foreach (CbeBladderType entity in lst)
+        {
+            string text = entity.TypeName;
+            string value = entity.ObjId.ToString();
+            cboMainBladderTypeId.AddItem(text, value);
+        }
+    }
+
+    /// <summary>
+    /// 初始化编辑方式
+    /// </summary>
+    private void InitEditTypes()
+    {
+        if (editType == enumEditTypes.Normal)
+        {
+            pnlDetailWinterTime.Hidden = true;
+            pnlDetailCuringTime.Hidden = true;
+        }
+        else if (editType == enumEditTypes.WinterSummer)
+        {
+            pnlDetailStandardTime.Hidden = true;
+        }
+    }
+
+    /// <summary>
+    /// 初始化当前执行
+    /// </summary>
+    private void InitCuringTimeTypes()
+    {
+    }
+
+    /// <summary>
+    /// 初始化定型高度
+    /// </summary>
+    private void InitShapingHeight()
+    {
+        ICrtShapingHeightManager manager = new CrtShapingHeightManager();
+        IList<CrtShapingHeight> lst = manager.GetEntityList(new CrtShapingHeight() { DeleteFlag = 0 }, "SHAPING_HEIGHT_CODE");
+        foreach (CrtShapingHeight entity in lst)
+        {
+            cboMainShapingHeightId.AddItem(entity.ShapingHeightCode, entity.ObjId.ToString());
+        }
+    }
+
+    /// <summary>
+    /// 初始化定型压力
+    /// </summary>
+    private void InitShapingPress()
+    {
+        ICrtShapingPressManager manager = new CrtShapingPressManager();
+        IList<CrtShapingPress> lst = manager.GetEntityList(new CrtShapingPress() { DeleteFlag = 0 }, "SHAPING_PRESS_CODE");
+        foreach (CrtShapingPress entity in lst)
+        {
+            cboMainShapingPressId.AddItem(entity.ShapingPressCode, entity.ObjId.ToString());
+        }
+    }
+
+    /// <summary>
+    /// 初始化定型时间
+    /// </summary>
+    private void InitShapingTime()
+    {
+        ICrtShapingTimeManager manager = new CrtShapingTimeManager();
+        IList<CrtShapingTime> lst = manager.GetEntityList(new CrtShapingTime() { DeleteFlag = 0 }, "SHAPING_TIME_CODE");
+        foreach (CrtShapingTime entity in lst)
+        {
+            cboMainShapingTimeId.AddItem(entity.ShapingTimeCode, entity.ObjId.ToString());
+        }
+    }
+
+    /// <summary>
+    /// 初始化定型位置
+    /// </summary>
+    private void InitShapingPosition()
+    {
+        ICrtShapingPositionManager manager = new CrtShapingPositionManager();
+        IList<CrtShapingPosition> lst = manager.GetEntityList(new CrtShapingPosition() { DeleteFlag = 0 }, "SHAPING_POSITION_CODE");
+        foreach (CrtShapingPosition entity in lst)
+        {
+            cboMainShapingPositionId.AddItem(entity.ShapingPositionCode, entity.ObjId.ToString());
+        }
+    }
+
+    /// <summary>
+    /// 初始化卡盘宽度
+    /// </summary>
+    private void InitChuckWidth()
+    {
+        ICrtChuckWidthManager manager = new CrtChuckWidthManager();
+        IList<CrtChuckWidth> lst = manager.GetEntityList(new CrtChuckWidth() { DeleteFlag = 0 }, "CHUCK_WIDTH_CODE");
+        foreach (CrtChuckWidth entity in lst)
+        {
+            cboMainChuckWidthId.AddItem(entity.ChuckWidthCode, entity.ObjId.ToString());
+        }
+    }
+
+    /// <summary>
+    /// 初始化审核人员
+    /// </summary>
+    private void InitAuditUsers()
+    {
+        ICrtTechAuditUserManager manager = new CrtTechAuditUserManager();
+        IList<CrtTechAuditUser> lst = manager.GetEntityList(new CrtTechAuditUser() { DeleteFlag = 0 });
+        ISsbUserManager userManager = new SsbUserManager();
+        foreach (CrtTechAuditUser entity in lst)
+        {
+            if (entity.AuditUserId == this.Data.User.UserId && allowSelfAudit == enumAllowSelfAudit.No)
+            {
+                continue;
+            }
+            string userName = userManager.GetByObjId(entity.AuditUserId.Value).UserName;
+            cbgMainAuditUser.Items.Add(new Checkbox(false) { BoxLabel = userName, ID = "chkMainAuditUser_" + entity.AuditUserId.ToString(), InputValue = entity.AuditUserId.ToString(), ColumnWidth = 0.25 });
+        }
+    }
+
+    /// <summary>
+    /// 初始化提交状态
+    /// </summary>
+    private void InitTechSubmitStates()
+    {
+        ICrtCuringTechSubmitStateManager manager = new CrtCuringTechSubmitStateManager();
+        IList<CrtCuringTechSubmitState> lst = manager.GetEntityList(new CrtCuringTechSubmitState() { DeleteFlag = 0 }, "OBJID");
+        foreach (CrtCuringTechSubmitState entity in lst)
+        {
+            cboSearchTechSubmitState.Items.Add(new Ext.Net.ListItem() { Text = entity.ShowName, Value = entity.ObjId.ToString() });
+        }
+    }
+
+    /// <summary>
+    /// 初始化审核状态
+    /// </summary>
+    private void InitTechAuditStates()
+    {
+        ICrtCuringTechAuditStateManager manager = new CrtCuringTechAuditStateManager();
+        IList<CrtCuringTechAuditState> lst = manager.GetEntityList(new CrtCuringTechAuditState() { DeleteFlag = 0 }, "OBJID");
+        foreach (CrtCuringTechAuditState entity in lst)
+        {
+            cboSearchTechAuditState.Items.Add(new Ext.Net.ListItem() { Text = entity.ShowName, Value = entity.ObjId.ToString() });
+        }
+    }
+
+    /// <summary>
+    /// 初始化审核状态
+    /// </summary>
+    private void InitTechSendStates()
+    {
+        ICrtCuringTechSendStateManager manager = new CrtCuringTechSendStateManager();
+        IList<CrtCuringTechSendState> lst = manager.GetEntityList(new CrtCuringTechSendState() { DeleteFlag = 0 }, "OBJID");
+        foreach (CrtCuringTechSendState entity in lst)
+        {
+            cboSearchTechSendState.Items.Add(new Ext.Net.ListItem() { Text = entity.ShowName, Value = entity.ObjId.ToString() });
+        }
+    }
+
+    /// <summary>
+    /// 初始化状态
+    /// </summary>
+    private void InitTechStates()
+    {
+        ICrtCuringTechStateManager manager = new CrtCuringTechStateManager();
+        IList<CrtCuringTechState> lst = manager.GetEntityList(new CrtCuringTechState() { DeleteFlag = 0 }, "OBJID");
+        foreach (CrtCuringTechState entity in lst)
+        {
+            cboSearchTechState.Items.Add(new Ext.Net.ListItem() { Text = entity.ShowName, Value = entity.ObjId.ToString() });
+        }
+    }
+
+    #endregion
+
+    #region 初始化及设置硫化工艺数据
+
+    /// <summary>
+    /// 设置硫化工艺数据
+    /// </summary>
+    /// <param name="command"></param>
+    /// <param name="objId"></param>
+    private void SetMainInfo(enumCommands command, string objId)
+    {
+        if (command == enumCommands.Add)
+        {
+            hdnMainGuid.Value = Guid.NewGuid().ToString();
+        }
+        else if (command == enumCommands.Update || command == enumCommands.View || command == enumCommands.Audit || command == enumCommands.Copy)
+        {
+            ICrtCuringTechnologyManager manager = new CrtCuringTechnologyManager();
+            CrtCuringTechnology entity = manager.GetByObjId(Convert.ToInt32(objId));
+            ICrtCuringTechParams1Manager managerParams1 = new CrtCuringTechParams1Manager();
+            CrtCuringTechParams1 entityParams1 = managerParams1.GetByObjId(Convert.ToInt32(objId));
+            ICrtCuringTechParams2Manager managerParams2 = new CrtCuringTechParams2Manager();
+            CrtCuringTechParams2 entityParams2 = managerParams2.GetByObjId(Convert.ToInt32(objId));
+
+            #region 基本信息
+            if (command == enumCommands.Copy)
+            {
+                hdnMainGuid.Value = Guid.NewGuid().ToString();
+            }
+            else
+            {
+                hdnMainObjId.Value = entity.ObjId;
+                txtMainTechnologyCode.Value = entity.TechnologyCode;
+                cboMainBuildingMaterialId.SetValue(entity.BuildingMaterialId.ToString());
+            }
+            cboMainTechnologyType.SetValue(entity.TechnologyType.ToString());
+            cboMainMinorTypeId.SetValue(entity.MinorTypeId.ToString());
+            cboMainBladderTypeId.SetValue(entity.BladderTypeId.ToString());
+            cboMainFactoryId.SetValue(entity.FactoryId.ToString());
+
+            cboMainSizeMarkLineD1.SetValue(entity.SizeMarkLineD1.ToString());
+            cboMainSizeMarkLineD2.SetValue(entity.SizeMarkLineD2.ToString());
+            cboMainSizeMarkLineD3.SetValue(entity.SizeMarkLineD3.ToString());
+            cboMainSizeMarkLineD4.SetValue(entity.SizeMarkLineD4.ToString());
+            cboMainSizeMarkLineD5.SetValue(entity.SizeMarkLineD5.ToString());
+            cboMainSizeMarkLineM.SetValue(entity.SizeMarkLineM.ToString());
+            cboMainSizeMarkLineU1.SetValue(entity.SizeMarkLineU1.ToString());
+            cboMainSizeMarkLineU2.SetValue(entity.SizeMarkLineU2.ToString());
+            cboMainSizeMarkLineU3.SetValue(entity.SizeMarkLineU3.ToString());
+            cboMainSizeMarkLineU4.SetValue(entity.SizeMarkLineU4.ToString());
+            cboMainSizeMarkLineU5.SetValue(entity.SizeMarkLineU5.ToString());
+            #endregion
+
+            #region 工艺时间
+            numMainHotRingSet.SetValue(entity.HotRingSet.ToString());
+            numMainModelTempSet.SetValue(entity.ModelTempSet.ToString());
+            numMainModelTempHigh.SetValue(entity.ModelTempHigh.ToString());
+            numMainModelTempLow.SetValue(entity.ModelTempLow.ToString());
+            numMainPlateTempSet.SetValue(entity.PlateTempSet.ToString());
+            numMainPlateTempHigh.SetValue(entity.PlateTempHigh.ToString());
+            numMainPlateTempLow.SetValue(entity.PlateTempLow.ToString());
+            numMainInnerTempSet.SetValue(entity.InnerTempSet.ToString());
+            numMainInnerTempHigh.SetValue(entity.InnerTempHigh.ToString());
+            numMainInnerTempLow.SetValue(entity.InnerTempLow.ToString());
+            numMainInnerPressSet.SetValue(entity.InnerPressSet.ToString());
+            numMainInnerPressHigh.SetValue(entity.InnerPressHigh.ToString());
+            numMainInnerPressLow.SetValue(entity.InnerPressLow.ToString());
+            numMainAllCuringTime.SetValue(entity.AllCuringTime.ToString());
+
+
+            if (command == enumCommands.Copy)
+            {
+                // 复制工艺时间
+                ICrtCuringTechStepManager managerStep = new CrtCuringTechStepManager();
+                Dictionary<string, object> dicStep = new Dictionary<string, object>();
+                dicStep.Add("Guid", hdnMainGuid.Value.ToString());
+                dicStep.Add("RecordUserId", this.Data.User.UserId);
+                dicStep.Add("TechnologyId", Convert.ToInt32(objId));
+                managerStep.InsertByStatement("Copy@CrtCuringTechStep", dicStep);
+            }
+
+            // gridPanelDetailPagingToolbar.DoRefresh();
+            // 设置刷新标志
+            hdnMainRefreshDetailFlag.Value = "1";
+
+            if (editType == enumEditTypes.Normal)
+            {
+            }
+            else if (editType == enumEditTypes.WinterSummer)
+            {
+                numMainCuringTimeWinter.SetValue(entityParams2.AllCuringTimeWinter);
+            }
+            #endregion
+
+            #region 工艺参数
+            if (editType == enumEditTypes.Normal)
+            {
+                // 工艺参数1
+                numMainBladderTensileHeightHigh.SetValue(entityParams1.BladderTensileHeightHigh.ToString());
+                numMainBladderTensileHeightLow.SetValue(entityParams1.BladderTensileHeightLow.ToString());
+                numMainCopperTensileHeightHigh.SetValue(entityParams1.CopperTensileHeightHigh.ToString());
+                numMainCopperTensileHeightLow.SetValue(entityParams1.CopperTensileHeightLow.ToString());
+                numMainFirstShapingHeightHigh.SetValue(entityParams1.FirstShapingHeightHigh.ToString());
+                numMainFirstShapingHeightLow.SetValue(entityParams1.FirstShapingHeightLow.ToString());
+                numMainSecondShapingHeightHigh.SetValue(entityParams1.SecondShapingHeightHigh.ToString());
+                numMainSecondShapingHeightLow.SetValue(entityParams1.SecondShapingHeightLow.ToString());
+                numMainCooperShapingHeightHigh.SetValue(entityParams1.CooperShapingHeightHigh.ToString());
+                numMainCooperShapingHeightLow.SetValue(entityParams1.CooperShapingHeightLow.ToString());
+
+                numMainBladderTensileHeightSet.SetValue(entityParams1.BladderTensileHeightSet.ToString());
+                numMainBladderTensileHeightTol.SetValue(entityParams1.BladderTensileHeightTol.ToString());
+                numMainCopperTensileHeightSet.SetValue(entityParams1.CopperTensileHeightSet.ToString());
+                numMainCopperTensileHeightTol.SetValue(entityParams1.CopperTensileHeightTol.ToString());
+                numMainFirstShapingHeightSet.SetValue(entityParams1.FirstShapingHeightSet.ToString());
+                numMainFirstShapingHeightTol.SetValue(entityParams1.FirstShapingHeightTol.ToString());
+                numMainSecondShapingHeightSet.SetValue(entityParams1.SecondShapingHeightSet.ToString());
+                numMainSecondShapingHeightTol.SetValue(entityParams1.SecondShapingHeightTol.ToString());
+                numMainCooperShapingHeightSet.SetValue(entityParams1.CooperShapingHeightSet.ToString());
+                numMainCooperShapingHeightTol.SetValue(entityParams1.CooperShapingHeightTol.ToString());
+
+                numMainClampingPressHigh.SetValue(entityParams1.ClampingPressHigh.ToString());
+                numMainClampingPressLow.SetValue(entityParams1.ClampingPressLow.ToString());
+                numMainManipulatorOpenHigh.SetValue(entityParams1.ManipulatorOpenHigh.ToString());
+                numMainManipulatorOpenLow.SetValue(entityParams1.ManipulatorOpenLow.ToString());
+                numMainFirstShapingPressHigh.SetValue(entityParams1.FirstShapingPressHigh.ToString());
+                numMainFirstShapingPressLow.SetValue(entityParams1.FirstShapingPressLow.ToString());
+                numMainSecondShapingPressHigh.SetValue(entityParams1.SecondShapingPressHigh.ToString());
+                numMainSecondShapingPressLow.SetValue(entityParams1.SecondShapingPressLow.ToString());
+                numMainSecondShapingTimeSet.SetValue(entityParams1.SecondShapingTimeSet.ToString());
+            }
+            else if (editType == enumEditTypes.WinterSummer)
+            {
+                // 工艺参数2
+                cboMainBladderTensileHeightId.SetValue(entityParams2.BladderTensileHeightId);
+                numMainBladderTensileHeight.SetValue(entityParams2.BladderTensileHeight);
+                numMainTopLimitAmount.SetValue(entityParams2.TopLimitAmount);
+                cboMainShapingHeightId.SetValue(entityParams2.ShapingHeightId);
+                numMainShapingHeight.SetValue(entityParams2.ShapingHeight);
+                numMainLoaderHeight.SetValue(entityParams2.LoaderHeight);
+                cboMainShapingPressId.SetValue(entityParams2.ShapingPressId);
+                numMainUsedAmountRange1.SetValue(entityParams2.UsedAmountRange1);
+                numMainFirstShapingPress1.SetValue(entityParams2.FirstShapingPress1);
+                numMainSecondShapingPress1.SetValue(entityParams2.SecondShapingPress1);
+                numMainThirdShapingPress1.SetValue(entityParams2.ThirdShapingPress1);
+                numMainUsedAmountRange2.SetValue(entityParams2.UsedAmountRange2);
+                numMainFirstShapingPress2.SetValue(entityParams2.FirstShapingPress2);
+                numMainSecondShapingPress2.SetValue(entityParams2.SecondShapingPress2);
+                numMainThirdShapingPress2.SetValue(entityParams2.ThirdShapingPress2);
+                numMainUsedAmountRange3.SetValue(entityParams2.UsedAmountRange3);
+                numMainFirstShapingPress3.SetValue(entityParams2.FirstShapingPress3);
+                numMainSecondShapingPress3.SetValue(entityParams2.SecondShapingPress3);
+                numMainThirdShapingPress3.SetValue(entityParams2.ThirdShapingPress3);
+                cboMainShapingTimeId.SetValue(entityParams2.ShapingTimeId);
+                numMainShapingTime.SetValue(entityParams2.ShapingTime);
+                cboMainShapingPositionId.SetValue(entityParams2.ShapingPositionId);
+                numMainTopPosition.SetValue(entityParams2.TopPosition);
+                numMainBottomPosition.SetValue(entityParams2.BottomPosition);
+                cboMainChuckWidthId.SetValue(entityParams2.ChuckWidthId);
+                numMainChuckWidth.SetValue(entityParams2.ChuckWidth);
+                numMainAeratePress.SetValue(entityParams2.AeratePress);
+                numMainClampingPress.SetValue(entityParams2.ClampingPress);
+                numMainReserve1.SetValue(entityParams2.Reserve1);
+                numMainReserve2.SetValue(entityParams2.Reserve2);
+                numMainReserve3.SetValue(entityParams2.Reserve3);
+                cboMainEnvironmentalFlag.SetValue(entityParams2.EnvironmentalFlag);
+            }
+            #endregion
+
+            #region 审核信息
+            ICrtTechAuditSelectManager managerAuditSelect = new CrtTechAuditSelectManager();
+            IList<CrtTechAuditSelect> lstAuditSelect = managerAuditSelect.GetEntityList(new CrtTechAuditSelect() { DeleteFlag = 0, TechnologyId = Convert.ToInt32(objId) });
+
+            string auditSelects = "";
+            foreach (CrtTechAuditSelect entityAuditSelect in lstAuditSelect)
+            {
+                if (auditSelects == "")
+                {
+                    auditSelects = entityAuditSelect.AuditUserId.ToString();
+                }
+                else
+                {
+                    auditSelects = auditSelects + "," + entityAuditSelect.AuditUserId.ToString();
+                }
+            }
+
+            if (command == enumCommands.Update || command == enumCommands.Copy)
+            {
+                hdnMainAuditSelects.Value = "";
+            }
+            else
+            {
+                // hdnMainAuditSelects.SetValue(auditSelects);
+                X.Js.Call("setAuditSelects", new object[] { auditSelects });
+            }
+
+            string auditUserName = "";
+            string auditTime = "";
+            if (entity.AuditUserId.HasValue)
+            {
+                ISsbUserManager userManager = new SsbUserManager();
+                auditUserName = userManager.GetByObjId(entity.AuditUserId.Value).UserName;
+                auditTime = entity.AuditTime.Value.ToString("yyyy-MM-dd");
+            }
+
+            if (command == enumCommands.Update || command == enumCommands.View || command == enumCommands.Audit)
+            {
+                txtMainLastAuditRemark.Value = entity.AuditRemark;
+                txtMainLastAuditTime.Value = auditTime;
+                txtMainLastAuditUserName.Value = auditUserName;
+            }
+            #endregion
+
+        }
+        tabPanelMain.SetActiveTab(0);
+        if (editType == enumEditTypes.Normal)
+        {
+            tabPanelDetail.SetActiveTab(0);
+        }
+        else if (editType == enumEditTypes.WinterSummer)
+        {
+            tabPanelDetail.SetActiveTab(1);
+        }
+
+    }
+
+    /// <summary>
+    /// 初始化硫化工艺数据
+    /// </summary>
+    private void InitMainInfo(enumCommands command)
+    {
+        #region 初始化值
+
+        #region 基本信息
+        hdnMainObjId.Value = "";
+        hdnMainGuid.Value = "";
+        hdnMainRefreshDetailFlag.Value = "";
+        txtMainTechnologyCode.Value = "";
+        cboMainTechnologyType.Value = "";
+        cboMainBuildingMaterialId.Value = "";
+        cboMainMinorTypeId.Value = "";
+        cboMainBladderTypeId.Value = "";
+        // cboMainFactoryId.Value = "";
+        cboMainSizeMarkLineU5.Value = "";
+        cboMainSizeMarkLineU4.Value = "";
+        cboMainSizeMarkLineU3.Value = "";
+        cboMainSizeMarkLineU2.Value = "";
+        cboMainSizeMarkLineM.Value = "";
+        cboMainSizeMarkLineU1.Value = "";
+        cboMainSizeMarkLineD1.Value = "";
+        cboMainSizeMarkLineD2.Value = "";
+        cboMainSizeMarkLineD3.Value = "";
+        cboMainSizeMarkLineD4.Value = "";
+        cboMainSizeMarkLineD5.Value = "";
+        #endregion
+
+        #region 工艺时间
+        numMainHotRingSet.Value = "";
+        numMainModelTempSet.Value = "";
+        numMainModelTempHigh.Value = "";
+        numMainModelTempLow.Value = "";
+        numMainPlateTempSet.Value = "";
+        numMainPlateTempHigh.Value = "";
+        numMainPlateTempLow.Value = "";
+        numMainInnerTempSet.Value = "";
+        numMainInnerTempHigh.Value = "";
+        numMainInnerTempLow.Value = "";
+        numMainInnerPressSet.Value = "";
+        numMainInnerPressHigh.Value = "";
+        numMainInnerPressLow.Value = "";
+        numMainAllCuringTime.Value = "";
+        gridPanelDetailStore.RemoveAll();
+        gridPanelDetailStore.DataBind();
+
+        if (editType == enumEditTypes.Normal)
+        {
+        }
+        else if (editType == enumEditTypes.WinterSummer)
+        {
+            numWinterHotRingSet.Value = "";
+            numWinterModelTempHigh.Value = "";
+            numWinterModelTempLow.Value = "";
+            numWinterPlateTempSet.Value = "";
+            numWinterPlateTempHigh.Value = "";
+            numWinterPlateTempLow.Value = "";
+            numWinterAllCuringTime.Value = "";
+            gridPanelWinterStore.RemoveAll();
+            gridPanelWinterStore.DataBind();
+        }
+        #endregion
+
+        #region 工艺参数
+        if (editType == enumEditTypes.Normal)
+        {
+            // 工艺参数1
+            numMainBladderTensileHeightHigh.Value = "";
+            numMainBladderTensileHeightLow.Value = "";
+            numMainCopperTensileHeightHigh.Value = "";
+            numMainCopperTensileHeightLow.Value = "";
+            numMainFirstShapingHeightHigh.Value = "";
+            numMainFirstShapingHeightLow.Value = "";
+            numMainSecondShapingHeightHigh.Value = "";
+            numMainSecondShapingHeightLow.Value = "";
+            numMainCooperShapingHeightHigh.Value = "";
+            numMainCooperShapingHeightLow.Value = "";
+
+            numMainBladderTensileHeightSet.Value = "";
+            numMainBladderTensileHeightTol.Value = "";
+            numMainCopperTensileHeightSet.Value = "";
+            numMainCopperTensileHeightTol.Value = "";
+            numMainFirstShapingHeightSet.Value = "";
+            numMainFirstShapingHeightTol.Value = "";
+            numMainSecondShapingHeightSet.Value = "";
+            numMainSecondShapingHeightTol.Value = "";
+            numMainCooperShapingHeightSet.Value = "";
+            numMainCooperShapingHeightTol.Value = "";
+
+            numMainClampingPressHigh.Value = "";
+            numMainClampingPressLow.Value = "";
+            numMainManipulatorOpenHigh.Value = "";
+            numMainManipulatorOpenLow.Value = "";
+            numMainFirstShapingPressHigh.Value = "";
+            numMainFirstShapingPressLow.Value = "";
+            numMainSecondShapingPressHigh.Value = "";
+            numMainSecondShapingPressLow.Value = "";
+            numMainSecondShapingTimeSet.Value = "";
+        }
+        else if (editType == enumEditTypes.WinterSummer)
+        {
+            // 工艺参数2
+            cboMainBladderTensileHeightId.Value = "";
+            numMainBladderTensileHeight.Value = "";
+            numMainTopLimitAmount.Value = "";
+            cboMainShapingHeightId.Value = "";
+            numMainShapingHeight.Value = "";
+            numMainLoaderHeight.Value = "";
+            cboMainShapingPressId.Value = "";
+            numMainUsedAmountRange1.Value = "";
+            numMainFirstShapingPress1.Value = "";
+            numMainSecondShapingPress1.Value = "";
+            numMainThirdShapingPress1.Value = "";
+            numMainUsedAmountRange2.Value = "";
+            numMainFirstShapingPress2.Value = "";
+            numMainSecondShapingPress2.Value = "";
+            numMainThirdShapingPress2.Value = "";
+            numMainUsedAmountRange3.Value = "";
+            numMainFirstShapingPress3.Value = "";
+            numMainSecondShapingPress3.Value = "";
+            numMainThirdShapingPress3.Value = "";
+            cboMainShapingTimeId.Value = "";
+            numMainShapingTime.Value = "";
+            cboMainShapingPositionId.Value = "";
+            numMainTopPosition.Value = "";
+            numMainBottomPosition.Value = "";
+            cboMainChuckWidthId.Value = "";
+            numMainChuckWidth.Value = "";
+            numMainAeratePress.Value = "";
+            // cboMainFactoryId.Value = "";
+            numMainCuringTimeWinter.Value = "";
+            numMainClampingPress.Value = "";
+            numMainReserve1.Value = "";
+            numMainReserve2.Value = "";
+            numMainReserve3.Value = "";
+            cboMainEnvironmentalFlag.Value = "";
+        }
+        #endregion
+
+        #region 审核信息
+        txtMainLastAuditRemark.Value = "";
+        txtMainLastAuditTime.Value = "";
+        txtMainLastAuditUserName.Value = "";
+        txtMainAuditRemark.Value = "";
+        cbgMainAuditUser.Reset();
+
+        #endregion
+
+        #endregion
+
+        #region 初始化只读或隐藏
+
+        #region 基本信息
+        txtMainTechnologyCode.ReadOnly = true;
+        cboMainTechnologyType.ReadOnly = true;
+        cboMainMajorTypeId.ReadOnly = true;
+        cboMainMinorTypeId.ReadOnly = true;
+        cboMainBuildingMaterialId.ReadOnly = true;
+        cboMainBladderTypeId.ReadOnly = true;
+        cboMainFactoryId.ReadOnly = true;
+        cboMainSizeMarkLineU5.ReadOnly = true;
+        cboMainSizeMarkLineU4.ReadOnly = true;
+        cboMainSizeMarkLineU3.ReadOnly = true;
+        cboMainSizeMarkLineU2.ReadOnly = true;
+        cboMainSizeMarkLineM.ReadOnly = true;
+        cboMainSizeMarkLineU1.ReadOnly = true;
+        cboMainSizeMarkLineD1.ReadOnly = true;
+        cboMainSizeMarkLineD2.ReadOnly = true;
+        cboMainSizeMarkLineD3.ReadOnly = true;
+        cboMainSizeMarkLineD4.ReadOnly = true;
+        cboMainSizeMarkLineD5.ReadOnly = true;
+
+        if (editType == enumEditTypes.Normal)
+        {
+            cboMainSizeMarkLineU5.Hidden = true;
+            cboMainSizeMarkLineU4.Hidden = true;
+            cboMainSizeMarkLineU3.Hidden = true;
+            cboMainSizeMarkLineD3.Hidden = true;
+            cboMainSizeMarkLineD4.Hidden = true;
+            cboMainSizeMarkLineD5.Hidden = true;
+
+        }
+        else if (editType == enumEditTypes.WinterSummer)
+        {
+            cboMainSizeMarkLineU5.Hidden = true;
+            cboMainSizeMarkLineU4.Hidden = true;
+            cboMainSizeMarkLineU3.Hidden = true;
+            cboMainSizeMarkLineU2.Hidden = true;
+            cboMainSizeMarkLineU1.Hidden = true;
+            cboMainSizeMarkLineD1.Hidden = true;
+            cboMainSizeMarkLineD2.Hidden = true;
+            cboMainSizeMarkLineD3.Hidden = true;
+            cboMainSizeMarkLineD4.Hidden = true;
+            cboMainSizeMarkLineD5.Hidden = true;
+        }
+        #endregion
+
+        #region 工艺时间
+        if (editType == enumEditTypes.Normal)
+        {
+            numMainInnerTempSet.ReadOnly = true;
+            numMainInnerTempHigh.ReadOnly = true;
+            numMainInnerTempLow.ReadOnly = true;
+            numMainInnerPressSet.ReadOnly = true;
+            numMainInnerPressHigh.ReadOnly = true;
+            numMainInnerPressLow.ReadOnly = true;
+            numMainModelTempSet.ReadOnly = true;
+            numMainModelTempHigh.ReadOnly = true;
+            numMainModelTempLow.ReadOnly = true;
+            numMainPlateTempSet.ReadOnly = true;
+            numMainPlateTempHigh.ReadOnly = true;
+            numMainPlateTempLow.ReadOnly = true;
+        }
+        else if (editType == enumEditTypes.WinterSummer)
+        {
+            numWinterHotRingSet.ReadOnly = true;
+            numWinterModelTempHigh.ReadOnly = true;
+            numWinterModelTempLow.ReadOnly = true;
+            numWinterPlateTempSet.ReadOnly = true;
+            numWinterPlateTempHigh.ReadOnly = true;
+            numWinterPlateTempLow.ReadOnly = true;
+            numWinterAllCuringTime.ReadOnly = true;
+        }
+        numMainAllCuringTime.ReadOnly = true;
+        #endregion
+
+        #region 工艺参数
+        if (editType == enumEditTypes.Normal)
+        {
+            #region 工艺参数1
+            numMainBladderTensileHeightHigh.ReadOnly = true;
+            numMainBladderTensileHeightLow.ReadOnly = true;
+            numMainCopperTensileHeightHigh.ReadOnly = true;
+            numMainCopperTensileHeightLow.ReadOnly = true;
+            numMainFirstShapingHeightHigh.ReadOnly = true;
+            numMainFirstShapingHeightLow.ReadOnly = true;
+            numMainSecondShapingHeightHigh.ReadOnly = true;
+            numMainSecondShapingHeightLow.ReadOnly = true;
+            numMainCooperShapingHeightHigh.ReadOnly = true;
+            numMainCooperShapingHeightLow.ReadOnly = true;
+
+            numMainBladderTensileHeightHigh.Hidden = true;
+            numMainBladderTensileHeightLow.Hidden = true;
+            numMainCopperTensileHeightHigh.Hidden = true;
+            numMainCopperTensileHeightLow.Hidden = true;
+            numMainFirstShapingHeightHigh.Hidden = true;
+            numMainFirstShapingHeightLow.Hidden = true;
+            numMainSecondShapingHeightHigh.Hidden = true;
+            numMainSecondShapingHeightLow.Hidden = true;
+            numMainCooperShapingHeightHigh.Hidden = true;
+            numMainCooperShapingHeightLow.Hidden = true;
+
+            numMainBladderTensileHeightSet.ReadOnly = true;
+            numMainBladderTensileHeightTol.ReadOnly = true;
+            numMainCopperTensileHeightSet.ReadOnly = true;
+            numMainCopperTensileHeightTol.ReadOnly = true;
+            numMainFirstShapingHeightSet.ReadOnly = true;
+            numMainFirstShapingHeightTol.ReadOnly = true;
+            numMainSecondShapingHeightSet.ReadOnly = true;
+            numMainSecondShapingHeightTol.ReadOnly = true;
+            numMainCooperShapingHeightSet.ReadOnly = true;
+            numMainCooperShapingHeightTol.ReadOnly = true;
+
+            numMainClampingPressHigh.ReadOnly = true;
+            numMainClampingPressLow.ReadOnly = true;
+            numMainManipulatorOpenHigh.ReadOnly = true;
+            numMainManipulatorOpenLow.ReadOnly = true;
+            numMainFirstShapingPressHigh.ReadOnly = true;
+            numMainFirstShapingPressLow.ReadOnly = true;
+            numMainSecondShapingPressHigh.ReadOnly = true;
+            numMainSecondShapingPressLow.ReadOnly = true;
+            numMainSecondShapingTimeSet.ReadOnly = true;
+            #endregion
+
+            pnlDetailParams2.Hidden = true;
+        }
+        else if (editType == enumEditTypes.WinterSummer)
+        {
+            #region 工艺参数2
+            cboMainBladderTensileHeightId.ReadOnly = true;
+            numMainBladderTensileHeight.ReadOnly = true;
+            numMainTopLimitAmount.ReadOnly = true;
+            cboMainShapingHeightId.ReadOnly = true;
+            numMainShapingHeight.ReadOnly = true;
+            numMainLoaderHeight.ReadOnly = true;
+            cboMainShapingPressId.ReadOnly = true;
+            numMainUsedAmountRange1.ReadOnly = true;
+            numMainFirstShapingPress1.ReadOnly = true;
+            numMainSecondShapingPress1.ReadOnly = true;
+            numMainThirdShapingPress1.ReadOnly = true;
+            numMainUsedAmountRange2.ReadOnly = true;
+            numMainFirstShapingPress2.ReadOnly = true;
+            numMainSecondShapingPress2.ReadOnly = true;
+            numMainThirdShapingPress2.ReadOnly = true;
+            numMainUsedAmountRange3.ReadOnly = true;
+            numMainFirstShapingPress3.ReadOnly = true;
+            numMainSecondShapingPress3.ReadOnly = true;
+            numMainThirdShapingPress3.ReadOnly = true;
+            cboMainShapingTimeId.ReadOnly = true;
+            numMainShapingTime.ReadOnly = true;
+            cboMainShapingPositionId.ReadOnly = true;
+            numMainTopPosition.ReadOnly = true;
+            numMainBottomPosition.ReadOnly = true;
+            cboMainChuckWidthId.ReadOnly = true;
+            numMainChuckWidth.ReadOnly = true;
+            numMainAeratePress.ReadOnly = true;
+            cboMainFactoryId.ReadOnly = true;
+            numMainCuringTimeWinter.ReadOnly = true;
+            numMainClampingPress.ReadOnly = true;
+            numMainReserve1.ReadOnly = true;
+            numMainReserve2.ReadOnly = true;
+            numMainReserve3.ReadOnly = true;
+            cboMainEnvironmentalFlag.ReadOnly = true;
+            #endregion
+
+            pnlDetailParams1.Hidden = true;
+        }
+
+        #endregion
+
+        #region 审核信息
+        txtMainLastAuditRemark.ReadOnly = true;
+        txtMainLastAuditRemark.Hidden = true;
+        txtMainLastAuditTime.ReadOnly = true;
+        txtMainLastAuditTime.Hidden = true;
+        txtMainLastAuditUserName.ReadOnly = true;
+        txtMainLastAuditUserName.Hidden = true;
+        txtMainAuditRemark.ReadOnly = true;
+        txtMainAuditRemark.Hidden = true;
+        cbgMainAuditUser.Disabled = true;
+        #endregion
+
+        #region 按钮信息
+        btnMainSave.Hidden = true;
+        btnMainAuditAcept.Hidden = true;
+        btnMainAuditReject.Hidden = true;
+        btnDetailAdd.Hidden = true;
+        btnDetailEdit.Hidden = true;
+        btnDetailDelete.Hidden = true;
+        #endregion
+
+        #endregion
+
+        #region 设置可写或显示
+        if (command == enumCommands.Add || command == enumCommands.Update || command == enumCommands.Copy)
+        {
+            #region 基本信息
+            txtMainTechnologyCode.ReadOnly = false;
+            cboMainTechnologyType.ReadOnly = false;
+            cboMainMajorTypeId.ReadOnly = false;
+            cboMainMinorTypeId.ReadOnly = false;
+            cboMainBuildingMaterialId.ReadOnly = false;
+            cboMainBladderTypeId.ReadOnly = false;
+            cboMainFactoryId.ReadOnly = false;
+            cboMainSizeMarkLineU5.ReadOnly = false;
+            cboMainSizeMarkLineU4.ReadOnly = false;
+            cboMainSizeMarkLineU3.ReadOnly = false;
+            cboMainSizeMarkLineU2.ReadOnly = false;
+            cboMainSizeMarkLineM.ReadOnly = false;
+            cboMainSizeMarkLineU1.ReadOnly = false;
+            cboMainSizeMarkLineD1.ReadOnly = false;
+            cboMainSizeMarkLineD2.ReadOnly = false;
+            cboMainSizeMarkLineD3.ReadOnly = false;
+            cboMainSizeMarkLineD4.ReadOnly = false;
+            cboMainSizeMarkLineD5.ReadOnly = false;
+            #endregion
+
+            #region 工艺时间
+            if (editType == enumEditTypes.Normal)
+            {
+                numMainInnerTempSet.ReadOnly = false;
+                numMainInnerTempHigh.ReadOnly = false;
+                numMainInnerTempLow.ReadOnly = false;
+                numMainInnerPressSet.ReadOnly = false;
+                numMainInnerPressHigh.ReadOnly = false;
+                numMainInnerPressLow.ReadOnly = false;
+                numMainModelTempSet.ReadOnly = false;
+                numMainModelTempHigh.ReadOnly = false;
+                numMainModelTempLow.ReadOnly = false;
+                numMainPlateTempSet.ReadOnly = false;
+                numMainPlateTempHigh.ReadOnly = false;
+                numMainPlateTempLow.ReadOnly = false;
+            }
+            else if (editType == enumEditTypes.WinterSummer)
+            {
+                numWinterHotRingSet.ReadOnly = false;
+                numWinterModelTempHigh.ReadOnly = false;
+                numWinterModelTempLow.ReadOnly = false;
+                numWinterPlateTempSet.ReadOnly = false;
+                numWinterPlateTempHigh.ReadOnly = false;
+                numWinterPlateTempLow.ReadOnly = false;
+                numWinterAllCuringTime.ReadOnly = false;
+            }
+            #endregion
+
+            #region 工艺参数
+            if (editType == enumEditTypes.Normal)
+            {
+                #region 工艺参数1
+                numMainBladderTensileHeightHigh.ReadOnly = false;
+                numMainBladderTensileHeightLow.ReadOnly = false;
+                numMainCopperTensileHeightHigh.ReadOnly = false;
+                numMainCopperTensileHeightLow.ReadOnly = false;
+                numMainFirstShapingHeightHigh.ReadOnly = false;
+                numMainFirstShapingHeightLow.ReadOnly = false;
+                numMainSecondShapingHeightHigh.ReadOnly = false;
+                numMainSecondShapingHeightLow.ReadOnly = false;
+                numMainCooperShapingHeightHigh.ReadOnly = false;
+                numMainCooperShapingHeightLow.ReadOnly = false;
+
+                numMainBladderTensileHeightSet.ReadOnly = false;
+                numMainBladderTensileHeightTol.ReadOnly = false;
+                numMainCopperTensileHeightSet.ReadOnly = false;
+                numMainCopperTensileHeightTol.ReadOnly = false;
+                numMainFirstShapingHeightSet.ReadOnly = false;
+                numMainFirstShapingHeightTol.ReadOnly = false;
+                numMainSecondShapingHeightSet.ReadOnly = false;
+                numMainSecondShapingHeightTol.ReadOnly = false;
+                numMainCooperShapingHeightSet.ReadOnly = false;
+                numMainCooperShapingHeightTol.ReadOnly = false;
+
+                numMainClampingPressHigh.ReadOnly = false;
+                numMainClampingPressLow.ReadOnly = false;
+                numMainManipulatorOpenHigh.ReadOnly = false;
+                numMainManipulatorOpenLow.ReadOnly = false;
+                numMainFirstShapingPressHigh.ReadOnly = false;
+                numMainFirstShapingPressLow.ReadOnly = false;
+                numMainSecondShapingPressHigh.ReadOnly = false;
+                numMainSecondShapingPressLow.ReadOnly = false;
+                numMainSecondShapingTimeSet.ReadOnly = false;
+                #endregion
+            }
+            else if (editType == enumEditTypes.WinterSummer)
+            {
+                #region 工艺参数2
+                cboMainBladderTensileHeightId.ReadOnly = false;
+                numMainBladderTensileHeight.ReadOnly = false;
+                numMainTopLimitAmount.ReadOnly = false;
+                cboMainShapingHeightId.ReadOnly = false;
+                numMainShapingHeight.ReadOnly = false;
+                numMainLoaderHeight.ReadOnly = false;
+                cboMainShapingPressId.ReadOnly = false;
+                numMainUsedAmountRange1.ReadOnly = false;
+                numMainFirstShapingPress1.ReadOnly = false;
+                numMainSecondShapingPress1.ReadOnly = false;
+                numMainThirdShapingPress1.ReadOnly = false;
+                numMainUsedAmountRange2.ReadOnly = false;
+                numMainFirstShapingPress2.ReadOnly = false;
+                numMainSecondShapingPress2.ReadOnly = false;
+                numMainThirdShapingPress2.ReadOnly = false;
+                numMainUsedAmountRange3.ReadOnly = false;
+                numMainFirstShapingPress3.ReadOnly = false;
+                numMainSecondShapingPress3.ReadOnly = false;
+                numMainThirdShapingPress3.ReadOnly = false;
+                cboMainShapingTimeId.ReadOnly = false;
+                numMainShapingTime.ReadOnly = false;
+                cboMainShapingPositionId.ReadOnly = false;
+                numMainTopPosition.ReadOnly = false;
+                numMainBottomPosition.ReadOnly = false;
+                cboMainChuckWidthId.ReadOnly = false;
+                numMainChuckWidth.ReadOnly = false;
+                numMainAeratePress.ReadOnly = false;
+                cboMainFactoryId.ReadOnly = false;
+                numMainCuringTimeWinter.ReadOnly = false;
+                numMainClampingPress.ReadOnly = false;
+                numMainReserve1.ReadOnly = false;
+                numMainReserve2.ReadOnly = false;
+                numMainReserve3.ReadOnly = false;
+                cboMainEnvironmentalFlag.ReadOnly = false;
+                #endregion
+            }
+
+            #endregion
+
+            #region 审核信息
+            cbgMainAuditUser.Disabled = false;
+            if (command == enumCommands.Update)
+            {
+                txtMainLastAuditUserName.Hidden = false;
+                txtMainLastAuditRemark.Hidden = false;
+                txtMainLastAuditTime.Hidden = false;
+            }
+            #endregion
+
+            #region 按钮信息
+            btnMainSave.Hidden = false;
+            btnDetailAdd.Hidden = false;
+            btnDetailEdit.Hidden = false;
+            btnDetailDelete.Hidden = false;
+            #endregion
+        }
+        else if (command == enumCommands.View)
+        {
+            #region 审核信息
+            txtMainLastAuditUserName.Hidden = false;
+            txtMainLastAuditRemark.Hidden = false;
+            txtMainLastAuditTime.Hidden = false;
+            #endregion
+
+        }
+        else if (command == enumCommands.Audit)
+        {
+            #region 审核信息
+            txtMainLastAuditRemark.Hidden = false;
+            txtMainLastAuditTime.Hidden = false;
+            txtMainLastAuditUserName.Hidden = false;
+            txtMainAuditRemark.Hidden = false;
+            txtMainAuditRemark.ReadOnly = false;
+            #endregion
+
+            #region 按钮信息
+            btnMainAuditAcept.Hidden = false;
+            btnMainAuditReject.Hidden = false;
+            #endregion
+        }
+        #endregion
+    }
+
+    #endregion
+
+    #region 查询硫化工艺
+    private PageResult GetPageResultData(PageResult pageParams)
+    {
+        var formParam = GetSelectParamFieldValue();
+        pageParams.ParameterObject = formParam;
+
+        ICrtCuringTechnologyManager manager = new CrtCuringTechnologyManager();
+        return manager.GetPageDataByReader(pageParams);
+    }
+
+    private Dictionary<string, object> GetSelectParamFieldValue()
+    {
+        Dictionary<string, object> result = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+
+        result.Add("DeleteFlag", 0);
+
+        var technologyCode = txtSearchTechnologyCode.Value;
+        var technologyType = cboSearchTechnologyType.Value;
+        var minorTypeId = cboSearchMinorTypeId.Value;
+        var buildingMaterialId = cboSearchBuildingMaterialId.Value;
+
+        var techSubmitState = cboSearchTechSubmitState.Value;
+        var techAuditState = cboSearchTechAuditState.Value;
+        var techSendState = cboSearchTechSendState.Value;
+        var techState = cboSearchTechState.Value;
+        var usedFlag = cboSearchUsedFlag.Value;
+
+        if (technologyCode != null && !string.IsNullOrEmpty(technologyCode.ToString()))
+        {
+            result.Add("TechnologyCode", technologyCode);
+        }
+        if (technologyType != null && !string.IsNullOrEmpty(technologyType.ToString()))
+        {
+            result.Add("TechnologyType", technologyType);
+        }
+        if (minorTypeId != null && !string.IsNullOrEmpty(minorTypeId.ToString()))
+        {
+            result.Add("MinorTypeId", minorTypeId);
+        }
+        if (buildingMaterialId != null && !string.IsNullOrEmpty(buildingMaterialId.ToString()))
+        {
+            result.Add("BuildingMaterialId", buildingMaterialId);
+        }
+
+        if (techSubmitState != null && !string.IsNullOrEmpty(techSubmitState.ToString()))
+        {
+            result.Add("TechSubmitState", techSubmitState);
+        }
+        if (techAuditState != null && !string.IsNullOrEmpty(techAuditState.ToString()))
+        {
+            result.Add("TechAuditState", techAuditState);
+        }
+        if (techSendState != null && !string.IsNullOrEmpty(techSendState.ToString()))
+        {
+            result.Add("TechSendState", techSendState);
+        }
+        if (techState != null && !string.IsNullOrEmpty(techState.ToString()))
+        {
+            result.Add("TechState", techState);
+        }
+        if (usedFlag != null && !string.IsNullOrEmpty(usedFlag.ToString()))
+        {
+            result.Add("UsedFlag", usedFlag);
+        }
+
+        return result;
+    }
+
+
+    [DirectMethod]
+    public object GridPanelBindData(string action, Dictionary<string, object> extraParams)
+    {
+        StoreRequestParameters prms = new StoreRequestParameters(extraParams);
+        PageResult pageResult = new PageResult();
+        pageResult.StatementId = "Select@CrtCuringTechnology";
+        pageResult.PageSize = prms.Limit;
+        pageResult.PageIndex = prms.Page;
+        pageResult.OrderString = "T1.TECHNOLOGY_TYPE,T1.MINOR_TYPE_ID,T5.MATERIAL_NAME,T1.VERSION DESC";
+        pageResult = GetPageResultData(pageResult);
+
+        DataTable data = new DataTable();
+        int total = 0;
+        if (pageResult == null)
+        {
+            return new { data, total };
+        }
+        data = pageResult.ResultDataSet.Tables[0];
+
+        total = pageResult.RecordCount;
+        return new { data, total };
+    }
+
+
+    private PageResult GetPageResultDetailData(PageResult pageParams)
+    {
+        var formParam = GetDetailSelectParamFieldValue();
+        if (formParam == null)
+        {
+            return null;
+        }
+        pageParams.ParameterObject = formParam;
+
+        ICrtCuringTechStepManager manager = new CrtCuringTechStepManager();
+        return manager.GetPageDataByReader(pageParams);
+    }
+
+    private Dictionary<string, object> GetDetailSelectParamFieldValue()
+    {
+        Dictionary<string, object> result = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+
+        var technologyId = hdnMainObjId.Value;
+        var guid = hdnMainGuid.Value;
+        if (technologyId != null && !string.IsNullOrEmpty(technologyId.ToString()))
+        {
+            result.Add("TechnologyId", technologyId);
+        }
+        else if (guid != null && !string.IsNullOrEmpty(guid.ToString()))
+        {
+            result.Add("Guid", guid);
+        }
+        else
+        {
+            return null;
+        }
+        result.Add("DeleteFlag", 0);
+
+        return result;
+    }
+
+    [DirectMethod]
+    public object GridPanelDetailBindData(string action, Dictionary<string, object> extraParams)
+    {
+
+        StoreRequestParameters prms = new StoreRequestParameters(extraParams);
+        PageResult pageResult = new PageResult();
+        pageResult.StatementId = "Select@CrtCuringTechStep";
+        pageResult.PageSize = prms.Limit;
+        pageResult.PageIndex = prms.Page;
+        pageResult.OrderString = "T1.CURING_STEP";
+        pageResult = GetPageResultDetailData(pageResult);
+
+        DataTable data = new DataTable();
+        int total = 0;
+        if (pageResult == null)
+        {
+            return new { data, total };
+        }
+        data = pageResult.ResultDataSet.Tables[0];
+
+        int allCuringTime = 0;
+        foreach (DataRow dr in data.Rows)
+        {
+            if (dr["CURING_TIME"] != null && dr["CURING_TIME"].ToString() != "")
+            {
+                allCuringTime += Convert.ToInt32(dr["CURING_TIME"]);
+            }
+        }
+        numMainAllCuringTime.Value = allCuringTime;
+
+
+        total = pageResult.RecordCount;
+        return new { data, total };
+    }
+
+    #endregion
+
+    #region 添加硫化工艺
+    /// <summary>
+    /// 添加硫化工艺
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnAdd_Click(object sender, DirectEventArgs e)
+    {
+        InitMainInfo(enumCommands.Add);
+
+        SetMainInfo(enumCommands.Add, "");
+
+        this.winMain.Title = "添加工艺标准";
+        winMain.Show();
+    }
+
+    #endregion
+
+    #region 修改硫化工艺
+    [Ext.Net.DirectMethod()]
+    public void command_direct_edit(string objId)
+    {
+        if (!CheckUpdateRecordState(objId))
+        {
+            return;
+        }
+
+        InitMainInfo(enumCommands.Update);
+
+        SetMainInfo(enumCommands.Update, objId);
+
+        this.winMain.Title = "修改工艺标准";
+        this.winMain.Show();
+    }
+    #endregion
+
+    #region 复制硫化工艺
+    [Ext.Net.DirectMethod()]
+    public void command_direct_copy(string objId)
+    {
+        ICrtCuringTechnologyManager manager = new CrtCuringTechnologyManager();
+        CrtCuringTechnology entity = manager.GetByObjId(Convert.ToInt32(objId));
+
+        if (entity == null)
+        {
+            X.Msg.Alert("提示", "未找到要复制的信息").Show();
+            return;
+
+        }
+
+        InitMainInfo(enumCommands.Copy);
+
+        SetMainInfo(enumCommands.Copy, objId);
+
+        for (var idx = 1; idx < tabPanelMain.Items.Count; idx++)
+        {
+            // tabPanelMain.SetActiveTab(idx);
+        }
+        tabPanelMain.SetActiveTab(0);
+        
+        //hdnMainRefreshDetailFlag.Value = "1";
+
+        this.winMain.Title = "复制工艺标准";
+        this.winMain.Show();
+    }
+    #endregion
+
+    #region 保存硫化工艺
+    /// <summary>
+    /// 保存硫化工艺
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnMainSave_Click(object sender, DirectEventArgs e)
+    {
+        string objId = hdnMainObjId.Value.ToString();
+        if (!CheckMainInfo(objId))
+        {
+            return;
+        }
+
+        CrtCuringTechnology entity = new CrtCuringTechnology();
+        entity.DeleteFlag = 0;
+
+        #region 基本信息
+        string guid = hdnMainGuid.Value.ToString();
+        string technologyCode = txtMainTechnologyCode.Value.ToString().Trim();
+        string technologyType = cboMainTechnologyType.Value.ToString();
+        string buildingMaterialId = cboMainBuildingMaterialId.Value.ToString();
+        string majorTypeId = cboMainMajorTypeId.Value.ToString();
+        string minorTypeId = cboMainMinorTypeId.Value.ToString();
+        string bladderTypeId = cboMainBladderTypeId.Value.ToString();
+        string factoryId = cboMainFactoryId.Value.ToString();
+
+        string sizeMarkLineD1 = cboMainSizeMarkLineD1.Value.ToString();
+        string sizeMarkLineD2 = cboMainSizeMarkLineD2.Value.ToString();
+        string sizeMarkLineD3 = cboMainSizeMarkLineD3.Value.ToString();
+        string sizeMarkLineD4 = cboMainSizeMarkLineD4.Value.ToString();
+        string sizeMarkLineD5 = cboMainSizeMarkLineD5.Value.ToString();
+        string sizeMarkLineM = cboMainSizeMarkLineM.Value.ToString();
+        string sizeMarkLineU1 = cboMainSizeMarkLineU1.Value.ToString();
+        string sizeMarkLineU2 = cboMainSizeMarkLineU2.Value.ToString();
+        string sizeMarkLineU3 = cboMainSizeMarkLineU3.Value.ToString();
+        string sizeMarkLineU4 = cboMainSizeMarkLineU4.Value.ToString();
+        string sizeMarkLineU5 = cboMainSizeMarkLineU5.Value.ToString();
+
+        entity.TechnologyCode = technologyCode;
+        entity.TechnologyType = Convert.ToInt32(technologyType);
+        entity.BuildingMaterialId = Convert.ToInt32(buildingMaterialId);
+        entity.MajorTypeId = Convert.ToInt32(majorTypeId);
+        entity.MinorTypeId = Convert.ToInt32(minorTypeId);
+        entity.BladderTypeId = Convert.ToInt32(bladderTypeId);
+        entity.FactoryId = string.IsNullOrEmpty(factoryId) ? (int?)null : Convert.ToInt32(factoryId);
+
+        entity.SizeMarkLineD1 = string.IsNullOrEmpty(sizeMarkLineD1) ? (int?)null : Convert.ToInt32(sizeMarkLineD1);
+        entity.SizeMarkLineD2 = string.IsNullOrEmpty(sizeMarkLineD2) ? (int?)null : Convert.ToInt32(sizeMarkLineD2);
+        entity.SizeMarkLineD3 = string.IsNullOrEmpty(sizeMarkLineD3) ? (int?)null : Convert.ToInt32(sizeMarkLineD3);
+        entity.SizeMarkLineD4 = string.IsNullOrEmpty(sizeMarkLineD4) ? (int?)null : Convert.ToInt32(sizeMarkLineD4);
+        entity.SizeMarkLineD5 = string.IsNullOrEmpty(sizeMarkLineD5) ? (int?)null : Convert.ToInt32(sizeMarkLineD5);
+        entity.SizeMarkLineM = string.IsNullOrEmpty(sizeMarkLineM) ? (int?)null : Convert.ToInt32(sizeMarkLineM);
+        entity.SizeMarkLineU1 = string.IsNullOrEmpty(sizeMarkLineU1) ? (int?)null : Convert.ToInt32(sizeMarkLineU1);
+        entity.SizeMarkLineU2 = string.IsNullOrEmpty(sizeMarkLineU2) ? (int?)null : Convert.ToInt32(sizeMarkLineU2);
+        entity.SizeMarkLineU3 = string.IsNullOrEmpty(sizeMarkLineU3) ? (int?)null : Convert.ToInt32(sizeMarkLineU3);
+        entity.SizeMarkLineU4 = string.IsNullOrEmpty(sizeMarkLineU4) ? (int?)null : Convert.ToInt32(sizeMarkLineU4);
+        entity.SizeMarkLineU5 = string.IsNullOrEmpty(sizeMarkLineU5) ? (int?)null : Convert.ToInt32(sizeMarkLineU5);
+        #endregion
+
+        #region 工艺时间
+        string hotRingSet = numMainHotRingSet.RawText.ToString();
+        string modelTempHigh = numMainModelTempHigh.RawText.ToString();
+        string modelTempSet = numMainModelTempSet.RawText.ToString();
+        string modelTempLow = numMainModelTempLow.RawText.ToString();
+        string plateTempHigh = numMainPlateTempHigh.RawText.ToString();
+        string plateTempSet = numMainPlateTempSet.RawText.ToString();
+        string plateTempLow = numMainPlateTempLow.RawText.ToString();
+        string innerPressHigh = numMainInnerPressHigh.RawText.ToString();
+        string innerPressSet = numMainInnerPressSet.RawText.ToString();
+        string innerPressLow = numMainInnerPressLow.RawText.ToString();
+        string innerTempHigh = numMainInnerTempHigh.RawText.ToString();
+        string innerTempSet = numMainInnerTempSet.RawText.ToString();
+        string innerTempLow = numMainInnerTempLow.RawText.ToString();
+        string allCuringTime = numMainAllCuringTime.RawText.ToString();
+
+        entity.HotRingSet = string.IsNullOrEmpty(hotRingSet) ? (decimal?)null : Convert.ToDecimal(hotRingSet);
+        entity.ModelTempHigh = string.IsNullOrEmpty(modelTempHigh) ? (decimal?)null : Convert.ToDecimal(modelTempHigh);
+        entity.ModelTempSet = string.IsNullOrEmpty(modelTempSet) ? (decimal?)null : Convert.ToDecimal(modelTempSet);
+        entity.ModelTempLow = string.IsNullOrEmpty(modelTempLow) ? (decimal?)null : Convert.ToDecimal(modelTempLow);
+        entity.PlateTempHigh = string.IsNullOrEmpty(plateTempHigh) ? (decimal?)null : Convert.ToDecimal(plateTempHigh);
+        entity.PlateTempSet = string.IsNullOrEmpty(plateTempSet) ? (decimal?)null : Convert.ToDecimal(plateTempSet);
+        entity.PlateTempLow = string.IsNullOrEmpty(plateTempLow) ? (decimal?)null : Convert.ToDecimal(plateTempLow);
+        entity.InnerPressHigh = string.IsNullOrEmpty(innerPressHigh) ? (decimal?)null : Convert.ToDecimal(innerPressHigh);
+        entity.InnerPressSet = string.IsNullOrEmpty(innerPressSet) ? (decimal?)null : Convert.ToDecimal(innerPressSet);
+        entity.InnerPressLow = string.IsNullOrEmpty(innerPressLow) ? (decimal?)null : Convert.ToDecimal(innerPressLow);
+        entity.InnerTempHigh = string.IsNullOrEmpty(innerTempHigh) ? (decimal?)null : Convert.ToDecimal(innerTempHigh);
+        entity.InnerTempSet = string.IsNullOrEmpty(innerTempSet) ? (decimal?)null : Convert.ToDecimal(innerTempSet);
+        entity.InnerTempLow = string.IsNullOrEmpty(innerTempLow) ? (decimal?)null : Convert.ToDecimal(innerTempLow);
+        entity.AllCuringTime = string.IsNullOrEmpty(allCuringTime) ? (int?)null : Convert.ToInt32(allCuringTime);
+        #endregion
+
+        #region 工艺参数
+        CrtCuringTechParams1 entityParams1 = new CrtCuringTechParams1();
+        entityParams1.DeleteFlag = 0;
+        CrtCuringTechParams2 entityParams2 = new CrtCuringTechParams2();
+        entityParams2.DeleteFlag = 0;
+        if (editType == enumEditTypes.Normal)
+        {
+            string bladderTensileHeightHigh = numMainBladderTensileHeightHigh.RawText.ToString();
+            string bladderTensileHeightLow = numMainBladderTensileHeightLow.RawText.ToString();
+            string copperTensileHeightHigh = numMainCopperTensileHeightHigh.RawText.ToString();
+            string copperTensileHeightLow = numMainCopperTensileHeightLow.RawText.ToString();
+            string firstShapingHeightHigh = numMainFirstShapingHeightHigh.RawText.ToString();
+            string firstShapingHeightLow = numMainFirstShapingHeightLow.RawText.ToString();
+            string secondShapingHeightHigh = numMainSecondShapingHeightHigh.RawText.ToString();
+            string secondShapingHeightLow = numMainSecondShapingHeightLow.RawText.ToString();
+            string cooperShapingHeightHigh = numMainCooperShapingHeightHigh.RawText.ToString();
+            string cooperShapingHeightLow = numMainCooperShapingHeightLow.RawText.ToString();
+
+            string bladderTensileHeightSet = numMainBladderTensileHeightSet.RawText.ToString();
+            string bladderTensileHeightTol = numMainBladderTensileHeightTol.RawText.ToString();
+            string copperTensileHeightSet = numMainCopperTensileHeightSet.RawText.ToString();
+            string copperTensileHeightTol = numMainCopperTensileHeightTol.RawText.ToString();
+            string firstShapingHeightSet = numMainFirstShapingHeightSet.RawText.ToString();
+            string firstShapingHeightTol = numMainFirstShapingHeightTol.RawText.ToString();
+            string secondShapingHeightSet = numMainSecondShapingHeightSet.RawText.ToString();
+            string secondShapingHeightTol = numMainSecondShapingHeightTol.RawText.ToString();
+            string cooperShapingHeightSet = numMainCooperShapingHeightSet.RawText.ToString();
+            string cooperShapingHeightTol = numMainCooperShapingHeightTol.RawText.ToString();
+
+            string clampingPressHigh = numMainClampingPressHigh.RawText.ToString();
+            string clampingPressLow = numMainClampingPressLow.RawText.ToString();
+            string manipulatorOpenHigh = numMainManipulatorOpenHigh.RawText.ToString();
+            string manipulatorOpenLow = numMainManipulatorOpenLow.RawText.ToString();
+            string firstShapingPressHigh = numMainFirstShapingPressHigh.RawText.ToString();
+            string firstShapingPressLow = numMainFirstShapingPressLow.RawText.ToString();
+            string secondShapingPressHigh = numMainSecondShapingPressHigh.RawText.ToString();
+            string secondShapingPressLow = numMainSecondShapingPressLow.RawText.ToString();
+            string secondShapingTimeSet = numMainSecondShapingTimeSet.RawText.ToString();
+
+            entityParams1.BladderTensileHeightHigh = string.IsNullOrEmpty(bladderTensileHeightHigh) ? (decimal?)null : Convert.ToDecimal(bladderTensileHeightHigh);
+            entityParams1.BladderTensileHeightLow = string.IsNullOrEmpty(bladderTensileHeightLow) ? (decimal?)null : Convert.ToDecimal(bladderTensileHeightLow);
+            entityParams1.CopperTensileHeightHigh = string.IsNullOrEmpty(copperTensileHeightHigh) ? (decimal?)null : Convert.ToDecimal(copperTensileHeightHigh);
+            entityParams1.CopperTensileHeightLow = string.IsNullOrEmpty(copperTensileHeightLow) ? (decimal?)null : Convert.ToDecimal(copperTensileHeightLow);
+            entityParams1.FirstShapingHeightHigh = string.IsNullOrEmpty(firstShapingHeightHigh) ? (decimal?)null : Convert.ToDecimal(firstShapingHeightHigh);
+            entityParams1.FirstShapingHeightLow = string.IsNullOrEmpty(firstShapingHeightLow) ? (decimal?)null : Convert.ToDecimal(firstShapingHeightLow);
+            entityParams1.SecondShapingHeightHigh = string.IsNullOrEmpty(secondShapingHeightHigh) ? (decimal?)null : Convert.ToDecimal(secondShapingHeightHigh);
+            entityParams1.SecondShapingHeightLow = string.IsNullOrEmpty(secondShapingHeightLow) ? (decimal?)null : Convert.ToDecimal(secondShapingHeightLow);
+            entityParams1.CooperShapingHeightHigh = string.IsNullOrEmpty(cooperShapingHeightHigh) ? (decimal?)null : Convert.ToDecimal(cooperShapingHeightHigh);
+            entityParams1.CooperShapingHeightLow = string.IsNullOrEmpty(cooperShapingHeightLow) ? (decimal?)null : Convert.ToDecimal(cooperShapingHeightLow);
+
+            entityParams1.BladderTensileHeightSet = string.IsNullOrEmpty(bladderTensileHeightSet) ? (decimal?)null : Convert.ToDecimal(bladderTensileHeightSet);
+            entityParams1.BladderTensileHeightTol = string.IsNullOrEmpty(bladderTensileHeightTol) ? (decimal?)null : Convert.ToDecimal(bladderTensileHeightTol);
+            entityParams1.CopperTensileHeightSet = string.IsNullOrEmpty(copperTensileHeightSet) ? (decimal?)null : Convert.ToDecimal(copperTensileHeightSet);
+            entityParams1.CopperTensileHeightTol = string.IsNullOrEmpty(copperTensileHeightTol) ? (decimal?)null : Convert.ToDecimal(copperTensileHeightTol);
+            entityParams1.FirstShapingHeightSet = string.IsNullOrEmpty(firstShapingHeightSet) ? (decimal?)null : Convert.ToDecimal(firstShapingHeightSet);
+            entityParams1.FirstShapingHeightTol = string.IsNullOrEmpty(firstShapingHeightTol) ? (decimal?)null : Convert.ToDecimal(firstShapingHeightTol);
+            entityParams1.SecondShapingHeightSet = string.IsNullOrEmpty(secondShapingHeightSet) ? (decimal?)null : Convert.ToDecimal(secondShapingHeightSet);
+            entityParams1.SecondShapingHeightTol = string.IsNullOrEmpty(secondShapingHeightTol) ? (decimal?)null : Convert.ToDecimal(secondShapingHeightTol);
+            entityParams1.CooperShapingHeightSet = string.IsNullOrEmpty(cooperShapingHeightSet) ? (decimal?)null : Convert.ToDecimal(cooperShapingHeightSet);
+            entityParams1.CooperShapingHeightTol = string.IsNullOrEmpty(cooperShapingHeightTol) ? (decimal?)null : Convert.ToDecimal(cooperShapingHeightTol);
+
+            entityParams1.ClampingPressHigh = string.IsNullOrEmpty(clampingPressHigh) ? (decimal?)null : Convert.ToDecimal(clampingPressHigh);
+            entityParams1.ClampingPressLow = string.IsNullOrEmpty(clampingPressLow) ? (decimal?)null : Convert.ToDecimal(clampingPressLow);
+            entityParams1.ManipulatorOpenHigh = string.IsNullOrEmpty(manipulatorOpenHigh) ? (decimal?)null : Convert.ToDecimal(manipulatorOpenHigh);
+            entityParams1.ManipulatorOpenLow = string.IsNullOrEmpty(manipulatorOpenLow) ? (decimal?)null : Convert.ToDecimal(manipulatorOpenLow);
+            entityParams1.FirstShapingPressHigh = string.IsNullOrEmpty(firstShapingPressHigh) ? (decimal?)null : Convert.ToDecimal(firstShapingPressHigh);
+            entityParams1.FirstShapingPressLow = string.IsNullOrEmpty(firstShapingPressLow) ? (decimal?)null : Convert.ToDecimal(firstShapingPressLow);
+            entityParams1.SecondShapingPressHigh = string.IsNullOrEmpty(secondShapingPressHigh) ? (decimal?)null : Convert.ToDecimal(secondShapingPressHigh);
+            entityParams1.SecondShapingPressLow = string.IsNullOrEmpty(secondShapingPressLow) ? (decimal?)null : Convert.ToDecimal(secondShapingPressLow);
+            entityParams1.SecondShapingTimeSet = string.IsNullOrEmpty(secondShapingTimeSet) ? (decimal?)null : Convert.ToDecimal(secondShapingTimeSet);
+        }
+        else if (editType == enumEditTypes.WinterSummer)
+        {
+
+        }
+        #endregion
+
+        #region 审核信息
+        List<CrtTechAuditSelect> lstAuditSelect = new List<CrtTechAuditSelect>();
+        string auditSelects = hdnMainAuditSelects.Value.ToString();
+        if (!string.IsNullOrEmpty(auditSelects))
+        {
+            string[] arrayAuditSelects = auditSelects.Split(new char[] { ',' });
+            foreach (string auditUserId in arrayAuditSelects)
+            {
+                CrtTechAuditSelect entityAuditSelect = new CrtTechAuditSelect();
+                entityAuditSelect.DeleteFlag = 0;
+                entityAuditSelect.Guid = guid;
+                entityAuditSelect.AuditUserId = Convert.ToInt32(auditUserId);
+
+                lstAuditSelect.Add(entityAuditSelect);
+            }
+        }
+        entity.SelectAuditUserId = hdnMainAuditSelects.Value.ToString();
+        entity.SelectAuditUserName = hdnMainAuditSelectNames.Value.ToString();
+
+        #endregion
+
+        ICrtCuringTechnologyManager manager = new CrtCuringTechnologyManager();
+        ICrtCuringTechParams1Manager managerParams1 = new CrtCuringTechParams1Manager();
+        ICrtTechAuditSelectManager managerAuditSelect = new CrtTechAuditSelectManager();
+        ICrtCuringTechStepManager managerStep = new CrtCuringTechStepManager();
+        List<CrtCuringTechStep> lstStep = null;
+        if (string.IsNullOrEmpty(objId))
+        {
+            // 添加
+            entity.Guid = guid;
+            entity.State = Convert.ToInt32(enumRecordStates.New);
+            entity.SubmitFlag = Convert.ToInt32(enumSubmitFlags.Waited);
+            entity.RecordTime = DateTime.Now;
+            entity.RecordUserId = this.Data.User.UserId;
+
+            if (editType == enumEditTypes.Normal)
+            {
+                entity.CuringTimeType = 0;
+
+                // 工艺参数
+            }
+            else if (editType == enumEditTypes.WinterSummer)
+            {
+                // 工艺时间
+                string curingTimeType = cboMainCuringTimeType.Value.ToString();
+                entity.CuringTimeType = Convert.ToInt32(curingTimeType);
+
+                // 工艺参数
+
+            }
+
+            if (editType == enumEditTypes.Normal)
+            {
+                entityParams1.Guid = guid;
+            }
+            else if (editType == enumEditTypes.WinterSummer)
+            {
+            }
+
+            lstStep = managerStep.GetEntityList(new CrtCuringTechStep() { DeleteFlag = 0, Guid = guid }).ToList();
+
+            manager.Insert(entity, entityParams1, entityParams2, lstAuditSelect, lstStep);
+
+            hdnMainGuid.Value = Guid.NewGuid().ToString();
+            X.Msg.Alert("提示", "添加成功").Show();
+        }
+        else
+        {
+            lstStep = managerStep.GetEntityList(new CrtCuringTechStep() { DeleteFlag = 0, TechnologyId = Convert.ToInt32(objId) }).ToList();
+            // 修改
+            manager.Update(Convert.ToInt32(objId), entity, entityParams1, entityParams2, lstAuditSelect, lstStep);
+
+            X.Msg.Alert("提示", "修改成功").Show();
+        }
+
+        gridPanelMainPagingToolbar.DoRefresh();
+
+        winMain.Close();
+    }
+
+    /// <summary>
+    /// 修改前校验记录状态
+    /// </summary>
+    /// <param name="objId"></param>
+    /// <returns></returns>
+    private bool CheckUpdateRecordState(string objId)
+    {
+        ICrtCuringTechnologyManager manager = new CrtCuringTechnologyManager();
+        CrtCuringTechnology entity = manager.GetByObjId(Convert.ToInt32(objId));
+        if (entity == null)
+        {
+            X.Msg.Alert("提示", "未找到要修改的信息").Show();
+            return false;
+
+        }
+        if (entity.RecordUserId != this.Data.User.UserId)
+        {
+            X.Msg.Alert("提示", "该记录不是当前用户创建，不允许修改，请核实").Show();
+            return false;
+        }
+        if (entity.SubmitFlag != Convert.ToInt32(enumSubmitFlags.Waited))
+        {
+            X.Msg.Alert("提示", "该记录已提交，不允许修改，请核实").Show();
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// 校验硫化工艺
+    /// </summary>
+    /// <returns></returns>
+    private bool CheckMainInfo(string objId)
+    {
+        #region 基本信息
+        if (txtMainTechnologyCode.Value == null || string.IsNullOrEmpty(txtMainTechnologyCode.Value.ToString()))
+        {
+            X.Msg.Alert("提示", "请填写工艺编号").Show();
+            return false;
+        }
+        if (cboMainTechnologyType.Value == null || string.IsNullOrEmpty(cboMainTechnologyType.Value.ToString()))
+        {
+            X.Msg.Alert("提示", "请选择工艺类型").Show();
+            return false;
+        }
+        if (cboMainBuildingMaterialId.Value == null || string.IsNullOrEmpty(cboMainBuildingMaterialId.Value.ToString()))
+        {
+            X.Msg.Alert("提示", "请选择胎胚规格").Show();
+            return false;
+        }
+        if (cboMainMinorTypeId.Value == null || string.IsNullOrEmpty(cboMainMinorTypeId.Value.ToString()))
+        {
+            X.Msg.Alert("提示", "请选择硫化机类型").Show();
+            return false;
+        }
+        if (cboMainBladderTypeId.Value == null || string.IsNullOrEmpty(cboMainBladderTypeId.Value.ToString()))
+        {
+            X.Msg.Alert("提示", "请选择胶囊型号").Show();
+            return false;
+        }
+        #endregion
+
+        #region 工艺时间
+        var visitCuringTimeFlag = hdnMainVisitCuringTimeFlag.Value;
+        if (string.IsNullOrEmpty(objId) && (visitCuringTimeFlag == null || visitCuringTimeFlag.ToString() == ""))
+        {
+            X.Msg.Alert("提示", "请先查看工艺时间是否正确").Show();
+            return false;
+        }
+        if (editType == enumEditTypes.WinterSummer)
+        {
+            if (cboMainCuringTimeType.Value == null || string.IsNullOrEmpty(cboMainCuringTimeType.Value.ToString()))
+            {
+                X.Msg.Alert("提示", "请选择当前执行(冬/夏)").Show();
+                return false;
+            }
+
+        }
+        string innerTempHigh = numMainInnerTempHigh.Value == null || numMainInnerTempHigh.Value.ToString() == "" ? "" : numMainInnerTempHigh.Value.ToString();
+        string innerTempSet = numMainInnerTempSet.Value == null || numMainInnerTempSet.Value.ToString() == "" ? "" : numMainInnerTempSet.Value.ToString();
+        string innerTempLow = numMainInnerTempLow.Value == null || numMainInnerTempLow.Value.ToString() == "" ? "" : numMainInnerTempLow.Value.ToString();
+        if (innerTempHigh != "" && innerTempSet != "" && Convert.ToDouble(innerTempHigh) < Convert.ToDouble(innerTempSet))
+        {
+            X.Msg.Alert("提示", "内压温度设定不能大于内压温度高限").Show();
+            return false;
+        }
+        if (innerTempLow != "" && innerTempSet != "" && Convert.ToDouble(innerTempLow) > Convert.ToDouble(innerTempSet))
+        {
+            X.Msg.Alert("提示", "内压温度低限不能大于内压温度设定").Show();
+            return false;
+        }
+        if (innerTempHigh != "" && innerTempLow != "" && Convert.ToDouble(innerTempHigh) < Convert.ToDouble(innerTempLow))
+        {
+            X.Msg.Alert("提示", "内压温度低限不能大于内压温度高限").Show();
+            return false;
+        }
+        string innerPressHigh = numMainInnerPressHigh.Value == null || numMainInnerPressHigh.Value.ToString() == "" ? "" : numMainInnerPressHigh.Value.ToString();
+        string innerPressSet = numMainInnerPressSet.Value == null || numMainInnerPressSet.Value.ToString() == "" ? "" : numMainInnerPressSet.Value.ToString();
+        string innerPressLow = numMainInnerPressLow.Value == null || numMainInnerPressLow.Value.ToString() == "" ? "" : numMainInnerPressLow.Value.ToString();
+        if (innerPressHigh != "" && innerPressSet != "" && Convert.ToDouble(innerPressHigh) < Convert.ToDouble(innerPressSet))
+        {
+            X.Msg.Alert("提示", "内压压力设定不能大于内压压力高限").Show();
+            return false;
+        }
+        if (innerPressLow != "" && innerPressSet != "" && Convert.ToDouble(innerPressLow) > Convert.ToDouble(innerPressSet))
+        {
+            X.Msg.Alert("提示", "内压压力低限不能大于内压压力设定").Show();
+            return false;
+        }
+        if (innerPressHigh != "" && innerPressLow != "" && Convert.ToDouble(innerPressHigh) < Convert.ToDouble(innerPressLow))
+        {
+            X.Msg.Alert("提示", "内压压力低限不能大于内压压力高限").Show();
+            return false;
+        }
+        string modelTempHigh = numMainModelTempHigh.Value == null || numMainModelTempHigh.Value.ToString() == "" ? "" : numMainModelTempHigh.Value.ToString();
+        string modelTempSet = numMainModelTempSet.Value == null || numMainModelTempSet.Value.ToString() == "" ? "" : numMainModelTempSet.Value.ToString();
+        string modelTempLow = numMainModelTempLow.Value == null || numMainModelTempLow.Value.ToString() == "" ? "" : numMainModelTempLow.Value.ToString();
+        if (modelTempHigh != "" && modelTempSet != "" && Convert.ToDouble(modelTempHigh) < Convert.ToDouble(modelTempSet))
+        {
+            X.Msg.Alert("提示", "模套温度/外压设定不能大于模套温度/外压高限").Show();
+            return false;
+        }
+        if (modelTempLow != "" && modelTempSet != "" && Convert.ToDouble(modelTempLow) > Convert.ToDouble(modelTempSet))
+        {
+            X.Msg.Alert("提示", "模套温度/外压低限不能大于模套温度/外压设定").Show();
+            return false;
+        }
+        if (modelTempHigh != "" && modelTempLow != "" && Convert.ToDouble(modelTempHigh) < Convert.ToDouble(modelTempLow))
+        {
+            X.Msg.Alert("提示", "模套温度/外压低限不能大于模套温度/外压高限").Show();
+            return false;
+        }
+        string plateTempHigh = numMainPlateTempHigh.Value == null || numMainPlateTempHigh.Value.ToString() == "" ? "" : numMainPlateTempHigh.Value.ToString();
+        string plateTempSet = numMainPlateTempSet.Value == null || numMainPlateTempSet.Value.ToString() == "" ? "" : numMainPlateTempSet.Value.ToString();
+        string plateTempLow = numMainPlateTempLow.Value == null || numMainPlateTempLow.Value.ToString() == "" ? "" : numMainPlateTempLow.Value.ToString();
+        if (plateTempHigh != "" && plateTempSet != "" && Convert.ToDouble(plateTempHigh) < Convert.ToDouble(plateTempSet))
+        {
+            X.Msg.Alert("提示", "热板温度/外温设定不能大于热板温度/外压高限").Show();
+            return false;
+        }
+        if (plateTempLow != "" && plateTempSet != "" && Convert.ToDouble(plateTempLow) > Convert.ToDouble(plateTempSet))
+        {
+            X.Msg.Alert("提示", "热板温度/外温低限不能大于热板温度/外压设定").Show();
+            return false;
+        }
+        if (plateTempHigh != "" && plateTempLow != "" && Convert.ToDouble(plateTempHigh) < Convert.ToDouble(plateTempLow))
+        {
+            X.Msg.Alert("提示", "热板温度/外温低限不能大于热板温度/外压高限").Show();
+            return false;
+        }
+        #endregion
+
+        #region 工艺参数
+        var visitParams1Flag = hdnMainVisitParams1Flag.Value;
+        if (string.IsNullOrEmpty(objId) && (visitParams1Flag == null || visitParams1Flag.ToString() == ""))
+        {
+            X.Msg.Alert("提示", "请先查看工艺参数是否正确").Show();
+            return false;
+        }
+        string clampingPressHigh = numMainClampingPressHigh.Value == null ? "" : numMainClampingPressHigh.Value.ToString();
+        string clampingPressLow = numMainClampingPressLow.Value == null ? "" : numMainClampingPressLow.Value.ToString();
+        if (clampingPressHigh != "" && clampingPressLow != "" && Convert.ToDouble(clampingPressHigh) < Convert.ToDouble(clampingPressLow))
+        {
+            X.Msg.Alert("提示", "合模力低限不能大于合模力高限").Show();
+            return false;
+        }
+        string manipulatorOpenHigh = numMainManipulatorOpenHigh.Value == null ? "" : numMainManipulatorOpenHigh.Value.ToString();
+        string manipulatorOpenLow = numMainManipulatorOpenLow.Value == null ? "" : numMainManipulatorOpenLow.Value.ToString();
+        if (manipulatorOpenHigh != "" && manipulatorOpenLow != "" && Convert.ToDouble(manipulatorOpenHigh) < Convert.ToDouble(manipulatorOpenLow))
+        {
+            X.Msg.Alert("提示", "机械手张开直径低限不能大于机械手张开直径高限").Show();
+            return false;
+        }
+        string firstShapingPressHigh = numMainFirstShapingPressHigh.Value == null ? "" : numMainFirstShapingPressHigh.Value.ToString();
+        string firstShapingPressLow = numMainFirstShapingPressLow.Value == null ? "" : numMainFirstShapingPressLow.Value.ToString();
+        if (firstShapingPressHigh != "" && firstShapingPressLow != "" && Convert.ToDouble(firstShapingPressHigh) < Convert.ToDouble(firstShapingPressLow))
+        {
+            X.Msg.Alert("提示", "一次定型压力低限不能大于一次定型压力高限").Show();
+            return false;
+        }
+        string secondShapingPressHigh = numMainSecondShapingPressHigh.Value == null ? "" : numMainSecondShapingPressHigh.Value.ToString();
+        string secondShapingPressLow = numMainSecondShapingPressLow.Value == null ? "" : numMainSecondShapingPressLow.Value.ToString();
+        if (secondShapingPressHigh != "" && secondShapingPressLow != "" && Convert.ToDouble(secondShapingPressHigh) < Convert.ToDouble(secondShapingPressLow))
+        {
+            X.Msg.Alert("提示", "二次定型压力低限不能大于二次定型压力高限").Show();
+            return false;
+        }
+        #endregion
+
+        if (hdnMainAuditSelects.Value == null || hdnMainAuditSelects.Value.ToString() == "")
+        {
+            X.Msg.Alert("提示", "请选择审核人员").Show();
+            return false;
+        }
+
+        if (!string.IsNullOrEmpty(objId))
+        {
+            if (!CheckUpdateRecordState(objId))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    #endregion
+
+    #region 删除硫化工艺
+    [Ext.Net.DirectMethod()]
+    public string command_direct_delete(string objId)
+    {
+        string resultValue = "";
+        ICrtCuringTechnologyManager manager = new CrtCuringTechnologyManager();
+
+        CrtCuringTechnology entity = manager.GetByObjId(Convert.ToInt32(objId));
+        resultValue = CheckDeleteRecordState(objId);
+        if (resultValue != "")
+        {
+            return resultValue;
+        }
+
+        int result = manager.UpdateByObjId(new CrtCuringTechnology() { DeleteFlag = 1 }, Convert.ToInt32(objId));
+        if (result <= 0)
+        {
+            return "数据删除失败";
+        }
+        gridPanelMainPagingToolbar.DoRefresh();
+        return "数据删除成功！";
+    }
+
+    /// <summary>
+    /// 删除前校验记录状态
+    /// </summary>
+    /// <param name="objId"></param>
+    /// <returns></returns>
+    private string CheckDeleteRecordState(string objId)
+    {
+        ICrtCuringTechnologyManager manager = new CrtCuringTechnologyManager();
+        CrtCuringTechnology entity = manager.GetByObjId(Convert.ToInt32(objId));
+        if (entity == null)
+        {
+            return "未找到要删除的信息";
+
+        }
+        if (entity.RecordUserId != this.Data.User.UserId)
+        {
+            return "该记录不是当前用户创建，不允许删除，请核实";
+        }
+        if (entity.SubmitFlag != Convert.ToInt32(enumSubmitFlags.Waited))
+        {
+            return "该记录已提交，不允许删除，请核实";
+        }
+
+        return "";
+    }
+
+    #endregion
+
+    #region 查看硫化工艺
+    [Ext.Net.DirectMethod()]
+    public void command_direct_view(string objId)
+    {
+        InitMainInfo(enumCommands.View);
+
+        SetMainInfo(enumCommands.View, objId);
+
+        this.winMain.Title = "查看工艺标准";
+        this.winMain.Show();
+    }
+    #endregion
+
+    #region 提交硫化工艺
+    [Ext.Net.DirectMethod()]
+    public string command_direct_submit(string objId)
+    {
+        string resultValue = "";
+        ICrtCuringTechnologyManager manager = new CrtCuringTechnologyManager();
+        CrtCuringTechnology entity = manager.GetByObjId(Convert.ToInt32(objId));
+        resultValue = CheckSubmitRecordState(objId, entity);
+        if (resultValue != "")
+        {
+            return resultValue;
+        }
+        int result = manager.UpdateByObjId(
+            new CrtCuringTechnology()
+            {
+                State = Convert.ToInt32(enumRecordStates.Submitted)
+                ,
+                SubmitFlag = Convert.ToInt32(enumSubmitFlags.Submited)
+                ,
+                AuditFlag = Convert.ToInt32(enumAuditFlags.Waited)
+            }
+            , Convert.ToInt32(objId));
+        if (result <= 0)
+        {
+            return "数据提交失败";
+        }
+        gridPanelMainPagingToolbar.DoRefresh();
+        return "数据提交成功！";
+    }
+
+    private string CheckSubmitRecordState(string objId, CrtCuringTechnology entity)
+    {
+        if (entity == null)
+        {
+            return "未找到要提交的信息";
+
+        }
+        if (entity.SubmitFlag != Convert.ToInt32(enumSubmitFlags.Waited))
+        {
+            return "数据不是待提交状态，请核实";
+        }
+        if (entity.RecordUserId != this.Data.User.UserId)
+        {
+            return "该记录不是当前用户创建，不允许提交，请核实";
+        }
+
+        return "";
+    }
+
+    #endregion
+
+    #region 审核硫化工艺
+    [Ext.Net.DirectMethod()]
+    public void command_direct_audit(string objId)
+    {
+        ICrtCuringTechnologyManager manager = new CrtCuringTechnologyManager();
+        CrtCuringTechnology entity = manager.GetByObjId(Convert.ToInt32(objId));
+
+        string returnValue = CheckAuditRecordState(objId, entity);
+        if (returnValue != "")
+        {
+            X.Msg.Alert("提示", returnValue).Show();
+            return;
+        }
+
+        InitMainInfo(enumCommands.Audit);
+
+        SetMainInfo(enumCommands.Audit, objId);
+
+        this.winMain.Title = "审核工艺标准";
+        this.winMain.Show();
+
+    }
+
+    private string CheckAuditRecordState(string objId, CrtCuringTechnology entity)
+    {
+        if (entity.AuditFlag != Convert.ToInt32(enumAuditFlags.Waited))
+        {
+            return "数据不是待审核状态，请核实";
+        }
+
+        ICrtTechAuditSelectManager managerAuditSelect = new CrtTechAuditSelectManager();
+        IList<CrtTechAuditSelect> lstAuditSelect = managerAuditSelect.GetEntityList(new CrtTechAuditSelect() { DeleteFlag = 0, TechnologyId = entity.ObjId });
+        if (lstAuditSelect.Where(m => m.AuditUserId == this.Data.User.UserId).Count() == 0)
+        {
+            return "当前用户不是该记录的审核人员，请核实";
+        }
+        return "";
+    }
+
+    /// <summary>
+    /// 审核通过
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnMainAuditAcept_Click(object sender, DirectEventArgs e)
+    {
+        string objId = hdnMainObjId.Value.ToString();
+        string auditRemark = txtMainAuditRemark.Value == null ? "" : txtMainAuditRemark.Value.ToString().Trim();
+        ICrtCuringTechnologyManager manager = new CrtCuringTechnologyManager();
+        CrtCuringTechnology entity = manager.GetByObjId(Convert.ToInt32(objId));
+
+        string resultValue = CheckAuditRecordState(objId, entity);
+        if (resultValue != "")
+        {
+            X.Msg.Alert("提示", resultValue).Show();
+            return;
+        }
+
+
+        IList<CrtCuringTechnology> lst = manager.GetEntityList(new CrtCuringTechnology()
+        {
+            BuildingMaterialId = entity.BuildingMaterialId,
+            MinorTypeId = entity.MinorTypeId,
+            TechnologyType = entity.TechnologyType,
+        }
+        , "VERSION DESC");
+        IEnumerable<CrtCuringTechnology> enumer = lst.Where(m => m.Version > 0);
+        int maxVersion = 1;
+
+        if (enumer.Count() > 0)
+        {
+            maxVersion = enumer.First().Version.Value + 1;
+        }
+
+        int result = manager.UpdateByObjId(new CrtCuringTechnology()
+        {
+            Version = maxVersion,
+            State = Convert.ToInt32(enumRecordStates.Passed),
+            AuditFlag = Convert.ToInt32(enumAuditFlags.Passed),
+            SendFlag = Convert.ToInt32(enumSendFlags.Waited),
+            AuditRemark = auditRemark,
+            AuditTime = DateTime.Now,
+            AuditUserId = this.Data.User.UserId,
+        }
+        , Convert.ToInt32(objId));
+        if (result == 0)
+        {
+            X.Msg.Alert("提示", "数据审核失败").Show();
+            return;
+        }
+
+        X.Msg.Alert("提示", "数据审核成功").Show();
+        winMain.Close();
+        gridPanelMainPagingToolbar.DoRefresh();
+
+    }
+
+    /// <summary>
+    /// 审核退回
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnMainAuditReject_Click(object sender, DirectEventArgs e)
+    {
+        string objId = hdnMainObjId.Value.ToString();
+        string auditRemark = txtMainAuditRemark.Value == null ? "" : txtMainAuditRemark.Value.ToString().Trim();
+        ICrtCuringTechnologyManager manager = new CrtCuringTechnologyManager();
+        CrtCuringTechnology entity = manager.GetByObjId(Convert.ToInt32(objId));
+        string resultValue = CheckAuditRecordState(objId, entity);
+        if (resultValue != "")
+        {
+            X.Msg.Alert("提示", resultValue).Show();
+            return;
+        }
+
+        if (string.IsNullOrEmpty(auditRemark))
+        {
+            X.Msg.Alert("提示", "请填写审核意见").Show();
+            tabPanelMain.SetActiveTab(tabPanelMain.Items.Count - 1);
+            return;
+        }
+
+        int result = manager.UpdateByObjId(new CrtCuringTechnology()
+        {
+            State = Convert.ToInt32(enumRecordStates.Backup),
+            SubmitFlag = Convert.ToInt32(enumSubmitFlags.Waited),
+            AuditFlag = Convert.ToInt32(enumAuditFlags.NotPassed),
+            AuditRemark = auditRemark,
+            AuditTime = DateTime.Now,
+            AuditUserId = this.Data.User.UserId,
+        }
+        , Convert.ToInt32(objId));
+        if (result == 0)
+        {
+            X.Msg.Alert("提示", "数据审核失败").Show();
+            return;
+        }
+
+        X.Msg.Alert("提示", "退回修改成功").Show();
+        winMain.Close();
+        gridPanelMainPagingToolbar.DoRefresh();
+
+    }
+
+    #endregion
+
+    #region 下发硫化工艺
+    [Ext.Net.DirectMethod()]
+    public string command_direct_send(string objId)
+    {
+        ICrtCuringTechnologyManager manager = new CrtCuringTechnologyManager();
+        CrtCuringTechnology entity = manager.GetByObjId(Convert.ToInt32(objId));
+        if (entity.SendFlag != Convert.ToInt32(enumSendFlags.Waited))
+        {
+            return "数据不是待下发状态，请核实";
+        }
+
+        IList<CrtCuringTechnology> lstUsed = manager.GetEntityList(new CrtCuringTechnology()
+        {
+            DeleteFlag = 0,
+            UsedFlag = Convert.ToInt32(enumUsedFlags.Used),
+            TechnologyType = entity.TechnologyType,
+            MinorTypeId = entity.MinorTypeId,
+            BuildingMaterialId = entity.BuildingMaterialId,
+        });
+
+        if (lstUsed.Count > 0 && lstUsed[0].Version > entity.Version)
+        {
+            return "正在使用的版本号比要下发的版本号大，不允许下发，请核实";
+        }
+
+
+        manager.Update(
+            new CrtCuringTechnology()
+            {
+                UsedFlag = Convert.ToInt32(enumUsedFlags.Stoped),
+                State = Convert.ToInt32(enumRecordStates.Stoped),
+            }
+            , new CrtCuringTechnology()
+            {
+                DeleteFlag = 0,
+                UsedFlag = Convert.ToInt32(enumUsedFlags.Used),
+                TechnologyType = entity.TechnologyType,
+                MinorTypeId = entity.MinorTypeId,
+                BuildingMaterialId = entity.BuildingMaterialId,
+            });
+
+        int result = manager.UpdateByObjId(
+            new CrtCuringTechnology()
+            {
+                State = Convert.ToInt32(enumRecordStates.Sent),
+                UsedFlag = Convert.ToInt32(enumUsedFlags.Used),
+                SendFlag = Convert.ToInt32(enumSendFlags.Sent),
+                SendTime = DateTime.Now,
+                SendUserId = this.Data.User.UserId,
+            }, Convert.ToInt32(objId));
+        if (result == 0)
+        {
+            return "数据下发失败";
+        }
+        gridPanelMainPagingToolbar.DoRefresh();
+        return "数据下发成功！";
+    }
+    #endregion
+
+    #region 添加硫化步序
+    /// <summary>
+    /// 添加硫化步序
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnDetailAdd_Click(object sender, DirectEventArgs e)
+    {
+        string majorTypeId = cboMainMajorTypeId.Value.ToString();
+        string minorTypeId = cboMainMinorTypeId.Value.ToString();
+
+        if (string.IsNullOrEmpty(minorTypeId))
+        {
+            X.Msg.Alert("提示", "请选择硫化机类型").Show();
+            return;
+        }
+
+        InitDetailInfo();
+
+        hdnDetailGuid.Value = hdnMainGuid.Value;
+        hdnDetailTechnologyId.Value = hdnMainObjId.Value;
+        hdnDetailCuringTimeType.Value = 0;
+
+        // 获取阀门信息
+        ICrtCuringTechValveManager crtCuringTechValveManager = new CrtCuringTechValveManager();
+        IList<CrtCuringTechValve> lst = crtCuringTechValveManager.GetEntityList(
+            new CrtCuringTechValve() { DeleteFlag = 0, MajorTypeId = Convert.ToInt32(majorTypeId), MinorTypeId = Convert.ToInt32(minorTypeId) });
+        foreach (CrtCuringTechValve entity in lst)
+        {
+            (chkgrpDetailValveState.Items[entity.ValveIndex.Value - 1] as Checkbox).FieldLabel = entity.ValveName;
+        }
+
+        string guid = hdnDetailGuid.Value.ToString();
+        string technologyId = hdnDetailTechnologyId.Value.ToString();
+        numDetailCuringStep.Value = GetDefaultCuringStep(guid, technologyId);
+
+        winDetail.Show();
+    }
+
+    /// <summary>
+    /// 获取默认步序
+    /// </summary>
+    /// <param name="guid"></param>
+    /// <param name="technologyId"></param>
+    /// <returns></returns>
+    private int GetDefaultCuringStep(string guid, string technologyId)
+    {
+        var lastStep = 0;
+
+        ICrtCuringTechStepManager manager = new CrtCuringTechStepManager();
+        // 设置默认步序
+        CrtCuringTechStep entity = new CrtCuringTechStep();
+        if (string.IsNullOrEmpty(technologyId))
+        {
+            entity.Guid = guid;
+        }
+        else
+        {
+            entity.TechnologyId = Convert.ToInt32(technologyId);
+        }
+        entity.DeleteFlag = 0;
+
+        IList<CrtCuringTechStep> lst = manager.GetEntityList(entity, "CURING_STEP");
+        foreach (CrtCuringTechStep item in lst)
+        {
+            if (item.CuringStep.Value - lastStep == 1)
+            {
+                lastStep = item.CuringStep.Value;
+                continue;
+            }
+            break;
+        }
+
+        return lastStep + 1;
+    }
+
+    protected void btnWinterAdd_Click(object sender, DirectEventArgs e)
+    {
+        string majorTypeId = cboMainMajorTypeId.Value.ToString();
+        string minorTypeId = cboMainMinorTypeId.Value.ToString();
+
+        if (string.IsNullOrEmpty(minorTypeId))
+        {
+            X.Msg.Alert("提示", "请选择硫化机类型").Show();
+            return;
+        }
+
+        InitDetailInfo();
+
+        hdnDetailGuid.Value = hdnMainGuid.Value;
+        hdnDetailTechnologyId.Value = hdnMainObjId.Value;
+        hdnDetailCuringTimeType.Value = 1;
+
+        // 获取阀门信息
+        ICrtCuringTechValveManager crtCuringTechValveManager = new CrtCuringTechValveManager();
+        IList<CrtCuringTechValve> lst = crtCuringTechValveManager.GetEntityList(
+            new CrtCuringTechValve() { DeleteFlag = 0, MajorTypeId = Convert.ToInt32(majorTypeId), MinorTypeId = Convert.ToInt32(minorTypeId) });
+        foreach (CrtCuringTechValve entity in lst)
+        {
+            (chkgrpDetailValveState.Items[entity.ValveIndex.Value - 1] as Checkbox).FieldLabel = entity.ValveName;
+        }
+
+        winDetail.Show();
+
+    }
+    /// <summary>
+    /// 清空硫化步序
+    /// </summary>
+    private void InitDetailInfo()
+    {
+        hdnDetailObjId.Value = "";
+        hdnDetailTechnologyId.Value = "";
+        hdnDetailCuringTimeType.Value = "";
+        numDetailCuringStep.Value = "";
+        numDetailCuringTime.Value = "";
+        foreach (Checkbox chk in chkgrpDetailValveState.Items)
+        {
+            chk.Checked = false;
+        }
+    }
+
+
+    /// <summary>
+    /// 清空工艺步序名称
+    /// </summary>
+    private void InitMainDetailColumns()
+    {
+        ColumnBase col = gridPanelDetail.ColumnModel.GetColumnByDataIndex("VALVE_STATE");
+        col.Hidden = true;
+
+        foreach (ColumnBase item in col.Columns)
+        {
+            item.Text = "备用";
+        }
+
+        col = gridPanelWinter.ColumnModel.GetColumnByDataIndex("VALVE_STATE");
+        col.Hidden = true;
+
+        foreach (ColumnBase item in col.Columns)
+        {
+            item.Text = "备用";
+        }
+
+    }
+
+    #endregion
+
+    #region 修改硫化步序
+
+    [Ext.Net.DirectMethod()]
+    public void detailcommand_direct_edit(string objId)
+    {
+        ICrtCuringTechStepManager manager = new CrtCuringTechStepManager();
+        CrtCuringTechStep entity = manager.GetByObjId(Convert.ToInt32(objId));
+
+        if (entity == null)
+        {
+            X.Msg.Alert("提示", "未找到要修改的信息").Show();
+            return;
+
+        }
+
+        InitDetailInfo();
+
+        hdnDetailObjId.Value = entity.ObjId;
+        hdnDetailGuid.Value = entity.Guid;
+        hdnDetailTechnologyId.Value = entity.TechnologyId;
+        hdnDetailCuringTimeType.Value = entity.CuringTimeType;
+        numDetailCuringStep.Value = entity.CuringStep;
+        numDetailCuringTime.Value = entity.CuringTime;
+        int index = 0;
+        int length = entity.CuringValve.Length;
+        foreach (Checkbox item in chkgrpDetailValveState.Items)
+        {
+            if (index >= length)
+            {
+                break;
+            }
+
+            if (entity.CuringValve.Substring(index, 1) == "1")
+            {
+                item.Checked = true;
+            }
+            else
+            {
+                item.Checked = false;
+            }
+
+            index++;
+        }
+
+        this.winDetail.Show();
+    }
+    #endregion
+
+    #region 保存硫化步序
+
+    /// <summary>
+    /// 保存硫化步序
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void btnDetailSave_Click(object sender, DirectEventArgs e)
+    {
+        if (!CheckDetailInfo())
+        {
+            return;
+        }
+
+        string objId = hdnDetailObjId.Value.ToString();
+        string guid = hdnDetailGuid.Value.ToString();
+        string technologyId = hdnDetailTechnologyId.Value.ToString();
+        string curingStep = numDetailCuringStep.RawText;
+        string curingTime = numDetailCuringTime.RawText;
+        string curingValve = "";
+        foreach (Checkbox chk in chkgrpDetailValveState.Items)
+        {
+            if (chk.Checked)
+            {
+                curingValve += "1";
+            }
+            else
+            {
+                curingValve += "0";
+            }
+        }
+        string curingTimeType = hdnDetailCuringTimeType.Value.ToString();
+
+        CrtCuringTechStep entity = new CrtCuringTechStep();
+        entity.CuringStep = Convert.ToInt32(curingStep);
+        entity.CuringTime = Convert.ToInt32(curingTime);
+        entity.CuringValve = curingValve;
+        entity.DeleteFlag = 0;
+        if (string.IsNullOrEmpty(technologyId))
+        {
+            entity.Guid = guid;
+        }
+        else
+        {
+            entity.TechnologyId = Convert.ToInt32(technologyId);
+        }
+        entity.CuringTimeType = Convert.ToInt32(curingTimeType);
+
+        if (!CheckRepeatDetailStep(guid, technologyId, objId, curingStep))
+        {
+            return;
+        }
+
+        ICrtCuringTechStepManager manager = new CrtCuringTechStepManager();
+        if (string.IsNullOrEmpty(objId))
+        {
+            manager.Insert(entity);
+
+            X.Msg.Alert("提示", "添加成功").Show();
+        }
+        else
+        {
+            manager.UpdateByObjId(entity, Convert.ToInt32(objId));
+
+            X.Msg.Alert("提示", "修改成功").Show();
+        }
+
+        gridPanelDetailPagingToolbar.DoRefresh();
+
+        winDetail.Close();
+    }
+
+    /// <summary>
+    /// 校验硫化步序
+    /// </summary>
+    /// <returns></returns>
+    private bool CheckDetailInfo()
+    {
+        if (string.IsNullOrEmpty(numDetailCuringStep.RawText))
+        {
+            X.Msg.Alert("提示", "请填写硫化步序").Show();
+            return false;
+        }
+
+        if (string.IsNullOrEmpty(numDetailCuringTime.RawText))
+        {
+            X.Msg.Alert("提示", "请填写硫化时间").Show();
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool CheckRepeatDetailStep(string guid, string technologyId, string objId, string curingStep)
+    {
+        ICrtCuringTechStepManager manager = new CrtCuringTechStepManager();
+        CrtCuringTechStep entity = new CrtCuringTechStep();
+
+        if (string.IsNullOrEmpty(technologyId))
+        {
+            entity.Guid = guid;
+        }
+        else
+        {
+            entity.TechnologyId = Convert.ToInt32(technologyId);
+        }
+        entity.CuringStep = Convert.ToInt32(curingStep);
+        entity.DeleteFlag = 0;
+        IList<CrtCuringTechStep> lst = manager.GetEntityList(entity);
+        if (lst.Count > 0)
+        {
+            if (string.IsNullOrEmpty(objId) || lst.Where(m => m.ObjId != Convert.ToInt32(objId)).Count() > 0)
+            {
+                X.Msg.Alert("提示", "硫化步序已存在").Show();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    #endregion
+
+    #region 删除硫化步序
+    [Ext.Net.DirectMethod()]
+    public string detailcommand_direct_delete(string objId)
+    {
+        ICrtCuringTechStepManager manager = new CrtCuringTechStepManager();
+        int result = manager.UpdateByObjId(new CrtCuringTechStep() { DeleteFlag = 1 }, Convert.ToInt32(objId));
+        if (result == 0)
+        {
+            return "数据删除失败";
+        }
+
+        gridPanelDetailPagingToolbar.DoRefresh();
+
+        return "数据删除成功！";
+    }
+    #endregion
+
+    #region 选择硫化机
+    /// <summary>
+    /// 选择硫化机类型
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    [Ext.Net.DirectMethod()]
+    public void equipminortype_change(string majorTypeId, string minorTypeId)
+    {
+        InitMainDetailColumns();
+
+        if (string.IsNullOrEmpty(minorTypeId))
+        {
+            return;
+        }
+        ColumnBase col = gridPanelDetail.ColumnModel.GetColumnByDataIndex("VALVE_STATE");
+        col.Hidden = false;
+        // 获取阀门信息
+        ICrtCuringTechValveManager crtCuringTechValveManager = new CrtCuringTechValveManager();
+        IList<CrtCuringTechValve> lst = crtCuringTechValveManager.GetEntityList(
+            new CrtCuringTechValve() { DeleteFlag = 0, MajorTypeId = Convert.ToInt32(majorTypeId), MinorTypeId = Convert.ToInt32(minorTypeId) });
+        foreach (CrtCuringTechValve entity in lst)
+        {
+            col.Columns.Find(m => m.DataIndex == "VALVE_STATE_" + entity.ValveIndex.Value.ToString()).Text = entity.ValveName;
+        }
+
+        // 冬季
+        col = gridPanelWinter.ColumnModel.GetColumnByDataIndex("VALVE_STATE");
+        col.Hidden = false;
+        // 获取阀门信息
+        foreach (CrtCuringTechValve entity in lst)
+        {
+            col.Columns.Find(m => m.DataIndex == "VALVE_STATE_" + entity.ValveIndex.Value.ToString()).Text = entity.ValveName;
+        }
+    }
+
+
+    #endregion
+
+    #region 选择胶囊型号
+
+    /// <summary>
+    /// 选择胶囊型号
+    /// </summary>
+    [Ext.Net.DirectMethod()]
+    public void bladdertype_change(object bladderTypeId)
+    {
+        if (editType == enumEditTypes.WinterSummer)
+        {
+            cboMainBladderTensileHeightId.GetStore().RemoveAll();
+            cboMainBladderTensileHeightId.Value = "";
+            numMainBladderTensileHeight.Value = "";
+            numMainTopLimitAmount.Value = "";
+            if (bladderTypeId != null && !string.IsNullOrEmpty(bladderTypeId.ToString()))
+            {
+                ICrtBladderTensileHeightManager manager = new CrtBladderTensileHeightManager();
+                IList<CrtBladderTensileHeight> lst = manager.GetEntityList(new CrtBladderTensileHeight() { DeleteFlag = 0, BladderTypeId = Convert.ToInt32(bladderTypeId) }, "OBJID DESC");
+                if (lst.Count > 0)
+                {
+                    CrtBladderTensileHeight entity = lst[0];
+                    cboMainBladderTensileHeightId.AddItem(entity.BladderTensileHeight.ToString(), entity.ObjId.ToString());
+                    cboMainBladderTensileHeightId.Select(0);
+                    numMainBladderTensileHeight.Value = entity.BladderTensileHeight.ToString();
+                    numMainTopLimitAmount.Value = entity.TopLimitAmount.ToString();
+                }
+            }
+        }
+    }
+    #endregion
+
+}

@@ -1,0 +1,381 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{61160FD8-59AF-42B3-B941-C4D810AA6092}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.TyreCheck</RootNamespace>
+    <AssemblyName>Mesnac.TyreCheck</AssemblyName>
+    <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PlatformFamilyName>PocketPC</PlatformFamilyName>
+    <PlatformID>4118C335-430C-497f-BE48-11C3316B135E</PlatformID>
+    <OSVersion>5.01</OSVersion>
+    <DeployDirSuffix>Mesnac.TyreCheck</DeployDirSuffix>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <NativePlatformName>Windows Mobile 5.0 Pocket PC SDK</NativePlatformName>
+    <FormFactorID>
+    </FormFactorID>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mesnac.WebService, Version=1.0.5107.19055, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Mesnac.WebService\bin\Debug\Mesnac.WebService.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataGrid" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FrmBadInStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBadInStore.Designer.cs">
+      <DependentUpon>FrmBadInStore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBadTyreInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBadTyreInfo.designer.cs">
+      <DependentUpon>FrmBadTyreInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCuringCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCuringCheck.designer.cs">
+      <DependentUpon>FrmCuringCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCuringFault.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCuringFault.Designer.cs">
+      <DependentUpon>FrmCuringFault.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDuty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDuty.Designer.cs">
+      <DependentUpon>FrmDuty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFault.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFault.Designer.cs">
+      <DependentUpon>FrmFault.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFCheck.designer.cs">
+      <DependentUpon>FrmFCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFCheckStopEquip.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFCheckStopEquip.Designer.cs">
+      <DependentUpon>FrmFCheckStopEquip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFCheckStopEquipInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFCheckStopEquipInfo.Designer.cs">
+      <DependentUpon>FrmFCheckStopEquipInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFLeaderCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFLeaderCheck.designer.cs">
+      <DependentUpon>FrmFLeaderCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFReCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFReCheck.designer.cs">
+      <DependentUpon>FrmFReCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLockBarcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLockBarcode.Designer.cs">
+      <DependentUpon>FrmLockBarcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRimClean.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRimClean.designer.cs">
+      <DependentUpon>FrmRimClean.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRimDel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRimDel.designer.cs">
+      <DependentUpon>FrmRimDel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRimEquipRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRimEquipRecord.designer.cs">
+      <DependentUpon>FrmRimEquipRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRimInOutStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRimInOutStore.designer.cs">
+      <DependentUpon>FrmRimInOutStore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRimRepair.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRimRepair.designer.cs">
+      <DependentUpon>FrmRimRepair.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmShift.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmShift.designer.cs">
+      <DependentUpon>FrmShift.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IniAssenbly.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmBadInStore.resx">
+      <DependentUpon>FrmBadInStore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBadTyreInfo.resx">
+      <DependentUpon>FrmBadTyreInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCuringCheck.resx">
+      <DependentUpon>FrmCuringCheck.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCuringFault.resx">
+      <DependentUpon>FrmCuringFault.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDuty.resx">
+      <DependentUpon>FrmDuty.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFault.resx">
+      <DependentUpon>FrmFault.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFCheck.resx">
+      <DependentUpon>FrmFCheck.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFCheckStopEquip.resx">
+      <DependentUpon>FrmFCheckStopEquip.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFCheckStopEquipInfo.resx">
+      <DependentUpon>FrmFCheckStopEquipInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFLeaderCheck.resx">
+      <DependentUpon>FrmFLeaderCheck.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFReCheck.resx">
+      <DependentUpon>FrmFReCheck.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLockBarcode.resx">
+      <DependentUpon>FrmLockBarcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRimClean.resx">
+      <DependentUpon>FrmRimClean.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRimDel.resx">
+      <DependentUpon>FrmRimDel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRimEquipRecord.resx">
+      <DependentUpon>FrmRimEquipRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRimInOutStore.resx">
+      <DependentUpon>FrmRimInOutStore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRimRepair.resx">
+      <DependentUpon>FrmRimRepair.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShift.resx">
+      <DependentUpon>FrmShift.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDegradeConfirm.resx">
+      <DependentUpon>FrmDegradeConfirm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRepair.resx">
+      <DependentUpon>FrmRepair.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmExpTab.resx">
+      <DependentUpon>FrmExpTab.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmArtificialCheck.resx">
+      <DependentUpon>FrmArtificialCheck.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFQBArtificialCheck.resx">
+      <DependentUpon>FrmFQBArtificialCheck.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="QualityManager.cs" />
+    <Compile Include="FrmDegradeConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDegradeConfirm.designer.cs">
+      <DependentUpon>FrmDegradeConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRepair.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRepair.designer.cs">
+      <DependentUpon>FrmRepair.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmExpTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmExpTab.designer.cs">
+      <DependentUpon>FrmExpTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmArtificialCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmArtificialCheck.designer.cs">
+      <DependentUpon>FrmArtificialCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFQBArtificialCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFQBArtificialCheck.designer.cs">
+      <DependentUpon>FrmFQBArtificialCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WebReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mesnac.Framework\Mesnac.Framework.csproj">
+      <Project>{82D95D33-9473-4246-8C99-C58E6A685B0F}</Project>
+      <Name>Mesnac.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Resources\Mesnac.Resources.csproj">
+      <Project>{0EC8F216-C3B2-49EC-B42C-05EECC9503EF}</Project>
+      <Name>Mesnac.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Scanner\Mesnac.Scanner.csproj">
+      <Project>{9FEDCB60-B5DC-4F26-A1D3-4FFAA012EAB2}</Project>
+      <Name>Mesnac.Scanner</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Utility\Mesnac.Utility.csproj">
+      <Project>{526D6F8D-C228-4F4A-9DD7-90ECCDCA3371}</Project>
+      <Name>Mesnac.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Windows\Mesnac.Windows.csproj">
+      <Project>{1F4959E8-BFE7-48EB-8D3D-887303A6E838}</Project>
+      <Name>Mesnac.Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://192.168.126.48:8011/Services/Mes/LockBarcodeSync.asmx">
+      <UrlBehavior>Static</UrlBehavior>
+      <RelPath>Web References\WebReference\</RelPath>
+      <UpdateFromURL>http://192.168.126.48:8011/Services/Mes/LockBarcodeSync.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\WebReference\LockBarcodeSync.disco" />
+    <None Include="Web References\WebReference\LockBarcodeSync.wsdl" />
+    <None Include="Web References\WebReference\LockBarcode_Resp.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\WebReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}">
+        <HostingProcess disable="1" />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(TargetPath)" /S/Y "$(SolutionDir)bin\"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

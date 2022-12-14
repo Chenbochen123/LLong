@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="REASON" Value="锁定原因"></Caption>
+  </Captions>
+  <WebPage Title="条码锁定原因维护">
+  </WebPage>
+  <Crud TableName="SBM_LOCK_REASON">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_SBM_LOCK_REASON"></SeqField>
+    </SeqFields>
+  </Crud>
+
+  <Insert>
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="REASON"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+
+  <Update>
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="REASON" ></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="REASON" ></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid >
+      <GridColumns>
+        <GridColumn ColumnName="REASON" Width="160" Caption="锁定原因"></GridColumn>
+       </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

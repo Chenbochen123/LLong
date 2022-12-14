@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudSsbWork" parameterClass="int" resultClass="row">
+      <![CDATA[SELECT * FROM SSB_WORK ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.WORK_NAME" prepend="AND">
+            WORK_NAME  like '%'||#where.WORK_NAME#||'%'
+        </isNotNull>
+        <isNotNull property="where.DEPT_ID" prepend="AND">
+          <![CDATA[DEPT_ID = #where.DEPT_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.PROCEDURE_ID" prepend="AND">
+          <![CDATA[PROCEDURE_ID = #where.PROCEDURE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.HR_CODE" prepend="AND">
+          <![CDATA[HR_CODE = #where.HR_CODE#]]>
+        </isNotNull>
+        <isNotNull property="where.ERP_CODE" prepend="AND">
+          <![CDATA[ERP_CODE = #where.ERP_CODE#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[Remark = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    <select id="Select+Update@CrudSsbWork" parameterClass="int" resultClass="row">
+      <![CDATA[SELECT * FROM SSB_WORK ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+  </statements>
+</sqlMap>

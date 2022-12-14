@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="SearchType" Value="查询类型"></Caption>
+    <Caption Name="BeginDate" Value="开始日期"></Caption>
+    <Caption Name="EndDate" Value="结束日期"></Caption>
+    <Caption Name="BeginTime" Value="开始时间"></Caption>
+    <Caption Name="EndTime" Value="结束时间"></Caption>
+    <Caption Name="BILLSTATE" Value="单据状态"></Caption>
+    <Caption Name="RecordUserName" Value="创建人"></Caption>
+    <Caption Name="BILL_CODE" Value="单据编号"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="创建人"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_TIME" Value="创建时间"></Caption>
+    <Caption Name="UPDATE_TIME" Value="更新时间"></Caption>
+    <Caption Name="UPDATE_USER_NAME" Value="更新人"></Caption>
+    <Caption Name="CAR_BARCODE" Value="车辆条码"></Caption>
+    <Caption Name="STORE_TYPE_NAME" Value="仓库类型"></Caption>
+    <Caption Name="STORE_NAME" Value="仓库"></Caption>
+    <Caption Name="STORE_PLACE_NAME" Value="库位"></Caption>
+    <Caption Name="CHECK_GRADE_NAME" Value="品级"></Caption>
+    <Caption Name="AFFIRM_USER_NAME" Value="确认人"></Caption>
+    <Caption Name="AFFIRM_TIME" Value="确认时间"></Caption>
+    <Caption Name="OUT_AMOUNT" Value="出库数量"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="规格"></Caption>
+  </Captions>
+  <WebPage Title="成品出库退库单汇总">
+  </WebPage>
+  <Crud TableName="PSM_OUTRETURN_STOCK_BILL">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="BeginDate" Type="DateBox"></ParamField>
+        <ParamField FieldName="EndDate" Type="DateBox"></ParamField>
+        <ParamField FieldName="BILLSTATE" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="STORE_NAME" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="BILL_CODE" Type="TextBox"></ParamField>
+        
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="BILL_CODE" ColumnType=""></GridColumn>
+        <GridColumn ColumnName="BILLSTATE"></GridColumn>
+        <GridColumn ColumnName="STORE_NAME" Width="40"></GridColumn>
+        <GridColumn ColumnName="OUT_AMOUNT"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="UPDATE_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="UPDATE_USER_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="AFFIRM_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="AFFIRM_USER_NAME" Width="60"></GridColumn>
+        <GridColumn ColumnName="REMARK" IsShow="false" Width="180"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

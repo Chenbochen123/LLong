@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BasicMapper.SstTaskRemind"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SstTaskRemind" type="Mesnac.FrameDb.Entity.BasicEntity.SstTaskRemind, Mesnac.FrameDb.Mapper" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SstTaskRemind" class="SstTaskRemind">
+    <result property="ObjId" column="OBJID"/>
+    <result property="EventName" column="EVENT_NAME"/>
+    <result property="EventTime" column="EVENT_TIME"/>
+    <result property="EventContent" column="EVENT_CONTENT"/>
+    <result property="CreateUserId" column="CREATE_USER_ID"/>
+    <result property="ReceiveUserId" column="RECEIVE_USER_ID"/>
+    <result property="ImportantLevel" column="IMPORTANT_LEVEL"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BakupFlag" column="BAKUP_FLAG"/>
+    <result property="BakupTime" column="BAKUP_TIME"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SstTaskRemind" class="SstTaskRemind">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="EventName" column="EventName"/>
+    <parameter property="EventTime" column="EventTime"/>
+    <parameter property="EventContent" column="EventContent"/>
+    <parameter property="CreateUserId" column="CreateUserId"/>
+    <parameter property="ReceiveUserId" column="ReceiveUserId"/>
+    <parameter property="ImportantLevel" column="ImportantLevel"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BakupFlag" column="BakupFlag"/>
+    <parameter property="BakupTime" column="BakupTime"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SST_TASK_REMIND ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EventName" prepend="AND">
+          <![CDATA[EVENT_NAME = #where.EventName#]]>
+        </isNotNull>
+        <isNotNull property="where.EventTime" prepend="AND">
+          <![CDATA[EVENT_TIME = #where.EventTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EventContent" prepend="AND">
+          <![CDATA[EVENT_CONTENT = #where.EventContent#]]>
+        </isNotNull>
+        <isNotNull property="where.CreateUserId" prepend="AND">
+          <![CDATA[CREATE_USER_ID = #where.CreateUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.ReceiveUserId" prepend="AND">
+          <![CDATA[RECEIVE_USER_ID = #where.ReceiveUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.ImportantLevel" prepend="AND">
+          <![CDATA[IMPORTANT_LEVEL = #where.ImportantLevel#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SST_TASK_REMIND]]>
+       <dynamic prepend="(">
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="EventName" prepend=",">EVENT_NAME</isNotNull>
+        <isNotNull property="EventTime" prepend=",">EVENT_TIME</isNotNull>
+        <isNotNull property="EventContent" prepend=",">EVENT_CONTENT</isNotNull>
+        <isNotNull property="CreateUserId" prepend=",">CREATE_USER_ID</isNotNull>
+        <isNotNull property="ReceiveUserId" prepend=",">RECEIVE_USER_ID</isNotNull>
+        <isNotNull property="ImportantLevel" prepend=",">IMPORTANT_LEVEL</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BakupFlag" prepend=",">BAKUP_FLAG</isNotNull>
+        <isNotNull property="BakupTime" prepend=",">BAKUP_TIME</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="EventName" prepend=",">#EventName#</isNotNull>
+        <isNotNull property="EventTime" prepend=",">#EventTime#</isNotNull>
+        <isNotNull property="EventContent" prepend=",">#EventContent#</isNotNull>
+        <isNotNull property="CreateUserId" prepend=",">#CreateUserId#</isNotNull>
+        <isNotNull property="ReceiveUserId" prepend=",">#ReceiveUserId#</isNotNull>
+        <isNotNull property="ImportantLevel" prepend=",">#ImportantLevel#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BakupFlag" prepend=",">#BakupFlag#</isNotNull>
+        <isNotNull property="BakupTime" prepend=",">#BakupTime#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SST_TASK_REMIND
+       <dynamic prepend="SET">
+        <isNotNull  property="update.EventName"  prepend=",">
+          EVENT_NAME = #update.EventName#
+        </isNotNull>
+        <isNotNull  property="update.EventTime"  prepend=",">
+          EVENT_TIME = #update.EventTime#
+        </isNotNull>
+        <isNotNull  property="update.EventContent"  prepend=",">
+          EVENT_CONTENT = #update.EventContent#
+        </isNotNull>
+        <isNotNull  property="update.CreateUserId"  prepend=",">
+          CREATE_USER_ID = #update.CreateUserId#
+        </isNotNull>
+        <isNotNull  property="update.ReceiveUserId"  prepend=",">
+          RECEIVE_USER_ID = #update.ReceiveUserId#
+        </isNotNull>
+        <isNotNull  property="update.ImportantLevel"  prepend=",">
+          IMPORTANT_LEVEL = #update.ImportantLevel#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BakupFlag"  prepend=",">
+          BAKUP_FLAG = #update.BakupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BakupTime"  prepend=",">
+          BAKUP_TIME = #update.BakupTime#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SST_TASK_REMIND
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SstTaskRemind">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SstTaskRemind">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SST_TASK_REMIND
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SST_TASK_REMIND
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SstTaskRemind" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SST_TASK_REMIND
+    </statement>
+  </statements>
+</sqlMap>

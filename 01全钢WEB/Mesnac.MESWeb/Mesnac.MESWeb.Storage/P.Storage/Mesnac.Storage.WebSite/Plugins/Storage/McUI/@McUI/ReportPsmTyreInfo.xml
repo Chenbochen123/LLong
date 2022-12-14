@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="SearchType" Value="查询类型"></Caption>
+    <Caption Name="InStockBeginTime" Value="入库开始日期"></Caption>
+    <Caption Name="InStockEndTime" Value="入库结束日期"></Caption>
+    <Caption Name="CuringBeginTime" Value="硫化开始时间"></Caption>
+    <Caption Name="CuringEndTime" Value="硫化结束时间"></Caption>
+    <Caption Name="GreenTyreNo" Value="成型条码"></Caption>
+    <Caption Name="GREEN_TYRE_NO" Value="成型条码"></Caption>
+    <Caption Name="TyreNo" Value="硫化条码"></Caption>
+    <Caption Name="TYRE_NO" Value="硫化条码"></Caption>
+    <Caption Name="CURING_TIME" Value="硫化时间"></Caption>
+    <Caption Name="INSTOCK_TIME" Value="入库时间"></Caption>
+    <Caption Name="DELETE_FLAG" Value="删除标志"></Caption>
+  </Captions>
+  <WebPage Title="轮胎生产信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Storage/McUI/@McUI/ReportPsmTyreInfo.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="Spp_Tyre_State">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+  </Crud>
+
+   <select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="SearchType" Type="ComboBox" ></ParamField>
+        <ParamField FieldName="TyreNo" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="GreenTyreNo" Type="TextBox" Nullable="true"></ParamField>
+        <ParamField FieldName="InStockBeginTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="InStockEndTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="CuringEndTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="CuringBeginTime" Type="DateTimeBox"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+
+    <MainGrid PageSize="50">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="TYRE_NO" Width="100"></GridColumn>
+        <GridColumn ColumnName="GREEN_TYRE_NO" Width="100"></GridColumn>
+        <GridColumn ColumnName="CURING_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+        <GridColumn ColumnName="INSTOCK_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="140"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+    
+</select>
+</UiConfig>

@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Storage.Mapper.BusinessMapper.PsbCustomer"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSB_CUSTOMER ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.CompArea" prepend="AND">
+          <![CDATA[COMP_AREA = #where.CompArea#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomerId" prepend="AND">
+          <![CDATA[CUSTOMER_ID = #where.CustomerId#]]>
+        </isNotNull>
+        <isNotNull property="where.Pass" prepend="AND">
+          <![CDATA[PASS = #where.Pass#]]>
+        </isNotNull>
+        <isNotNull property="where.Mark" prepend="AND">
+          <![CDATA[MARK = #where.Mark#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomeName" prepend="AND">
+          <![CDATA[CUSTOME_NAME = #where.CustomeName#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomeNick" prepend="AND">
+          <![CDATA[CUSTOME_NICK = #where.CustomeNick#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomeNameEn" prepend="AND">
+          <![CDATA[CUSTOME_NAME_EN = #where.CustomeNameEn#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomeNickEn" prepend="AND">
+          <![CDATA[CUSTOME_NICK_EN = #where.CustomeNickEn#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomeNameTh" prepend="AND">
+          <![CDATA[CUSTOME_NAME_TH = #where.CustomeNameTh#]]>
+        </isNotNull>
+        <isNotNull property="where.CustomeNickTh" prepend="AND">
+          <![CDATA[CUSTOME_NICK_TH = #where.CustomeNickTh#]]>
+        </isNotNull>
+        <isNotNull property="where.TaxId" prepend="AND">
+          <![CDATA[TAX_ID = #where.TaxId#]]>
+        </isNotNull>
+        <isNotNull property="where.Contactor" prepend="AND">
+          <![CDATA[CONTACTOR = #where.Contactor#]]>
+        </isNotNull>
+        <isNotNull property="where.PassDesc" prepend="AND">
+          <![CDATA[PASS_DESC = #where.PassDesc#]]>
+        </isNotNull>
+        <isNotNull property="where.AreaId" prepend="AND">
+          <![CDATA[AREA_ID = #where.AreaId#]]>
+        </isNotNull>
+        <isNotNull property="where.Area" prepend="AND">
+          <![CDATA[AREA = #where.Area#]]>
+        </isNotNull>
+        <isNotNull property="where.CountryId" prepend="AND">
+          <![CDATA[COUNTRY_ID = #where.CountryId#]]>
+        </isNotNull>
+        <isNotNull property="where.CountryDesc" prepend="AND">
+          <![CDATA[COUNTRY_DESC = #where.CountryDesc#]]>
+        </isNotNull>
+        <isNotNull property="where.DeptId" prepend="AND">
+          <![CDATA[DEPT_ID = #where.DeptId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeptDesc" prepend="AND">
+          <![CDATA[DEPT_DESC = #where.DeptDesc#]]>
+        </isNotNull>
+        <isNotNull property="where.MarkDesc" prepend="AND">
+          <![CDATA[MARK_DESC = #where.MarkDesc#]]>
+        </isNotNull>
+        <isNotNull property="where.HeadComId" prepend="AND">
+          <![CDATA[HEAD_COM_ID = #where.HeadComId#]]>
+        </isNotNull>
+        <isNotNull property="where.HeadCom" prepend="AND">
+          <![CDATA[HEAD_COM = #where.HeadCom#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Authorize" prepend="AND">
+          <![CDATA[AUTHORIZE = #where.Authorize#]]>
+        </isNotNull>
+        <isNotNull property="where.SalesId" prepend="AND">
+          <![CDATA[SALES_ID = #where.SalesId#]]>
+        </isNotNull>
+        <isNotNull property="where.SalesName" prepend="AND">
+          <![CDATA[SALES_NAME = #where.SalesName#]]>
+        </isNotNull>
+        <isNotNull property="where.CTime" prepend="AND">
+          <![CDATA[C_TIME = #where.CTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CDate" prepend="AND">
+          <![CDATA[C_DATE = #where.CDate#]]>
+        </isNotNull>
+        <isNotNull property="where.UDate" prepend="AND">
+          <![CDATA[U_DATE = #where.UDate#]]>
+        </isNotNull>
+        <isNotNull property="where.UTime" prepend="AND">
+          <![CDATA[U_TIME = #where.UTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+  </statements>
+</sqlMap>

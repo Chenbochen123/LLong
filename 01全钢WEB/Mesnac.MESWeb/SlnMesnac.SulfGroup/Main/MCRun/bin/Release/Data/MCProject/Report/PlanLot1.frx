@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/25/2013 10:38:31" ReportInfo.Modified="07/25/2013 16:46:27" ReportInfo.CreatorVersion="1.5.14.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqxfki+t8jnSxof6qn6ng9vYSsIy0obIa8gCIZU/gjbP6VgVVQek4BDHjWSof0mJWobfezllfl4BSAHAZk+tPDfHjufXyUV0HYRxOOQClcbuXdcyc1TcFu94Fd2nKBI3ILrh8NDPgLmaepIo9j/Clhajebd+EZmvvGTJu8LqE9aZqiXb91sxKplht+Gp/1vsPCWFm/I2Ct2/l4Ty1aisHdqw==">
+      <TableDataSource Name="PptPlan" DataType="System.Int32" Enabled="true" TableName="PptPlan">
+        <Column Name="PlanID" DataType="System.String"/>
+        <Column Name="PlanDate" DataType="System.DateTime"/>
+        <Column Name="RecipeEquipCode" DataType="System.String"/>
+        <Column Name="RecipeMaterialCode" DataType="System.String"/>
+        <Column Name="RecipeMaterialName" DataType="System.String"/>
+        <Column Name="RecipeVersionID" DataType="System.Int32"/>
+        <Column Name="RecipeUserVersion" DataType="System.String"/>
+        <Column Name="ShiftID" DataType="System.Int32"/>
+        <Column Name="ClassID" DataType="System.Int32"/>
+        <Column Name="SerialNum" DataType="System.Int32"/>
+        <Column Name="PriLevel" DataType="System.Int32"/>
+        <Column Name="RecipeName" DataType="System.String"/>
+        <Column Name="RecipeType" DataType="System.Int32"/>
+        <Column Name="RunType" DataType="System.String"/>
+        <Column Name="PrintType" DataType="System.String"/>
+        <Column Name="PlanSource" DataType="System.String"/>
+        <Column Name="TotalWeight" DataType="System.Decimal"/>
+        <Column Name="PlanNum" DataType="System.Int32"/>
+        <Column Name="PlanWeight" DataType="System.Decimal"/>
+        <Column Name="RealNum" DataType="System.Int32"/>
+        <Column Name="RealWeight" DataType="System.Decimal"/>
+        <Column Name="UrgencyState" DataType="System.Int32"/>
+        <Column Name="PlanState" DataType="System.String"/>
+        <Column Name="OperDatetime" DataType="System.DateTime"/>
+        <Column Name="PlanEndTime" DataType="System.DateTime"/>
+        <Column Name="RealStartTime" DataType="System.DateTime"/>
+        <Column Name="RealEndtime" DataType="System.DateTime"/>
+        <Column Name="OperCode" DataType="System.String"/>
+        <Column Name="ReviseSgn" DataType="System.String"/>
+        <Column Name="Smallcreate" DataType="System.Int32"/>
+        <Column Name="AvgTime" DataType="System.Decimal"/>
+        <Column Name="Remark" DataType="System.String"/>
+        <Column Name="DeleteFlag" DataType="System.String"/>
+        <Column Name="CreatePlanFlag" DataType="System.String"/>
+        <Column Name="ActionOrder" DataType="System.Int32"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="300">
+    <ReportTitleBand Name="ReportTitle1" Width="1058.4" Height="37.8">
+      <TextObject Name="txtTitle" Width="812.7" Height="28.35" Text="批报表『[PlanID]』" HorzAlign="Center" VertAlign="Center" Font="宋体, 20pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="1058.4" Height="538.65">
+      <TableObject Name="Table1" Width="614.25" Height="56.7" Border.Lines="All" Border.Width="2">
+        <TableColumn Name="Column1" Width="94.5"/>
+        <TableColumn Name="Column2" Width="170.1"/>
+        <TableColumn Name="Column3" Width="94.5"/>
+        <TableColumn Name="Column4" Width="141.75"/>
+        <TableColumn Name="Column5" Width="47.25"/>
+        <TableColumn Name="Column6"/>
+        <TableRow Name="Row1">
+          <TableCell Name="Cell1" Border.Lines="All" Text="配方名称"/>
+          <TableCell Name="Cell2" Border.Lines="All" Text="[PptPlan.RecipeName]"/>
+          <TableCell Name="Cell3" Border.Lines="All" Text="配方类型"/>
+          <TableCell Name="Cell4" Border.Lines="All">
+            <TextObject Name="Text2" Left="18.9" Width="94.5" Height="18.9" Text="[PptPlan.RecipeMaterialName]"/>
+          </TableCell>
+          <TableCell Name="Cell5" Border.Lines="All" Text="完成"/>
+          <TableCell Name="Cell16">
+            <TextObject Name="Text8" Width="94.5" Height="18.9" Text="[PptPlan.RealNum]"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row2">
+          <TableCell Name="Cell6" Border.Lines="All" Text="生产机台"/>
+          <TableCell Name="Cell7" Border.Lines="All" Text="[PptPlan.equipCode]"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="班组"/>
+          <TableCell Name="Cell9" Border.Lines="All">
+            <TextObject Name="Text4" Left="18.9" Width="94.5" Height="18.9" Text="[PptPlan.ShiftClassName]"/>
+          </TableCell>
+          <TableCell Name="Cell10" Border.Lines="All" Text="设定"/>
+          <TableCell Name="Cell17" Border.Lines="All">
+            <TextObject Name="Text7" Width="94.5" Height="18.9" Text="[PptPlan.PlanNum]"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row3">
+          <TableCell Name="Cell11" Text="开始时间"/>
+          <TableCell Name="Cell12" Border.Lines="All">
+            <TextObject Name="Text5" Left="28.35" Width="94.5" Height="18.9" Text="[PptPlan.RealStartTime]"/>
+          </TableCell>
+          <TableCell Name="Cell13" Text="结束时间"/>
+          <TableCell Name="Cell14" Border.Lines="All" ColSpan="3">
+            <TextObject Name="Text6" Left="18.9" Width="94.5" Height="18.9" Text="[PptPlan.RealEndtime]"/>
+          </TableCell>
+          <TableCell Name="Cell15"/>
+          <TableCell Name="Cell18"/>
+        </TableRow>
+      </TableObject>
+      <TableObject Name="Table2" Top="56.7" Width="670.95" Height="56.7" Border.Lines="All" BeforePrintEvent="Table1_BeforePrint">
+        <TableColumn Name="Column7" Width="71.4"/>
+        <TableColumn Name="Column8" Width="71.4"/>
+        <TableColumn Name="Column9" Width="71.4"/>
+        <TableColumn Name="Column10" Width="71.4"/>
+        <TableColumn Name="Column15" Width="71.4"/>
+        <TableColumn Name="Column14" Width="99.75"/>
+        <TableColumn Name="Column13" Width="71.4"/>
+        <TableColumn Name="Column12" Width="71.4"/>
+        <TableColumn Name="Column11" Width="71.4"/>
+        <TableRow Name="Row5">
+          <TableCell Name="Cell30" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell31" Border.Lines="All" Text="配方时间" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell32" Border.Lines="All" Text="炼胶时间" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell33" Border.Lines="All" Text="间隔时间" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell62" Border.Lines="All" Text="加胶时间" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell60" Border.Lines="All" Text="加炭黑时间" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell58" Border.Lines="All" Text="排胶温度" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell56" Border.Lines="All" Text="排胶功率" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell34" Border.Lines="All" Text="排胶能量" HorzAlign="Center" VertAlign="Center"/>
+        </TableRow>
+        <TableRow Name="Row8">
+          <TableCell Name="Cell55" Text="平均" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell46" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text10" Width="85.05" Height="18.9" Text="[planAvgAndSumMain.avgDoneAllRtime]"/>
+          </TableCell>
+          <TableCell Name="Cell47" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text11" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.avgDoneRtime]"/>
+          </TableCell>
+          <TableCell Name="Cell48" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text12" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.avgBwbTime]"/>
+          </TableCell>
+          <TableCell Name="Cell63" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text13" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.avgPolydistime]"/>
+          </TableCell>
+          <TableCell Name="Cell61" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text14" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.avgCBdistime]"/>
+          </TableCell>
+          <TableCell Name="Cell59" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text15" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.avgPjTemp]"/>
+          </TableCell>
+          <TableCell Name="Cell57" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text16" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.avgPjPower]"/>
+          </TableCell>
+          <TableCell Name="Cell49" Border.Lines="All" Format="Number" Format.UseLocale="false" Format.DecimalDigits="2" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text17" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.avgLotEnergy]"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row9">
+          <TableCell Name="Cell64" Border.Lines="All" Text="合计" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell65" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text18" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.sumDoneAllRtime]"/>
+          </TableCell>
+          <TableCell Name="Cell66" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text19" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.sumDoneRtime]"/>
+          </TableCell>
+          <TableCell Name="Cell67" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text20" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.sumBwbTime]"/>
+          </TableCell>
+          <TableCell Name="Cell68" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text21" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.sumPolyDistime]"/>
+          </TableCell>
+          <TableCell Name="Cell69" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text22" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.sumCBDistime]"/>
+            <TextObject Name="Text23" Left="103.95" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.sumPjTemp]"/>
+          </TableCell>
+          <TableCell Name="Cell70" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell71" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text24" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.sumPjPower]"/>
+          </TableCell>
+          <TableCell Name="Cell72" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt">
+            <TextObject Name="Text25" Width="94.5" Height="18.9" Text="[planAvgAndSumMain.sumLotEnergy]"/>
+          </TableCell>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="Text9" Top="113.4" Width="217.35" Height="37.8" Text="报表明细" HorzAlign="Center" VertAlign="Center" Font="宋体, 14pt, style=Bold"/>
+      <TableObject Name="Table4" Left="604.8" Top="151.2" Width="321.3" Height="122.85" ManualBuildEvent="Table2_ManualBuild">
+        <TableColumn Name="Column30" Width="85.05"/>
+        <TableColumn Name="Column35" Width="175.77"/>
+        <TableColumn Name="Column36" Width="60.48"/>
+        <TableRow Name="Row23">
+          <TableCell Name="Cell181" Border.Lines="All" RowSpan="2"/>
+          <TableCell Name="Cell182" Border.Lines="All" Text="[RubsDetailInfo.WeighType]"/>
+          <TableCell Name="Cell183" Border.Lines="All" Text="总重" RowSpan="2"/>
+        </TableRow>
+        <TableRow Name="Row20" Height="66.15">
+          <TableCell Name="Cell152" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell157" Border.Lines="All" Text="[RubsDetailInfo.MaterName]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+          <TableCell Name="Cell158" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row21">
+          <TableCell Name="Cell162" Border.Lines="All" Text="[RubsDetailInfo.SerialID]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell167" Border.Lines="All" Text="[RubsDetailInfo.RealWeight]" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell168" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row22">
+          <TableCell Name="Cell172" Border.Lines="All" Text="Total" HorzAlign="Center" Font="宋体, 9pt"/>
+          <TableCell Name="Cell177" Border.Lines="All" Font="宋体, 9pt"/>
+          <TableCell Name="Cell178" Border.Lines="All" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+    </PageHeaderBand>
+    <PageFooterBand Name="PageFooter1" Top="584.45" Width="1058.4" Height="264.6"/>
+  </ReportPage>
+</Report>

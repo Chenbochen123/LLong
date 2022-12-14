@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HptSemisTechMaster"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPT_SEMIS_TECH_MASTER ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.GroupId" prepend="AND">
+          <![CDATA[GROUP_ID = #where.GroupId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="getSemisTechMaster" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+       select t1.*,t2.equip_name,t3.shift_name,t4.class_name,t6.material_name from HPT_SEMIS_TECH_MASTER t1 
+        left join sbe_equip t2 on t1.equip_id=t2.objid
+        left join ssb_shift t3 on t1.shift_id=t3.objid
+        left join ssb_class t4 on t1.group_id=t4.objid
+        left join hpp_plan_detail t5 on t1.plan_detail_id=t5.objid
+        left join sbm_material t6 on t5.material_id=t6.objid
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="EquipID" prepend="AND">
+           <![CDATA[t1.Equip_ID = #EquipID#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[T1.RECORD_TIME >= to_date(#where.BeginTime#,'yyyy-mm-dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[T1.RECORD_TIME <= to_date(#where.EndTime#,'yyyy-mm-dd hh24:mi:ss')]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        order by t1.Equip_ID, t1.RECORD_TIME
+      ]]>
+     </select>
+
+     <select id="getSemisTechDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+      select t1.*,t2.tech_param_name from HPT_SEMIS_TECH_DETAIL t1 
+      left join hpt_semis_tech_item t2 on t1.TECH_ITEM_ID=t2.objid
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.TechMasterId" prepend="AND">
+           <![CDATA[t1.TECH_MASTER_ID = #where.TechMasterId#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        order by t1.TECH_ITEM_ID
+      ]]>
+     </select>
+
+     <select id="getSemisTechItem" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+    select distinct t2.tech_param_name from sbe_equip t1 inner join HPT_SEMIS_TECH_ITEM t2 on t1.minor_type_id=t2.equip_minor_type_id where t2.delete_flag=0
+      ]]>
+       <dynamic>
+         <isNotNull property="where.EquipID" prepend="AND">
+           <![CDATA[t1.OBJID = #where.EquipID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetSemisTechInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+    select parmcode,parmname,parmtype_name,vlues value,valuemax,valuemin from plm_half_main
+    where assem_sapmat=#sapCode# and version=#version# and delete_flag=0]]>
+     </select>
+     <select id="GetSemisTechInfoEquipid" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+    select parmcode,parmname,parmtype_name,vlues value,valuemax,valuemin from plm_half_main
+    where assem_sapmat=#sapCode# and equipment_code=#Equipid# and delete_flag=0]]>
+     </select>
+     <select id="GetSemisTechInfoNoVersion" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+    select parmcode,parmname,parmtype_name,vlues value,valuemax,valuemin from plm_half_main
+    where assem_sapmat=#sapCode# and delete_flag=0]]>
+     </select>
+     
+  <select id="getSemisTechParamInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+        select t1.record_time,t2.tech_item_value,t3.tech_param_name from HPT_SEMIS_TECH_MASTER t1 
+        left join HPT_SEMIS_TECH_DETAIL t2 on t1.objid=t2.tech_master_id
+        left join HPT_SEMIS_TECH_ITEM t3 on t2.tech_item_id=t3.objid
+      ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="EquipID" prepend="AND">
+           <![CDATA[t1.Equip_ID = #EquipID#]]>
+         </isNotNull>
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[T1.RECORD_TIME >= to_date(#where.BeginTime#,'yyyy-mm-dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[T1.RECORD_TIME <= to_date(#where.EndTime#,'yyyy-mm-dd hh24:mi:ss')]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        order by t1.Equip_ID, t1.RECORD_TIME
+      ]]>
+     </select>
+
+     <select id="GetHppShiGong" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+   select assem_name,parmname,vlues,max(record_time) mtime from plm_half_main where assem_sapmat = #sapCode# and  delete_flag = 0  
+group by assem_name,parmname,vlues]]>
+     </select>
+
+     <select id="GetNoClearRubber" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+select  *  from  sbm_rubbernoclear where old_sap = #OldRubberSap# and new_sap=#NewRubberSap# and delete_flag = 0 ]]>
+     </select>
+     
+  </statements>
+</sqlMap>

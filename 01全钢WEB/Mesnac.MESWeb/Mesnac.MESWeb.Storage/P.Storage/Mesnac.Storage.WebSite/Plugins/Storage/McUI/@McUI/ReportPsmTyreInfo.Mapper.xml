@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportPsmTyreInfo" parameterClass="map" resultClass="row">
+      <![CDATA[    
+            SELECT T.TYRE_NO ,T.GREEN_TYRE_NO , T.RECORD_TIME INSTOCK_TIME,T2.END_TIME CURING_TIME 
+            FROM PSM_IN_STOCK_DETAIL T
+            LEFT JOIN CPP_CURING_PRODUCTION T2 ON T.TYRE_NO=T2.TYRE_NO
+	]]>	
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.InStockBeginTime" prepend="AND">
+          <![CDATA[T.RECORD_TIME  >= #where.InStockBeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.InStockEndTime" prepend="AND">
+          <![CDATA[T.RECORD_TIME <= #where.InStockEndTime#]]>
+        </isNotNull>
+      <isNotNull property="where.CuringBeginTime" prepend="AND">
+        <![CDATA[T2.END_TIME  >= #where.CuringBeginTime#]]>
+      </isNotNull>
+      <isNotNull property="where.CuringEndTime" prepend="AND">
+        <![CDATA[T2.END_TIME <= #where.CuringEndTime#]]>
+      </isNotNull>
+        <isNotNull property="where.GreenTyreNo" prepend="AND">
+          <![CDATA[T1.green_tyre_no = #where.GreenTyreNo#]]>
+        </isNotNull>        	
+		 <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[T1.tyre_no = #where.TyreNo#]]>
+       	 </isNotNull>   
+      	<isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      	</isNotNull>      	
+  	</dynamic>
+
+</select>
+    
+    <!--查询类型信息，ID值固定为GetComboBoxData@Select@ReportPsmInLoadAndStockStat@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmTyreInfo@SearchType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT '1' sskey, '按入库时间' ssValue FROM dual
+      UNION
+      SELECT '2' sskey, '按硫化时间' ssValue FROM dual
+      ]]>
+    </select>
+  </statements>
+</sqlMap>

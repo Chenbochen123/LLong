@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Storage.Mapper.BusinessMapper.PsmStorageTrace"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PSM_STORAGE_TRACE ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.StoreId" prepend="AND">
+          <![CDATA[STORE_ID = #where.StoreId#]]>
+        </isNotNull>
+        <isNotNull property="where.StorePlaceId" prepend="AND">
+          <![CDATA[STORE_PLACE_ID = #where.StorePlaceId#]]>
+        </isNotNull>
+        <isNotNull property="where.OperType" prepend="AND">
+          <![CDATA[OPER_TYPE = #where.OperType#]]>
+        </isNotNull>
+        <isNotNull property="where.OperId1" prepend="AND">
+          <![CDATA[OPER_ID_1 = #where.OperId1#]]>
+        </isNotNull>
+        <isNotNull property="where.OperId2" prepend="AND">
+          <![CDATA[OPER_ID_2 = #where.OperId2#]]>
+        </isNotNull>
+        <isNotNull property="where.OperId3" prepend="AND">
+          <![CDATA[OPER_ID_3 = #where.OperId3#]]>
+        </isNotNull>
+        <isNotNull property="where.OperId4" prepend="AND">
+          <![CDATA[OPER_ID_4 = #where.OperId4#]]>
+        </isNotNull>
+        <isNotNull property="where.OperId5" prepend="AND">
+          <![CDATA[OPER_ID_5 = #where.OperId5#]]>
+        </isNotNull>
+        <isNotNull property="where.OperCode1" prepend="AND">
+          <![CDATA[OPER_CODE_1 = #where.OperCode1#]]>
+        </isNotNull>
+        <isNotNull property="where.OperCode2" prepend="AND">
+          <![CDATA[OPER_CODE_2 = #where.OperCode2#]]>
+        </isNotNull>
+        <isNotNull property="where.OperCode3" prepend="AND">
+          <![CDATA[OPER_CODE_3 = #where.OperCode3#]]>
+        </isNotNull>
+        <isNotNull property="where.OperCode4" prepend="AND">
+          <![CDATA[OPER_CODE_4 = #where.OperCode4#]]>
+        </isNotNull>
+        <isNotNull property="where.OperCode5" prepend="AND">
+          <![CDATA[OPER_CODE_5 = #where.OperCode5#]]>
+        </isNotNull>
+        <isNotNull property="where.OperMemo1" prepend="AND">
+          <![CDATA[OPER_MEMO_1 = #where.OperMemo1#]]>
+        </isNotNull>
+        <isNotNull property="where.OperMemo2" prepend="AND">
+          <![CDATA[OPER_MEMO_2 = #where.OperMemo2#]]>
+        </isNotNull>
+        <isNotNull property="where.OperMemo3" prepend="AND">
+          <![CDATA[OPER_MEMO_3 = #where.OperMemo3#]]>
+        </isNotNull>
+        <isNotNull property="where.OperMemo4" prepend="AND">
+          <![CDATA[OPER_MEMO_4 = #where.OperMemo4#]]>
+        </isNotNull>
+        <isNotNull property="where.OperMemo5" prepend="AND">
+          <![CDATA[OPER_MEMO_5 = #where.OperMemo5#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateTime" prepend="AND">
+          <![CDATA[UPDATE_TIME = #where.UpdateTime#]]>
+        </isNotNull>
+        <isNotNull property="where.UpdateUserId" prepend="AND">
+          <![CDATA[UPDATE_USER_ID = #where.UpdateUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.MainId" prepend="AND">
+          <![CDATA[MAIN_ID = #where.MainId#]]>
+        </isNotNull>
+        <isNotNull property="where.SummaryId" prepend="AND">
+          <![CDATA[SUMMARY_ID = #where.SummaryId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.CheckGradeCode" prepend="AND">
+          <![CDATA[CHECK_GRADE_CODE = #where.CheckGradeCode#]]>
+        </isNotNull>
+        <isNotNull property="where.InOrOut" prepend="AND">
+          <![CDATA[IN_OR_OUT = #where.InOrOut#]]>
+        </isNotNull>
+        <isNotNull property="where.Amount" prepend="AND">
+          <![CDATA[AMOUNT = #where.Amount#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <!--更新记录-->
+     <update id="UpdateAmountByObjId" parameterClass="map">
+       UPDATE PSM_STORAGE_TRACE
+       SET AMOUNT = AMOUNT + #update.UpdateAmount#
+       WHERE OBJID = #ObjId#
+     </update>
+     
+     <!--插入信息 整单出库退库-出库-->
+     <insert id="InsertOutReturnTraceOut" parameterClass="map">
+       INSERT INTO psm_storage_trace  T (T.OBJID,t.amount,T.Check_Grade_Code,T.DELETE_FLAG,T.In_Or_Out
+       ,T.Main_Id,T.Summary_Id,T.Oper_Code_1,T.Oper_Id_1,T.Oper_Memo_1,T.Oper_Type)
+       SELECT SEQ_psm_storage_trace.Nextval,1,T3.Check_Grade_Code,0,1,T3.Main_Id,T3.SUMMARY_ID,'1003','1','成品出库退库',1003
+       FROM PSM_OUT_STOCK_BILL T2
+       LEFT JOIN  PSM_OUT_STOCK_DETAIL T3 ON T3.BILL_ID=T2.OBJID
+       WHERE T2.OBJID= #BillId#
+     </insert>
+     <!--插入信息 整单出库退库-调拨-->
+     <insert id="InsertOutReturnTraceTransfer" parameterClass="map">
+       INSERT INTO psm_storage_trace  T (T.OBJID,t.amount,T.Check_Grade_Code,T.DELETE_FLAG,T.In_Or_Out
+       ,T.Main_Id,T.Summary_Id,T.Oper_Code_1,t.Oper_Id_1,t.Oper_Memo_1,Oper_Type)
+       SELECT SEQ_psm_storage_trace.Nextval,1,T3.Check_Grade_Code,0,1,T3.Main_Id,T3.SUMMARY_ID,'1003','1','成品出库退库',1003
+       FROM PSM_TRANSFER_BILL T2
+       LEFT JOIN  PSM_TRANSFER_DETAIL T3 ON T3.BILL_ID=T2.OBJID
+       WHERE T2.OBJID= #BillId#
+     </insert>
+     <!--插入信息 按规格入库-->
+     <insert id="InsertInStockTrace" parameterClass="map">
+       INSERT INTO PSM_STORAGE_TRACE  T (T.OBJID,T.REMARK,T.MAIN_ID,T.UPDATE_TIME,T.UPDATE_USER_ID,T.SUMMARY_ID,T.AMOUNT,T.DELETE_FLAG,T.IN_OR_OUT
+       ,T.OPER_CODE_1,T.OPER_ID_1,T.OPER_MEMO_1,OPER_TYPE)
+       SELECT SEQ_PSM_STORAGE_TRACE.NEXTVAL,#REMARK#,#MAIN_ID#,#UPDATE_TIME#,#UPDATE_USER_ID#,#SUMMARY_ID#,1,0,1,'1003','1','按规格入库',1003
+       FROM PSM_IN_STOCK_BILL T2
+       WHERE T2.OBJID= #INSTOCKBILLID#
+     </insert>
+   </statements>
+</sqlMap>

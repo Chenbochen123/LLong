@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CimCapsuleReplaceRecord"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CIM_CAPSULE_REPLACE_RECORD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipid" prepend="AND">
+          <![CDATA[EQUIPID = #where.Equipid#]]>
+        </isNotNull>
+        <isNotNull property="where.Lrflag" prepend="AND">
+          <![CDATA[LRFLAG = #where.Lrflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Currentcount" prepend="AND">
+          <![CDATA[CURRENTCOUNT = #where.Currentcount#]]>
+        </isNotNull>
+        <isNotNull property="where.Begintime" prepend="AND">
+          <![CDATA[BEGINTIME = #where.Begintime#]]>
+        </isNotNull>
+        <isNotNull property="where.Capsuleid" prepend="AND">
+          <![CDATA[CAPSULEID = #where.Capsuleid#]]>
+        </isNotNull>
+        <isNotNull property="where.Endtime" prepend="AND">
+          <![CDATA[ENDTIME = #where.Endtime#]]>
+        </isNotNull>
+        <isNotNull property="where.CapsuleidNew" prepend="AND">
+          <![CDATA[CAPSULEID_NEW = #where.CapsuleidNew#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.ReasonId" prepend="AND">
+          <![CDATA[REASON_ID = #where.ReasonId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.UserId1" prepend="AND">
+          <![CDATA[USER_ID1 = #where.UserId1#]]>
+        </isNotNull>
+        <isNotNull property="where.UserId2" prepend="AND">
+          <![CDATA[USER_ID2 = #where.UserId2#]]>
+        </isNotNull>
+        <isNotNull property="where.UserId3" prepend="AND">
+          <![CDATA[USER_ID3 = #where.UserId3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <select id="GetOldCapsule" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       select * from (SELECT CAPSULEID_NEW FROM CIM_CAPSULE_REPLACE_RECORD 
+       ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="EquipCode" prepend="AND">
+          <![CDATA[EQUIPID=#EquipCode#]]>
+        </isNotNull>
+        <isNotNull property="LeftOrRight" prepend="AND">
+          <![CDATA[LRFLAG=#LeftOrRight#]]>
+        </isNotNull>
+        <![CDATA[ORDER BY BEGINTIME DESC) WHERE ROWNUM=1]]>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

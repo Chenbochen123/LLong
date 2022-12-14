@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudPsbStore" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT T1.*
+      , T2.USER_NAME RECORD_USER_NAME 
+      , T3.STORE_TYPE_NAME 
+      FROM PSB_STORE T1 
+      LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+      LEFT JOIN PSB_STORE_TYPE T3 ON T1.STORE_TYPE_ID = T3.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.STORE_NAME" prepend="AND">
+          <![CDATA[T1.STORE_NAME LIKE '%' || #where.STORE_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.STORE_CODE" prepend="AND">
+          <![CDATA[T1.STORE_CODE = #where.STORE_CODE#]]>
+        </isNotNull>
+        <isNotNull property="where.STORE_TYPE_ID" prepend="AND">
+          <![CDATA[T1.STORE_TYPE_ID = #where.STORE_TYPE_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T1.OBJID
+      </isNull>
+    </select>
+    <select id="Select+Update@CrudPsbStore" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM PSB_STORE ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询仓库类型信息，ID值固定为GetComboBoxData@Select@CrudPsbStore@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudPsbStore@STORE_TYPE_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,OBJID || '-' || STORE_TYPE_NAME ssValue from PSB_STORE_TYPE where DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportPsmOutReturnStockDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT 
+         T1.GREEN_TYRE_NO
+        , T1.TYRE_NO,T3.O_R_NO BILL_CODE
+        ,T1.RECORD_TIME RECORD_TIME
+        , T2.USER_NAME RECORD_USER_NAME 
+        , T1.UPDATE_TIME UPDATE_TIME
+        , T4.USER_NAME UPDATE_USER_NAME 
+        FROM PSM_OUTRETURN_STOCK_DETAIL T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+        LEFT JOIN PSM_OUTRETURN_STOCK_BILL T3 ON T3.OBJID=T1.BILL_ID
+        LEFT JOIN SSB_USER T4 ON T1.UPDATE_USER_ID = T4.OBJID
+        WHERE 1=1  
+       ]]>
+        <isNotNull property="where.BILL_ID" prepend="AND">
+          <![CDATA[T3.O_R_NO = #where.BILL_ID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginDate" prepend="AND">
+          <![CDATA[T1.RECORD_TIME >= #where.BeginDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EndDate" prepend="AND">
+          <![CDATA[T1.RECORD_TIME <= #where.EndDate#]]>
+        </isNotNull>
+        <isNotNull property="where.BILLSTATE" prepend="AND">
+          <![CDATA[T3.BILL_STATE = #where.BILLSTATE#]]>
+        </isNotNull>
+        <isNotNull property="where.BILL_CODE" prepend="AND">
+          <![CDATA[T3.O_R_NO = #where.BILL_CODE#]]>
+        </isNotNull>
+        <isNotNull property="where.GREEN_TYRE_NO" prepend="AND">
+          <![CDATA[T1.GREEN_TYRE_NO = #where.GREEN_TYRE_NO#]]>
+        </isNotNull>
+      <isNotNull property="where.TYRE_NO" prepend="AND">
+        <![CDATA[T1.TYRE_NO = #where.TYRE_NO#]]>
+      </isNotNull>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY  RECORD_TIME
+      </isNull>
+    </select>
+    <select id="Select+Update@ReportPsmOutReturnStockDetail" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM PSM_OUTRETURN_STOCK_DETAIL ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询单据状态信息，ID值固定为GetComboBoxData@Select@ReportPsmOutReturnStockBill@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmOutReturnStockDetail@BILLSTATE" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT 0 sskey, '未确认' ssValue FROM dual
+      UNION
+      SELECT 1 sskey, '已确认' ssValue FROM dual
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

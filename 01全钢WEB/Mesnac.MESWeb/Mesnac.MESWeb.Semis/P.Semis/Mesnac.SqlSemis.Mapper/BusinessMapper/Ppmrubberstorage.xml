@@ -1,0 +1,578 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.SqlSemis.Mapper.BusinessMapper.Ppmrubberstorage"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PpmRubberStorage ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.Storageid" prepend="AND">
+          <![CDATA[StorageID = #where.Storageid#]]>
+        </isNotNull>
+        <isNotNull property="where.Storageplaceid" prepend="AND">
+          <![CDATA[StoragePlaceID = #where.Storageplaceid#]]> 
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[Barcode = #where.Barcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Shelfbarcode" prepend="AND">
+          <![CDATA[ShelfBarcode = #where.Shelfbarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcodestart" prepend="AND">
+          <![CDATA[BarcodeStart = #where.Barcodestart#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcodeend" prepend="AND">
+          <![CDATA[BarcodeEnd = #where.Barcodeend#]]>
+        </isNotNull>
+        <isNotNull property="where.Shelfnum" prepend="AND">
+          <![CDATA[ShelfNum = #where.Shelfnum#]]>
+        </isNotNull>
+        <isNotNull property="where.Memnote" prepend="AND">
+          <![CDATA[MemNote = #where.Memnote#]]>
+        </isNotNull>
+        <isNotNull property="where.Plandate" prepend="AND">
+          <![CDATA[PlanDate = #where.Plandate#]]>
+        </isNotNull>
+        <isNotNull property="where.Shiftid" prepend="AND">
+          <![CDATA[ShiftID = #where.Shiftid#]]>
+        </isNotNull>
+        <isNotNull property="where.Shiftclassid" prepend="AND">
+          <![CDATA[ShiftClassID = #where.Shiftclassid#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipcode" prepend="AND">
+          <![CDATA[EquipCode = #where.Equipcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Matercode" prepend="AND">
+          <![CDATA[MaterCode = #where.Matercode#]]>
+        </isNotNull>
+        <isNotNull property="where.Validdate" prepend="AND">
+          <![CDATA[ValidDate = #where.Validdate#]]>
+        </isNotNull>
+        <isNotNull property="where.Productweight" prepend="AND">
+          <![CDATA[ProductWeight = #where.Productweight#]]>
+        </isNotNull>
+        <isNotNull property="where.Stockflag" prepend="AND">
+          <![CDATA[StockFlag = #where.Stockflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Checkflag" prepend="AND">
+          <![CDATA[CheckFlag = #where.Checkflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Tecdealflag" prepend="AND">
+          <![CDATA[TecDealFlag = #where.Tecdealflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Tecdealidea" prepend="AND">
+          <![CDATA[TecDealIdea = #where.Tecdealidea#]]>
+        </isNotNull>
+        <isNotNull property="where.Consumeweight" prepend="AND">
+          <![CDATA[ConsumeWeight = #where.Consumeweight#]]>
+        </isNotNull>
+        <isNotNull property="where.Realweight" prepend="AND">
+          <![CDATA[RealWeight = #where.Realweight#]]>
+        </isNotNull>
+        <isNotNull property="where.Recorddate" prepend="AND">
+          <![CDATA[RecordDate = #where.Recorddate#]]>
+        </isNotNull>
+        <isNotNull property="where.Operperson" prepend="AND">
+          <![CDATA[OperPerson = #where.Operperson#]]>
+        </isNotNull>
+        <isNotNull property="where.Rubtype" prepend="AND">
+          <![CDATA[RubType = #where.Rubtype#]]>
+        </isNotNull>
+        <isNotNull property="where.Llbarcode" prepend="AND">
+          <![CDATA[LLBarCode = #where.Llbarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Realnum" prepend="AND">
+          <![CDATA[RealNum = #where.Realnum#]]>
+        </isNotNull>
+        <isNotNull property="where.Isinvalid" prepend="AND">
+          <![CDATA[IsInValid = #where.Isinvalid#]]>
+        </isNotNull>
+        <isNotNull property="where.Useequipcode" prepend="AND">
+          <![CDATA[UseEquipCode = #where.Useequipcode#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--获取胶料信息-->
+    <select id="GetPpmRubberStorage" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        SELECT T2.STORAGENAME,T3.STORAGEPLACENAME,T4.EQUIPNAME, T.* FROM DBO.PPMRUBBERSTORAGE T
+        LEFT JOIN BASSTORAGE T2 ON T.STORAGEID=T2.STORAGEID
+        LEFT JOIN BASSTORAGEPLACE T3 ON T.STORAGEPLACEID=T3.STORAGEPLACEID
+        LEFT JOIN BASEQUIP T4 ON T.EQUIPCODE=T4.EQUIPCODE
+         ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.Storageid" prepend="AND">
+          <![CDATA[StorageID = #where.Storageid#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[Barcode = #where.Barcode#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+    <select id="GetRubberStorageForSemis" parameterClass="map" resultClass="Row">
+      <![CDATA[     
+          SELECT top 5 T.BARCODE CARD_NO,T1.MATERIALNAME MATERIAL_NAME,T2.STORAGENAME STORE_NAME,T3.STORAGEPLACENAME STORE_PLACE_NAME,
+        T.REALWEIGHT WEIGHT,T.RECORDDATE RECORD_TIME,'21' as MATER_TYPE FROM PPMRUBBERSTORAGE T
+        LEFT JOIN BASMATERIAL T1 ON T1.MATERIALCODE = T.MATERCODE
+        LEFT JOIN BASSTORAGE T2 ON T2.STORAGEID = T.STORAGEID
+        LEFT JOIN BASSTORAGEPLACE T3 ON T3.STORAGEPLACEID = T.STORAGEPLACEID
+        LEFT JOIN PPTSHIFTCONFIG t4 on t4.barcode = t.barcode
+        WHERE T.STOCKFLAG='0' and T.realweight>50 and t4.PassFlag = 1
+       ]]>
+        <isNotNull property="SapCode" prepend="AND">
+          <![CDATA[(T1.SAPMATERIALSHORTCODE=#SapCode# or t1.SAPMATERIALSHORTCODE = #SapCode# + '_')]]>
+        </isNotNull>
+        <isNotNull property="StrStorage" prepend="AND">
+          <![CDATA[t.storageid = #StrStorage#]]>
+        </isNotNull>
+         <![CDATA[    
+union all
+   SELECT * FROM (  SELECT top 5 T.BARCODE CARD_NO,T1.MATERIALNAME MATERIAL_NAME,T2.STORAGENAME STORE_NAME,T3.STORAGEPLACENAME STORE_PLACE_NAME,
+        T.REALWEIGHT WEIGHT,T.RECORDDATE RECORD_TIME,'21' as MATER_TYPE FROM PPMRUBBERSTORAGE T
+        LEFT JOIN BASMATERIAL T1 ON T1.MATERIALCODE = T.MATERCODE
+        LEFT JOIN BASSTORAGE T2 ON T2.STORAGEID = T.STORAGEID
+        LEFT JOIN BASSTORAGEPLACE T3 ON T3.STORAGEPLACEID = T.STORAGEPLACEID
+        LEFT JOIN PPTSHIFTCONFIG t4 on t4.barcode = t.barcode
+        WHERE T.STOCKFLAG='0' and T.realweight>50 and t4.checkFlag='1'
+        and dateadd(hour,t1.MaxParkTime,t.RecordDate) > GETDATE()
+        and dateadd(hour,t1.MinParkTime,t.RecordDate) < GETDATE()
+       ]]>
+      <isNotNull property="SapCode" prepend="AND">
+        <![CDATA[(T1.SAPMATERIALSHORTCODE=#SapCode# or t1.SAPMATERIALSHORTCODE = #SapCode# + '_')]]>
+      </isNotNull>
+      <isNotNull property="StrStorage" prepend="AND">
+        <![CDATA[t.storageid = #StrStorage#]]>
+      </isNotNull>
+      <![CDATA[
+       ORDER BY T.RECORDDATE) T
+       ]]>
+    </select>
+    <!--SELECT  T1.MATERIALNAME MATERIAL_NAME,T1.SAPMATERIALCODE SAP_CODE,T.REALWEIGHT QTY,T.RECORDDATE RECORD_TIME
+     ,T.REALNUM FROM PPMRUBBERSTORAGE T
+     LEFT JOIN BASMATERIAL T1 ON T1.MATERIALCODE = T.MATERCODE
+     WHERE StockFlag=0-->
+    <select id="GetRubberBarcodeExists" parameterClass="map" resultClass="Row">
+      <![CDATA[
+           SELECT  T1.MATERIALNAME MATERIAL_NAME,case when T1.SAPMATERIALCODE is null then SUBSTRING(t1.SAPMaterialShortCode,0,len(t1.SAPMaterialShortCode)) else T1.SAPMATERIALCODE end SAP_CODE,T.REALWEIGHT QTY,T.RECORDDATE RECORD_TIME,t.MATERCODE
+             ,T.REALNUM,isnull(t2.PassFlag,0) PassFlag,t.StorageID FROM PPMRUBBERSTORAGE T
+             LEFT JOIN BASMATERIAL T1 ON T1.MATERIALCODE = T.MATERCODE
+             left join PptShiftConfig t2 on t.Barcode = t2.Barcode 
+             WHERE T.StockFlag=0
+       ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="Barcode" prepend="AND">
+          <![CDATA[T.BARCODE=#Barcode#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <select id="GetRubberProductInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        SELECT '' SHELF_NO,'0' STORE_PLACE_ID,'0' SUB_STORE_PLACE_ID, T1.SAPMATERIALCODE MATERIAL_ID,T.REALWEIGHT QTY 
+        FROM PPMRUBBERSTORAGE T
+        LEFT JOIN BASMATERIAL T1 ON T1.MATERIALCODE = T.MATERCODE
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="Barcode" prepend="AND">
+          <![CDATA[T.BARCODE=#Barcode#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <select id="GetPstStorageForSemis" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        SELECT T.BARCODE CARD_NO,T1.MATERIALNAME MATERIAL_NAME,T2.STORAGENAME STORE_NAME,
+        T3.STORAGEPLACENAME STORE_PLACE_NAME,T.REALWEIGHT WEIGHT,T.RECORDDATE RECORD_TIME,'1' AS MATER_TYPE FROM PSTSTORAGE T 
+        LEFT JOIN BASMATERIAL T1 ON T1.MATERIALCODE = T.MATERCODE
+        LEFT JOIN BASSTORAGE T2 ON T2.STORAGEID = T.STORAGEID
+        LEFT JOIN BASSTORAGEPLACE T3 ON T3.STORAGEPLACEID = T.STORAGEPLACEID 
+        WHERE T1.SAPMATERIALCODE=#SapCode# AND T2.STORAGETYPE ='0' AND T.REALWEIGHT<>0  
+        ORDER BY T.RECORDDATE
+       ]]>
+    </select>
+    <select id="GetPstBarcodeExists" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       SELECT T1.MATERIALNAME MATERIAL_NAME,T.REALWEIGHT QTY,T.RECORDDATE RECORD_TIME FROM PSTSTORAGE T 
+      LEFT JOIN BASMATERIAL T1 ON T1.MATERIALCODE = T.MATERCODE
+      LEFT JOIN BASSTORAGE T2 ON T2.STORAGEID = T.STORAGEID
+      WHERE  T2.STORAGETYPE='0' AND T.REALWEIGHT<>0
+       ]]>
+      <isNotNull property="Barcode" prepend="AND">
+        <![CDATA[T.BARCODE=#Barcode#]]>
+      </isNotNull>
+    </select>
+    <select id="GetPstProductInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        SELECT '' SHELF_NO,'0' STORE_PLACE_ID,'0' SUB_STORE_PLACE_ID, T1.SAPMATERIALCODE MATERIAL_ID,T.REALWEIGHT QTY 
+        FROM PSTSTORAGE T
+        LEFT JOIN BASMATERIAL T1 ON T1.MATERIALCODE = T.MATERCODE
+        left join basstorage t2 on t2.storageid = t.storageid
+        where t2.storagetype='0' and t.realweight<>0
+      ]]>
+      <isNotNull property="Barcode" prepend="AND">
+        <![CDATA[T.BARCODE=#Barcode#]]>
+      </isNotNull>
+    </select>
+    <select id="GetRubberStorage" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       SELECT STORAGEID,STORAGEPLACEID FROM PpmRubberStorage T WHERE T.BARCODE=#Barcode#
+       ]]>
+    </select>
+    <procedure id="ProcPpmSubmitRubberStoreout" parameterClass="map" resultClass="string">
+      ProcPpmSubmitRubberStoreout
+      @{StorageID,column=StorageID}
+      @{StoragePlaceID,column=StoragePlaceID}
+      @{Barcode,column=Barcode}
+      @{ShiftID,column=ShiftID}
+      @{ShiftClassID,column=ShiftClassID}
+      @{OperPerson,column=OperPerson}
+      @{ToStorageID,column=ToStorageID}
+      @{ToStoragePlaceID,column=ToStoragePlaceID}
+    </procedure>
+
+    <select id="GetRubberQualityInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[select * from PPTShiftConfig where barcode=#Barcode#]]>
+    </select>
+
+    <!--m11合格库-->
+
+    <select id="GetRubberStorageM11" parameterClass="map" resultClass="Row">
+      <![CDATA[ SELECT * FROM PPMRUBBERSTORAGE T WHERE T.STORAGEID in('005004','006004') ]]>
+      <dynamic  prepend="AND">
+        <isNotNull property="Barcode" prepend="AND">
+          <![CDATA[T.BARCODE=#Barcode#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+
+    <select id="GetRubberProductInfoForSemis" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       select t4.UnitName UNIT_NAME,t.Barcode BARCODE,t.EquipCode EQUIP_CODE,
+      t1.MaterialName MATERIAL_NAME,case when T1.SAPMATERIALCODE is null then SUBSTRING(t1.SAPMaterialShortCode,0,len(t1.SAPMaterialShortCode)) else T1.SAPMATERIALCODE end  SAP_CODE,
+      t1.MaterialCode MATERIAL_CODE,
+      t2.UserName OPER_NAME,t3.EquipName EQUIP_NAME,
+      t.RealWeight SET_QUANTITY,t.RealWeight LEFT_QUANTITY,t.ProdDate PRODUCE_TIME,t.ValidDate VALID_DATE,
+      isnull(t1.MaxParkTime,0) MAX_PARK_TIME,isnull(t1.MinParkTime,0) MIN_PARK_TIME,
+      t.ShiftBarCode SHELF_NO,t.MARKFLAG from pptshiftconfig t
+      left join BasMaterial t1 on t1.MaterialCode = t.MaterialCode
+      left join BasUser t2 on t2.HRCode = t.UserID
+      left join BasEquip t3 on t3.EquipCode = t.EquipCode
+      left join BasUnit t4 on t4.ObjID = t1.UnitID
+      where t.Barcode=#Barcode#
+       ]]>
+    </select>
+    <select id="GetSemisStorePlace" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       select STORAGEPLACEID from BasStoragePlace where StorageID='007007' and semisequip like  '%' + #EquipId# + '%'
+       ]]>
+    </select>
+
+    <select id="GetStopTimeInfo1" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        SELECT  T1.MATERIALNAME MATERIAL_NAME,T1.MaxParkTime VALID_TIME ,T1.MinParkTime MIN_TIME,T1.SAPMATERIALCODE SAP_CODE 
+        FROM BASMATERIAL T1  WHERE T1.MajorTypeID in(4,5) AND
+        T1.MATERIALNAME=#materialName#
+       ]]>
+    </select>
+
+    <!--<select id="GetRubberRFIDInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       SELECT ShiftBarCode FROM PptShiftConfig where BARCODE=#Barcode#
+      ]]>
+    </select>-->
+
+    <select id="GetRubberRFIDInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       select top 100 PC.*,R.RFID from dbo.PptShiftConfig PC 
+left join PptRFIDInfo R on R.Barcode = PC.Barcode
+where PC.Barcode = #Barcode#  ORDER BY R.recordTime DESC
+      ]]>
+    </select>
+    <select id="GetRubberRFIDBarcodeInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       select top 100 C.ShiftBarCode,R.RFID from PPTShiftConfig C left join dbo.PptRFIDInfo R
+on C.Barcode = R.Barcode
+where c.Barcode = #Barcode#
+      ]]>
+    </select>
+    
+    
+    <select id="SQLSERVER" parameterClass="map" resultClass="Row" >
+      <![CDATA[ 
+             SELECT (CASE T.REALNUM WHEN 1 THEN '放行' ELSE '未处理' END)  PASS_FLAG,
+                 T.BARCODE, T1.MATERIALNAME MATERIAL_NAME,T1.SAPMATERIALCODE SAP_CODE,T.RECORDDATE RECORD_TIME
+                  FROM PPMRUBBERSTORAGE T
+                  LEFT JOIN BASMATERIAL T1 ON T1.MATERIALCODE = T.MATERCODE
+                  WHERE StockFlag=0 
+                  ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="where.CARD_NO" prepend="AND">
+          <![CDATA[T.BARCODE= #where.CARD_NO#]]>
+        </isNotNull>
+        <isNotNull property="where.CHECK_BEGIN_DATE" prepend="AND">
+          <![CDATA[T.RECORDDATE RECORD_TIME >= #where.CHECK_BEGIN_DATE#]]>
+        </isNotNull>
+        <isNotNull property="where.CHECK_END_DATE" prepend="AND">
+          <![CDATA[T.RECORDDATE RECORD_TIME<= #where.CHECK_END_DATE#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+
+    <select id="GetMaterialProductInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        SELECT top 1 '' SHELF_NO,'0' STORE_PLACE_ID,'0' SUB_STORE_PLACE_ID, T1.SAPMATERIALCODE MATERIAL_ID,T.REALWEIGHT QTY 
+        FROM PstStorage T
+        LEFT JOIN BASMATERIAL T1 ON T1.MATERIALCODE = T.MATERCODE
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="Barcode" prepend="AND">
+          <![CDATA[T.BARCODE=#Barcode#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+
+    <select id="GetMaterialProductInfoForSemis" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       select top 1 t4.UnitName UNIT_NAME,t.Barcode BARCODE,
+      t1.MaterialName MATERIAL_NAME,t1.SAPMaterialCode SAP_CODE,
+      t1.MaterialCode MATERIAL_CODE,
+      t.RealWeight SET_QUANTITY,t.RealWeight LEFT_QUANTITY,
+      isnull(t.ProcDate,RecordDate) PRODUCE_TIME,
+      t1.ValidDate VALID_DATE,
+      t1.ValidDate*24 MAX_PARK_TIME,
+      isnull(t1.MinParkTime,0) MIN_PARK_TIME,t.MARKFLAG 
+      from PstStorage t
+      left join BasMaterial t1 on t1.MaterialCode = t.MATERCODE
+      left join BasUnit t4 on t4.ObjID = t1.UnitID
+      where t.Barcode=#Barcode#
+       ]]>
+    </select>
+    <select id="getRubberInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        select t3.MinorTypeName MATER_TYPE,t.BARCODE,t1.MATERIALCODE,t1.MATERIALNAME, T2.EQUIPNAME,t.RealWeight QTY from PptShiftConfig t
+        left join BasMaterial t1 on t1.MaterialCode = t.MaterialCode
+        left join BasEquip t2 on t2.EquipCode = t.EquipCode
+        left join BasMaterialMinorType t3 on t3.MinorTypeID = t1.MinorTypeID and t3.MajorID = t1.MajorTypeID
+         where Barcode=#Barcode#
+      ]]>
+    </select>
+    <select id="getRawInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[     
+  select t2.MinorTypeName MATER_TYPE,t.BARCODE,t1.MATERIALCODE,t1.MATERIALNAME,'' as EQUIPNAME,t.RealWeight QTY from PstStorage t
+  left join BasMaterial t1 on t1.MaterialCode = t.MaterCode
+  left join BasMaterialMinorType t2 on t2.MinorTypeID = t1.MinorTypeID and t2.MajorID = t1.MajorTypeID
+  where Barcode=#Barcode#
+      ]]>
+    </select>
+    <update id="updateMarkFlag" parameterClass="map">
+      <![CDATA[
+       update $tableName$ set markFlag=#markFlag# where barcode = #barcode#
+       ]]>
+    </update>
+
+    
+    <statement id="DeleteBomRubberCost" parameterClass="map">
+      truncate table PmtBomRubberCost
+    </statement>
+
+    <statement id="InsertBomRubberCost" parameterClass="map" resultClass="int">
+      <isNotNull property="lstDetail">
+        INSERT INTO PmtBomRubberCost(
+        [Month]
+        ,[MaterialId]
+        ,[MaterialCode]
+        ,[MaterialName]
+        ,[SapCode]
+        ,[Num]
+        ,[Unit]
+        )values
+        <iterate property="lstDetail" open="" close="" conjunction="," prepend="">
+          (#lstDetail[].Month#
+          ,#lstDetail[].MaterialId#
+          ,#lstDetail[].MaterialCode#
+          ,#lstDetail[].MaterialName#
+          ,#lstDetail[].SapCode#
+          ,#lstDetail[].Num#
+          ,#lstDetail[].Unit#)
+        </iterate>
+      </isNotNull>
+    </statement>
+    
+    <select id="getMonthPlanRawCost" parameterClass="map" resultClass="row">
+      Proc_GetRecipeRawCost
+      @{month,column=month}
+    </select>
+    <select id="GetRawTraceInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+       WITH CTE AS
+      (
+      SELECT S_barcode, F_barcode,F_materCode,0 as Layer FROM PptBarbom WHERE Scan_barcode=#barcode#
+      UNION ALL
+      SELECT A.S_barcode,A.F_barcode,A.F_materCode,Layer=layer+1 FROM PptBarbom A
+      JOIN CTE B ON A.S_barcode = B.F_barcode
+      )
+      select distinct t1.Shelf_Barcode BARCODE,t.F_materCode,t2.MaterialName,t2.EquipCode,t2.prodDate,t2.RealWeight,Layer from CTE t
+      inner join pptlot t1 on t1.Barcode = t.F_barcode
+      inner join PptShiftConfig t2 on t2.Barcode = t1.Shelf_Barcode
+      where 1=1
+      order by Layer
+       ]]>
+    </select>
+
+    <update id="UpdateRawMarkInfo" parameterClass="map">
+      <![CDATA[
+       update PstStorage set markFlag =2 where Barcode in ($barcode$)
+       ]]>
+    </update>
+    <update id="UpdateRubberMarkInfo" parameterClass="map">
+      <![CDATA[
+       update pptShiftConfig set  markFlag =2 where Barcode in ($barcode$)
+       ]]>
+    </update>
+
+    <select id="SelectRubberInfoByBarcode" parameterClass="map" resultClass="row">
+      select Barcode,MaterialCode,MaterialName,EquipCode from PptShiftConfig where Barcode=#barcode#
+    </select>
+
+    <select id="SelectRawInfoByBarcode" parameterClass="map" resultClass="row">
+      select t1.Barcode,t1.MaterCode,t2.MaterialName
+      from PstStorage t1
+      left join BasMaterial t2 on t1.MaterCode=t2.MaterialCode
+      where t1.Barcode=#barcode#
+    </select>
+
+    <select id="SelectRubberInfoByBarcodes" parameterClass="map" resultClass="row">
+      select Barcode,MaterialCode,MaterialName,EquipCode from PptShiftConfig where Barcode in ($barcode$)
+    </select>
+
+    <select id="SelectRawInfoByBarcodes" parameterClass="map" resultClass="row">
+      select t1.Barcode,t1.MaterCode,t2.MaterialName
+      from PstStorage t1
+      left join BasMaterial t2 on t1.MaterCode=t2.MaterialCode
+      where t1.Barcode in ($barcode$)
+    </select>
+
+
+    <update id="UnfreezeRawMarkInfo" parameterClass="map">
+      <![CDATA[
+       update PstStorage set markFlag =0 where Barcode in ($barcode$)
+       ]]>
+    </update>
+    <update id="UnfreezeRubberMarkInfo" parameterClass="map">
+      <![CDATA[
+       update pptShiftConfig set  markFlag =0 where Barcode in ($barcode$)
+       ]]>
+    </update>
+
+    <select id="GetRubberProductInfo22" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        SELECT ISNULL(T1.SAPMATERIALCODE,T1.SAPMaterialShortCode) SAPMATERIALCODE
+        FROM PPMRUBBERSTORAGE T
+        LEFT JOIN BASMATERIAL T1 ON T1.MATERIALCODE = T.MATERCODE
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="Barcode" prepend="AND">
+          <![CDATA[T.BARCODE=#Barcode#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <select id="GetReturnMixstorageinfo" parameterClass="map" resultClass="Row">
+      <![CDATA[ select b.StorageName from PpmRubberStorage a 
+ left join BasStorage b on b.StorageID = a.StorageID and b.DeleteFlag = 0 
+ where Barcode = #Barcode#
+       ]]>
+    </select>
+
+    <select id="GetReturnMixInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+     select a.* from PpmSemiStorage a
+                    left join BasStorage b on a.SourceStorageID = b.StorageID and b.StorageType = '2'
+                    where b.StorageType = '2' and  barcode = #Barcode#
+       ]]>
+    </select>
+
+    <procedure id="UpdateReturnMixInfo" parameterClass="map" resultClass="string">
+
+      ProcPpmSubmitRubberBack
+      @{StorageID,column=StorageID}
+      @{StoragePlaceID,column=StoragePlaceID}
+      @{Barcode,column=Barcode}
+      @{BackWeight,column=BackWeight}
+      @{NormalFlag,column=NormalFlag}
+      @{BackReason,column=BackReason}
+      @{ShiftID,column=ShiftID}
+      @{OperPerson,column=OperPerson}
+    </procedure>
+
+
+    <select id="GetReturnMixBarcodeInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      select MaterCode, B.MaterialName, CONVERT(varchar(10), A.ValidDate, 120) ValidDate, A.ShiftID, C.ShiftName, A.ShiftClassID, D.ClassName,
+	                        A.EquipCode, E.EquipName, A.BarcodeStart, A.BarcodeEnd, A.RealWeight, A.SourceStorageID
+                        from PpmSemiStorage A
+	                        left join BasMaterial B on A.MaterCode = B.MaterialCode
+	                        left join PptShift C on A.ShiftID = C.ObjID
+	                        left join PptClass D on A.ShiftClassID = D.ObjID
+	                        left join BasEquip E on A.EquipCode = E.EquipCode
+                        where    Barcode = #Barcode#
+       ]]>
+    </select>
+
+
+    <select id="GetByYCLReturn" parameterClass="map" resultClass="Row">
+      <![CDATA[
+select  *  from  PstStorage where  barcode = #Barcode# and len(StorageID) <5 
+       ]]>
+    </select>
+    
+    <update id="UpdateYCLReturn" parameterClass="map">
+      <![CDATA[
+update PstStorage set  num =  num + #num#,RealWeight= RealWeight + #leftqty#  where barcode =  #Barcode# and StoragePlaceID = #storageid#
+       ]]>
+    </update>
+
+    <select id="GetMaxOrderidYCLReturn" parameterClass="map" resultClass="Row">
+      <![CDATA[
+select max(OrderID)+1 orderid from PstStorageDetail where  barcode = #Barcode# 
+       ]]>
+    </select>
+
+    <insert id="InsertYCLReturn" parameterClass="map" resultClass="Row">
+      <![CDATA[
+insert into PstStorageDetail(Barcode,StorageID,StoragePlaceID,OrderID,StoreInOut,RecordDate,Num,PieceWeight,Weight,InaccountDate,InaccountDuration)
+values(#Barcode#,#storageid#,#storagePlaceid#,#Maxorder#,'I',GETDATE(),#num#,#PieceWeight#,#leftqty#,GETDATE(),#YearMonth#)
+       ]]>
+    </insert>
+
+    <update id="UpdateRubberStorage" parameterClass="map" >
+      <![CDATA[
+update PPMRUBBERSTORAGE set StockFlag = 0 where barcode = #Barcode# 
+       ]]>
+    </update>
+
+    <select id="GetRubberSD" parameterClass="map" resultClass="Row">
+      <![CDATA[
+   select  count(1) num from PPTLot Where Shelf_BarCode = #barcode#  And isnull(ManualFlag,0)=1
+       ]]>
+    </select>
+    
+  </statements>
+</sqlMap>

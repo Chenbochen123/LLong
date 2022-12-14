@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.SbeGsdatainfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SbeGsdatainfo" type="Mesnac.Semis.Entity.BasicEntity.SbeGsdatainfo, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SbeGsdatainfo" class="SbeGsdatainfo">
+    <result property="ObjId" column="OBJID"/>
+    <result property="EquipCode" column="EQUIP_CODE"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="MaterialCode" column="MATERIAL_CODE"/>
+    <result property="Standardperimeter" column="STANDARDPERIMETER"/>
+    <result property="Actualperimeter" column="ACTUALPERIMETER"/>
+    <result property="Actualdiameter" column="ACTUALDIAMETER"/>
+    <result property="Actualdifference" column="ACTUALDIFFERENCE"/>
+    <result property="Weight" column="WEIGHT"/>
+    <result property="PlanDetailid" column="PLAN_DETAILID"/>
+    <result property="Dummy1" column="DUMMY_1"/>
+    <result property="Dummy2" column="DUMMY_2"/>
+    <result property="Batch" column="BATCH"/>
+    <result property="Measuredate" column="MEASUREDATE"/>
+    <result property="Materilaid" column="MATERILAID"/>
+    <result property="Standarddiameter" column="STANDARDDIAMETER"/>
+    <result property="Errordiameter" column="ERRORDIAMETER"/>
+    <result property="Standardweight" column="STANDARDWEIGHT"/>
+    <result property="Actualweight" column="ACTUALWEIGHT"/>
+    <result property="Difference" column="DIFFERENCE"/>
+    <result property="Avgdifference" column="AVGDIFFERENCE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SbeGsdatainfo" class="SbeGsdatainfo">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="EquipCode" column="EquipCode"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="MaterialCode" column="MaterialCode"/>
+    <parameter property="Standardperimeter" column="Standardperimeter"/>
+    <parameter property="Actualperimeter" column="Actualperimeter"/>
+    <parameter property="Actualdiameter" column="Actualdiameter"/>
+    <parameter property="Actualdifference" column="Actualdifference"/>
+    <parameter property="Weight" column="Weight"/>
+    <parameter property="PlanDetailid" column="PlanDetailid"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Batch" column="Batch"/>
+    <parameter property="Measuredate" column="Measuredate"/>
+    <parameter property="Materilaid" column="Materilaid"/>
+    <parameter property="Standarddiameter" column="Standarddiameter"/>
+    <parameter property="Errordiameter" column="Errordiameter"/>
+    <parameter property="Standardweight" column="Standardweight"/>
+    <parameter property="Actualweight" column="Actualweight"/>
+    <parameter property="Difference" column="Difference"/>
+    <parameter property="Avgdifference" column="Avgdifference"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBE_GSDATAINFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipCode" prepend="AND">
+          <![CDATA[EQUIP_CODE = #where.EquipCode#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialCode" prepend="AND">
+          <![CDATA[MATERIAL_CODE = #where.MaterialCode#]]>
+        </isNotNull>
+        <isNotNull property="where.Standardperimeter" prepend="AND">
+          <![CDATA[STANDARDPERIMETER = #where.Standardperimeter#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualperimeter" prepend="AND">
+          <![CDATA[ACTUALPERIMETER = #where.Actualperimeter#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualdiameter" prepend="AND">
+          <![CDATA[ACTUALDIAMETER = #where.Actualdiameter#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualdifference" prepend="AND">
+          <![CDATA[ACTUALDIFFERENCE = #where.Actualdifference#]]>
+        </isNotNull>
+        <isNotNull property="where.Weight" prepend="AND">
+          <![CDATA[WEIGHT = #where.Weight#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailid" prepend="AND">
+          <![CDATA[PLAN_DETAILID = #where.PlanDetailid#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Batch" prepend="AND">
+          <![CDATA[BATCH = #where.Batch#]]>
+        </isNotNull>
+        <isNotNull property="where.Measuredate" prepend="AND">
+          <![CDATA[MEASUREDATE = #where.Measuredate#]]>
+        </isNotNull>
+        <isNotNull property="where.Materilaid" prepend="AND">
+          <![CDATA[MATERILAID = #where.Materilaid#]]>
+        </isNotNull>
+        <isNotNull property="where.Standarddiameter" prepend="AND">
+          <![CDATA[STANDARDDIAMETER = #where.Standarddiameter#]]>
+        </isNotNull>
+        <isNotNull property="where.Errordiameter" prepend="AND">
+          <![CDATA[ERRORDIAMETER = #where.Errordiameter#]]>
+        </isNotNull>
+        <isNotNull property="where.Standardweight" prepend="AND">
+          <![CDATA[STANDARDWEIGHT = #where.Standardweight#]]>
+        </isNotNull>
+        <isNotNull property="where.Actualweight" prepend="AND">
+          <![CDATA[ACTUALWEIGHT = #where.Actualweight#]]>
+        </isNotNull>
+        <isNotNull property="where.Difference" prepend="AND">
+          <![CDATA[DIFFERENCE = #where.Difference#]]>
+        </isNotNull>
+        <isNotNull property="where.Avgdifference" prepend="AND">
+          <![CDATA[AVGDIFFERENCE = #where.Avgdifference#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SBE_GSDATAINFO]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="EquipCode" prepend=",">EQUIP_CODE</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="MaterialCode" prepend=",">MATERIAL_CODE</isNotNull>
+        <isNotNull property="Standardperimeter" prepend=",">STANDARDPERIMETER</isNotNull>
+        <isNotNull property="Actualperimeter" prepend=",">ACTUALPERIMETER</isNotNull>
+        <isNotNull property="Actualdiameter" prepend=",">ACTUALDIAMETER</isNotNull>
+        <isNotNull property="Actualdifference" prepend=",">ACTUALDIFFERENCE</isNotNull>
+        <isNotNull property="Weight" prepend=",">WEIGHT</isNotNull>
+        <isNotNull property="PlanDetailid" prepend=",">PLAN_DETAILID</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY_1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY_2</isNotNull>
+        <isNotNull property="Batch" prepend=",">BATCH</isNotNull>
+        <isNotNull property="Measuredate" prepend=",">MEASUREDATE</isNotNull>
+        <isNotNull property="Materilaid" prepend=",">MATERILAID</isNotNull>
+        <isNotNull property="Standarddiameter" prepend=",">STANDARDDIAMETER</isNotNull>
+        <isNotNull property="Errordiameter" prepend=",">ERRORDIAMETER</isNotNull>
+        <isNotNull property="Standardweight" prepend=",">STANDARDWEIGHT</isNotNull>
+        <isNotNull property="Actualweight" prepend=",">ACTUALWEIGHT</isNotNull>
+        <isNotNull property="Difference" prepend=",">DIFFERENCE</isNotNull>
+        <isNotNull property="Avgdifference" prepend=",">AVGDIFFERENCE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SBE_GSDATAINFO.NEXTVAL</isNull>
+        <isNotNull property="EquipCode" prepend=",">#EquipCode#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="MaterialCode" prepend=",">#MaterialCode#</isNotNull>
+        <isNotNull property="Standardperimeter" prepend=",">#Standardperimeter#</isNotNull>
+        <isNotNull property="Actualperimeter" prepend=",">#Actualperimeter#</isNotNull>
+        <isNotNull property="Actualdiameter" prepend=",">#Actualdiameter#</isNotNull>
+        <isNotNull property="Actualdifference" prepend=",">#Actualdifference#</isNotNull>
+        <isNotNull property="Weight" prepend=",">#Weight#</isNotNull>
+        <isNotNull property="PlanDetailid" prepend=",">#PlanDetailid#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Batch" prepend=",">#Batch#</isNotNull>
+        <isNotNull property="Measuredate" prepend=",">#Measuredate#</isNotNull>
+        <isNotNull property="Materilaid" prepend=",">#Materilaid#</isNotNull>
+        <isNotNull property="Standarddiameter" prepend=",">#Standarddiameter#</isNotNull>
+        <isNotNull property="Errordiameter" prepend=",">#Errordiameter#</isNotNull>
+        <isNotNull property="Standardweight" prepend=",">#Standardweight#</isNotNull>
+        <isNotNull property="Actualweight" prepend=",">#Actualweight#</isNotNull>
+        <isNotNull property="Difference" prepend=",">#Difference#</isNotNull>
+        <isNotNull property="Avgdifference" prepend=",">#Avgdifference#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SBE_GSDATAINFO
+       <dynamic prepend="SET">
+        <isNotNull  property="update.EquipCode"  prepend=",">
+          EQUIP_CODE = #update.EquipCode#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.MaterialCode"  prepend=",">
+          MATERIAL_CODE = #update.MaterialCode#
+        </isNotNull>
+        <isNotNull  property="update.Standardperimeter"  prepend=",">
+          STANDARDPERIMETER = #update.Standardperimeter#
+        </isNotNull>
+        <isNotNull  property="update.Actualperimeter"  prepend=",">
+          ACTUALPERIMETER = #update.Actualperimeter#
+        </isNotNull>
+        <isNotNull  property="update.Actualdiameter"  prepend=",">
+          ACTUALDIAMETER = #update.Actualdiameter#
+        </isNotNull>
+        <isNotNull  property="update.Actualdifference"  prepend=",">
+          ACTUALDIFFERENCE = #update.Actualdifference#
+        </isNotNull>
+        <isNotNull  property="update.Weight"  prepend=",">
+          WEIGHT = #update.Weight#
+        </isNotNull>
+        <isNotNull  property="update.PlanDetailid"  prepend=",">
+          PLAN_DETAILID = #update.PlanDetailid#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY_1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY_2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Batch"  prepend=",">
+          BATCH = #update.Batch#
+        </isNotNull>
+        <isNotNull  property="update.Measuredate"  prepend=",">
+          MEASUREDATE = #update.Measuredate#
+        </isNotNull>
+        <isNotNull  property="update.Materilaid"  prepend=",">
+          MATERILAID = #update.Materilaid#
+        </isNotNull>
+        <isNotNull  property="update.Standarddiameter"  prepend=",">
+          STANDARDDIAMETER = #update.Standarddiameter#
+        </isNotNull>
+        <isNotNull  property="update.Errordiameter"  prepend=",">
+          ERRORDIAMETER = #update.Errordiameter#
+        </isNotNull>
+        <isNotNull  property="update.Standardweight"  prepend=",">
+          STANDARDWEIGHT = #update.Standardweight#
+        </isNotNull>
+        <isNotNull  property="update.Actualweight"  prepend=",">
+          ACTUALWEIGHT = #update.Actualweight#
+        </isNotNull>
+        <isNotNull  property="update.Difference"  prepend=",">
+          DIFFERENCE = #update.Difference#
+        </isNotNull>
+        <isNotNull  property="update.Avgdifference"  prepend=",">
+          AVGDIFFERENCE = #update.Avgdifference#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SBE_GSDATAINFO
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SbeGsdatainfo">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SbeGsdatainfo">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SBE_GSDATAINFO
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SBE_GSDATAINFO
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SbeGsdatainfo" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SBE_GSDATAINFO
+    </statement>
+  </statements>
+</sqlMap>

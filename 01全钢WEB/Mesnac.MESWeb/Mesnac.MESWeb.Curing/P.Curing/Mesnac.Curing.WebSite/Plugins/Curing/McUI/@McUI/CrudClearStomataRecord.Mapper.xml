@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudClearStomataRecord" parameterClass="map" resultClass="row">
+      <![CDATA[
+SELECT a.*,b.user_name,case left_right when 1 then '左模' when 2 then '右模' else '无' end LEFTORR FROM SBE_CLEARSTOMATA a
+left join ssb_user b on b.objid = a.record_userid
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[a.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BEGIN_TIME" prepend="AND">
+          <![CDATA[a.BEGIN_TIME >= #where.BEGIN_TIME#]]>
+        </isNotNull>
+        <isNotNull property="where.END_TIME" prepend="AND">
+          <![CDATA[a.BEGIN_TIME <= #where.END_TIME#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIPID" prepend="AND">
+          <![CDATA[a.EQUIPID = #where.EQUIPID#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <select id="Select+Update@CrudClearStomataRecord" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM SBE_CLEARSTOMATA ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+    
+    <!--查询左右模信息，ID值固定为GetComboBoxData@Select@CrudCimMouldWashRecord@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudClearStomataRecord@EQUIPID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+SELECT equip_code sskey,equip_name ssValue FROM SBE_EQUIP WHERE MAJOR_TYPe_id = 51 order by equip_code
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

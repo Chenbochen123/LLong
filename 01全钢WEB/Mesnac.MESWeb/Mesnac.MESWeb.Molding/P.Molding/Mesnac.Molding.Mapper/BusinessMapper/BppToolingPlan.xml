@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.BppToolingPlan"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BPP_TOOLING_PLAN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.ToolingPlanState" prepend="AND">
+          <![CDATA[TOOLING_PLAN_STATE = #where.ToolingPlanState#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.ToolingPlanDate" prepend="AND">
+          <![CDATA[TOOLING_PLAN_DATE = #where.ToolingPlanDate#]]>
+        </isNotNull>
+        <isNotNull property="where.BomId" prepend="AND">
+          <![CDATA[BOM_ID = #where.BomId#]]>
+        </isNotNull>
+        <isNotNull property="where.TechId" prepend="AND">
+          <![CDATA[TECH_ID = #where.TechId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <insert id="InsertToolingPlan" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        insert into bpp_tooling_plan (objid,tooling_plan_state,equip_id,material_id,tooling_plan_date,
+                              tech_id,shift_id,delete_flag,record_user_id,record_time,plan_detail_id)     
+        select seq_bpp_tooling_plan.nextval,1,t1.equip_id,t0.material_id,t1.plan_date,t0.tech_id,t1.shift_id,0,
+        t0.record_user_id,t0.record_time,t0.objid from bpp_plan_detail t0 
+        left join bpp_plan t1 on t1.objid = t0.plan_id
+        where t1.plan_date =#PlanDate#
+        and  t0.plan_state in (1 ,2)
+        and t1.equip_id=#EquipID#
+        and t0.material_id =#MaterialID#
+        and t0.tech_id=#TechID#  
+        and not exists(select 1 from bpp_tooling_plan t2 where t2.tooling_plan_date=t1.plan_date and t2.equip_id=t1.equip_id 
+           and t2.material_id = t0.material_id and t2.tech_id =t0.tech_id and t2.shift_id =t1.shift_id and t2.delete_flag = 0)     
+       ]]>
+     </insert>
+     <insert id="InsertAllToolingPlan" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        insert into bpp_tooling_plan (objid,tooling_plan_state,equip_id,material_id,tooling_plan_date,
+                              tech_id,shift_id,delete_flag,record_user_id,record_time,plan_detail_id)     
+        select seq_bpp_tooling_plan.nextval,1,t1.equip_id,t0.material_id,t1.plan_date,t0.tech_id,t1.shift_id,0,
+        t0.record_user_id,t0.record_time,t0.objid from bpp_plan_detail t0 
+        left join bpp_plan t1 on t1.objid = t0.plan_id
+        where t1.plan_date =#PlanDate#
+        and  t0.plan_state =1 
+        and not exists(select 1 from bpp_tooling_plan t2 where t2.tooling_plan_date=t1.plan_date and t2.equip_id=t1.equip_id 
+           and t2.material_id = t0.material_id and t2.tech_id =t0.tech_id and t2.shift_id =t1.shift_id and t2.delete_flag=0)     
+       ]]>
+     </insert>
+
+     <select id="GetToolingPlan" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select T0.OBJID AS TOOLING_PLAN_NO,T0.EQUIP_ID,t0.plan_detail_id,t0.tooling_plan_state,T3.EQUIP_NAME,T0.MATERIAL_ID,T1.MATERIAL_NAME,
+        T0.TOOLING_PLAN_DATE,t0.shift_id,t2.shift_name,T0.BOM_ID,T4.BOM_VERSION,T0.TECH_ID,T5.PDM_VERSION 
+        FROM BPP_TOOLING_PLAN T0 
+        LEFT JOIN V_BBM_MATERIALINFO T1 ON T1.OBJID = T0.MATERIAL_ID
+        LEFT JOIN SSB_SHIFT T2 ON T2.OBJID = T0.SHIFT_ID
+        LEFT JOIN SBE_EQUIP T3 ON T3.OBJID = T0.EQUIP_ID
+        LEFT JOIN SBM_BOM T4 ON T4.OBJID = T0.BOM_ID
+        LEFT JOIN BPT_MOLDING_TECH T5 ON T5.OBJID = T0.TECH_ID
+        WHERE T0.DELETE_FLAG =0 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="EquipId" prepend="AND">
+           <![CDATA[T0.EQUIP_ID=#EquipId#]]>
+         </isNotNull>
+         <isNotNull property="ToolingPlanDate" prepend="AND">
+           <![CDATA[T0.TOOLING_PLAN_DATE=#ToolingPlanDate#]]>
+         </isNotNull>
+         <isNotNull property="ShiftId" prepend="AND">
+           <![CDATA[T0.SHIFT_ID=#ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="ToolingPlanState" prepend="AND">
+           <![CDATA[T0.TOOLING_PLAN_STATE=#ToolingPlanState#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <update id="DeleteToolingPlan" parameterClass="map">
+       <![CDATA[
+       UPDATE BPP_TOOLING_PLAN SET
+       DELETE_FLAG = 1 
+       WHERE TOOLING_PLAN_DATE=TO_DATE(#ToolingPlanDate#,'yyyy-mm-dd') 
+       AND EQUIP_ID=#EquipID# AND MATERIAL_ID=#MaterialID#
+       AND TECH_ID=#TechID# AND TOOLING_PLAN_STATE = 1
+       AND DELETE_FLAG = #DeleteFlag#
+       ]]>
+     </update>
+     <select id="GetToolingPlanInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select T0.OBJID,T0.EQUIP_ID,t0.plan_detail_id,t6.SHOW_NAME,T3.EQUIP_NAME,T0.MATERIAL_ID,T1.MATERIAL_NAME,
+        T0.TOOLING_PLAN_DATE,t0.shift_id,t2.shift_name,T0.BOM_ID,T4.BOM_NAME,T0.TECH_ID,T5.TECH_NAME,T0.RECORD_TIME
+        FROM BPP_TOOLING_PLAN T0 
+        LEFT JOIN V_BBM_MATERIALINFO T1 ON T1.OBJID = T0.MATERIAL_ID
+        LEFT JOIN SSB_SHIFT T2 ON T2.OBJID = T0.SHIFT_ID
+        LEFT JOIN SBE_EQUIP T3 ON T3.OBJID = T0.EQUIP_ID
+        LEFT JOIN v_sbm_bom T4 ON T4.OBJID = T0.BOM_ID
+        LEFT JOIN V_BPT_MOLDING_TECH T5 ON T5.OBJID = T0.TECH_ID
+        LEFT JOIN BPP_PLAN_STATE T6 ON T6.OBJID = T0.tooling_plan_state
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.EquipId" prepend="AND">
+           <![CDATA[T0.EQUIP_ID=#where.EquipId#]]>
+         </isNotNull>
+         <isNotNull property="where.planDate" prepend="AND">
+           <![CDATA[T0.TOOLING_PLAN_DATE=#where.planDate#]]>
+         </isNotNull>
+         <isNotNull property="where.ShiftId" prepend="AND">
+           <![CDATA[T0.SHIFT_ID=#where.ShiftId#]]>
+         </isNotNull>
+         <isNotNull property="where.ToolingPlanNo" prepend="AND">
+           <![CDATA[T0.OBJID=#where.ToolingPlanNo#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T0.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+  </statements>
+</sqlMap>

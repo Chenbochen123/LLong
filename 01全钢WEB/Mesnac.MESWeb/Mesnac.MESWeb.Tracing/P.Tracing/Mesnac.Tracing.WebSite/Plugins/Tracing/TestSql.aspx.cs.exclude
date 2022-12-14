@@ -1,0 +1,110 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+using Ext.Net;
+using Mesnac.Tracing.Business.Implements;
+using Mesnac.Tracing.Business.Interface;
+using Mesnac.Tracing.Entity.BasicEntity;
+using Mesnac.Main.Business.Implements;
+using Mesnac.Main.Business.Interface;
+using Mesnac.Main.Entity.BasicEntity;
+using Mesnac.DbAccess;
+using Mesnac.Web.UI.Entity;
+using Mesnac.Web.UI;
+
+
+/// <summary>
+/// Tracing_Back_Search 实现类
+/// </summary>
+/// <remarks></remarks>
+public partial class Tracing_Test: Mesnac.Web.UI.Page
+{
+
+    #region 权限定义
+    protected __ _ = new __();
+    public class __ : ___  //必须继承___   //Action不能重复，重复会被覆盖
+    {
+        public __()
+        {
+            查询 = new PageAction() { ActionId = 1, ActionName = "btnSearch" };
+        }
+        public PageAction 查询 { get; private set; } //必须为 public
+    }
+    #endregion
+
+    #region 属性注入
+    private IBpmProductionManager moldingManager = new BpmProductionManager();
+    private IBpmProductionManager sqlManager = new BpmProductionManager("SQLSERVER");
+
+    private int count = 0;
+    #endregion
+
+    #region 页面初始化
+    /// <summary>
+    /// 
+    /// 孙本强 @ 2013-04-03 13:17:22
+    /// </summary>
+    private const string constSelectAllText = "---请选择---";
+   
+    /// <summary>
+    /// 页面初始化
+    /// 孙本强 @ 2013-04-03 13:39:51
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+    /// <remarks></remarks>
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (X.IsAjaxRequest)
+        {
+            return;
+        }
+        try
+        {
+            this.cbxBarcodeType.Select(3);
+        }
+        catch(Exception ex)
+        { }
+    }
+    /// <summary>
+    /// 生成红色Html标示
+    /// 孙本强 @ 2013-04-03 13:40:06
+    /// </summary>
+    /// <param name="ss">The ss.</param>
+    /// <returns></returns>
+    /// <remarks></remarks>
+    private string RedHtml(string ss)
+    {
+        return "<font color='red'>" + ss + "</font>";
+    }
+    #endregion
+
+    #region 查询相关
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        Dictionary<string,object> dic = new Dictionary<string,object>();
+        dic.Add("Green_Tyre_No", "8000138003");
+        DataTable dt = moldingManager.GetDataTableByStatement("GetTabMoldingProductionInfo", dic);
+        moldingStore.DataSource = dt;
+        moldingStore.DataBind();
+
+        Dictionary<string, object> sqldic = new Dictionary<string, object>();
+        sqldic.Add("code", "000001");
+        DataTable sqlDt = sqlManager.GetDataTableByStatement("GetSqlUserName", sqldic);
+        if (sqlDt != null && sqlDt.Rows.Count > 0)
+        {
+            txtUserName.Text = sqlDt.Rows[0]["UserName"].ToString();
+        }
+    }
+
+    #endregion
+
+}

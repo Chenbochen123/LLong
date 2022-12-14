@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <statements>
+        <select id="Select@ReportBptTech" parameterClass="map" resultClass="row">
+            <![CDATA[ 
+            SELECT T1.*,
+             T2.TYPE_NAME,T3.PARM_TYPE_NAME,
+             T4.TECH_COLOR_NAME AS NPAR32001010,
+             T5.TECH_COLOR_NAME AS NPAR32001009,
+             T6.TECH_COLOR_NAME AS NPAR32001008,
+             T7.TECH_COLOR_NAME AS NPAR32001007,
+             T8.TECH_COLOR_NAME AS NPAR32001006
+            ,T9.TECH_COLOR_NAME AS NPAR32001005,
+            T10.TECH_COLOR_NAME AS NPAR32001004,
+            T11.TECH_COLOR_NAME AS NPAR32001003,
+            T12.TECH_COLOR_NAME AS NPAR32001002,
+            T13.TECH_COLOR_NAME AS NPAR32001001
+            FROM BPT_MOLDING_TECH_DATA  T1
+            left JOIN CPT_CURING_TECH_TYPE T2 ON T1.TECH_TYPE=T2.OBJID
+            left JOIN CPT_CURING_TECH_PARM_TYPE T3 ON T1.PARM_TYPE=T3.OBJID
+            left JOIN cpt_curing_tech_parm_color T4 ON T1.PAR32001010=T4.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T5 ON T1.PAR32001009=T5.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T6 ON T1.PAR32001008=T6.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T7 ON T1.PAR32001007=T7.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T8 ON T1.PAR32001006=T8.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T9 ON T1.PAR32001005=T9.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T10 ON T1.PAR32001004=T10.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T11 ON T1.PAR32001003=T11.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T12 ON T1.PAR32001002=T12.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T13 ON T1.PAR32001001=T13.TECH_COLOR_CODE
+            WHERE T1.DELETE_FLAG=0
+            ]]>
+            <dynamic>
+                <isNotNull property="where.PDM_CODE" prepend="AND">
+                    <![CDATA[t1.PDM_CODE = #where.PDM_CODE#]]>
+                </isNotNull>
+                <isNotNull property="where.MATERIAL_SAP_CODE" prepend="AND">
+                    <![CDATA[t1.MATERIAL_SAP_CODE = #where.MATERIAL_SAP_CODE#]]>
+                </isNotNull>
+            </dynamic>
+            order by t1.material_name,t1.PDM_VERSION
+        </select>
+        <select id="Select@ReportBptTech@MainDetail" parameterClass="map" resultClass="row">
+            <![CDATA[ 
+             SELECT T1.*,
+             T2.TYPE_NAME,T3.PARM_TYPE_NAME,
+             T4.TECH_COLOR_NAME AS NPAR32001010,
+             T5.TECH_COLOR_NAME AS NPAR32001009,
+             T6.TECH_COLOR_NAME AS NPAR32001008,
+             T7.TECH_COLOR_NAME AS NPAR32001007,
+             T8.TECH_COLOR_NAME AS NPAR32001006
+            ,T9.TECH_COLOR_NAME AS NPAR32001005,
+            T10.TECH_COLOR_NAME AS NPAR32001004,
+            T11.TECH_COLOR_NAME AS NPAR32001003,
+            T12.TECH_COLOR_NAME AS NPAR32001002,
+            T13.TECH_COLOR_NAME AS NPAR32001001
+            FROM BPT_MOLDING_TECH_DATA  T1
+            left JOIN CPT_CURING_TECH_TYPE T2 ON T1.TECH_TYPE=T2.OBJID
+            left JOIN CPT_CURING_TECH_PARM_TYPE T3 ON T1.PARM_TYPE=T3.OBJID
+            left JOIN cpt_curing_tech_parm_color T4 ON T1.PAR32001010=T4.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T5 ON T1.PAR32001009=T5.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T6 ON T1.PAR32001008=T6.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T7 ON T1.PAR32001007=T7.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T8 ON T1.PAR32001006=T8.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T9 ON T1.PAR32001005=T9.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T10 ON T1.PAR32001004=T10.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T11 ON T1.PAR32001003=T11.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T12 ON T1.PAR32001002=T12.TECH_COLOR_CODE
+            left JOIN cpt_curing_tech_parm_color T13 ON T1.PAR32001001=T13.TECH_COLOR_CODE
+            WHERE T1.DELETE_FLAG=0
+            ]]>
+            <dynamic>
+                <isNotNull property="where.OBJID" prepend="AND">
+                    <![CDATA[t1.OBJID = #where.OBJID#]]>
+                </isNotNull>
+            </dynamic>
+        </select>
+    </statements>
+</sqlMap>

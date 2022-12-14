@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CimMouldWashRecord"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CimMouldWashRecord" type="Mesnac.Curing.Entity.BasicEntity.CimMouldWashRecord, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CimMouldWashRecord" class="CimMouldWashRecord">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Equipid" column="EQUIPID"/>
+    <result property="Lrflag" column="LRFLAG"/>
+    <result property="Currentcount" column="CURRENTCOUNT"/>
+    <result property="Begintime" column="BEGINTIME"/>
+    <result property="Mouldid" column="MOULDID"/>
+    <result property="Endtime" column="ENDTIME"/>
+    <result property="Firsttyre" column="FIRSTTYRE"/>
+    <result property="Usecount" column="USECOUNT"/>
+    <result property="CheckUserid" column="CHECK_USERID"/>
+    <result property="CheckTime" column="CHECK_TIME"/>
+    <result property="Result" column="RESULT"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CimMouldWashRecord" class="CimMouldWashRecord">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Equipid" column="Equipid"/>
+    <parameter property="Lrflag" column="Lrflag"/>
+    <parameter property="Currentcount" column="Currentcount"/>
+    <parameter property="Begintime" column="Begintime"/>
+    <parameter property="Mouldid" column="Mouldid"/>
+    <parameter property="Endtime" column="Endtime"/>
+    <parameter property="Firsttyre" column="Firsttyre"/>
+    <parameter property="Usecount" column="Usecount"/>
+    <parameter property="CheckUserid" column="CheckUserid"/>
+    <parameter property="CheckTime" column="CheckTime"/>
+    <parameter property="Result" column="Result"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CIM_MOULD_WASH_RECORD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Equipid" prepend="AND">
+          <![CDATA[EQUIPID = #where.Equipid#]]>
+        </isNotNull>
+        <isNotNull property="where.Lrflag" prepend="AND">
+          <![CDATA[LRFLAG = #where.Lrflag#]]>
+        </isNotNull>
+        <isNotNull property="where.Currentcount" prepend="AND">
+          <![CDATA[CURRENTCOUNT = #where.Currentcount#]]>
+        </isNotNull>
+        <isNotNull property="where.Begintime" prepend="AND">
+          <![CDATA[BEGINTIME = #where.Begintime#]]>
+        </isNotNull>
+        <isNotNull property="where.Mouldid" prepend="AND">
+          <![CDATA[MOULDID = #where.Mouldid#]]>
+        </isNotNull>
+        <isNotNull property="where.Endtime" prepend="AND">
+          <![CDATA[ENDTIME = #where.Endtime#]]>
+        </isNotNull>
+        <isNotNull property="where.Firsttyre" prepend="AND">
+          <![CDATA[FIRSTTYRE = #where.Firsttyre#]]>
+        </isNotNull>
+        <isNotNull property="where.Usecount" prepend="AND">
+          <![CDATA[USECOUNT = #where.Usecount#]]>
+        </isNotNull>
+      <isNotNull property="where.CheckUserid" prepend="AND">
+        <![CDATA[CHECK_USERID = #where.CheckUserid#]]>
+      </isNotNull>
+      <isNotNull property="where.CheckTime" prepend="AND">
+        <![CDATA[CHECK_TIME = #where.CheckTime#]]>
+      </isNotNull>
+      <isNotNull property="where.Result" prepend="AND">
+        <![CDATA[RESULT = #where.Result#]]>
+      </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE ( = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CIM_MOULD_WASH_RECORD]]>
+       <dynamic prepend="(">
+        <isNotNull property="ObjId" prepend=",">OBJID</isNotNull>
+        <isNotNull property="Equipid" prepend=",">EQUIPID</isNotNull>
+        <isNotNull property="Lrflag" prepend=",">LRFLAG</isNotNull>
+        <isNotNull property="Currentcount" prepend=",">CURRENTCOUNT</isNotNull>
+        <isNotNull property="Begintime" prepend=",">BEGINTIME</isNotNull>
+        <isNotNull property="Mouldid" prepend=",">MOULDID</isNotNull>
+        <isNotNull property="Endtime" prepend=",">ENDTIME</isNotNull>
+        <isNotNull property="Firsttyre" prepend=",">FIRSTTYRE</isNotNull>
+        <isNotNull property="Usecount" prepend=",">USECOUNT</isNotNull>
+         <isNotNull property="CheckUserid" prepend=",">CHECK_USERID</isNotNull>
+         <isNotNull property="CheckTime" prepend=",">CHECK_TIME</isNotNull>
+         <isNotNull property="Result" prepend=",">RESULT</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="Equipid" prepend=",">#Equipid#</isNotNull>
+        <isNotNull property="Lrflag" prepend=",">#Lrflag#</isNotNull>
+        <isNotNull property="Currentcount" prepend=",">#Currentcount#</isNotNull>
+        <isNotNull property="Begintime" prepend=",">#Begintime#</isNotNull>
+        <isNotNull property="Mouldid" prepend=",">#Mouldid#</isNotNull>
+        <isNotNull property="Endtime" prepend=",">#Endtime#</isNotNull>
+        <isNotNull property="Firsttyre" prepend=",">#Firsttyre#</isNotNull>
+        <isNotNull property="Usecount" prepend=",">#Usecount#</isNotNull>
+         <isNotNull property="CheckUserid" prepend=",">#CheckUserid#</isNotNull>
+         <isNotNull property="CheckTime" prepend=",">#CheckTime#</isNotNull>
+         <isNotNull property="Result" prepend=",">#Result#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CIM_MOULD_WASH_RECORD
+       <dynamic prepend="SET">
+        <isNotNull  property="update.ObjId"  prepend=",">
+          OBJID = #update.ObjId#
+        </isNotNull>
+        <isNotNull  property="update.Equipid"  prepend=",">
+          EQUIPID = #update.Equipid#
+        </isNotNull>
+        <isNotNull  property="update.Lrflag"  prepend=",">
+          LRFLAG = #update.Lrflag#
+        </isNotNull>
+        <isNotNull  property="update.Currentcount"  prepend=",">
+          CURRENTCOUNT = #update.Currentcount#
+        </isNotNull>
+        <isNotNull  property="update.Begintime"  prepend=",">
+          BEGINTIME = #update.Begintime#
+        </isNotNull>
+        <isNotNull  property="update.Mouldid"  prepend=",">
+          MOULDID = #update.Mouldid#
+        </isNotNull>
+        <isNotNull  property="update.Endtime"  prepend=",">
+          ENDTIME = #update.Endtime#
+        </isNotNull>
+        <isNotNull  property="update.Firsttyre"  prepend=",">
+          FIRSTTYRE = #update.Firsttyre#
+        </isNotNull>
+        <isNotNull  property="update.Usecount"  prepend=",">
+          USECOUNT = #update.Usecount#
+        </isNotNull>
+         <isNotNull  property="update.CheckUserid"  prepend=",">
+           CHECK_USERID = #update.CheckUserid#
+         </isNotNull>
+         <isNotNull  property="update.CheckTime"  prepend=",">
+           CHECK_TIME = #update.CheckTime#
+         </isNotNull>
+         <isNotNull  property="update.Result"  prepend=",">
+           RESULT = #update.Result#
+         </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CIM_MOULD_WASH_RECORD
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CimMouldWashRecord">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CimMouldWashRecord">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max()
+      </isNotPropertyAvailable>
+      FROM CIM_MOULD_WASH_RECORD
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CIM_MOULD_WASH_RECORD
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CimMouldWashRecord" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CIM_MOULD_WASH_RECORD
+    </statement>
+  </statements>
+</sqlMap>

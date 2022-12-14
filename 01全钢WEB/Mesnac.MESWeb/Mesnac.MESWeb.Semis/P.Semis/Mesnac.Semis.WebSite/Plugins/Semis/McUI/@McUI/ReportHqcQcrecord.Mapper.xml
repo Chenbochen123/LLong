@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportHqcQcrecord" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT T.OBJID,
+         T1.SAP_CODE SAP_CODE,T1.MATERIAL_NAME,T2.SHIFT_NAME CHECK_SHIFT_NAME,T3.CLASS_NAME CHECK_CLASS_NAME,
+         T4.END_TIME PRODUCTION_TIME, T4.CARD_NO,T5.EQUIP_NAME,  T6.USER_NAME CHECK_USER, T15.USER_NAME OPER_USER, 
+         T7.SHIFT_NAME PRO_SHIFT_NAME,T8.CLASS_NAME PRO_CLASS_NAME,T9.MINOR_TYPE_NAME CHECK_DEFECTPOS,
+          T10.DEFECT_NAME CHECK_DEFECT1,T11.DEFECT_NAME CHECK_DEFECT2,T12.DEFECT_NAME CHECK_DEFECT3,T13.EQUIP_NAME EUQIP_NAME,
+         (CASE  T.GRADEID WHEN 0 THEN '合格' WHEN 1 THEN '不合格' END ) CHECK_GRADE_NAME,T4.QTY, T.AMOUNT ,T14.UNIT_NAME,
+         case T4.QTY  when 0 then '.00' else TO_CHAR(ROUND(T4.QTY-T.AMOUNT)/T4.QTY*100,'FM999999999.00') end RATE,
+         T.RECORD_TIME CHECK_TIME ,T.SHIFT_ID CHECK_SHIFT_ID,T.CLASS_ID CHECK_CLASS_ID
+        FROM HQC_QCRECORD T
+        LEFT JOIN HPP_SEMIS_PRODUCTION T4 ON T.CARD_NO=T4.CARD_NO
+        LEFT JOIN SBM_MATERIAL T1 ON T.MATERIAL_ID=T1.OBJID
+        LEFT JOIN SSB_SHIFT T2 ON T.SHIFT_ID=T2.OBJID
+        LEFT JOIN SSB_CLASS T3 ON T.CLASS_ID=T3.OBJID
+        LEFT JOIN SBE_EQUIP T5 ON T.EQUIP_ID=T5.OBJID
+        LEFT JOIN SSB_USER T6 ON T.RECORD_USER_ID=T6.OBJID
+        LEFT JOIN SSB_SHIFT T7 ON T4.SHIFT_ID=T7.OBJID
+        LEFT JOIN SSB_CLASS T8 ON T4.CLASS_ID=T8.OBJID
+        LEFT JOIN SBM_MATERIAL_MINOR_TYPE T9 ON T.DEFECT_POS=T9.OBJID        
+        LEFT JOIN HQC_DEFECT T10 ON T.DEFECT_ID1=T10.OBJID
+        LEFT JOIN HQC_DEFECT T11 ON T.DEFECT_ID2=T11.OBJID
+        LEFT JOIN HQC_DEFECT T12 ON  T.DEFECT_ID3=T12.OBJID
+        LEFT JOIN SBE_EQUIP T13 ON T.EQUIP_ID=T13.OBJID
+         LEFT JOIN SSB_UNIT T14 ON T14.OBJID=T4.UNIT_ID
+         LEFT JOIN SSB_USER T15 ON T4.RECORD_USER_ID=T15.OBJID
+         WHERE 1=1 AND T4.DELETE_FLAG = 0
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="where.CARD_NO" prepend="AND">
+          <![CDATA[T4.CARD_NO = #where.CARD_NO#]]>
+        </isNotNull>
+        <isNull property="where.CARD_NO">
+          <isNotNull property="where.OBJID" prepend="AND">
+            <![CDATA[T.OBJID = #where.OBJID#]]>
+          </isNotNull>
+          <isNotNull property="where.CHECK_BEGIN_DATE" prepend="AND">
+            <![CDATA[T.RECORD_TIME >= #where.CHECK_BEGIN_DATE#]]>
+          </isNotNull>
+          <isNotNull property="where.CHECK_END_DATE" prepend="AND">
+            <![CDATA[T.RECORD_TIME <= #where.CHECK_END_DATE#]]>
+          </isNotNull>
+          <isNotNull property="where.SAP_CODE" prepend="AND">
+            <![CDATA[T1.SAP_CODE = #where.SAP_CODE#]]>
+          </isNotNull>
+          <isNotNull property="where.CHECK_GRADE_NAME" prepend="AND">
+            <![CDATA[T.GRADEID = #where.CHECK_GRADE_NAME#]]>
+          </isNotNull>
+          <isNotNull property="where.CHECK_CLASS_ID" prepend="AND">
+            <![CDATA[T.CLASS_ID = #where.CHECK_CLASS_ID#]]>
+          </isNotNull>
+          <isNotNull property="where.CHECK_SHIFT_ID" prepend="AND">
+            <![CDATA[T.SHIFT_ID = #where.CHECK_SHIFT_ID#]]>
+          </isNotNull>
+          <isNotNull property="where.PRO_CLASS_ID" prepend="AND">
+            <![CDATA[T4.CLASS_ID = #where.PRO_CLASS_ID#]]>
+          </isNotNull>
+          <isNotNull property="where.PRO_SHIFT_ID" prepend="AND">
+            <![CDATA[T4.SHIFT_ID = #where.PRO_SHIFT_ID#]]>
+          </isNotNull>
+          <isNotNull property="where.DELETE_FLAG" prepend="AND">
+            <![CDATA[T.DELETE_FLAG = #where.DELETE_FLAG#]]>
+          </isNotNull>
+        </isNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T.RECORD_TIME
+      </isNull>
+    </select>
+    <select id="Select@ReportHqcQcrecord@DetailGrid" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+      SELECT T.OBJID,T2.DEFECT_NAME CHECK_DEFECT1,T3.DEFECT_NAME CHECK_DEFECT2,T4.DEFECT_NAME CHECK_DEFECT3,
+         T5.DEFECT_NAME CHECK_DEFECT4,T6.DEFECT_NAME CHECK_DEFECT5,T7.DEFECT_NAME CHECK_DEFECT6,
+         T8.DEFECT_NAME CHECK_DEFECT7,T9.DEFECT_NAME CHECK_DEFECT8,T10.DEFECT_NAME CHECK_DEFECT9,T11.DEFECT_NAME CHECK_DEFECT10
+        FROM HQC_QCRECORD T  
+        LEFT JOIN HQC_DEFECT T2 ON T.DEFECT_ID1=T2.OBJID 
+        LEFT JOIN HQC_DEFECT T3 ON T.DEFECT_ID2=T3.OBJID 
+        LEFT JOIN HQC_DEFECT T4 ON T.DEFECT_ID3=T4.OBJID 
+        LEFT JOIN HQC_DEFECT T5 ON T.DUMMY1=T5.OBJID 
+        LEFT JOIN HQC_DEFECT T6 ON T.DUMMY2=T6.OBJID 
+        LEFT JOIN HQC_DEFECT T7 ON T.DUMMY3=T7.OBJID 
+        LEFT JOIN HQC_DEFECT T8 ON T.DUMMY4=T8.OBJID 
+        LEFT JOIN HQC_DEFECT T9 ON T.DUMMY5=T9.OBJID 
+        LEFT JOIN HQC_DEFECT T10 ON T.DUMMY6=T10.OBJID 
+         LEFT JOIN HQC_DEFECT T11 ON T.DUMMY7=T11.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T.OBJID = #where.OBJID#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+
+
+
+    <!--查询接班班次信息，ID值固定为GetComboBoxData@Select@ReportHqcQcrecord@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportHqcQcrecord@CHECK_SHIFT_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.SHIFT_NAME ssValue from SSB_SHIFT t1
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询接班班组信息，ID值固定为GetComboBoxData@Select@ReportHqcQcrecord@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportHqcQcrecord@CHECK_CLASS_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.CLASS_NAME ssValue from SSB_CLASS t1
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+    <!--查询生产班次信息，ID值固定为GetComboBoxData@Select@ReportHqcQcrecord@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportHqcQcrecord@PRO_SHIFT_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.SHIFT_NAME ssValue from SSB_SHIFT t1
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询生产班组信息，ID值固定为GetComboBoxData@Select@ReportHqcQcrecord@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportHqcQcrecord@PRO_CLASS_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.CLASS_NAME ssValue from SSB_CLASS t1
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询质检品级，ID值固定为GetComboBoxData@Select@ReportHqcQcrecord@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportHqcQcrecord@CHECK_GRADE_NAME" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT 0 SSKEY, '合格' SSVALUE FROM DUAL 
+      UNION
+      SELECT   1, '不合格' SSVALUE FROM DUAL
+       ]]>
+    </select>
+  </statements>
+</sqlMap>

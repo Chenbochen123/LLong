@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudSbmLockReason" parameterClass="map" resultClass="row">
+      <![CDATA[
+        select * from sbm_lock_REASON
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.REASON" prepend="AND">
+          <![CDATA[ REASON like '%' || #where.REASON# || '%' ]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <select id="Select+Update@CrudSbmLockReason" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM sbm_lock_REASON ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+  </statements>
+</sqlMap>

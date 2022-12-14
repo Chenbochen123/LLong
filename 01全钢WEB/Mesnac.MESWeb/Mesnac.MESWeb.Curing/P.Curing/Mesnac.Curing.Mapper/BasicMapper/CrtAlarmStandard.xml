@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CrtAlarmStandard"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CrtAlarmStandard" type="Mesnac.Curing.Entity.BasicEntity.CrtAlarmStandard, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CrtAlarmStandard" class="CrtAlarmStandard">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="Guid" column="GUID"/>
+    <result property="MajorTypeId" column="MAJOR_TYPE_ID"/>
+    <result property="MinorTypeId" column="MINOR_TYPE_ID"/>
+    <result property="AlarmStandardType" column="ALARM_STANDARD_TYPE"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="Version" column="VERSION"/>
+    <result property="SubmitFlag" column="SUBMIT_FLAG"/>
+    <result property="AuditFlag" column="AUDIT_FLAG"/>
+    <result property="SendFlag" column="SEND_FLAG"/>
+    <result property="UsedFlag" column="USED_FLAG"/>
+    <result property="ModifyTime" column="MODIFY_TIME"/>
+    <result property="ModifyUserId" column="MODIFY_USER_ID"/>
+    <result property="AuditTime" column="AUDIT_TIME"/>
+    <result property="AuditUserId" column="AUDIT_USER_ID"/>
+    <result property="AuditRemark" column="AUDIT_REMARK"/>
+    <result property="SendTime" column="SEND_TIME"/>
+    <result property="SendUserId" column="SEND_USER_ID"/>
+    <result property="SendRemark" column="SEND_REMARK"/>
+    <result property="State" column="STATE"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="SelectAuditUserId" column="SELECT_AUDIT_USER_ID"/>
+    <result property="SelectAuditUserName" column="SELECT_AUDIT_USER_NAME"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CrtAlarmStandard" class="CrtAlarmStandard">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="Guid" column="Guid"/>
+    <parameter property="MajorTypeId" column="MajorTypeId"/>
+    <parameter property="MinorTypeId" column="MinorTypeId"/>
+    <parameter property="AlarmStandardType" column="AlarmStandardType"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="Version" column="Version"/>
+    <parameter property="SubmitFlag" column="SubmitFlag"/>
+    <parameter property="AuditFlag" column="AuditFlag"/>
+    <parameter property="SendFlag" column="SendFlag"/>
+    <parameter property="UsedFlag" column="UsedFlag"/>
+    <parameter property="ModifyTime" column="ModifyTime"/>
+    <parameter property="ModifyUserId" column="ModifyUserId"/>
+    <parameter property="AuditTime" column="AuditTime"/>
+    <parameter property="AuditUserId" column="AuditUserId"/>
+    <parameter property="AuditRemark" column="AuditRemark"/>
+    <parameter property="SendTime" column="SendTime"/>
+    <parameter property="SendUserId" column="SendUserId"/>
+    <parameter property="SendRemark" column="SendRemark"/>
+    <parameter property="State" column="State"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="SelectAuditUserId" column="SelectAuditUserId"/>
+    <parameter property="SelectAuditUserName" column="SelectAuditUserName"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CRT_ALARM_STANDARD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Guid" prepend="AND">
+          <![CDATA[GUID = #where.Guid#]]>
+        </isNotNull>
+        <isNotNull property="where.MajorTypeId" prepend="AND">
+          <![CDATA[MAJOR_TYPE_ID = #where.MajorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.MinorTypeId" prepend="AND">
+          <![CDATA[MINOR_TYPE_ID = #where.MinorTypeId#]]>
+        </isNotNull>
+        <isNotNull property="where.AlarmStandardType" prepend="AND">
+          <![CDATA[ALARM_STANDARD_TYPE = #where.AlarmStandardType#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.Version" prepend="AND">
+          <![CDATA[VERSION = #where.Version#]]>
+        </isNotNull>
+        <isNotNull property="where.SubmitFlag" prepend="AND">
+          <![CDATA[SUBMIT_FLAG = #where.SubmitFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditFlag" prepend="AND">
+          <![CDATA[AUDIT_FLAG = #where.AuditFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.SendFlag" prepend="AND">
+          <![CDATA[SEND_FLAG = #where.SendFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedFlag" prepend="AND">
+          <![CDATA[USED_FLAG = #where.UsedFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.ModifyTime" prepend="AND">
+          <![CDATA[MODIFY_TIME = #where.ModifyTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ModifyUserId" prepend="AND">
+          <![CDATA[MODIFY_USER_ID = #where.ModifyUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditTime" prepend="AND">
+          <![CDATA[AUDIT_TIME = #where.AuditTime#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditUserId" prepend="AND">
+          <![CDATA[AUDIT_USER_ID = #where.AuditUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.AuditRemark" prepend="AND">
+          <![CDATA[AUDIT_REMARK = #where.AuditRemark#]]>
+        </isNotNull>
+        <isNotNull property="where.SendTime" prepend="AND">
+          <![CDATA[SEND_TIME = #where.SendTime#]]>
+        </isNotNull>
+        <isNotNull property="where.SendUserId" prepend="AND">
+          <![CDATA[SEND_USER_ID = #where.SendUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.SendRemark" prepend="AND">
+          <![CDATA[SEND_REMARK = #where.SendRemark#]]>
+        </isNotNull>
+        <isNotNull property="where.State" prepend="AND">
+          <![CDATA[STATE = #where.State#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.SelectAuditUserId" prepend="AND">
+          <![CDATA[SELECT_AUDIT_USER_ID = #where.SelectAuditUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.SelectAuditUserName" prepend="AND">
+          <![CDATA[SELECT_AUDIT_USER_NAME = #where.SelectAuditUserName#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CRT_ALARM_STANDARD]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="Guid" prepend=",">GUID</isNotNull>
+        <isNotNull property="MajorTypeId" prepend=",">MAJOR_TYPE_ID</isNotNull>
+        <isNotNull property="MinorTypeId" prepend=",">MINOR_TYPE_ID</isNotNull>
+        <isNotNull property="AlarmStandardType" prepend=",">ALARM_STANDARD_TYPE</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="Version" prepend=",">VERSION</isNotNull>
+        <isNotNull property="SubmitFlag" prepend=",">SUBMIT_FLAG</isNotNull>
+        <isNotNull property="AuditFlag" prepend=",">AUDIT_FLAG</isNotNull>
+        <isNotNull property="SendFlag" prepend=",">SEND_FLAG</isNotNull>
+        <isNotNull property="UsedFlag" prepend=",">USED_FLAG</isNotNull>
+        <isNotNull property="ModifyTime" prepend=",">MODIFY_TIME</isNotNull>
+        <isNotNull property="ModifyUserId" prepend=",">MODIFY_USER_ID</isNotNull>
+        <isNotNull property="AuditTime" prepend=",">AUDIT_TIME</isNotNull>
+        <isNotNull property="AuditUserId" prepend=",">AUDIT_USER_ID</isNotNull>
+        <isNotNull property="AuditRemark" prepend=",">AUDIT_REMARK</isNotNull>
+        <isNotNull property="SendTime" prepend=",">SEND_TIME</isNotNull>
+        <isNotNull property="SendUserId" prepend=",">SEND_USER_ID</isNotNull>
+        <isNotNull property="SendRemark" prepend=",">SEND_REMARK</isNotNull>
+        <isNotNull property="State" prepend=",">STATE</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="SelectAuditUserId" prepend=",">SELECT_AUDIT_USER_ID</isNotNull>
+        <isNotNull property="SelectAuditUserName" prepend=",">SELECT_AUDIT_USER_NAME</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNull property="ObjId" prepend=",">SEQ_CRT_ALARM_STANDARD.NEXTVAL</isNull>
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="Guid" prepend=",">#Guid#</isNotNull>
+        <isNotNull property="MajorTypeId" prepend=",">#MajorTypeId#</isNotNull>
+        <isNotNull property="MinorTypeId" prepend=",">#MinorTypeId#</isNotNull>
+        <isNotNull property="AlarmStandardType" prepend=",">#AlarmStandardType#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="Version" prepend=",">#Version#</isNotNull>
+        <isNotNull property="SubmitFlag" prepend=",">#SubmitFlag#</isNotNull>
+        <isNotNull property="AuditFlag" prepend=",">#AuditFlag#</isNotNull>
+        <isNotNull property="SendFlag" prepend=",">#SendFlag#</isNotNull>
+        <isNotNull property="UsedFlag" prepend=",">#UsedFlag#</isNotNull>
+        <isNotNull property="ModifyTime" prepend=",">#ModifyTime#</isNotNull>
+        <isNotNull property="ModifyUserId" prepend=",">#ModifyUserId#</isNotNull>
+        <isNotNull property="AuditTime" prepend=",">#AuditTime#</isNotNull>
+        <isNotNull property="AuditUserId" prepend=",">#AuditUserId#</isNotNull>
+        <isNotNull property="AuditRemark" prepend=",">#AuditRemark#</isNotNull>
+        <isNotNull property="SendTime" prepend=",">#SendTime#</isNotNull>
+        <isNotNull property="SendUserId" prepend=",">#SendUserId#</isNotNull>
+        <isNotNull property="SendRemark" prepend=",">#SendRemark#</isNotNull>
+        <isNotNull property="State" prepend=",">#State#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="SelectAuditUserId" prepend=",">#SelectAuditUserId#</isNotNull>
+        <isNotNull property="SelectAuditUserName" prepend=",">#SelectAuditUserName#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CRT_ALARM_STANDARD
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.Guid"  prepend=",">
+          GUID = #update.Guid#
+        </isNotNull>
+        <isNotNull  property="update.MajorTypeId"  prepend=",">
+          MAJOR_TYPE_ID = #update.MajorTypeId#
+        </isNotNull>
+        <isNotNull  property="update.MinorTypeId"  prepend=",">
+          MINOR_TYPE_ID = #update.MinorTypeId#
+        </isNotNull>
+        <isNotNull  property="update.AlarmStandardType"  prepend=",">
+          ALARM_STANDARD_TYPE = #update.AlarmStandardType#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.Version"  prepend=",">
+          VERSION = #update.Version#
+        </isNotNull>
+        <isNotNull  property="update.SubmitFlag"  prepend=",">
+          SUBMIT_FLAG = #update.SubmitFlag#
+        </isNotNull>
+        <isNotNull  property="update.AuditFlag"  prepend=",">
+          AUDIT_FLAG = #update.AuditFlag#
+        </isNotNull>
+        <isNotNull  property="update.SendFlag"  prepend=",">
+          SEND_FLAG = #update.SendFlag#
+        </isNotNull>
+        <isNotNull  property="update.UsedFlag"  prepend=",">
+          USED_FLAG = #update.UsedFlag#
+        </isNotNull>
+        <isNotNull  property="update.ModifyTime"  prepend=",">
+          MODIFY_TIME = #update.ModifyTime#
+        </isNotNull>
+        <isNotNull  property="update.ModifyUserId"  prepend=",">
+          MODIFY_USER_ID = #update.ModifyUserId#
+        </isNotNull>
+        <isNotNull  property="update.AuditTime"  prepend=",">
+          AUDIT_TIME = #update.AuditTime#
+        </isNotNull>
+        <isNotNull  property="update.AuditUserId"  prepend=",">
+          AUDIT_USER_ID = #update.AuditUserId#
+        </isNotNull>
+        <isNotNull  property="update.AuditRemark"  prepend=",">
+          AUDIT_REMARK = #update.AuditRemark#
+        </isNotNull>
+        <isNotNull  property="update.SendTime"  prepend=",">
+          SEND_TIME = #update.SendTime#
+        </isNotNull>
+        <isNotNull  property="update.SendUserId"  prepend=",">
+          SEND_USER_ID = #update.SendUserId#
+        </isNotNull>
+        <isNotNull  property="update.SendRemark"  prepend=",">
+          SEND_REMARK = #update.SendRemark#
+        </isNotNull>
+        <isNotNull  property="update.State"  prepend=",">
+          STATE = #update.State#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.SelectAuditUserId"  prepend=",">
+          SELECT_AUDIT_USER_ID = #update.SelectAuditUserId#
+        </isNotNull>
+        <isNotNull  property="update.SelectAuditUserName"  prepend=",">
+          SELECT_AUDIT_USER_NAME = #update.SelectAuditUserName#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CRT_ALARM_STANDARD
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CrtAlarmStandard">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CrtAlarmStandard">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CRT_ALARM_STANDARD
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CRT_ALARM_STANDARD
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <insert id="Insert" parameterMap="P_CrtAlarmStandard" resultClass="int">
+      <selectKey property="ObjId" type="post" resultClass="int">
+        SELECT SEQ_CRT_ALARM_STANDARD.CURRVAL FROM DUAL
+      </selectKey>
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </insert>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CRT_ALARM_STANDARD
+    </statement>
+  </statements>
+</sqlMap>

@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudHppSemisProduction" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT T.*,T1.SHIFT_NAME,T2.CLASS_NAME,T3.UNIT_NAME,t20.user_name UPDATE_NAME,
+        T4.MATERIAL_NAME,T4.MATERIAL_CODE,T5.EQUIP_NAME,T6.MINOR_TYPE_NAME,
+        T8.SHOW_NAME IS_ALARM_CAPTION,T7.USER_NAME AS RECORD_USER_NAME,T9.PLAN_DATE,T10.SHIFT_NAME PLAN_SHIFT_NAME,T11.METHOD_RESULT AS OLD_MATERIAL_NAME
+        ,CASE NVL(T.DUMMY5,0) WHEN 1 THEN '左' WHEN 2 THEN '右' ELSE '' END LR_FLAG
+        ,CASE NVL(t21.singleweight,0) WHEN 0 THEN '' ELSE TO_CHAR(t.qty*t21.singleweight) END as TOTAL_WEIGHT
+        ,CASE NVL(T21.SINGLELENGTH,0) WHEN 0 THEN '' ELSE TO_CHAR(T.QTY*T21.SINGLELENGTH) END AS TOTAL_LENGTH,to_date(NVL(T.DUMMY4,(t.end_time + a.valid_time/24)),'yyyy-MM-dd hh24:mi:ss') VALIDTIME,B.USER_NAME RK_USERNAME,
+        t.END_TIME as END_TIMEE 
+        FROM HPP_SEMIS_PRODUCTION T 
+        LEFT JOIN SSB_SHIFT T1 ON T1.OBJID = T.SHIFT_ID
+        LEFT JOIN SSB_CLASS T2 ON T2.OBJID = T.CLASS_ID
+        LEFT JOIN SSB_UNIT T3 ON T3.OBJID = T.UNIT_ID
+        LEFT JOIN SBM_MATERIAL T4 ON T4.OBJID = T.MATERIAL_ID
+        LEFT JOIN SBE_EQUIP T5 ON T5.OBJID = T.EQUIP_ID
+        LEFT JOIN SBE_EQUIP_MINOR_TYPE T6 ON T6.OBJID = T5.MINOR_TYPE_ID
+        LEFT JOIN SSB_USER T7 ON T7.OBJID = T.RECORD_USER_ID
+        LEFT JOIN cbh_yes_or_no_helper T8 ON T8.OBJID = T.IS_ALARM
+        LEFT JOIN HPP_PLAN T9 ON T9.OBJID = T.PLAN_ID
+        LEFT JOIN SSB_SHIFT T10 ON T10.OBJID = T9.SHIFT_ID
+        LEFT JOIN SSL_WEB_LOG T11 ON T11.NEW_BARCODE = T.CARD_NO
+        left join sbm_material_minor_type t12 on t4.minor_type_id = t12.objid and t12.delete_flag = 0 
+        left join ssb_user t20 on t20.objid = t.seq_index
+        left join HPP_SEMIS_MATERIAL_CODE t21 on t21.material_id = t.material_id
+        left join sbm_material_info_stand a on a.material_id = t.material_id AND A.DELETE_FLAG = 0
+        LEFT JOIN SSB_USER B ON B.OBJID = T.DUMMY10
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.CARD_NO" prepend ="AND">
+          <![CDATA[T.CARD_NO = #where.CARD_NO#]]>
+        </isNotNull>
+        <isNull property="where.CARD_NO">
+          <isNotNull property="where.OBJID" prepend="AND">
+            <![CDATA[T.OBJID = #where.OBJID#]]>
+          </isNotNull>
+          <isNotNull property="where.SHELF_NO" prepend="AND">
+            <![CDATA[T.SHELF_NO = #where.SHELF_NO#]]>
+          </isNotNull>
+          <isNotNull property="where.BEGIN_TIME" prepend="AND">
+            <![CDATA[T.END_TIME >= #where.BEGIN_TIME#]]>
+          </isNotNull>
+          <isNotNull property="where.END_TIME" prepend="AND">
+            <![CDATA[T.END_TIME <= #where.END_TIME#]]>
+          </isNotNull>
+          <isNotNull property="where.BEGIN_DATE" prepend="AND">
+            <![CDATA[T.SHIFT_DATE >= #where.BEGIN_DATE#]]>
+          </isNotNull>
+          <isNotNull property="where.END_DATE" prepend="AND">
+            <![CDATA[T.SHIFT_DATE <= #where.END_DATE#]]>
+          </isNotNull>
+          <isNotNull property="where.SHIFT_ID" prepend="AND">
+            <![CDATA[T.SHIFT_ID = #where.SHIFT_ID#]]>
+          </isNotNull>
+          <isNotNull property="where.MATERIAL_NAME" prepend="AND">
+            <![CDATA[T4.MATERIAL_NAME LIKE '%' || #where.MATERIAL_NAME# || '%' ]]>
+          </isNotNull>
+          <isNotNull property="where.MATERIAL_CODE" prepend="AND">
+            <![CDATA[T4.MATERIAL_CODE = #where.MATERIAL_CODE#]]>
+          </isNotNull>
+          <isNotNull property="where.EQUIP_NAME" prepend="AND">
+            <![CDATA[T5.EQUIP_NAME LIKE '%' || #where.EQUIP_NAME# || '%' ]]>
+          </isNotNull>
+          <isNotNull property="where.DELETE_FLAG" prepend="AND">
+            <![CDATA[T.DELETE_FLAG = #where.DELETE_FLAG#]]>
+          </isNotNull>
+          <isNotNull property="where.MATER_MINOR_TYPE" prepend="AND">
+            <![CDATA[t12.objid = #where.MATER_MINOR_TYPE#]]>
+          </isNotNull>
+        </isNull>
+      </dynamic>
+      <![CDATA[  ORDER BY T.END_TIME ]]>
+    </select>
+    <select id="Select+Update@CrudHppSemisProduction" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT T.*,T1.PLAN_DATE,T2.SHIFT_NAME PLAN_SHIFT_NAME,T4.EQUIP_NAME SHIFT_EQUIP_NAME,
+      T5.EQUIP_NAME,T7.MATERIAL_NAME
+      FROM HPP_SEMIS_PRODUCTION T
+      LEFT JOIN HPP_PLAN T1 ON T1.OBJID = T.PLAN_ID
+      LEFT JOIN SSB_SHIFT T2 ON T2.OBJID = T1.SHIFT_ID
+      LEFT JOIN HPP_SHIFT_MASTER T3 ON T3.OBJID = T.SHIFT_MASTER_ID
+      LEFT JOIN SBE_EQUIP T4 ON T4.OBJID = T3.EQUIP_ID
+      LEFT JOIN SBE_EQUIP T5 ON T5.OBJID = T1.EQUIP_ID
+      LEFT JOIN HPP_PLAN_DETAIL T6 ON T6.OBJID = T.PLAN_DETAIL_ID
+      LEFT JOIN SBM_MATERIAL T7 ON T7.OBJID = T6.MATERIAL_ID
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T.OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <!--查询类型信息，ID值固定为GetComboBoxData@Select@CrudHppSemisProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudHppSemisProduction@SearchType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select 1 sskey, '按接班日期' ssValue from dual union select 2 sskey, '按生产时间' ssValue from dual
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by sskey
+      </isNull>
+    </select>
+    
+    <!--查询设备信息，ID值固定为GetComboBoxData@Select@CrudHppSemisProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudHppSemisProduction@EQUIP_NAME" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+       select EQUIP_NAME sskey,EQUIP_NAME ssValue from sbe_equip  where major_type_id in (21,22,31,32,33,34,35) 
+       and delete_flag = 0  and used_flag = 1 order by major_type_id,record_time
+       ]]>
+    </select>
+
+    <!--查询左右模信息，ID值固定为GetComboBoxData@Select@CrudHppSemisProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudHppSemisProduction@UNIT_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey,UNIT_NAME ssValue from SSB_UNIT where 1=1
+     ]]>
+    </select>
+
+    <!--查询接班班次信息，ID值固定为GetComboBoxData@Select@CrudHppSemisProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudHppSemisProduction@SHIFT_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.SHIFT_NAME ssValue from SSB_SHIFT t1
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询接班班组信息，ID值固定为GetComboBoxData@Select@CrudHppSemisProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudHppSemisProduction@CLASS_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.CLASS_NAME ssValue from SSB_CLASS t1
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>
+
+    <!--查询计划班次信息，ID值固定为GetComboBoxData@Select@CrudHppSemisProduction@字段，id值不允许重复-->
+
+    <!--<select id="GetComboBoxData@Select@CrudHppSemisProduction@PLAN_SHIFT_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.SHIFT_NAME ssValue from SSB_SHIFT t1
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.OBJID
+      </isNull>
+    </select>-->
+
+    <!--查询机台信息，ID值固定为GetComboBoxData@Select@CrudHppSemisProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudHppSemisProduction@EQUIP_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.EQUIP_NAME ssValue from SBE_EQUIP t1 WHERE MAJOR_TYPE_ID IN(31,22,21)
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.EQUIP_NAME
+      </isNull>
+    </select>
+
+    <!--查询物料信息，ID值固定为GetComboBoxData@Select@CrudHppSemisProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudHppSemisProduction@MATERIAL_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t1.OBJID sskey, t1.MATERIAL_NAME || '|' || t1.MATERIAL_CODE ssValue from SBM_MATERIAL WHERE MAJOR_TYPE_ID =31
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.MATERIAL_NAME
+      </isNull>
+    </select>
+
+    <!--查询人员信息，ID值固定为GetComboBoxData@Select@CrudHppSemisProduction@字段，id值不允许重复-->
+    <!--<select id="GetComboBoxData@Select@CrudHppSemisProduction@WORKER_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select OBJID sskey, USER_NAME ssValue from SSB_USER
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by USER_NAME
+      </isNull>
+    </select>-->
+
+    <!--查询物料细类信息，ID值固定为GetComboBoxData@Select@CrudHppSemisProduction@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@CrudHppSemisProduction@MATER_MINOR_TYPE" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select t.objid sskey,t.minor_type_name ssValue from sbm_material_minor_type t
+      where t.delete_flag = 0  and t.major_type_id = 31
+     ]]>
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t.OBJID
+      </isNull>
+    </select>
+  </statements>
+</sqlMap>

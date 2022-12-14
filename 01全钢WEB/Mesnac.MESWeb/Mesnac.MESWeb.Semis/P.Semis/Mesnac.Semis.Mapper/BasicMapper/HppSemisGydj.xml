@@ -1,0 +1,439 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.HppSemisGydj"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HppSemisGydj" type="Mesnac.Semis.Entity.BasicEntity.HppSemisGydj, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HppSemisGydj" class="HppSemisGydj">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Measuredate" column="MEASUREDATE"/>
+    <result property="EquipCode" column="EQUIP_CODE"/>
+    <result property="MLeftouteravgdata" column="M_LEFTOUTERAVGDATA"/>
+    <result property="MLeftinneravgdata" column="M_LEFTINNERAVGDATA"/>
+    <result property="MCenteravgdata" column="M_CENTERAVGDATA"/>
+    <result property="MRightinneravgdata" column="M_RIGHTINNERAVGDATA"/>
+    <result property="MRightouteravgdata" column="M_RIGHTOUTERAVGDATA"/>
+    <result property="Standardtype" column="STANDARDTYPE"/>
+    <result property="Totalthickness" column="TOTALTHICKNESS"/>
+    <result property="TotalUpoffset" column="TOTAL_UPOFFSET"/>
+    <result property="TotalBelowoffset" column="TOTAL_BELOWOFFSET"/>
+    <result property="Qualified" column="QUALIFIED"/>
+    <result property="Workshift" column="WORKSHIFT"/>
+    <result property="Ca" column="CA"/>
+    <result property="Cp" column="CP"/>
+    <result property="Cpk" column="CPK"/>
+    <result property="Linespeed" column="LINESPEED"/>
+    <result property="Width" column="WIDTH"/>
+    <result property="Isautocontrol" column="ISAUTOCONTROL"/>
+    <result property="TotalUpmax" column="TOTAL_UPMAX"/>
+    <result property="TotalBelowmax" column="TOTAL_BELOWMAX"/>
+    <result property="Zhlength" column="ZHLENGTH"/>
+    <result property="Zhwidth" column="ZHWIDTH"/>
+    <result property="Xjpbzhdcpk" column="XJPBZHDCPK"/>
+    <result property="XJphd" column="X_JPHD"/>
+    <result property="MaterialCode" column="MATERIAL_CODE"/>
+    <result property="MaterialName" column="MATERIAL_NAME"/>
+    <result property="Bzzhdcpk" column="BZZHDCPK"/>
+    <result property="Zhhd" column="ZHHD"/>
+    <result property="Sjpbzhdcpk" column="SJPBZHDCPK"/>
+    <result property="Sjphd" column="SJPHD"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HppSemisGydj" class="HppSemisGydj">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Measuredate" column="Measuredate"/>
+    <parameter property="EquipCode" column="EquipCode"/>
+    <parameter property="MLeftouteravgdata" column="MLeftouteravgdata"/>
+    <parameter property="MLeftinneravgdata" column="MLeftinneravgdata"/>
+    <parameter property="MCenteravgdata" column="MCenteravgdata"/>
+    <parameter property="MRightinneravgdata" column="MRightinneravgdata"/>
+    <parameter property="MRightouteravgdata" column="MRightouteravgdata"/>
+    <parameter property="Standardtype" column="Standardtype"/>
+    <parameter property="Totalthickness" column="Totalthickness"/>
+    <parameter property="TotalUpoffset" column="TotalUpoffset"/>
+    <parameter property="TotalBelowoffset" column="TotalBelowoffset"/>
+    <parameter property="Qualified" column="Qualified"/>
+    <parameter property="Workshift" column="Workshift"/>
+    <parameter property="Ca" column="Ca"/>
+    <parameter property="Cp" column="Cp"/>
+    <parameter property="Cpk" column="Cpk"/>
+    <parameter property="Linespeed" column="Linespeed"/>
+    <parameter property="Width" column="Width"/>
+    <parameter property="Isautocontrol" column="Isautocontrol"/>
+    <parameter property="TotalUpmax" column="TotalUpmax"/>
+    <parameter property="TotalBelowmax" column="TotalBelowmax"/>
+    <parameter property="Zhlength" column="Zhlength"/>
+    <parameter property="Zhwidth" column="Zhwidth"/>
+    <parameter property="Xjpbzhdcpk" column="Xjpbzhdcpk"/>
+    <parameter property="XJphd" column="XJphd"/>
+    <parameter property="MaterialCode" column="MaterialCode"/>
+    <parameter property="MaterialName" column="MaterialName"/>
+    <parameter property="Bzzhdcpk" column="Bzzhdcpk"/>
+    <parameter property="Zhhd" column="Zhhd"/>
+    <parameter property="Sjpbzhdcpk" column="Sjpbzhdcpk"/>
+    <parameter property="Sjphd" column="Sjphd"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_SEMIS_GYDJ ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Measuredate" prepend="AND">
+          <![CDATA[MEASUREDATE = #where.Measuredate#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipCode" prepend="AND">
+          <![CDATA[EQUIP_CODE = #where.EquipCode#]]>
+        </isNotNull>
+        <isNotNull property="where.MLeftouteravgdata" prepend="AND">
+          <![CDATA[M_LEFTOUTERAVGDATA = #where.MLeftouteravgdata#]]>
+        </isNotNull>
+        <isNotNull property="where.MLeftinneravgdata" prepend="AND">
+          <![CDATA[M_LEFTINNERAVGDATA = #where.MLeftinneravgdata#]]>
+        </isNotNull>
+        <isNotNull property="where.MCenteravgdata" prepend="AND">
+          <![CDATA[M_CENTERAVGDATA = #where.MCenteravgdata#]]>
+        </isNotNull>
+        <isNotNull property="where.MRightinneravgdata" prepend="AND">
+          <![CDATA[M_RIGHTINNERAVGDATA = #where.MRightinneravgdata#]]>
+        </isNotNull>
+        <isNotNull property="where.MRightouteravgdata" prepend="AND">
+          <![CDATA[M_RIGHTOUTERAVGDATA = #where.MRightouteravgdata#]]>
+        </isNotNull>
+        <isNotNull property="where.Standardtype" prepend="AND">
+          <![CDATA[STANDARDTYPE = #where.Standardtype#]]>
+        </isNotNull>
+        <isNotNull property="where.Totalthickness" prepend="AND">
+          <![CDATA[TOTALTHICKNESS = #where.Totalthickness#]]>
+        </isNotNull>
+        <isNotNull property="where.TotalUpoffset" prepend="AND">
+          <![CDATA[TOTAL_UPOFFSET = #where.TotalUpoffset#]]>
+        </isNotNull>
+        <isNotNull property="where.TotalBelowoffset" prepend="AND">
+          <![CDATA[TOTAL_BELOWOFFSET = #where.TotalBelowoffset#]]>
+        </isNotNull>
+        <isNotNull property="where.Qualified" prepend="AND">
+          <![CDATA[QUALIFIED = #where.Qualified#]]>
+        </isNotNull>
+        <isNotNull property="where.Workshift" prepend="AND">
+          <![CDATA[WORKSHIFT = #where.Workshift#]]>
+        </isNotNull>
+        <isNotNull property="where.Ca" prepend="AND">
+          <![CDATA[CA = #where.Ca#]]>
+        </isNotNull>
+        <isNotNull property="where.Cp" prepend="AND">
+          <![CDATA[CP = #where.Cp#]]>
+        </isNotNull>
+        <isNotNull property="where.Cpk" prepend="AND">
+          <![CDATA[CPK = #where.Cpk#]]>
+        </isNotNull>
+        <isNotNull property="where.Linespeed" prepend="AND">
+          <![CDATA[LINESPEED = #where.Linespeed#]]>
+        </isNotNull>
+        <isNotNull property="where.Width" prepend="AND">
+          <![CDATA[WIDTH = #where.Width#]]>
+        </isNotNull>
+        <isNotNull property="where.Isautocontrol" prepend="AND">
+          <![CDATA[ISAUTOCONTROL = #where.Isautocontrol#]]>
+        </isNotNull>
+        <isNotNull property="where.TotalUpmax" prepend="AND">
+          <![CDATA[TOTAL_UPMAX = #where.TotalUpmax#]]>
+        </isNotNull>
+        <isNotNull property="where.TotalBelowmax" prepend="AND">
+          <![CDATA[TOTAL_BELOWMAX = #where.TotalBelowmax#]]>
+        </isNotNull>
+        <isNotNull property="where.Zhlength" prepend="AND">
+          <![CDATA[ZHLENGTH = #where.Zhlength#]]>
+        </isNotNull>
+        <isNotNull property="where.Zhwidth" prepend="AND">
+          <![CDATA[ZHWIDTH = #where.Zhwidth#]]>
+        </isNotNull>
+        <isNotNull property="where.Xjpbzhdcpk" prepend="AND">
+          <![CDATA[XJPBZHDCPK = #where.Xjpbzhdcpk#]]>
+        </isNotNull>
+        <isNotNull property="where.XJphd" prepend="AND">
+          <![CDATA[X_JPHD = #where.XJphd#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialCode" prepend="AND">
+          <![CDATA[MATERIAL_CODE = #where.MaterialCode#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[MATERIAL_NAME = #where.MaterialName#]]>
+        </isNotNull>
+        <isNotNull property="where.Bzzhdcpk" prepend="AND">
+          <![CDATA[BZZHDCPK = #where.Bzzhdcpk#]]>
+        </isNotNull>
+        <isNotNull property="where.Zhhd" prepend="AND">
+          <![CDATA[ZHHD = #where.Zhhd#]]>
+        </isNotNull>
+        <isNotNull property="where.Sjpbzhdcpk" prepend="AND">
+          <![CDATA[SJPBZHDCPK = #where.Sjpbzhdcpk#]]>
+        </isNotNull>
+        <isNotNull property="where.Sjphd" prepend="AND">
+          <![CDATA[SJPHD = #where.Sjphd#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HPP_SEMIS_GYDJ]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="Measuredate" prepend=",">MEASUREDATE</isNotNull>
+        <isNotNull property="EquipCode" prepend=",">EQUIP_CODE</isNotNull>
+        <isNotNull property="MLeftouteravgdata" prepend=",">M_LEFTOUTERAVGDATA</isNotNull>
+        <isNotNull property="MLeftinneravgdata" prepend=",">M_LEFTINNERAVGDATA</isNotNull>
+        <isNotNull property="MCenteravgdata" prepend=",">M_CENTERAVGDATA</isNotNull>
+        <isNotNull property="MRightinneravgdata" prepend=",">M_RIGHTINNERAVGDATA</isNotNull>
+        <isNotNull property="MRightouteravgdata" prepend=",">M_RIGHTOUTERAVGDATA</isNotNull>
+        <isNotNull property="Standardtype" prepend=",">STANDARDTYPE</isNotNull>
+        <isNotNull property="Totalthickness" prepend=",">TOTALTHICKNESS</isNotNull>
+        <isNotNull property="TotalUpoffset" prepend=",">TOTAL_UPOFFSET</isNotNull>
+        <isNotNull property="TotalBelowoffset" prepend=",">TOTAL_BELOWOFFSET</isNotNull>
+        <isNotNull property="Qualified" prepend=",">QUALIFIED</isNotNull>
+        <isNotNull property="Workshift" prepend=",">WORKSHIFT</isNotNull>
+        <isNotNull property="Ca" prepend=",">CA</isNotNull>
+        <isNotNull property="Cp" prepend=",">CP</isNotNull>
+        <isNotNull property="Cpk" prepend=",">CPK</isNotNull>
+        <isNotNull property="Linespeed" prepend=",">LINESPEED</isNotNull>
+        <isNotNull property="Width" prepend=",">WIDTH</isNotNull>
+        <isNotNull property="Isautocontrol" prepend=",">ISAUTOCONTROL</isNotNull>
+        <isNotNull property="TotalUpmax" prepend=",">TOTAL_UPMAX</isNotNull>
+        <isNotNull property="TotalBelowmax" prepend=",">TOTAL_BELOWMAX</isNotNull>
+        <isNotNull property="Zhlength" prepend=",">ZHLENGTH</isNotNull>
+        <isNotNull property="Zhwidth" prepend=",">ZHWIDTH</isNotNull>
+        <isNotNull property="Xjpbzhdcpk" prepend=",">XJPBZHDCPK</isNotNull>
+        <isNotNull property="XJphd" prepend=",">X_JPHD</isNotNull>
+        <isNotNull property="MaterialCode" prepend=",">MATERIAL_CODE</isNotNull>
+        <isNotNull property="MaterialName" prepend=",">MATERIAL_NAME</isNotNull>
+        <isNotNull property="Bzzhdcpk" prepend=",">BZZHDCPK</isNotNull>
+        <isNotNull property="Zhhd" prepend=",">ZHHD</isNotNull>
+        <isNotNull property="Sjpbzhdcpk" prepend=",">SJPBZHDCPK</isNotNull>
+        <isNotNull property="Sjphd" prepend=",">SJPHD</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_HPP_SEMIS_GYDJ.NEXTVAL</isNull>
+        <isNotNull property="Measuredate" prepend=",">#Measuredate#</isNotNull>
+        <isNotNull property="EquipCode" prepend=",">#EquipCode#</isNotNull>
+        <isNotNull property="MLeftouteravgdata" prepend=",">#MLeftouteravgdata#</isNotNull>
+        <isNotNull property="MLeftinneravgdata" prepend=",">#MLeftinneravgdata#</isNotNull>
+        <isNotNull property="MCenteravgdata" prepend=",">#MCenteravgdata#</isNotNull>
+        <isNotNull property="MRightinneravgdata" prepend=",">#MRightinneravgdata#</isNotNull>
+        <isNotNull property="MRightouteravgdata" prepend=",">#MRightouteravgdata#</isNotNull>
+        <isNotNull property="Standardtype" prepend=",">#Standardtype#</isNotNull>
+        <isNotNull property="Totalthickness" prepend=",">#Totalthickness#</isNotNull>
+        <isNotNull property="TotalUpoffset" prepend=",">#TotalUpoffset#</isNotNull>
+        <isNotNull property="TotalBelowoffset" prepend=",">#TotalBelowoffset#</isNotNull>
+        <isNotNull property="Qualified" prepend=",">#Qualified#</isNotNull>
+        <isNotNull property="Workshift" prepend=",">#Workshift#</isNotNull>
+        <isNotNull property="Ca" prepend=",">#Ca#</isNotNull>
+        <isNotNull property="Cp" prepend=",">#Cp#</isNotNull>
+        <isNotNull property="Cpk" prepend=",">#Cpk#</isNotNull>
+        <isNotNull property="Linespeed" prepend=",">#Linespeed#</isNotNull>
+        <isNotNull property="Width" prepend=",">#Width#</isNotNull>
+        <isNotNull property="Isautocontrol" prepend=",">#Isautocontrol#</isNotNull>
+        <isNotNull property="TotalUpmax" prepend=",">#TotalUpmax#</isNotNull>
+        <isNotNull property="TotalBelowmax" prepend=",">#TotalBelowmax#</isNotNull>
+        <isNotNull property="Zhlength" prepend=",">#Zhlength#</isNotNull>
+        <isNotNull property="Zhwidth" prepend=",">#Zhwidth#</isNotNull>
+        <isNotNull property="Xjpbzhdcpk" prepend=",">#Xjpbzhdcpk#</isNotNull>
+        <isNotNull property="XJphd" prepend=",">#XJphd#</isNotNull>
+        <isNotNull property="MaterialCode" prepend=",">#MaterialCode#</isNotNull>
+        <isNotNull property="MaterialName" prepend=",">#MaterialName#</isNotNull>
+        <isNotNull property="Bzzhdcpk" prepend=",">#Bzzhdcpk#</isNotNull>
+        <isNotNull property="Zhhd" prepend=",">#Zhhd#</isNotNull>
+        <isNotNull property="Sjpbzhdcpk" prepend=",">#Sjpbzhdcpk#</isNotNull>
+        <isNotNull property="Sjphd" prepend=",">#Sjphd#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HPP_SEMIS_GYDJ
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Measuredate"  prepend=",">
+          MEASUREDATE = #update.Measuredate#
+        </isNotNull>
+        <isNotNull  property="update.EquipCode"  prepend=",">
+          EQUIP_CODE = #update.EquipCode#
+        </isNotNull>
+        <isNotNull  property="update.MLeftouteravgdata"  prepend=",">
+          M_LEFTOUTERAVGDATA = #update.MLeftouteravgdata#
+        </isNotNull>
+        <isNotNull  property="update.MLeftinneravgdata"  prepend=",">
+          M_LEFTINNERAVGDATA = #update.MLeftinneravgdata#
+        </isNotNull>
+        <isNotNull  property="update.MCenteravgdata"  prepend=",">
+          M_CENTERAVGDATA = #update.MCenteravgdata#
+        </isNotNull>
+        <isNotNull  property="update.MRightinneravgdata"  prepend=",">
+          M_RIGHTINNERAVGDATA = #update.MRightinneravgdata#
+        </isNotNull>
+        <isNotNull  property="update.MRightouteravgdata"  prepend=",">
+          M_RIGHTOUTERAVGDATA = #update.MRightouteravgdata#
+        </isNotNull>
+        <isNotNull  property="update.Standardtype"  prepend=",">
+          STANDARDTYPE = #update.Standardtype#
+        </isNotNull>
+        <isNotNull  property="update.Totalthickness"  prepend=",">
+          TOTALTHICKNESS = #update.Totalthickness#
+        </isNotNull>
+        <isNotNull  property="update.TotalUpoffset"  prepend=",">
+          TOTAL_UPOFFSET = #update.TotalUpoffset#
+        </isNotNull>
+        <isNotNull  property="update.TotalBelowoffset"  prepend=",">
+          TOTAL_BELOWOFFSET = #update.TotalBelowoffset#
+        </isNotNull>
+        <isNotNull  property="update.Qualified"  prepend=",">
+          QUALIFIED = #update.Qualified#
+        </isNotNull>
+        <isNotNull  property="update.Workshift"  prepend=",">
+          WORKSHIFT = #update.Workshift#
+        </isNotNull>
+        <isNotNull  property="update.Ca"  prepend=",">
+          CA = #update.Ca#
+        </isNotNull>
+        <isNotNull  property="update.Cp"  prepend=",">
+          CP = #update.Cp#
+        </isNotNull>
+        <isNotNull  property="update.Cpk"  prepend=",">
+          CPK = #update.Cpk#
+        </isNotNull>
+        <isNotNull  property="update.Linespeed"  prepend=",">
+          LINESPEED = #update.Linespeed#
+        </isNotNull>
+        <isNotNull  property="update.Width"  prepend=",">
+          WIDTH = #update.Width#
+        </isNotNull>
+        <isNotNull  property="update.Isautocontrol"  prepend=",">
+          ISAUTOCONTROL = #update.Isautocontrol#
+        </isNotNull>
+        <isNotNull  property="update.TotalUpmax"  prepend=",">
+          TOTAL_UPMAX = #update.TotalUpmax#
+        </isNotNull>
+        <isNotNull  property="update.TotalBelowmax"  prepend=",">
+          TOTAL_BELOWMAX = #update.TotalBelowmax#
+        </isNotNull>
+        <isNotNull  property="update.Zhlength"  prepend=",">
+          ZHLENGTH = #update.Zhlength#
+        </isNotNull>
+        <isNotNull  property="update.Zhwidth"  prepend=",">
+          ZHWIDTH = #update.Zhwidth#
+        </isNotNull>
+        <isNotNull  property="update.Xjpbzhdcpk"  prepend=",">
+          XJPBZHDCPK = #update.Xjpbzhdcpk#
+        </isNotNull>
+        <isNotNull  property="update.XJphd"  prepend=",">
+          X_JPHD = #update.XJphd#
+        </isNotNull>
+        <isNotNull  property="update.MaterialCode"  prepend=",">
+          MATERIAL_CODE = #update.MaterialCode#
+        </isNotNull>
+        <isNotNull  property="update.MaterialName"  prepend=",">
+          MATERIAL_NAME = #update.MaterialName#
+        </isNotNull>
+        <isNotNull  property="update.Bzzhdcpk"  prepend=",">
+          BZZHDCPK = #update.Bzzhdcpk#
+        </isNotNull>
+        <isNotNull  property="update.Zhhd"  prepend=",">
+          ZHHD = #update.Zhhd#
+        </isNotNull>
+        <isNotNull  property="update.Sjpbzhdcpk"  prepend=",">
+          SJPBZHDCPK = #update.Sjpbzhdcpk#
+        </isNotNull>
+        <isNotNull  property="update.Sjphd"  prepend=",">
+          SJPHD = #update.Sjphd#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HPP_SEMIS_GYDJ
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HppSemisGydj">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HppSemisGydj">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM HPP_SEMIS_GYDJ
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HPP_SEMIS_GYDJ
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HppSemisGydj" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HPP_SEMIS_GYDJ
+    </statement>
+  </statements>
+</sqlMap>

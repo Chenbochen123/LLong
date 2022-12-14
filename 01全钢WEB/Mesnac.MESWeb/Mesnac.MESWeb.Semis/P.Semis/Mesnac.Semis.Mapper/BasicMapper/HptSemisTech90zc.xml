@@ -1,0 +1,529 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BasicMapper.HptSemisTech90zc"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="HptSemisTech90zc" type="Mesnac.Semis.Entity.BasicEntity.HptSemisTech90zc, Mesnac.Semis.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_HptSemisTech90zc" class="HptSemisTech90zc">
+    <result property="ObjId" column="OBJID"/>
+    <result property="PlanId" column="PLAN_ID"/>
+    <result property="PlanDetailId" column="PLAN_DETAIL_ID"/>
+    <result property="Sideawidth" column="SIDEAWIDTH"/>
+    <result property="Sideawidthcpk" column="SIDEAWIDTHCPK"/>
+    <result property="Param3" column="PARAM3"/>
+    <result property="Param4" column="PARAM4"/>
+    <result property="Param5" column="PARAM5"/>
+    <result property="Param6" column="PARAM6"/>
+    <result property="Param7" column="PARAM7"/>
+    <result property="Param8" column="PARAM8"/>
+    <result property="Param9" column="PARAM9"/>
+    <result property="Param10" column="PARAM10"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="ShiftId" column="SHIFT_ID"/>
+    <result property="MaterialId" column="MATERIAL_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="CordwidStandard" column="CORDWID_STANDARD"/>
+    <result property="CordwidUpoffset" column="CORDWID_UPOFFSET"/>
+    <result property="CordwidLowoffset" column="CORDWID_LOWOFFSET"/>
+    <result property="Cordwid" column="CORDWID"/>
+    <result property="Isqualifiedcord" column="ISQUALIFIEDCORD"/>
+    <result property="CbosStandwid" column="CBOS_STANDWID"/>
+    <result property="CbosUpwid" column="CBOS_UPWID"/>
+    <result property="CbosLowwid" column="CBOS_LOWWID"/>
+    <result property="CbdsStandwid" column="CBDS_STANDWID"/>
+    <result property="CbdsUpwid" column="CBDS_UPWID"/>
+    <result property="CbdsLowwid" column="CBDS_LOWWID"/>
+    <result property="CbosWid" column="CBOS_WID"/>
+    <result property="CbdsWid" column="CBDS_WID"/>
+    <result property="IsqualifiedCbOs" column="ISQUALIFIED_CB_OS"/>
+    <result property="IsqualifiedCbDs" column="ISQUALIFIED_CB_DS"/>
+    <result property="Cdjdval" column="CDJDVAL"/>
+    <result property="Jtkd" column="JTKD"/>
+    <result property="Jqzl1" column="JQZL1"/>
+    <result property="Jqzl2" column="JQZL2"/>
+    <result property="Jqzl3" column="JQZL3"/>
+    <result property="Jqzl4" column="JQZL4"/>
+    <result property="Barcode" column="BARCODE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_HptSemisTech90zc" class="HptSemisTech90zc">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="PlanId" column="PlanId"/>
+    <parameter property="PlanDetailId" column="PlanDetailId"/>
+    <parameter property="Sideawidth" column="Sideawidth"/>
+    <parameter property="Sideawidthcpk" column="Sideawidthcpk"/>
+    <parameter property="Param3" column="Param3"/>
+    <parameter property="Param4" column="Param4"/>
+    <parameter property="Param5" column="Param5"/>
+    <parameter property="Param6" column="Param6"/>
+    <parameter property="Param7" column="Param7"/>
+    <parameter property="Param8" column="Param8"/>
+    <parameter property="Param9" column="Param9"/>
+    <parameter property="Param10" column="Param10"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="ShiftId" column="ShiftId"/>
+    <parameter property="MaterialId" column="MaterialId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="CordwidStandard" column="CordwidStandard"/>
+    <parameter property="CordwidUpoffset" column="CordwidUpoffset"/>
+    <parameter property="CordwidLowoffset" column="CordwidLowoffset"/>
+    <parameter property="Cordwid" column="Cordwid"/>
+    <parameter property="Isqualifiedcord" column="Isqualifiedcord"/>
+    <parameter property="CbosStandwid" column="CbosStandwid"/>
+    <parameter property="CbosUpwid" column="CbosUpwid"/>
+    <parameter property="CbosLowwid" column="CbosLowwid"/>
+    <parameter property="CbdsStandwid" column="CbdsStandwid"/>
+    <parameter property="CbdsUpwid" column="CbdsUpwid"/>
+    <parameter property="CbdsLowwid" column="CbdsLowwid"/>
+    <parameter property="CbosWid" column="CbosWid"/>
+    <parameter property="CbdsWid" column="CbdsWid"/>
+    <parameter property="IsqualifiedCbOs" column="IsqualifiedCbOs"/>
+    <parameter property="IsqualifiedCbDs" column="IsqualifiedCbDs"/>
+    <parameter property="Cdjdval" column="Cdjdval"/>
+    <parameter property="Jtkd" column="Jtkd"/>
+    <parameter property="Jqzl1" column="Jqzl1"/>
+    <parameter property="Jqzl2" column="Jqzl2"/>
+    <parameter property="Jqzl3" column="Jqzl3"/>
+    <parameter property="Jqzl4" column="Jqzl4"/>
+    <parameter property="Barcode" column="Barcode"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPT_SEMIS_TECH_90ZC ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.Sideawidth" prepend="AND">
+          <![CDATA[SIDEAWIDTH = #where.Sideawidth#]]>
+        </isNotNull>
+        <isNotNull property="where.Sideawidthcpk" prepend="AND">
+          <![CDATA[SIDEAWIDTHCPK = #where.Sideawidthcpk#]]>
+        </isNotNull>
+        <isNotNull property="where.Param3" prepend="AND">
+          <![CDATA[PARAM3 = #where.Param3#]]>
+        </isNotNull>
+        <isNotNull property="where.Param4" prepend="AND">
+          <![CDATA[PARAM4 = #where.Param4#]]>
+        </isNotNull>
+        <isNotNull property="where.Param5" prepend="AND">
+          <![CDATA[PARAM5 = #where.Param5#]]>
+        </isNotNull>
+        <isNotNull property="where.Param6" prepend="AND">
+          <![CDATA[PARAM6 = #where.Param6#]]>
+        </isNotNull>
+        <isNotNull property="where.Param7" prepend="AND">
+          <![CDATA[PARAM7 = #where.Param7#]]>
+        </isNotNull>
+        <isNotNull property="where.Param8" prepend="AND">
+          <![CDATA[PARAM8 = #where.Param8#]]>
+        </isNotNull>
+        <isNotNull property="where.Param9" prepend="AND">
+          <![CDATA[PARAM9 = #where.Param9#]]>
+        </isNotNull>
+        <isNotNull property="where.Param10" prepend="AND">
+          <![CDATA[PARAM10 = #where.Param10#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.CordwidStandard" prepend="AND">
+          <![CDATA[CORDWID_STANDARD = #where.CordwidStandard#]]>
+        </isNotNull>
+        <isNotNull property="where.CordwidUpoffset" prepend="AND">
+          <![CDATA[CORDWID_UPOFFSET = #where.CordwidUpoffset#]]>
+        </isNotNull>
+        <isNotNull property="where.CordwidLowoffset" prepend="AND">
+          <![CDATA[CORDWID_LOWOFFSET = #where.CordwidLowoffset#]]>
+        </isNotNull>
+        <isNotNull property="where.Cordwid" prepend="AND">
+          <![CDATA[CORDWID = #where.Cordwid#]]>
+        </isNotNull>
+        <isNotNull property="where.Isqualifiedcord" prepend="AND">
+          <![CDATA[ISQUALIFIEDCORD = #where.Isqualifiedcord#]]>
+        </isNotNull>
+        <isNotNull property="where.CbosStandwid" prepend="AND">
+          <![CDATA[CBOS_STANDWID = #where.CbosStandwid#]]>
+        </isNotNull>
+        <isNotNull property="where.CbosUpwid" prepend="AND">
+          <![CDATA[CBOS_UPWID = #where.CbosUpwid#]]>
+        </isNotNull>
+        <isNotNull property="where.CbosLowwid" prepend="AND">
+          <![CDATA[CBOS_LOWWID = #where.CbosLowwid#]]>
+        </isNotNull>
+        <isNotNull property="where.CbdsStandwid" prepend="AND">
+          <![CDATA[CBDS_STANDWID = #where.CbdsStandwid#]]>
+        </isNotNull>
+        <isNotNull property="where.CbdsUpwid" prepend="AND">
+          <![CDATA[CBDS_UPWID = #where.CbdsUpwid#]]>
+        </isNotNull>
+        <isNotNull property="where.CbdsLowwid" prepend="AND">
+          <![CDATA[CBDS_LOWWID = #where.CbdsLowwid#]]>
+        </isNotNull>
+        <isNotNull property="where.CbosWid" prepend="AND">
+          <![CDATA[CBOS_WID = #where.CbosWid#]]>
+        </isNotNull>
+        <isNotNull property="where.CbdsWid" prepend="AND">
+          <![CDATA[CBDS_WID = #where.CbdsWid#]]>
+        </isNotNull>
+        <isNotNull property="where.IsqualifiedCbOs" prepend="AND">
+          <![CDATA[ISQUALIFIED_CB_OS = #where.IsqualifiedCbOs#]]>
+        </isNotNull>
+        <isNotNull property="where.IsqualifiedCbDs" prepend="AND">
+          <![CDATA[ISQUALIFIED_CB_DS = #where.IsqualifiedCbDs#]]>
+        </isNotNull>
+        <isNotNull property="where.Cdjdval" prepend="AND">
+          <![CDATA[CDJDVAL = #where.Cdjdval#]]>
+        </isNotNull>
+        <isNotNull property="where.Jtkd" prepend="AND">
+          <![CDATA[JTKD = #where.Jtkd#]]>
+        </isNotNull>
+        <isNotNull property="where.Jqzl1" prepend="AND">
+          <![CDATA[JQZL1 = #where.Jqzl1#]]>
+        </isNotNull>
+        <isNotNull property="where.Jqzl2" prepend="AND">
+          <![CDATA[JQZL2 = #where.Jqzl2#]]>
+        </isNotNull>
+        <isNotNull property="where.Jqzl3" prepend="AND">
+          <![CDATA[JQZL3 = #where.Jqzl3#]]>
+        </isNotNull>
+        <isNotNull property="where.Jqzl4" prepend="AND">
+          <![CDATA[JQZL4 = #where.Jqzl4#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[BARCODE = #where.Barcode#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO HPT_SEMIS_TECH_90ZC]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="PlanId" prepend=",">PLAN_ID</isNotNull>
+        <isNotNull property="PlanDetailId" prepend=",">PLAN_DETAIL_ID</isNotNull>
+        <isNotNull property="Sideawidth" prepend=",">SIDEAWIDTH</isNotNull>
+        <isNotNull property="Sideawidthcpk" prepend=",">SIDEAWIDTHCPK</isNotNull>
+        <isNotNull property="Param3" prepend=",">PARAM3</isNotNull>
+        <isNotNull property="Param4" prepend=",">PARAM4</isNotNull>
+        <isNotNull property="Param5" prepend=",">PARAM5</isNotNull>
+        <isNotNull property="Param6" prepend=",">PARAM6</isNotNull>
+        <isNotNull property="Param7" prepend=",">PARAM7</isNotNull>
+        <isNotNull property="Param8" prepend=",">PARAM8</isNotNull>
+        <isNotNull property="Param9" prepend=",">PARAM9</isNotNull>
+        <isNotNull property="Param10" prepend=",">PARAM10</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">SHIFT_ID</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">MATERIAL_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="CordwidStandard" prepend=",">CORDWID_STANDARD</isNotNull>
+        <isNotNull property="CordwidUpoffset" prepend=",">CORDWID_UPOFFSET</isNotNull>
+        <isNotNull property="CordwidLowoffset" prepend=",">CORDWID_LOWOFFSET</isNotNull>
+        <isNotNull property="Cordwid" prepend=",">CORDWID</isNotNull>
+        <isNotNull property="Isqualifiedcord" prepend=",">ISQUALIFIEDCORD</isNotNull>
+        <isNotNull property="CbosStandwid" prepend=",">CBOS_STANDWID</isNotNull>
+        <isNotNull property="CbosUpwid" prepend=",">CBOS_UPWID</isNotNull>
+        <isNotNull property="CbosLowwid" prepend=",">CBOS_LOWWID</isNotNull>
+        <isNotNull property="CbdsStandwid" prepend=",">CBDS_STANDWID</isNotNull>
+        <isNotNull property="CbdsUpwid" prepend=",">CBDS_UPWID</isNotNull>
+        <isNotNull property="CbdsLowwid" prepend=",">CBDS_LOWWID</isNotNull>
+        <isNotNull property="CbosWid" prepend=",">CBOS_WID</isNotNull>
+        <isNotNull property="CbdsWid" prepend=",">CBDS_WID</isNotNull>
+        <isNotNull property="IsqualifiedCbOs" prepend=",">ISQUALIFIED_CB_OS</isNotNull>
+        <isNotNull property="IsqualifiedCbDs" prepend=",">ISQUALIFIED_CB_DS</isNotNull>
+        <isNotNull property="Cdjdval" prepend=",">CDJDVAL</isNotNull>
+        <isNotNull property="Jtkd" prepend=",">JTKD</isNotNull>
+        <isNotNull property="Jqzl1" prepend=",">JQZL1</isNotNull>
+        <isNotNull property="Jqzl2" prepend=",">JQZL2</isNotNull>
+        <isNotNull property="Jqzl3" prepend=",">JQZL3</isNotNull>
+        <isNotNull property="Jqzl4" prepend=",">JQZL4</isNotNull>
+        <isNotNull property="Barcode" prepend=",">BARCODE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_HPT_SEMIS_TECH_90ZC.NEXTVAL</isNull>
+        <isNotNull property="PlanId" prepend=",">#PlanId#</isNotNull>
+        <isNotNull property="PlanDetailId" prepend=",">#PlanDetailId#</isNotNull>
+        <isNotNull property="Sideawidth" prepend=",">#Sideawidth#</isNotNull>
+        <isNotNull property="Sideawidthcpk" prepend=",">#Sideawidthcpk#</isNotNull>
+        <isNotNull property="Param3" prepend=",">#Param3#</isNotNull>
+        <isNotNull property="Param4" prepend=",">#Param4#</isNotNull>
+        <isNotNull property="Param5" prepend=",">#Param5#</isNotNull>
+        <isNotNull property="Param6" prepend=",">#Param6#</isNotNull>
+        <isNotNull property="Param7" prepend=",">#Param7#</isNotNull>
+        <isNotNull property="Param8" prepend=",">#Param8#</isNotNull>
+        <isNotNull property="Param9" prepend=",">#Param9#</isNotNull>
+        <isNotNull property="Param10" prepend=",">#Param10#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">#ShiftId#</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">#MaterialId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="CordwidStandard" prepend=",">#CordwidStandard#</isNotNull>
+        <isNotNull property="CordwidUpoffset" prepend=",">#CordwidUpoffset#</isNotNull>
+        <isNotNull property="CordwidLowoffset" prepend=",">#CordwidLowoffset#</isNotNull>
+        <isNotNull property="Cordwid" prepend=",">#Cordwid#</isNotNull>
+        <isNotNull property="Isqualifiedcord" prepend=",">#Isqualifiedcord#</isNotNull>
+        <isNotNull property="CbosStandwid" prepend=",">#CbosStandwid#</isNotNull>
+        <isNotNull property="CbosUpwid" prepend=",">#CbosUpwid#</isNotNull>
+        <isNotNull property="CbosLowwid" prepend=",">#CbosLowwid#</isNotNull>
+        <isNotNull property="CbdsStandwid" prepend=",">#CbdsStandwid#</isNotNull>
+        <isNotNull property="CbdsUpwid" prepend=",">#CbdsUpwid#</isNotNull>
+        <isNotNull property="CbdsLowwid" prepend=",">#CbdsLowwid#</isNotNull>
+        <isNotNull property="CbosWid" prepend=",">#CbosWid#</isNotNull>
+        <isNotNull property="CbdsWid" prepend=",">#CbdsWid#</isNotNull>
+        <isNotNull property="IsqualifiedCbOs" prepend=",">#IsqualifiedCbOs#</isNotNull>
+        <isNotNull property="IsqualifiedCbDs" prepend=",">#IsqualifiedCbDs#</isNotNull>
+        <isNotNull property="Cdjdval" prepend=",">#Cdjdval#</isNotNull>
+        <isNotNull property="Jtkd" prepend=",">#Jtkd#</isNotNull>
+        <isNotNull property="Jqzl1" prepend=",">#Jqzl1#</isNotNull>
+        <isNotNull property="Jqzl2" prepend=",">#Jqzl2#</isNotNull>
+        <isNotNull property="Jqzl3" prepend=",">#Jqzl3#</isNotNull>
+        <isNotNull property="Jqzl4" prepend=",">#Jqzl4#</isNotNull>
+        <isNotNull property="Barcode" prepend=",">#Barcode#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE HPT_SEMIS_TECH_90ZC
+       <dynamic prepend="SET">
+        <isNotNull  property="update.PlanId"  prepend=",">
+          PLAN_ID = #update.PlanId#
+        </isNotNull>
+        <isNotNull  property="update.PlanDetailId"  prepend=",">
+          PLAN_DETAIL_ID = #update.PlanDetailId#
+        </isNotNull>
+        <isNotNull  property="update.Sideawidth"  prepend=",">
+          SIDEAWIDTH = #update.Sideawidth#
+        </isNotNull>
+        <isNotNull  property="update.Sideawidthcpk"  prepend=",">
+          SIDEAWIDTHCPK = #update.Sideawidthcpk#
+        </isNotNull>
+        <isNotNull  property="update.Param3"  prepend=",">
+          PARAM3 = #update.Param3#
+        </isNotNull>
+        <isNotNull  property="update.Param4"  prepend=",">
+          PARAM4 = #update.Param4#
+        </isNotNull>
+        <isNotNull  property="update.Param5"  prepend=",">
+          PARAM5 = #update.Param5#
+        </isNotNull>
+        <isNotNull  property="update.Param6"  prepend=",">
+          PARAM6 = #update.Param6#
+        </isNotNull>
+        <isNotNull  property="update.Param7"  prepend=",">
+          PARAM7 = #update.Param7#
+        </isNotNull>
+        <isNotNull  property="update.Param8"  prepend=",">
+          PARAM8 = #update.Param8#
+        </isNotNull>
+        <isNotNull  property="update.Param9"  prepend=",">
+          PARAM9 = #update.Param9#
+        </isNotNull>
+        <isNotNull  property="update.Param10"  prepend=",">
+          PARAM10 = #update.Param10#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.ShiftId"  prepend=",">
+          SHIFT_ID = #update.ShiftId#
+        </isNotNull>
+        <isNotNull  property="update.MaterialId"  prepend=",">
+          MATERIAL_ID = #update.MaterialId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.CordwidStandard"  prepend=",">
+          CORDWID_STANDARD = #update.CordwidStandard#
+        </isNotNull>
+        <isNotNull  property="update.CordwidUpoffset"  prepend=",">
+          CORDWID_UPOFFSET = #update.CordwidUpoffset#
+        </isNotNull>
+        <isNotNull  property="update.CordwidLowoffset"  prepend=",">
+          CORDWID_LOWOFFSET = #update.CordwidLowoffset#
+        </isNotNull>
+        <isNotNull  property="update.Cordwid"  prepend=",">
+          CORDWID = #update.Cordwid#
+        </isNotNull>
+        <isNotNull  property="update.Isqualifiedcord"  prepend=",">
+          ISQUALIFIEDCORD = #update.Isqualifiedcord#
+        </isNotNull>
+        <isNotNull  property="update.CbosStandwid"  prepend=",">
+          CBOS_STANDWID = #update.CbosStandwid#
+        </isNotNull>
+        <isNotNull  property="update.CbosUpwid"  prepend=",">
+          CBOS_UPWID = #update.CbosUpwid#
+        </isNotNull>
+        <isNotNull  property="update.CbosLowwid"  prepend=",">
+          CBOS_LOWWID = #update.CbosLowwid#
+        </isNotNull>
+        <isNotNull  property="update.CbdsStandwid"  prepend=",">
+          CBDS_STANDWID = #update.CbdsStandwid#
+        </isNotNull>
+        <isNotNull  property="update.CbdsUpwid"  prepend=",">
+          CBDS_UPWID = #update.CbdsUpwid#
+        </isNotNull>
+        <isNotNull  property="update.CbdsLowwid"  prepend=",">
+          CBDS_LOWWID = #update.CbdsLowwid#
+        </isNotNull>
+        <isNotNull  property="update.CbosWid"  prepend=",">
+          CBOS_WID = #update.CbosWid#
+        </isNotNull>
+        <isNotNull  property="update.CbdsWid"  prepend=",">
+          CBDS_WID = #update.CbdsWid#
+        </isNotNull>
+        <isNotNull  property="update.IsqualifiedCbOs"  prepend=",">
+          ISQUALIFIED_CB_OS = #update.IsqualifiedCbOs#
+        </isNotNull>
+        <isNotNull  property="update.IsqualifiedCbDs"  prepend=",">
+          ISQUALIFIED_CB_DS = #update.IsqualifiedCbDs#
+        </isNotNull>
+        <isNotNull  property="update.Cdjdval"  prepend=",">
+          CDJDVAL = #update.Cdjdval#
+        </isNotNull>
+        <isNotNull  property="update.Jtkd"  prepend=",">
+          JTKD = #update.Jtkd#
+        </isNotNull>
+        <isNotNull  property="update.Jqzl1"  prepend=",">
+          JQZL1 = #update.Jqzl1#
+        </isNotNull>
+        <isNotNull  property="update.Jqzl2"  prepend=",">
+          JQZL2 = #update.Jqzl2#
+        </isNotNull>
+        <isNotNull  property="update.Jqzl3"  prepend=",">
+          JQZL3 = #update.Jqzl3#
+        </isNotNull>
+        <isNotNull  property="update.Jqzl4"  prepend=",">
+          JQZL4 = #update.Jqzl4#
+        </isNotNull>
+        <isNotNull  property="update.Barcode"  prepend=",">
+          BARCODE = #update.Barcode#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM HPT_SEMIS_TECH_90ZC
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_HptSemisTech90zc">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_HptSemisTech90zc">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM HPT_SEMIS_TECH_90ZC
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM HPT_SEMIS_TECH_90ZC
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_HptSemisTech90zc" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE HPT_SEMIS_TECH_90ZC
+    </statement>
+  </statements>
+</sqlMap>

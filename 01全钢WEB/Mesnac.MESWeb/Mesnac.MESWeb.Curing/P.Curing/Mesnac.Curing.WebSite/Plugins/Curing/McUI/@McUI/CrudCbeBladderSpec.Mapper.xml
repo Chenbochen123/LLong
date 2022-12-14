@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudCbeBladderSpec" parameterClass="map" resultClass="row">
+      <![CDATA[
+      SELECT DISTINCT NVL(T3.JY,T1.ERP_CODE) JYM, T3.JY,T1.*, T2.USER_NAME RECORD_USER_NAME ,t3.YJ_NUM,to_number(nvl(t3.YJ_NUM,0))+150 MAX_NUM
+      FROM CBE_BLADDER_SPEC T1 
+      LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID 
+      LEFT JOIN (select distinct
+                  max(case when a.parmcode = '1102' then a.parm_value end) SAP编码
+                 ,max(case when a.parmcode = '1105' then a.parm_value end) JY
+                  ,max(case when a.parmcode = '1104' then a.parm_value end) YJ_NUM
+                  from CPT_CURING_TECH_PARM_DATA a
+                  where a.delete_flag = 0
+                  and a.parmtypecode = 11 
+                  group by a.objectcode) T3 ON T3.SAP编码 = T1.TYPE_CODE
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.TYPE_NAME" prepend="AND">
+          <![CDATA[T1.TYPE_NAME LIKE '%' || #where.TYPE_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.TYPE_CODE" prepend="AND">
+          <![CDATA[T1.TYPE_CODE LIKE '%' || #where.TYPE_CODE# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </select>
+    <select id="Select+Update@CrudCbeBladderSpec" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM CBE_BLADDER_SPEC ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

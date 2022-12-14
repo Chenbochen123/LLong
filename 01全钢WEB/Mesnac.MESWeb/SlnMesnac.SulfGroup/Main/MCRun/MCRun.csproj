@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{91C803A6-90D1-4361-8B92-9AFD9E766411}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MCRun</RootNamespace>
+    <AssemblyName>MCRun</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>images\runner.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Host, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Host.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Core, Version=4.3.0.9338, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Data.Access">
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Data.~\ICSharpCode.Data.Access.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Data.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Data.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Data.MySQL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Data.~\ICSharpCode.Data.MySQL.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Data.Oracle">
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Data.~\ICSharpCode.Data.Oracle.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.Data.SQLServer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\ICSharpCode.Data.~\ICSharpCode.Data.SQLServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Loder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Loder.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\Libraries\log4net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\Mesnac.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Docking">
+      <HintPath>..\..\Libraries\Mesnac.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Equips.Connection, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Equips\Mesnac.Equips.Connection.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Gui, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\Mesnac.Gui.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Maths, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Equips\Mesnac.Maths.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.PlugIn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\PlugInPlatform\Mesnac.PlugIn.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.DataAccess">
+      <HintPath>..\..\Libraries\Oracle\Oracle.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\MesnacResource.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Properties\SDRes.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="Data\SysConfig\MenuConfig.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\SysConfig\ToolStripConfig.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Action\Default\Mesnac.Action.Default\Mesnac.Action.Default.csproj">
+      <Project>{6A2190C6-B530-4D5B-BD34-29EFB0431F67}</Project>
+      <Name>Mesnac.Action.Default</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Action\Mesnac.Action.Base\Mesnac.Action.Base.csproj">
+      <Project>{7C91BC10-712A-4391-BC2C-FA48DC59F806}</Project>
+      <Name>Mesnac.Action.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Action\Mesnac.ActionService\Mesnac.ActionService.csproj">
+      <Project>{4F366487-D407-48EB-9AAD-E13C177BC788}</Project>
+      <Name>Mesnac.ActionService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Action\Sulf\Mesnac.Action.Sulf\Mesnac.Action.Sulf.csproj">
+      <Project>{3A9F8AC9-510D-40BD-A733-674FAB1ADC22}</Project>
+      <Name>Mesnac.Action.Sulf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Controls\Mesnac.Controls.Default\Mesnac.Controls.Default.csproj">
+      <Project>{F022C0E6-2819-4FB1-BB86-0F389F061A44}</Project>
+      <Name>Mesnac.Controls.Default</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Controls\Mesnac.Controls.Feeding\Mesnac.Controls.Feeding.csproj">
+      <Project>{D0C0324F-434E-47EB-8F7C-BA6CD7F233B4}</Project>
+      <Name>Mesnac.Controls.Feeding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Controls\Mesnac.Controls.Sulf\Mesnac.Controls.Sulf.csproj">
+      <Project>{A68F1349-57E9-4E5F-8B98-A7ECFC028FB4}</Project>
+      <Name>Mesnac.Controls.Sulf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Mesnac.Communication\Mesnac.Communication.csproj">
+      <Project>{9A9C4AEF-33E4-4F26-9DC3-9CACBA375B69}</Project>
+      <Name>Mesnac.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mesnac.Action.SulfGroup\Mesnac.Action.SulfGroup.csproj">
+      <Project>{243891EC-75BF-43D8-A557-455D6B368ECC}</Project>
+      <Name>Mesnac.Action.SulfGroup</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mensac.Gui.Run.Global\Mesnac.Gui.Run.Global.csproj">
+      <Project>{CC98CB3B-F532-4510-AC08-7DDBD520CB06}</Project>
+      <Name>Mesnac.Gui.Run.Global</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Basic\Mesnac.Basic.csproj">
+      <Project>{28ACACF1-9936-4E97-A866-F84366EC5286}</Project>
+      <Name>Mesnac.Basic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Gui.Common\Mesnac.Gui.Common.csproj">
+      <Project>{235DF851-9EA7-43D4-B3F9-0CAB7F60AD17}</Project>
+      <Name>Mesnac.Gui.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Gui.Run\Mesnac.Gui.Run.csproj">
+      <Project>{902D2229-8803-4B7C-B245-4AD4B04D0C3F}</Project>
+      <Name>Mesnac.Gui.Run</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\AccessData\2012-08-14.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\broadkey\CnBlogs.Youzai.HookEx.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\broadkey\ScreenKeyboard.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ComponentAction.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ComponentEvent.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ComponentProperty.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Data\DeviceConfig\设备接口目录.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\EventConfig\事件处理程序-Action配置文件目录.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MCProject\组态工程目录.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\MesnacPlugIn\自定义插件目录.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\SharpDevelopControlLibrary.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\SharpPlugIn\Mesnac.addin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\SysConfig\系统工程配置.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\TempData.mdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\MenuAndTools\Icons_16X16_Login.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_About.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Cancel.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Danger.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Delete.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Display.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Exit.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Hint.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_History.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Home.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Load.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Message.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Ok.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_PlugInList.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Refresh.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Report.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Table.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_TurnOff.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_UserGroup.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_View.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Wrench.png" />
+    <Content Include="images\MenuAndTools\Icons_16X16_Default.png" />
+    <Content Include="images\runner.ico" />
+    <EmbeddedResource Include="Resources\Sulf\btnback.png" />
+    <Content Include="Resources\Sulf\login_window.png" />
+    <Content Include="Resources\Sulf\login_window1.png" />
+    <EmbeddedResource Include="Resources\Sulf\22.png" />
+    <EmbeddedResource Include="Resources\Sulf\1.png" />
+    <EmbeddedResource Include="Resources\Sulf\2-3.png" />
+    <EmbeddedResource Include="Resources\Sulf\2-4.png" />
+    <EmbeddedResource Include="Resources\Sulf\2-5.png" />
+    <Content Include="Resources\Sulf\201435_32.jpg" />
+    <Content Include="Resources\Sulf\201435_33.jpg" />
+    <EmbeddedResource Include="Resources\Sulf\23.png" />
+    <EmbeddedResource Include="Resources\Sulf\24.png" />
+    <EmbeddedResource Include="Resources\Sulf\arrow_03.png" />
+    <EmbeddedResource Include="Resources\Sulf\arrow_06.png" />
+    <EmbeddedResource Include="Resources\Sulf\arrow_17.png" />
+    <EmbeddedResource Include="Resources\Sulf\btn-hover_1.jpg" />
+    <EmbeddedResource Include="Resources\Sulf\btn-hover_2.jpg" />
+    <EmbeddedResource Include="Resources\Sulf\btn-hover_3.jpg" />
+    <EmbeddedResource Include="Resources\Sulf\btn-hover_4.jpg" />
+    <EmbeddedResource Include="Resources\Sulf\btn_01.jpg" />
+    <EmbeddedResource Include="Resources\Sulf\btn_1.jpg" />
+    <EmbeddedResource Include="Resources\Sulf\btn_2.jpg" />
+    <EmbeddedResource Include="Resources\Sulf\btn_3.jpg" />
+    <EmbeddedResource Include="Resources\Sulf\btn_4.jpg" />
+    <Content Include="ReceiveText.Txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ACTMULTILib">
+      <Guid>{A306B141-AE98-11D3-83AE-00A024BDBF2B}</Guid>
+      <VersionMajor>3</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>XCOPY "$(SolutionDir)bin\*.*" /S/Y "$(TargetDir)"
+XCOPY "$(SolutionDir)packages\*.*" /S/Y "$(TargetDir)"
+XCOPY "$(SolutionDir)Main\MCEdit\Data\DeviceConfig\*.*" /S/Y "$(TargetDir)Data\DeviceConfig\"
+XCOPY "$(SolutionDir)Main\MCEdit\Data\EventConfig\*.*" /S/Y "$(TargetDir)Data\EventConfig\"
+XCOPY "$(SolutionDir)Main\MCEdit\Data\MCProject\*.*" /S/Y "$(TargetDir)Data\MCProject\"</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BasicMapper.CqcQcrecord"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CqcQcrecord" type="Mesnac.Quality.Entity.BasicEntity.CqcQcrecord, Mesnac.Quality.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CqcQcrecord" class="CqcQcrecord">
+    <result property="ObjId" column="OBJID"/>
+    <result property="Tyreid" column="TYREID"/>
+    <result property="Gradeid" column="GRADEID"/>
+    <result property="Seqid" column="SEQID"/>
+    <result property="NewFlag" column="NEW_FLAG"/>
+    <result property="FactoryId" column="FACTORY_ID"/>
+    <result property="BaupFlag" column="BAUP_FLAG"/>
+    <result property="BaupTime" column="BAUP_TIME"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="StateFlag" column="STATE_FLAG"/>
+    <result property="MaterialId" column="MATERIAL_ID"/>
+    <result property="EquipId" column="EQUIP_ID"/>
+    <result property="ShiftId" column="SHIFT_ID"/>
+    <result property="ClassId" column="CLASS_ID"/>
+    <result property="DefectId1" column="DEFECT_ID1"/>
+    <result property="DefectId2" column="DEFECT_ID2"/>
+    <result property="DefectId3" column="DEFECT_ID3"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="ShiftDate" column="SHIFT_DATE"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CqcQcrecord" class="CqcQcrecord">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="Tyreid" column="Tyreid"/>
+    <parameter property="Gradeid" column="Gradeid"/>
+    <parameter property="Seqid" column="Seqid"/>
+    <parameter property="NewFlag" column="NewFlag"/>
+    <parameter property="FactoryId" column="FactoryId"/>
+    <parameter property="BaupFlag" column="BaupFlag"/>
+    <parameter property="BaupTime" column="BaupTime"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="StateFlag" column="StateFlag"/>
+    <parameter property="MaterialId" column="MaterialId"/>
+    <parameter property="EquipId" column="EquipId"/>
+    <parameter property="ShiftId" column="ShiftId"/>
+    <parameter property="ClassId" column="ClassId"/>
+    <parameter property="DefectId1" column="DefectId1"/>
+    <parameter property="DefectId2" column="DefectId2"/>
+    <parameter property="DefectId3" column="DefectId3"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="ShiftDate" column="ShiftDate"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CQC_QCRECORD ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Tyreid" prepend="AND">
+          <![CDATA[TYREID = #where.Tyreid#]]>
+        </isNotNull>
+        <isNotNull property="where.Gradeid" prepend="AND">
+          <![CDATA[GRADEID = #where.Gradeid#]]>
+        </isNotNull>
+        <isNotNull property="where.Seqid" prepend="AND">
+          <![CDATA[SEQID = #where.Seqid#]]>
+        </isNotNull>
+        <isNotNull property="where.NewFlag" prepend="AND">
+          <![CDATA[NEW_FLAG = #where.NewFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupFlag" prepend="AND">
+          <![CDATA[BAUP_FLAG = #where.BaupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupTime" prepend="AND">
+          <![CDATA[BAUP_TIME = #where.BaupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.StateFlag" prepend="AND">
+          <![CDATA[STATE_FLAG = #where.StateFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.ClassId" prepend="AND">
+          <![CDATA[CLASS_ID = #where.ClassId#]]>
+        </isNotNull>
+        <isNotNull property="where.DefectId1" prepend="AND">
+          <![CDATA[DEFECT_ID1 = #where.DefectId1#]]>
+        </isNotNull>
+        <isNotNull property="where.DefectId2" prepend="AND">
+          <![CDATA[DEFECT_ID2 = #where.DefectId2#]]>
+        </isNotNull>
+        <isNotNull property="where.DefectId3" prepend="AND">
+          <![CDATA[DEFECT_ID3 = #where.DefectId3#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDate" prepend="AND">
+          <![CDATA[SHIFT_DATE = #where.ShiftDate#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CQC_QCRECORD]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="Tyreid" prepend=",">TYREID</isNotNull>
+        <isNotNull property="Gradeid" prepend=",">GRADEID</isNotNull>
+        <isNotNull property="Seqid" prepend=",">SEQID</isNotNull>
+        <isNotNull property="NewFlag" prepend=",">NEW_FLAG</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">FACTORY_ID</isNotNull>
+        <isNotNull property="BaupFlag" prepend=",">BAUP_FLAG</isNotNull>
+        <isNotNull property="BaupTime" prepend=",">BAUP_TIME</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="StateFlag" prepend=",">STATE_FLAG</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">MATERIAL_ID</isNotNull>
+        <isNotNull property="EquipId" prepend=",">EQUIP_ID</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">SHIFT_ID</isNotNull>
+        <isNotNull property="ClassId" prepend=",">CLASS_ID</isNotNull>
+        <isNotNull property="DefectId1" prepend=",">DEFECT_ID1</isNotNull>
+        <isNotNull property="DefectId2" prepend=",">DEFECT_ID2</isNotNull>
+        <isNotNull property="DefectId3" prepend=",">DEFECT_ID3</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="ShiftDate" prepend=",">SHIFT_DATE</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_CQC_QCRECORD.NEXTVAL</isNull>
+        <isNotNull property="Tyreid" prepend=",">#Tyreid#</isNotNull>
+        <isNotNull property="Gradeid" prepend=",">#Gradeid#</isNotNull>
+        <isNotNull property="Seqid" prepend=",">#Seqid#</isNotNull>
+        <isNotNull property="NewFlag" prepend=",">#NewFlag#</isNotNull>
+        <isNotNull property="FactoryId" prepend=",">#FactoryId#</isNotNull>
+        <isNotNull property="BaupFlag" prepend=",">#BaupFlag#</isNotNull>
+        <isNotNull property="BaupTime" prepend=",">#BaupTime#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="StateFlag" prepend=",">#StateFlag#</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">#MaterialId#</isNotNull>
+        <isNotNull property="EquipId" prepend=",">#EquipId#</isNotNull>
+        <isNotNull property="ShiftId" prepend=",">#ShiftId#</isNotNull>
+        <isNotNull property="ClassId" prepend=",">#ClassId#</isNotNull>
+        <isNotNull property="DefectId1" prepend=",">#DefectId1#</isNotNull>
+        <isNotNull property="DefectId2" prepend=",">#DefectId2#</isNotNull>
+        <isNotNull property="DefectId3" prepend=",">#DefectId3#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="ShiftDate" prepend=",">#ShiftDate#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CQC_QCRECORD
+       <dynamic prepend="SET">
+        <isNotNull  property="update.Tyreid"  prepend=",">
+          TYREID = #update.Tyreid#
+        </isNotNull>
+        <isNotNull  property="update.Gradeid"  prepend=",">
+          GRADEID = #update.Gradeid#
+        </isNotNull>
+        <isNotNull  property="update.Seqid"  prepend=",">
+          SEQID = #update.Seqid#
+        </isNotNull>
+        <isNotNull  property="update.NewFlag"  prepend=",">
+          NEW_FLAG = #update.NewFlag#
+        </isNotNull>
+        <isNotNull  property="update.FactoryId"  prepend=",">
+          FACTORY_ID = #update.FactoryId#
+        </isNotNull>
+        <isNotNull  property="update.BaupFlag"  prepend=",">
+          BAUP_FLAG = #update.BaupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BaupTime"  prepend=",">
+          BAUP_TIME = #update.BaupTime#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.StateFlag"  prepend=",">
+          STATE_FLAG = #update.StateFlag#
+        </isNotNull>
+        <isNotNull  property="update.MaterialId"  prepend=",">
+          MATERIAL_ID = #update.MaterialId#
+        </isNotNull>
+        <isNotNull  property="update.EquipId"  prepend=",">
+          EQUIP_ID = #update.EquipId#
+        </isNotNull>
+        <isNotNull  property="update.ShiftId"  prepend=",">
+          SHIFT_ID = #update.ShiftId#
+        </isNotNull>
+        <isNotNull  property="update.ClassId"  prepend=",">
+          CLASS_ID = #update.ClassId#
+        </isNotNull>
+        <isNotNull  property="update.DefectId1"  prepend=",">
+          DEFECT_ID1 = #update.DefectId1#
+        </isNotNull>
+        <isNotNull  property="update.DefectId2"  prepend=",">
+          DEFECT_ID2 = #update.DefectId2#
+        </isNotNull>
+        <isNotNull  property="update.DefectId3"  prepend=",">
+          DEFECT_ID3 = #update.DefectId3#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.ShiftDate"  prepend=",">
+          SHIFT_DATE = #update.ShiftDate#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CQC_QCRECORD
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CqcQcrecord">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CqcQcrecord">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CQC_QCRECORD
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CQC_QCRECORD
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CqcQcrecord" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CQC_QCRECORD
+    </statement>
+  </statements>
+</sqlMap>

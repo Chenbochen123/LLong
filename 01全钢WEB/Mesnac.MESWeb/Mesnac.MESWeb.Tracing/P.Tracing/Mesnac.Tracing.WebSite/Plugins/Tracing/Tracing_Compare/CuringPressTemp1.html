@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ECharts · Example</title>
+
+    <link href="./asset/css/echartsHome.css" rel="stylesheet">
+    <script src="./asset/js/echarts.js"></script>
+    <script>
+
+        var xdata0 = [];
+      //  debugger;
+        if (parent && parent.xdata0 && parent.xdata0.length > 0) {
+            for (var i = 0; i < parent.xdata0.length; i++) {
+                xdata0.push(parent.xdata0[i]);
+            }
+        }
+
+        var xdata1 = [];
+        //  debugger;
+        if (parent && parent.xdata1 && parent.xdata1.length > 0) {
+            for (var i = 0; i < parent.xdata1.length; i++) {
+                xdata1.push(parent.xdata1[i]);
+            }
+            for (var j = 0; j < 10 - parent.xdata1.length; j++)
+            {
+                xdata1.push('');
+            }
+        }
+
+        var ydata1 = [];
+        if (parent && parent.ydata1 && parent.ydata1.length > 0) {
+            for (var i = 0; i < parent.ydata1.length; i++) {
+                ydata1.push(parent.ydata1[i]);
+            }
+        }
+
+        var ydata2 = [];
+        if (parent && parent.ydata2 && parent.ydata2.length > 0) {
+            for (var i = 0; i < parent.ydata2.length; i++) {
+                ydata2.push(parent.ydata2[i]);
+            }
+        }
+
+        var ydata3 = [];
+        if (parent && parent.ydata3 && parent.ydata3.length > 0) {
+            for (var i = 0; i < parent.ydata3.length; i++) {
+                ydata3.push(parent.ydata3[i]);
+            }
+        }
+
+        var ydata4 = [];
+        if (parent && parent.ydata4 && parent.ydata4.length > 0) {
+            for (var i = 0; i < parent.ydata4.length; i++) {
+                ydata4.push(parent.ydata4[i]);
+            }
+        }
+
+        var ydata5 = [];
+        if (parent && parent.ydata5 && parent.ydata5.length > 0) {
+            for (var i = 0; i < parent.ydata5.length; i++) {
+                ydata5.push(parent.ydata5[i]);
+            }
+        }
+
+        var ydata6 = [];
+        if (parent && parent.ydata6 && parent.ydata6.length > 0) {
+            for (var i = 0; i < parent.ydata6.length; i++) {
+                ydata6.push(parent.ydata6[i]);
+            }
+        }
+
+        var ydata7 = [];
+        if (parent && parent.ydata7 && parent.ydata7.length > 0) {
+            for (var i = 0; i < parent.ydata7.length; i++) {
+                ydata7.push(parent.ydata7[i]);
+            }
+        }
+
+        var ydata8 = [];
+        if (parent && parent.ydata8 && parent.ydata8.length > 0) {
+            for (var i = 0; i < parent.ydata8.length; i++) {
+                ydata8.push(parent.ydata8[i]);
+            }
+        }
+
+        var ydata9 = [];
+        if (parent && parent.ydata9 && parent.ydata9.length > 0) {
+            for (var i = 0; i < parent.ydata9.length; i++) {
+                ydata9.push(parent.ydata9[i]);
+            }
+        }
+        var ydata10 = [];
+        if (parent && parent.ydata10 && parent.ydata10.length > 0) {
+            for (var i = 0; i < parent.ydata10.length; i++) {
+                ydata10.push(parent.ydata10[i]);
+            }
+        }
+        var index = 0;
+        if (parent && parent.item) {
+            index = parent.item;
+        }
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                formatter: function (params, ticket, callback) {
+                    var result = "时间：" + params[0].name;
+                    for (var i = 0; i < params.length; i++) {
+                        result = result + "<br>" + params[i].seriesName + ":" + params[i].value;
+                    }
+                    return result;
+                }
+            },
+            legend: {
+                data: [xdata1[0], xdata1[1], xdata1[2], xdata1[3], xdata1[4], xdata1[5], xdata1[6], xdata1[7], xdata1[8], xdata1[9]]
+            },
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                feature: {
+                    mark: { show: false },
+                    dataZoom: { show: true },
+                    dataView: { show: false },
+                    magicType: { show: false, type: ['line', 'bar', 'stack', 'tiled'] },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            calculable: false,
+            dataZoom: {
+                show: true,
+                realtime: true,
+                start: 0,
+                end: 100
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    boundaryGap: true,
+                    data: xdata0
+                }
+            ],
+            yAxis: [
+                {
+                    name: '温度',
+                    type: 'value',
+                    min: 100,
+                    max: 250
+                },
+                {
+                    name: '压力',
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: xdata1[0],
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: index,
+                    data: ydata1,
+                    itemStyle: {
+                        normal: {
+                            color: 'red'
+                        }
+                    }
+                },
+                {
+                    name: xdata1[1],
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: index,
+                    data: ydata2
+                },
+                {
+                    name: xdata1[2],
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: index,
+                    data: ydata3
+                },
+                {
+                    name: xdata1[3],
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: index,
+                    data: ydata4
+                },
+                {
+                    name: xdata1[4],
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: index,
+                    data: ydata5
+                },
+                {
+                    name: xdata1[5],
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: index,
+                    data: ydata6
+                },
+                {
+                    name: xdata1[6],
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: index,
+                    data: ydata7
+                },
+                {
+                    name: xdata1[7],
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: index,
+                    data: ydata8
+                },
+                {
+                    name: xdata1[8],
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: index,
+                    data: ydata9
+                },
+                {
+                    name: xdata1[9],
+                    type: 'line',
+                    symbol: 'none',
+                    yAxisIndex: index,
+                    data: ydata10
+                }
+            ]
+        };
+    </script>
+</head>
+<body>
+    <div id="main" class="main"></div>
+    <script src="./asset/js/jquery.min.js"></script>
+    <script src="./asset/js/echartsExample.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="TestSql.aspx.cs" Inherits="Tracing_Test" ViewStateMode="Enabled" EnableViewStateMac="true" EnableViewState="true" %>
+
+<%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="head" runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Test</title>
+    <!--通用-->
+    <link rel="Stylesheet" type="text/css" href="<%= Page.ResolveUrl("~/") %>resources/css/ext-chinese-font.css" />
+    <link rel="Stylesheet" type="text/css" href="<%= Page.ResolveUrl("~/") %>resources/css/main.css" />
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+    <form id="form" runat="server">
+        <ext:ResourceManager ID="resourceManager" runat="server" />
+        <ext:Viewport ID="viewport" runat="server" Layout="BorderLayout">
+            <Items>
+                <ext:Panel ID="northPanel" runat="server" Region="North" AutoHeight="true">
+                    <TopBar>
+                        <ext:Toolbar runat="server" ID="northToolbar">
+                            <Items>
+                                <ext:ComboBox ID="cbxBarcodeType" runat="server" FieldLabel="条码类型(工序)" LabelAlign="Right">
+                                    <Items>
+                                        <ext:ListItem Text="原材料条码" Value="1" />
+                                        <ext:ListItem Text="车条码" Value="2" />
+                                        <ext:ListItem Text="半制品条码" Value="3" />
+                                        <ext:ListItem Text="成型号" Value="4" />
+                                    </Items>
+                                 
+                                </ext:ComboBox>
+                                <ext:TextField ID="txtBarcode" runat="server" FieldLabel="条码号" />
+                                <ext:Button runat="server" Icon="Find" Text="查询" ID="btnSearch">
+                                    <ToolTips>
+                                        <ext:ToolTip ID="ttSearch" runat="server" Html="点击进行查询" />
+                                    </ToolTips>
+                                    <DirectEvents>
+                                        <Click OnEvent="btnSearch_Click"></Click>
+                                    </DirectEvents>
+                                </ext:Button>
+                                <ext:ToolbarSeparator ID="toolbarSeparator_end" />
+                                <ext:ToolbarSpacer runat="server" ID="toolbarSpacer_end" />
+                                <ext:TextField runat="server" ID="txtUserName" FieldLabel="SQLSERVER" Text="123"> </ext:TextField>
+                                <ext:ToolbarFill ID="toolbarFill_end" />
+                            </Items>
+                        </ext:Toolbar>
+                    </TopBar>
+                </ext:Panel>
+                <ext:Panel ID="Panel1" runat="server" Region="Center" AutoHeight="true" Layout="BorderLayout">
+                    <Items>
+                        <ext:TabPanel runat="server" ID="tabPanel" Region="Center" Plain="true" ActiveIndex="0">
+                            <Items>
+                                <ext:Panel runat="server" ID="moldingTab" Title="成型信息" Flex="1" BodyPadding="6" AutoScroll="true" Region="Center">
+                                    <Items>
+                                        <ext:GridPanel runat="server" ID="moldingPanel" Region="Center">
+                                            <Store>
+                                                <ext:Store runat="server" ID="moldingStore" PageSize="30">
+                                                    <Model>
+                                                        <ext:Model ID="model2" runat="server" IDProperty="成型号">
+                                                            <Fields>
+                                                                <ext:ModelField Name="成型号" />
+                                                                <ext:ModelField Name="规格" />
+                                                                <ext:ModelField Name="机台" />
+                                                                <ext:ModelField Name="生产日期" Type="Date" />
+                                                                <ext:ModelField Name="班次" />
+                                                                <ext:ModelField Name="班组" />
+                                                                <ext:ModelField Name="生产开始时间" Type="Date" />
+                                                                <ext:ModelField Name="生产结束时间" Type="Date" />
+                                                                <ext:ModelField Name="是否首件胎" />
+                                                                <ext:ModelField Name="主机" />
+                                                                <ext:ModelField Name="副机" />
+                                                                <ext:ModelField Name="帮车" />
+                                                            </Fields>
+                                                        </ext:Model>
+                                                    </Model>
+                                                </ext:Store>
+                                            </Store>
+                                            <ColumnModel ID="columnModel3" runat="server">
+                                                <Columns>
+                                                    <ext:RowNumbererColumn runat="server" />
+                                                    <ext:Column ID="Column2" runat="server" Text="成型号" Width="100" DataIndex="成型号" />
+                                                    <ext:Column ID="Column15" runat="server" Text="规格" Flex="1" DataIndex="规格" />
+                                                    <ext:Column ID="Column16" runat="server" Text="机台" Width="100" DataIndex="机台" />
+                                                    <ext:DateColumn ID="Column17" runat="server" Text="生产日期" Width="100" DataIndex="生产日期" Format="yyyy-MM-dd" />
+                                                    <ext:Column ID="Column18" runat="server" Text="班次" Width="50" DataIndex="班次" />
+                                                    <ext:Column ID="Column19" runat="server" Text="班组" Width="50" DataIndex="班组" />
+                                                    <ext:DateColumn ID="Column20" runat="server" Text="生产开始时间" Width="100" DataIndex="生产开始时间" Format="yyyy-MM-dd HH:mm:ss" />
+                                                    <ext:DateColumn ID="Column21" runat="server" Text="生产结束时间" Width="100" DataIndex="生产结束时间" Format="yyyy-MM-dd HH:mm:ss" />
+                                                    <ext:Column ID="Column22" runat="server" Text="是否首件胎" Width="50" DataIndex="是否首件胎" />
+                                                    <ext:Column ID="Column23" runat="server" Text="主机" Width="80" DataIndex="主机" />
+                                                    <ext:Column ID="Column24" runat="server" Text="副机" Width="80" DataIndex="副机" />
+                                                    <ext:Column ID="Column25" runat="server" Text="帮车" Width="80" DataIndex="帮车" />
+                                                </Columns>
+                                            </ColumnModel>
+                                        </ext:GridPanel>
+                                    </Items>
+                                </ext:Panel>
+                            </Items>
+                        </ext:TabPanel>
+                    </Items>
+                </ext:Panel>
+                <ext:Hidden runat="server" ID="refreshHidden" />
+                <ext:Hidden runat="server" ID="hiddenMaterialMajorType"></ext:Hidden>
+                <ext:Hidden runat="server" ID="hiddenSourceProcessId"></ext:Hidden>
+                <ext:Hidden runat="server" ID="hiddenTargetProcessId"></ext:Hidden>
+                <ext:Hidden runat="server" ID="hiddenSemisTrackBarcode"></ext:Hidden>
+                 <ext:Hidden runat="server" ID="hiddenSemisTrackRoot"></ext:Hidden>
+            </Items>
+        </ext:Viewport>
+    </form>
+</body>
+</html>

@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HppScanLog"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_SCAN_LOG ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.ScanBarcode" prepend="AND">
+          <![CDATA[SCAN_BARCODE = #where.ScanBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.Rfid" prepend="AND">
+          <![CDATA[RFID = #where.Rfid#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.IsSuccess" prepend="AND">
+          <![CDATA[IS_SUCCESS = #where.IsSuccess#]]>
+        </isNotNull>
+        <isNotNull property="where.FaultReason" prepend="AND">
+          <![CDATA[FAULT_REASON = #where.FaultReason#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetSemisRFIDScanInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      SELECT DISTINCT T.SCAN_BARCODE,T.RFID,T2.EQUIP_NAME
+      ,NVL(nvl(T5.MINOR_TYPE_NAME,T6.MINOR_TYPE_NAME),'口型板') as MINOR_TYPE_NAME 
+      ,NVL(nvl(T4.MATERIAL_NAME,T6.MATERIAL_NAME),T7.KOU_MOULD) as MATERIAL_NAME
+      ,case to_char(t.is_success) when 'True' then '成功' else '失败' end IS_SUCCESS
+      ,T.FAULT_REASON,T.RECORD_TIME,T1.USER_NAME FROM HPP_SCAN_LOG T
+      LEFT JOIN SSB_USER T1 ON T1.OBJID = T.RECORD_USER_ID
+      LEFT JOIN SBE_EQUIP T2 ON T2.OBJID = T.EQUIP_ID
+      LEFT JOIN HPP_SEMIS_PRODUCTION T3 ON T3.CARD_NO = T.SCAN_BARCODE
+      LEFT JOIN SBM_MATERIAL T4 ON T4.OBJID = T3.MATERIAL_ID
+      LEFT JOIN SBM_MATERIAL_MINOR_TYPE T5 ON T5.OBJID = T4.MINOR_TYPE_ID
+      LEFT JOIN ( SELECT X1.SCAN_BARCODE,x4.MINOR_TYPE_NAME,x3.MATERIAL_NAME  FROM HPP_SCAN_LOG X1
+                  inner JOIN HPP_RUBBER_PRODUCTION X2 ON X2.BARCODE=X1.SCAN_BARCODE
+                  left join SBM_MATERIAL x3 on x3.sap_code=x2.SAP_CODE
+                  LEFT JOIN SBM_MATERIAL_MINOR_TYPE X4 ON X4.OBJID = X3.MINOR_TYPE_ID
+                  WHERE X1.DELETE_FLAG=0
+                  ) T6 ON T6.SCAN_BARCODE=T.SCAN_BARCODE
+      LEFT JOIN  hpp_koumould T7 ON T7.RFID = T.RFID
+      WHERE T.DELETE_FLAG=0 and nvl(t.scan_barcode,'1') <> '1'
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[T.RECORD_TIME >=#where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[T.RECORD_TIME <=#where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.RFIDNo" prepend="AND">
+           <![CDATA[T.RFID=#where.RFIDNo#]]>
+         </isNotNull>
+         <isNotNull property="where.CardNo" prepend="AND">
+           <![CDATA[T.SCAN_BARCODE=#where.CardNo#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipID" prepend="AND">
+           <![CDATA[T.EQUIP_ID=#where.EquipID#]]>
+         </isNotNull>
+         <isNotNull property="where.OkFlag" prepend="AND">
+           <![CDATA[t.is_success=#where.OkFlag#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+      ORDER BY T.RECORD_TIME DESC
+      ]]>
+     </select>
+     <select id="GetSemisEquip" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select objid,equip_name from sbe_equip where delete_flag=0 and major_type_id in(21,22,31,32,33,34,35) order by major_type_id,Minor_type_id,equip_name
+       ]]>
+     </select>
+
+     <select id="GetSemisEquipRepairRecoed" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      SELECT T5.USER_NAME RECORD_USER_NAME, T1.*,T2.EQUIP_NAME,T3.EQUIP_STOP_TYPE_NAME,T4.EQUIP_STOP_REASON_NAME
+        ,u1.user_name || ',' || u2.user_name|| ',' || u3.user_name|| ',' || u4.user_name REPAIR_NAME
+        ,case nvl(t1.repair_status,0) when 0 then '停机开始' when 1 then '维修开始' when 2 then '维修结束' when 3 then '停机结束' end STATUS
+        FROM SEE_EQUIP_STOP_RECORD T1 LEFT JOIN SBE_EQUIP T2 ON T1.EQUIP_ID=T2.OBJID
+        LEFT JOIN SBE_EQUIP_STOP_TYPE T3 ON T1.STOP_TYPE_ID=T3.OBJID
+        LEFT JOIN SBE_EQUIP_STOP_REASON T4 ON T1.STOP_REASON_ID=T4.OBJID
+        LEFT JOIN SSB_USER T5 ON T1.RECORD_USER_ID=T5.OBJID
+        left join SSB_USER u1 on t1.repair_user_id = u1.objid 
+        left join SSB_USER u2 on t1.repair_user_id_1 = u2.objid 
+        left join SSB_USER u3 on t1.repair_user_id_2 = u3.objid 
+        left join SSB_USER u4 on t1.repair_user_id_3 = u4.objid 
+        WHERE t1.stop_type_id <> 1 and t1.stop_type_id <> 0
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="EQUIP_ID" prepend="AND">
+           <![CDATA[T1.EQUIP_ID = #EQUIP_ID#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+       order by t1.bill_no
+      ]]>
+     </select>
+
+     <select id="GetNewBillNo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT COUNT(1) ID FROM see_equip_stop_record T
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="BillDate" prepend="AND">
+           <![CDATA[T.Bill_Date = #BillDate#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+   <select id="GetSemisEquipStopType" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select t.*,t1.major_type_name from sbe_equip_stop_type t
+       left join sbe_equip_major_type t1 on t.equip_major_type_id = t1.objid
+       where t.delete_flag = 0
+       order by t.equip_major_type_id,t.equip_stop_type_name
+       ]]>
+     </select>
+     
+    <select id="GetSemisEquipStopReason" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select t.*, t1.major_type_name from sbe_equip_stop_reason t
+       left join sbe_equip_major_type t1 on t.equip_major_type_id = t1.objid
+       where t.delete_flag = 0
+       order by t.equip_major_type_id,t.equip_stop_reason_name
+       ]]>
+     </select>
+     
+   <select id="GetNewBillNoWH" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT COUNT(1) ID FROM SBE_EQUIP_REPAIR_PLAN T
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="BillDate" prepend="AND">
+           <![CDATA[T.Bill_Date = #BillDate#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+   <select id="GetSemisEquipRepairRecoedWH" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      SELECT T1.USER_NAME RESPONSE_USER_NAME,T2.USER_NAME FINISH_USER_NAME,T3.USER_NAME CONFIRM_USER_NAME,
+         CASE T.PLAN_STOPTIME WHEN 0 THEN '本月上旬' WHEN 1 THEN '本月中旬' WHEN 2 THEN '本月下旬' WHEN 3 THEN '每月' WHEN 4 THEN '每周'
+        ELSE '123' END PLAN_STOPTIME_TEXT,
+          T4.EQUIP_NAME,
+         T.*, T.ROWID
+          FROM SBE_EQUIP_REPAIR_PLAN T
+        LEFT JOIN SSB_USER T1 ON T.RESPONSE_USER=T1.OBJID
+        LEFT JOIN SSB_USER T2 ON T.FINISH_USER=T2.OBJID
+        LEFT JOIN SSB_USER T3 ON T.CONFIRM_USER=T3.OBJID
+        LEFT JOIN SBE_EQUIP T4 ON T.EQUIP_ID=T4.OBJID
+        WHERE 1=1 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="EquipID" prepend="AND">
+           <![CDATA[T.EQUIP_ID = #EquipID#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+       order by t.bill_no
+      ]]>
+     </select>
+
+     <select id="GetSemisEquipRepairRecoedXJ" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT B.EQUIP_NAME,C.USER_NAME INSPECTION_USER_NAME, 
+       CASE A.PLAN_TYPE_ID WHEN 0 THEN '自动' WHEN 1 THEN '手动' END PLAN_TYPE_NAME,
+       CASE A.INSPECTION_STATUS WHEN 1 THEN '未开始' WHEN 2 THEN '进行中' WHEN 3 THEN '已完成' END STATUS,
+       D.MINOR_TYPE_NAME || '电器检点项目' AS FANGAN_NAME,
+       A.* 
+       FROM SBE_EQUIP_INSPECTION_PLAN A
+       LEFT JOIN SBE_EQUIP B ON A.EQUIP_ID = B.OBJID AND B.DELETE_FLAG = 0
+       LEFT JOIN SSB_USER C ON A.INSPECTION_USER_ID = C.OBJID AND C.DELETE_FLAG = 0
+       LEFT JOIN SBE_EQUIP_MINOR_TYPE D ON B.MINOR_TYPE_ID = D.OBJID 
+       WHERE 1=1 and A.DELETE_FLAG = 0
+      ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="EQUIP_ID" prepend="AND">
+           <![CDATA[A.EQUIP_ID = #EQUIP_ID#]]>
+         </isNotNull>
+         <isNotNull property="EQUIP_CODE" prepend="AND">
+           <![CDATA[B.EQUIP_NAME = #EQUIP_CODE#]]>
+         </isNotNull>
+         <isNotNull property="BeginTime" prepend="AND">
+           <![CDATA[A.INSPECTION_PLAN_DATE >= #BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="EndTime" prepend="AND">
+           <![CDATA[A.INSPECTION_PLAN_DATE <= #EndTime#]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+        order by A.bill_no
+      ]]>
+     </select>
+
+     <select id="GetNewBillNoXJ" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT COUNT(1) ID FROM SBE_EQUIP_INSPECTION_PLAN T
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="BillDate" prepend="AND">
+           <![CDATA[T.Bill_Date = #BillDate#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetCompetence" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select nvl(d.user_pwd,'123') user_pwd,a.* from ssp_role_action a
+       inner join ssp_role b on a.role_id = b.objid
+       inner join ssp_user_role c on c.role_id = b.objid
+       inner join ssb_user d on c.user_id = d.objid
+       where d.delete_flag = 0 and b.delete_flag = 0
+       and d.work_barcode = #UserID# and a.action_id = #PageID#
+      ]]>
+     </select>
+
+     <select id="GetReprintRecord" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      select a.cardid,a.num,b.equip_name,c.user_name,a.record_time,a.reason from sbe_reprintrecord a
+      left join sbe_equip b on a.equipid = b.objid
+      left join ssb_user c on c.objid = a.record_user where 1=1 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[a.RECORD_TIME >=#where.BeginTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[a.RECORD_TIME <=#where.EndTime#]]>
+         </isNotNull>
+         <isNotNull property="where.EquipID" prepend="AND">
+           <![CDATA[a.EQUIPID=#where.EquipID#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetEquipStopReasonAndType" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select t.objid typeID,t.equip_stop_type_name typeName,r.objid reasonID,r.equip_stop_reason_name reasonName,t.equip_major_type_id equipid from sbe_equip_stop_type t
+left join sbe_equip_stop_reason r on r.Equip_Stop_Type_Id=t.objid where r.Equip_major_type_id=#EquipID# and t.Equip_major_type_id=#EquipID#
+
+       ]]>
+     </select>
+  </statements>
+</sqlMap>

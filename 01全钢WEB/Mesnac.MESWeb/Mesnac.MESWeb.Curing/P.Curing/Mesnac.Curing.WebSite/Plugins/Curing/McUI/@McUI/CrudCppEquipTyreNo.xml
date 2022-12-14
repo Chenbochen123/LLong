@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="EQUIP_ID" Value="设备ID"></Caption>
+    <Caption Name="EQUIP_NAME" Value="设备名称"></Caption>
+    <Caption Name="EQUIP_TYRE_NO" Value="机台硫化号"></Caption>
+
+    <Caption Name="RECORD_USER_ID" Value="更改人"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="更改人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+    <Caption Name="SearchType" Value="查询类型"></Caption>
+  </Captions>
+  <WebPage Title="硫化条码机台维护">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Curing/McUI/@McUI/CrudCppEquipTyreNo.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="CPP_EQUIP_TYRENO">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_CPP_EQUIP_TYRENO"></SeqField>
+    </SeqFields>
+    <Uniques>
+      <Unique Fields="EQUIP_ID,EQUIP_TYRE_NO"></Unique>
+    </Uniques>
+  </Crud>
+
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="EQUIP_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="EQUIP_TYRE_NO"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel Width="600" ColumnCount="2">
+      <ParamFields>
+        <ParamField FieldName="EQUIP_ID" Type="ComboBox"></ParamField>
+        <ParamField FieldName="EQUIP_TYRE_NO" ></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="EQUIP_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_TYRE_NO" ></ParamField>
+        <ParamField FieldName="RECORD_USER_NAME" ></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid >
+      <GridColumns>
+        <GridColumn ColumnName="EQUIP_NAME" Width="160" Caption="设备名称"></GridColumn>
+        <GridColumn ColumnName="EQUIP_TYRE_NO" Width="160" Caption="机台硫化号"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME" Width="160" Caption="更改人"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss" Width="160" Caption="更改时间"></GridColumn>
+       </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

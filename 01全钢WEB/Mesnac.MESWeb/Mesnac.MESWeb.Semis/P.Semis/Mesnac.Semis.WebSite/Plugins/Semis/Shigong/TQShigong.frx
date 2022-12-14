@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="01/07/2020 09:04:30" ReportInfo.Modified="10/27/2022 14:10:00" ReportInfo.CreatorVersion="2013.3.9.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils; 
+
+namespace FastReport
+{
+  public class ReportScript
+  {  
+    private void Table1_AfterData(object sender, EventArgs e)
+    {  
+      DataSourceBase rowData = Report.GetDataSource(&quot;Table&quot;);   
+      double sjjWeight = 0;
+                              
+      try        
+        {Cell38.Text = (Convert.ToDouble(rowData.Report.GetColumnValue(&quot;Table.上三角胶重量&quot;).ToString())+Convert.ToDouble(rowData.Report.GetColumnValue(&quot;Table.下三角胶重量&quot;).ToString())
+          + Convert.ToDouble(rowData.Report.GetColumnValue(&quot;Table.型胶重量&quot;).ToString()) + Convert.ToDouble(rowData.Report.GetColumnValue(&quot;Table.胶片1重量&quot;).ToString())
+           + Convert.ToDouble(rowData.Report.GetColumnValue(&quot;Table.胶片2重量&quot;).ToString())).ToString();
+      }
+      catch{Cell38.Text = &quot;&quot;;}
+      
+      try        
+    {Cell28.Text = (Convert.ToDouble(rowData.Report.GetColumnValue(&quot;Table.钢丝包布米重&quot;).ToString())*Convert.ToDouble(rowData.Report.GetColumnValue(&quot;Table.钢丝包布长度MM&quot;).ToString())/1000
+        +sjjWeight+ Convert.ToDouble(rowData.Report.GetColumnValue(&quot;Table.钢丝圈重量&quot;).ToString())).ToString();
+      }
+      catch{Cell28.Text = &quot;&quot;;}
+         
+      
+                                                     
+      }
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="weight" ConnectionString="rijcmlqPJ0Cq8Y2NHHCeotpTIiRTFuZRkK74hrP4FXglzMPfwdPm/vVLwZzXoD55Fm6gUEbHx9iJLQDKy/XYKxCNrE78KTyb0u+KL8YizqW6wq8Q534V3e81h7i+/Rj78iMPi4aYHqjcmp+jaZgNx/iYZE33MfezN4G9ejNGovC6MPOw1rPujWNaNUsrKAImoe1zVai">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="select '' as 胎圈代码,'' as 日期,'' as 版本,'' as SAP品号,'' as 钢丝圈包布SAP,'' as 三角胶代码,'' as 钢丝圈内径,'' as 钢丝直径,&#13;&#10;'' as 钢丝包布米重,'' as 钢丝包布长度MM,'' as 钢丝圈重量,'' as 上三角胶重量,'' as 下三角胶重量,&#13;&#10;'' as 型胶重量,'' as 胶片1重量,'' as 胶片2重量,'' as 三角胶凹槽内宽,'' as 排列方式,'' as 三角胶口型板号,'' as 三角胶高度,&#13;&#10;'' as 上三角胶胶料,'' as 下三角胶胶料,'' as 型胶胶料,'' as 三角胶使用长度,'' as 胶片1代码,'' as 胶片2代码,'' as 三角胶全宽,'' as 三角胶米重,&#13;&#10;'' as 三角胶长度,'' as 制表人,'' as 校对人,'' as 审核人,'' as 批准人">
+        <Column Name="版本" DataType="System.String"/>
+        <Column Name="胎圈代码" DataType="System.String"/>
+        <Column Name="日期" DataType="System.String"/>
+        <Column Name="钢丝圈重量" DataType="System.String"/>
+        <Column Name="三角胶代码" DataType="System.String"/>
+        <Column Name="钢丝圈内径" DataType="System.String"/>
+        <Column Name="排列方式" DataType="System.String"/>
+        <Column Name="三角胶高度" DataType="System.String"/>
+        <Column Name="三角胶米重" DataType="System.String"/>
+        <Column Name="三角胶长度" DataType="System.String"/>
+        <Column Name="制表人" DataType="System.String"/>
+        <Column Name="校对人" DataType="System.String"/>
+        <Column Name="审核人" DataType="System.String"/>
+        <Column Name="批准人" DataType="System.String"/>
+        <Column Name="SAP品号" DataType="System.String"/>
+        <Column Name="钢丝圈包布SAP" DataType="System.String"/>
+        <Column Name="钢丝直径" DataType="System.String"/>
+        <Column Name="钢丝包布米重" DataType="System.String"/>
+        <Column Name="钢丝包布长度MM" DataType="System.String"/>
+        <Column Name="上三角胶重量" DataType="System.String"/>
+        <Column Name="下三角胶重量" DataType="System.String"/>
+        <Column Name="型胶重量" DataType="System.String"/>
+        <Column Name="胶片1重量" DataType="System.String"/>
+        <Column Name="胶片2重量" DataType="System.String"/>
+        <Column Name="三角胶凹槽内宽" DataType="System.String"/>
+        <Column Name="三角胶口型板号" DataType="System.String"/>
+        <Column Name="上三角胶胶料" DataType="System.String"/>
+        <Column Name="下三角胶胶料" DataType="System.String"/>
+        <Column Name="型胶胶料" DataType="System.String"/>
+        <Column Name="三角胶使用长度" DataType="System.String"/>
+        <Column Name="胶片1代码" DataType="System.String"/>
+        <Column Name="胶片2代码" DataType="System.String"/>
+        <Column Name="三角胶全宽" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" RawPaperSize="9" Guides="5962.95,7474.95,7484.4,7456.05,7446.6,10328.85,10328.85,10338.3,718.2,510.3">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Guides="9.45,28.35"/>
+    <DataBand Name="Data1" Top="15.9" Width="718.2" Height="595.35" Guides="37.8,0,66.15,18.9">
+      <PictureObject Name="Picture1" Width="718.2" Height="75.6" Image="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"/>
+      <TextObject Name="Text1" Left="18.9" Top="75.6" Width="75.6" Height="18.9" Text="下传日期：" Font="宋体, 9pt"/>
+      <TextObject Name="Text2" Left="94.5" Top="75.6" Width="170.1" Height="18.9" Text="[Table.日期]" Font="宋体, 9pt"/>
+      <TextObject Name="Text3" Left="311.85" Top="75.6" Width="85.05" Height="18.9" Text="[Table.版本]" Font="宋体, 9pt"/>
+      <TextObject Name="Text4" Left="264.6" Top="75.6" Width="47.25" Height="18.9" Text="版本：" Font="宋体, 9pt"/>
+      <TextObject Name="Text5" Left="529.2" Top="75.6" Width="170.1" Height="18.9" Text="技术Q/LLJ 03-JS235.14-2002" Font="宋体, 9pt"/>
+      <TextObject Name="Text6" Left="481.95" Top="75.6" Width="47.25" Height="18.9" Text="表号：" Font="宋体, 9pt"/>
+      <TableObject Name="Table1" Left="18.9" Top="103.95" Width="681.4" Height="453.6" Border.Lines="All" AfterDataEvent="Table1_AfterData">
+        <TableColumn Name="Column1" Width="170.1"/>
+        <TableColumn Name="Column2" Width="1"/>
+        <TableColumn Name="Column3" Width="170.1"/>
+        <TableColumn Name="Column4" Width="170.1"/>
+        <TableColumn Name="Column5" Width="170.1"/>
+        <TableRow Name="Row1" Height="43.47">
+          <TableCell Name="Cell1" Border.Lines="All" Text="胎圈代码" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell2" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell3" Border.Lines="All" Text="[Table.胎圈代码]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell4" Border.Lines="All" Text="SAP号" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell5" Border.Lines="All" Text="[Table.SAP品号]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="43.47">
+          <TableCell Name="Cell6" Border.Lines="All" Text="缠绕包布后钢丝圈半部件代码" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell7" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="[Table.钢丝圈包布SAP]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell9" Border.Lines="All" Text="三角胶代码" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell10" Border.Lines="All" Text="[Table.三角胶代码]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="43.47">
+          <TableCell Name="Cell11" Border.Lines="All" Text="钢丝圈内径（mm）" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell12" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell13" Border.Lines="All" Text="[Table.钢丝圈内径]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell14" Border.Lines="All" Text="三角胶口型板号" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell15" Border.Lines="All" Text="[Table.三角胶口型板号]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row4" Height="43.47">
+          <TableCell Name="Cell16" Border.Lines="All" Text="排列方式" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell17" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell18" Border.Lines="All" Text="[Table.排列方式]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell19" Border.Lines="All" Text="上三角胶胶料" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell20" Border.Lines="All" Text="[Table.上三角胶胶料]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row5" Height="43.47">
+          <TableCell Name="Cell21" Border.Lines="All" Text="钢丝直径（mm）" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell22" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell23" Border.Lines="All" Text="[Table.钢丝直径]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell24" Border.Lines="All" Text="下三角胶胶料" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell25" Border.Lines="All" Text="[Table.下三角胶胶料]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row6" Height="47.25">
+          <TableCell Name="Cell26" Border.Lines="All" Text="胎圈重量（kg/个）" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell27" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell28" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell29" Border.Lines="All" Text="胶片1代码" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell30" Border.Lines="All" Text="[Table.胶片1代码]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row7" Height="47.25">
+          <TableCell Name="Cell31" Border.Lines="All" Text="三角胶全宽（mm）" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell32" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell33" Border.Lines="All" Text="[Table.三角胶全宽]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell34" Border.Lines="All" Text="胶片2代码" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell35" Border.Lines="All" Text="[Table.胶片2代码]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row8" Height="47.25">
+          <TableCell Name="Cell36" Border.Lines="All" Text="三角胶重量（kg/条）" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell37" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell38" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell39" Border.Lines="All" Text="型胶胶料" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell40" Border.Lines="All" Text="[Table.型胶胶料]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row9" Height="47.25">
+          <TableCell Name="Cell41" Border.Lines="All" Text="三角胶凹槽宽度（mm）" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell42" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell43" Border.Lines="All" Text="[Table.三角胶凹槽内宽]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell44" Border.Lines="All" Text="三角胶使用长度（mm）" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell45" Border.Lines="All" Text="[Table.三角胶使用长度]" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row10" Height="47.25">
+          <TableCell Name="Cell46" Border.Lines="All" Text="口型尺寸图" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell47" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell48" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell49" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+          <TableCell Name="Cell50" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="Text7" Left="85.05" Top="567" Width="94.5" Height="18.9" Text="[Table.批准人]" Font="宋体, 9pt"/>
+      <TextObject Name="Text8" Left="37.8" Top="567" Width="47.25" Height="18.9" Text="批准：" Font="宋体, 9pt"/>
+      <TextObject Name="Text9" Left="264.6" Top="567" Width="94.5" Height="18.9" Text="[Table.审核人]" Font="宋体, 9pt"/>
+      <TextObject Name="Text10" Left="217.35" Top="567" Width="47.25" Height="18.9" Text="审核：" Font="宋体, 9pt"/>
+      <TextObject Name="Text11" Left="434.7" Top="567" Width="94.5" Height="18.9" Text="[Table.校对人]" Font="宋体, 9pt"/>
+      <TextObject Name="Text12" Left="387.45" Top="567" Width="47.25" Height="18.9" Text="校对：" Font="宋体, 9pt"/>
+      <TextObject Name="Text13" Left="604.8" Top="567" Width="94.5" Height="18.9" Text="[Table.制表人]" Font="宋体, 9pt"/>
+      <TextObject Name="Text14" Left="557.55" Top="567" Width="47.25" Height="18.9" Text="制表：" Font="宋体, 9pt"/>
+      <DataHeaderBand Name="DataHeader1" Top="3.23" Width="718.2" Height="9.45" Guides="9.45,28.35,0" KeepWithData="true"/>
+    </DataBand>
+  </ReportPage>
+</Report>

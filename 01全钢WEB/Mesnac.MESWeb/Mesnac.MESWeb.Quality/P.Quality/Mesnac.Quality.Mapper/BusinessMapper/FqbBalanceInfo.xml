@@ -1,0 +1,828 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Quality.Mapper.BusinessMapper.FqbBalanceInfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM FQB_BALANCE_INFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.Uprank" prepend="AND">
+          <![CDATA[UPRANK = #where.Uprank#]]>
+        </isNotNull>
+        <isNotNull property="where.Lowerrank" prepend="AND">
+          <![CDATA[LOWERRANK = #where.Lowerrank#]]>
+        </isNotNull>
+        <isNotNull property="where.Uplowerrank" prepend="AND">
+          <![CDATA[UPLOWERRANK = #where.Uplowerrank#]]>
+        </isNotNull>
+        <isNotNull property="where.Staticrank" prepend="AND">
+          <![CDATA[STATICRANK = #where.Staticrank#]]>
+        </isNotNull>
+        <isNotNull property="where.Couplerank" prepend="AND">
+          <![CDATA[COUPLERANK = #where.Couplerank#]]>
+        </isNotNull>
+        <isNotNull property="where.Rcoarank" prepend="AND">
+          <![CDATA[RCOARANK = #where.Rcoarank#]]>
+        </isNotNull>
+        <isNotNull property="where.Standard" prepend="AND">
+          <![CDATA[STANDARD = #where.Standard#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreId" prepend="AND">
+          <![CDATA[TYRE_ID = #where.TyreId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.Seqid" prepend="AND">
+          <![CDATA[SEQID = #where.Seqid#]]>
+        </isNotNull>
+        <isNotNull property="where.UpAmount" prepend="AND">
+          <![CDATA[UP_AMOUNT = #where.UpAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.LowerAmount" prepend="AND">
+          <![CDATA[LOWER_AMOUNT = #where.LowerAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.UplowerAmount" prepend="AND">
+          <![CDATA[UPLOWER_AMOUNT = #where.UplowerAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.StaticAmount" prepend="AND">
+          <![CDATA[STATIC_AMOUNT = #where.StaticAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.CoupleAmount" prepend="AND">
+          <![CDATA[COUPLE_AMOUNT = #where.CoupleAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.LtoaAmount" prepend="AND">
+          <![CDATA[LTOA_AMOUNT = #where.LtoaAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.LboaAmount" prepend="AND">
+          <![CDATA[LBOA_AMOUNT = #where.LboaAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.RcoaAmount" prepend="AND">
+          <![CDATA[RCOA_AMOUNT = #where.RcoaAmount#]]>
+        </isNotNull>
+        <isNotNull property="where.Ufrank" prepend="AND">
+          <![CDATA[UFRANK = #where.Ufrank#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupFlag" prepend="AND">
+          <![CDATA[BAUP_FLAG = #where.BaupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupTime" prepend="AND">
+          <![CDATA[BAUP_TIME = #where.BaupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserid" prepend="AND">
+          <![CDATA[RECORD_USERID = #where.RecordUserid#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.LtoaRank" prepend="AND">
+          <![CDATA[LTOA_RANK = #where.LtoaRank#]]>
+        </isNotNull>
+        <isNotNull property="where.LboaRank" prepend="AND">
+          <![CDATA[LBOA_RANK = #where.LboaRank#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+
+    <select id="GetQualifiedTotal" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+       select NVL(t3.MATERIAL_NAME,'扫描未成功胎胚') MATERIAL_NAME,t2.total as TOTAL_COUNT,nvl(sum(gradeid),0) as QUALIFY_COUNT,
+       nvl(sum(uplowid),0) as UPLOWERRANK_COUNT,nvl(sum(rcoaid),0) as RCOARANK_COUNT,t2.equip_name,t2.class_name,
+       (round(nvl(sum(gradeid),0)/ max(t2.total), 4)) * 100 || '%' as RATIO
+       FROM ( select t123.objid,nvl(t123.material_id,-1) material_id,T115.Class_Name，t123.delete_flag,t123.record_time,t123.tyre_id, t1114.equip_code,
+       case when ((rcoarank= 2 OR rcoarank=1) and (uplowerrank=2 OR uplowerrank=1) and (uprank=2 OR uprank=1) and (lowerrank=2 OR lowerrank=1)) then 1  else 0 end as gradeid,
+       case when ((uplowerrank=2 OR uplowerrank=1) and (uprank=2 OR uprank=1) and (lowerrank=2 OR lowerrank=1)) then 1  else 0 end as uplowid,
+       case when (rcoarank=2 OR rcoarank=1) then 1 else 0 end rcoaid
+       from FQB_BALANCE_INFO t123
+       INNER JOIN CPP_CURING_PRODUCTION T117 ON T123.TYRE_ID=T117.TYRE_NO
+         INNER JOIN BPM_PRODUCTION T118 ON T118.GREEN_TYRE_NO=T117.GREEN_TYRE_NO
+         INNER JOIN BPM_SHIFT_MASTER T119 ON T119.OBJID=T118.SHIFT_MASTER_ID
+        LEFT JOIN SBE_EQUIP T1114 ON T1114.OBJID = T119.EQUIP_ID
+      LEFT JOIN SSB_CLASS T115 ON T115.OBJID = T119.CLASS_ID
+         WHERE UFRANK IS NOT NULL 
+       ) t1
+       inner join (
+       SELECT NVL(T10.MATERIAL_ID,-1) MATERIAL_ID,t14.equip_name,t14.equip_code as equip_id,T15.CLASS_NAME,COUNT(*) AS TOTAL,t14.equip_code,t15.objid as class_id FROM  FQB_BALANCE_INFO T10
+       INNER JOIN CPP_CURING_PRODUCTION T7 ON T10.TYRE_ID=T7.TYRE_NO
+         INNER JOIN BPM_PRODUCTION T8 ON T8.GREEN_TYRE_NO=T7.GREEN_TYRE_NO
+         INNER JOIN BPM_SHIFT_MASTER T9 ON T9.OBJID=T8.SHIFT_MASTER_ID
+        LEFT JOIN SBE_EQUIP T14 ON T14.OBJID = T9.EQUIP_ID
+      LEFT JOIN SSB_CLASS T15 ON T15.OBJID = T9.CLASS_ID
+          WHERE  T10.DELETE_FLAG=0 AND T10.UFRANK IS NOT NULL
+       ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="BeginTime" prepend="AND">
+          <![CDATA[ t10.RECORD_TIME > #BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="EndTime" prepend="AND">
+          <![CDATA[t10.RECORD_TIME < #EndTime#]]>
+        </isNotNull>
+        <isNotNull property="Equip" prepend="AND">
+          <![CDATA[T14.EQUIP_CODE = #Equip#]]>
+        </isNotNull>
+        <isNotNull property="Classid" prepend="AND">
+          <![CDATA[T15.OBJID = #Classid#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[ 
+          group by t10.material_id,t14.equip_name,t14.equip_code,T15.CLASS_NAME,t15.objid
+       ) t2
+        on t1.material_id=t2.material_id and t1.equip_code=t2.equip_id and t1.class_name=t2.class_name 
+        left join v_cbm_materialinfo t3 on t3.ObjId= t1.material_id
+        inner join cpp_curing_production t4 on t1.tyre_id=t4.tyre_no
+         inner join bpm_production t5 on t4.green_tyre_no=t5.green_tyre_no
+         INNER JOIN BPM_SHIFT_MASTER T6 ON T6.OBJID=T5.SHIFT_MASTER_ID
+         where  t1.delete_flag = 0
+        ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="BeginTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME > #BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="EndTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME < #EndTime#]]>
+        </isNotNull>
+        <isNotNull property="Equip" prepend="AND">
+          <![CDATA[T2.equip_id = #Equip#]]>
+        </isNotNull>
+        <isNotNull property="Classid" prepend="AND">
+          <![CDATA[T2.class_id = #Classid#]]>
+        </isNotNull>
+        <!--<isNotNull property="Username" prepend="AND">
+           <![CDATA[T2.USER_NAME = #Username#]]>
+         </isNotNull>-->
+      </dynamic>
+      <dynamic prepend="GROUP BY">
+        <![CDATA[t3.MATERIAL_NAME,t2.total,t2.equip_name,t2.class_name]]>
+      </dynamic>
+      <dynamic prepend="ORDER BY">
+        <![CDATA[equip_name,class_name]]>
+      </dynamic>
+    </select>
+    <!--根据查询条件获取质检及追溯信息-->
+    <select id="GetBcheckInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+         
+     SELECT N.OBJID,N.TYRE_ID,N.GREEN_TYRE_NO,N.MATERIAL_NAME,N.EQUIP_NAME,N.PDM_CODE,
+      N.C_EQUIP_NAME,N.SHOW_NAME,N.C_CLASS_NAME,N.M_EQUIP_NAME,N.M_CLASS_NAME,
+      N.GRADENAME,N.BEGIN_TIME,N.END_TIME,N.C_BEGIN_TIME,N.C_END_TIME,N.RECORD_TIME,N.UP_AMOUNT,N.UPRANK,
+      N.LOWER_AMOUNT,N.LOWERRANK,N.UPLOWER_AMOUNT,N.UPLOWERRANK,
+      N.STATIC_AMOUNT,N.STATICRANK,
+      N.COUPLE_AMOUNT,N.COUPLERANK,N.RCOA_AMOUNT,N.RCOARANK,N.FINAL_GRADE_CODE,N.LTOA_AMOUNT,N.LTOA_RANK,N.LBOA_AMOUNT,N.LBOA_RANK,N.STANDARD ,
+     N.CURINGNAME,N10.USER_NAME AS MOLDINGNAME ,N11.USER_NAME AS MOLDINGNAME1 ,N12.USER_NAME AS MOLDINGNAME2，N.UpperUnbalanceDeg,N.LowerUnbalanceDeg,N.StaticUnbalanceDeg,N.CoupleUnbalanceDeg,N.RCOADeg,N.LTOADeg,N.LBOADeg,
+      LT_1H_OA_LTMM,LT_1H_OA_DEG,LT_1H_OA_RANK,LB_1H_OA_LBMM,LB_1H_OA_DEG,LB_1H_OA_RANK,RT_1H_OA_LTMM,RT_1H_OA_DEG,RT_1H_OA_RANK
+      FROM
+      (
+      ( SELECT T0.OBJID,T0.TYRE_ID,T10.GREEN_TYRE_NO,T1.MATERIAL_NAME,T2.EQUIP_NAME,T27.PDM_CODE,
+      T11.EQUIP_NAME C_EQUIP_NAME,T17.CLASS_NAME C_CLASS_NAME,T14.EQUIP_NAME M_EQUIP_NAME,T15.CLASS_NAME M_CLASS_NAME,
+      case t3.GRADENAME when 'A品' then 'A+1' when 'B品' then 'A+2' when 'C品' then 'A0' else T3.GRADENAME end GRADENAME,T0.RECORD_TIME,T0.UP_AMOUNT,T4.GRADENAME AS UPRANK,
+      T0.LOWER_AMOUNT,T5.GRADENAME AS LOWERRANK,T0.UPLOWER_AMOUNT,T6.GRADENAME AS UPLOWERRANK,
+      T0.STATIC_AMOUNT,T7.GRADENAME AS STATICRANK,
+      T0.COUPLE_AMOUNT,T8.GRADENAME AS COUPLERANK,T0.RCOA_AMOUNT,T9.GRADENAME AS RCOARANK,T0.STANDARD ,T3.FINAL_GRADE_CODE,T0.LTOA_AMOUNT,T19.GRADENAME AS LTOA_RANK,T0.LBOA_AMOUNT,T20.GRADENAME AS LBOA_RANK,
+      T18.REAL_NAME AS CURINGNAME,T12.BEGIN_TIME,T12.END_TIME,T10.BEGIN_TIME AS C_BEGIN_TIME,T10.END_TIME AS C_END_TIME,
+          MAX(DECODE(T22.WORKER_ID8,82,T22.WORKER_ID1,NULL)) EMP1,MAX(DECODE(T22.WORKER_ID8,83,T22.WORKER_ID1,NULL)) EMP2
+        , MAX(DECODE(T22.WORKER_ID8,85,T22.WORKER_ID1,NULL)) EMP3,T21.SHOW_NAME,t0.UpperUnbalanceDeg,t0.LowerUnbalanceDeg,t0.StaticUnbalanceDeg,t0.CoupleUnbalanceDeg,t0.RCOADeg,t0.LTOADeg,t0.LBOADeg,
+        LT_1H_OA_LTMM,LT_1H_OA_DEG,CASE LT_1H_OA_RANK WHEN 1 THEN 'A品' WHEN 2 THEN 'B品' WHEN 3 THEN 'C品' WHEN 4 THEN 'D品' END LT_1H_OA_RANK,LB_1H_OA_LBMM,LB_1H_OA_DEG,CASE LB_1H_OA_RANK WHEN 1 THEN 'A品' WHEN 2 THEN 'B品' WHEN 3 THEN 'C品' WHEN 4 THEN 'D品' END LB_1H_OA_RANK,RT_1H_OA_LTMM,RT_1H_OA_DEG,CASE RT_1H_OA_RANK WHEN 1 THEN 'A品' WHEN 2 THEN 'B品' WHEN 3 THEN 'C品' WHEN 4 THEN 'D品' END RT_1H_OA_RANK
+      FROM 
+       ]]>
+      <isNotNull property="WhichTable" prepend=" ">
+        <![CDATA[  FQB_BALANCE_INFO_3 T0  ]]>
+      </isNotNull>
+      <isNull property="WhichTable" prepend=" ">
+        <![CDATA[  FQB_BALANCE_INFO T0   ]]>
+      </isNull>
+      <![CDATA[ 
+      LEFT JOIN V_CBM_MATERIALINFO T1 ON T1.OBJID=T0.MATERIAL_ID
+      LEFT JOIN SBE_EQUIP T2 ON T2.OBJID=T0.EQUIP_ID
+      LEFT JOIN FQG_GRADE_INFO T3 ON T3.FINAL_GRADE_CODE=T0.UFRANK
+      LEFT JOIN FQG_GRADE_INFO T4 ON T4.FINAL_GRADE_CODE=T0.UPRANK
+      LEFT JOIN FQG_GRADE_INFO T5 ON T5.FINAL_GRADE_CODE=T0.LOWERRANK
+      LEFT JOIN FQG_GRADE_INFO T6 ON T6.FINAL_GRADE_CODE=T0.UPLOWERRANK
+      LEFT JOIN FQG_GRADE_INFO T7 ON T7.FINAL_GRADE_CODE=T0.STATICRANK
+      LEFT JOIN FQG_GRADE_INFO T8 ON T8.FINAL_GRADE_CODE=T0.COUPLERANK
+      LEFT JOIN FQG_GRADE_INFO T9 ON T9.FINAL_GRADE_CODE=T0.RCOARANK
+      LEFT JOIN CPP_CURING_PRODUCTION T10 ON T10.TYRE_NO = T0.TYRE_ID AND T10.DELETE_FLAG=0
+      left join bpm_production T25 ON T25.GREEN_TYRE_NO = T10.GREEN_TYRE_NO
+      LEFT JOIN BPP_PLAN_DETAIL T26 ON T25.PLAN_DETAIL_ID = T26.OBJID
+      LEFT JOIN SBM_MATERIAL T27 ON T27.OBJID=T26.MATERIAL_ID
+      LEFT JOIN SBE_EQUIP T11 ON T11.OBJID = T10.EQUIP_ID
+      LEFT JOIN BPM_PRODUCTION T12 ON T12.GREEN_TYRE_NO = T10.GREEN_TYRE_NO
+      LEFT JOIN BPM_SHIFT_MASTER T13 ON T13.OBJID = T12.SHIFT_MASTER_ID
+      LEFT JOIN BPM_SHIFT_DETAIL T22 ON T22.MASTER_ID = T13.OBJID
+      LEFT JOIN SBE_EQUIP T14 ON T14.OBJID = T13.EQUIP_ID
+      LEFT JOIN SSB_CLASS T15 ON T15.OBJID = T13.CLASS_ID
+      LEFT JOIN CPP_CURING_SHIFT_MASTER T16 ON T16.OBJID = T10.SHIFT_MASTER_ID
+      LEFT JOIN SSB_USER T18 ON T18.OBJID = T16.WORKER_ID
+      LEFT JOIN SSB_CLASS T17 ON T17.OBJID = T16.CLASS_ID
+      LEFT JOIN FQG_GRADE_INFO T19 ON T19.FINAL_GRADE_CODE = T0.LTOA_RANK AND T19.WORK_PROCESS_ID=520
+      LEFT JOIN FQG_GRADE_INFO T20 ON T20.FINAL_GRADE_CODE = T0.LBOA_RANK AND T20.WORK_PROCESS_ID=520
+      LEFT JOIN CBE_EQUIP_POSITION T21 ON T21.OBJID = T10.EQUIP_POSITION 
+      WHERE T0.DELETE_FLAG=0  AND T0.UFRANK IS NOT NULL AND T3.WORK_PROCESS_ID=520 
+      AND T4.WORK_PROCESS_ID=520 AND T5.WORK_PROCESS_ID=520 AND T6.WORK_PROCESS_ID=520
+      AND T7.WORK_PROCESS_ID=520 AND T8.WORK_PROCESS_ID=520 AND T9.WORK_PROCESS_ID=520
+      AND T0.TYRE_ID IS NOT NULL AND T0.MATERIAL_ID IS NOT NULL
+       ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="BeginTime" prepend="AND">
+          <![CDATA[T0.RECORD_TIME > #BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="EndTime" prepend="AND">
+          <![CDATA[T0.RECORD_TIME < #EndTime#]]>
+        </isNotNull>
+				<isNotNull property="TyreBeginTime" prepend="AND">
+					<![CDATA[T10.BEGIN_TIME > #TyreBeginTime#]]>
+				</isNotNull>
+				<isNotNull property="TyreEndTime" prepend="AND">
+					<![CDATA[T10.END_TIME < #TyreEndTime#]]>
+				</isNotNull>
+				<isNotNull property="ModingBeginTime" prepend="AND">
+					<![CDATA[T12.BEGIN_TIME > #ModingBeginTime#]]>
+				</isNotNull>
+				<isNotNull property="ModingEndTime" prepend="AND">
+					<![CDATA[T12.END_TIME < #ModingEndTime#]]>
+				</isNotNull>
+        <isNotNull property="Material_Name" prepend="AND">
+          <![CDATA[T1.MATERIAL_NAME LIKE '%'||#Material_Name#||'%']]>
+        </isNotNull>
+        <isNotNull property="TyreNo" prepend="AND">
+          <![CDATA[T0.TYRE_ID = #TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="GreenTyreNo" prepend="AND">
+          <![CDATA[T10.GREEN_TYRE_NO = #GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="Grade" prepend="AND">
+          <![CDATA[T0.UFRANK = #Grade#]]>
+        </isNotNull>
+        <isNotNull property="EquipID" prepend="AND">
+          <![CDATA[T0.EQUIP_ID = #EquipID#]]>
+        </isNotNull>
+        <isNotNull property="EquipIDMolding" prepend="AND">
+          <![CDATA[t13.EQUIP_ID = #EquipIDMolding#]]>
+        </isNotNull>
+        <isNotNull property="EquipIDCuring" prepend="AND">
+          <![CDATA[T10.EQUIP_ID = #EquipIDCuring#]]>
+        </isNotNull>
+        <isNotNull property="cppclass" prepend="AND">
+          <![CDATA[T10.class_id = #cppclass#]]>
+        </isNotNull>
+        <isNotNull property="moldclass" prepend="AND">
+          <![CDATA[T13.class_id = #moldclass#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+          GROUP BY  T0.OBJID,T0.TYRE_ID,T10.GREEN_TYRE_NO,T1.MATERIAL_NAME,T2.EQUIP_NAME,T27.PDM_CODE,
+          T11.EQUIP_NAME,T17.CLASS_NAME,T14.EQUIP_NAME,T15.CLASS_NAME,
+          T3.GRADENAME,T0.RECORD_TIME,T0.UP_AMOUNT,T4.GRADENAME,
+          T0.LOWER_AMOUNT,T5.GRADENAME,T0.UPLOWER_AMOUNT,T6.GRADENAME ,
+          T0.STATIC_AMOUNT,T7.GRADENAME ,
+          T0.COUPLE_AMOUNT,T8.GRADENAME ,T0.RCOA_AMOUNT,T9.GRADENAME ,T0.STANDARD ,T3.FINAL_GRADE_CODE,T0.LTOA_AMOUNT,T19.GRADENAME,T0.LBOA_AMOUNT,T20.GRADENAME,
+          T18.REAL_NAME ,T12.BEGIN_TIME,T12.END_TIME,T10.BEGIN_TIME,T10.END_TIME,T21.SHOW_NAME，t0.UpperUnbalanceDeg,t0.LowerUnbalanceDeg,t0.StaticUnbalanceDeg,t0.CoupleUnbalanceDeg,t0.RCOADeg,t0.LTOADeg,t0.LBOADeg,
+           LT_1H_OA_LTMM,LT_1H_OA_DEG,LT_1H_OA_RANK,LB_1H_OA_LBMM,LB_1H_OA_DEG,LB_1H_OA_RANK,RT_1H_OA_LTMM,RT_1H_OA_DEG,RT_1H_OA_RANK
+          ) N
+          LEFT JOIN SSB_USER N10 ON N10.OBJID = N.EMP1
+          LEFT JOIN SSB_USER N11 ON N11.OBJID = N.EMP2
+          LEFT JOIN SSB_USER N12 ON N12.OBJID = N.EMP3
+          )
+         ]]>
+    </select>
+
+    <select id="GetQualifiedRatio" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+       select NVL(t3.MATERIAL_NAME,'扫描未成功胎胚') MATERIAL_NAME,t2.total as TOTAL_COUNT,nvl(sum(gradeid),0) as QUALIFY_COUNT,
+       nvl(sum(uplowid),0) as UPLOWERRANK_COUNT,nvl(sum(rcoaid),0) as RCOARANK_COUNT,
+       (round(nvl(sum(gradeid),0)/ max(t2.total), 4)) * 100 || '%' as RATIO
+       from (select objid, equip_id,nvl(material_id,-1) material_id,delete_flag,record_time,tyre_id, 
+       case when ((rcoarank=1 OR rcoarank=2) and (uplowerrank=1 or uplowerrank=2) and (uprank=1 or uprank=2) and (lowerrank=1 or lowerrank=2)) then 1  else 0 end as gradeid,
+       case when ((uplowerrank=1 or uplowerrank=2) and (uprank=1 or uprank=2) and (lowerrank=1 or lowerrank=2)) then 1  else 0 end as uplowid,
+       case when (rcoarank=1 or rcoarank=2) then 1 else 0 end rcoaid
+       from ]]>
+      <isNotNull property="WhichTable" prepend=" ">
+        <![CDATA[  FQB_BALANCE_INFO_3   ]]>
+      </isNotNull>
+      <isNull property="WhichTable" prepend=" ">
+        <![CDATA[  FQB_BALANCE_INFO    ]]>
+      </isNull>
+      
+      <![CDATA[ 
+       WHERE UFRANK IS NOT NULL ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="GradeId" prepend="AND">
+          <![CDATA[Ufrank = #GradeId#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[  ) t1
+       inner join (SELECT NVL(T10.MATERIAL_ID,-1) MATERIAL_ID, COUNT(*) AS TOTAL FROM ]]>
+      <isNotNull property="WhichTable" prepend=" ">
+        <![CDATA[  FQB_BALANCE_INFO_3  T10 ]]>
+      </isNotNull>
+      <isNull property="WhichTable" prepend=" ">
+        <![CDATA[  FQB_BALANCE_INFO  T10  ]]>
+      </isNull>
+      <![CDATA[
+       INNER JOIN CPP_CURING_PRODUCTION T7 ON T10.TYRE_ID=T7.TYRE_NO
+         INNER JOIN BPM_PRODUCTION T8 ON T8.GREEN_TYRE_NO=T7.GREEN_TYRE_NO
+         INNER JOIN BPM_SHIFT_MASTER T9 ON T9.OBJID=T8.SHIFT_MASTER_ID
+          WHERE  T10.DELETE_FLAG=0 AND T10.UFRANK IS NOT NULL
+       ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="BeginTime" prepend="AND">
+          <![CDATA[ t10.RECORD_TIME > #BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="EndTime" prepend="AND">
+          <![CDATA[t10.RECORD_TIME < #EndTime#]]>
+        </isNotNull>
+				<isNotNull property="TyreBeginTime" prepend="AND">
+					<![CDATA[ T7.BEGIN_TIME > #TyreBeginTime#]]>
+				</isNotNull>
+				<isNotNull property="TyreEndTime" prepend="AND">
+					<![CDATA[T7.END_TIME < #TyreEndTime#]]>
+				</isNotNull>
+				<isNotNull property="ModingBeginTime" prepend="AND">
+					<![CDATA[ T8.BEGIN_TIME > #ModingBeginTime#]]>
+				</isNotNull>
+				<isNotNull property="ModingEndTime" prepend="AND">
+					<![CDATA[T8.END_TIME < #ModingEndTime#]]>
+				</isNotNull>
+        <isNotNull property="Material_Name" prepend="AND">
+          <![CDATA[t10.MATERIAL_ID in (select objid from v_cbm_materialinfo where material_name LIKE '%'||#Material_Name#||'%')]]>
+        </isNotNull>
+        <isNotNull property="TyreNo" prepend="AND">
+          <![CDATA[t10.TYRE_ID = #TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="GreenTyreNo" prepend="AND">
+          <![CDATA[t7.green_tyre_no = #GreenTyreNo#]]>
+        </isNotNull>
+        <isNotNull property="GradeId" prepend="AND">
+          <![CDATA[t10.Ufrank = #GradeId#]]>
+        </isNotNull>
+        <isNotNull property="EquipID" prepend="AND">
+          <![CDATA[t10.EQUIP_ID = #EquipID#]]>
+        </isNotNull>
+        <isNotNull property="EquipIDMolding" prepend="AND">
+          <![CDATA[T9.EQUIP_ID = #EquipIDMolding#]]>
+        </isNotNull>
+        <isNotNull property="EquipIDCuring" prepend="AND">
+          <![CDATA[T7.EQUIP_ID = #EquipIDCuring#]]>
+        </isNotNull>
+        <isNotNull property="cppclass" prepend="AND">
+          <![CDATA[T7.class_id = #cppclass#]]>
+        </isNotNull>
+        <isNotNull property="moldclass" prepend="AND">
+          <![CDATA[T9.class_id = #moldclass#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[ 
+            group by t10.material_id) t2
+        on t1.material_id=t2.material_id
+        left join v_cbm_materialinfo t3 on t3.ObjId= t1.material_id
+        inner join cpp_curing_production t4 on t1.tyre_id=t4.tyre_no
+         inner join bpm_production t5 on t4.green_tyre_no=t5.green_tyre_no
+         INNER JOIN BPM_SHIFT_MASTER T6 ON T6.OBJID=T5.SHIFT_MASTER_ID
+         where  t1.delete_flag = 0
+        ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="BeginTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME > #BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="EndTime" prepend="AND">
+          <![CDATA[T1.RECORD_TIME < #EndTime#]]>
+        </isNotNull>
+				<isNotNull property="TyreBeginTime" prepend="AND">
+					<![CDATA[T4.BEGIN_TIME > #TyreBeginTime#]]>
+				</isNotNull>
+				<isNotNull property="TyreEndTime" prepend="AND">
+					<![CDATA[T4.END_TIME < #TyreEndTime#]]>
+				</isNotNull>
+				<isNotNull property="ModingBeginTime" prepend="AND">
+					<![CDATA[ T5.BEGIN_TIME > #ModingBeginTime#]]>
+				</isNotNull>
+				<isNotNull property="ModingEndTime" prepend="AND">
+					<![CDATA[T5.END_TIME < #ModingEndTime#]]>
+				</isNotNull>
+        <isNotNull property="Material_Name" prepend="AND">
+          <![CDATA[T1.MATERIAL_ID in (select objid from v_cbm_materialinfo where material_name LIKE '%'||#Material_Name#||'%')]]>
+        </isNotNull>
+        <isNotNull property="TyreNo" prepend="AND">
+          <![CDATA[T1.TYRE_ID = #TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="EquipID" prepend="AND">
+          <![CDATA[T1.EQUIP_ID = #EquipID#]]>
+        </isNotNull>
+        <isNotNull property="EquipIDMolding" prepend="AND">
+          <![CDATA[T6.EQUIP_ID = #EquipIDMolding#]]>
+        </isNotNull>
+        <isNotNull property="EquipIDCuring" prepend="AND">
+          <![CDATA[T4.EQUIP_ID = #EquipIDCuring#]]>
+        </isNotNull>
+        <isNotNull property="cppclass" prepend="AND">
+          <![CDATA[T4.class_id = #cppclass#]]>
+        </isNotNull>
+        <isNotNull property="moldclass" prepend="AND">
+          <![CDATA[T6.class_id = #moldclass#]]>
+        </isNotNull>
+      </dynamic>
+      <dynamic prepend="GROUP BY">
+        <![CDATA[t3.MATERIAL_NAME,t2.total]]>
+      </dynamic>
+      <dynamic prepend="ORDER BY">
+        <![CDATA[MATERIAL_NAME]]>
+      </dynamic>
+    </select>
+    <select id="GetWorkShopEquip" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      select workshop_equip_id,equip_id from fqb_workshop_equipid where minor_type_id=6102
+      ]]>
+    </select>
+    <select id="GetBanlanceReportInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        select t.material_id ,t1.Material_Name,sum(t.ufrank) ufrank,sum(t.uplowerrank) uplowerrank,sum(t.ltoarank) ltoarank,sum(t.lboarank) lboarank,
+        sum(t.rcoarank) rcoarank,count(t.ufrank) total,round(sum(t.ufrank)/count(t.ufrank),4)*100||'%' percent from
+        (
+        select t0.material_id,case when (t0.rcoarank=1 and t0.uplowerrank=1 and t0.uprank=1 and t0.lowerrank=1 and nvl(t0.lboa_rank,1) = 1 and nvl(t0.ltoa_rank,1) = 1) then t0.rcoarank  else 0 end ufrank,
+        case when  (t0.uplowerrank=1 and t0.uprank=1 and t0.lowerrank=1) then t0.uplowerrank else 0 end uplowerrank,
+        case when t0.rcoarank=1 then t0.rcoarank else 0 end rcoarank,
+        case when nvl(t0.ltoa_rank,1) = 1 then nvl(t0.ltoa_rank,1) else 0 end ltoarank,
+        case when nvl(t0.lboa_rank,1) = 1 then nvl(t0.lboa_rank,1) else 0 end lboarank
+        from fqb_balance_info t0 
+        where t0.delete_flag = 0 and t0.ufrank is not null AND T0.MATERIAL_ID IS NOT NULL AND T0.TYRE_ID IS NOT NULL
+       ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[t0.record_time>=#where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[t0.record_time<#where.EndTime#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+           )t 
+           left join v_cbm_materialinfo t1 on t1.ObjId = t.material_id
+       ]]>
+      <dynamic prepend="GROUP BY">
+        <![CDATA[t.material_id,t1.Material_Name]]>
+      </dynamic>
+    </select>
+
+    <select id="GetBanlanceReportInfoOld" parameterClass="map" resultClass="Row">
+      <![CDATA[
+        select t.material_id ,t1.Material_Name,sum(t.ufrank) ufrank,sum(t.uplowerrank) uplowerrank,
+        sum(t.rcoarank) rcoarank,count(t.ufrank) total,round(sum(t.ufrank)/count(t.ufrank),4)*100||'%' percent from
+        (
+        select t0.material_id,case when ((t0.rcoarank=1 or t0.rcoarank=2) and (t0.uplowerrank=1 or t0.uplowerrank=2) and (t0.uprank=1 or t0.uprank=2) and (t0.lowerrank=1 or t0.lowerrank=2)) then 1  else 0 end ufrank,
+        case when  ((t0.uplowerrank=1 or t0.uplowerrank=2) and (t0.uprank=1 or t0.uprank=2) and (t0.lowerrank=1 or t0.lowerrank=2)) then 1 else 0 end uplowerrank,
+        case when (t0.rcoarank=1 or t0.rcoarank=2) then 1 else 0 end rcoarank
+        from fqb_balance_info t0 
+        where t0.delete_flag = 0 and t0.ufrank is not null AND T0.MATERIAL_ID IS NOT NULL AND T0.TYRE_ID IS NOT NULL
+       ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[t0.record_time>=#where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[t0.record_time<#where.EndTime#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+           )t 
+           left join v_cbm_materialinfo t1 on t1.ObjId = t.material_id
+       ]]>
+      <dynamic prepend="GROUP BY">
+        <![CDATA[t.material_id,t1.Material_Name]]>
+      </dynamic>
+    </select>
+
+    <!--获取WMS所需轮胎信息-->
+    <select id="GetTyreNoWMSInfoQuality" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+         
+   select a.tyre_no,a.green_tyre_no,nvl(a.end_time,a.begin_time) end_time,b.material_code,b.sap_code
+                  ,case nvl(e.objid,0) when 2 then 1 else 0 end AS testFlag
+                  ,nvl(to_char(a.END_TIME,'yyyy'),to_char(sysdate,'yyyy')) batchCuring
+                  ,to_char(a.END_TIME, 'WWYY') weekYear
+                  ,nvl(a.year_week,'') year_week
+                  ,f.final_check_grade
+                  ,case when f.final_check_grade <> 1 then 1
+                        else nvl(nullif(g.UFRANK,0),2) end dph_grade_code,h.ufmtotalrank realjun,g.ufrank realdong,i.gradeid realx,j.is_jun isjun,j.is_dong isdong
+                          ,k.dummy3  Weightflag  ,nvl(l.degrade_id,0) degrade_id            
+            from cpp_curing_production a
+            left join sbm_material b on a.material_id = b.objid and b.delete_flag = 0
+            left join cpp_curing_plan_detail c on a.plan_detail_id = c.objid
+            left join sbm_bom d on c.bom_id = d.objid
+            left join sbm_bom_type e on d.bom_type = e.objid
+            left join spp_tyre_state f on a.tyre_no = f.tyre_no and f.delete_flag = 0
+            left join fqb_balance_info g on a.tyre_no = g.tyre_id and g.delete_flag = 0
+            left join sbe_uniformity h on h.tyreno = a.tyre_no
+            left join fqx_xcheck_info i on i.tyrdid = a.tyre_no
+            left join fqb_quality_standard j on j.material_id = b.objid and j.delete_flag = 0
+            left join bpm_weight_info k on k.green_tyre_no = a.green_tyre_no and k.delete_flag = 0
+            left join cpp_curing_degrade l on l.tyre_no = a.tyre_no 
+            where a.delete_flag = 0 
+       ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="TyreNo" prepend="AND">
+          <![CDATA[a.tyre_no = #TyreNo#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+
+
+    <!--获取WMS所需轮胎信息-->
+    <select id="GetTyreNoWMSToTalRank" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+            select TOTALRank from sbe_Uniformity a
+            where a.TyreNo = #TyreNo#  order by checktime desc
+       ]]>
+    </select>
+
+
+    <!--获取WMS所需轮胎信息-->
+    <select id="GetWMSInfoByTyreNo" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+            select * from WMS_UPLOAD_RECORD where delete_flag = 0
+       ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="TyreNo" prepend="AND">
+          <![CDATA[tyre_no = #TyreNo#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+
+    <!--更新WMS轮胎信息-->
+    <update id="UpdateWMSInfoByTyreNo" parameterClass="map">
+      <![CDATA[ 
+        update WMS_UPLOAD_RECORD set BACKUP_TIME = SYSDATE,ITEM_NUMBER = #ITEM_NUMBER#
+                                    ,ITEM_DESC= #ITEM_DESC#,LOT_NUMBER = #LOT_NUMBER#
+                                    ,MES_LOT = #MES_LOT#,GRADE = #GRADE#
+                                    ,WEEK = #WEEK#,TEST_FLAG = #TEST_FLAG#
+                                    ,PRODUCTION_TIME = to_date(#PRODUCTION_TIME#,'yyyy-mm-dd hh24:mi:ss'),UPLOAD_FLAG=0
+                                    ,RETURN_FLAG = #RETURN_FLAG#
+                                    ,RECORD_USER_ID = #UserID#,returnstate=null
+        where TYRE_NO = #TyreNo#
+      ]]>
+    </update>
+
+    <update id="UpdateWMSReflag" parameterClass="map">
+      <![CDATA[ 
+        update WMS_UPLOAD_RECORD set reflag = #reflag# where TYRE_NO = #TyreNo#
+      ]]>
+    </update>
+
+    <!--插入WMS轮胎信息-->
+    <insert id="InsertWMSInfoByTyreNo" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+       INSERT INTO WMS_UPLOAD_RECORD(OBJID,RECORD_TIME,BACKUP_TIME,DELETE_FLAG,TYRE_NO,GREEN_TYRE_NO,WH_ID
+                                           ,SUB_WARE_HOUSE,ITEM_NUMBER,ITEM_DESC,SAP_LINE_LOC,LOT_NUMBER,MES_LOT,TEST_FLAG,RETURN_FLAG,GRADE
+                                           ,WEEK,SHIFT,PRODUCTION_TIME,UPLOAD_FLAG,UPLOAD_TIME,RECORD_USER_ID)
+       VALUES(SEQ_WMS_UPLOAD_RECORD.NEXTVAL,SYSDATE,SYSDATE,0,#TyreNo#,#GreenTyreNo#,'8002'
+             ,'3',#ITEM_NUMBER#,#ITEM_DESC#,#SAP_LINE_LOC#,#LOT_NUMBER#,#MES_LOT#,#TEST_FLAG#,#RETURN_FLAG#,#GRADE#
+             ,#WEEK#,#SHIFT#,to_date(#PRODUCTION_TIME#,'yyyy-mm-dd hh24:mi:ss'),0,SYSDATE,#UserID#)
+      ]]>
+    </insert>
+
+    <!--更新WMS轮胎实验胎标志-->
+    <update id="UpdateTyreNoWMSRecordTestFlag" parameterClass="map">
+      <![CDATA[ 
+        update WMS_UPLOAD_RECORD set BACKUP_TIME = SYSDATE
+                                    ,BACKUP_FLAG = #BACKUP_FLAG#
+                                    ,TEST_FLAG = #TEST_FLAG#
+                                    ,UPLOAD_FLAG=0
+                                    ,RECORD_USER_ID = #UserID#
+        where TYRE_NO = #TyreNo#
+      ]]>
+    </update>
+
+
+    <select id="GetUCheckInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+ 
+select N.*,N10.USER_NAME AS MOLDINGNAME ,N11.USER_NAME AS MOLDINGNAME1 ,N12.USER_NAME AS MOLDINGNAME2,ufrank realdong from ( select a.OBJID,tyreno,materialid,materialname,b.equip_name,ufmstandard,checktime,C.GRADEname totalrank,
+load1,CWRFVOAkgf,CWRFVOAdeg,case CWRFVOArank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else ''  end CWRFVOArank,CWRFVOA1Hkgf,CWRFVOA1Hdeg,case CWRFVOA1Hrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CWRFVOA1Hrank,
+CWRFVOA2Hkgf,CWRFVOA2Hdeg,case CWRFVOA2Hrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CWRFVOA2Hrank,CWRFVOA8Hkgf,CWRFVOA8Hdeg,case CWRFVOA8Hrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CWRFVOA8Hrank,
+CWLFVOAkgf,CWLFVOAdeg,case CWLFVOArank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CWLFVOArank,CWLFVOA1Hkgf,CWLFVOA1Hdeg,case CWLFVOA1Hrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CWLFVOA1Hrank,
+CWLFVOA2Hkgf,CWLFVOA2Hdeg,case CWLFVOA2Hrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CWLFVOA2Hrank,CWLFVOA8Hkgf,CWLFVOA8Hdeg,case CWLFVOA8Hrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CWLFVOA8Hrank,
+CCWRFVOAkgf,CCWRFVOAdeg,case CCWRFVOArank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CCWRFVOArank,CCWRFVOA1Hkgf,CCWRFVOA1Hdeg,case CCWRFVOA1Hrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CCWRFVOA1Hrank,
+CCWRFVOA2Hkgf,CCWRFVOA2Hdeg,case CCWRFVOA2Hrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CCWRFVOA2Hrank,CCWRFVOA8Hkgf,CCWRFVOA8Hdeg,case CCWRFVOA8Hrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CCWRFVOA8Hrank,
+CCWLFVOAkgf,CCWLFVOAdeg,case CCWLFVOArank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CCWLFVOArank,CCWLFVOA1Hkgf,CCWLFVOA1Hdeg,case CCWLFVOA1Hrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CCWLFVOA1Hrank,
+CCWLFVOA2Hkgf,CCWLFVOA2Hdeg,case CCWLFVOA2Hrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CCWLFVOA2Hrank,CCWLFVOA8Hkgf,CCWLFVOA8Hdeg,case CCWLFVOA8Hrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CCWLFVOA8Hrank,
+CWLFDkgf,case CWLFDrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CWLFDrank,CCWLFDkgf,case CCWLFDrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CCWLFDrank
+,CONkgf,case CONrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end CONrank,PLYkgf,case PLYrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end PLYrank
+,case UfmTotalrank when 1 then 'A+1' when 2 then 'A+2' when 3 then 'A0' when 4 then 'D品' when 5 then 'E品' else '' end UfmTotalrank,case RoTotalRank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end RoTotalRank
+,T27.PDM_CODE,T14.EQUIP_NAME M_EQUIP_NAME,T15.CLASS_NAME M_CLASS_NAME,T11.EQUIP_NAME C_EQUIP_NAME,T21.SHOW_NAME,T17.CLASS_NAME C_CLASS_NAME
+,T18.REAL_NAME AS CURINGNAME,T12.BEGIN_TIME,T12.END_TIME,T10.BEGIN_TIME AS C_BEGIN_TIME,T10.END_TIME AS C_END_TIME
+,MAX(DECODE(T22.WORKER_ID8,82,T22.WORKER_ID1,NULL)) EMP1,MAX(DECODE(T22.WORKER_ID8,83,T22.WORKER_ID1,NULL)) EMP2
+, MAX(DECODE(T22.WORKER_ID8,85,T22.WORKER_ID1,NULL)) EMP3,t33.ufrank,UfmTotalrank realjun,
+case (case when nvl(ufrank,0)> nvl(UfmTotalrank,0) then ufrank else UfmTotalrank end) when 1 then 'A+1' when 2 then 'A+2' when 3 then 'A0' when 4 then 'D品' when 5 then 'E品' end total,
+t33.rcoa_amount,case t33.rcoarank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end rcoarank,t33.rcoadeg,t33.staticunbalancedeg,
+case t33.staticrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end staticrank,t33.static_amount,t33.coupleunbalancedeg,
+case t33.couplerank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end couplerank,t33.couple_amount,t33.up_amount,
+case t33.uprank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end uprank,t33.lower_amount,t33.lowerunbalancedeg,t33.uplower_amount,
+case t33.lowerrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end lowerrank,
+case t33.uplowerrank when 1 then 'A品' when 2 then 'B品' when 3 then 'C品' when 4 then 'D品' when 5 then 'E品' else '' end uplowerrank
+ from  sbe_uniformity a
+left join sbe_equip b on b.objid = a.equipid
+LEFT JOIN FQG_GRADE_INFO C ON C.FINAL_GRADE_CODE = A.TOTALRANK AND C.WORK_PROCESS_ID = 530
+
+      LEFT JOIN CPP_CURING_PRODUCTION T10 ON T10.TYRE_NO = a.tyreno AND T10.DELETE_FLAG=0
+      left join bpm_production T25 ON T25.GREEN_TYRE_NO = T10.GREEN_TYRE_NO
+      LEFT JOIN BPP_PLAN_DETAIL T26 ON T25.PLAN_DETAIL_ID = T26.OBJID
+      LEFT JOIN SBM_MATERIAL T27 ON T27.OBJID=T26.MATERIAL_ID
+      LEFT JOIN SBE_EQUIP T11 ON T11.OBJID = T10.EQUIP_ID
+      LEFT JOIN BPM_PRODUCTION T12 ON T12.GREEN_TYRE_NO = T10.GREEN_TYRE_NO
+      LEFT JOIN BPM_SHIFT_MASTER T13 ON T13.OBJID = T12.SHIFT_MASTER_ID
+      LEFT JOIN BPM_SHIFT_DETAIL T22 ON T22.MASTER_ID = T13.OBJID
+      LEFT JOIN SBE_EQUIP T14 ON T14.OBJID = T13.EQUIP_ID
+      LEFT JOIN SSB_CLASS T15 ON T15.OBJID = T13.CLASS_ID
+      LEFT JOIN CBE_EQUIP_POSITION T21 ON T21.OBJID = T10.EQUIP_POSITION 
+      LEFT JOIN CPP_CURING_SHIFT_MASTER T16 ON T16.OBJID = T10.SHIFT_MASTER_ID
+      LEFT JOIN SSB_USER T18 ON T18.OBJID = T16.WORKER_ID
+      LEFT JOIN SSB_CLASS T17 ON T17.OBJID = T16.CLASS_ID
+      left join fqb_balance_info t33 on t33.tyre_id = a.tyreno
+      where 1=1
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="BeginTime" prepend="AND">
+          <![CDATA[A.checktime >= #BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="EndTime" prepend="AND">
+          <![CDATA[A.checktime <= #EndTime#]]>
+        </isNotNull>
+        <isNotNull property="TyreNo" prepend="AND">
+          <![CDATA[A.tyreno = #TyreNo#]]>
+        </isNotNull>
+        <isNotNull property="EquipID" prepend="AND">
+          <![CDATA[b.objid = #EquipID#]]>
+        </isNotNull>
+        <isNotNull property="Material_Name" prepend="AND">
+          <![CDATA[a.MATERIALNAME LIKE '%'||#Material_Name#||'%']]>
+        </isNotNull>
+        <isNotNull property="EquipIDMolding" prepend="AND">
+          <![CDATA[t13.EQUIP_ID = #EquipIDMolding#]]>
+        </isNotNull>
+        <isNotNull property="EquipIDCuring" prepend="AND">
+          <![CDATA[T10.EQUIP_ID = #EquipIDCuring#]]>
+        </isNotNull>
+        <isNotNull property="TotalRank" prepend="AND">
+          <![CDATA[A.TOTALRANK = #TotalRank#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+group by a.OBJID,tyreno,materialid,materialname,b.equip_name,ufmstandard,checktime,C.GRADEname,
+load1,CWRFVOAkgf,CWRFVOAdeg,CWRFVOArank,CWRFVOA1Hkgf,CWRFVOA1Hdeg,CWRFVOA1Hrank,
+CWRFVOA2Hkgf,CWRFVOA2Hdeg,CWRFVOA2Hrank,CWRFVOA8Hkgf,CWRFVOA8Hdeg,CWRFVOA8Hrank,
+CWLFVOAkgf,CWLFVOAdeg,CWLFVOArank,CWLFVOA1Hkgf,CWLFVOA1Hdeg,CWLFVOA1Hrank,
+CWLFVOA2Hkgf,CWLFVOA2Hdeg,CWLFVOA2Hrank,CWLFVOA8Hkgf,CWLFVOA8Hdeg,CWLFVOA8Hrank,
+CCWRFVOAkgf,CCWRFVOAdeg,CCWRFVOArank,CCWRFVOA1Hkgf,CCWRFVOA1Hdeg,CCWRFVOA1Hrank,
+CCWRFVOA2Hkgf,CCWRFVOA2Hdeg,CCWRFVOA2Hrank,CCWRFVOA8Hkgf,CCWRFVOA8Hdeg,CCWRFVOA8Hrank,
+CCWLFVOAkgf,CCWLFVOAdeg,CCWLFVOArank,CCWLFVOA1Hkgf,CCWLFVOA1Hdeg,CCWLFVOA1Hrank,
+CCWLFVOA2Hkgf,CCWLFVOA2Hdeg,CCWLFVOA2Hrank,CCWLFVOA8Hkgf,CCWLFVOA8Hdeg,CCWLFVOA8Hrank,
+CWLFDkgf,CWLFDrank,CWLFDrank,CCWLFDkgf,CCWLFDrank
+,CONkgf,CONrank,PLYkgf,PLYrank
+,UfmTotalrank,RoTotalRank
+,T27.PDM_CODE,T14.EQUIP_NAME,T15.CLASS_NAME,T11.EQUIP_NAME,T21.SHOW_NAME,T17.CLASS_NAME
+,T18.REAL_NAME,T12.BEGIN_TIME,T12.END_TIME,T10.BEGIN_TIME,T10.END_TIME,t33.ufrank,t33.rcoa_amount,
+t33.rcoarank,t33.rcoadeg,t33.staticunbalancedeg,t33.staticrank,t33.static_amount,t33.coupleunbalancedeg,t33.couplerank,
+t33.couple_amount,t33.up_amount,t33.uprank,t33.lower_amount,t33.lowerunbalancedeg,t33.uplower_amount,t33.lowerrank,t33.uplowerrank
+) N
+          LEFT JOIN SSB_USER N10 ON N10.OBJID = N.EMP1
+          LEFT JOIN SSB_USER N11 ON N11.OBJID = N.EMP2
+          LEFT JOIN SSB_USER N12 ON N12.OBJID = N.EMP3
+        ]]>
+    </select>
+    <select id="GetUcheckTotalInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+   select sbm.material_name materialname,count(*) as Total,nvl(x.JunyunHege,0) as JunyunHege,nvl(z.DongHege,0) as DongHege,nvl(round(w.DongHege1/count(*)*100,2),0) as hegelv,nvl(round(x.JunyunHege/count(*)*100,2),0) as junhegelv,
+      nvl(w.DongHege1,0) as zonghegeshu
+
+ from sbe_uniformity y 
+ left join cpp_curing_production cpp on cpp.tyre_no = y.tyreno
+ left join sbm_material sbm on cpp.material_id = sbm.objid
+ left join (select materialname as material1,count(*) as JunyunHege from sbe_uniformity where checktime >= #BeginTime# and checktime <= #EndTime# and (UfmTotalrank = 1 or UfmTotalrank = 2) group by materialname order by materialname) x
+ on sbm.material_name = x.material1
+ left join(select c.material_name as material2,count(*) as DongHege from fqb_balance_info a
+left join (
+select tyreno from sbe_uniformity where checktime >= #BeginTime# and checktime <= #EndTime#
+) b on a.tyre_id = b.tyreno
+left join sbm_material c on c.objid = a.material_id
+where a.tyre_id = b.tyreno and (a.ufrank = 1 or a.ufrank = 2) group by material_name order by material_name) z
+on z.material2 = sbm.material_name
+ left join(select c1.material_name as material2,count(*) as DongHege1 from fqb_balance_info a1
+left join (
+select tyreno,UfmTotalrank from sbe_uniformity where checktime >= #BeginTime# and checktime <= #EndTime#
+) b1 on a1.tyre_id = b1.tyreno
+left join sbm_material c1 on c1.objid = a1.material_id
+where a1.tyre_id = b1.tyreno and (a1.ufrank = 1 or a1.ufrank =2) and (b1.UfmTotalrank = 1 or b1.UfmTotalrank = 2) group by material_name order by material_name) w
+on w.material2 = sbm.material_name
+ 
+ where checktime >= #BeginTime# and checktime <= #EndTime#
+group by sbm.material_name,x.JunyunHege,z.DongHege,w.DongHege1 order by sbm.material_name
+      ]]>
+    </select>
+
+
+    <select id="GetBarcodeInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+select * from (
+ select  a.tyreid,case b.gradename when '二级品' then '次品' else  b.gradename end gradename
+,substr(a.defectname,4,99) defect  from  fqf_fcheck_info a 
+left join fqg_grade_info b on b.final_grade_code = a.gradeid and b.work_process_id = 500
+where a.tyreid = #TyreNo# and a.new_flag = 1
+union 
+select x.tyrdid,case x2.gradename when '二级品' then '次品' else  x2.gradename end gradename 
+,x3.defectname
+ from  fqx_xcheck_detail x 
+left join fqx_xcheck_info x1 on x.tyrdid = x1.tyrdid and x1.new_flag = 1
+left join fqg_grade_info x2 on x2.final_grade_code = x1.gradeid and x2.work_process_id = 500
+left join fqd_defect_info x3 on x3.objid = x.defectid
+where x.tyrdid = #TyreNo# and x.new_flag = 1
+) xx order by defect 
+       ]]>
+    </select>
+    <insert id="InsBadInStore" parameterClass="map">
+      <![CDATA[ 
+insert into psm_badinstore
+values(seq_psm_badinstore.nextval,#TyreNo#,#userid#,sysdate)
+      ]]>
+    </insert>
+
+    <delete id="DelBInStore" parameterClass="map">
+      <![CDATA[ 
+delete from  psm_badinstore where tyre_no = #TyreNo#
+      ]]>
+    </delete>
+
+    <select id="GetIsBadInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+select * from psm_badinstore where tyre_no = #TyreNo#
+       ]]>
+    </select>
+    
+        <insert id="InsertSbeRbRecord" parameterClass="map">
+      <![CDATA[ 
+      insert into sbe_rbrecord(objid,tyre_no,defect_name,user_id) values(seq_sbe_rbrecord.nextval,#TyreNo#,#BCName#,#userid#)
+      ]]>
+    </insert>
+    
+   <select id="GetRBGradeInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+ select a.defectname,CASE T.PT_TYPE_ID WHEN 1 THEN '配套' WHEN 5 THEN '非配套' END PT_TYPE from fqf_fcheck_info a 
+left join cpp_curing_production b on b.tyre_no = a.tyreid and b.delete_flag = 0
+left join FQF_PTSTANDARD_DETAIL t on t.material_id = b.material_id
+   where a.tyreid = #TyreNo# and a.state_flag = 0 and a.delete_flag = 0
+       ]]>
+    </select>
+
+    <select id="GetBpmTestInfo" parameterClass="map" resultClass="Row">
+      <![CDATA[ select test_flag  from  bpm_production  where  green_tyre_no = #TyreNo# and delete_flag = 0
+       ]]>
+    </select>
+
+  </statements>
+</sqlMap>

@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.HppSemisProduction"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_SEMIS_PRODUCTION ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.CardNo" prepend="AND">
+          <![CDATA[CARD_NO = #where.CardNo#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanId" prepend="AND">
+          <![CDATA[PLAN_ID = #where.PlanId#]]>
+        </isNotNull>
+        <isNotNull property="where.PlanDetailId" prepend="AND">
+          <![CDATA[PLAN_DETAIL_ID = #where.PlanDetailId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftMasterId" prepend="AND">
+          <![CDATA[SHIFT_MASTER_ID = #where.ShiftMasterId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftDate" prepend="AND">
+          <![CDATA[SHIFT_DATE = #where.ShiftDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.ClassId" prepend="AND">
+          <![CDATA[CLASS_ID = #where.ClassId#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[BEGIN_TIME = #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[END_TIME = #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.UnitId" prepend="AND">
+          <![CDATA[UNIT_ID = #where.UnitId#]]>
+        </isNotNull>
+        <isNotNull property="where.Qty" prepend="AND">
+          <![CDATA[QTY = #where.Qty#]]>
+        </isNotNull>
+        <isNotNull property="where.ShelfNo" prepend="AND">
+          <![CDATA[SHELF_NO = #where.ShelfNo#]]>
+        </isNotNull>
+        <isNotNull property="where.IsAlarm" prepend="AND">
+          <![CDATA[IS_ALARM = #where.IsAlarm#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Weight" prepend="AND">
+          <![CDATA[WEIGHT = #where.Weight#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.WasteQty" prepend="AND">
+          <![CDATA[WASTE_QTY = #where.WasteQty#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftQty" prepend="AND">
+          <![CDATA[LEFT_QTY = #where.LeftQty#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetSemisProductInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      select * from ( SELECT T.CARD_NO Barcode,T.EQUIP_ID,T.MATERIAL_ID,T1.MATERIAL_NAME,T1.SAP_CODE,T1.MATERIAL_CODE,T1.MINOR_TYPE_ID MATERIAL_TYPE_ID,
+       T2.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T4.USER_NAME OPER_NAME,T3.EQUIP_NAME,T.QTY SET_QUANTITY,T.LEFT_QTY LEFT_QUANTITY,T.END_TIME PRODUCE_TIME,
+       T.END_TIME VALID_DATE,T5.MIN_TIME,T5.VALID_TIME ,T.DUMMY2,T.MARK_FLAG,case t.MARK_FLAG when 1 then t13.reason_name when 2 then t14.reason_name else null end reason_name 
+       ,NVL(T.dummy8,'1') USED_FLAG 
+       ,T.DUMMY9 YC_TIME,t.batch
+       from HPP_SEMIS_PRODUCTION t
+        LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID  =T.MATERIAL_ID
+        LEFT JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T2.OBJID = T1.MINOR_TYPE_ID
+        LEFT JOIN SBE_EQUIP T3 ON T3.OBJID = T.EQUIP_ID
+        LEFT JOIN SSB_USER T4 ON T4.OBJID = T.RECORD_USER_ID
+        LEFT JOIN SBM_MATERIAL_INFO T5 ON T5.MATERIAL_ID = T.MATERIAL_ID
+            LEFT JOIN sbm_mark_info t12 on t12.barcode = t.card_no and t12.delete_flag=0  and t.mark_flag = t12.mark_flag
+        LEFT JOIN sbm_mark_reason t13 on t13.objid = t12.reason_id
+        left join sbm_freeze_reason t14 on t14.objid = t12.reason_id
+       WHERE T.DELETE_FLAG=0
+       ]]>
+       <isNotNull property="cardNo" prepend="AND">
+         <![CDATA[T.CARD_NO=#cardNo#]]>
+       </isNotNull>
+       <![CDATA[ order by t12.record_time desc) where rownum<=1]]>
+     </select>
+     
+     <update id="UpdateCardNoLeftQty" parameterClass="map">
+       <![CDATA[
+       update hpp_rubber_production set left_qty = left_qty - #useQty#
+       where barcode = #CardNo#
+       ]]>
+     </update>
+
+     <select id="ReturnStrippingOKFlagInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+    select  OK_FLAG  from  hpp_stripping where batch=#Batch#
+       ]]>
+     </select>
+     
+  </statements>
+</sqlMap>

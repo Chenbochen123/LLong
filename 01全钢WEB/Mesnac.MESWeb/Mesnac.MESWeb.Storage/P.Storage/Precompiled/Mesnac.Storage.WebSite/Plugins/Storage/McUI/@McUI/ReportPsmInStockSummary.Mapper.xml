@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportPsmInStockSummary" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T7.MATERIAL_NAME, T1.*
+        , CASE T1.SUMMARY_STATE WHEN 0 THEN '未确认' WHEN 1 THEN '已确认' ELSE '' END SUMMARY_STATE_CAPTION
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '合格品' WHEN 2 THEN '次品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' ELSE '无品级' END CHECK_GRADE_NAME 
+        , CASE T3.BILL_TYPE WHEN 1 THEN '装车入库' WHEN 2 THEN '直接入库' ELSE '' END BILL_TYPE_CAPTION
+        , T2.USER_NAME RECORD_USER_NAME 
+        , T3.IN_DATE
+        , T5.USER_NAME UPDATE_USER_NAME 
+        , T6.USER_NAME AFFIRM_USER_NAME 
+        , T8.STORE_NAME
+        , T9.STORE_PLACE_NAME
+        ,T10.CLASS_NAME IN_CLASS_NAME
+        , T11.SHIFT_NAME IN_SHIFT_NAME 
+        FROM PSM_IN_STOCK_SUMMARY T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        LEFT JOIN PSM_IN_STOCK_BILL T3 ON T1.BILL_ID = T3.OBJID 
+        LEFT JOIN SSB_USER T5 ON T1.UPDATE_USER_ID = T5.OBJID
+        LEFT JOIN SSB_USER T6 ON T1.AFFIRM_USER_ID = T6.OBJID
+        LEFT JOIN SBM_MATERIAL T7 ON T1.MATERIAL_ID = T7.OBJID
+        LEFT JOIN PSB_STORE T8 ON T1.STORE_ID = T8.OBJID
+        LEFT JOIN PSB_STORE_PLACE T9 ON T1.STORE_PLACE_ID = T9.OBJID
+        LEFT JOIN SSB_CLASS T10 ON T3.IN_CLASS_ID = T10.OBJID 
+        LEFT JOIN SSB_SHIFT T11 ON T3.IN_SHIFT_ID = T11.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.DELETE_FLAG" prepend="AND">
+          <![CDATA[T1.DELETE_FLAG = #where.DELETE_FLAG#]]>
+        </isNotNull>
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.TyreNo" prepend="AND">
+          <![CDATA[
+            EXISTS (
+              SELECT * FROM PSM_IN_STOCK_DETAIL A 
+              WHERE A.DELETE_FLAG = 0 
+              AND A.TYRE_NO = #where.TyreNo#
+              AND A.SUMMARY_ID = T1.OBJID
+            )
+          ]]>
+        </isNotNull>
+        <isNull property="where.TyreNo">
+          <isNotNull property="where.GreenTyreNo" prepend="AND">
+            <![CDATA[
+              EXISTS (
+                SELECT * FROM PSM_IN_STOCK_DETAIL A 
+                WHERE A.DELETE_FLAG = 0 
+                AND A.GREEN_TYRE_NO = #where.GreenTyreNo#
+                AND A.SUMMARY_ID = T1.OBJID
+              )
+          ]]>
+          </isNotNull>
+          <isNull property="where.GreenTyreNo">
+            <isNotNull property="where.BeginDate" prepend="AND">
+              <![CDATA[T3.IN_DATE >= #where.BeginDate#]]>
+            </isNotNull>
+            <isNotNull property="where.EndDate" prepend="AND">
+              <![CDATA[T3.IN_DATE <= #where.EndDate#]]>
+            </isNotNull>
+            <isNotNull property="where.BeginTime" prepend="AND">
+              <![CDATA[T1.RECORD_TIME >= #where.BeginTime#]]>
+            </isNotNull>
+            <isNotNull property="where.EndTime" prepend="AND">
+              <![CDATA[T1.RECORD_TIME <= #where.EndTime#]]>
+            </isNotNull>
+            <isNotNull property="where.SummaryState" prepend="AND">
+              <![CDATA[T1.SUMMARY_STATE = #where.SummaryState#]]>
+            </isNotNull>
+            <isNotNull property="where.InClassId" prepend="AND">
+              <![CDATA[T3.IN_CLASS_ID = #where.InClassId#]]>
+            </isNotNull>
+            <isNotNull property="where.InShiftId" prepend="AND">
+              <![CDATA[T3.IN_SHIFT_ID = #where.InShiftId#]]>
+            </isNotNull>
+            <isNotNull property="where.MaterialId" prepend="AND">
+              <![CDATA[T1.MATERIAL_ID = #where.MaterialId#]]>
+            </isNotNull>
+            <isNotNull property="where.MaterialName" prepend="AND">
+              <![CDATA[T7.MATERIAL_NAME LIKE '%' || #where.MaterialName# || '%']]>
+            </isNotNull>
+            <isNotNull property="where.CheckGradeCode" prepend="AND">
+              <![CDATA[T1.CHECK_GRADE_CODE = #where.CheckGradeCode#]]>
+            </isNotNull>
+            <isNotNull property="where.CheckGradeCode" prepend="AND">
+              <![CDATA[T1.CHECK_GRADE_CODE = #where.CheckGradeCode#]]>
+            </isNotNull>
+            <isNotNull property="where.BillType" prepend="AND">
+              <![CDATA[T3.BILL_TYPE = #where.BillType#]]>
+            </isNotNull>
+            <isNotNull property="where.RecordUserName" prepend="AND">
+              <![CDATA[T2.USER_NAME like '%' || #where.RecordUserName# || '%']]>
+            </isNotNull>
+            <isNotNull property="where.BillCode" prepend="AND">
+              <![CDATA[T3.BILL_CODE = #where.BillCode#]]>
+            </isNotNull>
+          </isNull>
+        </isNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend=" ">
+        ORDER BY T3.RECORD_TIME DESC, T1.RECORD_TIME
+      </isNull>
+    </select>
+    <select id="Select+Update@ReportPsmInStockSummary" parameterClass="map" resultClass="row">
+      <![CDATA[SELECT * FROM PSM_IN_STOCK_SUMMARY ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(OBJID = #OBJID#)]]>
+      </dynamic>
+    </select>
+
+    <select id="Select@ReportPsmInStockSummary@MainDetail" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T7.MATERIAL_NAME, T1.*
+        , CASE T1.SUMMARY_STATE WHEN 0 THEN '未确认' WHEN 1 THEN '已确认' ELSE '' END SUMMARY_STATE_CAPTION
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '合格品' WHEN 2 THEN '次品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' ELSE '无品级' END CHECK_GRADE_NAME 
+        , CASE T3.BILL_TYPE WHEN 1 THEN '装车入库' WHEN 2 THEN '直接入库' ELSE '' END BILL_TYPE_CAPTION
+        , T2.USER_NAME RECORD_USER_NAME 
+        , T3.IN_DATE
+        , T5.USER_NAME UPDATE_USER_NAME 
+        , T6.USER_NAME AFFIRM_USER_NAME 
+        , T8.STORE_NAME
+        , T9.STORE_PLACE_NAME
+        ,T10.CLASS_NAME IN_CLASS_NAME
+        , T11.SHIFT_NAME IN_SHIFT_NAME 
+        FROM PSM_IN_STOCK_SUMMARY T1 
+        LEFT JOIN SSB_USER T2 ON T1.RECORD_USER_ID = T2.OBJID
+        LEFT JOIN PSM_IN_STOCK_BILL T3 ON T1.BILL_ID = T3.OBJID 
+        LEFT JOIN SSB_USER T5 ON T1.UPDATE_USER_ID = T5.OBJID
+        LEFT JOIN SSB_USER T6 ON T1.AFFIRM_USER_ID = T6.OBJID
+        LEFT JOIN SBM_MATERIAL T7 ON T1.MATERIAL_ID = T7.OBJID
+        LEFT JOIN PSB_STORE T8 ON T1.STORE_ID = T8.OBJID
+        LEFT JOIN PSB_STORE_PLACE T9 ON T1.STORE_PLACE_ID = T9.OBJID
+        LEFT JOIN SSB_CLASS T10 ON T3.IN_CLASS_ID = T10.OBJID 
+        LEFT JOIN SSB_SHIFT T11 ON T3.IN_SHIFT_ID = T11.OBJID 
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[(T1.OBJID = #where.OBJID#)]]>
+      </dynamic>
+    </select>
+
+
+    <select id="Select@ReportPsmInStockSummary@DetailGrid" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT T1.*
+        , CASE T1.CHECK_GRADE_CODE WHEN 1 THEN '合格品' WHEN 2 THEN '次品' WHEN 3 THEN '废品' WHEN 4 THEN '特废品' WHEN 9 THEN '试验胎' ELSE '无品级' END CHECK_GRADE_NAME 
+        , T4.USER_NAME RECORD_USER_NAME 
+        , T6.MATERIAL_NAME 
+        , T8.USER_NAME UPDATE_USER_NAME
+        FROM PSM_IN_STOCK_DETAIL T1 
+        LEFT JOIN PSM_IN_STOCK_SUMMARY T2 ON T1.SUMMARY_ID = T2.OBJID 
+        LEFT JOIN PSM_IN_STOCK_BILL T3 ON T1.BILL_ID = T3.OBJID
+        LEFT JOIN SSB_USER T4 ON T1.RECORD_USER_ID = T4.OBJID
+        LEFT JOIN SBM_MATERIAL T6 ON T2.MATERIAL_ID = T6.OBJID
+        LEFT JOIN SSB_USER T8 ON T1.UPDATE_USER_ID = T8.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <![CDATA[
+        T1.DELETE_FLAG = 0
+        AND T1.SUMMARY_ID = #where.OBJID#
+        ]]>
+      </dynamic>
+      <![CDATA[
+        ORDER BY T1.TYRE_NO 
+      ]]>
+    </select>
+
+    <!--查询类型信息，ID值固定为GetComboBoxData@Select@ReportPsmInStockSummary@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInStockSummary@SearchType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT '1' sskey, '按接班日期' ssValue FROM dual
+      UNION
+      SELECT '2' sskey, '按创建时间' ssValue FROM dual
+     ]]>
+    </select>
+
+    <!--查询汇总状态信息，ID值固定为GetComboBoxData@Select@ReportPsmInStockSummary@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInStockSummary@SummaryState" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT 0 sskey, '未确认' ssValue FROM dual
+      UNION
+      SELECT 1 sskey, '已确认' ssValue FROM dual
+     ]]>
+    </select>
+    
+    <!--查询单据状态信息，ID值固定为GetComboBoxData@Select@ReportPsmInStockSummary@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInStockSummary@BillType" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT 1 sskey, '装车入库' ssValue FROM dual
+      UNION
+      SELECT 2 sskey, '直接入库' ssValue FROM dual
+     ]]>
+    </select>
+
+
+    <!--查询班组信息，ID值固定为GetComboBoxData@Select@ReportPsmInStockSummary@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInStockSummary@InClassId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey, CLASS_NAME ssValue FROM SSB_CLASS WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+    <!--查询班次信息，ID值固定为GetComboBoxData@Select@ReportPsmInStockSummary@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInStockSummary@InShiftId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey, SHIFT_NAME ssValue FROM SSB_SHIFT WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询仓库类型信息，ID值固定为GetComboBoxData@Select@ReportPsmInStockSummary@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInStockSummary@StoreTypeId" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+      SELECT OBJID sskey,STORE_TYPE_NAME ssValue FROM PSB_STORE_TYPE WHERE DELETE_FLAG = '0' ORDER BY OBJID
+     ]]>
+    </select>
+
+    <!--查询品级信息，ID值固定为GetComboBoxData@Select@ReportPsmInStockSummary@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportPsmInStockSummary@CheckGradeCode" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+        SELECT 1 sskey, '合格品' ssValue FROM dual
+        union 
+        SELECT 2 sskey, '次品' ssValue FROM dual
+        union 
+        SELECT 3 sskey, '废品' ssValue FROM dual
+        union 
+        SELECT 4 sskey, '特废品' ssValue FROM dual
+        union 
+        SELECT 9 sskey, '试验胎' ssValue FROM dual
+        union 
+        SELECT 0 sskey, '无品级' ssValue FROM dual
+
+     ]]>
+    </select>
+  </statements>
+</sqlMap>

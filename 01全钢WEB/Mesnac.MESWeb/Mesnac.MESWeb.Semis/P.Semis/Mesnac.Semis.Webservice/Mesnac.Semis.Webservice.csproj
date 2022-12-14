@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{51E9E8D9-FE24-4F40-A0A4-4F234D94D3EB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Semis.Webservice</RootNamespace>
+    <AssemblyName>Mesnac.Semis.Webservice</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\@packages\MyBatis\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\@packages\MyBatis\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.DbAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\@packages\Frame\Mesnac.DbAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.FrameDb.Mapper">
+      <HintPath>..\..\@packages\Frame\Mesnac.FrameDb.Mapper.dll</HintPath>
+    </Reference>
+    <Reference Include="LogAgent">
+      <HintPath>..\..\@packages\LogAgent\LogAgent.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Main.Business">
+      <HintPath>..\..\@packages\P.Main\Mesnac.Main.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Main.Data">
+      <HintPath>..\..\@packages\P.Main\Mesnac.Main.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Main.Entity">
+      <HintPath>..\..\@packages\P.Main\Mesnac.Main.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Main.Mapper">
+      <HintPath>..\..\@packages\P.Main\Mesnac.Main.Mapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.SemisBG.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Mesnac.SemisBG.Business\bin\Debug\Mesnac.SemisBG.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.SemisBG.Data">
+      <HintPath>..\Mesnac.Semis.WebSite\Bin\Mesnac.SemisBG.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.SemisBG.Entity, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Mesnac.SemisBG.Entity\bin\Debug\Mesnac.SemisBG.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.SemisBG.Mapper">
+      <HintPath>..\Mesnac.Semis.WebSite\Bin\Mesnac.SemisBG.Mapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\@packages\Frame\Mesnac.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="MyBatis.Common">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.DataMapper">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log4net\log4net.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Mesnac.SqlSemis.Mapper.csproj" />
+    <Content Include="Semis\AppService.asmx" />
+    <Content Include="Semis\ClientDataService.asmx" />
+    <Content Include="Semis\GetMaterToSap.asmx" />
+    <Content Include="Semis\WMSIsStore.asmx" />
+    <Content Include="Semis\WMSService.asmx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Semis\AppService.asmx.cs">
+      <DependentUpon>AppService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Semis\ClientDataService.asmx.cs">
+      <DependentUpon>ClientDataService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Semis\GetMaterToSap.asmx.cs">
+      <DependentUpon>GetMaterToSap.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Semis\WMSIsStore.asmx.cs">
+      <DependentUpon>WMSIsStore.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Semis\WMSService.asmx.cs">
+      <DependentUpon>WMSService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\dbVersion.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="config\providers.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\SqlMap.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WinCEFiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log4net\log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\LogAgent.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Frame\Mesnac.DbAccess\Mesnac.DbAccess.csproj">
+      <Project>{60b919c5-c601-4999-a531-439042d59746}</Project>
+      <Name>Mesnac.DbAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Frame\Mesnac.UI.Db\Mesnac.FrameDb.Mapper.csproj">
+      <Project>{57d6db7a-e0b3-4798-8d57-ce65afa4f474}</Project>
+      <Name>Mesnac.FrameDb.Mapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Frame\Mesnac.Utility\Mesnac.Utility.csproj">
+      <Project>{03b7f91d-fc5b-4c3d-a4b5-abf78bb4f884}</Project>
+      <Name>Mesnac.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Semis.Business\Mesnac.Semis.Business.csproj">
+      <Project>{d998beaa-997a-43a6-9a70-2536b30de7c4}</Project>
+      <Name>Mesnac.Semis.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Semis.Data\Mesnac.Semis.Data.csproj">
+      <Project>{f6dd545e-3d3e-4301-ba04-3614618af00d}</Project>
+      <Name>Mesnac.Semis.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Semis.Entity\Mesnac.Semis.Entity.csproj">
+      <Project>{9693eb18-296e-4e4f-b280-a4df3466c798}</Project>
+      <Name>Mesnac.Semis.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Semis.Mapper\Mesnac.Semis.Mapper.csproj">
+      <Project>{cbc1e504-48aa-4cb7-96d1-59ff0d7fe5cf}</Project>
+      <Name>Mesnac.Semis.Mapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Semis.McUI\Mesnac.Semis.McUI.csproj">
+      <Project>{c8dfff3b-8e96-49d9-b0c2-831130a6d887}</Project>
+      <Name>Mesnac.Semis.McUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.SqlSemis.Business\Mesnac.SqlSemis.Business.csproj">
+      <Project>{00ab1fae-82f9-468b-a71a-e0fbbe4dfc3a}</Project>
+      <Name>Mesnac.SqlSemis.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.SqlSemis.Data\Mesnac.SqlSemis.Data.csproj">
+      <Project>{8d845b0f-3f80-4517-b346-0789a410b8f0}</Project>
+      <Name>Mesnac.SqlSemis.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.SqlSemis.Entity\Mesnac.SqlSemis.Entity.csproj">
+      <Project>{bacbf01a-087c-418b-bc00-1241bfc4491d}</Project>
+      <Name>Mesnac.SqlSemis.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.SqlSemis.Mapper\Mesnac.SqlSemis.Mapper.csproj">
+      <Project>{7ba643dc-5c8f-471a-ba07-e9d63a702d14}</Project>
+      <Name>Mesnac.SqlSemis.Mapper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\SqlMap2.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\SqlMapBG.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Properties\PublishProfiles\配置文件1.pubxml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61995</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:61997/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

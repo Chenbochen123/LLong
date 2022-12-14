@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <statements>
+        <select id="Select@SearchBoxCuringEquip" parameterClass="map" resultClass="row">
+            <![CDATA[ 
+              SELECT t.* FROM SBE_EQUIP T WHERE T.MAJOR_TYPE_ID=51 and t.DELETE_FLAG=0
+            ]]>
+            <dynamic>
+                <isNotNull property="where.EquipName" prepend="AND">
+                    T.EQUIP_NAME like '%'||#where.EquipName#||'%'
+                </isNotNull>
+            </dynamic>
+            <isNotNull property="OrderString" prepend="">
+                ORDER BY EQUIP_CODE
+            </isNotNull>
+        </select>
+    </statements>
+</sqlMap>

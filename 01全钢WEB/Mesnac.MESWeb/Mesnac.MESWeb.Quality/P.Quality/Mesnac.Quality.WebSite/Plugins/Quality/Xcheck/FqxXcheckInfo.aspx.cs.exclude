@@ -1,0 +1,252 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+
+using Ext.Net;
+using Mesnac.DbAccess;
+using Mesnac.Quality.Business.Implements;
+using Mesnac.Quality.Business.Interface;
+using Mesnac.Quality.Entity.BasicEntity;
+using Mesnac.Main.Business.Implements;
+using Mesnac.Main.Business.Interface;
+using Mesnac.Main.Entity.BasicEntity;
+
+public partial class Plugins_Quality_Xcheck_FqxXcheckInfo : Mesnac.Web.UI.Page
+{
+    protected FqxXcheckInfoManager xcheckManager = new FqxXcheckInfoManager();
+    protected FqxXcheckDetailManager detailManager = new FqxXcheckDetailManager();
+    protected FqgGradeInfoManager gradeManager = new FqgGradeInfoManager();
+    protected FqdDefectInfoManager defectManager = new FqdDefectInfoManager();
+    protected SsbFactoryManager factoryManager = new SsbFactoryManager();
+    protected SsbWorkshopManager workshopManager = new SsbWorkshopManager();
+    protected SsbUserManager userManager = new SsbUserManager();
+    protected SbeEquipManager equipManager = new SbeEquipManager();
+    
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!X.IsAjaxRequest && !IsPostBack)
+        {
+            txtBeginTime.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            txtEndTime.Text = DateTime.Now.ToString("yyyy-MM-dd");
+
+            InitGradeInfo();
+            InitShift();
+        }
+    }
+
+    #region
+    //等级绑定
+    private void InitGradeInfo()
+    {
+        FqgGradeInfo gradeInfo = new FqgGradeInfo();
+        gradeInfo.DeleteFlag = 0;
+        IList<FqgGradeInfo> lst = gradeManager.GetEntityList(gradeInfo);
+        cbxGrade.Items.Clear();
+        if (true)
+        {
+            Ext.Net.ListItem item = new Ext.Net.ListItem();
+            item.Text = "====全部====";
+            item.Value = " ";
+            cbxGrade.Items.Add(item);
+        }
+        foreach (FqgGradeInfo grade in lst)
+        {
+            Ext.Net.ListItem item = new Ext.Net.ListItem();
+            item.Text = grade.Gradename;
+            item.Value = grade.ObjId.ToString();
+            cbxGrade.Items.Add(item);
+        }
+        cbxGrade.Select(0);
+    }
+
+    //班次绑定
+    private void InitShift()
+    {
+        SsbShift shiftInfo = new SsbShift();
+        shiftInfo.DeleteFlag = 0;
+        ISsbShiftManager shiftManager = new SsbShiftManager();
+        IList<SsbShift> lst = shiftManager.GetEntityList(shiftInfo);
+        cbxShift.Items.Clear();
+        cbxShift1.Items.Clear();
+        if (true)
+        {
+            Ext.Net.ListItem item = new Ext.Net.ListItem();
+            item.Text = "====全部====";
+            item.Value = " ";
+            cbxShift.Items.Add(item);
+        }
+        foreach (SsbShift shift in lst)
+        {
+            Ext.Net.ListItem item = new Ext.Net.ListItem();
+            item.Text = shift.ShiftName;
+            item.Value = shift.ObjId.ToString();
+            cbxShift.Items.Add(item);
+            cbxShift1.Items.Add(item);
+        }
+        cbxShift.Select(0);
+    }
+    #endregion
+
+    #region 分页相关方法
+    private PageResult GetPageResultData(PageResult pageParams)
+    {
+        pageParams.StatementId = "GetPageData@GetXcheckInfoByParams";
+        Dictionary<string, object> dic = new Dictionary<string, object>();
+        dic.Add("BeginRecordTime", txtBeginTime.SelectedDate);
+        dic.Add("EndRecordTime", txtEndTime.SelectedDate);
+        if (!string.IsNullOrEmpty(txtTyreNo.Text))
+        {
+            dic.Add("TyreID", txtTyreNo.Text);
+        }
+        if (cbxShift.Value != null && !string.IsNullOrWhiteSpace(cbxShift.Value.ToString()))
+        {
+            dic.Add("ShiftID", cbxShift.Value);
+        }
+        if (cbxGrade.Value != null && !string.IsNullOrWhiteSpace(cbxGrade.Value.ToString()))
+        {
+            dic.Add("GradeID", cbxGrade.Value);
+        }
+        if (!string.IsNullOrEmpty(hiddenMakerPerson.Text))
+        {
+            dic.Add("RecordUserID", hiddenMakerPerson.Text);
+        }
+        pageParams.ParameterObject = dic;
+        pageParams = xcheckManager.GetPageDataByReader(pageParams);
+        return pageParams;
+    }
+
+    [DirectMethod]
+    public object GridPanelBindData(string action, Dictionary<string, object> extraParams)
+    {
+        StoreRequestParameters prms = new StoreRequestParameters(extraParams);
+        PageResult pageParams = new PageResult();
+        pageParams.PageIndex = prms.Page;
+        pageParams.PageSize = prms.Limit;
+
+        pageParams = GetPageResultData(pageParams);
+        DataTable data = pageParams.ResultDataSet.Tables[0];
+
+        int total = pageParams.RecordCount;
+        return new { data, total };
+    }
+
+    protected void RowSelect(object sender, StoreReadDataEventArgs e)
+    {
+        string objID = e.Parameters["OBJID"];
+
+        Dictionary<string, object> dic = new Dictionary<string, object>();
+        dic.Add("XcheckID", Convert.ToInt32(objID));
+
+        DataTable dt = detailManager.GetDataTableByStatement("GetPageData@GetXcheckDetailByParams", dic);
+
+        this.storeDetail.DataSource = dt;
+        this.storeDetail.DataBind();
+    }
+    #endregion
+
+    #region 增删改查按钮激发的事件
+    [Ext.Net.DirectMethod()]
+    public void commandcolumndetail_direct_edit(string objID)
+    {
+        PageResult pageParams = new PageResult();
+        pageParams.StatementId = "GetPageData@GetXcheckInfoByParams";
+        Dictionary<string, object> dic = new Dictionary<string, object>();
+        dic.Add("ObjID", Convert.ToInt32(objID));
+        pageParams.ParameterObject = dic;
+        pageParams = xcheckManager.GetPageDataByReader(pageParams);
+        
+        DataTable dt = new DataTable();
+        dt = pageParams.ResultDataSet.Tables[0];
+
+        txtObjID1.Text = objID;
+        txtTyreID1.Text = dt.Rows[0]["TYREID"].ToString();
+        txtGradeID1.Text = dt.Rows[0]["GRADENAME"].ToString();
+        txtRecordTime1.Text = dt.Rows[0]["RECORD_TIME"].ToString();
+        cbxShift1.Value = dt.Rows[0]["SHIFT_ID"].ToString();
+        txtRecordUser1.Text = dt.Rows[0]["USER_NAME"].ToString();
+        hiddenEditUserID.Text = dt.Rows[0]["RECORD_USERID"].ToString();
+
+        this.winModify.Show();
+    }
+
+    protected void btnModify_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            FqxXcheckInfo xcheckInfo = xcheckManager.GetByObjId(Convert.ToInt32(txtObjID1.Text));
+            xcheckInfo.ShiftId = Convert.ToInt32(cbxShift1.Value);
+            xcheckInfo.RecordUserId = Convert.ToInt32(hiddenEditUserID.Text);
+
+            xcheckManager.Update(xcheckInfo, new FqxXcheckInfo() { ObjId = Convert.ToInt32(txtObjID1.Text) });
+
+            pageToolBar.DoRefresh();
+            this.winModify.Close();
+            X.MessageBox.Alert("操作", "更新成功").Show();
+        }
+        catch (Exception ex)
+        {
+            X.MessageBox.Alert("操作", "更新失败：" + ex).Show();
+        }
+    }
+
+    [Ext.Net.DirectMethod()]
+    public string commandcolumn_direct_delete(string billNo)
+    {
+        try
+        {
+            //PstMaterialStorein store = manager.GetById(billNo);
+            //store.DeleteFlag = "1";
+
+            //manager.Update(store);
+            pageToolBar.DoRefresh();
+        }
+        catch (Exception e)
+        {
+            return "删除失败：" + e;
+        }
+        return "删除成功";
+    }
+
+    public void btnCancel_Click(object sender, DirectEventArgs e)
+    {
+        //this.winAdd.Close();
+        this.winModify.Close();
+    }
+    #endregion
+
+    #region 校验方法
+    protected void CheckField(object sender, RemoteValidationEventArgs e)
+    {
+        TextField field = (TextField)sender;
+
+        if (field.Text != "")
+        {
+            e.Success = true;
+        }
+        else
+        {
+            e.Success = false;
+            e.ErrorMessage = "此属性必须填写！";
+        }
+    }
+
+    protected void CheckCombo(object sender, RemoteValidationEventArgs e)
+    {
+        ComboBox combo = (ComboBox)sender;
+
+        if (combo.SelectedItem.Value != "")
+        {
+            e.Success = true;
+        }
+        else
+        {
+            e.Success = false;
+            e.ErrorMessage = "此属性必须选择！";
+        }
+    }
+    #endregion
+}

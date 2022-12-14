@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Semis.Mapper.BusinessMapper.HppRubberProduction"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM HPP_RUBBER_PRODUCTION ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.Barcode" prepend="AND">
+          <![CDATA[BARCODE = #where.Barcode#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipCode" prepend="AND">
+          <![CDATA[EQUIP_CODE = #where.EquipCode#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialCode" prepend="AND">
+          <![CDATA[MATERIAL_CODE = #where.MaterialCode#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialName" prepend="AND">
+          <![CDATA[MATERIAL_NAME = #where.MaterialName#]]>
+        </isNotNull>
+        <isNotNull property="where.SapCode" prepend="AND">
+          <![CDATA[SAP_CODE = #where.SapCode#]]>
+        </isNotNull>
+        <isNotNull property="where.ProcUserName" prepend="AND">
+          <![CDATA[PROC_USER_NAME = #where.ProcUserName#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipName" prepend="AND">
+          <![CDATA[EQUIP_NAME = #where.EquipName#]]>
+        </isNotNull>
+        <isNotNull property="where.Qty" prepend="AND">
+          <![CDATA[QTY = #where.Qty#]]>
+        </isNotNull>
+        <isNotNull property="where.LeftQty" prepend="AND">
+          <![CDATA[LEFT_QTY = #where.LeftQty#]]>
+        </isNotNull>
+        <isNotNull property="where.ProduceTime" prepend="AND">
+          <![CDATA[PRODUCE_TIME = #where.ProduceTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ValidDate" prepend="AND">
+          <![CDATA[VALID_DATE = #where.ValidDate#]]>
+        </isNotNull>
+        <isNotNull property="where.ShelfNo" prepend="AND">
+          <![CDATA[SHELF_NO = #where.ShelfNo#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.UnitName" prepend="AND">
+          <![CDATA[UNIT_NAME = #where.UnitName#]]>
+        </isNotNull>
+        <isNotNull property="where.Batch" prepend="AND">
+          <![CDATA[BATCH = #where.Batch#]]>
+        </isNotNull>
+        <isNotNull property="where.ProFactory" prepend="AND">
+          <![CDATA[PRO_FACTORY = #where.ProFactory#]]>
+        </isNotNull>
+      <isNotNull property="where.MarkFlag" prepend="AND">
+        <![CDATA[MARK_FLAG = #where.MarkFlag#]]>
+      </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetHppRubberProductInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      select * from ( SELECT T.UNIT_NAME,T.BARCODE,T.EQUIP_CODE EQUIP_ID,T1.OBJID MATERIAL_ID,T1.MATERIAL_NAME,T.SAP_CODE,T1.MATERIAL_CODE,
+      T2.OBJID MATERIAL_TYPE_ID,T2.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T.PROC_USER_NAME OPER_NAME,
+      T.EQUIP_NAME,T.QTY SET_QUANTITY,T.LEFT_QTY LEFT_QUANTITY,T.PRODUCE_TIME,T.VALID_DATE,T.SHELF_NO,T4.STORE_PLACE_ID ,T3.STORE_PLACE_NAME 
+      ,NVL(T.DUMMY_3,0) MIN_TIME,NVL(T.DUMMY_4,0) VALID_TIME,t.dummy_2 DUMMY2,T.BATCH,T.PRO_FACTORY,'-1' AS STATE,t.MARK_FLAG,case t.MARK_FLAG when 1 then t13.reason_name when 2 then t14.reason_name else null end reason_name
+      ,T.DUMMY_6 YC_TIME ,T4.RECORD_TIME IN_STOCK_TIME,t.dummy_5 use_state,case when t.valid_date = to_date('0001-01-01','yyyy-MM-dd') then NULL else t.valid_date end YQ_VALID_TIME,t.yc_time CX_YQTIME
+      FROM HPP_RUBBER_PRODUCTION T
+      INNER JOIN HPP_STORAGE_DETAIL T4 ON T4.CARD_NO = T.BARCODE
+      LEFT JOIN SBM_MATERIAL T1 ON T1.SAP_CODE = T.SAP_CODE
+      LEFT JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T2.OBJID = T1.MINOR_TYPE_ID
+      LEFT JOIN HPP_STORE_PLACE T3 ON  T3.POSITION_TYPE=1 AND T3.OBJID = T4.STORE_PLACE_ID
+         LEFT JOIN sbm_mark_info t12 on t12.barcode = t.barcode and t12.delete_flag=0  and t.mark_flag = t12.mark_flag
+        LEFT JOIN sbm_mark_reason t13 on t13.objid = t12.reason_id
+        left join sbm_freeze_reason t14 on t14.objid = t12.reason_id
+      WHERE T.BARCODE=#Barcode# order by t12.record_time desc) where rownum<=1
+      
+       ]]>
+     </select>
+
+     <select id="GetRubberMaterInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+    SELECT distinct T.BARCODE || '@' || T.DUMMY_1 as OBJID,T.BARCODE,T5.EQUIP_NAME PICK_EQUIP_NAME,T1.OBJID MATERIAL_ID,T1.MATERIAL_NAME,T.SAP_CODE,
+      T.EQUIP_NAME,T.QTY SET_QUANTITY,T.LEFT_QTY LEFT_QUANTITY,T3.STORE_PLACE_NAME 
+      ,T.RECORD_TIME,T6.USER_NAME,T8.USER_NAME LLNAME,T7.RECORD_TIME LLTIME,T.YC_TIME,t.material_name ymater
+      FROM HPP_RUBBER_PRODUCTION T
+      INNER JOIN HPP_STORAGE_DETAIL T4 ON T4.CARD_NO = T.BARCODE  AND T4.DELETE_FLAG = 0
+      LEFT JOIN SBM_MATERIAL T1 ON T1.SAP_CODE = T.SAP_CODE
+      LEFT JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T2.OBJID = T1.MINOR_TYPE_ID
+      LEFT JOIN HPP_STORE_PLACE T3 ON  T3.POSITION_TYPE=1 AND T3.OBJID = T4.STORE_PLACE_ID
+      LEFT JOIN SBE_EQUIP T5 ON T3.DUMMY_8 = T5.OBJID 
+      LEFT JOIN SSB_USER T6 ON T6.OBJID = T.REMARK
+      LEFT JOIN hpp_storage_detail T7 ON T7.CARD_NO = T.BARCODE  and t7.delete_flag = 0
+      LEFT JOIN SSB_USER T8 ON T8.OBJID = T7.RECORD_USER_ID
+      WHERE 1=1 and t.delete_flag = 0 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.EquipID" prepend="AND">
+           <![CDATA[T5.OBJID=#where.EquipID#]]>
+         </isNotNull>
+         <isNotNull property="where.PlanDateStart" prepend="AND">
+           <![CDATA[T.RECORD_TIME >= to_date('$where.PlanDateStart$','yyyy/mm/dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.PlanDateEnd" prepend="AND">
+           <![CDATA[T.RECORD_TIME <= to_date('$where.PlanDateEnd$','yyyy/mm/dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialID" prepend="AND">
+           <![CDATA[T1.OBJID=#where.MaterialID#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG=#where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.Barcode" prepend="AND">
+           <![CDATA[T.BARCODE LIKE '%' || #where.Barcode# ||'%' ]]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[
+         and t.barcode in(select barcode from HPP_RUBBER_PRODUCTION where length(trim(translate(barcode,translate(barcode,'N',' '),' '))) > 0 or length(barcode) = 24  or length(barcode) = 17)
+       ]]>
+     </select>
+
+     <select id="GetRubberMaterInfoBarcode" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      SELECT distinct T.UNIT_NAME,T.BARCODE,T5.OBJID EQUIP_ID,T5.EQUIP_NAME PICK_EQUIP_NAME,T1.OBJID MATERIAL_ID,T1.MATERIAL_NAME,T.SAP_CODE,T1.MATERIAL_CODE,
+      T2.OBJID MATERIAL_TYPE_ID,T2.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T.PROC_USER_NAME OPER_NAME,
+      T.EQUIP_NAME,T.QTY SET_QUANTITY,T.LEFT_QTY LEFT_QUANTITY,T.PRODUCE_TIME,T.VALID_DATE,T.SHELF_NO,T4.STORE_PLACE_ID ,T3.STORE_PLACE_NAME 
+      ,NVL(T.DUMMY_3,0) MIN_TIME,NVL(T.DUMMY_4,0) VALID_TIME,t.dummy_2 DUMMY2,T.BATCH,T.PRO_FACTORY,T.DUMMY_1 DUMMY1,T.RECORD_TIME
+      ,T.BARCODE || '@' || T.DUMMY_1 as OBJID,T6.USER_NAME
+      FROM HPP_RUBBER_PRODUCTION T
+      INNER JOIN HPP_STORAGE_DETAIL T4 ON T4.CARD_NO = T.BARCODE and t4.delete_flag = 0
+      LEFT JOIN SBM_MATERIAL T1 ON T1.SAP_CODE = T.SAP_CODE
+      LEFT JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T2.OBJID = T1.MINOR_TYPE_ID
+      LEFT JOIN HPP_STORE_PLACE T3 ON  T3.POSITION_TYPE=1 AND T3.OBJID = T4.STORE_PLACE_ID
+      LEFT JOIN SBE_EQUIP T5 ON T3.DUMMY_8 = T5.OBJID 
+      LEFT JOIN SSB_USER T6 ON T6.OBJID = T.REMARK
+      WHERE 1=1 and t.delete_flag = 0 
+       ]]>
+       <dynamic prepend="AND">
+         <isNotNull property="where.EquipID" prepend="AND">
+           <![CDATA[T5.OBJID=#where.EquipID#]]>
+         </isNotNull>
+         <isNotNull property="where.PlanDateStart" prepend="AND">
+           <![CDATA[T.RECORD_TIME >= to_date('$where.PlanDateStart$','yyyy/mm/dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.PlanDateEnd" prepend="AND">
+           <![CDATA[T.RECORD_TIME <= to_date('$where.PlanDateEnd$','yyyy/mm/dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.MaterialID" prepend="AND">
+           <![CDATA[T1.OBJID=#where.MaterialID#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG=#where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.Barcode" prepend="AND">
+           <![CDATA[T.BARCODE=#where.Barcode#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <select id="GetModifyInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T.UNIT_NAME,T.BARCODE,T5.OBJID EQUIP_ID,T5.EQUIP_NAME PICK_EQUIP_NAME,T1.OBJID MATERIAL_ID,T1.MATERIAL_NAME,T.SAP_CODE,T1.MATERIAL_CODE,
+      T2.OBJID MATERIAL_TYPE_ID,T2.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T.PROC_USER_NAME OPER_NAME,
+      T.EQUIP_NAME,T.QTY SET_QUANTITY,T.LEFT_QTY LEFT_QUANTITY,T.PRODUCE_TIME,T.VALID_DATE,T.SHELF_NO,T4.STORE_PLACE_ID ,T3.STORE_PLACE_NAME 
+      ,NVL(T.DUMMY_3,0) MIN_TIME,NVL(T.DUMMY_4,0) VALID_TIME,t.dummy_2 DUMMY2,T.BATCH,T.PRO_FACTORY,T.DUMMY_1 DUMMY1,T.RECORD_TIME
+      ,T.BARCODE || '@' || T.DUMMY_1 as OBJID
+      FROM HPP_RUBBER_PRODUCTION T
+      INNER JOIN HPP_STORAGE_DETAIL T4 ON T4.CARD_NO = T.BARCODE
+      LEFT JOIN SBM_MATERIAL T1 ON T1.SAP_CODE = T.SAP_CODE
+      LEFT JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T2.OBJID = T1.MINOR_TYPE_ID
+      LEFT JOIN HPP_STORE_PLACE T3 ON  T3.POSITION_TYPE=1 AND T3.OBJID = T4.STORE_PLACE_ID
+      LEFT JOIN SBE_EQUIP T5 ON T3.DUMMY_8 = T5.OBJID 
+      WHERE T.BARCODE=#where.barcode#
+      AND T.DUMMY_1 =#where.equipID#
+       ]]>
+     </select>
+
+     <select id="GetHppRubberProductInfoQG" parameterClass="map" resultClass="Row">
+       <![CDATA[
+      select *from (SELECT T.UNIT_NAME,T.BARCODE,T.EQUIP_CODE EQUIP_ID,T1.OBJID MATERIAL_ID,T1.MATERIAL_NAME,T.SAP_CODE,T1.MATERIAL_CODE,
+      T2.OBJID MATERIAL_TYPE_ID,T2.MINOR_TYPE_NAME MATERIAL_TYPE_NAME,T.PROC_USER_NAME OPER_NAME,
+      T.EQUIP_NAME,T.QTY SET_QUANTITY,T.LEFT_QTY LEFT_QUANTITY,T.PRODUCE_TIME,T.VALID_DATE,T.SHELF_NO,T4.STORE_PLACE_ID ,T3.STORE_PLACE_NAME 
+      ,NVL(T.DUMMY_3,0) MIN_TIME,NVL(T.DUMMY_4,0) VALID_TIME,t.dummy_2 DUMMY2,T.BATCH,T.PRO_FACTORY,'-1' AS STATE,t.MARK_FLAG,case t.MARK_FLAG when 1 then t13.reason_name when 2 then t14.reason_name else null end reason_name
+      ,T.DUMMY_6 YC_TIME,t.dummy_5 use_state
+      FROM HPP_RUBBER_PRODUCTION T
+      INNER JOIN HPP_STORAGE_DETAIL T4 ON T4.CARD_NO = T.BARCODE
+      LEFT JOIN SBM_MATERIAL T1 ON T1.SAP_CODE = T.SAP_CODE
+      LEFT JOIN SBM_MATERIAL_MINOR_TYPE T2 ON T2.OBJID = T1.MINOR_TYPE_ID
+      LEFT JOIN HPP_STORE_PLACE T3 ON  T3.POSITION_TYPE=1 AND T3.OBJID = T4.STORE_PLACE_ID
+      LEFT JOIN HSM_TOOLING_LOAD T5 ON T5.CARD_NO = T.BARCODE
+      LEFT JOIN HSM_TOOLING T6 ON T6.OBJID = T5.TOOLING_ID
+      LEFT JOIN sbm_mark_info t12 on t12.barcode = t.barcode and t12.delete_flag=0  and t.mark_flag = t12.mark_flag
+      LEFT JOIN sbm_mark_reason t13 on t13.objid = t12.reason_id
+      left join sbm_freeze_reason t14 on t14.objid = t12.reason_id
+      WHERE 1=1
+       ]]>
+       <isNotNull property="Barcode" prepend="AND">
+         <![CDATA[T.BARCODE=#Barcode#]]>
+       </isNotNull>
+       <isNotNull property="RFIDNo" prepend="AND">
+         <![CDATA[T6.TOOLING_RFID_BARCODE=#RFIDNo#]]>
+       </isNotNull>
+       <![CDATA[
+       order by t12.record_time desc) where rownum<=1
+       ]]>
+     </select>
+     <select id="GetRubberTraceInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        select a.semis BARCODE,t2.material_full_name,t3.minor_type_name,t4.equip_name,t1.record_time,t1.left_qty from (select card_no semis,SEMIS_MINOR_TYPE_ID from hpp_trace_info t start with card_detail_no = #barcode# connect by card_no = prior card_detail_no)a
+        inner join hpp_semis_production t1 on t1.card_no = a.semis
+        inner join sbm_material t2 on t2.objid = t1.material_id
+        inner join sbm_material_minor_type t3 on t3.objid = a.SEMIS_MINOR_TYPE_ID
+        inner join sbe_equip t4 on t4.objid = t1.equip_id
+        where t1.delete_flag=0
+       ]]>
+     </select>
+     
+     <select id="GetHppRubberInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select * from Hpp_Rubber_Production where barcode =#barcode# and delete_flag = 0
+       ]]>
+     </select>
+   </statements>
+</sqlMap>

@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BasicMapper.SbmBom"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="SbmBom" type="Mesnac.Molding.Entity.BasicEntity.SbmBom, Mesnac.Molding.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_SbmBom" class="SbmBom">
+    <result property="ObjId" column="OBJID"/>
+    <result property="LastmodifyDate" column="LASTMODIFY_DATE"/>
+    <result property="MaterialId" column="MATERIAL_ID"/>
+    <result property="UnitId" column="UNIT_ID"/>
+    <result property="GroupNum" column="GROUP_NUM"/>
+    <result property="GreentyreVersion" column="GREENTYRE_VERSION"/>
+    <result property="BomType" column="BOM_TYPE"/>
+    <result property="BomFactroy" column="BOM_FACTROY"/>
+    <result property="BomVersion" column="BOM_VERSION"/>
+    <result property="GroupUnitNum" column="GROUP_UNIT_NUM"/>
+    <result property="EffectDate" column="EFFECT_DATE"/>
+    <result property="LoseEffectDate" column="LOSE_EFFECT_DATE"/>
+    <result property="PdmCode" column="PDM_CODE"/>
+    <result property="DropFlag" column="DROP_FLAG"/>
+    <result property="GreentyreMaterialId" column="GREENTYRE_MATERIAL_ID"/>
+    <result property="MaterialParentId" column="MATERIAL_PARENT_ID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_SbmBom" class="SbmBom">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="LastmodifyDate" column="LastmodifyDate"/>
+    <parameter property="MaterialId" column="MaterialId"/>
+    <parameter property="UnitId" column="UnitId"/>
+    <parameter property="GroupNum" column="GroupNum"/>
+    <parameter property="GreentyreVersion" column="GreentyreVersion"/>
+    <parameter property="BomType" column="BomType"/>
+    <parameter property="BomFactroy" column="BomFactroy"/>
+    <parameter property="BomVersion" column="BomVersion"/>
+    <parameter property="GroupUnitNum" column="GroupUnitNum"/>
+    <parameter property="EffectDate" column="EffectDate"/>
+    <parameter property="LoseEffectDate" column="LoseEffectDate"/>
+    <parameter property="PdmCode" column="PdmCode"/>
+    <parameter property="DropFlag" column="DropFlag"/>
+    <parameter property="GreentyreMaterialId" column="GreentyreMaterialId"/>
+    <parameter property="MaterialParentId" column="MaterialParentId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBM_BOM ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.LastmodifyDate" prepend="AND">
+          <![CDATA[LASTMODIFY_DATE = #where.LastmodifyDate#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.UnitId" prepend="AND">
+          <![CDATA[UNIT_ID = #where.UnitId#]]>
+        </isNotNull>
+        <isNotNull property="where.GroupNum" prepend="AND">
+          <![CDATA[GROUP_NUM = #where.GroupNum#]]>
+        </isNotNull>
+        <isNotNull property="where.GreentyreVersion" prepend="AND">
+          <![CDATA[GREENTYRE_VERSION = #where.GreentyreVersion#]]>
+        </isNotNull>
+        <isNotNull property="where.BomType" prepend="AND">
+          <![CDATA[BOM_TYPE = #where.BomType#]]>
+        </isNotNull>
+        <isNotNull property="where.BomFactroy" prepend="AND">
+          <![CDATA[BOM_FACTROY = #where.BomFactroy#]]>
+        </isNotNull>
+        <isNotNull property="where.BomVersion" prepend="AND">
+          <![CDATA[BOM_VERSION = #where.BomVersion#]]>
+        </isNotNull>
+        <isNotNull property="where.GroupUnitNum" prepend="AND">
+          <![CDATA[GROUP_UNIT_NUM = #where.GroupUnitNum#]]>
+        </isNotNull>
+        <isNotNull property="where.EffectDate" prepend="AND">
+          <![CDATA[EFFECT_DATE = #where.EffectDate#]]>
+        </isNotNull>
+        <isNotNull property="where.LoseEffectDate" prepend="AND">
+          <![CDATA[LOSE_EFFECT_DATE = #where.LoseEffectDate#]]>
+        </isNotNull>
+        <isNotNull property="where.PdmCode" prepend="AND">
+          <![CDATA[PDM_CODE = #where.PdmCode#]]>
+        </isNotNull>
+        <isNotNull property="where.DropFlag" prepend="AND">
+          <![CDATA[DROP_FLAG = #where.DropFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.GreentyreMaterialId" prepend="AND">
+          <![CDATA[GREENTYRE_MATERIAL_ID = #where.GreentyreMaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialParentId" prepend="AND">
+          <![CDATA[MATERIAL_PARENT_ID = #where.MaterialParentId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO SBM_BOM]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="LastmodifyDate" prepend=",">LASTMODIFY_DATE</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">MATERIAL_ID</isNotNull>
+        <isNotNull property="UnitId" prepend=",">UNIT_ID</isNotNull>
+        <isNotNull property="GroupNum" prepend=",">GROUP_NUM</isNotNull>
+        <isNotNull property="GreentyreVersion" prepend=",">GREENTYRE_VERSION</isNotNull>
+        <isNotNull property="BomType" prepend=",">BOM_TYPE</isNotNull>
+        <isNotNull property="BomFactroy" prepend=",">BOM_FACTROY</isNotNull>
+        <isNotNull property="BomVersion" prepend=",">BOM_VERSION</isNotNull>
+        <isNotNull property="GroupUnitNum" prepend=",">GROUP_UNIT_NUM</isNotNull>
+        <isNotNull property="EffectDate" prepend=",">EFFECT_DATE</isNotNull>
+        <isNotNull property="LoseEffectDate" prepend=",">LOSE_EFFECT_DATE</isNotNull>
+        <isNotNull property="PdmCode" prepend=",">PDM_CODE</isNotNull>
+        <isNotNull property="DropFlag" prepend=",">DROP_FLAG</isNotNull>
+        <isNotNull property="GreentyreMaterialId" prepend=",">GREENTYRE_MATERIAL_ID</isNotNull>
+        <isNotNull property="MaterialParentId" prepend=",">MATERIAL_PARENT_ID</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_SBM_BOM.NEXTVAL</isNull>
+        <isNotNull property="LastmodifyDate" prepend=",">#LastmodifyDate#</isNotNull>
+        <isNotNull property="MaterialId" prepend=",">#MaterialId#</isNotNull>
+        <isNotNull property="UnitId" prepend=",">#UnitId#</isNotNull>
+        <isNotNull property="GroupNum" prepend=",">#GroupNum#</isNotNull>
+        <isNotNull property="GreentyreVersion" prepend=",">#GreentyreVersion#</isNotNull>
+        <isNotNull property="BomType" prepend=",">#BomType#</isNotNull>
+        <isNotNull property="BomFactroy" prepend=",">#BomFactroy#</isNotNull>
+        <isNotNull property="BomVersion" prepend=",">#BomVersion#</isNotNull>
+        <isNotNull property="GroupUnitNum" prepend=",">#GroupUnitNum#</isNotNull>
+        <isNotNull property="EffectDate" prepend=",">#EffectDate#</isNotNull>
+        <isNotNull property="LoseEffectDate" prepend=",">#LoseEffectDate#</isNotNull>
+        <isNotNull property="PdmCode" prepend=",">#PdmCode#</isNotNull>
+        <isNotNull property="DropFlag" prepend=",">#DropFlag#</isNotNull>
+        <isNotNull property="GreentyreMaterialId" prepend=",">#GreentyreMaterialId#</isNotNull>
+        <isNotNull property="MaterialParentId" prepend=",">#MaterialParentId#</isNotNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE SBM_BOM
+       <dynamic prepend="SET">
+        <isNotNull  property="update.LastmodifyDate"  prepend=",">
+          LASTMODIFY_DATE = #update.LastmodifyDate#
+        </isNotNull>
+        <isNotNull  property="update.MaterialId"  prepend=",">
+          MATERIAL_ID = #update.MaterialId#
+        </isNotNull>
+        <isNotNull  property="update.UnitId"  prepend=",">
+          UNIT_ID = #update.UnitId#
+        </isNotNull>
+        <isNotNull  property="update.GroupNum"  prepend=",">
+          GROUP_NUM = #update.GroupNum#
+        </isNotNull>
+        <isNotNull  property="update.GreentyreVersion"  prepend=",">
+          GREENTYRE_VERSION = #update.GreentyreVersion#
+        </isNotNull>
+        <isNotNull  property="update.BomType"  prepend=",">
+          BOM_TYPE = #update.BomType#
+        </isNotNull>
+        <isNotNull  property="update.BomFactroy"  prepend=",">
+          BOM_FACTROY = #update.BomFactroy#
+        </isNotNull>
+        <isNotNull  property="update.BomVersion"  prepend=",">
+          BOM_VERSION = #update.BomVersion#
+        </isNotNull>
+        <isNotNull  property="update.GroupUnitNum"  prepend=",">
+          GROUP_UNIT_NUM = #update.GroupUnitNum#
+        </isNotNull>
+        <isNotNull  property="update.EffectDate"  prepend=",">
+          EFFECT_DATE = #update.EffectDate#
+        </isNotNull>
+        <isNotNull  property="update.LoseEffectDate"  prepend=",">
+          LOSE_EFFECT_DATE = #update.LoseEffectDate#
+        </isNotNull>
+        <isNotNull  property="update.PdmCode"  prepend=",">
+          PDM_CODE = #update.PdmCode#
+        </isNotNull>
+        <isNotNull  property="update.DropFlag"  prepend=",">
+          DROP_FLAG = #update.DropFlag#
+        </isNotNull>
+        <isNotNull  property="update.GreentyreMaterialId"  prepend=",">
+          GREENTYRE_MATERIAL_ID = #update.GreentyreMaterialId#
+        </isNotNull>
+        <isNotNull  property="update.MaterialParentId"  prepend=",">
+          MATERIAL_PARENT_ID = #update.MaterialParentId#
+        </isNotNull>
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM SBM_BOM
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_SbmBom">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_SbmBom">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM SBM_BOM
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM SBM_BOM
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_SbmBom" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE SBM_BOM
+    </statement>
+  </statements>
+</sqlMap>

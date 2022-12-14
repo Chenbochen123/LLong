@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="BeginTime" Value="接班开始时间"></Caption>
+    <Caption Name="EndTime" Value="接班结束时间"></Caption>
+    <Caption Name="SHIFT_DATE" Value="接班日期"></Caption>
+    <Caption Name="SHIFT_ID" Value="班次"></Caption>
+    <Caption Name="SHIFT_NAME" Value="班次"></Caption>
+    <Caption Name="EQUIP_ID" Value="机台"></Caption>
+    <Caption Name="EQUIP_NAME" Value="机台"></Caption>
+    <Caption Name="CLASS_ID" Value="班组"></Caption>
+    <Caption Name="CLASS_NAME" Value="班组"></Caption>
+    <Caption Name="WORKER_ID" Value="操作工"></Caption>
+    <Caption Name="WORKER_NAME" Value="操作工"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_TIME" Value="接班时间"></Caption>
+    <Caption Name="CARD_NO" Value="流水卡号"></Caption>
+    <Caption Name="BEGIN_TIME" Value="开始时间"></Caption>
+    <Caption Name="END_TIME" Value="结束时间"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="物料规格"></Caption>
+  </Captions>
+  <WebPage Title="半制品接班信息">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Semis/McUI/@McUI/ReportHppShiftMaster.js?" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="HPP_SHIFT_MASTER">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="BeginTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EndTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="SHIFT_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="CLASS_ID" Type="ComboBox" Nullable="true"></ParamField>
+        <ParamField FieldName="EQUIP_NAME" Type="TextBox" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="true"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="SHIFT_DATE" ColumnType="Date" ColumnFormt="yyyy-MM-dd"></GridColumn>
+        <GridColumn ColumnName="EQUIP_NAME"></GridColumn>
+        <GridColumn ColumnName="SHIFT_NAME"></GridColumn>
+        <GridColumn ColumnName="CLASS_NAME"></GridColumn>
+        <GridColumn ColumnName="WORKER_NAME" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+    <MainDetail>
+      <ParamFields>
+        <ParamField FieldName="RECORD_TIME" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="SHIFT_DATE" Type="DateBox"></ParamField>
+        <ParamField FieldName="SHIFT_NAME"></ParamField>
+        <ParamField FieldName="CLASS_NAME"></ParamField>
+        <ParamField FieldName="WORKER_NAME" IsShow="false"></ParamField>
+        <ParamField FieldName="REMARK"></ParamField>
+      </ParamFields>
+    </MainDetail>
+    <DetailGrid Width="600">
+      <GridColumns>
+        <GridColumn ColumnName="CARD_NO"></GridColumn>
+        <GridColumn ColumnName="BEGIN_TIME" ColumnType="Date" ColumnFormt="yyyy-MM-dd HH:mm:ss"></GridColumn>
+        <GridColumn ColumnName="END_TIME" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="300"></GridColumn>
+      </GridColumns>
+    </DetailGrid>
+  </Select>
+</UiConfig>

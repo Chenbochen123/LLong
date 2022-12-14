@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="ProduceDate" Value="生产日期"></Caption>
+    <Caption Name="ShiftTime" Value="班次"></Caption>
+    <Caption Name="SHOW_NAME" Value="停机原因"></Caption>
+    <Caption Name="BeginTime" Value="开始时间"></Caption>
+    <Caption Name="EndTime" Value="结束时间"></Caption>
+  </Captions>
+  <WebPage Title="硫化产量日报表">
+    <JavaScripts>
+      <JavaScript FileUrl="../Plugins/Curing/McUI/@McUI/ReportCppCuringProductionTimesStat.js" />
+    </JavaScripts>
+  </WebPage>
+  <Crud TableName="CPP_CURING_PRODUCTION">
+    <PrimaryKey FieldName="OBJID" Identity="false"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_CPP_CURING_PRODUCTION"></SeqField>
+    </SeqFields>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="ProduceDate" Type="DateBox"></ParamField>
+        <ParamField FieldName="ShiftTime" Type="ComboBox"></ParamField>
+        <ParamField FieldName="BeginTime" Type="DateTimeBox" IsShow="true"></ParamField>
+        <ParamField FieldName="EndTime" Type="DateTimeBox" IsShow="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid>
+      <GridColumns>
+        <GridColumn ColumnName="SHOW_NAME" Width="100"></GridColumn>
+        <GridColumn ColumnName="08" Caption="08:00"></GridColumn>
+        <GridColumn ColumnName="09" Caption="09:00"></GridColumn>
+        <GridColumn ColumnName="10" Caption="10:00"></GridColumn>
+        <GridColumn ColumnName="11" Caption="11:00"></GridColumn>
+        <GridColumn ColumnName="12" Caption="12:00"></GridColumn>
+        <GridColumn ColumnName="13" Caption="13:00"></GridColumn>
+        <GridColumn ColumnName="14" Caption="14:00"></GridColumn>
+        <GridColumn ColumnName="15" Caption="15:00"></GridColumn>
+        <GridColumn ColumnName="16" Caption="16:00"></GridColumn>
+        <GridColumn ColumnName="17" Caption="17:00"></GridColumn>
+        <GridColumn ColumnName="18" Caption="18:00"></GridColumn>
+        <GridColumn ColumnName="19" Caption="19:00"></GridColumn>
+        <GridColumn ColumnName="20" Caption="20:00"></GridColumn>
+        <GridColumn ColumnName="21" Caption="21:00"></GridColumn>
+        <GridColumn ColumnName="22" Caption="22:00"></GridColumn>
+        <GridColumn ColumnName="23" Caption="23:00"></GridColumn>
+        <GridColumn ColumnName="00" Caption="00:00"></GridColumn>
+        <GridColumn ColumnName="01" Caption="01:00"></GridColumn>
+        <GridColumn ColumnName="02" Caption="02:00"></GridColumn>
+        <GridColumn ColumnName="03" Caption="03:00"></GridColumn>
+        <GridColumn ColumnName="04" Caption="04:00"></GridColumn>
+        <GridColumn ColumnName="05" Caption="05:00"></GridColumn>
+        <GridColumn ColumnName="06" Caption="06:00"></GridColumn>
+        <GridColumn ColumnName="07" Caption="07:00"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

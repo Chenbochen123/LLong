@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CbmEquipGroup"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CBM_EQUIP_GROUP ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.IsControl" prepend="AND">
+          <![CDATA[IS_CONTROL = #where.IsControl#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.EquipId" prepend="AND">
+          <![CDATA[EQUIP_ID = #where.EquipId#]]>
+        </isNotNull>
+        <isNotNull property="where.GroupId" prepend="AND">
+          <![CDATA[GROUP_ID = #where.GroupId#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     
+     <select id="GetGroupINFO" parameterClass="map" resultClass="Row">
+       <![CDATA[
+            select b.Group_ip,b.group_port,b.is_group_control,a.is_control 
+            from cbm_equip_group a 
+            inner join cbm_group_control b on a.group_id=b.objid
+       ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.equip_id" prepend="AND">
+           <![CDATA[a.equip_id = #where.equip_id#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     
+     <select id="GetEquipINFO" parameterClass="map" resultClass="Row">
+       <![CDATA[
+            select b.* 
+            from cbm_equip_group a 
+            inner join sbe_equip b on a.equip_id=b.objid
+       ]]>
+       <dynamic prepend="where">
+         <isNotNull property="where.group_id" prepend="AND">
+           <![CDATA[a.group_id = #where.group_id#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+   </statements>
+</sqlMap>

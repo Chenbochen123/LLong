@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@SearchBoxSebStore" parameterClass="map" resultClass="row">
+      <![CDATA[ 
+       select t1.*
+       from SEB_STORE t1 
+       where t1.DELETE_FLAG = 0 
+      ]]>
+      <dynamic>
+        <isNotNull property="where.MajorType" prepend="AND">
+          <![CDATA[t1.MAJOR_TYPE_ID = #where.MajorType#]]>
+        </isNotNull>
+        <isNotNull property="where.MinorType" prepend="AND">
+          <![CDATA[t1.MINOR_TYPE_ID = #where.MinorType#]]>
+        </isNotNull>
+        <isNotNull property="where.StoreName" prepend="AND">
+          <![CDATA[t1.STORE_NAME LIKE '%' || #where.StoreName# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.StoreCode" prepend="AND">
+          <![CDATA[t1.STORE_CODE = #where.StoreCode#]]>
+        </isNotNull>
+      </dynamic>
+      <isNotNull property="OrderString" prepend="">
+        order by $OrderString$
+      </isNotNull>
+      <isNull property="OrderString" prepend="">
+        order by t1.STORE_CODE, t1.STORE_NAME
+      </isNull>
+    </select>
+
+  </statements>
+</sqlMap>

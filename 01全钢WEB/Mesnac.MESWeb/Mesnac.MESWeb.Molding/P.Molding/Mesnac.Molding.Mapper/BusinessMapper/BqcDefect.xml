@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.BqcDefect"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM BQC_DEFECT ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.DefectCode" prepend="AND">
+          <![CDATA[DEFECT_CODE = #where.DefectCode#]]>
+        </isNotNull>
+        <isNotNull property="where.DefectName" prepend="AND">
+          <![CDATA[DEFECT_NAME = #where.DefectName#]]>
+        </isNotNull>
+        <isNotNull property="where.FactoryId" prepend="AND">
+          <![CDATA[FACTORY_ID = #where.FactoryId#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupFlag" prepend="AND">
+          <![CDATA[BAUP_FLAG = #where.BaupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BaupTime" prepend="AND">
+          <![CDATA[BAUP_TIME = #where.BaupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+     <select id="GetDefectList" parameterClass="map" resultClass="Row">
+       <![CDATA[select * from bqc_defect where delete_flag=0 order by objid]]>
+     </select>
+     <select id="GetAllBqcDefectInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT OBJID,DEFECT_CODE,DEFECT_NAME,REMARK FROM BQC_DEFECT 
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[DELETE_FLAG=#where.DeleteFlag#]]>
+         </isNotNull>
+         <isNotNull property="where.DefectName" prepend="AND">
+           <![CDATA[DEFECT_NAME=#where.DefectName#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+     <update id="UpdateBqcDefectInfo" parameterClass="map">
+       <![CDATA[ 
+        UPDATE BQC_DEFECT SET 
+        DEFECT_NAME=#DefectName#,
+        REMARK=#Remark#
+        WHERE (OBJID = #ObjId#) 
+      ]]>
+     </update>
+
+
+     <select id="GetMouldDrumInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select * from SBE_MOULDDRUM 
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.barcode" prepend="AND">
+           <![CDATA[barcode=#where.barcode#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+		 <select id="GetMouldDrumMaterial" parameterClass="map" resultClass="Row">
+			 <![CDATA[
+       select OBJID,MATERIAL_CODE,SAP_CODE,MATERIAL_NAME from SBM_MATERIAL where DELETE_FLAG = '0' and MAJOR_TYPE_ID = '41'
+       ]]>
+				<isNotNull property="where.barcode" prepend="AND">
+					<![CDATA[SAP_CODE=#where.barcode#]]>
+				</isNotNull>
+			 <isNotNull property="where.materName" prepend="AND">
+				 <![CDATA[MATERIAL_NAME like '%'||#where.materName#||'%']]>
+			 </isNotNull>
+			 <isNotNull property="where.materCode" prepend="AND">
+				 <![CDATA[MATERIAL_CODE like '%'||#where.materCode#||'%']]>
+			 </isNotNull>
+		 </select>
+		 <select id="GetMouldDrumNotMaterial" parameterClass="map" resultClass="Row">
+			 <![CDATA[
+        select OBJID, MATERIAL_CODE, SAP_CODE, MATERIAL_NAME
+        from SBM_MATERIAL
+        where DELETE_FLAG = '0'
+          and MAJOR_TYPE_ID = '41'
+          and SAP_CODE in (select COLUMN_VALUE from Table (select SPLITSTR(REMARK5, ';') from SBE_MOULDDRUM where OBJID =#where.ObjID#))
+        order by SAP_CODE
+       ]]>
+		 </select>
+		 <update id="UpdateMouldDrumNotMaterial" parameterClass="map">
+			 <![CDATA[
+       update SBE_MOULDDRUM set REMARK5 = #REMARK# where OBJID = #ObjID#
+       ]]>
+		 </update>
+     <select id="GetBpmWeightUnlockInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[  select a.*,b.user_name from bpm_weight_unlock a
+  left join ssb_user b on a.record_userid = b.objid where a.delete_flag = 0 
+       ]]>
+         <isNotNull property="where.reason" prepend="AND">
+           <![CDATA[a.unlock_reason=#where.reason#]]>
+         </isNotNull>
+         <isNotNull property="objid" prepend="AND">
+           <![CDATA[a.objid=#objid#]]>
+         </isNotNull>
+     </select>
+
+
+     <select id="GetBpmWeightUnlockreason" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+  select  distinct unlock_reason from  bpm_weight_unlock
+       ]]>
+     </select>
+     
+     <insert id="InsertBpmWeightUnlock" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+  insert into bpm_weight_unlock values(seq_bpm_weight_unlock.nextval,'',#reason#,#userid#,sysdate,'',#remark#,'','',0)
+       ]]>
+     </insert>
+      <update id="DeleteBpmWeightUnlock" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+update bpm_weight_unlock set delete_flag = 1,record_userid = #userid#,record_time = sysdate where objid = #id#
+       ]]>
+     </update>
+        <update id="UpdateBpmWeightUnlock" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+update bpm_weight_unlock set unlock_reason = #reason#,dummy2 = #remark#,record_userid = #userid#,record_time = sysdate  where objid = #id#
+       ]]>
+     </update>
+
+     <!--begin成品胎例查，停成型机-->
+     <select id="GetBpmStopMaterInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+select  a.objid,a.cpp_sap,c.material_name cpp_mater,a.bpm_sap,d.material_name bpm_mater,a.stop_reason,a.state,b.state equipstate,b.test_num,b.real_num
+,a.stop_begintime,a.stop_endtime,a.record_time,e.user_name,nvl(b.objid,0) b_objid,b.equip_name
+  from bpm_stopmater A
+LEFT JOIN bpm_workequip B ON B.SAP_CODE = A.BPM_SAP AND B.NEW_FLAG = 1
+left join (select  sap_code,max(material_name) material_name from  sbm_material where delete_flag = 0 group by sap_code) c on c.sap_code = a.cpp_sap  
+left join (select  sap_code,max(material_name) material_name from  sbm_material where delete_flag = 0 group by sap_code) d on d.sap_code = a.bpm_sap
+left join ssb_user e on e.objid = a.record_userid where 1=1 
+       ]]>
+       <isNotNull property="objid" prepend="AND">
+         <![CDATA[a.objid=#objid#]]>
+       </isNotNull>
+       <isNotNull property="b_objid" prepend="AND">
+         <![CDATA[b.objid=#b_objid#]]>
+       </isNotNull>
+       <isNotNull property="where.CppSap" prepend="AND">
+         <![CDATA[a.cpp_sap=#where.CppSap#]]>
+       </isNotNull>
+       <isNotNull property="where.BpmCpp" prepend="AND">
+         <![CDATA[a.bpm_sap=#where.BpmCpp#]]>
+       </isNotNull>
+       <isNotNull property="where.txtreason" prepend="AND">
+         <![CDATA[a.stop_reason like '%' || #where.txtreason# || '%']]>
+       </isNotNull>
+       <isNotNull property="where.cbxtype" prepend="AND">
+         <![CDATA[a.state =#where.cbxtype#]]>
+       </isNotNull>
+       <![CDATA[order by a.record_time,b.equip_name]]>
+     </select>
+
+     <insert id="InsertBpmStopMaterInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ insert into bpm_stopmater(objid,cpp_sap,bpm_sap,stop_reason,state,record_userid)
+values(seq_bpm_stopmater.nextval,#addcppsap#,#addbpmsap#,#addreason#,'正用',#userid#)
+       ]]>
+     </insert>
+
+     <update id="UpdateBpmStopMaterInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+update bpm_workequip set state = '停机' where sap_code = #addbpmsap# and new_flag = 1
+       ]]>
+     </update>
+     <update id="UpdateBpmStopMaterOne" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+UPDATE  bpm_stopmater set state = #editState#
+       ]]>
+       <isNotNull property="endTime">
+         <![CDATA[,stop_endtime = to_date(#endTime#,'yyyy-MM-dd hh24:mi:ss')]]>
+       </isNotNull>
+       <![CDATA[ where objid =  #id#]]>
+     </update>
+     <update id="UpdateBpmStopMaterTwo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+update bpm_workequip set state = #editEquipstate#,test_num = #editTestnum#  where objid = #id2#
+       ]]>
+     </update>
+     <!--end成品胎例查，停成型机-->
+
+     <select id="GetGradeList" parameterClass="map" resultClass="Row">
+       <![CDATA[select * from bqc_grade where delete_flag=0 order by objid]]>
+     </select>
+
+     <select id="GetMoldGradeList" parameterClass="map" resultClass="Row">
+       <![CDATA[
+        SELECT 22 OBJID,'一级品' GRADE_NAME FROM DUAL
+        UNION
+        SELECT 23 OBJID,'二级品' GRADE_NAME FROM DUAL
+        UNION
+        SELECT 24 OBJID,'废品' GRADE_NAME FROM DUAL
+       ]]>
+     </select>
+
+     <select id="GetInventoryDetail" parameterClass="map" resultClass="Row">
+       <![CDATA[
+           SELECT  T3.BILL_CODE,T2.USER_NAME,T.* FROM BSM_INVENTORY_DETAIL T
+          LEFT JOIN SSB_USER T2 ON T.RECORD_USER_ID=T2.OBJID
+          LEFT JOIN BSM_INVENTORY_BILL T3 ON T.BILL_ID=T3.OBJID 
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="StorePlaceID" prepend="AND">
+           <![CDATA[T.STORE_PLACE_ID=#StorePlaceID# ]]>
+         </isNotNull>
+         <isNotNull property="BillID" prepend="AND">
+           <![CDATA[T.Bill_ID=#BillID# ]]>
+         </isNotNull>
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG=#DeleteFlag# ]]>
+         </isNotNull>
+         <isNotNull property="DATE" prepend="AND">
+           <![CDATA[T.INVENTORY_DATE>=TO_DATE(#DATE#,'yyyy-MM-dd') ]]>
+         </isNotNull>
+       </dynamic>
+       <isNotNull property="OrderString" prepend="">
+         ORDER BY $OrderString$
+       </isNotNull>
+     </select>
+     <select id="GetInventoryBill" parameterClass="map" resultClass="Row">
+       <![CDATA[
+          SELECT T.OBJID,T.BILL_CODE,T.BILL_TYPE,T.INVENTORY_AMOUNT,
+          CASE T.BILL_STATE WHEN 0 THEN '新建' WHEN 1 THEN '正在盘点' WHEN 4 THEN '异常终止' 
+          WHEN 8 THEN '盘点完成' ELSE '其他' END BILL_STATE,T.RECORD_TIME,
+          T2.USER_NAME,T3.STORE_PLACE_NAME,T3.OBJID STOREPLACEID, T3.STORAGE_AMOUNT AMOUNT ,T3.STORE_ID ,T4.STORE_NAME FROM BSM_INVENTORY_BILL T
+          LEFT JOIN SSB_USER T2 ON T.RECORD_USER_ID=T2.OBJID
+          LEFT JOIN BSM_STORE_PLACE T3 ON T.DUMMY_1=T3.OBJID
+          LEFT JOIN BSM_STORE T4 ON T4.OBJID = T3.STORE_ID
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="StoreID" prepend="AND">
+           <![CDATA[T3.STORE_ID=#StoreID# ]]>
+         </isNotNull>
+         <isNotNull property="StorePlaceID" prepend="AND">
+           <![CDATA[T.DUMMY_1=#StorePlaceID# ]]>
+         </isNotNull>
+         <isNotNull property="DATE" prepend="AND">
+           <![CDATA[T.INVENTORY_DATE>=TO_DATE(#DATE#,'yyyy-MM-dd') ]]>
+         </isNotNull>
+         <isNotNull property="BillState" prepend="AND">
+           <![CDATA[T.BILL_STATE=#BillState# ]]>
+         </isNotNull>
+       </dynamic>
+       <isNotNull property="OrderString" prepend="">
+         ORDER BY $OrderString$
+       </isNotNull>
+     </select>
+
+     <select id="GetSbeShiGongUser" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+SELECT distinct a.*,b.user_name zbuser,c.user_name jduser,d.user_name shuser,e.user_name pzuser,f.user_name recorduser  FROM   sbe_shigong_user a
+left join ssb_user b on a.zb_workid = b.work_barcode
+left join ssb_user c on a.jd_workid = c.work_barcode
+left join ssb_user d on a.sh_workid = d.work_barcode
+left join ssb_user e on a.pz_workid = e.work_barcode
+left join ssb_user f on a.record_userid = f.objid
+       ]]>
+       <isNotNull property="item" prepend="AND">
+         <![CDATA[a.item=#item#]]>
+       </isNotNull>
+     </select>
+     <update id="UpdateSbeShiGongUser" parameterClass="map">
+       <![CDATA[ 
+update sbe_shigong_user set zb_workid =#zb#,jd_workid =#jd#,sh_workid =#sh#,pz_workid =#pz#,record_userid =#userid#,record_time = sysdate where item = #item#
+       ]]>
+     </update>
+     
+  </statements>
+</sqlMap>

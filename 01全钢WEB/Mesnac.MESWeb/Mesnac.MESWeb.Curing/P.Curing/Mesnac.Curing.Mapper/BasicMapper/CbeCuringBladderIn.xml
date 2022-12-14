@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BasicMapper.CbeCuringBladderIn"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="CbeCuringBladderIn" type="Mesnac.Curing.Entity.BasicEntity.CbeCuringBladderIn, Mesnac.Curing.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_CbeCuringBladderIn" class="CbeCuringBladderIn">
+    <result property="ObjId" column="OBJID"/>
+    <result property="RecordUserId" column="RECORD_USER_ID"/>
+    <result property="RecordTime" column="RECORD_TIME"/>
+    <result property="BackupFlag" column="BACKUP_FLAG"/>
+    <result property="BackupTime" column="BACKUP_TIME"/>
+    <result property="DeleteFlag" column="DELETE_FLAG"/>
+    <result property="BladderCode" column="BLADDER_CODE"/>
+    <result property="BuyType" column="BUY_TYPE"/>
+    <result property="BladderType" column="BLADDER_TYPE"/>
+    <result property="BladderSpec" column="BLADDER_SPEC"/>
+    <result property="BladderBatch" column="BLADDER_BATCH"/>
+    <result property="BladderState" column="BLADDER_STATE"/>
+    <result property="SeqIndex" column="SEQ_INDEX"/>
+    <result property="Remark" column="REMARK"/>
+    <result property="Dummy1" column="DUMMY1"/>
+    <result property="Dummy2" column="DUMMY2"/>
+    <result property="Dummy3" column="DUMMY3"/>
+    <result property="Dummy4" column="DUMMY4"/>
+    <result property="Dummy5" column="DUMMY5"/>
+    <result property="ChangeNum" column="CHANGE_NUM"/>
+    <result property="Yc1Num" column="YC1_NUM"/>
+    <result property="Yc1Userid" column="YC1_USERID"/>
+    <result property="Yc1Time" column="YC1_TIME"/>
+    <result property="Yc2Num" column="YC2_NUM"/>
+    <result property="Yc2Userid" column="YC2_USERID"/>
+    <result property="Yc2Time" column="YC2_TIME"/>
+    <result property="Yc3Num" column="YC3_NUM"/>
+    <result property="Yc3Userid" column="YC3_USERID"/>
+    <result property="Yc3Time" column="YC3_TIME"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_CbeCuringBladderIn" class="CbeCuringBladderIn">
+    <parameter property="ObjId" column="ObjId"/>
+    <parameter property="RecordUserId" column="RecordUserId"/>
+    <parameter property="RecordTime" column="RecordTime"/>
+    <parameter property="BackupFlag" column="BackupFlag"/>
+    <parameter property="BackupTime" column="BackupTime"/>
+    <parameter property="DeleteFlag" column="DeleteFlag"/>
+    <parameter property="BladderCode" column="BladderCode"/>
+    <parameter property="BuyType" column="BuyType"/>
+    <parameter property="BladderType" column="BladderType"/>
+    <parameter property="BladderSpec" column="BladderSpec"/>
+    <parameter property="BladderBatch" column="BladderBatch"/>
+    <parameter property="BladderState" column="BladderState"/>
+    <parameter property="SeqIndex" column="SeqIndex"/>
+    <parameter property="Remark" column="Remark"/>
+    <parameter property="Dummy1" column="Dummy1"/>
+    <parameter property="Dummy2" column="Dummy2"/>
+    <parameter property="Dummy3" column="Dummy3"/>
+    <parameter property="Dummy4" column="Dummy4"/>
+    <parameter property="Dummy5" column="Dummy5"/>
+    <parameter property="ChangeNum" column="ChangeNum"/>
+    <parameter property="Yc1Num" column="Yc1Num"/>
+    <parameter property="Yc1Userid" column="Yc1Userid"/>
+    <parameter property="Yc1Time" column="Yc1Time"/>
+    <parameter property="Yc2Num" column="Yc2Num"/>
+    <parameter property="Yc2Userid" column="Yc2Userid"/>
+    <parameter property="Yc2Time" column="Yc2Time"/>
+    <parameter property="Yc3Num" column="Yc3Num"/>
+    <parameter property="Yc3Userid" column="Yc3Userid"/>
+    <parameter property="Yc3Time" column="Yc3Time"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CBE_CURING_BLADDER_IN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderCode" prepend="AND">
+          <![CDATA[BLADDER_CODE = #where.BladderCode#]]>
+        </isNotNull>
+        <isNotNull property="where.BuyType" prepend="AND">
+          <![CDATA[BUY_TYPE = #where.BuyType#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderType" prepend="AND">
+          <![CDATA[BLADDER_TYPE = #where.BladderType#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderSpec" prepend="AND">
+          <![CDATA[BLADDER_SPEC = #where.BladderSpec#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderBatch" prepend="AND">
+          <![CDATA[BLADDER_BATCH = #where.BladderBatch#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderState" prepend="AND">
+          <![CDATA[BLADDER_STATE = #where.BladderState#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.ChangeNum" prepend="AND">
+          <![CDATA[CHANGE_NUM = #where.ChangeNum#]]>
+        </isNotNull>
+        <isNotNull property="where.Yc1Num" prepend="AND">
+          <![CDATA[YC1_NUM = #where.Yc1Num#]]>
+        </isNotNull>
+        <isNotNull property="where.Yc1Userid" prepend="AND">
+          <![CDATA[YC1_USERID = #where.Yc1Userid#]]>
+        </isNotNull>
+        <isNotNull property="where.Yc1Time" prepend="AND">
+          <![CDATA[YC1_TIME = #where.Yc1Time#]]>
+        </isNotNull>
+        <isNotNull property="where.Yc2Num" prepend="AND">
+          <![CDATA[YC2_NUM = #where.Yc2Num#]]>
+        </isNotNull>
+        <isNotNull property="where.Yc2Userid" prepend="AND">
+          <![CDATA[YC2_USERID = #where.Yc2Userid#]]>
+        </isNotNull>
+        <isNotNull property="where.Yc2Time" prepend="AND">
+          <![CDATA[YC2_TIME = #where.Yc2Time#]]>
+        </isNotNull>
+        <isNotNull property="where.Yc3Num" prepend="AND">
+          <![CDATA[YC3_NUM = #where.Yc3Num#]]>
+        </isNotNull>
+        <isNotNull property="where.Yc3Userid" prepend="AND">
+          <![CDATA[YC3_USERID = #where.Yc3Userid#]]>
+        </isNotNull>
+        <isNotNull property="where.Yc3Time" prepend="AND">
+          <![CDATA[YC3_TIME = #where.Yc3Time#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (OBJID = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO CBE_CURING_BLADDER_IN]]>
+       <dynamic prepend="(OBJID,">
+        <isNotNull property="RecordUserId" prepend=",">RECORD_USER_ID</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">RECORD_TIME</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">BACKUP_FLAG</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">BACKUP_TIME</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">DELETE_FLAG</isNotNull>
+        <isNotNull property="BladderCode" prepend=",">BLADDER_CODE</isNotNull>
+        <isNotNull property="BuyType" prepend=",">BUY_TYPE</isNotNull>
+        <isNotNull property="BladderType" prepend=",">BLADDER_TYPE</isNotNull>
+        <isNotNull property="BladderSpec" prepend=",">BLADDER_SPEC</isNotNull>
+        <isNotNull property="BladderBatch" prepend=",">BLADDER_BATCH</isNotNull>
+        <isNotNull property="BladderState" prepend=",">BLADDER_STATE</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">SEQ_INDEX</isNotNull>
+        <isNotNull property="Remark" prepend=",">REMARK</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">DUMMY1</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">DUMMY2</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">DUMMY3</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">DUMMY4</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">DUMMY5</isNotNull>
+        <isNotNull property="ChangeNum" prepend=",">CHANGE_NUM</isNotNull>
+        <isNotNull property="Yc1Num" prepend=",">YC1_NUM</isNotNull>
+        <isNotNull property="Yc1Userid" prepend=",">YC1_USERID</isNotNull>
+        <isNotNull property="Yc1Time" prepend=",">YC1_TIME</isNotNull>
+        <isNotNull property="Yc2Num" prepend=",">YC2_NUM</isNotNull>
+        <isNotNull property="Yc2Userid" prepend=",">YC2_USERID</isNotNull>
+        <isNotNull property="Yc2Time" prepend=",">YC2_TIME</isNotNull>
+        <isNotNull property="Yc3Num" prepend=",">YC3_NUM</isNotNull>
+        <isNotNull property="Yc3Userid" prepend=",">YC3_USERID</isNotNull>
+        <isNotNull property="Yc3Time" prepend=",">YC3_TIME</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="ObjId" prepend=",">#ObjId#</isNotNull>
+        <isNull property="ObjId" prepend=",">SEQ_CBE_CURING_BLADDER_IN.NEXTVAL</isNull>
+        <isNotNull property="RecordUserId" prepend=",">#RecordUserId#</isNotNull>
+        <isNotNull property="RecordTime" prepend=",">#RecordTime#</isNotNull>
+        <isNotNull property="BackupFlag" prepend=",">#BackupFlag#</isNotNull>
+        <isNotNull property="BackupTime" prepend=",">#BackupTime#</isNotNull>
+        <isNotNull property="DeleteFlag" prepend=",">#DeleteFlag#</isNotNull>
+        <isNotNull property="BladderCode" prepend=",">#BladderCode#</isNotNull>
+        <isNotNull property="BuyType" prepend=",">#BuyType#</isNotNull>
+        <isNotNull property="BladderType" prepend=",">#BladderType#</isNotNull>
+        <isNotNull property="BladderSpec" prepend=",">#BladderSpec#</isNotNull>
+        <isNotNull property="BladderBatch" prepend=",">#BladderBatch#</isNotNull>
+        <isNotNull property="BladderState" prepend=",">#BladderState#</isNotNull>
+        <isNotNull property="SeqIndex" prepend=",">#SeqIndex#</isNotNull>
+        <isNotNull property="Remark" prepend=",">#Remark#</isNotNull>
+        <isNotNull property="Dummy1" prepend=",">#Dummy1#</isNotNull>
+        <isNotNull property="Dummy2" prepend=",">#Dummy2#</isNotNull>
+        <isNotNull property="Dummy3" prepend=",">#Dummy3#</isNotNull>
+        <isNotNull property="Dummy4" prepend=",">#Dummy4#</isNotNull>
+        <isNotNull property="Dummy5" prepend=",">#Dummy5#</isNotNull>
+        <isNotNull property="ChangeNum" prepend=",">#ChangeNum#</isNotNull>
+        <isNotNull property="Yc1Num" prepend=",">#Yc1Num#</isNotNull>
+        <isNotNull property="Yc1Userid" prepend=",">#Yc1Userid#</isNotNull>
+        <isNotNull property="Yc1Time" prepend=",">#Yc1Time#</isNotNull>
+        <isNotNull property="Yc2Num" prepend=",">#Yc2Num#</isNotNull>
+        <isNotNull property="Yc2Userid" prepend=",">#Yc2Userid#</isNotNull>
+        <isNotNull property="Yc2Time" prepend=",">#Yc2Time#</isNotNull>
+        <isNotNull property="Yc3Num" prepend=",">#Yc3Num#</isNotNull>
+        <isNotNull property="Yc3Userid" prepend=",">#Yc3Userid#</isNotNull>
+        <isNotNull property="Yc3Time" prepend=",">#Yc3Time#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE CBE_CURING_BLADDER_IN
+       <dynamic prepend="SET">
+        <isNotNull  property="update.RecordUserId"  prepend=",">
+          RECORD_USER_ID = #update.RecordUserId#
+        </isNotNull>
+        <isNotNull  property="update.RecordTime"  prepend=",">
+          RECORD_TIME = #update.RecordTime#
+        </isNotNull>
+        <isNotNull  property="update.BackupFlag"  prepend=",">
+          BACKUP_FLAG = #update.BackupFlag#
+        </isNotNull>
+        <isNotNull  property="update.BackupTime"  prepend=",">
+          BACKUP_TIME = #update.BackupTime#
+        </isNotNull>
+        <isNotNull  property="update.DeleteFlag"  prepend=",">
+          DELETE_FLAG = #update.DeleteFlag#
+        </isNotNull>
+        <isNotNull  property="update.BladderCode"  prepend=",">
+          BLADDER_CODE = #update.BladderCode#
+        </isNotNull>
+        <isNotNull  property="update.BuyType"  prepend=",">
+          BUY_TYPE = #update.BuyType#
+        </isNotNull>
+        <isNotNull  property="update.BladderType"  prepend=",">
+          BLADDER_TYPE = #update.BladderType#
+        </isNotNull>
+        <isNotNull  property="update.BladderSpec"  prepend=",">
+          BLADDER_SPEC = #update.BladderSpec#
+        </isNotNull>
+        <isNotNull  property="update.BladderBatch"  prepend=",">
+          BLADDER_BATCH = #update.BladderBatch#
+        </isNotNull>
+        <isNotNull  property="update.BladderState"  prepend=",">
+          BLADDER_STATE = #update.BladderState#
+        </isNotNull>
+        <isNotNull  property="update.SeqIndex"  prepend=",">
+          SEQ_INDEX = #update.SeqIndex#
+        </isNotNull>
+        <isNotNull  property="update.Remark"  prepend=",">
+          REMARK = #update.Remark#
+        </isNotNull>
+        <isNotNull  property="update.Dummy1"  prepend=",">
+          DUMMY1 = #update.Dummy1#
+        </isNotNull>
+        <isNotNull  property="update.Dummy2"  prepend=",">
+          DUMMY2 = #update.Dummy2#
+        </isNotNull>
+        <isNotNull  property="update.Dummy3"  prepend=",">
+          DUMMY3 = #update.Dummy3#
+        </isNotNull>
+        <isNotNull  property="update.Dummy4"  prepend=",">
+          DUMMY4 = #update.Dummy4#
+        </isNotNull>
+        <isNotNull  property="update.Dummy5"  prepend=",">
+          DUMMY5 = #update.Dummy5#
+        </isNotNull>
+        <isNotNull  property="update.ChangeNum"  prepend=",">
+          CHANGE_NUM = #update.ChangeNum#
+        </isNotNull>
+        <isNotNull  property="update.Yc1Num"  prepend=",">
+          YC1_NUM = #update.Yc1Num#
+        </isNotNull>
+        <isNotNull  property="update.Yc1Userid"  prepend=",">
+          YC1_USERID = #update.Yc1Userid#
+        </isNotNull>
+        <isNotNull  property="update.Yc1Time"  prepend=",">
+          YC1_TIME = #update.Yc1Time#
+        </isNotNull>
+        <isNotNull  property="update.Yc2Num"  prepend=",">
+          YC2_NUM = #update.Yc2Num#
+        </isNotNull>
+        <isNotNull  property="update.Yc2Userid"  prepend=",">
+          YC2_USERID = #update.Yc2Userid#
+        </isNotNull>
+        <isNotNull  property="update.Yc2Time"  prepend=",">
+          YC2_TIME = #update.Yc2Time#
+        </isNotNull>
+        <isNotNull  property="update.Yc3Num"  prepend=",">
+          YC3_NUM = #update.Yc3Num#
+        </isNotNull>
+        <isNotNull  property="update.Yc3Userid"  prepend=",">
+          YC3_USERID = #update.Yc3Userid#
+        </isNotNull>
+        <isNotNull  property="update.Yc3Time"  prepend=",">
+          YC3_TIME = #update.Yc3Time#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM CBE_CURING_BLADDER_IN
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_CbeCuringBladderIn">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_CbeCuringBladderIn">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(OBJID)
+      </isNotPropertyAvailable>
+      FROM CBE_CURING_BLADDER_IN
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM CBE_CURING_BLADDER_IN
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_CbeCuringBladderIn" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE CBE_CURING_BLADDER_IN
+    </statement>
+  </statements>
+</sqlMap>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="BeginTime" Value="开始时间"></Caption>
+    <Caption Name="EndTime" Value="结束时间"></Caption>
+    <Caption Name="STORE_ID" Value="仓库"></Caption>
+    <Caption Name="STORE_NAME" Value="原仓库名称"></Caption>
+    <Caption Name="STORE_PLACE_NAME" Value="原库位名称"></Caption>
+    <Caption Name="DES_STORE_PLACE_NAME" Value="目的库位名称"></Caption>
+    <Caption Name="STORE_PLACE_SUB_CODE" Value="子库位代号"></Caption>
+    <Caption Name="STORE_PLACE_CODE" Value="库位代号"></Caption>
+    <Caption Name="CARD_NO" Value="流水卡号"></Caption>
+    <Caption Name="MATERIAL_NAME" Value="规格"></Caption>
+    <Caption Name="SHELF_NO" Value="工装架子号"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+    <Caption Name="PROD_CODE" Value="项目代码"></Caption>
+  </Captions>
+  <WebPage Title="退库详情">
+  </WebPage>
+  <Crud TableName="HPP_RETURN_STOCK_DETAIL">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_HPP_RETURN_STOCK_DETAIL"></SeqField>
+    </SeqFields>
+  </Crud>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="BeginTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="EndTime" Type="DateTimeBox"></ParamField>
+        <ParamField FieldName="STORE_PLACE_NAME" Nullable="true"></ParamField>
+        <ParamField FieldName="DES_STORE_PLACE_NAME" Nullable="true"></ParamField>
+        <ParamField FieldName="CARD_NO" Nullable="true"></ParamField>
+        <ParamField FieldName="SHELF_NO" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID"  IsShow="false"></GridColumn>
+        <GridColumn ColumnName="STORE_NAME"  Width="100"></GridColumn>
+        <GridColumn ColumnName="STORE_PLACE_NAME" Width="200"></GridColumn>
+        <GridColumn ColumnName="DES_STORE_PLACE_NAME" Width="200"></GridColumn>
+        <GridColumn ColumnName="CARD_NO" Width="200"></GridColumn>
+        <GridColumn ColumnName="MATERIAL_NAME" Width="200"></GridColumn>
+        <GridColumn ColumnName="SHELF_NO" Width="100"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME" Width="50"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date" Width="150"></GridColumn>
+        <GridColumn ColumnName="REMARK"  Width="50"></GridColumn>
+        <GridColumn ColumnName="PROD_CODE"  Width="180" IsShow="false"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

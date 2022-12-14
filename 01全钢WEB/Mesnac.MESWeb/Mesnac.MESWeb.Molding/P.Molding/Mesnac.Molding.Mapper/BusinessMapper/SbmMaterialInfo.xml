@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.SbmMaterialInfo"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SBM_MATERIAL_INFO ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialId" prepend="AND">
+          <![CDATA[MATERIAL_ID = #where.MaterialId#]]>
+        </isNotNull>
+        <isNotNull property="where.MinTime" prepend="AND">
+          <![CDATA[MIN_TIME = #where.MinTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ValidTime" prepend="AND">
+          <![CDATA[VALID_TIME = #where.ValidTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY_1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY_2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY_3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY_4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY_5 = #where.Dummy5#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy6" prepend="AND">
+          <![CDATA[DUMMY_6 = #where.Dummy6#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialMinorType" prepend="AND">
+          <![CDATA[MATERIAL_MINOR_TYPE = #where.MaterialMinorType#]]>
+        </isNotNull>
+        <isNotNull property="where.MaterialMajorType" prepend="AND">
+          <![CDATA[MATERIAL_MAJOR_TYPE = #where.MaterialMajorType#]]>
+        </isNotNull>
+        <isNotNull property="where.RecoverTime" prepend="AND">
+          <![CDATA[RECOVER_TIME = #where.RecoverTime#]]>
+        </isNotNull>
+        <isNotNull property="where.HisMinTime" prepend="AND">
+          <![CDATA[HIS_MIN_TIME = #where.HisMinTime#]]>
+        </isNotNull>
+        <isNotNull property="where.HisValidTime" prepend="AND">
+          <![CDATA[HIS_VALID_TIME = #where.HisValidTime#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+     <select id="GetMaterialTimeInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T.MATERIAL_ID,T1.MATERIAL_CODE,T1.MATERIAL_NAME,T.MIN_TIME,T.VALID_TIME FROM SBM_MATERIAL_INFO T
+       LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID = T.MATERIAL_ID
+       WHERE T.MATERIAL_MINOR_TYPE NOT IN(32,33)
+       ]]>
+         <isNotNull property="where.materialName" prepend="AND">
+           <![CDATA[T1.MATERIAL_NAME LIKE '%'||#where.materialName#||'%' ]]>
+         </isNotNull>
+         <isNotNull property="where.materialCode" prepend="AND">
+           <![CDATA[T1.MATERIAL_CODE LIKE '%'||#where.materialCode#||'%']]>
+         </isNotNull>
+         <isNotNull property="where.minorTypeId" prepend="AND">
+           <![CDATA[T.MATERIAL_MINOR_TYPE = #where.minorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+     </select>
+     
+          <select id="GetMaterialTimeStandInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       SELECT T.MATERIAL_ID,T1.MATERIAL_CODE,T1.MATERIAL_NAME,T.MIN_TIME,T.VALID_TIME FROM sbm_material_info_stand T
+       LEFT JOIN SBM_MATERIAL T1 ON T1.OBJID = T.MATERIAL_ID
+       WHERE T.MATERIAL_MINOR_TYPE NOT IN(32,33)
+       ]]>
+         <isNotNull property="where.materialName" prepend="AND">
+           <![CDATA[T1.MATERIAL_NAME LIKE '%'||#where.materialName#||'%' ]]>
+         </isNotNull>
+         <isNotNull property="where.materialCode" prepend="AND">
+           <![CDATA[T1.MATERIAL_CODE LIKE '%'||#where.materialCode#||'%']]>
+         </isNotNull>
+         <isNotNull property="where.minorTypeId" prepend="AND">
+           <![CDATA[T.MATERIAL_MINOR_TYPE = #where.minorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="where.DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #where.DeleteFlag#]]>
+         </isNotNull>
+     </select>
+         
+     <update id="UpdateMatrialInfoByType" parameterClass="map">
+       <![CDATA[
+       UPDATE SBM_MATERIAL_INFO SET
+       ]]>
+       <isNotNull property="minTime" prepend="">
+         <![CDATA[ HIS_MIN_TIME=MIN_TIME,MIN_TIME =#minTime#]]>
+       </isNotNull>
+       <isNotNull property="validTime" prepend=",">
+         <![CDATA[ HIS_VALID_TIME = VALID_TIME, VALID_TIME=#validTime#,]]>
+       </isNotNull>
+       <![CDATA[ Recover_time=#recoverTime#,RECORD_USER_ID=#userId#,RECORD_TIME=#recordTime#
+       WHERE MATERIAL_MINOR_TYPE=#minorTypeId#
+       ]]>
+     </update>
+            
+     <update id="UpdateMatrialStandInfoByType" parameterClass="map">
+       <![CDATA[
+       UPDATE sbm_material_info_stand SET
+       ]]>
+       <isNotNull property="minTime" prepend="">
+         <![CDATA[ HIS_MIN_TIME=MIN_TIME,MIN_TIME =#minTime#,]]>
+       </isNotNull>
+       <isNotNull property="validTime" prepend="">
+         <![CDATA[ HIS_VALID_TIME = VALID_TIME, VALID_TIME=#validTime#,]]>
+       </isNotNull>
+       <![CDATA[ Recover_time=#recoverTime#,RECORD_USER_ID=#userId#,RECORD_TIME=#recordTime#
+       WHERE MATERIAL_MINOR_TYPE=#minorTypeId#
+       ]]>
+     </update>
+     
+     <update id="UpdateMaterialInfoByMater" parameterClass="map">
+       <![CDATA[
+       UPDATE SBM_MATERIAL_INFO SET 
+         ]]>
+       <isNotNull property="minTime" prepend="">
+         <![CDATA[HIS_MIN_TIME=MIN_TIME, MIN_TIME =#minTime#]]>
+       </isNotNull>
+       <isNotNull property="validTime" prepend=",">
+         <![CDATA[ HIS_VALID_TIME = VALID_TIME, VALID_TIME=#validTime#,]]>
+       </isNotNull>
+       <![CDATA[  Recover_time=#recoverTime#,RECORD_USER_ID=#userId#,RECORD_TIME=#recordTime#
+       WHERE MATERIAL_ID=#materialId#]]>
+     </update>
+      <update id="UpdateMaterialStandInfoByMater" parameterClass="map">
+       <![CDATA[
+       UPDATE sbm_material_info_stand SET 
+         ]]>
+       <isNotNull property="minTime" prepend="">
+         <![CDATA[HIS_MIN_TIME=MIN_TIME, MIN_TIME =#minTime#,]]>
+       </isNotNull>
+       <isNotNull property="validTime" prepend="">
+         <![CDATA[HIS_VALID_TIME = VALID_TIME, VALID_TIME=#validTime#,]]>
+       </isNotNull>
+       <![CDATA[  Recover_time=#recoverTime#,RECORD_USER_ID=#userId#,RECORD_TIME=#recordTime#
+       WHERE MATERIAL_ID=#materialId#]]>
+     </update>
+           
+     <insert id="InitMaterial" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+         insert into sbm_material_info (objid,material_id,min_time,valid_time,delete_flag,material_major_type,material_minor_type) 
+         select seq_sbm_material_info.nextval,t1.objid,nvl(t2.min_hours,0),nvl(t2.max_hours,48),t1.delete_flag,t1.major_type_id,t1.minor_type_id from sbm_material t1
+         left join sbm_material_minor_time_set t2 on t1.minor_type_id = t2.objid
+         where not EXISTS (select 1 from  sbm_material_info t0 where t0.MATERIAL_ID=t1.objid)
+      ]]>
+     </insert>
+             
+     <insert id="InitStandMaterial" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+         insert into sbm_material_info_stand (objid,material_id,min_time,valid_time,delete_flag,material_major_type,material_minor_type) 
+         select seq_sbm_material_info_stand.nextval,t1.objid,nvl(t2.min_hours,0),nvl(t2.max_hours,48),t1.delete_flag,t1.major_type_id,t1.minor_type_id from sbm_material t1
+         left join sbm_material_minor_time_set t2 on t1.minor_type_id = t2.objid
+         where not EXISTS (select 1 from  sbm_material_info_stand t0 where t0.MATERIAL_ID=t1.objid)
+      ]]>
+     </insert>
+           
+     <select id="GetMaterialByType" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select t1.material_code as dummy1,t1.material_name as dummy2,t.min_time MinTime,t.valid_time ValidTime from sbm_material_info t
+       left join sbm_material t1 on t1.objid = t.material_id
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="minorTypeId" prepend="AND">
+           <![CDATA[T.MATERIAL_MINOR_TYPE = #minorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+   
+     <select id="GetMaterialStandByType" parameterClass="map" resultClass="Row">
+       <![CDATA[
+       select t1.material_code as dummy1,t1.material_name as dummy2,t.min_time MinTime,t.valid_time ValidTime from sbm_material_info_stand t
+       left join sbm_material t1 on t1.objid = t.material_id
+       ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="minorTypeId" prepend="AND">
+           <![CDATA[T.MATERIAL_MINOR_TYPE = #minorTypeId#]]>
+         </isNotNull>
+         <isNotNull property="DeleteFlag" prepend="AND">
+           <![CDATA[T.DELETE_FLAG = #DeleteFlag#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <update id="UpdateRecoverValidTimeStand" parameterClass="map">
+       <![CDATA[
+        update sbm_material_info set VALID_TIME = 
+       (SELECT VALID_TIME FROM sbm_material_info_stand where sbm_material_info.material_id = sbm_material_info_stand.material_id )
+       where sbm_material_info.material_minor_type=#minorTypeId#
+       ]]>
+     </update>
+  </statements>
+</sqlMap>

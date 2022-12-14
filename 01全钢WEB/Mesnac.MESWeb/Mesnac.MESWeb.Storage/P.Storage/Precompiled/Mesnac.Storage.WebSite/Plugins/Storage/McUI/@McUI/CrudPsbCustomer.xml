@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UiConfig>
+  <Captions>
+    <Caption Name="OBJID" Value="编号"></Caption>
+    <Caption Name="COMP_AREA" Value="公司代码"></Caption>
+    <Caption Name="CUSTOMER_ID" Value="客户编码"></Caption>
+    <Caption Name="CUSTOME_NAME" Value="客户名称"></Caption>
+    <Caption Name="CUSTOME_NICK" Value="客户简称"></Caption>
+    <Caption Name="REMARK" Value="备注"></Caption>
+    <Caption Name="RECORD_USER_NAME" Value="记录人"></Caption>
+    <Caption Name="RECORD_TIME" Value="记录时间"></Caption>
+  </Captions>
+  <WebPage Title="客户信息">
+  </WebPage>
+  <Crud TableName="PSB_CUSTOMER">
+    <PrimaryKey FieldName="OBJID" Identity="true"></PrimaryKey>
+    <DeleteFlag Value="DELETE_FLAG"></DeleteFlag>
+    <SeqFields>
+      <SeqField FieldName="OBJID" SeqName="SEQ_PSB_CUSTOMER"></SeqField>
+    </SeqFields>
+    <Uniques>
+      <Unique Fields="CUSTOMER_ID"></Unique>
+    </Uniques>
+  </Crud>
+  <Insert UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="CUSTOMER_ID"></ParamField>
+        <ParamField FieldName="CUSTOME_NAME"></ParamField>
+        <ParamField FieldName="CUSTOME_NICK" Nullable="true"></ParamField>
+        <ParamField FieldName="COMP_AREA" Nullable="true"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Insert>
+  <Update UserField="RECORD_USER_ID" TimeField="RECORD_TIME">
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="CUSTOMER_ID"></ParamField>
+        <ParamField FieldName="CUSTOME_NAME"></ParamField>
+        <ParamField FieldName="CUSTOME_NICK" Nullable="true"></ParamField>
+        <ParamField FieldName="COMP_AREA" Nullable="true"></ParamField>
+        <ParamField FieldName="REMARK" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+  </Update>
+  <Select>
+    <ParamPanel>
+      <ParamFields>
+        <ParamField FieldName="CUSTOMER_ID" Nullable="true"></ParamField>
+        <ParamField FieldName="CUSTOME_NAME" Nullable="true"></ParamField>
+      </ParamFields>
+    </ParamPanel>
+    <MainGrid OrderString="">
+      <GridColumns>
+        <GridColumn ColumnName="OBJID" IsShow="false"></GridColumn>
+        <GridColumn ColumnName="CUSTOMER_ID"></GridColumn>
+        <GridColumn ColumnName="CUSTOME_NAME"></GridColumn>
+        <GridColumn ColumnName="CUSTOME_NICK"></GridColumn>
+        <GridColumn ColumnName="COMP_AREA"></GridColumn>
+        <GridColumn ColumnName="RECORD_USER_NAME"></GridColumn>
+        <GridColumn ColumnName="RECORD_TIME" ColumnType="Date"></GridColumn>
+        <GridColumn ColumnName="REMARK"></GridColumn>
+      </GridColumns>
+    </MainGrid>
+  </Select>
+</UiConfig>

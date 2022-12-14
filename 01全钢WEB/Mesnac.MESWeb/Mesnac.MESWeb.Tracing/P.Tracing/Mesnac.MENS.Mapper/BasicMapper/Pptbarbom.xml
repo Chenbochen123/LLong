@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.MENS.Mapper.BasicMapper.Pptbarbom"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <alias>
+     <typeAlias alias="Pptbarbom" type="Mesnac.MENS.Entity.BasicEntity.Pptbarbom, Mesnac.MENS.Entity" />
+   </alias>
+   
+  <!--结果集映射 resultMap-->
+  <resultMap id="R_Pptbarbom" class="Pptbarbom">
+    <result property="FBarcode" column="F_barcode"/>
+    <result property="SBarcode" column="S_barcode"/>
+    <result property="ScanBarcode" column="Scan_barcode"/>
+    <result property="UsedWeigh" column="Used_weigh"/>
+    <result property="UsedTime" column="Used_time"/>
+    <result property="ShelfFlag" column="Shelf_Flag"/>
+    <result property="FMatercode" column="F_materCode"/>
+    <result property="SMatercode" column="S_MaterCode"/>
+    <result property="Matercode" column="MaterCode"/>
+    <result property="Qlweight" column="QLWeight"/>
+  </resultMap>
+  <!--参数集映射 parameterMap-->
+  <parameterMap id="P_Pptbarbom" class="Pptbarbom">
+    <parameter property="FBarcode" column="FBarcode"/>
+    <parameter property="SBarcode" column="SBarcode"/>
+    <parameter property="ScanBarcode" column="ScanBarcode"/>
+    <parameter property="UsedWeigh" column="UsedWeigh"/>
+    <parameter property="UsedTime" column="UsedTime"/>
+    <parameter property="ShelfFlag" column="ShelfFlag"/>
+    <parameter property="FMatercode" column="FMatercode"/>
+    <parameter property="SMatercode" column="SMatercode"/>
+    <parameter property="Matercode" column="Matercode"/>
+    <parameter property="Qlweight" column="Qlweight"/>
+  </parameterMap>
+
+   <!--本文件为自动生成，不允许进行修改，如需扩展请参阅 BusinessMapper-->
+   <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM PptBarbom ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.FBarcode" prepend="AND">
+          <![CDATA[F_barcode = #where.FBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.SBarcode" prepend="AND">
+          <![CDATA[S_barcode = #where.SBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.ScanBarcode" prepend="AND">
+          <![CDATA[Scan_barcode = #where.ScanBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedWeigh" prepend="AND">
+          <![CDATA[Used_weigh = #where.UsedWeigh#]]>
+        </isNotNull>
+        <isNotNull property="where.UsedTime" prepend="AND">
+          <![CDATA[Used_time = #where.UsedTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ShelfFlag" prepend="AND">
+          <![CDATA[Shelf_Flag = #where.ShelfFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.FMatercode" prepend="AND">
+          <![CDATA[F_materCode = #where.FMatercode#]]>
+        </isNotNull>
+        <isNotNull property="where.SMatercode" prepend="AND">
+          <![CDATA[S_MaterCode = #where.SMatercode#]]>
+        </isNotNull>
+        <isNotNull property="where.Matercode" prepend="AND">
+          <![CDATA[MaterCode = #where.Matercode#]]>
+        </isNotNull>
+        <isNotNull property="where.Qlweight" prepend="AND">
+          <![CDATA[QLWeight = #where.Qlweight#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--按主键查询-->
+    <sql id="includeWhereByObjId">
+      <![CDATA[ WHERE (F_BARCODE = #ObjId#)]]>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend=" ">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+    <!--添加数据-->
+   <sql id="includeInsert">
+      <![CDATA[INSERT INTO PptBarbom]]>
+       <dynamic prepend="(F_barcode,">
+        <isNotNull property="ScanBarcode" prepend=",">Scan_barcode</isNotNull>
+        <isNotNull property="UsedWeigh" prepend=",">Used_weigh</isNotNull>
+        <isNotNull property="ShelfFlag" prepend=",">Shelf_Flag</isNotNull>
+        <isNotNull property="FMatercode" prepend=",">F_materCode</isNotNull>
+        <isNotNull property="SMatercode" prepend=",">S_MaterCode</isNotNull>
+        <isNotNull property="Matercode" prepend=",">MaterCode</isNotNull>
+        <isNotNull property="Qlweight" prepend=",">QLWeight</isNotNull>
+       </dynamic>
+       <dynamic prepend=") VALUES (">
+        <isNotNull property="FBarcode" prepend=",">#FBarcode#</isNotNull>
+        <isNull property="FBarcode" prepend=",">SEQ_PptBarbom.NEXTVAL</isNull>
+        <isNotNull property="ScanBarcode" prepend=",">#ScanBarcode#</isNotNull>
+        <isNotNull property="UsedWeigh" prepend=",">#UsedWeigh#</isNotNull>
+        <isNotNull property="ShelfFlag" prepend=",">#ShelfFlag#</isNotNull>
+        <isNotNull property="FMatercode" prepend=",">#FMatercode#</isNotNull>
+        <isNotNull property="SMatercode" prepend=",">#SMatercode#</isNotNull>
+        <isNotNull property="Matercode" prepend=",">#Matercode#</isNotNull>
+        <isNotNull property="Qlweight" prepend=",">#Qlweight#</isNotNull>
+       </dynamic>
+       <![CDATA[)]]>
+    </sql>
+    <!--修改数据-->
+    <sql id="includeUpdate">
+      UPDATE PptBarbom
+       <dynamic prepend="SET">
+        <isNotNull  property="update.ScanBarcode"  prepend=",">
+          Scan_barcode = #update.ScanBarcode#
+        </isNotNull>
+        <isNotNull  property="update.UsedWeigh"  prepend=",">
+          Used_weigh = #update.UsedWeigh#
+        </isNotNull>
+        <isNotNull  property="update.ShelfFlag"  prepend=",">
+          Shelf_Flag = #update.ShelfFlag#
+        </isNotNull>
+        <isNotNull  property="update.FMatercode"  prepend=",">
+          F_materCode = #update.FMatercode#
+        </isNotNull>
+        <isNotNull  property="update.SMatercode"  prepend=",">
+          S_MaterCode = #update.SMatercode#
+        </isNotNull>
+        <isNotNull  property="update.Matercode"  prepend=",">
+          MaterCode = #update.Matercode#
+        </isNotNull>
+        <isNotNull  property="update.Qlweight"  prepend=",">
+          QLWeight = #update.Qlweight#
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--删除数据-->
+    <sql id="includeDelete">
+      DELETE FROM PptBarbom
+    </sql>
+
+	
+    <!--增删改查配置信息-->
+    <!--查找序列-->
+    <select id="GetSeqNextVal" parameterClass="string" resultClass="int">
+      select $SequenceName$.NEXTVAL from dual
+    </select>
+    <!--按照主键查找-->
+    <select id="GetByObjId" parameterClass="int" resultMap="R_Pptbarbom">
+      <include refid="includeSelect"/>
+      <include refid="includeWhereByObjId"/>
+    </select>
+    <!--指定条件的查询-->
+    <select id="GetEntityList" parameterClass="map" resultMap="R_Pptbarbom">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    <!--获取某个属性（数据列）的最大值-->
+    <select id="GetColumnMaxValue" parameterClass="map" resultClass="map">
+      SELECT
+      <isPropertyAvailable property="ColumnName" prepend=" ">
+        max($ColumnName$)
+      </isPropertyAvailable>
+      <isNotPropertyAvailable property="ColumnName" prepend=" ">
+        max(F_BARCODE)
+      </isNotPropertyAvailable>
+      FROM PptBarbom
+      <include refid="includeWhere"/>
+    </select>
+    <!--获取数据条数-->
+    <select id="GetRowCount" parameterClass="map" resultClass="int">
+      SELECT COUNT(*) FROM PptBarbom
+      <include refid="includeWhere"/>
+    </select>
+    <!--添加新记录-->
+    <statement id="Insert" parameterMap="P_Pptbarbom" resultClass="int">
+      <include refid="includeInsert"/>
+      <!--<include refid="includeGetObjId"/>-->
+    </statement>
+    <!--更新记录-->
+    <update id="UpdateByObjId" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhereByObjId"/>
+    </update>
+    <!--更新记录-->
+    <update id="Update" parameterClass="map">
+      <include refid="includeUpdate"/>
+      <include refid="includeWhere"/>
+    </update>
+    <!--删除主键是id值得记录-->
+    <delete id="DeleteByObjId" parameterClass="int32">
+      <include refid="includeDelete"/>
+      <include refid="includeWhereByObjId"/>
+    </delete>
+    <!--删除对象对应的记录-->
+    <delete id="Delete" parameterClass="map">
+      <include refid="includeDelete"/>
+      <include refid="includeWhere"/>
+    </delete>
+    <!--清除表中所有记录  慎用！！！-->
+    <statement id="TruncateTable">
+       TRUNCATE TABLE PptBarbom
+    </statement>
+  </statements>
+</sqlMap>

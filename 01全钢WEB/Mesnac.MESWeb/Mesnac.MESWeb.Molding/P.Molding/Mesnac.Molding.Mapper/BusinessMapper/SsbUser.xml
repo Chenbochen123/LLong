@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Molding.Mapper.BusinessMapper.SsbUser"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM SSB_USER ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.IsEmployee" prepend="AND">
+          <![CDATA[IS_EMPLOYEE = #where.IsEmployee#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupFlag" prepend="AND">
+          <![CDATA[BAKUP_FLAG = #where.BakupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BakupTime" prepend="AND">
+          <![CDATA[BAKUP_TIME = #where.BakupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.UserName" prepend="AND">
+          <![CDATA[USER_NAME = #where.UserName#]]>
+        </isNotNull>
+        <isNotNull property="where.UserPwd" prepend="AND">
+          <![CDATA[USER_PWD = #where.UserPwd#]]>
+        </isNotNull>
+        <isNotNull property="where.RealName" prepend="AND">
+          <![CDATA[REAL_NAME = #where.RealName#]]>
+        </isNotNull>
+        <isNotNull property="where.Sex" prepend="AND">
+          <![CDATA[SEX = #where.Sex#]]>
+        </isNotNull>
+        <isNotNull property="where.Telephone" prepend="AND">
+          <![CDATA[TELEPHONE = #where.Telephone#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkBarcode" prepend="AND">
+          <![CDATA[WORK_BARCODE = #where.WorkBarcode#]]>
+        </isNotNull>
+        <isNotNull property="where.DeptId" prepend="AND">
+          <![CDATA[DEPT_ID = #where.DeptId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkId" prepend="AND">
+          <![CDATA[WORK_ID = #where.WorkId#]]>
+        </isNotNull>
+        <isNotNull property="where.ShiftId" prepend="AND">
+          <![CDATA[SHIFT_ID = #where.ShiftId#]]>
+        </isNotNull>
+        <isNotNull property="where.ClassId" prepend="AND">
+          <![CDATA[CLASS_ID = #where.ClassId#]]>
+        </isNotNull>
+        <isNotNull property="where.WorkshopId" prepend="AND">
+          <![CDATA[WORKSHOP_ID = #where.WorkshopId#]]>
+        </isNotNull>
+        <isNotNull property="where.HrCode" prepend="AND">
+          <![CDATA[HR_CODE = #where.HrCode#]]>
+        </isNotNull>
+        <isNotNull property="where.ErpCode" prepend="AND">
+          <![CDATA[ERP_CODE = #where.ErpCode#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row">
+      <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+
+    <!--下载成型用户 改为下载全部用户 qusf 20160114-->
+    <select id="wsDownloadEmployees" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      select lpad(u.OBJID, 10, '0') EMP_ID, u.USER_NAME EMP_NAME, u.USER_PWD PASSWD, lpad(u.DEPT_ID, 4, '0') DEPT_ID, u.WORK_BARCODE
+      from SSB_USER u
+      --join (
+      --select OBJID--FIRST_VALUE(objid) OVER (ORDER BY LEVEL ROWS UNBOUNDED PRECEDING) AS firstdeptid, objid
+      --from SSB_DEPT
+      --where DELETE_FLAG = 0
+      --start with HR_CODE = '30016066' connect by prior OBJID = PARENT_ID
+      --) d on u.DEPT_ID = d.OBJID
+      where u.DELETE_FLAG = 0
+      and nvl(u.work_barcode,'') <> '000001'
+      ]]>
+
+    </select>
+
+    <select id="wsDownloadEmployees2" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      select lpad(u.OBJID, 10, '0') EMP_ID, u.USER_NAME EMP_NAME, u.USER_PWD PASSWD, lpad(u.DEPT_ID, 4, '0') DEPT_ID, u.WORK_BARCODE
+      from SSB_USER u
+      where u.DELETE_FLAG = 0
+      and nvl(u.work_barcode,'') <> '000001'
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="Objid" prepend="AND">
+          <![CDATA[u.Objid>=#Objid#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+	  
+	  <!--人员岗位等级-开始-->
+	  <!--列表展示信息，行转列-->
+	  <select id="GetUserPostLevel" parameterClass="map" resultClass="Row">
+		  <![CDATA[
+        select *
+         from (select t1.OBJID USER_ID,
+                      t1.WORK_BARCODE,
+                      t1.USER_NAME,
+                      t2.WORK_NAME,
+                      t.POST_LEVEL
+               from SSB_USER_POST_LEVEL t
+                        left join SSB_USER t1 on t.USER_ID = t1.OBJID
+                        left join SSB_WORK t2 on t.POST_ID = t2.OBJID
+               where 1 = 1
+      ]]>
+			  <isNotNull property="where.WORK_BARCODE" prepend="AND">
+				  <![CDATA[t1.WORK_BARCODE=#where.WORK_BARCODE#]]>
+			  </isNotNull>
+			  <isNotNull property="where.USER_NAME" prepend="AND">
+				  <![CDATA[t1.USER_NAME like '%'||#where.USER_NAME#||'%']]>
+			  </isNotNull>
+		 <![CDATA[
+		 ) t PIVOT (max(POST_LEVEL) POST_LEVEL for WORK_NAME in ('成型副机' as two , '成型备料' as four, '成型帮车' as three, '成型主机' as one ) )
+		 ]]>
+	  </select>
+      <!--获取岗位信息-->
+	  <select id="GetUserPost" parameterClass="map" resultClass="Row">
+		  <![CDATA[
+            select OBJID,WORK_NAME
+            from SSB_WORK t1
+            where t1.PROCEDURE_ID = '300'
+              and DELETE_FLAG = 0
+      ]]>
+	  </select>
+      <!--查询信息是否存在-->
+	  <select id="GetUserPostLevelList" parameterClass="map" resultClass="Row">
+		  <![CDATA[
+           select * from  SSB_USER_POST_LEVEL t1 where 1=1
+      ]]>
+		  <isNotNull property="USERID" prepend="AND">
+			  <![CDATA[t1.USER_ID=#USERID#]]>
+		  </isNotNull>
+		  <isNotNull property="POSTID" prepend="AND">
+			  <![CDATA[t1.POST_ID=#POSTID#]]>
+		  </isNotNull>
+	  </select>
+	  <!--插入信息-->
+	  <insert id="InsertUserPostLevel" parameterClass="map" resultClass="Row">
+		  <![CDATA[
+       insert into SSB_USER_POST_LEVEL (user_id, post_level, post_id ) values (#USERID#,#POSTLEVEL#,#POSTID#)
+       ]]>
+	  </insert>
+	  <!--更新信息-->
+	  <update id="UpdateUserPostLevel" parameterClass="map">
+		  <![CDATA[
+       update SSB_USER_POST_LEVEL set POST_LEVEL = #POSTLEVEL# where POST_ID = #POSTID# and USER_ID = #USERID#
+       ]]>
+	  </update>
+	  <!--删除信息-->
+	  <delete id="DeleteUserPostLevel" parameterClass="map">
+		  <![CDATA[
+       delete from SSB_USER_POST_LEVEL t1 where t1.USER_ID = #USERID#
+       ]]>
+	  </delete>
+	  <!--人员岗位等级-结束-->
+	  
+		<!--人员值班表-开始-->
+		<!--获取人员值班表信息-->
+		<select id="GetUserDutyInfo" parameterClass="map" resultClass="Row">
+			<![CDATA[
+            select t.*,
+                   case t.PROCEDURE when 1 then '全工序' when 2 then '密炼' when 3 then '全钢' when 4 then '半钢' end procedure_name,
+                   t1.WORK_BARCODE,
+                   t1.USER_NAME,
+                   t1.TELEPHONE
+            from SBE_DUTY_INFO t
+                     left join SSB_USER t1 on t.USER_ID = t1.OBJID
+               where 1 = 1
+      ]]>
+			<isNotNull property="where.WORK_BARCODE" prepend="AND">
+				<![CDATA[t1.WORK_BARCODE=#where.WORK_BARCODE#]]>
+			</isNotNull>
+			<isNotNull property="where.USER_NAME" prepend="AND">
+				<![CDATA[t1.USER_NAME like '%'||#where.USER_NAME#||'%']]>
+			</isNotNull>
+			<isNotNull property="where.PROCEDUREID" prepend="AND">
+				<![CDATA[t.PROCEDURE =#where.PROCEDUREID#]]>
+			</isNotNull>
+			<isNotNull property="where.PLAN_DATE_BEGIN" prepend="AND">
+				<![CDATA[t.PLAN_DATE >=#where.PLAN_DATE_BEGIN#]]>
+			</isNotNull>
+			<isNotNull property="where.PLAN_DATE_END" prepend="AND">
+				<![CDATA[t.PLAN_DATE <=#where.PLAN_DATE_END#]]>
+			</isNotNull>
+		</select>
+	  <!--插入信息-->
+		<insert id="InsertUserDutyInfo" parameterClass="map" resultClass="Row">
+			<![CDATA[
+       insert into SBE_DUTY_INFO ("PROCEDURE", PLAN_DATE, USER_ID, BEGIN_TIME, END_TIME, REMARK)
+       values (#PROCEDUREID#,#PLANDATE#,#USERID#,#BEGINTIME#,#ENDTIME#,#REMARK#)
+       ]]>
+		</insert>
+		<!--更新信息-->
+	  <update id="UpdateUserDutyInfo" parameterClass="map">
+		  <![CDATA[
+      update SBE_DUTY_INFO
+        set BEGIN_TIME=#BEGINTIME#,END_TIME=#ENDTIME#,REMARK=#REMARK#
+        where USER_ID =#USERID# and "PROCEDURE" =#PROCEDUREID# and PLAN_DATE =#PLANDATE#
+       ]]>
+	  </update>
+		<!--删除信息-->
+	  <delete id="DeleteUserDutyInfo" parameterClass="map">
+		  <![CDATA[
+            delete
+            from SBE_DUTY_INFO t1 
+            where t1.USER_ID = #USERID# and t1.PLAN_DATE = #PLAN_DATE# and t1.PROCEDURE = #PROCEDURE#
+       ]]>
+	  </delete>
+		<!--导入信息-->
+		<select id="GetDutyInfoByExcel" parameterClass="map" resultClass="Row">
+			<![CDATA[
+            select t.*
+            from SBE_DUTY_INFO t
+                      left join SSB_USER t1 on t.USER_ID = t1.OBJID
+            where 1 = 1
+      ]]>
+			<isNotNull property="USERCODE" prepend="AND">
+				<![CDATA[t1.WORK_BARCODE=#USERCODE#]]>
+			</isNotNull>
+			<isNotNull property="PROCEDURENAME" prepend="AND">
+				<![CDATA[(case PROCEDURE
+                        when 1 then '全工序'
+                        when 2 then '密炼'
+                        when 3 then '全钢'
+                        when 4 then '半钢' end) = #PROCEDURENAME#]]>
+			</isNotNull>
+			<isNotNull property="PLANDATE" prepend="AND">
+				<![CDATA[t.PLAN_DATE =#PLANDATE#]]>
+			</isNotNull>
+		</select>
+		
+		<insert id="InsertDutyForExcel" parameterClass="map" resultClass="Row">
+			<![CDATA[
+            INSERT INTO SBE_DUTY_INFO (procedure, plan_date, user_id, begin_time, end_time, remark)
+            SELECT case #PROCEDURENAME#
+                       when '全工序' then 1
+                       when '密炼' then 2
+                       when '全钢' then 3
+                       when '半钢' then 4 end,
+                   #PLANDATE#,
+                   t1.OBJID,
+                   #BEGINTIME#,
+                   #ENDTIME#,
+                   #REMARK# 
+            from SSB_USER t1
+            where WORK_BARCODE = #USERCODE#
+						and LENGTH(nvl(t1.USER_PWD,''))>0
+       ]]>
+		</insert>
+		<!--人员值班表-结束-->
+		
+	  <select id="GetUserCEMenuDataSet" parameterClass="map" resultClass="Row">
+      <![CDATA[
+           select  substr(t1.menu_level,3) menulevel,ta.* from ssp_page_action ta
+          inner join ssp_page_menu t1 on t1.objid=ta.page_menu_id 
+          inner join v_ssp_user_all_action t2 on ta.objid=t2.ACTION_ID
+          inner join ssb_user t3 on t3.objid = t2.user_id
+          where  substr(t1.menu_level,1,4)='0290'
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="userID" prepend="AND">
+          <![CDATA[t3.work_barcode=#userID#]]>
+        </isNotNull>
+      </dynamic>
+    </select>
+    <select id="GetUserAction" parameterClass="map" resultClass="Row">
+      <![CDATA[
+      SELECT * FROM (SELECT ACTION_ID FROM SSP_USER_ACTION T 
+      WHERE USER_ID =#UserId#
+      UNION ALL
+      SELECT ACTION_ID FROM SSP_USER_ROLE T1 
+      LEFT JOIN SSP_ROLE_ACTION T2 ON T2.ROLE_ID = T1.ROLE_ID
+      WHERE T1.USER_ID =#UserId#)
+      WHERE ACTION_ID=#ActionId#
+      ]]>
+    </select>
+    
+    <!--下载班次-->
+    <select id="wsDownloadShifts" parameterClass="map" resultClass="Row">
+      select OBJID SHIFT_ID, SHIFT_NAME
+      from SSB_SHIFT
+      where DELETE_FLAG = 0
+      order by OBJID
+    </select>
+
+    <!--下载班次-->
+    <select id="wsDownloadGroups" parameterClass="map" resultClass="Row">
+      select OBJID GROUP_ID, CLASS_NAME GROUP_NAME
+      from SSB_CLASS
+      where DELETE_FLAG = 0
+      order by OBJID
+    </select>
+
+    <!--下载全钢B区部门-->
+     <select id="wsDownloadDepartments" parameterClass="map" resultClass="Row">
+       select lpad(OBJID, 4, '0') AS DEPT_ID, DEPT_NAME, case when HR_CODE = '30015442' then NULL else lpad(PARENT_ID, 4, '0') end PARENT_ID-- , FIRST_VALUE(objid) OVER (ORDER BY LEVEL ROWS UNBOUNDED PRECEDING) AS firstdeptid
+       from SSB_DEPT
+       where DELETE_FLAG = 0
+       start with HR_CODE = '30015442' connect by prior OBJID = PARENT_ID
+
+     </select>
+     
+     <!--下载成型工序岗位-->
+     <select id="wsDownloadWorkposts" parameterClass="map" resultClass="Row">
+       select lpad(OBJID, 4, '0') POST_ID, WORK_NAME POST_NAME
+       from SSB_WORK
+       where DELETE_FLAG = 0
+       and PROCEDURE_ID = 300
+
+     </select>
+    
+  </statements>
+</sqlMap>

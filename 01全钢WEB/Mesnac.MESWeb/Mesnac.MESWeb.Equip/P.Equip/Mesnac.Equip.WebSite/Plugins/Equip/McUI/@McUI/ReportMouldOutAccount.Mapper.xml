@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@ReportMouldOutAccount" parameterClass="map" resultClass="row">
+    <![CDATA[
+     SELECT T8.EQUIP_NAME,CASE T.BAUP_FLAG WHEN 1 THEN '左模' ELSE '右模' END LR, T1.STORE_NAME,T2.STORE_PLACE_NAME,T3.SUB_STORE_PLACE_NAME,T4.USER_NAME RECORD_USER_NAME
+     ,T6.SIZE_NAME,T7.PATTERN_NAME,T.* FROM CIM_MOULD_OUTPUT T 
+     LEFT JOIN SEB_STORE T1 ON T.STORE_ID = T1.OBJID
+     LEFT JOIN SEB_STORE_PLACE T2 ON T.STORE_PLACE_ID = T2.OBJID
+     LEFT JOIN SEB_SUB_STORE_PLACE T3 ON T.SUB_STORE_PLACE_ID = T3.OBJID
+     LEFT JOIN SSB_USER T4 ON T.RECORD_USER_ID = T4.OBJID
+     LEFT JOIN CIM_MOULD_INFO T5 ON T.MOULD_BARCODE = T5.MOULD_CODE
+     LEFT JOIN CBM_SIZE T6 ON T5.SIZE_ID=T6.OBJID 
+     LEFT JOIN CBM_PATTERN T7 ON T5.PATTERN_ID=T7.OBJID 
+     LEFT JOIN SBE_EQUIP T8 ON T.EQUIP_ID = T8.OBJID
+     WHERE 1=1
+      ]]>
+      <dynamic prepend="AND">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginDate" prepend="AND">
+          <![CDATA[T.RECORD_TIME >= #where.BeginDate#]]>
+        </isNotNull>
+        <isNotNull property="where.EndDate" prepend="AND">
+          <![CDATA[T.RECORD_TIME <= #where.EndDate#]]>
+        </isNotNull>
+        <isNotNull property="where.MOULD_NAME" prepend="AND">
+          <![CDATA[T.MOULD_NAME LIKE '%' || #where.MOULD_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.PATTERN_NAME" prepend="AND">
+          <![CDATA[T7.PATTERN_NAME LIKE '%' || #where.PATTERN_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.SIZE_NAME" prepend="AND">
+          <![CDATA[T6.SIZE_NAME LIKE '%' || #where.SIZE_NAME# || '%']]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[T8.OBJID = #where.EQUIP_ID#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+       ORDER BY T.OBJID
+      ]]>
+    </select>
+    
+    <!--查询模具库存，ID值固定为GetComboBoxData@Select@ReportMouldOutAccount@字段，id值不允许重复-->
+    <select id="GetComboBoxData@Select@ReportMouldOutAccount@EQUIP_ID" parameterClass="map" resultClass="Row">
+      <![CDATA[ 
+       SELECT T1.OBJID SSKEY,T1.EQUIP_NAME SSVALUE FROM SBE_EQUIP T1 WHERE T1.MAJOR_TYPE_ID=51 AND T1.DELETE_FLAG = '0'
+        ORDER BY T1.EQUIP_CODE
+     ]]>
+    </select>
+  </statements>
+  
+</sqlMap>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SynConfig>
+  <Tables>
+    <Table name="Table.Source">
+      <DbSourceName>SAP155</DbSourceName>
+      <TableName>Customer</TableName>
+    </Table>
+    <Table name="Table.Target">
+      <DbSourceName>MES</DbSourceName>
+      <TableName>PSB_CUSTOMER</TableName>
+      <Primarykey FieldName="OBJID"/>
+      <SeqFields>
+        <SeqField FieldName="OBJID" SeqName="SEQ_PSB_CUSTOMER"/>
+      </SeqFields>
+    </Table>
+  </Tables>
+  <SynDatas>
+    <SynData>
+      <SourceTable TableName="Table.Source">
+        <Command >
+          <FileName value="Mesnac.DbSyn.dll"/>
+          <ClassName value="Mesnac.DbSyn.TableSyn.Source"/>
+        </Command>
+        <SelectData>
+          <add key="count" value="0"/>
+          <add key="where">
+            <![CDATA[CompArea <> '8004']]>
+          </add>
+        </SelectData>
+      </SourceTable>
+      <TargetTable TableName="Table.Target">
+        <Command >
+          <FileName value="Mesnac.DbSyn.dll"/>
+          <ClassName value="Mesnac.DbSyn.TableSyn.Target"/>
+        </Command>
+        <ExcuteRowSyn>
+          <add key="where" value="CUSTOMER_ID"/>
+        </ExcuteRowSyn>
+      </TargetTable>
+      <SourceTargetFields>
+        <SourceTargetField SourceFieldName="CompArea" TargetFieldName="COMP_AREA"/>
+        <SourceTargetField SourceFieldName="CustomerID" TargetFieldName="CUSTOMER_ID"/>
+        <SourceTargetField SourceFieldName="Pass" TargetFieldName="PASS"/>
+        <SourceTargetField SourceFieldName="Mark" TargetFieldName="Mark"/>
+        <SourceTargetField SourceFieldName="CustomeName" TargetFieldName="CUSTOME_NAME"/>
+        <SourceTargetField SourceFieldName="CustomeNick" TargetFieldName="CUSTOME_NICK"/>
+        <SourceTargetField SourceFieldName="CustomeName_EN" TargetFieldName="CUSTOME_NAME_EN"/>
+        <SourceTargetField SourceFieldName="CustomeNick_EN" TargetFieldName="CUSTOME_NICK_EN"/>
+        <SourceTargetField SourceFieldName="CustomeName_TH" TargetFieldName="CUSTOME_NAME_TH"/>
+        <SourceTargetField SourceFieldName="CustomeNick_TH" TargetFieldName="CUSTOME_NICK_TH"/>
+        <SourceTargetField SourceFieldName="TaxID" TargetFieldName="TAX_ID"/>
+        <SourceTargetField SourceFieldName="Contactor" TargetFieldName="CONTACTOR"/>
+        <SourceTargetField SourceFieldName="PassDesc" TargetFieldName="PASS_DESC"/>
+        <SourceTargetField SourceFieldName="AreaID" TargetFieldName="AREA_ID"/>
+        <SourceTargetField SourceFieldName="Area" TargetFieldName="AREA"/>
+        <SourceTargetField SourceFieldName="CountryID" TargetFieldName="COUNTRY_ID"/>
+        <SourceTargetField SourceFieldName="CountryDesc" TargetFieldName="COUNTRY_DESC"/>
+        <SourceTargetField SourceFieldName="DeptID" TargetFieldName="DEPT_ID"/>
+        <SourceTargetField SourceFieldName="DeptDesc" TargetFieldName="DEPT_DESC"/>
+        <SourceTargetField SourceFieldName="MarkDesc" TargetFieldName="MARK_DESC"/>
+        <SourceTargetField SourceFieldName="HeadComID" TargetFieldName="HEAD_COM_ID"/>
+        <SourceTargetField SourceFieldName="HeadCom" TargetFieldName="HEAD_COM"/>
+        <SourceTargetField SourceFieldName="Remark" TargetFieldName="REMARK"/>
+        <SourceTargetField SourceFieldName="Authorize" TargetFieldName="AUTHORIZE"/>
+        <SourceTargetField SourceFieldName="SalesID" TargetFieldName="SALES_ID"/>
+        <SourceTargetField SourceFieldName="SalesName" TargetFieldName="SALES_NAME"/>
+        <SourceTargetField SourceFieldName="CTime" TargetFieldName="C_TIME"/>
+        <SourceTargetField SourceFieldName="CDate" TargetFieldName="C_DATE"/>
+        <SourceTargetField SourceFieldName="Udate" TargetFieldName="U_DATE"/>
+        <SourceTargetField SourceFieldName="Utime" TargetFieldName="U_TIME"/>
+        <SourceTargetField SourceFieldName="Dummy1" TargetFieldName="DUMMY_1"/>
+        <SourceTargetField SourceFieldName="Dummy2" TargetFieldName="DUMMY_2"/>
+        <SourceTargetField SourceFieldName="Dummy3" TargetFieldName="DUMMY_3"/>
+        <SourceTargetField SourceFieldName="Dummy4" TargetFieldName="DUMMY_4"/>
+      </SourceTargetFields>
+    </SynData>
+  </SynDatas>
+</SynConfig>

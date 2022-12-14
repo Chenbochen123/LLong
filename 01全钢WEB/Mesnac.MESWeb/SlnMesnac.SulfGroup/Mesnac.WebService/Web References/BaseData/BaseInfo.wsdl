@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMaterialInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ModifyTime" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMaterialInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMaterialInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTechnologyInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MaterialID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TechnologyType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TechVERSION" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EquipType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="objid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTechnologyInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTechnologyInfoResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDBDatetime">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDBDatetimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDBDatetimeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStopReason">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetStopReasonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStopReasonResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStopType">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetStopTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStopTypeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertStopRecord">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EquipId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="StopBeginTime" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="StopEndTime" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="StopReasonId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="StopTypeId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsertStopRecordResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateEquipState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="equipid" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EQUIP_STATE" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CURRENT_STEP" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ALL_STEP" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="STOP_TIME" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="STEP_TIME" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CURING_LEFT_TIME" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CURING_TIME" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="LEFT_BLADDER_COUNT" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RIGHT_BLADDER_COUNT" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="LEFT_MATERIAL_ID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RIGHT_MATERIAL_ID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LEFT_TYRE_NO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RIGHT_TYRE_NO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LEFT_GREEN_TYRE_NO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RIGHT_GREEN_TYRE_NO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LEFT_MOULD_CODE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RIGHT_MOULD_CODE" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="LEFT_MOULD_COUNT" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RIGHT_MOULD_COUNT" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ValveState" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateEquipStateResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateEquipStateNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ds">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateEquipStateNewResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="DataSet" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:element ref="s:schema" />
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DataTable" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMaterialInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMaterialInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetMaterialInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMaterialInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTechnologyInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTechnologyInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetTechnologyInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTechnologyInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDBDatetimeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDBDatetime" />
+  </wsdl:message>
+  <wsdl:message name="GetDBDatetimeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDBDatetimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStopReasonSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStopReason" />
+  </wsdl:message>
+  <wsdl:message name="GetStopReasonSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStopReasonResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStopTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStopType" />
+  </wsdl:message>
+  <wsdl:message name="GetStopTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStopTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="InsertStopRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:InsertStopRecord" />
+  </wsdl:message>
+  <wsdl:message name="InsertStopRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:InsertStopRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEquipStateSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateEquipState" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEquipStateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateEquipStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEquipStateNewSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateEquipStateNew" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEquipStateNewSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateEquipStateNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMaterialInfoHttpGetIn">
+    <wsdl:part name="ModifyTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMaterialInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetTechnologyInfoHttpGetIn">
+    <wsdl:part name="MaterialID" type="s:string" />
+    <wsdl:part name="TechnologyType" type="s:string" />
+    <wsdl:part name="TechVERSION" type="s:string" />
+    <wsdl:part name="EquipType" type="s:string" />
+    <wsdl:part name="objid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTechnologyInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetDBDatetimeHttpGetIn" />
+  <wsdl:message name="GetDBDatetimeHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetStopReasonHttpGetIn" />
+  <wsdl:message name="GetStopReasonHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetStopTypeHttpGetIn" />
+  <wsdl:message name="GetStopTypeHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="InsertStopRecordHttpGetIn">
+    <wsdl:part name="EquipId" type="s:string" />
+    <wsdl:part name="StopBeginTime" type="s:string" />
+    <wsdl:part name="StopEndTime" type="s:string" />
+    <wsdl:part name="StopReasonId" type="s:string" />
+    <wsdl:part name="StopTypeId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertStopRecordHttpGetOut" />
+  <wsdl:message name="UpdateEquipStateHttpGetIn">
+    <wsdl:part name="equipid" type="s:string" />
+    <wsdl:part name="EQUIP_STATE" type="s:string" />
+    <wsdl:part name="CURRENT_STEP" type="s:string" />
+    <wsdl:part name="ALL_STEP" type="s:string" />
+    <wsdl:part name="STOP_TIME" type="s:string" />
+    <wsdl:part name="STEP_TIME" type="s:string" />
+    <wsdl:part name="CURING_LEFT_TIME" type="s:string" />
+    <wsdl:part name="CURING_TIME" type="s:string" />
+    <wsdl:part name="LEFT_BLADDER_COUNT" type="s:string" />
+    <wsdl:part name="RIGHT_BLADDER_COUNT" type="s:string" />
+    <wsdl:part name="LEFT_MATERIAL_ID" type="s:string" />
+    <wsdl:part name="RIGHT_MATERIAL_ID" type="s:string" />
+    <wsdl:part name="LEFT_TYRE_NO" type="s:string" />
+    <wsdl:part name="RIGHT_TYRE_NO" type="s:string" />
+    <wsdl:part name="LEFT_GREEN_TYRE_NO" type="s:string" />
+    <wsdl:part name="RIGHT_GREEN_TYRE_NO" type="s:string" />
+    <wsdl:part name="LEFT_MOULD_CODE" type="s:string" />
+    <wsdl:part name="RIGHT_MOULD_CODE" type="s:string" />
+    <wsdl:part name="LEFT_MOULD_COUNT" type="s:string" />
+    <wsdl:part name="RIGHT_MOULD_COUNT" type="s:string" />
+    <wsdl:part name="ValveState" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEquipStateHttpGetOut" />
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMaterialInfoHttpPostIn">
+    <wsdl:part name="ModifyTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMaterialInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetTechnologyInfoHttpPostIn">
+    <wsdl:part name="MaterialID" type="s:string" />
+    <wsdl:part name="TechnologyType" type="s:string" />
+    <wsdl:part name="TechVERSION" type="s:string" />
+    <wsdl:part name="EquipType" type="s:string" />
+    <wsdl:part name="objid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTechnologyInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataSet" />
+  </wsdl:message>
+  <wsdl:message name="GetDBDatetimeHttpPostIn" />
+  <wsdl:message name="GetDBDatetimeHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetStopReasonHttpPostIn" />
+  <wsdl:message name="GetStopReasonHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetStopTypeHttpPostIn" />
+  <wsdl:message name="GetStopTypeHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="InsertStopRecordHttpPostIn">
+    <wsdl:part name="EquipId" type="s:string" />
+    <wsdl:part name="StopBeginTime" type="s:string" />
+    <wsdl:part name="StopEndTime" type="s:string" />
+    <wsdl:part name="StopReasonId" type="s:string" />
+    <wsdl:part name="StopTypeId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="InsertStopRecordHttpPostOut" />
+  <wsdl:message name="UpdateEquipStateHttpPostIn">
+    <wsdl:part name="equipid" type="s:string" />
+    <wsdl:part name="EQUIP_STATE" type="s:string" />
+    <wsdl:part name="CURRENT_STEP" type="s:string" />
+    <wsdl:part name="ALL_STEP" type="s:string" />
+    <wsdl:part name="STOP_TIME" type="s:string" />
+    <wsdl:part name="STEP_TIME" type="s:string" />
+    <wsdl:part name="CURING_LEFT_TIME" type="s:string" />
+    <wsdl:part name="CURING_TIME" type="s:string" />
+    <wsdl:part name="LEFT_BLADDER_COUNT" type="s:string" />
+    <wsdl:part name="RIGHT_BLADDER_COUNT" type="s:string" />
+    <wsdl:part name="LEFT_MATERIAL_ID" type="s:string" />
+    <wsdl:part name="RIGHT_MATERIAL_ID" type="s:string" />
+    <wsdl:part name="LEFT_TYRE_NO" type="s:string" />
+    <wsdl:part name="RIGHT_TYRE_NO" type="s:string" />
+    <wsdl:part name="LEFT_GREEN_TYRE_NO" type="s:string" />
+    <wsdl:part name="RIGHT_GREEN_TYRE_NO" type="s:string" />
+    <wsdl:part name="LEFT_MOULD_CODE" type="s:string" />
+    <wsdl:part name="RIGHT_MOULD_CODE" type="s:string" />
+    <wsdl:part name="LEFT_MOULD_COUNT" type="s:string" />
+    <wsdl:part name="RIGHT_MOULD_COUNT" type="s:string" />
+    <wsdl:part name="ValveState" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEquipStateHttpPostOut" />
+  <wsdl:portType name="BaseInfoSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterialInfo">
+      <wsdl:input message="tns:GetMaterialInfoSoapIn" />
+      <wsdl:output message="tns:GetMaterialInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTechnologyInfo">
+      <wsdl:input message="tns:GetTechnologyInfoSoapIn" />
+      <wsdl:output message="tns:GetTechnologyInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDBDatetime">
+      <wsdl:input message="tns:GetDBDatetimeSoapIn" />
+      <wsdl:output message="tns:GetDBDatetimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStopReason">
+      <wsdl:input message="tns:GetStopReasonSoapIn" />
+      <wsdl:output message="tns:GetStopReasonSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStopType">
+      <wsdl:input message="tns:GetStopTypeSoapIn" />
+      <wsdl:output message="tns:GetStopTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertStopRecord">
+      <wsdl:input message="tns:InsertStopRecordSoapIn" />
+      <wsdl:output message="tns:InsertStopRecordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEquipState">
+      <wsdl:input message="tns:UpdateEquipStateSoapIn" />
+      <wsdl:output message="tns:UpdateEquipStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEquipStateNew">
+      <wsdl:input message="tns:UpdateEquipStateNewSoapIn" />
+      <wsdl:output message="tns:UpdateEquipStateNewSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BaseInfoHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterialInfo">
+      <wsdl:input message="tns:GetMaterialInfoHttpGetIn" />
+      <wsdl:output message="tns:GetMaterialInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTechnologyInfo">
+      <wsdl:input message="tns:GetTechnologyInfoHttpGetIn" />
+      <wsdl:output message="tns:GetTechnologyInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDBDatetime">
+      <wsdl:input message="tns:GetDBDatetimeHttpGetIn" />
+      <wsdl:output message="tns:GetDBDatetimeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStopReason">
+      <wsdl:input message="tns:GetStopReasonHttpGetIn" />
+      <wsdl:output message="tns:GetStopReasonHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStopType">
+      <wsdl:input message="tns:GetStopTypeHttpGetIn" />
+      <wsdl:output message="tns:GetStopTypeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertStopRecord">
+      <wsdl:input message="tns:InsertStopRecordHttpGetIn" />
+      <wsdl:output message="tns:InsertStopRecordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEquipState">
+      <wsdl:input message="tns:UpdateEquipStateHttpGetIn" />
+      <wsdl:output message="tns:UpdateEquipStateHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="BaseInfoHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterialInfo">
+      <wsdl:input message="tns:GetMaterialInfoHttpPostIn" />
+      <wsdl:output message="tns:GetMaterialInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTechnologyInfo">
+      <wsdl:input message="tns:GetTechnologyInfoHttpPostIn" />
+      <wsdl:output message="tns:GetTechnologyInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDBDatetime">
+      <wsdl:input message="tns:GetDBDatetimeHttpPostIn" />
+      <wsdl:output message="tns:GetDBDatetimeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStopReason">
+      <wsdl:input message="tns:GetStopReasonHttpPostIn" />
+      <wsdl:output message="tns:GetStopReasonHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStopType">
+      <wsdl:input message="tns:GetStopTypeHttpPostIn" />
+      <wsdl:output message="tns:GetStopTypeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertStopRecord">
+      <wsdl:input message="tns:InsertStopRecordHttpPostIn" />
+      <wsdl:output message="tns:InsertStopRecordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEquipState">
+      <wsdl:input message="tns:UpdateEquipStateHttpPostIn" />
+      <wsdl:output message="tns:UpdateEquipStateHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BaseInfoSoap" type="tns:BaseInfoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterialInfo">
+      <soap:operation soapAction="http://tempuri.org/GetMaterialInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTechnologyInfo">
+      <soap:operation soapAction="http://tempuri.org/GetTechnologyInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDBDatetime">
+      <soap:operation soapAction="http://tempuri.org/GetDBDatetime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStopReason">
+      <soap:operation soapAction="http://tempuri.org/GetStopReason" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStopType">
+      <soap:operation soapAction="http://tempuri.org/GetStopType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertStopRecord">
+      <soap:operation soapAction="http://tempuri.org/InsertStopRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEquipState">
+      <soap:operation soapAction="http://tempuri.org/UpdateEquipState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEquipStateNew">
+      <soap:operation soapAction="http://tempuri.org/UpdateEquipStateNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BaseInfoSoap12" type="tns:BaseInfoSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterialInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetMaterialInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTechnologyInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetTechnologyInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDBDatetime">
+      <soap12:operation soapAction="http://tempuri.org/GetDBDatetime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStopReason">
+      <soap12:operation soapAction="http://tempuri.org/GetStopReason" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStopType">
+      <soap12:operation soapAction="http://tempuri.org/GetStopType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertStopRecord">
+      <soap12:operation soapAction="http://tempuri.org/InsertStopRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEquipState">
+      <soap12:operation soapAction="http://tempuri.org/UpdateEquipState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEquipStateNew">
+      <soap12:operation soapAction="http://tempuri.org/UpdateEquipStateNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BaseInfoHttpGet" type="tns:BaseInfoHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterialInfo">
+      <http:operation location="/GetMaterialInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTechnologyInfo">
+      <http:operation location="/GetTechnologyInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDBDatetime">
+      <http:operation location="/GetDBDatetime" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStopReason">
+      <http:operation location="/GetStopReason" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStopType">
+      <http:operation location="/GetStopType" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertStopRecord">
+      <http:operation location="/InsertStopRecord" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEquipState">
+      <http:operation location="/UpdateEquipState" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BaseInfoHttpPost" type="tns:BaseInfoHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaterialInfo">
+      <http:operation location="/GetMaterialInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTechnologyInfo">
+      <http:operation location="/GetTechnologyInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDBDatetime">
+      <http:operation location="/GetDBDatetime" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStopReason">
+      <http:operation location="/GetStopReason" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStopType">
+      <http:operation location="/GetStopType" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertStopRecord">
+      <http:operation location="/InsertStopRecord" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEquipState">
+      <http:operation location="/UpdateEquipState" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BaseInfo">
+    <wsdl:port name="BaseInfoSoap" binding="tns:BaseInfoSoap">
+      <soap:address location="http://localhost:8090/CuringQKQG/Curing/BaseInfo.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BaseInfoSoap12" binding="tns:BaseInfoSoap12">
+      <soap12:address location="http://localhost:8090/CuringQKQG/Curing/BaseInfo.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BaseInfoHttpGet" binding="tns:BaseInfoHttpGet">
+      <http:address location="http://localhost:8090/CuringQKQG/Curing/BaseInfo.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BaseInfoHttpPost" binding="tns:BaseInfoHttpPost">
+      <http:address location="http://localhost:8090/CuringQKQG/Curing/BaseInfo.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

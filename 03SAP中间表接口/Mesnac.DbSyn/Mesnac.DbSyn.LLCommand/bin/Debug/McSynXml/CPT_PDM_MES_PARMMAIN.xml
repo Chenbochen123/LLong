@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SynConfig>
+    <Tables>
+        <Table name="Table.Source">
+            <DbSourceName>PDM200</DbSourceName>
+            <TableName>PDM_MES_PARMMAIN</TableName>
+        </Table>
+        <Table name="Table.Target">
+           <DbSourceName>MES</DbSourceName>
+            <TableName>CPT_CURING_TECH_PARM_MAT</TableName>
+            <Primarykey FieldName="OBJID"/>
+            <SeqFields>
+                <SeqField FieldName="OBJID" SeqName="SEQ_CPT_CURING_TECH_PARM_MAT"/>
+            </SeqFields>
+        </Table>
+    </Tables>
+    <SynDatas>
+        <SynData>
+            <SourceTable TableName="Table.Source">
+                <Command >
+                    <FileName value="Mesnac.DbSyn.dll"/>
+                    <ClassName value="Mesnac.DbSyn.TableSyn.Source"/>
+                </Command>
+                <BeginSyn>
+                    <add key="sql" value=""/>
+                </BeginSyn>
+                <SelectData>
+                    <add key="count" value="0"/>
+                    <add key="sql">
+                        <![CDATA[
+                            SELECT DISTINCT * FROM (
+                            SELECT t1.* FROM dbo.PDM_MES_PARMMAIN t1
+                            INNER JOIN dbo.PDM_MES_PARMB t2 ON t1.PARMINDXB=t2.PARMINDX 
+                            WHERE t1.S_Factory='8002' AND t2.S_Factory='8002' AND t2.PARMNAME LIKE '%色标%' AND t1.DISTRICT='B'
+                            UNION ALL 
+                            SELECT t1.* FROM dbo.PDM_MES_PARMMAIN t1
+                            INNER JOIN dbo.PDM_MES_PARMC t2 ON t1.PARMINDXC=t2.PARMINDX 
+                            WHERE t1.S_Factory='8002' AND t2.S_Factory='8002' AND t1.DISTRICT='C'
+                            ) t
+                            WHERE t.RECORDFLAG<>0
+                        ]]>
+                    </add>
+                </SelectData>
+                <FinishRowSyn>
+                    <add key="update" value="RECORDFLAG=0"/>
+                    <add key="where" value="INDX"/>
+                    <add key="where_and" value="DISTRICT='C'"/>
+                </FinishRowSyn>
+            </SourceTable>
+            <TargetTable TableName="Table.Target">
+                <Command >
+                    <FileName value="Mesnac.DbSyn.LLCommand.dll"/>
+                    <ClassName value="Mesnac.DbSyn.LLERP.CPT_PDM_MES_PARMMAIN.Target"/>
+                </Command>
+                <ExcuteRowSyn>
+                    <add key="where" value="PDM_CODE"/>
+                </ExcuteRowSyn>
+            </TargetTable>
+            <SourceTargetFields>
+                <SourceTargetField SourceFieldName="INDX" TargetFieldName="PDM_CODE"/>
+                <SourceTargetField SourceFieldName="VERSION" TargetFieldName="PDM_VERSION"/>
+            </SourceTargetFields>
+        </SynData>
+    </SynDatas>
+</SynConfig>

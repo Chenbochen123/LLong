@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B1072B24-E212-45A3-9A03-BCB1D08CD707}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mesnac.Storage.Business</RootNamespace>
+    <AssemblyName>Mesnac.Storage.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\@packages\MyBatis\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\@packages\MyBatis\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Mesnac.DbAccess">
+      <HintPath>..\..\@packages\Frame\Mesnac.DbAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.Common">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MyBatis.DataMapper">
+      <HintPath>..\..\@packages\MyBatis\MyBatis.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\StorageManager.cs" />
+    <Compile Include="Implements\BpmProductionManager.cs" />
+    <Compile Include="Implements\CppCuringPlanDetailManager.cs" />
+    <Compile Include="Implements\CppCuringPlanManager.cs" />
+    <Compile Include="Implements\CppCuringProductionManager.cs" />
+    <Compile Include="Implements\CppTraceCuringInfoManager.cs" />
+    <Compile Include="Implements\PsbCustomerManager.cs" />
+    <Compile Include="Implements\PsbStoreManager.cs" />
+    <Compile Include="Implements\PsbStorePlaceManager.cs" />
+    <Compile Include="Implements\PsbStoreTypeManager.cs" />
+    <Compile Include="Implements\PsmInLoadBillManager.cs" />
+    <Compile Include="Implements\PsmInLoadDetailManager.cs" />
+    <Compile Include="Implements\PsmInLoadSummaryManager.cs" />
+    <Compile Include="Implements\PsmInScanLogManager.cs" />
+    <Compile Include="Implements\PsmInStockBillManager.cs" />
+    <Compile Include="Implements\PsmInStockDetailManager.cs" />
+    <Compile Include="Implements\PsmInStockSummaryManager.cs" />
+    <Compile Include="Implements\PsmInventoryBillManager.cs" />
+    <Compile Include="Implements\PsmInventorySummaryManager.cs" />
+    <Compile Include="Implements\PsmMesStorageQtyManager.cs" />
+    <Compile Include="Implements\PsmOutLoadDetailManager.cs" />
+    <Compile Include="Implements\PsmOutLoadSummaryManager.cs" />
+    <Compile Include="Implements\PsmOutreturnStockBillManager.cs" />
+    <Compile Include="Implements\PsmOutreturnStockDetailManager.cs" />
+    <Compile Include="Implements\PsmOutreturnSummaryManager.cs" />
+    <Compile Include="Implements\PsmOutScanLogManager.cs" />
+    <Compile Include="Implements\PsmOutStockBillManager.cs" />
+    <Compile Include="Implements\PsmOutStockDetailManager.cs" />
+    <Compile Include="Implements\PsmOutStockMainManager.cs" />
+    <Compile Include="Implements\PsmOutStockSummaryManager.cs" />
+    <Compile Include="Implements\PsmReturnStockBillManager.cs" />
+    <Compile Include="Implements\PsmReturnStockDetailManager.cs" />
+    <Compile Include="Implements\PsmReturnStockSummaryManager.cs" />
+    <Compile Include="Implements\PsmSapInHeadManager.cs" />
+    <Compile Include="Implements\PsmSapInRecordsManager.cs" />
+    <Compile Include="Implements\PsmStorageDetailManager.cs" />
+    <Compile Include="Implements\PsmStorageDetailQkManager.cs" />
+    <Compile Include="Implements\PsmStorageMainManager.cs" />
+    <Compile Include="Implements\PsmStorageMateChangeBillManager.cs" />
+    <Compile Include="Implements\PsmStorageMateChangeDetailManager.cs" />
+    <Compile Include="Implements\PsmStorageSummaryManager.cs" />
+    <Compile Include="Implements\PsmStorageTraceDetailManager.cs" />
+    <Compile Include="Implements\PsmStorageTraceManager.cs" />
+    <Compile Include="Implements\PsmTransferBillManager.cs" />
+    <Compile Include="Implements\PsmTransferDetailManager.cs" />
+    <Compile Include="Implements\PsmTransferMainManager.cs" />
+    <Compile Include="Implements\PsmTransferSummaryManager.cs" />
+    <Compile Include="Implements\SbmMaterialManager.cs" />
+    <Compile Include="Implements\SiiSapLogManager.cs" />
+    <Compile Include="Implements\SppTyreStateManager.cs" />
+    <Compile Include="Implements\SppTyreTypeManager.cs" />
+    <Compile Include="Implements\SsbClassManager.cs" />
+    <Compile Include="Implements\SsbShiftManager.cs" />
+    <Compile Include="Interface\IBpmProductionManager.cs" />
+    <Compile Include="Interface\ICppCuringPlanDetailManager.cs" />
+    <Compile Include="Interface\ICppCuringPlanManager.cs" />
+    <Compile Include="Interface\ICppCuringProductionManager.cs" />
+    <Compile Include="Interface\ICppTraceCuringInfoManager.cs" />
+    <Compile Include="Interface\IPsbCustomerManager.cs" />
+    <Compile Include="Interface\IPsbStoreManager.cs" />
+    <Compile Include="Interface\IPsbStorePlaceManager.cs" />
+    <Compile Include="Interface\IPsbStoreTypeManager.cs" />
+    <Compile Include="Interface\IPsmInLoadBillManager.cs" />
+    <Compile Include="Interface\IPsmInLoadDetailManager.cs" />
+    <Compile Include="Interface\IPsmInLoadSummaryManager.cs" />
+    <Compile Include="Interface\IPsmInScanLogManager.cs" />
+    <Compile Include="Interface\IPsmInStockBillManager.cs" />
+    <Compile Include="Interface\IPsmInStockDetailManager.cs" />
+    <Compile Include="Interface\IPsmInStockSummaryManager.cs" />
+    <Compile Include="Interface\IPsmInventoryBillManager.cs" />
+    <Compile Include="Interface\IPsmInventorySummaryManager.cs" />
+    <Compile Include="Interface\IPsmMesStorageQtyManager.cs" />
+    <Compile Include="Interface\IPsmOutLoadDetailManager.cs" />
+    <Compile Include="Interface\IPsmOutLoadSummaryManager.cs" />
+    <Compile Include="Interface\IPsmOutreturnStockBillManager.cs" />
+    <Compile Include="Interface\IPsmOutreturnStockDetailManager.cs" />
+    <Compile Include="Interface\IPsmOutreturnSummaryManager.cs" />
+    <Compile Include="Interface\IPsmOutScanLogManager.cs" />
+    <Compile Include="Interface\IPsmOutStockBillManager.cs" />
+    <Compile Include="Interface\IPsmOutStockDetailManager.cs" />
+    <Compile Include="Interface\IPsmOutStockMainManager.cs" />
+    <Compile Include="Interface\IPsmOutStockSummaryManager.cs" />
+    <Compile Include="Interface\IPsmReturnStockBillManager.cs" />
+    <Compile Include="Interface\IPsmReturnStockDetailManager.cs" />
+    <Compile Include="Interface\IPsmReturnStockSummaryManager.cs" />
+    <Compile Include="Interface\IPsmSapInHeadManager.cs" />
+    <Compile Include="Interface\IPsmSapInRecordsManager.cs" />
+    <Compile Include="Interface\IPsmStorageDetailManager.cs" />
+    <Compile Include="Interface\IPsmStorageDetailQkManager.cs" />
+    <Compile Include="Interface\IPsmStorageMainManager.cs" />
+    <Compile Include="Interface\IPsmStorageMateChangeBillManager.cs" />
+    <Compile Include="Interface\IPsmStorageMateChangeDetailManager.cs" />
+    <Compile Include="Interface\IPsmStorageSummaryManager.cs" />
+    <Compile Include="Interface\IPsmStorageTraceDetailManager.cs" />
+    <Compile Include="Interface\IPsmStorageTraceManager.cs" />
+    <Compile Include="Interface\IPsmTransferBillManager.cs" />
+    <Compile Include="Interface\IPsmTransferDetailManager.cs" />
+    <Compile Include="Interface\IPsmTransferMainManager.cs" />
+    <Compile Include="Interface\IPsmTransferSummaryManager.cs" />
+    <Compile Include="Interface\ISbmMaterialManager.cs" />
+    <Compile Include="Interface\ISiiSapLogManager.cs" />
+    <Compile Include="Interface\ISppTyreStateManager.cs" />
+    <Compile Include="Interface\ISppTyreTypeManager.cs" />
+    <Compile Include="Interface\ISsbClassManager.cs" />
+    <Compile Include="Interface\ISsbShiftManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SapInterface\SapInterfaceManager.cs" />
+    <Compile Include="SapInterface\SI_Comm_outService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Frame\Mesnac.DbAccess\Mesnac.DbAccess.csproj">
+      <Project>{60b919c5-c601-4999-a531-439042d59746}</Project>
+      <Name>Mesnac.DbAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Storage.Data\Mesnac.Storage.Data.csproj">
+      <Project>{88E1E515-4320-453F-B857-312C6876F5D8}</Project>
+      <Name>Mesnac.Storage.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mesnac.Storage.Entity\Mesnac.Storage.Entity.csproj">
+      <Project>{C132AAD3-28E2-4E99-8BE7-DAA350B8B8AF}</Project>
+      <Name>Mesnac.Storage.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

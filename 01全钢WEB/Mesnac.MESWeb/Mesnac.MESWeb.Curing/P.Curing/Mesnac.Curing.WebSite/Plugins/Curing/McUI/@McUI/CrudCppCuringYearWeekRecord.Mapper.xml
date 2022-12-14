@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.FrameDb.Mapper.BusinessMapper.McUI"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <statements>
+    <select id="Select@CrudCppCuringYearWeekRecord" parameterClass="map" resultClass="row">
+      <![CDATA[
+        SELECT B.EQUIP_CODE EQUIP_NAME, CASE A.LRFLAG WHEN 1 THEN '左模' ELSE '右模' END LRFLAG,A.YEARWEEK,A.RECORDTIME RECORD_TIME,C.USER_NAME RECORD_USER_NAME,A.CONFIRMTIME CONFIRM_TIME ,D.USER_NAME CONFIRM_USER_NAME
+         ,CASE A.STATEFLAG WHEN 0 THEN '新设置' WHEN 1 THEN '通过' WHEN 2 THEN '不通过' WHEN 3 THEN '不通过已扫描一条' END FLAG
+        FROM CIM_YEAR_WEEK_RECORD A
+        LEFT JOIN SBE_EQUIP B ON A.EQUIPID = B.OBJID AND B.DELETE_FLAG = 0
+        LEFT JOIN SSB_USER C ON A.RECORDUSERID = C.OBJID
+        LEFT JOIN SSB_USER D ON A.CONFIRMUSERID = D.OBJID
+      ]]>
+      <dynamic prepend="WHERE">
+        <isNotNull property="where.OBJID" prepend="AND">
+          <![CDATA[T1.OBJID = #where.OBJID#]]>
+        </isNotNull>
+        <isNotNull property="where.BeginTime" prepend="AND">
+          <![CDATA[A.RECORDTIME >= #where.BeginTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EndTime" prepend="AND">
+          <![CDATA[A.RECORDTIME <= #where.EndTime#]]>
+        </isNotNull>
+        <isNotNull property="where.EQUIP_ID" prepend="AND">
+          <![CDATA[A.EQUIPID = #where.EQUIP_ID#]]>
+        </isNotNull>
+      </dynamic>
+      <![CDATA[
+         ORDER BY A.RECORDTIME desc
+      ]]>
+    </select>
+    
+  </statements>
+</sqlMap>

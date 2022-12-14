@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Mesnac.Curing.Mapper.BusinessMapper.CbeCuringBladderIn"
+	xmlns="http://ibatis.apache.org/mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+   <statements>
+	 <!--查询数据-->
+    <sql id="includeSelect">
+      <![CDATA[SELECT * FROM CBE_CURING_BLADDER_IN ]]>
+    </sql>
+    <!--查询条件-->
+    <sql id="includeWhere">
+	  <dynamic prepend="WHERE">
+        <isNotNull property="where.ObjId" prepend="AND">
+          <![CDATA[OBJID = #where.ObjId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordUserId" prepend="AND">
+          <![CDATA[RECORD_USER_ID = #where.RecordUserId#]]>
+        </isNotNull>
+        <isNotNull property="where.RecordTime" prepend="AND">
+          <![CDATA[RECORD_TIME = #where.RecordTime#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupFlag" prepend="AND">
+          <![CDATA[BACKUP_FLAG = #where.BackupFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BackupTime" prepend="AND">
+          <![CDATA[BACKUP_TIME = #where.BackupTime#]]>
+        </isNotNull>
+        <isNotNull property="where.DeleteFlag" prepend="AND">
+          <![CDATA[DELETE_FLAG = #where.DeleteFlag#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderCode" prepend="AND">
+          <![CDATA[BLADDER_CODE = #where.BladderCode#]]>
+        </isNotNull>
+        <isNotNull property="where.BuyType" prepend="AND">
+          <![CDATA[BUY_TYPE = #where.BuyType#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderType" prepend="AND">
+          <![CDATA[BLADDER_TYPE = #where.BladderType#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderSpec" prepend="AND">
+          <![CDATA[BLADDER_SPEC = #where.BladderSpec#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderBatch" prepend="AND">
+          <![CDATA[BLADDER_BATCH = #where.BladderBatch#]]>
+        </isNotNull>
+        <isNotNull property="where.BladderState" prepend="AND">
+          <![CDATA[BLADDER_STATE = #where.BladderState#]]>
+        </isNotNull>
+        <isNotNull property="where.SeqIndex" prepend="AND">
+          <![CDATA[SEQ_INDEX = #where.SeqIndex#]]>
+        </isNotNull>
+        <isNotNull property="where.Remark" prepend="AND">
+          <![CDATA[REMARK = #where.Remark#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy1" prepend="AND">
+          <![CDATA[DUMMY1 = #where.Dummy1#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy2" prepend="AND">
+          <![CDATA[DUMMY2 = #where.Dummy2#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy3" prepend="AND">
+          <![CDATA[DUMMY3 = #where.Dummy3#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy4" prepend="AND">
+          <![CDATA[DUMMY4 = #where.Dummy4#]]>
+        </isNotNull>
+        <isNotNull property="where.Dummy5" prepend="AND">
+          <![CDATA[DUMMY5 = #where.Dummy5#]]>
+        </isNotNull>
+      </dynamic>
+    </sql>
+    <!--排序条件-->
+    <sql id="includeOrderString">
+      <isNotNull property="OrderString" prepend="">
+        ORDER BY $OrderString$
+      </isNotNull>
+    </sql>
+
+    <!--查询实例说明-->
+    <select id="GetPageDataByReader" parameterClass="map" resultClass="Row"> 
+	  <include refid="includeSelect"/>
+      <include refid="includeWhere"/>
+      <include refid="includeOrderString"/>
+    </select>
+    
+    
+     
+     
+
+     
+
+     
+
+     
+
+     
+
+
+
+     <!--查询-->
+     <select id="SelectCurrentDatetime" parameterClass="map" resultClass="row">
+       <![CDATA[
+       select sysdate from dual
+       ]]>
+     </select>
+
+     <!--获取物料信息-->
+     <select id="GetbrandInfo" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+       select * from cbm_brand
+        ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.RecordTime" prepend="AND">
+           <![CDATA[record_time> #where.RecordTime#]]>
+         </isNotNull>
+       </dynamic>
+     </select>
+
+     <!--获取物料信息-->
+     <select id="GetSbeMunuRecord" parameterClass="map" resultClass="Row">
+       <![CDATA[ 
+         SELECT A.OBJID,A.TYRE_NOL,A.TYRE_NOR,A.EQUIP_ID,C.MATERIAL_NAME,A.BEGIN_TIME,to_date(to_char(NVL(A.END_TIME,B.END_TIME),'yyyy-MM-dd hh24:mi:ss'),'yyyy-MM-dd hh24:mi:ss') END_TIME,to_char('手动') STATE
+FROM SBE_MUNURECORD A
+LEFT JOIN CPP_CURING_PRODUCTION B ON B.TYRE_NO = NVL(A.TYRE_NOL,A.TYRE_NOR) AND B.DELETE_FLAG = 0
+LEFT JOIN SBM_MATERIAL C ON C.OBJID = B.MATERIAL_ID
+        ]]>
+       <dynamic prepend="WHERE">
+         <isNotNull property="where.BeginTime" prepend="AND">
+           <![CDATA[A.BEGIN_TIME >= to_date(#where.BeginTime#,'yyyy-MM-dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.EndTime" prepend="AND">
+           <![CDATA[A.BEGIN_TIME <= to_date(#where.EndTime#,'yyyy-MM-dd hh24:mi:ss')]]>
+         </isNotNull>
+         <isNotNull property="where.cbxequip" prepend="AND">
+           <![CDATA[A.EQUIP_ID = #where.cbxequip#]]>
+         </isNotNull>
+         <isNotNull property="where.txtmater" prepend="AND">
+           <![CDATA[C.MATERIAL_NAME LIKE '%' || #where.txtmater# || '%']]>
+         </isNotNull>
+       </dynamic>
+       <![CDATA[ORDER BY a.RECORD_TIME ]]>
+     </select>
+
+     <select id="GetEquipInfo22" parameterClass="map" resultClass="Row">
+       <![CDATA[  select  equip_name  from  sbe_equip where major_type_id = 51 and delete_flag = 0 order by equip_name
+        ]]>
+     </select>
+
+     <select id="GetCppDxStandard" parameterClass="map" resultClass="row">
+       <![CDATA[
+select  a.*,case when includemin = 1 then '是' else '否' end includemin1
+,case when includemax = 1 then '是' else '否' end includemax1 from  cpp_dxstandard a
+       ]]>
+     </select>
+     <update id="UpdateCppDxStandard" parameterClass="map" >
+       <![CDATA[
+update cpp_dxstandard set min=#min#,includemin = #includemin#,max = #max#,includemax = #includemax# where objid = #objid#
+       ]]>
+     </update>
+     
+  </statements>
+</sqlMap>
